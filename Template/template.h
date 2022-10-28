@@ -1,0 +1,1 @@
+/// Stockage ici des différents templates et leurs prototypes
