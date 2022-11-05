@@ -2,11 +2,10 @@
 
 class XX : public QObject
 {
-  Q_OBJECT
+    Q_OBJECT
+    public signals:
+    void nom_signal(args);
 
-  public signals: //Définition des signaux
-    void XXX(YYY);
-
-  public slots:
-    bool XXX(YY);
+    public slots:
+    bool nom_slot(args);
 }
