@@ -25,9 +25,13 @@ QObject::connect();
 //     nom du slot qui doit s'exécuter après le signal
 
 // Fermer une fenêtre : slot(quit()) avec l'objet recepteur : l'application
+// Exemple complet : QObject::connect(&bouton,SIGNAL(clicked()),&app,SLOT(quit()));
 
 // Widgets : https://fr.wikibooks.org/wiki/Programmation_Qt/Les_widgets
 
+// créer un objet : deux possibilités, objets ou pointeurs :
+QBlablabla *mon_blabla = new QBlablabla();
+QBlabla mon_blablabla;
 
 
 //Positionnement des widgets
@@ -42,12 +46,23 @@ monWidget->setGeometry(50, 70, 24, 89); //déplace le widget à l'abscisse 50 et
 //Positionnement relatif
 
 // Layout horizontal
-QWidget *maPage = new QWidget(); /* Création de la page qui contiendra le layout */
+QWidget *maPage = new QWidget(); /* Création de la page qui contiendra le layout, un QWidget est une fenêtre */
+
+// On peut donner tout un tas de propriétés à la fenêtre :
+maPage->setFixedSize(500, 500);
+maPage->setWindowTitle("mon titre");
 
 /* Création des boutons */
 QPushButton *bouton1 = new QPushButton("Wiki");
 QPushButton *bouton2 = new QPushButton("Books");
 
+/* layout :
++ QHBoxLayout : comme une div ou les éléments seront entassés horizontalement
++ QVBoxLayout : idem mais verticalement
+QGridLayout : Positionnement en grille
+
+Voir images dans ce dossier qui montrent des exemples
+*/
 QHBoxLayout *monLayout = new QHBoxLayout(); /* Création du layout */
 /* Ajout des widgets dans le layout */
 monLayout->addWidget(bouton1);
@@ -67,9 +82,45 @@ m_layout->addWidget(wi, 0, 0); /* En haut à gauche */
 m_layout->addWidget(ki, 1, 0); /* En haut à droite */
 m_layout->addWidget(books, 1, 1, 1, 2); /* En bas */
 
+// possibilité que le widget occupe plusieurs colonnes/lignes, par défaut une seule.
+// dans ce cas, les coordonnées correspondent au début du widget
+m_layout->addWidget(widget, pos_x, pos_y, row_pan, columnspan);
+
+// Création d'un formulaire avec QFormLayout -> utile pour définir le début de partie machi koro
+/* Création des widgets */
+QLineEdit *nom = new QLineEdit();
+QLineEdit *langageProg = new QLineEdit();
+
+/* Création et introduction dans le layout */
+QFormLayout *monLayout = new QFormLayout();
+monLayout->addRow("Votre nom : ", nom);
+monLayout->addRow("Votre langage de programmation préféré : " langageProg);
+
+/* Création et introduction dans la page **/
+QWidget *maPage = new QWidget();
+maPage->setLayout(monLayout);
+
 /* Introduction du layout dans la page */
 QWidget *m_page = new QWidget();
 m_page->setLayout(m_layout);
+
+// combiner des layouts, pour ajouter un bouton quitter à un formulaire par ex
+QLineEdit *nom = new QLineEdit();
+QLineEdit *prenom = new QLineEdit();
+
+QFormLayout *layoutFormulaire = new QFormLayout();
+layoutFormulaire->addRow("Votre nom : ", nom);
+layoutFormulaire->addRow("Votr prénom : ", prenom);
+
+QPushButton *boutonQuitter = new QPushButton("Quitter");
+
+QVBoxLayout *layoutPrincipal = new QVBoxLayout();
+layoutPrincipal->addLayout(layoutFormulaire); /* Utilisation de la méthode addLayout() */
+layoutPrincipal->addWidget(boutonQuitter);
+
+QWidget *maPage = new QWidget();
+maPage->setLayout(layoutPrincipal);
+
 
 // Les différents Widget
 
