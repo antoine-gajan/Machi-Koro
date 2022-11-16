@@ -1,5 +1,5 @@
 #include "Gare.h"
-#include "Joueur.h"
+#include "../../Joueur/Joueur.h"
 #include <iostream>
 
 using namespace std;

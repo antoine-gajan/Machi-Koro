@@ -1,13 +1,13 @@
 #ifndef MACHI_KORO_GARE_H
 #define MACHI_KORO_GARE_H
 #include "Monument.h"
-#include "Joueur.h"
+#include "../../Joueur/Joueur.h"
 
 class Gare : public Monument {
 public :
     Gare(Moment_Effet effet_moment, string nom, unsigned int prix, string description_effet, string path_image);
 
-    ~Gare() {delete this;} // pareil ?? appel du destructeur de Monument
+    ~Gare()=default;
     void effet(Joueur *joueur);
 };
 

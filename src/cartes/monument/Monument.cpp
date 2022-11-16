@@ -1,10 +1,10 @@
 #include "Monument.h"
-#include "carte.h"
+#include "../Carte.h"
 #include <iostream>
 
 using namespace std;
 
-Monument::Monument(Moment_Effet effet_moment, string nom, unsigned int prix, string description_effet, string path_image) : Carte(nom, prix, description_effet, path_image) {
+Monument::Monument(Moment_Effet effet_moment, string nom, unsigned int prix, string description_effet, string path_image)  :Carte(nom, prix, description_effet, path_image) {
     /// Constructeur de Monument
 
     // Gestion d'erreur moment
@@ -26,6 +26,6 @@ Monument::Monument(Moment_Effet effet_moment, string nom, unsigned int prix, str
     }
 
     // Appel au constructeur de Carte et initialisation de moment
-    Carte(description_effet, nom, prix, path_image);
+    // Carte(description_effet, nom, prix, path_image);
     moment = effet_moment;
 }
