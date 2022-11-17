@@ -21,6 +21,8 @@ public:
     string get_description() const { return description_effet; }
     unsigned int get_prix() const { return prix; }
     string get_path_image() const { return path_image; }
+
+    virtual string get_type() const = 0;
 };
 
 

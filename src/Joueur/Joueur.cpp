@@ -110,3 +110,24 @@ void Joueur::ajouter_batiment(Batiment *bat) {
     else
         liste_batiment.insert(pair<Batiment*, unsigned int>(bat, 1));
 }
+
+void Joueur::acheter_carte(Carte *carte) {
+    if (carte == nullptr) {
+        throw invalid_argument("La carte ne peut pas être nulle");
+    }
+
+    // On vérifie que le joueur a assez d'argent
+    if (argent < carte->get_prix()) {
+        return;
+    }
+
+    // On retire l'argent
+    argent -= carte->get_prix();
+
+    // On ajoute la carte
+    if (carte->get_type() == "Batiment") {
+        ajouter_batiment((Batiment*) carte);
+    } else if (carte->get_type() == "Monument") {
+        activer_monument((Monument*) carte);
+    }
+}

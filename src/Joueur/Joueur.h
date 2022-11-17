@@ -42,9 +42,11 @@ class Joueur {
         /***** Setters *****/
         void set_argent(unsigned int arg) {argent = arg;};
 
+        /***** Autres méthodes *****/
         void activer_monument(Monument *mon);
         void ajouter_batiment(Batiment *bat);
 
+        void acheter_carte(Carte *carte);
 };
 
 #endif //MACHI_KORO_JOUEUR_H

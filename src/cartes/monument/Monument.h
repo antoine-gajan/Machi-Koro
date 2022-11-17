@@ -16,6 +16,7 @@ class Monument : public Carte{
         Moment_Effet getMoment() const {return moment;}
         ~Monument()=default;
 
+        virtual string get_type() const {return "Monument";};
 };
 
 #endif //MACHI_KORO_MONUMENT_H
