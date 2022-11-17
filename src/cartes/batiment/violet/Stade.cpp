@@ -1,7 +1,6 @@
 #include "Stade.h"
 
-Stade::Stade(string nom, unsigned int prix, string description_effet, string path_image,
-                                   couleur_bat coul, std::list<unsigned int> num, std::string type_bat)
-        : Batiment(nom, prix, description_effet, path_image, coul, num, type_bat) {
+Stade::Stade(string path_image)
+        : Batiment("Stade", 6, "Recevez 2 pièces de la part de chaque autre joueur", path_image, Violet, list<unsigned int>{6}, "spécial") {
     ///Constructeur de Stade
 }

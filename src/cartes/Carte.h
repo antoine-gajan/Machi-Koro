@@ -14,7 +14,6 @@ private:
     string path_image;
 
 public:
-    const static unsigned int prix_min;
     Carte(const string& name, const string& effect_description, unsigned int price, const string& path_picture);
     ~Carte() = default;
     string get_nom() const { return nom; }

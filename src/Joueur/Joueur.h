@@ -16,7 +16,9 @@ enum strat_IA {aleatoire, agressive, defensif, neutre};
 
 class Joueur {
     private:
-        string nom;
+    /*** Attributs de la classe ***/
+
+    string nom;
         map<Monument*, bool> liste_monument;
         map<Batiment*, unsigned int> liste_batiment;
         unsigned int argent;
