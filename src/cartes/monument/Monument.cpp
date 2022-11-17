@@ -4,7 +4,8 @@
 
 using namespace std;
 
-Monument::Monument(Moment_Effet effet_moment, string nom, unsigned int prix, string description_effet, string path_image)  :Carte(nom, prix, description_effet, path_image) {
+Monument::Monument(Moment_Effet effet_moment, const string& nom, unsigned int prix, const string& description_effet, const string& path_image) :
+    Carte(nom, prix, description_effet, path_image) {
     /// Constructeur de Monument
 
     // Gestion d'erreur moment

@@ -6,24 +6,24 @@ using namespace std;
 
 const unsigned int Carte::prix_min = 0;
 
-Carte::Carte(string name, string effect_description, int price, string path_picture) {
+Carte::Carte(const string& name, const string& effect_description, int price, const string& path_picture) {
     /// Constructeur de la classe Carte
 
     // Gestion des erreurs
     if (price < prix_min) {
-        throw "Le prix de la carte ne peut pas être inférieur à 0";
+        throw invalid_argument("Le prix de la carte ne peut pas être inférieur à 0");
     }
 
     if (name.empty()) {
-        throw "Le nom de la carte ne peut pas être vide";
+        throw invalid_argument("Le nom de la carte ne peut pas être vide");
     }
 
     if (effect_description.empty()) {
-        throw "La description de l'effet de la carte ne peut pas être vide";
+        throw invalid_argument("La description de l'effet de la carte ne peut pas être vide");
     }
 
     if (path_image.empty()) {
-        throw "Le chemin de l'image de la carte ne peut pas être vide";
+        throw invalid_argument("Le chemin de l'image de la carte ne peut pas être vide");
     }
 
     // Initialisation des attributs
