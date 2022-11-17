@@ -8,7 +8,7 @@ public :
     Gare(const string& path_image);
 
     ~Gare()=default;
-    void effet(Joueur *joueur);
+    void effet(const Joueur& joueur);
 };
 
 #endif //MACHI_KORO_GARE_H

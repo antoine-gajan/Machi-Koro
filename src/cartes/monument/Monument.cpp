@@ -5,7 +5,7 @@
 using namespace std;
 
 Monument::Monument(Moment_Effet effet_moment, const string& nom, unsigned int prix, const string& description_effet, const string& path_image) :
-    Carte(nom, prix, description_effet, path_image) {
+    Carte(nom, description_effet, prix, path_image) {
     /// Constructeur de Monument
 
     // Gestion d'erreur moment

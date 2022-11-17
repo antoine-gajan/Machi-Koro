@@ -6,6 +6,6 @@ Parc_attraction::Parc_attraction(const string& path_image) :
     /// Constructeur de Parc_attraction
 }
 
-void Parc_attraction::effet(Joueur* joueur) {
+void Parc_attraction::effet(const Joueur& joueur) {
     /// Effet de Parc_attraction
 }

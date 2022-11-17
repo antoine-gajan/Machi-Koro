@@ -7,7 +7,7 @@ Port::Port(const string& path_image)
     ///Constructeur de Port
 }
 
-void Port::effet(Joueur *joueur) {
+void Port::effet(const Joueur& joueur) {
     /// Effet de Port
     // Test si le joueur a la possibilite de jeter deux des
     // Si oui, test si le résultat est supérieur à 10

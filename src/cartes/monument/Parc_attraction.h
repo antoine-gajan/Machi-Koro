@@ -9,7 +9,7 @@ public:
     Parc_attraction(const string& path_image);
     ~Parc_attraction()=default;
 
-    void effet(Joueur* joueur);
+    void effet(const Joueur& joueur);
 };
 
 

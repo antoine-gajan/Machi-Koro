@@ -9,7 +9,7 @@ class Aeroport : public Monument {
         Aeroport(const string& path_image);
         ~Aeroport()=default;
 
-        void effet(Joueur *joueur);
+        void effet(Joueur& joueur);
 };
 
 #endif //MACHI_KORO_AEROPORT_H

@@ -6,11 +6,8 @@ Aeroport::Aeroport(const string& path_image) :
     ///Constructeur de Aeroport
 }
 
-void Aeroport::effet(Joueur *joueur) {
+void Aeroport::effet(Joueur& joueur) {
     /// Effet de Aeroport
-    if (joueur == nullptr) {
-        return;
-    }
 
-    joueur->setArgent(joueur->getArgent() + 10);
+    joueur.set_argent(joueur.get_argent() + 10);
 }

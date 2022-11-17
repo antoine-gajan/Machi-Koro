@@ -6,6 +6,6 @@ Tour_radio::Tour_radio(const string& path_image) :
     ///Constructeur de Tour_radio
 }
 
-void Tour_radio::effet(Joueur* joueur) {
+void Tour_radio::effet(const Joueur& joueur) {
     /// Effet de la carte Tour_radio
 }

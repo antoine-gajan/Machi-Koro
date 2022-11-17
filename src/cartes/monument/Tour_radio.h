@@ -9,7 +9,7 @@ class Tour_radio : public Monument {
         Tour_radio(const string& path_image);
         ~Tour_radio()=default;
 
-        void effet(Joueur* joueur);
+        void effet(const Joueur& joueur);
 };
 
 #endif //MACHI_KORO_TOUR_RADIO_H

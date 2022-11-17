@@ -9,7 +9,7 @@ class Port : public Monument {
         Port(const string& path_image);
 
         ~Port()=default;
-        void effet(Joueur *joueur);
+        void effet(const Joueur& joueur);
 };
 
 
