@@ -97,3 +97,16 @@ void Joueur::activer_monument(Monument *mon) {
         it->second = true;
     }
 }
+
+void Joueur::ajouter_batiment(Batiment *bat) {
+    if (bat == nullptr) {
+        throw invalid_argument("Le batiment ne peut pas être nul");
+    }
+
+    // On ajoute le batiment
+    auto it = liste_batiment.find(bat);
+    if (it != liste_batiment.end())
+        it->second++;
+    else
+        liste_batiment.insert(pair<Batiment*, unsigned int>(bat, 1));
+}

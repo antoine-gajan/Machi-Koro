@@ -43,6 +43,7 @@ class Joueur {
         void set_argent(unsigned int arg) {argent = arg;};
 
         void activer_monument(Monument *mon);
+        void ajouter_batiment(Batiment *bat);
 
 };
 
