@@ -4,7 +4,7 @@
 
 using namespace std;
 
-Gare::Gare(string path_image)
+Gare::Gare(const string& path_image)
     : Monument(AVANT, "Gare", 4, "Vous pouvez lancer 2 dés", path_image) {
 }
 

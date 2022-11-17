@@ -6,7 +6,7 @@
 
 class Centre_commercial : public Monument {
     public :
-        Centre_commercial(string path_image);
+        Centre_commercial(const string& path_image);
 
         ~Centre_commercial()=default;
         unsigned int effet(unsigned int coup_init);

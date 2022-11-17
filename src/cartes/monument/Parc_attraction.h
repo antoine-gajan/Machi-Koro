@@ -6,7 +6,7 @@
 
 class Parc_attraction : public Monument {
 public:
-    Parc_attraction(string path_image);
+    Parc_attraction(const string& path_image);
     ~Parc_attraction()=default;
 
     void effet(Joueur* joueur);

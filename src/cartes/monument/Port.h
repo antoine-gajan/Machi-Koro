@@ -6,7 +6,7 @@
 
 class Port : public Monument {
     public :
-        Port(string path_image);
+        Port(const string& path_image);
 
         ~Port()=default;
         void effet(Joueur *joueur);

@@ -1,7 +1,7 @@
 #include "Centre_commercial.h"
 #include "../../Joueur/Joueur.h"
 
-Centre_commercial::Centre_commercial(string path_image) :
+Centre_commercial::Centre_commercial(const string& path_image) :
     Monument(APRES, "Centre commercial", 10, "Les établissement rouge et vert vous rapportent une pièce de plus", path_image) {
     ///Constructeur de Centre commercial
 }

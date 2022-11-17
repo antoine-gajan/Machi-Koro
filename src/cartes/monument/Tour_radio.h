@@ -6,7 +6,7 @@
 
 class Tour_radio : public Monument {
     public:
-        Tour_radio(string path_image);
+        Tour_radio(const string& path_image);
         ~Tour_radio()=default;
 
         void effet(Joueur* joueur);

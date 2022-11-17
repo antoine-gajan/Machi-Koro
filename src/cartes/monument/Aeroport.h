@@ -6,7 +6,7 @@
 
 class Aeroport : public Monument {
     public:
-        Aeroport(string path_image);
+        Aeroport(const string& path_image);
         ~Aeroport()=default;
 
         void effet(Joueur *joueur);

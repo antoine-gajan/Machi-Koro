@@ -1,7 +1,7 @@
 #include "Tour_radio.h"
 #include "../../Joueur/Joueur.h"
 
-Tour_radio::Tour_radio(string path_image) :
+Tour_radio::Tour_radio(const string& path_image) :
     Monument(APRES, "Tour radio", 22, "Une fois par tour vous pouvez relancer vos dés", path_image) {
     ///Constructeur de Tour_radio
 }

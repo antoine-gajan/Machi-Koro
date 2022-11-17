@@ -5,7 +5,7 @@
 
 class Gare : public Monument {
 public :
-    Gare(string path_image);
+    Gare(const string& path_image);
 
     ~Gare()=default;
     void effet(Joueur *joueur);
