@@ -1,4 +1,21 @@
 #ifndef MACHI_KORO_BATIMENT_H
 #define MACHI_KORO_BATIMENT_H
+#include <string>
+#include <list>
+#include "../Carte.h"
 
+enum couleur_bat {Bleu, Rouge, Vert, Violet};
+
+class Batiment : public Carte {
+protected:
+    couleur_bat couleur;
+    std::list<unsigned int> num_activation;
+    std::string type;
+    Batiment(string nom, unsigned int prix, string description_effet, string path_image, couleur_bat coul, std::list<unsigned int> num, std::string type_bat);
+    virtual ~Batiment() = default;
+public:
+    couleur_bat get_couleur() const {return couleur;};
+    std::list<unsigned int> get_num_activation() const {return num_activation;};
+    std::string get_type() const {return type;};
+};
 #endif //MACHI_KORO_BATIMENT_H

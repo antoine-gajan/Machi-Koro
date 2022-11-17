@@ -4,6 +4,8 @@
 
 using namespace std;
 
+const unsigned int Carte::prix_min = 0;
+
 Carte::Carte(string name, string effect_description, int price, string path_picture) {
     /// Constructeur de la classe Carte
 
