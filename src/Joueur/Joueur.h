@@ -40,6 +40,7 @@ class Joueur {
 
         map<Monument*, bool> get_liste_monument() const {return liste_monument;};
         map<Batiment*, unsigned int> get_liste_batiment() const {return liste_batiment;};
+        map<Batiment*, unsigned int> get_liste_batiment() {return liste_batiment;};
 
         /***** Setters *****/
         void set_argent(unsigned int arg) {argent = arg;};
