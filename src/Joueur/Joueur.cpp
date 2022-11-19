@@ -69,6 +69,7 @@ Joueur::~Joueur() {
 }
 
 unsigned int * Joueur::get_repartition_argent() const {
+    /// Répartition de l'argent en fonction des types de pièces
     unsigned int *repartition = new unsigned int [3];
     repartition[0] = argent/10;
     repartition[1] = (argent%10)/5;

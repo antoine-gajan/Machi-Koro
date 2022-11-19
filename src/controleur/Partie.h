@@ -8,13 +8,13 @@
 class Partie {
 private:
     vector<Joueur*> tab_joueurs;
-    Joueur* joueur_actuel;
+    unsigned int joueur_actuel;
     unsigned int nb_monuments_win;
-    unsigned int nb_joueurs;
 public:
     void jouer_partie();
     void jouer_tour(Joueur* joueur_actuel);
-    Partie(vector<EditionDeJeu*> editions);
+    unsigned int get_joueur_actuel() const {return joueur_actuel;};
+    Partie(vector<Joueur*> liste_joueurs, vector<EditionDeJeu*> editions);
     ~Partie() = default;
 };
 

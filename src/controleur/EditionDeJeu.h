@@ -3,6 +3,7 @@
 
 #include <string>
 #include <map>
+#include <vector>
 #include "Batiment.h"
 #include "Monument.h"
 
@@ -12,10 +13,10 @@ protected:
     unsigned int nb_joueurs_min;
     unsigned int nb_joueurs_max;
     unsigned int nb_monuments_win;
-    map<unsigned int, Batiment> batiments;
-    map<unsigned int, Monument> monuments;
+    map<Batiment, unsigned int> batiments;
+    map<Monument, unsigned int> monuments;
     bool est_edition;
-    EditionDeJeu();
+    EditionDeJeu(string& nom, unsigned int joueurs_min, unsigned int joueurs_max, unsigned int mon_win, Monument list_mon[], unsigned int quantite_mon[], Batiment list_bat[], unsigned int quantite_bat[], bool edition);
     ~EditionDeJeu()=default;
 public:
     std::string get_nom() const {return nom;};
