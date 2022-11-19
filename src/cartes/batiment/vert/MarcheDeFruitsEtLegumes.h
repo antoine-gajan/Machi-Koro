@@ -5,7 +5,7 @@
 
 class MarcheDeFruitsEtLegumes : public Batiment {
 public:
-    MarcheDeFruitsEtLegumes(string path_image);
+    MarcheDeFruitsEtLegumes(const string& path_image);
     /* A faire plus tard
     virtual void declencher_effet(*Joueur[] tab_joueurs);
      */

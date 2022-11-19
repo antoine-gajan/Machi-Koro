@@ -1,6 +1,6 @@
 #include "Superette.h"
 
-Superette::Superette(string path_image)
+Superette::Superette(const string& path_image)
         : Batiment("Supérette",
                    2,
                    "Recevez 3 pièce de la banque.",

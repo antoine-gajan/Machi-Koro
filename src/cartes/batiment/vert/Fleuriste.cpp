@@ -1,6 +1,6 @@
 #include "Fleuriste.h"
 
-Fleuriste::Fleuriste(string path_image)
+Fleuriste::Fleuriste(const string& path_image)
         : Batiment("Fleuriste",
                    1,
                    "Recevez 1 pièce de la banque pour chaque Champ de fleurs que vous possédez.",

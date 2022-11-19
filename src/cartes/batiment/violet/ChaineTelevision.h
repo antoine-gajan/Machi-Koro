@@ -7,7 +7,7 @@
 
 class ChaineTelevision : public Batiment {
 public:
-    ChaineTelevision(string& path_image);
+    ChaineTelevision(const string& path_image);
     virtual void declencher_effet(vector<Joueur*>& tab_joueurs, unsigned int joueur_actuel);
 };
 

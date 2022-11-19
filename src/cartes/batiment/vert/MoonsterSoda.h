@@ -5,7 +5,7 @@
 
 class MoonsterSoda : public Batiment {
 public:
-    MoonsterSoda(string path_image);
+    MoonsterSoda(const string& path_image);
     /* A faire plus tard
     virtual void declencher_effet(*Joueur[] tab_joueurs);
      */

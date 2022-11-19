@@ -1,6 +1,6 @@
 #include "BanqueDeMinivilles.h"
 
-BanqueDeMinivilles::BanqueDeMinivilles(string path_image)
+BanqueDeMinivilles::BanqueDeMinivilles(const string& path_image)
         : Batiment("Banque de minivilles",
                    0,
                    "Lorsque vous achetez cet établissement, recevez 5 pièces de la banque. Payez 2 pièces à la banque.",

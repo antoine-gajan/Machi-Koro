@@ -5,7 +5,7 @@
 
 class Fromagerie : public Batiment {
 public:
-    Fromagerie(string path_image);
+    Fromagerie(const string& path_image);
     /* A faire plus tard
     virtual void declencher_effet(*Joueur[] tab_joueurs);
      */

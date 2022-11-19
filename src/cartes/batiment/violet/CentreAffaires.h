@@ -8,7 +8,7 @@
 
 class CentreAffaires : public Batiment {
 public:
-    CentreAffaires(string& path_image);
+    CentreAffaires(const string& path_image);
     virtual void declencher_effet(vector<Joueur*>& tab_joueurs, unsigned int joueur_actuel);
 };
 

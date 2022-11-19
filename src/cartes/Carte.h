@@ -16,10 +16,10 @@ private:
 public:
     Carte(const string& name, const string& effect_description, unsigned int price, const string& path_picture);
     ~Carte() = default;
-    string get_nom() const { return nom; }
-    string get_description() const { return description_effet; }
+    const string& get_nom() const { return nom; }
+    const string& get_description() const { return description_effet; }
     unsigned int get_prix() const { return prix; }
-    string get_path_image() const { return path_image; }
+    const string& get_path_image() const { return path_image; }
 
     virtual string get_type() const = 0;
 };

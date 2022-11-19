@@ -5,7 +5,7 @@
 
 class Boulangerie : public Batiment {
 public:
-    Boulangerie(string path_image);
+    Boulangerie(const string& path_image);
     /* A faire plus tard
     virtual void declencher_effet(*Joueur[] tab_joueurs);
      */

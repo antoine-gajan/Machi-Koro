@@ -5,7 +5,7 @@
 
 class Superette : public Batiment {
 public:
-    Superette(string path_image);
+    Superette(const string& path_image);
     /* A faire plus tard
     virtual void declencher_effet(*Joueur[] tab_joueurs);
      */

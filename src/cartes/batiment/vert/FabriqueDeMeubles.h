@@ -5,7 +5,7 @@
 
 class FabriqueDeMeubles : public Batiment {
 public:
-    FabriqueDeMeubles(string path_image);
+    FabriqueDeMeubles(const string& path_image);
     /* A faire plus tard
     virtual void declencher_effet(*Joueur[] tab_joueurs);
      */
