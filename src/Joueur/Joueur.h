@@ -46,6 +46,7 @@ class Joueur {
 
         /***** Autres méthodes *****/
         void activer_monument(Monument *mon);
+        void desactiver_monument(Monument *mon);
         void ajouter_batiment(Batiment *bat);
         void retirer_batiment(Batiment *bat);
 

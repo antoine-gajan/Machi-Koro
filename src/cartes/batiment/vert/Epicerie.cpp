@@ -9,3 +9,12 @@ Epicerie::Epicerie(string path_image)
                    {2},
                    "commerce") {}
 
+void Epicerie::declencher_effet(vector<Joueur *> &tab_joueurs, unsigned int joueur_actuel) {
+    /// Effet de l'Epicerie
+    Joueur* j_actuel = tab_joueurs[joueur_actuel];
+
+    if (j_actuel->get_monuments_jouables().size() < 2){
+        j_actuel->set_argent(j_actuel->get_argent() + 2);
+    }
+
+}

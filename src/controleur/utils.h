@@ -11,10 +11,12 @@ unsigned int count_type(Joueur *joueur, string type);
 unsigned int selectionner_joueur(vector<Joueur*>& tab_joueurs, unsigned int joueur_actuel);
 
 
-// séléction d'un batiment chez un joueur (selection d'un pointeur sa paire map<batiment, nb>)
-// map est le dictionnaire entier, pair est une paire en particulier (paire->first et paire->second)
-// on ne fait pas de const pair car on peut etre ammené a la modifier par la suite en cas d'échange de carte
-pair<Batiment*, unsigned int>* selectionner_batiment(Joueur *joueur);
+// séléction d'un batiment chez un joueur, on fait choisir parmis la liste des batiments possédés par le joueur
+// on renvoit un simple pointeur sur le batiment (qui lui n'est pas spécifique au joueur)
+Batiment* selectionner_batiment(Joueur *joueur);
+
+// idem mais pour monument
+Monument* selectionner_monument(Joueur *joueur);
 
 
 

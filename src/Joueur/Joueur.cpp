@@ -102,6 +102,18 @@ void Joueur::activer_monument(Monument *mon) {
     }
 }
 
+void Joueur::desactiver_monument(Monument *mon) {
+    if (mon == nullptr) {
+        throw invalid_argument("Le monument ne peut pas être nul");
+    }
+
+    // On active le monument
+    auto it = liste_monument.find(mon);
+    if (it != liste_monument.end()) {
+        it->second = false;
+    }
+}
+
 void Joueur::ajouter_batiment(Batiment *bat) {
     if (bat == nullptr) {
         throw invalid_argument("Le batiment ne peut pas être nul");
