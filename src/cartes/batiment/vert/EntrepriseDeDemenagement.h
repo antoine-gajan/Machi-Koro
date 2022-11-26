@@ -9,7 +9,7 @@
 
 class EntrepriseDeDemenagement : public Batiment {
 public:
-    EntrepriseDeDemenagement(string path_image);
+    EntrepriseDeDemenagement(const string& path_image);
     virtual void declencher_effet(vector<Joueur*>& tab_joueurs, unsigned int joueur_actuel);
 };
 

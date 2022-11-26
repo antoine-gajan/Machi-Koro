@@ -1,6 +1,6 @@
 #include "Boulangerie.h"
 
-Boulangerie::Boulangerie(string path_image)
+Boulangerie::Boulangerie(const string& path_image)
         : Batiment("Boulangerie",
                    1,
                    "Recevez une pièce de la banque.",

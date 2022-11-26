@@ -2,13 +2,15 @@
 #define MACHI_KORO_MARCHE_DE_FRUITS_ET_LEGUMES_H
 
 #include "../Batiment.h"
+#include "Joueur.h"
+#include "../controleur/utils.h"
+#include <list>
+#include <vector>
 
 class MarcheDeFruitsEtLegumes : public Batiment {
 public:
-    MarcheDeFruitsEtLegumes(string path_image);
-    /* A faire plus tard
-    virtual void declencher_effet(*Joueur[] tab_joueurs);
-     */
+    MarcheDeFruitsEtLegumes(const string& path_image);
+    virtual void declencher_effet(vector<Joueur*>& tab_joueurs, unsigned int joueur_actuel);
 };
 
 #endif //MACHI_KORO_MARCHE_DE_FRUITS_ET_LEGUMES_H

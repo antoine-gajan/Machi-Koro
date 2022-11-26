@@ -9,7 +9,7 @@
 
 class FabriqueDeMeubles : public Batiment {
 public:
-    FabriqueDeMeubles(string path_image);
+    FabriqueDeMeubles(const string& path_image);
     virtual void declencher_effet(vector<Joueur*>& tab_joueurs, unsigned int joueur_actuel);
 };
 

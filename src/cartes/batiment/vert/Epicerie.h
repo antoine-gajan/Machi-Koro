@@ -9,7 +9,7 @@
 
 class Epicerie : public Batiment {
 public:
-    Epicerie(string path_image);
+    Epicerie(const string& path_image);
     virtual void declencher_effet(vector<Joueur*>& tab_joueurs, unsigned int joueur_actuel);
 
 };
