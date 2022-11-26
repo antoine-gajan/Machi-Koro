@@ -5,7 +5,7 @@
 
 class Fleuriste : public Batiment {
 public:
-    Fleuriste(const string& path_image);
+    Fleuriste(string path_image);
     /* A faire plus tard
     virtual void declencher_effet(*Joueur[] tab_joueurs);
      */

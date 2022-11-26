@@ -1,12 +1,12 @@
 #include "Stade.h"
 
-Stade::Stade(const string& path_image) :
+Stade::Stade(string& path_image) :
 Batiment("Stade",
          6,
          "Recevez 2 pièces de la part de chaque autre joueur",
          path_image,
          Violet,
-         {6},
+         list<unsigned int>{6},
          "spécial") {
     ///Constructeur de Stade
 }

@@ -1,9 +1,9 @@
 #include "HalleDeMarche.h"
 
-HalleDeMarche::HalleDeMarche(const string& path_image)
+HalleDeMarche::HalleDeMarche(string path_image)
         : Batiment("Halle de marché",
                    2,
-                   "Recevez 2 pièces de la banque pour chaque établissement de type café que vous possédez",
+                   "Recevez 2 pièces de la banque pour chaque établissement de type restaurant que vous possédez",
                    path_image,
                    Vert,
                    {12, 13},

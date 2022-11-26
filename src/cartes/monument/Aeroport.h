@@ -2,14 +2,16 @@
 #define MACHI_KORO_AEROPORT_H
 
 #include "Monument.h"
-#include "../../Joueur/Joueur.h"
+#include "Joueur.h"
 
 class Aeroport : public Monument {
     public:
-        Aeroport(const string& path_image);
+        //*** Constructeur et destructeur ***//
+        Aeroport();
         ~Aeroport()=default;
 
-        void effet(Joueur& joueur);
+        //*** Méthodes ***//
+        virtual string get_name() const {return "Aeroport";}
 };
 
 #endif //MACHI_KORO_AEROPORT_H

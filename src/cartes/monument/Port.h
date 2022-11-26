@@ -2,14 +2,16 @@
 #define MACHI_KORO_PORT_H
 
 #include "Monument.h"
-#include "../../Joueur/Joueur.h"
+#include "Joueur.h"
 
 class Port : public Monument {
     public :
-        Port(const string& path_image);
-
+        //*** Constructeur et destructeur ***//
+        Port();
         ~Port()=default;
-        void effet(const Joueur& joueur);
+
+        //*** Méthodes ***//
+        virtual string get_name() const {return "Port";}
 };
 
 

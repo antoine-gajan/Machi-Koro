@@ -7,7 +7,7 @@
 
 class Stade : public Batiment {
 public:
-    Stade(const string& path_image);
+    Stade(string& path_image);
     virtual void declencher_effet(vector<Joueur*>& tab_joueurs, unsigned int joueur_actuel);
 };
 

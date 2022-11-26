@@ -5,7 +5,7 @@
 
 class BanqueDeMinivilles : public Batiment {
 public:
-    BanqueDeMinivilles(const string& path_image);
+    BanqueDeMinivilles(string path_image);
     /* A faire plus tard
     virtual void declencher_effet(*Joueur[] tab_joueurs);
      */

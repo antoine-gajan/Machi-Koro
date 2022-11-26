@@ -19,7 +19,7 @@ protected:
     EditionDeJeu(string& nom, unsigned int joueurs_min, unsigned int joueurs_max, unsigned int mon_win, Monument list_mon[], unsigned int quantite_mon[], Batiment list_bat[], unsigned int quantite_bat[], bool edition);
     ~EditionDeJeu()=default;
 public:
-    const std::string& get_nom() const {return nom;};
+    std::string get_nom() const {return nom;};
     unsigned int get_nb_joueurs_min() const {return nb_joueurs_min;};
     unsigned int get_nb_joueurs_max() const {return nb_joueurs_max;};
     unsigned int get_nb_monuments_win() const {return nb_monuments_win;};

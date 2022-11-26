@@ -1,11 +1,15 @@
 #include "Pioche.h"
-#include "../cartes/batiment/Batiment.h"
+#include "Batiment.h"
 
-Pioche::Pioche(Batiment *batiments[]) {
+Pioche::Pioche(vector<Batiment*> batiments) {
     /// Constructeur de la classe Pioche
-    if (batiments != nullptr) {
-        for (int i = 0; i < 10; i++) {
-            contenu.push_back(batiments[i]);
-        }
+
+    for (size_t i = 0; i < batiments.size(); i++) {
+        contenu.push_back(batiments[i]);
     }
+}
+
+Pioche::~Pioche() {
+    /// Destructeur de la classe Pioche
+    contenu.clear();
 }

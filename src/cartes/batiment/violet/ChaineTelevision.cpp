@@ -3,13 +3,13 @@
 
 using namespace std;
 
-ChaineTelevision::ChaineTelevision(const string& path_image):
+ChaineTelevision::ChaineTelevision(string& path_image):
     Batiment("Chaine de télévision",
              7,
              "Recevez 5 pièces du joueur de votre choix",
              path_image,
              Violet,
-             {6},
+             list<unsigned int>{6},
              "spécial") {
     ///Constructeur de Chaine de Television
 }

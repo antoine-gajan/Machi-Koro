@@ -1,6 +1,6 @@
 #include "Epicerie.h"
 
-Epicerie::Epicerie(const string& path_image)
+Epicerie::Epicerie(string path_image)
         : Batiment("Épicerie",
                    0,
                    "Si vous possédez moins de deux monuments, recevez 2 pièces de la banque.",

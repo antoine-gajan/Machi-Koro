@@ -1,14 +1,17 @@
 #ifndef MACHI_KORO_GARE_H
 #define MACHI_KORO_GARE_H
+
 #include "Monument.h"
-#include "../../Joueur/Joueur.h"
+#include "Joueur.h"
 
 class Gare : public Monument {
 public :
-    Gare(const string& path_image);
-
+    //*** Constructeur et destructeur ***//
+    Gare();
     ~Gare()=default;
-    void effet(const Joueur& joueur);
+
+    //*** Méthodes ***//
+    virtual string get_name() const {return "Gare";}
 };
 
 #endif //MACHI_KORO_GARE_H

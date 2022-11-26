@@ -1,5 +1,5 @@
 #include "Monument.h"
-#include "../Carte.h"
+#include "Carte.h"
 #include <iostream>
 
 using namespace std;
@@ -20,13 +20,6 @@ Monument::Monument(Moment_Effet effet_moment, const string& nom, unsigned int pr
         return;
     }
 
-    // Gestion d'erreur prix
-    if (prix < 0) {
-        cout << "Erreur : prix invalide" << endl;
-        return;
-    }
-
-    // Appel au constructeur de Carte et initialisation de moment
-    // Carte(description_effet, nom, prix, path_image);
+    // Initialisation de moment
     moment = effet_moment;
 }

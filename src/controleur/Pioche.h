@@ -4,15 +4,17 @@
 #include <vector>
 #include <random>
 #include <algorithm>
-#include "../cartes/batiment/Batiment.h"
+#include "Batiment.h"
 
 class Pioche {
+    friend class Batiment;
+
     private:
         std::vector<Batiment *> contenu;
 
     public:
-        Pioche(Batiment *batiments[]);
-        ~Pioche() {contenu.clear();};
+        Pioche(vector<Batiment*> batiments);
+        ~Pioche();
         Batiment* getCarte() {return contenu.front();}; // retourne la carte du dessus de la pioche
         void melanger() {std::random_shuffle(contenu.begin(), contenu.end());}; // mélange la pioche
         bool est_vide() {return contenu.empty();}; // vérifie si la pioche est vide
