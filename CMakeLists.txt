@@ -7,6 +7,8 @@ include_directories(src/cartes)
 include_directories(src/cartes/batiment)
 include_directories(src/cartes/monument)
 include_directories(src/Joueur)
+include_directories(src/controleur)
+include_directories(src/Joueur)
 
 add_executable(Machi_Koro
         src/cartes/batiment/Batiment.cpp
@@ -20,7 +22,6 @@ add_executable(Machi_Koro
         src/Joueur/Joueur.cpp
         src/Joueur/Joueur.h
         src/main.cpp
-        template/template.cpp
         src/controleur/utils.cpp src/controleur/utils.h
         template/template.h
         src/cartes/batiment/violet/CentreAffaires.cpp
@@ -29,8 +30,6 @@ add_executable(Machi_Koro
         src/cartes/batiment/violet/ChaineTelevision.h
         src/cartes/batiment/violet/Stade.cpp
         src/cartes/batiment/violet/Stade.h
-        src/cartes/batiment/bleu/ChampBle.cpp
-        src/cartes/batiment/bleu/ChampBle.h
         src/cartes/batiment/rouge/Cafe.cpp
         src/cartes/batiment/rouge/Cafe.h
         src/cartes/batiment/vert/Boulangerie.cpp
@@ -73,15 +72,12 @@ add_executable(Machi_Koro
         src/cartes/batiment/vert/MoonsterSoda.h
         src/cartes/batiment/vert/Superette.cpp
         src/cartes/batiment/vert/Superette.h
-        template/template.h
         src/cartes/batiment/violet/CentreAffaires.cpp
         src/cartes/batiment/violet/CentreAffaires.h
         src/cartes/batiment/violet/ChaineTelevision.cpp
         src/cartes/batiment/violet/ChaineTelevision.h
         src/cartes/batiment/violet/Stade.cpp
         src/cartes/batiment/violet/Stade.h
-        src/cartes/batiment/bleu/ChampsBle.cpp
-        src/cartes/batiment/bleu/ChampsBle.h
         src/cartes/batiment/rouge/Cafe.cpp
         src/cartes/batiment/rouge/Cafe.h
         src/cartes/batiment/vert/Boulangerie.cpp

@@ -1,5 +1,5 @@
 #include <iostream>
-#include "cartes/monument/Gare.h"
+#include "Gare.h"
 
 using namespace std;
 
