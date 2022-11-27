@@ -5,7 +5,7 @@
 #include "../cartes/batiment/Batiment.h"
 #include <string>
 
-unsigned int count_type(Joueur *joueur, string type);
+unsigned int count_type(Joueur *joueur, const string& type);
 
 // entier valide entre 0 et tab_joueurs.size() - 1, ne doit pas etre egal a joueur_actuel
 unsigned int selectionner_joueur(vector<Joueur*>& tab_joueurs, unsigned int joueur_actuel);

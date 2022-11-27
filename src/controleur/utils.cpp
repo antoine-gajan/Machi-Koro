@@ -1,7 +1,7 @@
 #include "utils.h"
 
 
-unsigned int count_type(Joueur *joueur, string type) {
+unsigned int count_type(Joueur *joueur, const string& type) {
     unsigned int count = 0;
 
     // pour chaque couleur de la liste de batissements du joueur
