@@ -1,6 +1,6 @@
 #include "CentreAffaires.h"
 
-CentreAffaires::CentreAffaires(string& path_image):
+CentreAffaires::CentreAffaires(const string& path_image):
     Batiment("Centre d'Affaires",
              8,
              "Vous pouvez échanger avec le joueur de votre choix un établissement qui n'est pas de type spécial",

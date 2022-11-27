@@ -3,7 +3,7 @@
 
 using namespace std;
 
-ChaineTelevision::ChaineTelevision(string& path_image):
+ChaineTelevision::ChaineTelevision(cosnt string& path_image):
     Batiment("Chaine de télévision",
              7,
              "Recevez 5 pièces du joueur de votre choix",
