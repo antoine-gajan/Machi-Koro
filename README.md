@@ -3,7 +3,7 @@ Contient le travail sur le projet de LO21
 
 lien vers le markdown : https://md.picasoft.net/EOlI631fT96Rk2uIrXs2cQ#
 
-## :notebook-with-decorative-cover: Description du projet
+## :notebook_with_decorative_cover: Description du projet
 Notre projet répond au sujet disponible [ici](./doc/Sujet%20du%20projet.pdf).
 Le but de ce dernier est de créer en version numérique le jeu de société Machi Koro.
 Nous allons mettre en pratique les différents concepts vus en cours de LO21.

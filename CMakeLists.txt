@@ -23,7 +23,6 @@ add_executable(Machi_Koro
         src/Joueur/Joueur.h
         src/main.cpp
         src/controleur/utils.cpp src/controleur/utils.h
-        template/template.h
         src/cartes/batiment/violet/CentreAffaires.cpp
         src/cartes/batiment/violet/CentreAffaires.h
         src/cartes/batiment/violet/ChaineTelevision.cpp
