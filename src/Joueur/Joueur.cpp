@@ -119,7 +119,7 @@ void Joueur::ajouter_batiment(Batiment *bat) {
         throw invalid_argument("Le batiment ne peut pas être nul");
     }
 
-    // On ajoute le batiment
+    /// Ajout du batiment
     couleur_bat coul_bat = bat->get_couleur();
     string couleur;
 
@@ -159,6 +159,48 @@ void Joueur::ajouter_batiment(Batiment *bat) {
 void Joueur::retirer_batiment(Batiment *bat) {
     // on vérifie si le joueur possède le batiment et si oui on retire 1 à sa quantité
     // si la quantité est nulle on retire le batiment de la liste
+    if (bat == nullptr) {
+        throw invalid_argument("Le batiment ne peut pas être nul");
+    }
+
+    /// Enlever le batiment
+    couleur_bat coul_bat = bat->get_couleur();
+    string couleur;
+
+    if (coul_bat == Bleu)
+        couleur = "Bleu";
+    else if (coul_bat == Rouge)
+        couleur = "Rouge";
+    else if (coul_bat == Vert)
+        couleur = "Vert";
+    else if (coul_bat == Violet)
+        couleur = "Violet";
+
+    auto bat_couleur = liste_batiment.at(couleur);
+    if (couleur == "Violet") {
+        // Si la carte violette est présente on la retire
+        auto it = bat_couleur.find(bat);
+        if (it != bat_couleur.end()) {
+            // On ajoute le batiment
+            liste_batiment.at(couleur).erase(it);
+        }
+        // Sinon on ne fait rien
+    }
+    else {
+        // On vérifie si le batiment est déjà présent
+        auto it = bat_couleur.find(bat);
+        if (it != bat_couleur.end()) {
+            // On décrémente le nombre de batiment
+            if (it->second > 1) {
+                it->second--;
+            }
+            else {
+                // On retire le batiment
+                liste_batiment.at(couleur).erase(it);
+            }
+        }
+        // Sinon on ne fait rien
+    }
 }
 
 void Joueur::acheter_carte(Carte *carte) {
