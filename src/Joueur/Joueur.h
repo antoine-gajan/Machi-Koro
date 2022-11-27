@@ -31,14 +31,14 @@ class Joueur {
 
         /***** Getters *****/
         unsigned int get_argent() const {return argent;};
-        string get_nom() const {return nom;};
+        const string& get_nom() const {return nom;};
         bool get_est_ia() const {return est_ia;};
         strat_IA get_strategie() const {return strategie;};
         unsigned int * get_repartition_argent() const;
 
         const map<Monument*, bool>& get_liste_monument() const {return liste_monument;};
-        const map<string, map<Batiment*, unsigned int>>& get_liste_batiment() const {return liste_batiment;};
-        map<string, map<Batiment*, unsigned int>>& get_liste_batiment() {return liste_batiment;};
+        const map<couleur_bat, map<Batiment*, unsigned int>>& get_liste_batiment() const {return liste_batiment;};
+        map<couleur_bat, map<Batiment*, unsigned int>>& get_liste_batiment() {return liste_batiment;};
         vector<Monument*> get_monument_jouables() const;
 
         /***** Setters *****/

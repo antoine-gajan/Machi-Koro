@@ -1,4 +1,5 @@
 #include "CentreAffaires.h"
+#include "utils.h"
 
 CentreAffaires::CentreAffaires(const string& path_image):
     Batiment("Centre d'Affaires",
@@ -12,17 +13,6 @@ CentreAffaires::CentreAffaires(const string& path_image):
 }
 
 
-
-map<Batiment*, unsigned int> get_liste_bat_non_special(Joueur* j){
-    map<Batiment* ,unsigned int> liste;
-    for (auto bat : j->get_liste_batiment()){
-        if (bat.first->get_bat_type() != "spécial")
-        {
-            liste.insert(pair<Batiment*, unsigned int>(bat.first, bat.second));
-        }
-    }
-    return liste;
-}
 
 void CentreAffaires::declencher_effet(vector<Joueur *> &tab_joueurs, unsigned int joueur_actuel) {
     /// Effet du Centre d'affaires

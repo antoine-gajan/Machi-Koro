@@ -18,6 +18,13 @@ Batiment* selectionner_batiment(Joueur *joueur);
 // idem mais pour monument
 Monument* selectionner_monument(Joueur *joueur);
 
+// Fonction qui retourne une liste des monuments non violets possédé par un joueur
+map<Batiment*, unsigned int> get_liste_bat_non_special(Joueur* j);
+
+//Fonction qui échange le batiment 1 du joueur 1 avec le batiment 2 du joueur 2
+void swap_bat_players(Joueur *j1, Joueur *j2, Batiment *bat1, Batiment *bat2);
+
+
 
 
 #endif //MACHI_KORO_UTILS_H
