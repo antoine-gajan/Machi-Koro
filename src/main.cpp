@@ -1,5 +1,4 @@
 #include <iostream>
-#include "Gare.h"
 
 using namespace std;
 
