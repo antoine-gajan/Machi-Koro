@@ -9,7 +9,7 @@
 
 class Chalutier : public Batiment{
 public:
-    Chalutier(string& path_image);
+    Chalutier(const string& path_image);
     virtual void declencher_effet(Joueur* joueur_actuel);
 };
 #endif //MACHI_KORO_MASTER_CHALUTIER_H

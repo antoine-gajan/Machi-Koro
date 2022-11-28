@@ -9,7 +9,7 @@
 
 class BateauPeche : public Batiment{
 public:
-    BateauPeche(string& path_image);
+    BateauPeche(const string& path_image);
     void declencher_effet(Joueur* joueur_actuel);
 };
 

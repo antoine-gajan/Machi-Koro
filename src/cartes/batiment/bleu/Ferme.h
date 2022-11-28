@@ -8,7 +8,7 @@
 
 class Ferme : public Batiment{
 public:
-    Ferme(string& path_image);
+    Ferme(const string& path_image);
     virtual void declencher_effet(Joueur* joueur_affecté);
 };
 

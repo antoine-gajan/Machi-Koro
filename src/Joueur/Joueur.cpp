@@ -3,13 +3,13 @@
 
 using namespace std;
 
-Joueur::Joueur(string name, Monument *list_mon[], Batiment *list_bat[], unsigned int arg_depart) {
+Joueur::Joueur(const string& name, Monument *list_mon[], Batiment *list_bat[], unsigned int arg_depart)
+            : nom(name), argent(arg_depart), est_ia(false){
     /// Création d'un joueur non IA
 
     if (name.empty()) {
         throw invalid_argument("Le nom du joueur ne peut pas être vide");
     }
-    nom = name;
 
     if (list_mon == nullptr || list_bat == nullptr) {
         throw invalid_argument("Les listes de cartes ne peuvent pas être nulles");
@@ -30,12 +30,10 @@ Joueur::Joueur(string name, Monument *list_mon[], Batiment *list_bat[], unsigned
         i++;
         mon = list_mon[i];
     }
-
-    argent = arg_depart;
-    est_ia = false;
 }
 
-Joueur::Joueur(string name, Monument *list_mon[], Batiment *list_bat[], unsigned int arg_depart, strat_IA stratIa) {
+Joueur::Joueur(const string& name, Monument *list_mon[], Batiment *list_bat[], unsigned int arg_depart, strat_IA stratIa)
+            : argent(arg_depart), nom(name), est_ia(true), strategie(stratIa){
     /// Création d'un joueur IA
 
     if (name.empty()) {
@@ -62,10 +60,6 @@ Joueur::Joueur(string name, Monument *list_mon[], Batiment *list_bat[], unsigned
         i++;
         mon = list_mon[i];
     }
-
-    argent = arg_depart;
-    est_ia = true;
-    strategie = stratIa;
 }
 
 Joueur::~Joueur() {
@@ -83,10 +77,12 @@ Joueur::~Joueur() {
 unsigned int * Joueur::get_repartition_argent() const {
     /// Répartition de l'argent en fonction des types de pièces
     unsigned int *repartition = new unsigned int [3];
+    // Pièces de 10
     repartition[0] = argent/10;
+    // Pièces de 5
     repartition[1] = (argent%10)/5;
+    //Pièces de 1
     repartition[2] = (argent%10)%5;
-
     return repartition;
 }
 
@@ -215,11 +211,12 @@ void Joueur::acheter_carte(Carte *carte) {
     }
 }
 
-vector<Monument*> Joueur::get_monument_jouables() const {
+const vector<Monument*>& Joueur::get_monument_jouables() const {
+    /// Fonction qui retourne la liste des monuments actifs d'un joueur
     vector<Monument*> liste;
-    for (auto it = liste_monument.begin(); it != liste_monument.end(); it++) {
-        if (it->second)
-            liste.push_back(it->first);
+    for (auto monument : liste_monument) {
+        if (monument.second)
+            liste.push_back(monument.first);
     }
     return liste;
 }

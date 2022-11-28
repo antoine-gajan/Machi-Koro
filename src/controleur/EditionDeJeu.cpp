@@ -4,7 +4,7 @@ using namespace std;
 
 
 EditionDeJeu::EditionDeJeu(string& nom, unsigned int joueurs_min, unsigned int joueurs_max, unsigned int mon_win,
-                           Monument list_mon[], unsigned int quantite_mon[], Batiment list_bat[], unsigned int quantite_bat[], bool edition) : nom(nom), nb_joueurs_min(joueurs_min), nb_joueurs_max(joueurs_max), nb_monuments_win(mon_win), est_edition(edition) {
+                           Monument* list_mon[], unsigned int quantite_mon[], Batiment* list_bat[], unsigned int quantite_bat[], bool edition) : nom(nom), nb_joueurs_min(joueurs_min), nb_joueurs_max(joueurs_max), nb_monuments_win(mon_win), est_edition(edition) {
     /// Constructeur de EditionDeJeu
 
     //Gestion des erreurs
@@ -18,7 +18,7 @@ EditionDeJeu::EditionDeJeu(string& nom, unsigned int joueurs_min, unsigned int j
 
     // Ajout des batiments initiaux
     while (list_bat != nullptr && quantite_bat != nullptr) {
-        batiments.insert(pair<Batiment, unsigned int>(*list_bat, *quantite_bat));
+        batiments.insert(pair<Batiment*, unsigned int>(*list_bat, *quantite_bat));
         list_bat++;
         quantite_bat++;
     }
@@ -29,7 +29,7 @@ EditionDeJeu::EditionDeJeu(string& nom, unsigned int joueurs_min, unsigned int j
     // Ajout des monuments initiaux
 
     while (list_mon != nullptr) {
-        monuments.insert(pair<Monument, unsigned int>(*list_mon, *quantite_mon));
+        monuments.insert(pair<Monument*, unsigned int>(*list_mon, *quantite_mon));
         list_mon++;
         quantite_mon++;
     }

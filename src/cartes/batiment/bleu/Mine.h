@@ -8,7 +8,7 @@
 
 class Mine : public Batiment{
 public:
-    Mine(string& path_image);
+    Mine(const string& path_image);
     virtual void declencher_effet(Joueur* joueur_affecté);
 };
 #endif //MACHI_KORO_MASTER_MINE_H

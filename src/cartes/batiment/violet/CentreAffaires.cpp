@@ -1,4 +1,5 @@
 #include "CentreAffaires.h"
+#include "utils.h"
 
 CentreAffaires::CentreAffaires(const string& path_image):
     Batiment("Centre d'Affaires",
@@ -12,17 +13,6 @@ CentreAffaires::CentreAffaires(const string& path_image):
 }
 
 
-
-map<Batiment*, unsigned int> get_liste_bat_non_special(Joueur* j){
-    map<Batiment* ,unsigned int> liste;
-    for (auto bat : j->get_liste_batiment()){
-        if (bat.first->get_bat_type() != "spécial")
-        {
-            liste.insert(pair<Batiment*, unsigned int>(bat.first, bat.second));
-        }
-    }
-    return liste;
-}
 
 void CentreAffaires::declencher_effet(vector<Joueur *> &tab_joueurs, unsigned int joueur_actuel) {
     /// Effet du Centre d'affaires
@@ -105,52 +95,8 @@ void CentreAffaires::declencher_effet(vector<Joueur *> &tab_joueurs, unsigned in
     // Affichage du récapitulatif
     cout << "Vous allez recevoir de " << joueur_echange->get_nom() << " le bâtiment " << batiment_a_recevoir.first->get_nom();
 
-
     // Echange des batiments
-
-    // On retire le bat à donner du joueur actuel
-    // Si un seul exemplaire du batiment, on le supprime
-    if (batiment_a_donner.second == 1)
-    {
-        j_actuel->get_liste_batiment().erase(batiment_a_donner.first);
-    }
-    else
-    {
-        // Sinon, on décrémente sa quantité de 1
-        j_actuel->get_liste_batiment().find(batiment_a_donner.first)->second--;
-    }
-
-    // Ajout du batiment à donner au joueur de l'échange
-    auto element = joueur_echange->get_liste_batiment().find(batiment_a_donner.first);
-    if (element != joueur_echange->get_liste_batiment().end()){
-        element->second++;
-    }
-    else{
-        joueur_echange->get_liste_batiment().insert(pair<Batiment*, unsigned int>(batiment_a_donner.first, 1));
-    }
-
-    // On retire le bat à recevoir du joueur échange
-    // Si un seul exemplaire du batiment, on le supprime
-    if (batiment_a_recevoir.second == 1)
-    {
-        joueur_echange->get_liste_batiment().erase(batiment_a_recevoir.first);
-    }
-    else
-    {
-        // Sinon, on décrémente sa quantité de 1
-        joueur_echange->get_liste_batiment().find(batiment_a_recevoir.first)->second--;
-    }
-
-    // Ajout du batiment à recevoir au joueur actuel
-    auto element2 = j_actuel->get_liste_batiment().find(batiment_a_recevoir.first);
-    // S'il a déjà un exemplaire de ce bâtiment, on incrémente sa quantité
-    if (element2 != j_actuel->get_liste_batiment().end()){
-        element2->second++;
-    }
-    // Sinon, on ajoute le batiment à sa liste
-    else{
-        j_actuel->get_liste_batiment().insert(pair<Batiment*, unsigned int>(batiment_a_recevoir.first, 1));
-    }
+    swap_bat_players(j_actuel, joueur_echange, batiment_a_donner.first, batiment_a_recevoir.first);
 }
 
 

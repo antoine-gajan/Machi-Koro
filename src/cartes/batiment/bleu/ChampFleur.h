@@ -8,7 +8,7 @@
 
 class ChampFleur : public Batiment{
 public:
-    ChampFleur(string& path_image);
+    ChampFleur(const string& path_image);
     virtual void declencher_effet(Joueur* joueur_affecté);
 };
 
