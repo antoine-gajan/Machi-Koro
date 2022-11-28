@@ -14,7 +14,7 @@ private:
     ~Shop() = default;
 public:
     unsigned int get_nb_tas_possibles() const {return nb_tas_possibles;};
-    std::map<Batiment*, unsigned int> get_contenu() {return contenu;};
+    const std::map<Batiment*, unsigned int>& get_contenu() {return contenu;};
 };
 
 #endif //MACHI_KORO_SHOP_H

@@ -5,8 +5,7 @@ unsigned int count_type(Joueur *joueur, const string& type) {
     unsigned int count = 0;
 
     // pour chaque couleur de la liste de batissements du joueur
-    map<string, map<Batiment*, unsigned int>>::iterator it;
-    for (it=joueur->get_liste_batiment().begin(); it!=joueur->get_liste_batiment().end(); ++it) {
+    for (auto it=joueur->get_liste_batiment().begin(); it!=joueur->get_liste_batiment().end(); ++it) {
 
         // pour chaque batiment de la couleur, (batiments sous forme de map(Batiment*, unsigned int))
         map<Batiment*, unsigned int>::iterator it2;
@@ -160,43 +159,45 @@ void swap_bat_players(Joueur *j1, Joueur *j2, const string& bat1, const string& 
     // Si un seul exemplaire du batiment, on le supprime
     if (batiment1.second == 1)
     {
-        j1->get_liste_batiment().find(batiment1.first->get_couleur()).erase(batiment1.first);
+        j1->get_liste_batiment()[batiment1.first->get_couleur()].erase(batiment1.first);
     }
     else
     {
         // Sinon, on décrémente sa quantité de 1
-        j1->get_liste_batiment().find(batiment1.first)->second--;
+        j1->get_liste_batiment()[batiment1.first->get_couleur()].find(batiment1.first)->second--;
     }
 
     // Ajout du batiment à donner au joueur de l'échange
-    auto element = j2->get_liste_batiment().find(bat2.first);
-    if (element != j2->get_liste_batiment().end()){
+    auto element = j2->get_liste_batiment()[batiment1.first->get_couleur()].find(batiment1.first);
+    // Si le joueur a déjà un batiment de ce type
+    if (element != j2->get_liste_batiment()[batiment1.first->get_couleur()].end()){
         element->second++;
     }
+    // Sinon, on crée le batiment pour le joueur
     else{
-        joueur_echange->get_liste_batiment().insert(pair<Batiment*, unsigned int>(batiment_a_donner.first, 1));
+        j2->get_liste_batiment()[batiment1.first->get_couleur()].insert(pair<Batiment*, unsigned int>(batiment1.first, 1));
     }
 
     // On retire le bat à recevoir du joueur échange
     // Si un seul exemplaire du batiment, on le supprime
-    if (batiment_a_recevoir.second == 1)
+    if (batiment2.second == 1)
     {
-        joueur_echange->get_liste_batiment().erase(batiment_a_recevoir.first);
+        j2->get_liste_batiment()[batiment2.first->get_couleur()].erase(batiment2.first);
     }
     else
     {
         // Sinon, on décrémente sa quantité de 1
-        joueur_echange->get_liste_batiment().find(batiment_a_recevoir.first)->second--;
+        j2->get_liste_batiment()[batiment2.first->get_couleur()].find(batiment2.first)->second--;
     }
 
     // Ajout du batiment à recevoir au joueur actuel
-    auto element2 = j_actuel->get_liste_batiment().find(batiment_a_recevoir.first);
-    // S'il a déjà un exemplaire de ce bâtiment, on incrémente sa quantité
-    if (element2 != j_actuel->get_liste_batiment().end()){
+    auto element2 = j2->get_liste_batiment()[batiment1.first->get_couleur()].find(batiment1.first);
+    // Si le joueur a déjà un batiment de ce type
+    if (element2 != j2->get_liste_batiment()[batiment1.first->get_couleur()].end()){
         element2->second++;
     }
-        // Sinon, on ajoute le batiment à sa liste
+        // Sinon, on crée le batiment pour le joueur
     else{
-        j_actuel->get_liste_batiment().insert(pair<Batiment*, unsigned int>(batiment_a_recevoir.first, 1));
+        j2->get_liste_batiment()[batiment1.first->get_couleur()].insert(pair<Batiment*, unsigned int>(batiment1.first, 1));
     }
 }
