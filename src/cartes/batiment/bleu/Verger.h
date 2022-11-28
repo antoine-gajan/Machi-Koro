@@ -8,7 +8,7 @@
 
 class Verger : public Batiment{
 public:
-    Verger(string& path_image);
+    Verger(const string& path_image);
     virtual void declencher_effet(Joueur* joueur_affecté);
 };
 #endif //MACHI_KORO_MASTER_VERGER_H

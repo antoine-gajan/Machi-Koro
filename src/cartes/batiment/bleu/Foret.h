@@ -8,7 +8,7 @@
 
 class Foret : public Batiment{
 public:
-    Foret(string& path_image);
+    Foret(const string& path_image);
     virtual void declencher_effet(Joueur* joueur_affecté);
 };
 

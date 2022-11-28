@@ -15,8 +15,8 @@ class Pioche {
 
     public:
         Pioche(const vector<Batiment*>& batiments);
-        ~Pioche();
-        Batiment* getCarte() {return contenu.pop();}; // retourne la carte du dessus de la pioche
+        ~Pioche() = default;
+        Batiment* getCarte(); // retourne la carte du dessus de la pioche
         void melanger() {std::random_shuffle(contenu.begin(), contenu.end());}; // mélange la pioche
         bool est_vide() {return contenu.empty();}; // vérifie si la pioche est vide
 };

@@ -5,11 +5,10 @@
 #include "../cartes/batiment/Batiment.h"
 #include <string>
 
-// compte le nombre de cartes d'un type donné dans le jeu d'un Joueur
+// Compte le nombre de cartes d'un type donné dans le jeu d'un Joueur
 unsigned int count_type(Joueur *joueur, const string& type);
 
-// renvoi de l'indice d'un joueur
-// entier valide entre 0 et tab_joueurs.size() - 1, ne doit pas etre egal a joueur_actuel
+// Renvoie l'indice d'un joueur entier valide different de l'indice du joueur actuel
 unsigned int selectionner_joueur(vector<Joueur*>& tab_joueurs, unsigned int joueur_actuel);
 
 
