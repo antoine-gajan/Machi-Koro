@@ -29,4 +29,6 @@ add_executable(src
 
     cartes/monument/Monument.cpp
     cartes/monument/Monument.h
-)
+    cartes/monument/Aeroport.cpp
+    cartes/monument/Aeroport.h
+        )
