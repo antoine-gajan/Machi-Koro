@@ -4,6 +4,7 @@
 #include "../Batiment.h"
 #include "Port.h"
 #include "Joueur.h"
+#include "Partie.h"
 #include <list>
 #include <vector>
 

@@ -1,13 +1,8 @@
 #include "Mine.h"
 
-Mine::Mine(const string &path_image) :
-            Batiment("Mine",
-                     6,
-                     "Recevez cinq pièces de la banque",
-                     path_image,
-                     Bleu,
-                     list<unsigned int>{9},
-                     "Engrenage"){};
+Mine::Mine(const string &path_image) : Batiment("Mine",6
+        ,"Recevez cinq pièces de la banque",path_image,Bleu
+        ,list<unsigned int>{9},"Engrenage"){};
 ///Constructeur de Mine
 
 void Mine::declencher_effet(Joueur *joueur_affecté) {

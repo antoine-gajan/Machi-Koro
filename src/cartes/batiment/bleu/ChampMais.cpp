@@ -1,12 +1,8 @@
 #include "ChampMais.h"
 
-ChampMais::ChampMais(const string &path_image) :
-            Batiment("Champs de maïs",
-                     2,
-                     "Recevez une pièce de la banque si vous avez moins de deux monuments construits",
-                     path_image,Bleu,
-                     list<unsigned int>{3,4},
-                     "Champ"){};
+ChampMais::ChampMais(const string &path_image) : Batiment("Champs de maïs",2
+        ,"Recevez une pièce de la banque si vous avez moins de deux monuments construits",path_image,Bleu
+        ,list<unsigned int>{3,4},"Champ"){};
 ///Constructeur de Ferme
 
 void ChampMais::declencher_effet(Joueur *joueur_affecté) {

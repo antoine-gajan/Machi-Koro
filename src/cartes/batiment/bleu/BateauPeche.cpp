@@ -8,5 +8,9 @@ BateauPeche::BateauPeche(const string &path_image) : Batiment("Petit bateau de p
 ///Constructeur de BateauPeche
 
 
-//void BateauPeche::declencher_effet(Joueur* joueur_actuel) {}
+void BateauPeche::declencher_effet(Joueur* joueur_actuel) {
+    unsigned int argent = joueur_actuel->get_argent();
+    argent+=3;
+    joueur_actuel->set_argent(argent);
+}
 //L'effet est que le joueur reçoit 3 pièces de la banque si 8 tombe à tout moment de la partie
