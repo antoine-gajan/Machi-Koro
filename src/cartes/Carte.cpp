@@ -8,10 +8,6 @@ Carte::Carte(const string& name, const string& effect_description, unsigned int 
     /// Constructeur de la classe Carte
 
     // Gestion des erreurs
-    if (price < 0) {
-        throw invalid_argument("Le prix de la carte ne peut pas être inférieur à 0");
-    }
-
     if (name.empty()) {
         throw invalid_argument("Le nom de la carte ne peut pas être vide");
     }
