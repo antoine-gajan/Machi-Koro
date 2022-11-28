@@ -16,17 +16,6 @@ add_executable(src
     Joueur/Joueur.cpp
     Joueur/Joueur.h
 
-    controleur/EditionDeJeu.cpp
-    controleur/EditionDeJeu.h
-    controleur/Partie.cpp
-    controleur/Partie.h
-    controleur/Pioche.cpp
-    controleur/Pioche.h
-    controleur/Shop.cpp
-    controleur/Shop.h
-    controleur/utils.cpp
-    controleur/utils.h
-
     cartes/Carte.cpp
     cartes/Carte.h
 
@@ -45,7 +34,6 @@ add_executable(src
     cartes/monument/TourRadio.cpp
     cartes/monument/TourRadio.h
 
-
     cartes/batiment/Batiment.cpp
     cartes/batiment/Batiment.h
 
@@ -53,24 +41,5 @@ add_executable(src
     cartes/batiment/vert/BanqueDeMinivilles.h
     cartes/batiment/vert/Boulangerie.cpp
     cartes/batiment/vert/Boulangerie.h
-    cartes/batiment/vert/EntrepriseDeDemenagement.cpp
-    cartes/batiment/vert/EntrepriseDeDemenagement.h
-    cartes/batiment/vert/EntrepriseDeTravauxPublics.cpp
-    cartes/batiment/vert/EntrepriseDeTravauxPublics.h
-    cartes/batiment/vert/Epicerie.cpp
-    cartes/batiment/vert/Epicerie.h
-    cartes/batiment/vert/FabriqueDeMeubles.cpp
-    cartes/batiment/vert/FabriqueDeMeubles.h
-    cartes/batiment/vert/Fleuriste.cpp
-    cartes/batiment/vert/Fleuriste.h
-    cartes/batiment/vert/Fromagerie.cpp
-    cartes/batiment/vert/Fromagerie.h
-    cartes/batiment/vert/HalleDeMarche.cpp
-    cartes/batiment/vert/HalleDeMarche.h
-    cartes/batiment/vert/MarcheDeFruitsEtLegumes.cpp
-    cartes/batiment/vert/MarcheDeFruitsEtLegumes.h
-    cartes/batiment/vert/MoonsterSoda.cpp
-    cartes/batiment/vert/MoonsterSoda.h
-    cartes/batiment/vert/Superette.cpp
-    cartes/batiment/vert/Superette.h
+
 )
