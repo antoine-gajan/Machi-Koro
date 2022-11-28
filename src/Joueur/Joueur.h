@@ -16,7 +16,7 @@ class Joueur {
     private:
     /*** Attributs de la classe ***/
 
-    string nom;
+        string nom;
         map<Monument*, bool> liste_monument;
         map<string, map<Batiment*, unsigned int>> liste_batiment;
         unsigned int argent;
@@ -25,8 +25,8 @@ class Joueur {
 
     public:
         /*** Constructeurs et destructeur ***/
-        Joueur(string nom, Monument *list_mon[], Batiment *list_bat[], unsigned int arg_depart);
-        Joueur(string nom, Monument *list_mon[], Batiment *list_bat[], unsigned int arg_depart, strat_IA stratIa);
+        Joueur(const string& nom, Monument *list_mon[], Batiment *list_bat[], unsigned int arg_depart);
+        Joueur(const string& nom, Monument *list_mon[], Batiment *list_bat[], unsigned int arg_depart, strat_IA stratIa);
         ~Joueur();
 
         /***** Getters *****/
@@ -37,9 +37,11 @@ class Joueur {
         unsigned int * get_repartition_argent() const;
 
         const map<Monument*, bool>& get_liste_monument() const {return liste_monument;};
+        // Version lecture
         const map<couleur_bat, map<Batiment*, unsigned int>>& get_liste_batiment() const {return liste_batiment;};
+        // Version écriture
         map<couleur_bat, map<Batiment*, unsigned int>>& get_liste_batiment() {return liste_batiment;};
-        vector<Monument*> get_monument_jouables() const;
+        const vector<Monument*>& get_monument_jouables() const;
 
         /***** Setters *****/
         void set_argent(unsigned int arg) {argent = arg;};
