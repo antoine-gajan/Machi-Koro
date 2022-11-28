@@ -16,7 +16,7 @@ Carte::Carte(const string& name, const string& effect_description, unsigned int 
         throw invalid_argument("La description de l'effet de la carte ne peut pas être vide");
     }
 
-    if (path_image.empty()) {
+    if (path_picture.empty()) {
         throw invalid_argument("Le chemin de l'image de la carte ne peut pas être vide");
     }
 
