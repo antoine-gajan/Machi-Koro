@@ -1,5 +1,6 @@
 #include "EntrepriseDeTravauxPublics.h"
 
+
 EntrepriseDeTravauxPublics::EntrepriseDeTravauxPublics(const string& path_image)
         : Batiment("Entreprise de travaux publics",
                    2,
@@ -19,7 +20,7 @@ void EntrepriseDeTravauxPublics::declencher_effet(vector<Joueur *> &tab_joueurs,
     Monument* monument = selectionner_monument(j_actuel);
 
     // On recupere la liste des monuments actifs du joueur
-    vector<Monument*> monuments_jouables = j_actuel->get_monuments_jouables();
+    vector<Monument*> monuments_jouables = j_actuel->get_monument_jouables();
 
     // On vérifie que le monument est jouable
     while (find(monuments_jouables.begin(), monuments_jouables.end(), monument) == monuments_jouables.end()){

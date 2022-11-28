@@ -22,7 +22,7 @@ unsigned int count_type(Joueur *joueur, const string& type) {
 unsigned int selectionner_joueur(vector<Joueur*>& tab_joueurs, unsigned int joueur_actuel){
     unsigned int count = 0;
     string nom_joueur;
-    vector<Joueur*>::iterator it = tab_joueurs.begin();
+    auto it = tab_joueurs.begin();
 
     //Affichage de tous les joueus de tab_joueurs
     std::cout<<"Quel joueur voulez vous choisir parmis la liste suivante :";
@@ -87,14 +87,15 @@ Batiment* selectionner_batiment(Joueur *joueur){
 }
 
 Monument* selectionner_monument(Joueur *joueur){
-    map<Monument*, bool>::iterator it;
+    /// TODO
+    /// ERREUR IT
     string nom_monu;
     Monument* monu_a_retourner;
 
     std::cout<<"Quel monument voulez-vous sélectionner parmis la liste ci-dessous :";
     // affichage des batiments que le joueur possède
     // pour chaque couleur de la liste de batiments du joueur
-    for (it=joueur->get_liste_monument().begin(); it!=joueur->get_liste_monument().end(); ++it) {
+    for (auto it=joueur->get_liste_monument().begin(); it!=joueur->get_liste_monument().end(); ++it) {
 
         // pour chaque batiment de la couleur, (batiments sous forme de map(Batiment*, unsigned int))
             cout<<"\n -"<<it->first->get_nom();
@@ -102,9 +103,9 @@ Monument* selectionner_monument(Joueur *joueur){
 
     cin >> nom_monu;
 
-    it = joueur->get_liste_batiment().begin();
+    auto it = joueur->get_liste_batiment().begin();
     //on vient parcourir pour chaque couleur
-    while(it!=joueur->get_liste_monument().end() && it->first->get_nom()!=nom_monu){
+    while(it!=joueur->get_liste_monument().end() && it->first.get_nom()!=nom_monu){
         //on vient parcourir pour chaque carte dans un groupe de couleur
         it++;
     }
