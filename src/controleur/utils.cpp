@@ -1,10 +1,9 @@
 #include "utils.h"
 
-
 unsigned int count_type(Joueur *joueur, const string& type) {
     unsigned int count = 0;
 
-    // pour chaque couleur de la liste de batissements du joueur
+    // pour chaque couleur de la liste de batiments du joueur
     for (auto it=joueur->get_liste_batiment().begin(); it!=joueur->get_liste_batiment().end(); ++it) {
 
         // pour chaque batiment de la couleur, (batiments sous forme de map(Batiment*, unsigned int))
@@ -45,16 +44,16 @@ unsigned int selectionner_joueur(vector<Joueur*>& tab_joueurs, unsigned int joue
 }
 
 Batiment* selectionner_batiment(Joueur *joueur){
-    map<string, map<Batiment*, unsigned int>>::iterator it;
+    map<couleur_bat, map<Batiment*, unsigned int>>::iterator it;
     map<Batiment*, unsigned int>::iterator it2;
     string nom_bat;
     unsigned int check = 0;
     Batiment* bat_a_retourner;
 
     std::cout<<"Quel batiment voulez-vous sélectionner parmis la liste ci-dessous :";
-    // affichage des batiments que le joueur possède
-    // pour chaque couleur de la liste de batiments du joueur
-    for (it=joueur->get_liste_batiment().begin(); it!=joueur->get_liste_batiment().end(); ++it) {
+    // affichage des monuments que le joueur possède
+    // pour chaque couleur de la liste de batiment du joueur
+    for (it=joueur->get_liste_batiment().begin();it!=joueur->get_liste_batiment().end();++it) {
 
         // pour chaque batiment de la couleur, (batiments sous forme de map(Batiment*, unsigned int))
         for (it2=it->second.begin(); it2!=it->second.end(); ++it2) {
@@ -86,32 +85,78 @@ Batiment* selectionner_batiment(Joueur *joueur){
     return bat_a_retourner;
 }
 
+Batiment* possede_batiment(Joueur *joueur,string nom_bat){
+    map<couleur_bat, map<Batiment*, unsigned int>>::iterator it;
+    map<Batiment*, unsigned int>::iterator it2;
+    unsigned int check = 0;
+    Batiment* bat_a_retourner;
+
+    it = joueur->get_liste_batiment().begin();
+    it2 = it->second.begin();
+    //on vient parcourir pour chaque couleur
+    while(it!=joueur->get_liste_batiment().end() && check!=1){
+        //on vient parcourir pour chaque carte dans un groupe de couleur
+        while(it2!=it->second.end() && it2->first->get_nom()!=nom_bat){
+            it2++;
+        }
+        //attribut check pour exit le premier while (à voir s'il n'est pas possible de faire plus simple?)
+        if(it2->first->get_nom()==nom_bat){
+            check = 1;
+            bat_a_retourner = it2->first;
+        }
+        it++;
+    }
+
+    if(it == joueur->get_liste_batiment().end()){
+        bat_a_retourner = nullptr;
+    }
+
+    return bat_a_retourner;
+}
+
 Monument* selectionner_monument(Joueur *joueur){
-    map<Monument*, bool>::iterator it;
     string nom_monu;
     Monument* monu_a_retourner;
+    auto it = joueur->get_liste_monument().begin();
 
     std::cout<<"Quel monument voulez-vous sélectionner parmis la liste ci-dessous :";
-    // affichage des batiments que le joueur possède
-    // pour chaque couleur de la liste de batiments du joueur
-    for (it=joueur->get_liste_monument().begin(); it!=joueur->get_liste_monument().end(); ++it) {
-
-        // pour chaque batiment de la couleur, (batiments sous forme de map(Batiment*, unsigned int))
+    // affichage des monuments que le joueur possède
+    // pour chaque monument du joueur
+    for (it; it!=joueur->get_liste_monument().end(); ++it) {
             cout<<"\n -"<<it->first->get_nom();
     }
 
     cin >> nom_monu;
 
-    it = joueur->get_liste_batiment().begin();
-    //on vient parcourir pour chaque couleur
+    //parcours des monuments du joueur à la recherche du monument à trouver
+    it = joueur->get_liste_monument().begin();
     while(it!=joueur->get_liste_monument().end() && it->first->get_nom()!=nom_monu){
-        //on vient parcourir pour chaque carte dans un groupe de couleur
         it++;
     }
 
-    //cas où erreur (batiment entré pas dans la liste)
+    //cas où erreur (monument entré pas dans la liste)
     if(it == joueur->get_liste_monument().end()) {
         throw invalid_argument("Le monument entré n'est pas valide");
+    }else{
+        monu_a_retourner = it->first;
+    }
+
+    return monu_a_retourner;
+}
+
+Monument* possede_monument(Joueur *joueur,string nom_monu){
+    auto it = joueur->get_liste_monument().begin();
+    Monument* monu_a_retourner;
+
+    //parcours des monuments du joueur à la recherche du monument à trouver
+    it = joueur->get_liste_monument().begin();
+    while(it!=joueur->get_liste_monument().end() && it->first->get_nom()!=nom_monu){
+        it++;
+    }
+
+    //cas où erreur (monument entré pas dans la liste)
+    if(it == joueur->get_liste_monument().end()) {
+        monu_a_retourner = nullptr;
     }else{
         monu_a_retourner = it->first;
     }

@@ -15,9 +15,13 @@ unsigned int selectionner_joueur(vector<Joueur*>& tab_joueurs, unsigned int joue
 // séléction d'un batiment chez un joueur, on fait choisir parmis la liste des batiments possédés par le joueur
 // on renvoit un simple pointeur sur le batiment (qui lui n'est pas spécifique au joueur)
 Batiment* selectionner_batiment(Joueur *joueur);
+//renvoie un pointeur sur le batiment si le joueur possède le batiment, cette fois-ci, le nom du batiment est passé en paramètre, utile pour certains effets
+Batiment* possede_batiment(Joueur *joueur,string nom_bat);
+
 
 // idem mais pour monument
 Monument* selectionner_monument(Joueur *joueur);
+Monument* possede_monument(Joueur *joueur,string nom_monu);
 
 // Fonction qui retourne une liste des monuments non violets possédé par un joueur
 map<Batiment*, unsigned int> get_liste_bat_non_special(Joueur* j);

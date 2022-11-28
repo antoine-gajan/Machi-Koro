@@ -13,7 +13,7 @@ void Epicerie::declencher_effet(vector<Joueur *> &tab_joueurs, unsigned int joue
     /// Effet de l'Epicerie
     Joueur* j_actuel = tab_joueurs[joueur_actuel];
 
-    if (j_actuel->get_monuments_jouables().size() < 2){
+    if (j_actuel->get_monument_jouables().size() < 2){
         j_actuel->set_argent(j_actuel->get_argent() + 2);
     }
 
