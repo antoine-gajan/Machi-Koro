@@ -38,9 +38,9 @@ class Joueur {
 
         const map<Monument*, bool>& get_liste_monument() const {return liste_monument;};
         // Version lecture
-        const map<couleur_bat, map<Batiment*, unsigned int>>& get_liste_batiment() const {return liste_batiment;};
+        const map<string, map<Batiment*, unsigned int>>& get_liste_batiment() const {return liste_batiment;};
         // Version écriture
-        map<couleur_bat, map<Batiment*, unsigned int>>& get_liste_batiment() {return liste_batiment;};
+        map<string, map<Batiment*, unsigned int>>& get_liste_batiment() {return liste_batiment;};
         const vector<Monument*>& get_monument_jouables() const;
 
         /***** Setters *****/
