@@ -177,30 +177,21 @@ void Joueur::retirer_batiment(Batiment *bat) {
         couleur = "Violet";
 
     auto bat_couleur = liste_batiment.at(couleur);
-    if (couleur == "Violet") {
-        // Si la carte violette est présente on la retire
-        auto it = bat_couleur.find(bat);
-        if (it != bat_couleur.end()) {
-            // On ajoute le batiment
+
+    // On vérifie si le batiment est déjà présent
+    auto it = bat_couleur.find(bat);
+    if (it != bat_couleur.end()) {
+        // On décrémente le nombre de batiment
+        if (it->second > 1) {
+            it->second--;
+        }
+        else {
+            // On retire le batiment
             liste_batiment.at(couleur).erase(it);
         }
-        // Sinon on ne fait rien
     }
-    else {
-        // On vérifie si le batiment est déjà présent
-        auto it = bat_couleur.find(bat);
-        if (it != bat_couleur.end()) {
-            // On décrémente le nombre de batiment
-            if (it->second > 1) {
-                it->second--;
-            }
-            else {
-                // On retire le batiment
-                liste_batiment.at(couleur).erase(it);
-            }
-        }
-        // Sinon on ne fait rien
-    }
+    // Sinon on ne fait rien
+
 }
 
 void Joueur::acheter_carte(Carte *carte) {
