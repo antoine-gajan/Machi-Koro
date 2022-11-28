@@ -31,4 +31,14 @@ add_executable(src
     cartes/monument/Monument.h
     cartes/monument/Aeroport.cpp
     cartes/monument/Aeroport.h
-        )
+    cartes/monument/CentreCommercial.cpp
+    cartes/monument/CentreCommercial.h
+    cartes/monument/Gare.cpp
+    cartes/monument/Gare.h
+    cartes/monument/ParcAttraction.cpp
+    cartes/monument/ParcAttraction.h
+    cartes/monument/Port.cpp
+    cartes/monument/Port.h
+    cartes/monument/TourRadio.cpp
+    cartes/monument/TourRadio.h
+)
