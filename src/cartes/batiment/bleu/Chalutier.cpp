@@ -8,5 +8,11 @@ Chalutier::Chalutier(const string &path_image) : Batiment("Chalutier",5
         "Bateau"){};
 ///Constructeur de Chalutier
 
-void Chalutier::declencher_effet(Joueur *joueur_actuel) {}
+void Chalutier::declencher_effet(Joueur *joueur_actuel,unsigned int val_des) {
+    if(possede_monument(joueur_actuel,"Port") != nullptr){
+        unsigned int argent = joueur_actuel->get_argent();
+        argent += val_des;
+        joueur_actuel->set_argent(argent);
+    }
+}
 ///A voir plus tard, méthode déclencher effet de chalutier
