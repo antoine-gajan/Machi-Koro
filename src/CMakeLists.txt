@@ -26,4 +26,7 @@ add_executable(src
 
     cartes/Carte.cpp
     cartes/Carte.h
+
+    cartes/monument/Monument.cpp
+    cartes/monument/Monument.h
 )
