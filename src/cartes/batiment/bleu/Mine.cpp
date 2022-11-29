@@ -1,11 +1,20 @@
 #include "Mine.h"
 
-Mine::Mine(const string &path_image) : Batiment("Mine",6
-        ,"Recevez cinq pièces de la banque",path_image,Bleu
-        ,list<unsigned int>{9},"Engrenage"){};
+Mine::Mine() :
+    Batiment("Mine",
+         6,
+        "Recevez cinq pieces de la banque",
+        "../../assets/batiments/bleu/Mine.jpg",
+        Bleu,
+        list<unsigned int>{9},
+        "Engrenage"){};
 ///Constructeur de Mine
 
-void Mine::declencher_effet(Joueur *joueur_affecté) {
+void Mine::declencher_effet() {
+    //j'ai délibérément retiré le paramètre joueur actuel de declencher effet pour respecter la méthode virtuelle déclarée dans Batiment.h
+    cout<<"declencher effet de Mine";
+    /*
     joueur_affecté->set_argent(joueur_affecté->get_argent() + 5);
     //On augmente de un l'argent du joueur actuel
+     */
 }

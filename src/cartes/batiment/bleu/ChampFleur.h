@@ -8,8 +8,8 @@
 
 class ChampFleur : public Batiment{
 public:
-    ChampFleur(const string& path_image);
-    virtual void declencher_effet(Joueur* joueur_affecté);
+    ChampFleur();
+    virtual void declencher_effet();
 };
 
 #endif //MACHI_KORO_MASTER_CHAMPFLEUR_H

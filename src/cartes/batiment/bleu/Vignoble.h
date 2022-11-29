@@ -8,7 +8,7 @@
 
 class Vignoble : public Batiment{
 public:
-    Vignoble(const string& path_image);
-    virtual void declencher_effet(Joueur* joueur_affecté);
+    Vignoble();
+    virtual void declencher_effet();
 };
 #endif //MACHI_KORO_VIGNOBLE_H

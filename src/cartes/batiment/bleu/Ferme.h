@@ -8,8 +8,8 @@
 
 class Ferme : public Batiment{
 public:
-    Ferme(const string& path_image);
-    virtual void declencher_effet(Joueur* joueur_affecté);
+    Ferme();
+    virtual void declencher_effet();
 };
 
 #endif //MACHI_KORO_MASTER_RANCH_H

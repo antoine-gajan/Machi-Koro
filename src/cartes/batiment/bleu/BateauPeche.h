@@ -2,16 +2,16 @@
 #define MACHI_KORO_MASTER_BATEAUPECHE_H
 
 #include "../Batiment.h"
-#include "Port.h"
+//#include "Port.h"
 #include "Joueur.h"
-#include "Partie.h"
+//#include "Partie.h"
 #include <list>
 #include <vector>
 
 class BateauPeche : public Batiment{
 public:
-    BateauPeche(const string& path_image);
-    void declencher_effet(Joueur* joueur_actuel);
+    BateauPeche();
+    void declencher_effet();
 };
 
 #endif //MACHI_KORO_MASTER_BATEAUPECHE_H

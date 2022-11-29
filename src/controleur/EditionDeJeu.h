@@ -24,5 +24,7 @@ public:
     unsigned int get_nb_joueurs_max() const {return nb_joueurs_max;};
     unsigned int get_nb_monuments_win() const {return nb_monuments_win;};
     bool get_est_edition() const {return est_edition;};
+    map<Batiment*, unsigned int> get_batiments() const {return batiments;};
+    map<Monument*, unsigned int> get_monuments() const {return monuments;};
 };
 #endif //MACHI_KORO_EDITIONDEJEU_H
