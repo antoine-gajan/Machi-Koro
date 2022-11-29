@@ -4,7 +4,7 @@ ChampMais::ChampMais() :
     Batiment("Champs de mais",
          2,
         "Recevez une piece de la banque si vous avez moins de deux monuments construits",
-        "../../assets/batiments/bleu/Champs-ble.jpg",
+        "../../assets/batiments/bleu/ChampMais.jpg",
         Bleu,
         list<unsigned int>{3,4},
         "Champ"){};
