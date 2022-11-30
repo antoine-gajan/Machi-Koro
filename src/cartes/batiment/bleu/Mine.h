@@ -9,6 +9,6 @@
 class Mine : public Batiment{
 public:
     Mine();
-    void declencher_effet();
+    void declencher_effet() const;
 };
 #endif //MACHI_KORO_MASTER_MINE_H

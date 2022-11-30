@@ -10,7 +10,7 @@ Verger::Verger() :
         "Champ"){};
 ///Constructeur de Verger
 
-void Verger::declencher_effet() {
+void Verger::declencher_effet() const {
     //j'ai délibérément retiré le paramètre joueur actuel de declencher effet pour respecter la méthode virtuelle déclarée dans Batiment.h
     cout<<"declencher effet de Verger";
     /*

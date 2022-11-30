@@ -10,7 +10,7 @@ BateauPeche::BateauPeche() :
 ///Constructeur de BateauPeche
 
 
-void BateauPeche::declencher_effet() {
+void BateauPeche::declencher_effet() const{
     //j'ai délibérément retiré le paramètre joueur actuel de declencher effet pour respecter la méthode virtuelle déclarée dans Batiment.h
     cout<<"declencher effet de BateauPeche";
     /*

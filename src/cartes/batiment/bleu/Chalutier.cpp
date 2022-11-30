@@ -10,7 +10,7 @@ Chalutier::Chalutier() :
         "Bateau"){};
 ///Constructeur de Chalutier
 
-void Chalutier::declencher_effet() {
+void Chalutier::declencher_effet() const{
     //j'ai délibérément retiré les paramètres joueur actuel et val_des de declencher effet pour respecter la méthode virtuelle déclarée dans Batiment.h
     cout<<"declencher effet de Chalutier";
     /*

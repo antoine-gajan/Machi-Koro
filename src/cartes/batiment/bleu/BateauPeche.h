@@ -11,7 +11,7 @@
 class BateauPeche : public Batiment{
 public:
     BateauPeche();
-    void declencher_effet();
+    void declencher_effet() const;
 };
 
 #endif //MACHI_KORO_MASTER_BATEAUPECHE_H

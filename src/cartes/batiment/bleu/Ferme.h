@@ -9,7 +9,7 @@
 class Ferme : public Batiment{
 public:
     Ferme();
-    void declencher_effet();
+    void declencher_effet() const;
 };
 
 #endif //MACHI_KORO_MASTER_RANCH_H

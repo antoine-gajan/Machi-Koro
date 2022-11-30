@@ -40,8 +40,6 @@ add_executable(src
         cartes/monument/FabriqueDuPereNoel.h
         cartes/monument/HotelDeVille.cpp
         cartes/monument/HotelDeVille.h
-        controleur/EditionDeJeu/Marina.cpp
-        controleur/EditionDeJeu/Marina.h
 
         cartes/batiment/Batiment.cpp
         cartes/batiment/Batiment.h

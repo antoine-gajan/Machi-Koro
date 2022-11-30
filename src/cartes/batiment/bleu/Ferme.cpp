@@ -10,7 +10,7 @@ Ferme::Ferme() :
         "Betail"){};
 ///Constructeur de Ferme
 
-void Ferme::declencher_effet() {
+void Ferme::declencher_effet() const {
     //j'ai délibérément retiré le paramètre joueur actuel de declencher effet pour respecter la méthode virtuelle déclarée dans Batiment.h
     cout<<"declencher effet de Ferme";
     /*

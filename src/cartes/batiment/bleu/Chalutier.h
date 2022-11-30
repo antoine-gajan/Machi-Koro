@@ -11,6 +11,6 @@
 class Chalutier : public Batiment{
 public:
     Chalutier();
-    void declencher_effet();
+    void declencher_effet() const;
 };
 #endif //MACHI_KORO_MASTER_CHALUTIER_H
