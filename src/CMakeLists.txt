@@ -5,6 +5,7 @@ set(CMAKE_CXX_STANDARD 14)
 
 include_directories(cartes)
 include_directories(cartes/batiment)
+include_directories(cartes/batiment/vert)
 include_directories(cartes/monument)
 include_directories(Joueur)
 include_directories(controleur)
@@ -41,5 +42,25 @@ add_executable(src
     cartes/batiment/vert/BanqueDeMinivilles.h
     cartes/batiment/vert/Boulangerie.cpp
     cartes/batiment/vert/Boulangerie.h
+    cartes/batiment/vert/EntrepriseDeDemenagement.cpp
+    cartes/batiment/vert/EntrepriseDeDemenagement.h
+    cartes/batiment/vert/EntrepriseDeTravauxPublics.cpp
+    cartes/batiment/vert/EntrepriseDeTravauxPublics.h
+    cartes/batiment/vert/Epicerie.h
+    cartes/batiment/vert/Epicerie.cpp
+    cartes/batiment/vert/FabriqueDeMeubles.h
+    cartes/batiment/vert/FabriqueDeMeubles.cpp
+    cartes/batiment/vert/Fleuriste.h
+    cartes/batiment/vert/Fleuriste.cpp
+    cartes/batiment/vert/Fromagerie.h
+    cartes/batiment/vert/Fromagerie.cpp
+    cartes/batiment/vert/HalleDeMarche.cpp
+    cartes/batiment/vert/HalleDeMarche.h
+    cartes/batiment/vert/MarcheDeFruitsEtLegumes.h
+    cartes/batiment/vert/MarcheDeFruitsEtLegumes.cpp
+    cartes/batiment/vert/MoonsterSoda.h
+    cartes/batiment/vert/MoonsterSoda.cpp
+    cartes/batiment/vert/Superette.h
+    cartes/batiment/vert/Superette.cpp
 
 )

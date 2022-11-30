@@ -4,7 +4,7 @@ ChampFleur::ChampFleur() :
     Batiment("Champ de fleurs",
          2,
         "Recevez une piece de la banque",
-        "../../assets/batiments/bleu/ChampFleur.jpg",
+        "../../assets/batiments/bleu/ChampFleur.jpeg",
         Bleu,
         list<unsigned int>{4},
         "Champ"){};
