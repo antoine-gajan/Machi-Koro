@@ -12,7 +12,7 @@ protected:
 
 public:
     Carte(const std::string& name, const std::string& effect_description, unsigned int price, const std::string& path_picture);
-    ~Carte() = default;
+    virtual ~Carte() = default;
     const std::string& get_nom() const { return nom; }
     const std::string& get_description() const { return description_effet; }
     unsigned int get_prix() const { return prix; }
