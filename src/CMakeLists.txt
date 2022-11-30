@@ -63,4 +63,4 @@ add_executable(src
     cartes/batiment/vert/Superette.h
     cartes/batiment/vert/Superette.cpp
 
-)
+        cartes/monument/FabriqueDuPereNoel.cpp cartes/monument/FabriqueDuPereNoel.h cartes/monument/HotelDeVille.cpp cartes/monument/HotelDeVille.h)
