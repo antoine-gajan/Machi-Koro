@@ -9,7 +9,7 @@
 class CentreAffaires : public Batiment {
 public:
     CentreAffaires();
-    virtual void declencher_effet();
+    virtual void declencher_effet() const;
 };
 
 #endif //MACHI_KORO_CENTREAFFAIRES_H

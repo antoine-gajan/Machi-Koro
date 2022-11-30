@@ -11,7 +11,7 @@ Batiment("Stade",
     ///Constructeur de Stade
 }
 
-void Stade::declencher_effet() {
+void Stade::declencher_effet() const{
     /// Effet de la classe Stade
     std::cout << "Activation de l'effet du stade." << std::endl;
 

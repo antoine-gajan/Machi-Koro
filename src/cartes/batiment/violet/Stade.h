@@ -8,7 +8,7 @@
 class Stade : public Batiment {
 public:
     Stade();
-    virtual void declencher_effet();
+    virtual void declencher_effet() const;
 };
 
 #endif //MACHI_KORO_STADE_H

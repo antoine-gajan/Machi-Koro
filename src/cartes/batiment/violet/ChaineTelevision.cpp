@@ -14,7 +14,7 @@ ChaineTelevision::ChaineTelevision():
     ///Constructeur de Chaine de Television
 }
 
-void ChaineTelevision::declencher_effet() {
+void ChaineTelevision::declencher_effet() const{
     /// Effet de ChaineTelevision
     std::cout << "Activation de l'effet de la chaine de télévision." << std::endl;
 
