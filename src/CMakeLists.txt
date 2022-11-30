@@ -27,6 +27,6 @@ add_executable(src
         cartes/batiment/violet/ChaineTelevision.h
         cartes/batiment/violet/MaisonEdition.cpp
         cartes/batiment/violet/MaisonEdition.h
-        cartes/batiment/violet/Stade.cpp
-        cartes/batiment/violet/Stade.h
+        cartes/batiment/violet/Startup.cpp
+        cartes/batiment/violet/Startup.h
 )

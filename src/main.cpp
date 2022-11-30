@@ -5,12 +5,12 @@
 #include "Carte.h"
 #include "ChaineTelevision.h"
 #include "MaisonEdition.h"
-#include "Stade.h"
+#include "Startup.h"
 
 using namespace std;
 
 int main() {
-    Stade x;
+    Startup x;
     cout << x.get_nom();
     x.declencher_effet();
 
