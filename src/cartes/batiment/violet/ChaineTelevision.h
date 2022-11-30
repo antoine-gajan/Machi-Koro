@@ -8,7 +8,7 @@
 class ChaineTelevision : public Batiment {
 public:
     ChaineTelevision();
-    virtual void declencher_effet() const;
+    void declencher_effet() const;
 };
 
 #endif //MACHI_KORO_CHAINETELEVISION_H

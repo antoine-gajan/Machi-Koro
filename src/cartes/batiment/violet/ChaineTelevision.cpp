@@ -4,9 +4,9 @@
 using namespace std;
 
 ChaineTelevision::ChaineTelevision():
-    Batiment("Chaine de télévision",
+    Batiment("Chaine de television",
              7,
-             "Recevez 5 pièces du joueur de votre choix",
+             "Recevez 5 pieces du joueur de votre choix",
              "../../../assets/batiments/Violet/Chaine-de-television.jpg",
              Violet,
              list<unsigned int>{6},
@@ -16,7 +16,7 @@ ChaineTelevision::ChaineTelevision():
 
 void ChaineTelevision::declencher_effet() const{
     /// Effet de ChaineTelevision
-    std::cout << "Activation de l'effet de la chaine de télévision." << std::endl;
+    std::cout << "Activation de l'effet de la chaine de television." << std::endl;
 
     /*
     Joueur* j_actuel = tab_joueurs[joueur_actuel];

@@ -16,22 +16,17 @@ add_executable(src
         cartes/Carte.cpp
         cartes/Carte.h
 
-        cartes/monument/Monument.cpp
-        cartes/monument/Monument.h
-        cartes/monument/Aeroport.cpp
-        cartes/monument/Aeroport.h
-        cartes/monument/CentreCommercial.cpp
-        cartes/monument/CentreCommercial.h
-        cartes/monument/Gare.cpp
-        cartes/monument/Gare.h
-        cartes/monument/ParcAttraction.cpp
-        cartes/monument/ParcAttraction.h
-        cartes/monument/Port.cpp
-        cartes/monument/Port.h
-        cartes/monument/TourRadio.cpp
-        cartes/monument/TourRadio.h
-        cartes/monument/FabriqueDuPereNoel.cpp
-        cartes/monument/FabriqueDuPereNoel.h
-        cartes/monument/HotelDeVille.cpp
-        cartes/monument/HotelDeVille.h
+        cartes/batiment/batiment.cpp
+        cartes/batiment/batiment.h
+
+        cartes/batiment/violet/CentreAffaires.cpp
+        cartes/batiment/violet/CentreAffaires.h
+        cartes/batiment/violet/CentreImpots.cpp
+        cartes/batiment/violet/CentreImpots.h
+        cartes/batiment/violet/ChaineTelevision.cpp
+        cartes/batiment/violet/ChaineTelevision.h
+        cartes/batiment/violet/MaisonEdition.cpp
+        cartes/batiment/violet/MaisonEdition.h
+        cartes/batiment/violet/Stade.cpp
+        cartes/batiment/violet/Stade.h
 )
