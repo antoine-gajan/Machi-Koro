@@ -9,7 +9,7 @@ CentreImpots::CentreImpots():
                  Violet,
                  list<unsigned int>{8,9},
                  "spécial") {
-    ///Constructeur de Centre d'Affaires
+    ///Constructeur du Centre des Impots
 }
 
 

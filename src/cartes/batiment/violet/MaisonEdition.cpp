@@ -9,7 +9,7 @@ MaisonEdition::MaisonEdition():
                  Violet,
                  list<unsigned int>{7},
                  "spécial") {
-    ///Constructeur de Centre d'Affaires
+    ///Constructeur de Maison d'Edition
 }
 
 

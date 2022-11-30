@@ -8,10 +8,10 @@ Startup::Startup() :
                  Violet,
                  list<unsigned int>{10},
                  "spécial") {
-    ///Constructeur de Stade
+    ///Constructeur de Startup
 }
 
 void Startup::declencher_effet() const{
-    /// Effet de la classe Stade
+    /// Effet de la classe Startup
     std::cout << "Activation de l'effet de la startup." << std::endl;
 }
