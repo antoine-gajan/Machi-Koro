@@ -8,8 +8,8 @@
 
 class CentreAffaires : public Batiment {
 public:
-    CentreAffaires(const string& path_image);
-    virtual void declencher_effet(vector<Joueur*>& tab_joueurs, unsigned int joueur_actuel);
+    CentreAffaires();
+    virtual void declencher_effet();
 };
 
 #endif //MACHI_KORO_CENTREAFFAIRES_H
