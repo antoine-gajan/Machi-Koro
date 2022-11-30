@@ -11,7 +11,7 @@
 class EntrepriseDeTravauxPublics : public Batiment {
 public:
     EntrepriseDeTravauxPublics();
-    virtual void declencher_effet();
+    void declencher_effet();
 };
 
 #endif //MACHI_KORO_ENTREPRISE_DE_TRAVAUX_PUBLICS_H

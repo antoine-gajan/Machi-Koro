@@ -10,7 +10,7 @@
 class Epicerie : public Batiment {
 public:
     Epicerie();
-    virtual void declencher_effet();
+    void declencher_effet();
 
 };
 

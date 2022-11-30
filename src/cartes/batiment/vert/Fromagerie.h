@@ -10,7 +10,7 @@
 class Fromagerie : public Batiment {
 public:
     Fromagerie();
-    virtual void declencher_effet();
+    void declencher_effet();
 };
 
 #endif //MACHI_KORO_FROMAGERIE_H

@@ -10,7 +10,7 @@
 class MarcheDeFruitsEtLegumes : public Batiment {
 public:
     MarcheDeFruitsEtLegumes();
-    virtual void declencher_effet();
+    void declencher_effet();
 };
 
 #endif //MACHI_KORO_MARCHE_DE_FRUITS_ET_LEGUMES_H

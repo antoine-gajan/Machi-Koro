@@ -10,7 +10,7 @@
 class MoonsterSoda : public Batiment {
 public:
     MoonsterSoda();
-    virtual void declencher_effet();
+    void declencher_effet();
 };
 
 #endif //MACHI_KORO_MONSTER_SODA_H

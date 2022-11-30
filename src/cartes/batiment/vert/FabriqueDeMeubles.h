@@ -10,7 +10,7 @@
 class FabriqueDeMeubles : public Batiment {
 public:
     FabriqueDeMeubles();
-    virtual void declencher_effet();
+    void declencher_effet();
 };
 
 #endif //MACHI_KORO_FABRIQUE_DE_MEUBLES_H
