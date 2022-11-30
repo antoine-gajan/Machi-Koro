@@ -10,8 +10,8 @@ class CentreCommercial : public Monument {
         ~CentreCommercial()=default;
 
         //*** Méthodes ***//
-        virtual std::string get_name() const {return "CentreCommercial";}
-        virtual void declencher_effet() const;
+        std::string get_name() const {return "CentreCommercial";}
+        void declencher_effet() const;
 };
 
 #endif //MACHI_KORO_CENTRECOMMERCIAL_H

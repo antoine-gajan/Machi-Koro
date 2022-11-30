@@ -10,8 +10,8 @@ public:
     ~ParcAttraction()=default;
 
     //*** Méthodes ***//
-    virtual std::string get_name() const {return "ParcAttraction";}
-    virtual void declencher_effet() const;
+    std::string get_name() const {return "ParcAttraction";}
+    void declencher_effet() const;
 };
 
 

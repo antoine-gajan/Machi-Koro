@@ -10,8 +10,8 @@ class Aeroport : public Monument {
         ~Aeroport()=default;
 
         //*** Méthodes ***//
-        virtual std::string get_name() const {return "Aeroport";}
-        virtual void declencher_effet() const;
+        std::string get_name() const {return "Aeroport";}
+        void declencher_effet() const;
 };
 
 #endif //MACHI_KORO_AEROPORT_H

@@ -10,8 +10,8 @@ class Port : public Monument {
         ~Port()=default;
 
         //*** Méthodes ***//
-        virtual std::string get_name() const {return "Port";}
-        virtual void declencher_effet() const;
+        std::string get_name() const {return "Port";}
+        void declencher_effet() const;
 };
 
 

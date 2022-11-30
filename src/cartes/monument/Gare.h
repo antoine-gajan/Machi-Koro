@@ -10,8 +10,8 @@ public :
     ~Gare()=default;
 
     //*** Méthodes ***//
-    virtual std::string get_name() const {return "Gare";}
-    virtual void declencher_effet() const;
+    std::string get_name() const {return "Gare";}
+    void declencher_effet() const;
 };
 
 #endif //MACHI_KORO_GARE_H

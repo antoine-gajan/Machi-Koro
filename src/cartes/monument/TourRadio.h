@@ -10,8 +10,8 @@ class TourRadio : public Monument {
         ~TourRadio()=default;
 
         //*** Méthodes ***//
-        virtual std::string get_name() const {return "TourRadio";}
-        virtual void declencher_effet() const;
+        std::string get_name() const {return "TourRadio";}
+        void declencher_effet() const;
 };
 
 #endif //MACHI_KORO_TOURRADIO_H

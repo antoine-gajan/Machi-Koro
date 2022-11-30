@@ -10,8 +10,8 @@ public :
     ~FabriqueDuPereNoel()=default;
 
     //*** Méthodes ***//
-    virtual std::string get_name() const {return "FabriqueDuPereNoel";}
-    virtual void declencher_effet() const;
+    std::string get_name() const {return "FabriqueDuPereNoel";}
+    void declencher_effet() const;
 };
 
 #endif //SRC_FABRIQUEDUPERENOEL_H

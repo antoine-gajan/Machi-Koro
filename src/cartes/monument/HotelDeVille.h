@@ -10,8 +10,8 @@ public :
     ~HotelDeVille()=default;
 
     //*** Méthodes ***//
-    virtual std::string get_name() const {return "HotelDeVille";}
-    virtual void declencher_effet() const;
+    std::string get_name() const {return "HotelDeVille";}
+    void declencher_effet() const;
 };
 
 #endif //SRC_HOTELDEVILLE_H
