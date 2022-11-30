@@ -2,7 +2,6 @@
 #define MACHI_KORO_CENTRECOMMERCIAL_H
 
 #include "Monument.h"
-#include "Joueur.h"
 
 class CentreCommercial : public Monument {
     public :
@@ -11,7 +10,8 @@ class CentreCommercial : public Monument {
         ~CentreCommercial()=default;
 
         //*** Méthodes ***//
-        virtual string get_name() const {return "CentreCommercial";}
+        virtual std::string get_name() const {return "CentreCommercial";}
+        virtual void declencher_effet() const;
 };
 
 #endif //MACHI_KORO_CENTRECOMMERCIAL_H

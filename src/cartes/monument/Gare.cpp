@@ -1,8 +1,4 @@
 #include "Gare.h"
-#include "Joueur.h"
-#include <iostream>
-
-using namespace std;
 
 Gare::Gare()
     : Monument(AVANT,
@@ -11,4 +7,8 @@ Gare::Gare()
                "Vous pouvez lancer 2 dés",
                "../../assets/Monuments/Gare-travaux.png") {
     /// Constructeur de Gare
+}
+
+void Gare::declencher_effet() const {
+    std::cout << "Activation de l'effet de la gare" << std::endl;
 }

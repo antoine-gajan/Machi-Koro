@@ -2,6 +2,7 @@
 #define MACHI_KORO_CARTE_H
 
 #include <string>
+#include <iostream>
 class Carte {
 protected:
     std::string nom;

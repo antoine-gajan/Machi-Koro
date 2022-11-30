@@ -2,7 +2,6 @@
 #define MACHI_KORO_PARCATTRACTION_H
 
 #include "Monument.h"
-#include "Joueur.h"
 
 class ParcAttraction : public Monument {
 public:
@@ -11,7 +10,8 @@ public:
     ~ParcAttraction()=default;
 
     //*** Méthodes ***//
-    virtual string get_name() const {return "ParcAttraction";}
+    virtual std::string get_name() const {return "ParcAttraction";}
+    virtual void declencher_effet() const;
 };
 
 

@@ -1,5 +1,4 @@
 #include "Aeroport.h"
-#include "Joueur.h"
 
 Aeroport::Aeroport() :
     Monument(APRES,
@@ -11,5 +10,5 @@ Aeroport::Aeroport() :
 }
 
 void Aeroport::declencher_effet() const {
-    cout << "Activation de l'effet de l'aéroport" << endl;
+    std::cout << "Activation de l'effet de l'aéroport" << std::endl;
 }

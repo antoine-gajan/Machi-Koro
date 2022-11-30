@@ -9,3 +9,7 @@ TourRadio::TourRadio() :
              "../../assets/Monuments/TourRadio-travaux.png") {
     /// Constructeur de TourRadio
 }
+
+void TourRadio::declencher_effet() const {
+    std::cout << "Activation de l'effet de la Tour radio" << std::endl;
+}

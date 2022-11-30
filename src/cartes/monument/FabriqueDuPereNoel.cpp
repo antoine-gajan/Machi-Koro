@@ -8,3 +8,7 @@ FabriqueDuPereNoel::FabriqueDuPereNoel() :
                  "../../assets/Monuments/FabriqueDuPereNoel.png") {
     /// Constructeur de Centre commercial
 }
+
+void FabriqueDuPereNoel::declencher_effet() const {
+    std::cout << "Activation de l'effet de la Fabrique du Père Noël" << std::endl;
+}

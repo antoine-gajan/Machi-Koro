@@ -11,6 +11,7 @@ public :
 
     //*** Méthodes ***//
     virtual std::string get_name() const {return "FabriqueDuPereNoel";}
+    virtual void declencher_effet() const;
 };
 
 #endif //SRC_FABRIQUEDUPERENOEL_H
