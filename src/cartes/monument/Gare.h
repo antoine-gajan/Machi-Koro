@@ -9,7 +9,7 @@ public :
     Gare();
     ~Gare()=default;
 
-    //*** Méthodes ***//
+    //*** Methodes ***//
     void declencher_effet() const;
 };
 

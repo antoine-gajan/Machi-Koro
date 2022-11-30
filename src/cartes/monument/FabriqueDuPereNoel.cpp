@@ -10,5 +10,5 @@ FabriqueDuPereNoel::FabriqueDuPereNoel() :
 }
 
 void FabriqueDuPereNoel::declencher_effet() const {
-    std::cout << "Activation de l'effet de la Fabrique du Père Noel" << std::endl;
+    std::cout << "Activation de l'effet de la Fabrique du Pere Noel" << std::endl;
 }

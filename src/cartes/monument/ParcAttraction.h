@@ -9,7 +9,7 @@ public:
     ParcAttraction();
     ~ParcAttraction()=default;
 
-    //*** Méthodes ***//
+    //*** Methodes ***//
     void declencher_effet() const;
 };
 

@@ -3,7 +3,7 @@
 Boulangerie::Boulangerie()
         : Batiment("Boulangerie",
                    1,
-                   "Recevez une pièce de la banque.",
+                   "Recevez une piece de la banque.",
                    "../../../assets/batiments/Vert/Boulangerie.jpg",
                    Vert,
                    {2, 3},
@@ -11,7 +11,7 @@ Boulangerie::Boulangerie()
 
 
 void Boulangerie::declencher_effet() const {
-    cout << "Déclenchement de l'effet de la carte Boulangerie" << endl;
+    cout << "Declenchement de l'effet de la carte Boulangerie" << endl;
     /*
     /// Effet de la Boulangerie
     Joueur* j_actuel = tab_joueurs[joueur_actuel];

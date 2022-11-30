@@ -9,7 +9,7 @@ class TourRadio : public Monument {
         TourRadio();
         ~TourRadio()=default;
 
-        //*** Méthodes ***//
+        //*** Methodes ***//
         void declencher_effet() const;
 };
 

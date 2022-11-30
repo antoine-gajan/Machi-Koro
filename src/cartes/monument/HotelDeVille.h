@@ -9,7 +9,7 @@ public :
     HotelDeVille();
     ~HotelDeVille()=default;
 
-    //*** Méthodes ***//
+    //*** Methodes ***//
     void declencher_effet() const;
 };
 

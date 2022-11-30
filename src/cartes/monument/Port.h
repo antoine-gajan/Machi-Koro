@@ -9,7 +9,7 @@ class Port : public Monument {
         Port();
         ~Port()=default;
 
-        //*** Méthodes ***//
+        //*** Methodes ***//
         void declencher_effet() const;
 };
 

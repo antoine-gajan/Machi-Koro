@@ -9,7 +9,7 @@ class CentreCommercial : public Monument {
         CentreCommercial();
         ~CentreCommercial()=default;
 
-        //*** Méthodes ***//
+        //*** Methodes ***//
         void declencher_effet() const;
 };
 

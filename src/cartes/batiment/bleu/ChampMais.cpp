@@ -11,12 +11,12 @@ ChampMais::ChampMais() :
 ///Constructeur de Ferme
 
 void ChampMais::declencher_effet() const{
-    //j'ai délibérément retiré le paramètre joueur actuel de declencher effet pour respecter la méthode virtuelle déclarée dans Batiment.h
+    //j'ai deliberement retire le parametre joueur actuel de declencher effet pour respecter la methode virtuelle declaree dans Batiment.h
     cout<<"declencher effet de ChampMais";
     /*
-    if(joueur_affecté->get_liste_monument().size() < 2){
-        joueur_affecté->set_argent(joueur_affecté->get_argent() + 1);
-        //On augmente de un l'argent du joueur pointé s'il a moins de deux monuments construits
+    if(joueur_affecte->get_liste_monument().size() < 2){
+        joueur_affecte->set_argent(joueur_affecte->get_argent() + 1);
+        //On augmente de un l'argent du joueur pointe s'il a moins de deux monuments construits
     }
      */
 }

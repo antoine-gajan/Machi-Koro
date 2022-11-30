@@ -11,10 +11,10 @@ Ferme::Ferme() :
 ///Constructeur de Ferme
 
 void Ferme::declencher_effet() const {
-    //j'ai délibérément retiré le paramètre joueur actuel de declencher effet pour respecter la méthode virtuelle déclarée dans Batiment.h
+    //j'ai deliberement retire le parametre joueur actuel de declencher effet pour respecter la methode virtuelle declaree dans Batiment.h
     cout<<"declencher effet de Ferme";
     /*
-    joueur_affecté->set_argent(joueur_affecté->get_argent() + 1);
-    //On augmente de un l'argent du joueur pointé
+    joueur_affecte->set_argent(joueur_affecte->get_argent() + 1);
+    //On augmente de un l'argent du joueur pointe
      */
 }

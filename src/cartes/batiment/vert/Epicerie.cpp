@@ -1,16 +1,16 @@
 #include "Epicerie.h"
 
 Epicerie::Epicerie()
-        : Batiment("Épicerie",
+        : Batiment("Epicerie",
                    0,
-                   "Si vous possédez moins de deux monuments, recevez 2 pièces de la banque.",
+                   "Si vous possedez moins de deux monuments, recevez 2 pieces de la banque.",
                    "../../../assets/batiments/Vert/Epicerie.jpg",
                    Vert,
                    {2},
                    "commerce") {}
 
 void Epicerie::declencher_effet() const{
-    cout << "Déclenchement de l'effet de la carte Épicerie" << endl;
+    cout << "Declenchement de l'effet de la carte Epicerie" << endl;
     /*
     /// Effet de l'Epicerie
     Joueur* j_actuel = tab_joueurs[joueur_actuel];

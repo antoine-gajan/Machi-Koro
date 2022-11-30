@@ -11,7 +11,7 @@ Chalutier::Chalutier() :
 ///Constructeur de Chalutier
 
 void Chalutier::declencher_effet() const{
-    //j'ai délibérément retiré les paramètres joueur actuel et val_des de declencher effet pour respecter la méthode virtuelle déclarée dans Batiment.h
+    //j'ai deliberement retire les parametres joueur actuel et val_des de declencher effet pour respecter la methode virtuelle declaree dans Batiment.h
     cout<<"declencher effet de Chalutier";
     /*
     if(possede_monument(joueur_actuel,"Port") != nullptr){
@@ -21,4 +21,4 @@ void Chalutier::declencher_effet() const{
     }
      */
 }
-///A voir plus tard, méthode déclencher effet de chalutier
+///A voir plus tard, methode declencher effet de chalutier

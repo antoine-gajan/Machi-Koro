@@ -3,11 +3,11 @@
 EntrepriseRenovation::EntrepriseRenovation() :
         Batiment("Entreprise de renovation",
                  1,
-                 "Recevez 1 pièce de la banque pour chaque pièce placée sur l'ensemble de tous les joueurs. A la fin de votre tour, placez une pièce sur votre EntrepriseRenovation.",
+                 "Recevez 1 piece de la banque pour chaque piece placee sur l'ensemble de tous les joueurs. A la fin de votre tour, placez une piece sur votre EntrepriseRenovation.",
                  "../../../assets/batiments/Violet/Entreprise-de-renovation.jpg",
                  Violet,
                  list<unsigned int>{10},
-                 "spécial") {
+                 "special") {
     ///Constructeur de EntrepriseRenovation
 }
 

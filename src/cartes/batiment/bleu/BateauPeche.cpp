@@ -11,7 +11,7 @@ BateauPeche::BateauPeche() :
 
 
 void BateauPeche::declencher_effet() const{
-    //j'ai délibérément retiré le paramètre joueur actuel de declencher effet pour respecter la méthode virtuelle déclarée dans Batiment.h
+    //j'ai deliberement retire le parametre joueur actuel de declencher effet pour respecter la methode virtuelle declaree dans Batiment.h
     cout<<"declencher effet de BateauPeche";
     /*
     unsigned int argent = joueur_actuel->get_argent();
@@ -19,4 +19,4 @@ void BateauPeche::declencher_effet() const{
     joueur_actuel->set_argent(argent);
      */
 }
-//L'effet est que le joueur reçoit 3 pièces de la banque si 8 tombe à tout moment de la partie
+//L'effet est que le joueur reçoit 3 pieces de la banque si 8 tombe a tout moment de la partie

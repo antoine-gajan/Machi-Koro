@@ -9,7 +9,7 @@ class Aeroport : public Monument {
         Aeroport();
         ~Aeroport()=default;
 
-        //*** Méthodes ***//
+        //*** Methodes ***//
         void declencher_effet() const;
 };
 

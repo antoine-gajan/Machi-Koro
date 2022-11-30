@@ -9,7 +9,7 @@ public :
     FabriqueDuPereNoel();
     ~FabriqueDuPereNoel()=default;
 
-    //*** Méthodes ***//
+    //*** Methodes ***//
     void declencher_effet() const;
 };
 

@@ -10,15 +10,15 @@ BanqueDeMinivilles::BanqueDeMinivilles()
                    "commerce") {}
 
 void BanqueDeMinivilles::declencher_effet() const{
-    cout << "Déclenchement de l'effet de la carte Banque de minivilles" << endl;
+    cout << "Declenchement de l'effet de la carte Banque de minivilles" << endl;
     /*
 
     /// Effet de l'BanqueDeMinivilles
 
-    // Le don de 5 pièces est géré lors de l'achat de la carte
+    // Le don de 5 pieces est gere lors de l'achat de la carte
 
     /// TRANSACTION AVEC LA BANQUE
-    // Le joueur actuel paye 2 pièces à la banque
+    // Le joueur actuel paye 2 pieces a la banque
     Joueur* j_actuel = tab_joueurs[joueur_actuel];
 
     if (j_actuel->get_argent() >= 2) {
