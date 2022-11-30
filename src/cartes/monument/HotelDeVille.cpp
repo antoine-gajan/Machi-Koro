@@ -4,7 +4,7 @@ HotelDeVille::HotelDeVille() :
     Monument(APRES,
              "HotelDeVille",
              0,
-             "Une fois par tour vous pouvez relancer vos dés",
+             "Une fois par tour vous pouvez relancer vos des",
              "../../assets/Monuments/HotelDeVille.png") {
     /// Constructeur de HotelDeVille
 }

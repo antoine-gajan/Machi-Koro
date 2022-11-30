@@ -4,7 +4,7 @@ ParcAttraction::ParcAttraction() :
     Monument(APRES,
              "ParcAttraction",
              16,
-             "Si le jet de dé est un double vous pouvez rejouer",
+             "Si le jet de de est un double vous pouvez rejouer",
              "../../assets/Monuments/ParcAttraction-travaux.png") {
     /// Constructeur de ParcAttraction
 }

@@ -4,7 +4,7 @@ CentreCommercial::CentreCommercial() :
     Monument(APRES,
              "CentreCommercial",
              10,
-             "Les établissement rouge et vert vous rapportent une pièce de plus",
+             "Les etablissement rouge et vert vous rapportent une piece de plus",
              "../../assets/Monuments/CentreCommercial-travaux.png") {
     /// Constructeur de Centre commercial
 }

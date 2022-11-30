@@ -5,7 +5,7 @@ TourRadio::TourRadio() :
     Monument(APRES,
              "TourRadio",
              22,
-             "Une fois par tour vous pouvez relancer vos dés",
+             "Une fois par tour vous pouvez relancer vos des",
              "../../assets/Monuments/TourRadio-travaux.png") {
     /// Constructeur de TourRadio
 }
