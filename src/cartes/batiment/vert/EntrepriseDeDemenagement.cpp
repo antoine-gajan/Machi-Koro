@@ -9,7 +9,7 @@ EntrepriseDeDemenagement::EntrepriseDeDemenagement()
                    {9, 10},
                    "entreprise") {}
 
-void EntrepriseDeDemenagement::declencher_effet() {
+void EntrepriseDeDemenagement::declencher_effet() const {
     cout << "Déclenchement de l'effet de la carte Entreprise de déménagement" << endl;
     /*
     /// Effet de l'EntrepriseDeDemenagement

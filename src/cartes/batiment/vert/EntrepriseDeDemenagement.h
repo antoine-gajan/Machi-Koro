@@ -10,7 +10,7 @@
 class EntrepriseDeDemenagement : public Batiment {
 public:
     EntrepriseDeDemenagement();
-    void declencher_effet();
+    void declencher_effet() const;
 };
 
 #endif //MACHI_KORO_ENTREPRISE_DE_DEMENAGEMENT_H

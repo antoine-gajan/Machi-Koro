@@ -10,7 +10,7 @@
 class Superette : public Batiment {
 public:
     Superette();
-    void declencher_effet();
+    void declencher_effet() const;
 };
 
 #endif //MACHI_KORO_SUPERETTE_H

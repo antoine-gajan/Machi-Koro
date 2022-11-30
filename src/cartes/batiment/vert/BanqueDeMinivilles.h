@@ -10,7 +10,7 @@
 class BanqueDeMinivilles : public Batiment {
 public:
     BanqueDeMinivilles();
-    void declencher_effet();
+    void declencher_effet() const;
 
 };
 

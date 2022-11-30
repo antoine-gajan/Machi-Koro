@@ -10,7 +10,7 @@ FabriqueDeMeubles::FabriqueDeMeubles()
                    "usine") {}
 
 
-void FabriqueDeMeubles::declencher_effet() {
+void FabriqueDeMeubles::declencher_effet() const {
     cout << "Déclenchement de l'effet de la carte Fabrique de meubles" << endl;
     /*
     /// Effet de la FabriqueDeMeubles

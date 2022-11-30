@@ -10,7 +10,7 @@
 class HalleDeMarche : public Batiment {
 public:
     HalleDeMarche();
-    void declencher_effet();
+    void declencher_effet() const;
 };
 
 #endif //MACHI_KORO_HALLE_DE_MARCHE_H

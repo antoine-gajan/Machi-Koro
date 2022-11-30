@@ -10,7 +10,7 @@
 class Fleuriste : public Batiment {
 public:
     Fleuriste();
-    void declencher_effet();
+    void declencher_effet() const;
 };
 
 #endif //MACHI_KORO_FLEURISTE_H

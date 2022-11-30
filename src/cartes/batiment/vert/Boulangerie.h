@@ -9,7 +9,7 @@
 class Boulangerie : public Batiment {
 public:
     Boulangerie();
-    void declencher_effet();
+    void declencher_effet() const;
 };
 
 #endif //MACHI_KORO_BOULANGERIE_H
