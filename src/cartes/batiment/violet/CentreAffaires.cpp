@@ -1,5 +1,4 @@
 #include "CentreAffaires.h"
-#include "utils.h"
 
 CentreAffaires::CentreAffaires():
     Batiment("Centre d'Affaires",
