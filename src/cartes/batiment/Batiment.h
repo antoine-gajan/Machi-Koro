@@ -22,7 +22,5 @@ class Batiment : public Carte {
         const list<unsigned int>& get_num_activation() const {return num_activation;};
         const string& get_bat_type() const {return type;};
         virtual string get_type() const {return type;};
-
-    virtual void declencher_effet() = 0;
 };
 #endif //MACHI_KORO_BATIMENT_H

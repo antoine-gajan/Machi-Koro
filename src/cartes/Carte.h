@@ -19,6 +19,8 @@ public:
 
 
     virtual std::string get_type() const = 0;
+
+    virtual void declencher_effet() const = 0;
 };
 
 

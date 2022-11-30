@@ -9,3 +9,7 @@ Aeroport::Aeroport() :
                 "../../assets/Monuments/Aeroport-travaux.jpeg") {
     /// Constructeur de Aeroport
 }
+
+void Aeroport::declencher_effet() const {
+    cout << "Activation de l'effet de l'aéroport" << endl;
+}

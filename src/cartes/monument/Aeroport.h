@@ -12,6 +12,7 @@ class Aeroport : public Monument {
 
         //*** Méthodes ***//
         virtual string get_name() const {return "Aeroport";}
+        virtual void declencher_effet() const;
 };
 
 #endif //MACHI_KORO_AEROPORT_H
