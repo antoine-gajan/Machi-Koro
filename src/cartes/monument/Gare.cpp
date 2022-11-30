@@ -4,7 +4,7 @@ Gare::Gare()
     : Monument(AVANT,
                "Gare",
                4,
-               "Vous pouvez lancer 2 dés",
+               "Vous pouvez lancer 2 des",
                "../../assets/Monuments/Gare-travaux.png") {
     /// Constructeur de Gare
 }
