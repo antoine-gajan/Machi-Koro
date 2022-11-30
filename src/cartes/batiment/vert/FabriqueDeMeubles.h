@@ -10,7 +10,7 @@
 class FabriqueDeMeubles : public Batiment {
 public:
     FabriqueDeMeubles();
-    void declencher_effet();
+    void declencher_effet() const;
 };
 
 #endif //MACHI_KORO_FABRIQUE_DE_MEUBLES_H

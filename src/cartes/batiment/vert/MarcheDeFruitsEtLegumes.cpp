@@ -9,7 +9,7 @@ MarcheDeFruitsEtLegumes::MarcheDeFruitsEtLegumes()
                    {11, 12},
                    "marche") {}
 
-void MarcheDeFruitsEtLegumes::declencher_effet() {
+void MarcheDeFruitsEtLegumes::declencher_effet() const{
     cout << "Déclenchement de l'effet de la carte Marché de fruits et légumes" << endl;
     /*
     /// Effet du MarcheDeFruitsEtLegumes

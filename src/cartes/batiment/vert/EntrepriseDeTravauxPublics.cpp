@@ -10,7 +10,7 @@ EntrepriseDeTravauxPublics::EntrepriseDeTravauxPublics()
                    {4},
                    "entreprise") {}
 
-void EntrepriseDeTravauxPublics::declencher_effet() {
+void EntrepriseDeTravauxPublics::declencher_effet() const {
     cout << "Déclenchement de l'effet de la carte Entreprise de travaux publics" << endl;
     /*
     /// Effet de l'EntrepriseDeTravauxPublics

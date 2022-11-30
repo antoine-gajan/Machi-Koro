@@ -9,7 +9,7 @@ BanqueDeMinivilles::BanqueDeMinivilles()
                    {5, 6},
                    "commerce") {}
 
-void BanqueDeMinivilles::declencher_effet() {
+void BanqueDeMinivilles::declencher_effet() const{
     cout << "Déclenchement de l'effet de la carte Banque de minivilles" << endl;
     /*
 

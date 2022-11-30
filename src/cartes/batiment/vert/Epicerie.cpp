@@ -9,7 +9,7 @@ Epicerie::Epicerie()
                    {2},
                    "commerce") {}
 
-void Epicerie::declencher_effet() {
+void Epicerie::declencher_effet() const{
     cout << "Déclenchement de l'effet de la carte Épicerie" << endl;
     /*
     /// Effet de l'Epicerie

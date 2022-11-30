@@ -9,7 +9,7 @@ MoonsterSoda::MoonsterSoda()
                    {11},
                    "usine") {}
 
-void MoonsterSoda::declencher_effet() {
+void MoonsterSoda::declencher_effet() const {
     cout << "Déclenchement de l'effet de la carte MoonsterSoda" << endl;
     /*
     /// Effet du MoonsterSoda
