@@ -13,12 +13,14 @@ protected:
     unsigned int nb_joueurs_min;
     unsigned int nb_joueurs_max;
     unsigned int nb_monuments_win;
-    map<Batiment, unsigned int> batiments;
-    map<Monument, unsigned int> monuments;
+    map<Batiment*, unsigned int> batiments;
+    vector<Monument*> monuments;
     bool est_edition;
-    EditionDeJeu(string& nom, unsigned int joueurs_min, unsigned int joueurs_max, unsigned int mon_win, const list<Monument> list_mon, const list<unsigned int> quantite_mon, const list<Batiment> list_bat, const list<unsigned int> quantite_bat, bool edition);
-    ~EditionDeJeu()=default;
+
 public:
+    EditionDeJeu(const string& nom, unsigned int joueurs_min, unsigned int joueurs_max, unsigned int mon_win, vector<Monument*> monuments, map<Batiment*, unsigned int> batiments, bool edition);
+    EditionDeJeu() = default;
+    ~EditionDeJeu()=default;
     const std::string& get_nom() const {return nom;};
     unsigned int get_nb_joueurs_min() const {return nb_joueurs_min;};
     unsigned int get_nb_joueurs_max() const {return nb_joueurs_max;};
