@@ -5,6 +5,6 @@ FabriqueDuPereNoel::FabriqueDuPereNoel() :
                  "FabriqueDuPereNoel",
                  0,
                  "Si le jet de dé est cassé vous gagnez 3 pièces",
-                 "../../assets/Monuments/FabriqueDuPereNoel-active.png") {
+                 "../../assets/Monuments/FabriqueDuPereNoel.png") {
     /// Constructeur de Centre commercial
 }
