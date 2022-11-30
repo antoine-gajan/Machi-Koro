@@ -4,9 +4,6 @@
 #include "EditionDeJeu.h"
 
 class Marina : public EditionDeJeu{
-    private:
-        vector<Batiment> list_bat;
-        vector<Monument> list_mon;
     public:
         Marina();
         ~Marina();
