@@ -1,16 +1,18 @@
 #include "EntrepriseDeTravauxPublics.h"
 
 
-EntrepriseDeTravauxPublics::EntrepriseDeTravauxPublics(const string& path_image)
+EntrepriseDeTravauxPublics::EntrepriseDeTravauxPublics()
         : Batiment("Entreprise de travaux publics",
                    2,
                    "Vous devez retourner une de vos cartes monuments sur sa face en travaux. Ce faisant, vous recevez 8 pièces de la banque.",
-                   path_image,
+                   "../../../assets/batiments/Vert/Entreprise-de-travaux-publics.jpeg",
                    Vert,
                    {4},
                    "entreprise") {}
 
-void EntrepriseDeTravauxPublics::declencher_effet(vector<Joueur *> &tab_joueurs, unsigned int joueur_actuel) {
+void EntrepriseDeTravauxPublics::declencher_effet() {
+    cout << "Déclenchement de l'effet de la carte Entreprise de travaux publics" << endl;
+    /*
     /// Effet de l'EntrepriseDeTravauxPublics
 
     /// DESACTIVATION DU MONUMENT
@@ -34,6 +36,6 @@ void EntrepriseDeTravauxPublics::declencher_effet(vector<Joueur *> &tab_joueurs,
     /// TRANSACTION AVEC LA BANQUE
     // On donne 8 pièces au joueur actuel
     j_actuel->set_argent(j_actuel->get_argent() + 8);
-
+*/
 
 }

@@ -9,8 +9,8 @@
 
 class MoonsterSoda : public Batiment {
 public:
-    MoonsterSoda(const string& path_image);
-    virtual void declencher_effet(vector<Joueur*>& tab_joueurs, unsigned int joueur_actuel);
+    MoonsterSoda();
+    virtual void declencher_effet();
 };
 
 #endif //MACHI_KORO_MONSTER_SODA_H

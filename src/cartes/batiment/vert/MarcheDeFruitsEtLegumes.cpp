@@ -1,15 +1,17 @@
 #include "MarcheDeFruitsEtLegumes.h"
 
-MarcheDeFruitsEtLegumes::MarcheDeFruitsEtLegumes(const string& path_image)
+MarcheDeFruitsEtLegumes::MarcheDeFruitsEtLegumes()
         : Batiment("Marché de fruits et légumes",
                    2,
                    "Recevez 2 pièces de la banque pour chaque établissement de type champ que vous possédez.",
-                   path_image,
+                   "../../../assets/batiments/Vert/Marche-de-fruits-et-legumes.jpg",
                    Vert,
                    {11, 12},
                    "marche") {}
 
-void MarcheDeFruitsEtLegumes::declencher_effet(vector<Joueur *> &tab_joueurs, unsigned int joueur_actuel) {
+void MarcheDeFruitsEtLegumes::declencher_effet() {
+    cout << "Déclenchement de l'effet de la carte Marché de fruits et légumes" << endl;
+    /*
     /// Effet du MarcheDeFruitsEtLegumes
     Joueur* j_actuel = tab_joueurs[joueur_actuel];
 
@@ -18,4 +20,5 @@ void MarcheDeFruitsEtLegumes::declencher_effet(vector<Joueur *> &tab_joueurs, un
 
     // On donne 2 pièces par champ
     j_actuel->set_argent(j_actuel->get_argent() + 2 * nb_champs);
+    */
 }

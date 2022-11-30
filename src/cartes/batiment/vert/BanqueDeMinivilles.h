@@ -9,8 +9,8 @@
 
 class BanqueDeMinivilles : public Batiment {
 public:
-    BanqueDeMinivilles(const string& path_image);
-    virtual void declencher_effet(vector<Joueur*>& tab_joueurs, unsigned int joueur_actuel);
+    BanqueDeMinivilles();
+    virtual void declencher_effet();
 
 };
 

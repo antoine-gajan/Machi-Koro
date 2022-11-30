@@ -1,18 +1,21 @@
 #include "Boulangerie.h"
 
-Boulangerie::Boulangerie(const string& path_image)
+Boulangerie::Boulangerie()
         : Batiment("Boulangerie",
                    1,
                    "Recevez une pièce de la banque.",
-                   path_image,
+                   "../../../assets/batiments/Vert/Boulangerie.jpg",
                    Vert,
                    {2, 3},
                    "commerce") {}
 
 
-void Boulangerie::declencher_effet(vector<Joueur *> &tab_joueurs, unsigned int joueur_actuel) {
+void Boulangerie::declencher_effet() {
+    cout << "Déclenchement de l'effet de la carte Boulangerie" << endl;
+    /*
     /// Effet de la Boulangerie
     Joueur* j_actuel = tab_joueurs[joueur_actuel];
 
     j_actuel->set_argent(j_actuel->get_argent() + 1);
+    */
 }

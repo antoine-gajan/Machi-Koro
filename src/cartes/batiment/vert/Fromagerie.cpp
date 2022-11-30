@@ -1,15 +1,17 @@
 #include "Fromagerie.h"
 
-Fromagerie::Fromagerie(const string& path_image)
+Fromagerie::Fromagerie()
         : Batiment("Fromagerie",
                    5,
                    "Recevez 3 pièces de la banque pour chaque établissement de type betail que vous possédez.",
-                   path_image,
+                   "../../../assets/batiments/Vert/Fromagerie.jpeg",
                    Vert,
                    {7},
                    "usine") {}
 
-void Fromagerie::declencher_effet(vector<Joueur *> &tab_joueurs, unsigned int joueur_actuel) {
+void Fromagerie::declencher_effet() {
+    cout << "Déclenchement de l'effet de la carte Fromagerie" << endl;
+    /*
     /// Effet de la Fromagerie
     Joueur* j_actuel = tab_joueurs[joueur_actuel];
 
@@ -18,4 +20,5 @@ void Fromagerie::declencher_effet(vector<Joueur *> &tab_joueurs, unsigned int jo
 
     // On donne 3 pièces par betail
     j_actuel->set_argent(j_actuel->get_argent() + 3 * nb_betail);
+    */
 }

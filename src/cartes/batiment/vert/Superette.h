@@ -9,8 +9,8 @@
 
 class Superette : public Batiment {
 public:
-    Superette(const string& path_image);
-    virtual void declencher_effet(vector<Joueur*>& tab_joueurs, unsigned int joueur_actuel);
+    Superette();
+    virtual void declencher_effet();
 };
 
 #endif //MACHI_KORO_SUPERETTE_H

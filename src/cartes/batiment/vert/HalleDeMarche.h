@@ -9,8 +9,8 @@
 
 class HalleDeMarche : public Batiment {
 public:
-    HalleDeMarche(const string& path_image);
-    virtual void declencher_effet(vector<Joueur*>& tab_joueurs, unsigned int joueur_actuel);
+    HalleDeMarche();
+    virtual void declencher_effet();
 };
 
 #endif //MACHI_KORO_HALLE_DE_MARCHE_H

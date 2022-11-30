@@ -9,8 +9,8 @@
 
 class Fromagerie : public Batiment {
 public:
-    Fromagerie(const string& path_image);
-    virtual void declencher_effet(vector<Joueur*>& tab_joueurs, unsigned int joueur_actuel);
+    Fromagerie();
+    virtual void declencher_effet();
 };
 
 #endif //MACHI_KORO_FROMAGERIE_H

@@ -9,8 +9,8 @@
 
 class EntrepriseDeDemenagement : public Batiment {
 public:
-    EntrepriseDeDemenagement(const string& path_image);
-    virtual void declencher_effet(vector<Joueur*>& tab_joueurs, unsigned int joueur_actuel);
+    EntrepriseDeDemenagement();
+    virtual void declencher_effet();
 };
 
 #endif //MACHI_KORO_ENTREPRISE_DE_DEMENAGEMENT_H

@@ -1,7 +1,8 @@
 #include <iostream>
 
 /// Importation des classes monuments
-#include "Monument.h"
+#include "Batiment.h"
+
 #include "Aeroport.h"
 #include "CentreCommercial.h"
 #include "Gare.h"

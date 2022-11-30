@@ -1,15 +1,18 @@
 #include "BanqueDeMinivilles.h"
 
-BanqueDeMinivilles::BanqueDeMinivilles(const string& path_image)
+BanqueDeMinivilles::BanqueDeMinivilles()
         : Batiment("Banque de minivilles",
                    0,
                    "Lorsque vous achetez cet établissement, recevez 5 pièces de la banque. Payez 2 pièces à la banque.",
-                   path_image,
+                   "../../../assets/batiments/Vert/Banque-de-minivilles.jpeg",
                    Vert,
                    {5, 6},
                    "commerce") {}
 
-void BanqueDeMinivilles::declencher_effet(vector<Joueur *> &tab_joueurs, unsigned int joueur_actuel) {
+void BanqueDeMinivilles::declencher_effet() {
+    cout << "Déclenchement de l'effet de la carte Banque de minivilles" << endl;
+    /*
+
     /// Effet de l'BanqueDeMinivilles
 
     // Le don de 5 pièces est géré lors de l'achat de la carte
@@ -24,5 +27,6 @@ void BanqueDeMinivilles::declencher_effet(vector<Joueur *> &tab_joueurs, unsigne
     else {
         j_actuel->set_argent(0);
     }
+*/
 
 }

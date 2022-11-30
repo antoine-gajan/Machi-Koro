@@ -1,15 +1,17 @@
 #include "Fleuriste.h"
 
-Fleuriste::Fleuriste(const string& path_image)
+Fleuriste::Fleuriste()
         : Batiment("Fleuriste",
                    1,
                    "Recevez 1 pièce de la banque pour chaque Champ de fleurs que vous possédez.",
-                   path_image,
+                   "../../../assets/batiments/Vert/Fleuriste.jpeg",
                    Vert,
                    {6},
                    "commerce") {}
 
-void Fleuriste::declencher_effet(vector<Joueur *> &tab_joueurs, unsigned int joueur_actuel) {
+void Fleuriste::declencher_effet() {
+    cout << "Déclenchement de l'effet de la carte Fleuriste" << endl;
+    /*
     /// Effet de la FabriqueDeMeubles
     Joueur* j_actuel = tab_joueurs[joueur_actuel];
 
@@ -29,4 +31,5 @@ void Fleuriste::declencher_effet(vector<Joueur *> &tab_joueurs, unsigned int jou
 
     // on donne 1 pièce par champ de fleur
     j_actuel->set_argent(j_actuel->get_argent() + nb_champs_fleur);
+    */
 }

@@ -1,15 +1,17 @@
 #include "MoonsterSoda.h"
 
-MoonsterSoda::MoonsterSoda(const string& path_image)
+MoonsterSoda::MoonsterSoda()
         : Batiment("Moonster soda",
                    5,
                    "Recevez 1 pièce de la banque pour chaque établissement de type restaurant que possèdent tous les joueurs.",
-                   path_image,
+                   "../../../assets/batiments/Vert/Moonster-soda.jpeg",
                    Vert,
                    {11},
                    "usine") {}
 
-void MoonsterSoda::declencher_effet(vector<Joueur *> &tab_joueurs, unsigned int joueur_actuel) {
+void MoonsterSoda::declencher_effet() {
+    cout << "Déclenchement de l'effet de la carte MoonsterSoda" << endl;
+    /*
     /// Effet du MoonsterSoda
     Joueur* j_actuel = tab_joueurs[joueur_actuel];
 
@@ -21,4 +23,5 @@ void MoonsterSoda::declencher_effet(vector<Joueur *> &tab_joueurs, unsigned int 
 
     // On donne 1 pièce par restaurant
     j_actuel->set_argent(j_actuel->get_argent() + nb_restaurants);
+    */
 }

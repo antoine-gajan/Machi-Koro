@@ -9,8 +9,8 @@
 
 class Fleuriste : public Batiment {
 public:
-    Fleuriste(const string& path_image);
-    virtual void declencher_effet(vector<Joueur*>& tab_joueurs, unsigned int joueur_actuel);
+    Fleuriste();
+    virtual void declencher_effet();
 };
 
 #endif //MACHI_KORO_FLEURISTE_H

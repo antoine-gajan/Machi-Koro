@@ -1,15 +1,17 @@
 #include "EntrepriseDeDemenagement.h"
 
-EntrepriseDeDemenagement::EntrepriseDeDemenagement(const string& path_image)
+EntrepriseDeDemenagement::EntrepriseDeDemenagement()
         : Batiment("Entreprise de déménagement",
                    2,
                    "Donnez à un autre joueur un de vos établissements qui ne soit pas de type special. Puis recevez 4 pièces de la banque.",
-                   path_image,
+                   "../../../assets/batiments/Vert/Entreprise-de-demenagement.jpeg",
                    Vert,
                    {9, 10},
                    "entreprise") {}
 
-void EntrepriseDeDemenagement::declencher_effet(vector<Joueur *> &tab_joueurs, unsigned int joueur_actuel) {
+void EntrepriseDeDemenagement::declencher_effet() {
+    cout << "Déclenchement de l'effet de la carte Entreprise de déménagement" << endl;
+    /*
     /// Effet de l'EntrepriseDeDemenagement
 
     /// DON DE L'ETABLISSEMENT
@@ -37,6 +39,6 @@ void EntrepriseDeDemenagement::declencher_effet(vector<Joueur *> &tab_joueurs, u
     /// TRANSACTION AVEC LA BANQUE
     // On donne 4 pièces au joueur actuel
     j_actuel->set_argent(j_actuel->get_argent() + 4);
-
+*/
 
 }

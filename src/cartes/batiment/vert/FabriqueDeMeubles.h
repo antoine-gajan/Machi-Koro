@@ -9,8 +9,8 @@
 
 class FabriqueDeMeubles : public Batiment {
 public:
-    FabriqueDeMeubles(const string& path_image);
-    virtual void declencher_effet(vector<Joueur*>& tab_joueurs, unsigned int joueur_actuel);
+    FabriqueDeMeubles();
+    virtual void declencher_effet();
 };
 
 #endif //MACHI_KORO_FABRIQUE_DE_MEUBLES_H
