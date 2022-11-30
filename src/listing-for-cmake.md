@@ -1,4 +1,7 @@
-# Stockage dans ce fichier des liens pour le fichier CMakeLists.txt
+# Stockage dans ce fichier des liens pour le fichier CMakeLists.txt et les imports
+
+
+## CMakeLists.txt
 ```cmake
 cmake_minimum_required(VERSION 3.23)
 project(src)
@@ -41,4 +44,17 @@ add_executable(src
         cartes/monument/HotelDeVille.cpp
         cartes/monument/HotelDeVille.h
 )
+```
+
+## Imports
+```cpp
+/// Importation des classes monuments
+#include "Aeroport.h"
+#include "CentreCommercial.h"
+#include "FabriqueDuPereNoel.h"
+#include "Gare.h"
+#include "HotelDeVille.h"
+#include "ParcAttraction.h"
+#include "Port.h"
+#include "TourRadio.h"
 ```
