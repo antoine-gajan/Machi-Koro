@@ -2,7 +2,7 @@
 
 CentreCommercial::CentreCommercial() :
     Monument(APRES,
-             "Centre commercial",
+             "CentreCommercial",
              10,
              "Les établissement rouge et vert vous rapportent une pièce de plus",
              "../../assets/Monuments/CentreCommercial-travaux.png") {

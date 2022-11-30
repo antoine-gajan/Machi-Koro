@@ -16,7 +16,6 @@ class Monument : public Carte{
 
         //*** GETTER ***//
         std::string get_type() const {return "Monument";};
-        virtual std::string get_name() const = 0;
         Moment_Effet getMoment() const {return moment;}
 
         //*** SETTER ***//

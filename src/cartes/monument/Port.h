@@ -10,7 +10,6 @@ class Port : public Monument {
         ~Port()=default;
 
         //*** Méthodes ***//
-        std::string get_name() const {return "Port";}
         void declencher_effet() const;
 };
 

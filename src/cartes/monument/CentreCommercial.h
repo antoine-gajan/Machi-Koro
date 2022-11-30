@@ -10,7 +10,6 @@ class CentreCommercial : public Monument {
         ~CentreCommercial()=default;
 
         //*** Méthodes ***//
-        std::string get_name() const {return "CentreCommercial";}
         void declencher_effet() const;
 };
 

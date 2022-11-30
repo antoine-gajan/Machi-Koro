@@ -10,7 +10,6 @@ public :
     ~FabriqueDuPereNoel()=default;
 
     //*** Méthodes ***//
-    std::string get_name() const {return "FabriqueDuPereNoel";}
     void declencher_effet() const;
 };
 

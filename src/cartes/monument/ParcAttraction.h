@@ -10,7 +10,6 @@ public:
     ~ParcAttraction()=default;
 
     //*** Méthodes ***//
-    std::string get_name() const {return "ParcAttraction";}
     void declencher_effet() const;
 };
 

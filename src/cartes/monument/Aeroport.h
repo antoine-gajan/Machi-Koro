@@ -10,7 +10,6 @@ class Aeroport : public Monument {
         ~Aeroport()=default;
 
         //*** Méthodes ***//
-        std::string get_name() const {return "Aeroport";}
         void declencher_effet() const;
 };
 

@@ -10,7 +10,6 @@ public :
     ~Gare()=default;
 
     //*** Méthodes ***//
-    std::string get_name() const {return "Gare";}
     void declencher_effet() const;
 };
 

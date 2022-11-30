@@ -2,7 +2,7 @@
 
 HotelDeVille::HotelDeVille() :
     Monument(APRES,
-             "Hotel de ville",
+             "HotelDeVille",
              0,
              "Une fois par tour vous pouvez relancer vos dés",
              "../../assets/Monuments/HotelDeVille.png") {

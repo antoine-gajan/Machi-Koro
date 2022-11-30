@@ -10,7 +10,6 @@ class TourRadio : public Monument {
         ~TourRadio()=default;
 
         //*** Méthodes ***//
-        std::string get_name() const {return "TourRadio";}
         void declencher_effet() const;
 };
 
