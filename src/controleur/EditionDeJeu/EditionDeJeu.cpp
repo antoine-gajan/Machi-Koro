@@ -1,7 +1,7 @@
 #include "EditionDeJeu.h"
 
 EditionDeJeu::EditionDeJeu(std::string& nom, unsigned int joueurs_min, unsigned int joueurs_max, unsigned int mon_win,
-                           Monument* list_mon[], unsigned int quantite_mon[], Batiment* list_bat[], unsigned int quantite_bat[], bool edition) :
+                           const list<Monument> list_mon, const list<unsigned int> quantite_mon, const list<Batiment> list_bat, const list<unsigned int> quantite_bat, bool edition) :
                            nom(nom),
                            nb_joueurs_min(joueurs_min),
                            nb_joueurs_max(joueurs_max),

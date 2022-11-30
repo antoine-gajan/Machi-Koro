@@ -14,6 +14,7 @@ private:
     unsigned int nb_monuments_win;
     Shop shop;
     Pioche pioche;
+    vector<EditionDeJeu*> editions;
 
 public:
     //********** Jouer une partie **********//

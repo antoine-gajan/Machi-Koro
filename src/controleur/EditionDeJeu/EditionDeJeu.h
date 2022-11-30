@@ -13,10 +13,10 @@ protected:
     unsigned int nb_joueurs_min;
     unsigned int nb_joueurs_max;
     unsigned int nb_monuments_win;
-    map<Batiment*, unsigned int> batiments;
-    map<Monument*, unsigned int> monuments;
+    map<Batiment, unsigned int> batiments;
+    map<Monument, unsigned int> monuments;
     bool est_edition;
-    EditionDeJeu(string& nom, unsigned int joueurs_min, unsigned int joueurs_max, unsigned int mon_win, Monument* list_mon[], unsigned int quantite_mon[], Batiment* list_bat[], unsigned int quantite_bat[], bool edition);
+    EditionDeJeu(string& nom, unsigned int joueurs_min, unsigned int joueurs_max, unsigned int mon_win, const list<Monument> list_mon, const list<unsigned int> quantite_mon, const list<Batiment> list_bat, const list<unsigned int> quantite_bat, bool edition);
     ~EditionDeJeu()=default;
 public:
     const std::string& get_nom() const {return nom;};
