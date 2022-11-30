@@ -5,7 +5,8 @@
 
 class ClubPrive : public Batiment {
 public:
-    ClubPrive(const string& path_image);
+    ClubPrive();
+    void declencher_effet() const;
   
 };
 

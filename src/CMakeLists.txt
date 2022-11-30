@@ -5,6 +5,7 @@ set(CMAKE_CXX_STANDARD 14)
 
 include_directories(cartes)
 include_directories(cartes/batiment)
+include_directories(cartes/batiment/rouge)
 include_directories(cartes/batiment/vert)
 include_directories(cartes/monument)
 include_directories(Joueur)

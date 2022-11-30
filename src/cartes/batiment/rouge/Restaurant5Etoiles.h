@@ -5,7 +5,8 @@
 
 class Restaurant5Etoiles : public Batiment {
 public:
-    Restaurant5Etoiles(const string& path_image);
+    Restaurant5Etoiles();
+    void declencher_effet() const;
   
 };
 

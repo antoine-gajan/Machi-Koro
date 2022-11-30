@@ -5,7 +5,8 @@
 
 class Cafe : public Batiment {
 public:
-    Cafe(const string& path_image);
+    Cafe();
+    void declencher_effet() const;
 
 };
 
