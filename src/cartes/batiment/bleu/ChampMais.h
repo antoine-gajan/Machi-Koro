@@ -9,7 +9,7 @@
 class ChampMais : public Batiment{
 public:
     ChampMais();
-    virtual void declencher_effet();
+    void declencher_effet();
 };
 
 #endif //MACHI_KORO_MASTER_CHAMPSMAIS_H

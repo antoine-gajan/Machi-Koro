@@ -9,6 +9,6 @@
 class Vignoble : public Batiment{
 public:
     Vignoble();
-    virtual void declencher_effet();
+    void declencher_effet();
 };
 #endif //MACHI_KORO_VIGNOBLE_H

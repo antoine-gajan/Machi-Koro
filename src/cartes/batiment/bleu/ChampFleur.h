@@ -9,7 +9,7 @@
 class ChampFleur : public Batiment{
 public:
     ChampFleur();
-    virtual void declencher_effet();
+    void declencher_effet();
 };
 
 #endif //MACHI_KORO_MASTER_CHAMPFLEUR_H

@@ -9,7 +9,7 @@
 class Foret : public Batiment{
 public:
     Foret();
-    virtual void declencher_effet();
+    void declencher_effet();
 };
 
 #endif //MACHI_KORO_MASTER_FORET_H

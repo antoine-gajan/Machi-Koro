@@ -9,6 +9,6 @@
 class Verger : public Batiment{
 public:
     Verger();
-    virtual void declencher_effet();
+    void declencher_effet();
 };
 #endif //MACHI_KORO_MASTER_VERGER_H

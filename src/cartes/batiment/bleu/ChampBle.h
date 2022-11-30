@@ -9,7 +9,7 @@
 class ChampBle : public Batiment{
 public:
     ChampBle();
-    virtual void declencher_effet();
+    void declencher_effet();
 };
 
 #endif //MACHI_KORO_CHAMPBLE_H
