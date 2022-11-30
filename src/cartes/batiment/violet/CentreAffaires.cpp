@@ -1,11 +1,11 @@
 #include "CentreAffaires.h"
 #include "utils.h"
 
-CentreAffaires::CentreAffaires(const string& path_image):
+CentreAffaires::CentreAffaires():
     Batiment("Centre d'Affaires",
              8,
              "Vous pouvez échanger avec le joueur de votre choix un établissement qui n'est pas de type spécial",
-             path_image,
+             "../../../assets/batiments/Violet/Centre-d-'affaires.jpeg",
              Violet,
              list<unsigned int>{6},
              "spécial") {
@@ -14,8 +14,10 @@ CentreAffaires::CentreAffaires(const string& path_image):
 
 
 
-void CentreAffaires::declencher_effet(vector<Joueur *> &tab_joueurs, unsigned int joueur_actuel) {
+void CentreAffaires::declencher_effet() {
     /// Effet du Centre d'affaires
+    std::cout << "Activation de l'effet du centre d'affaires." << std::endl;
+    /*
     Joueur* j_actuel = tab_joueurs[joueur_actuel];
     
     // Choix du joueur
@@ -97,6 +99,7 @@ void CentreAffaires::declencher_effet(vector<Joueur *> &tab_joueurs, unsigned in
 
     // Echange des batiments
     swap_bat_players(j_actuel, joueur_echange, batiment_a_donner.first, batiment_a_recevoir.first);
+     */
 }
 
 
