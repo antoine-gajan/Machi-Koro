@@ -3,19 +3,22 @@
 
 using namespace std;
 
-ChaineTelevision::ChaineTelevision(cosnt string& path_image):
+ChaineTelevision::ChaineTelevision():
     Batiment("Chaine de télévision",
              7,
              "Recevez 5 pièces du joueur de votre choix",
-             path_image,
+             "../../../assets/batiments/Violet/Chaine-de-television.jpg",
              Violet,
              list<unsigned int>{6},
              "spécial") {
     ///Constructeur de Chaine de Television
 }
 
-void ChaineTelevision::declencher_effet(vector<Joueur *>& tab_joueurs, unsigned int joueur_actuel) {
+void ChaineTelevision::declencher_effet() const{
     /// Effet de ChaineTelevision
+    std::cout << "Activation de l'effet de la chaine de télévision." << std::endl;
+
+    /*
     Joueur* j_actuel = tab_joueurs[joueur_actuel];
     unsigned int num_joueur;
     // Affichage des joueurs
@@ -41,5 +44,6 @@ void ChaineTelevision::declencher_effet(vector<Joueur *>& tab_joueurs, unsigned 
     else{
         cout << tab_joueurs[num_joueur]->get_nom() << " n'a pas assez d'argent." << endl;
     }
+     */
 }
 

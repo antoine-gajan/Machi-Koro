@@ -2,7 +2,7 @@
 #define MACHI_KORO_PARTIE_H
 
 #include <list>
-#include "EditionDeJeu.h"
+#include "EditionDeJeu/EditionDeJeu.h"
 #include "Joueur.h"
 #include "Shop.h"
 #include "Pioche.h"

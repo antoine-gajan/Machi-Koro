@@ -1,18 +1,21 @@
 #include "Stade.h"
 
-Stade::Stade(const string& path_image) :
+Stade::Stade() :
 Batiment("Stade",
          6,
          "Recevez 2 pièces de la part de chaque autre joueur",
-         path_image,
+         "../../../assets/batiments/Violet/Stade.jpg",
          Violet,
          list<unsigned int>{6},
          "spécial") {
     ///Constructeur de Stade
 }
 
-void Stade::declencher_effet(vector<Joueur*>& tab_joueurs, unsigned int joueur_actuel) {
+void Stade::declencher_effet() const{
     /// Effet de la classe Stade
+    std::cout << "Activation de l'effet du stade." << std::endl;
+
+    /*
     Joueur* j_actuel = tab_joueurs[joueur_actuel];
     // Pour chaque joueur de la partie
     for (auto joueur : tab_joueurs){
@@ -31,4 +34,5 @@ void Stade::declencher_effet(vector<Joueur*>& tab_joueurs, unsigned int joueur_a
         }
     }
     cout << j_actuel->get_nom() << "possède maintenant " << j_actuel->get_argent() << " crédits." <<endl;
+     */
 }

@@ -2,7 +2,6 @@
 #define MACHI_KORO_TOURRADIO_H
 
 #include "Monument.h"
-#include "Joueur.h"
 
 class TourRadio : public Monument {
     public:
@@ -11,7 +10,8 @@ class TourRadio : public Monument {
         ~TourRadio()=default;
 
         //*** Méthodes ***//
-        virtual string get_name() const {return "TourRadio";}
+        std::string get_name() const {return "TourRadio";}
+        void declencher_effet() const;
 };
 
 #endif //MACHI_KORO_TOURRADIO_H

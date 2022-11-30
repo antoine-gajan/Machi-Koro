@@ -2,7 +2,6 @@
 #define MACHI_KORO_GARE_H
 
 #include "Monument.h"
-#include "Joueur.h"
 
 class Gare : public Monument {
 public :
@@ -11,7 +10,8 @@ public :
     ~Gare()=default;
 
     //*** Méthodes ***//
-    virtual string get_name() const {return "Gare";}
+    std::string get_name() const {return "Gare";}
+    void declencher_effet() const;
 };
 
 #endif //MACHI_KORO_GARE_H

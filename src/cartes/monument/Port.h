@@ -2,7 +2,6 @@
 #define MACHI_KORO_PORT_H
 
 #include "Monument.h"
-#include "Joueur.h"
 
 class Port : public Monument {
     public :
@@ -11,7 +10,8 @@ class Port : public Monument {
         ~Port()=default;
 
         //*** Méthodes ***//
-        virtual string get_name() const {return "Port";}
+        std::string get_name() const {return "Port";}
+        void declencher_effet() const;
 };
 
 

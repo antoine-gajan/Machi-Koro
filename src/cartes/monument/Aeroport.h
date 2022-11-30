@@ -2,7 +2,6 @@
 #define MACHI_KORO_AEROPORT_H
 
 #include "Monument.h"
-#include "Joueur.h"
 
 class Aeroport : public Monument {
     public:
@@ -11,7 +10,8 @@ class Aeroport : public Monument {
         ~Aeroport()=default;
 
         //*** Méthodes ***//
-        virtual string get_name() const {return "Aeroport";}
+        std::string get_name() const {return "Aeroport";}
+        void declencher_effet() const;
 };
 
 #endif //MACHI_KORO_AEROPORT_H
