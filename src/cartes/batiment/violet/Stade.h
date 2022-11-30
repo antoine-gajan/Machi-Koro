@@ -7,8 +7,8 @@
 
 class Stade : public Batiment {
 public:
-    Stade(const string& path_image);
-    virtual void declencher_effet(vector<Joueur*>& tab_joueurs, unsigned int joueur_actuel);
+    Stade();
+    virtual void declencher_effet();
 };
 
 #endif //MACHI_KORO_STADE_H
