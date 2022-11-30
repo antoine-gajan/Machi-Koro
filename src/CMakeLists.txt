@@ -13,10 +13,6 @@ include_directories(Joueur)
 
 add_executable(src
         main.cpp
-
-        Joueur/Joueur.cpp
-        Joueur/Joueur.h
-
         cartes/Carte.cpp
         cartes/Carte.h
 
@@ -38,6 +34,4 @@ add_executable(src
         cartes/monument/FabriqueDuPereNoel.h
         cartes/monument/HotelDeVille.cpp
         cartes/monument/HotelDeVille.h
-        controleur/EditionDeJeu/Marina.cpp
-        controleur/EditionDeJeu/Marina.h
 )
