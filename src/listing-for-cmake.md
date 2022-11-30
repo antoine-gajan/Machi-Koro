@@ -25,8 +25,12 @@ add_executable(src
         cartes/Carte.cpp
         cartes/Carte.h
 
+        cartes/batiment/Batiment.cpp
+        cartes/batiment/Batiment.h
+
         cartes/monument/Monument.cpp
         cartes/monument/Monument.h
+        
         cartes/monument/Aeroport.cpp
         cartes/monument/Aeroport.h
         cartes/monument/CentreCommercial.cpp
@@ -43,6 +47,31 @@ add_executable(src
         cartes/monument/FabriqueDuPereNoel.h
         cartes/monument/HotelDeVille.cpp
         cartes/monument/HotelDeVille.h
+
+        cartes/batiment/vert/BanqueDeMinivilles.cpp
+        cartes/batiment/vert/BanqueDeMinivilles.h
+        cartes/batiment/vert/Boulangerie.cpp
+        cartes/batiment/vert/Boulangerie.h
+        cartes/batiment/vert/EntrepriseDeDemenagement.cpp
+        cartes/batiment/vert/EntrepriseDeDemenagement.h
+        cartes/batiment/vert/EntrepriseDeTravauxPublics.cpp
+        cartes/batiment/vert/EntrepriseDeTravauxPublics.h
+        cartes/batiment/vert/Epicerie.h
+        cartes/batiment/vert/Epicerie.cpp
+        cartes/batiment/vert/FabriqueDeMeubles.h
+        cartes/batiment/vert/FabriqueDeMeubles.cpp
+        cartes/batiment/vert/Fleuriste.h
+        cartes/batiment/vert/Fleuriste.cpp
+        cartes/batiment/vert/Fromagerie.h
+        cartes/batiment/vert/Fromagerie.cpp
+        cartes/batiment/vert/HalleDeMarche.cpp
+        cartes/batiment/vert/HalleDeMarche.h
+        cartes/batiment/vert/MarcheDeFruitsEtLegumes.h
+        cartes/batiment/vert/MarcheDeFruitsEtLegumes.cpp
+        cartes/batiment/vert/MoonsterSoda.h
+        cartes/batiment/vert/MoonsterSoda.cpp
+        cartes/batiment/vert/Superette.h
+        cartes/batiment/vert/Superette.cpp
 )
 ```
 
@@ -57,4 +86,29 @@ add_executable(src
 #include "ParcAttraction.h"
 #include "Port.h"
 #include "TourRadio.h"
+
+/// Importation des batiments verts
+#include "BanqueDeMinivilles.h"
+#include "Boulangerie.h"
+#include "EntrepriseDeDemenagement.h"
+#include "EntrepriseDeTravauxPublics.h"
+#include "Epicerie.h"
+#include "FabriqueDeMeubles.h"
+#include "Fleuriste.h"
+#include "Fromagerie.h"
+#include "HalleDeMarche.h"
+#include "MarcheDeFruitsEtLegumes.h"
+#include "MoonsterSoda.h"
+#include "Superette.h"
+
+/// Importation des batiments bleus
+
+/// Importation des batiments rouges
+
+/// Importation des batiments violets
+
+/// Importation des controleurs
+
+/// Importation des joueurs
+)
 ```
