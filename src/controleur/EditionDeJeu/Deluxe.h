@@ -6,7 +6,7 @@
 class Deluxe : public EditionDeJeu{
 public:
     Deluxe();
-    ~Deluxe();
+    ~Deluxe() = default;
 };
 
 #endif //SRC_DELUXE_H

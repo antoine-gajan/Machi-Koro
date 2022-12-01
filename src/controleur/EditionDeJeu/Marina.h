@@ -6,7 +6,7 @@
 class Marina : public EditionDeJeu{
     public:
         Marina();
-        ~Marina();
+        ~Marina() = default;
 };
 
 #endif //SRC_MARINA_H
