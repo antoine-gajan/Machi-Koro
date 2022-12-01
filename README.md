@@ -17,3 +17,8 @@ Le projet est organisé en plusieurs parties :
 - Le dossier `old` contient les anciennes versions de notre UML
 - Le dossier `rapport` contient les différents rapports du projet
 - Le dossier `templates` contient les templates Qt utilisés pour le projet
+
+## :notebook_with_decorative_cover: - Auteurs et contributeurs
+
+-  **Sacha-sz** - [sacha-sz](https://github.com/sacha-sz/)
+-  **Th3o-D**  - [Th3o-D](https://github.com/Th3o-D/)
