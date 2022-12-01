@@ -17,13 +17,13 @@
 
 Marina::Marina(){
     /// Constructeur de Marina
-    // Liste des monuments
+    // Liste des monuments de Marina
     vector<Monument*> mon;
     mon.push_back(new Aeroport());
     mon.push_back(new Port());
     mon.push_back(new HotelDeVille());
 
-    // Liste des batiments
+    // Liste des batiments de Marina
     map<Batiment*, unsigned int> bat;
     bat.insert(pair<Batiment*, unsigned int>(new MoonsterSoda(), 6));
     bat.insert(pair<Batiment*, unsigned int>(new Pizzeria(), 6));
