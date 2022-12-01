@@ -22,5 +22,6 @@ Le projet est organisé en plusieurs parties :
 
 -  **Antoine gajan**  - [antoine-gajan](https://github.com/antoine-gajan/)
 -  **Nasser Chaouchi**  - [MidoriNess](https://github.com/MidoriNess)
+-  **Nicolas T**  - [Saucisse2toulouse](https://github.com/Saucisse2toulouse)
 -  **Sacha-sz** - [sacha-sz](https://github.com/sacha-sz/)
 -  **Th3o-D**  - [Th3o-D](https://github.com/Th3o-D/)
