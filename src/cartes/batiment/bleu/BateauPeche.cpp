@@ -12,7 +12,7 @@ BateauPeche::BateauPeche() :
 
 void BateauPeche::declencher_effet() const{
     //j'ai deliberement retire le parametre joueur actuel de declencher effet pour respecter la methode virtuelle declaree dans Batiment.h
-    cout<<"declencher effet de BateauPeche";
+    cout << "Activation de l'effet de BateauPeche" << endl;
     /*
     unsigned int argent = joueur_actuel->get_argent();
     argent+=3;

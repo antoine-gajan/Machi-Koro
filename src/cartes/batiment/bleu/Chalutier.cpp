@@ -12,7 +12,7 @@ Chalutier::Chalutier() :
 
 void Chalutier::declencher_effet() const{
     //j'ai deliberement retire les parametres joueur actuel et val_des de declencher effet pour respecter la methode virtuelle declaree dans Batiment.h
-    cout<<"declencher effet de Chalutier";
+    cout << "Activation de l'effet de Chalutier" << endl;
     /*
     if(possede_monument(joueur_actuel,"Port") != nullptr){
         unsigned int argent = joueur_actuel->get_argent();

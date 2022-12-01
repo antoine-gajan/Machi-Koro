@@ -101,4 +101,25 @@ add_executable(src
         cartes/batiment/rouge/StandDeHamburger.h
         cartes/batiment/rouge/SushiBar.cpp
         cartes/batiment/rouge/SushiBar.h
-)
+
+        cartes/batiment/bleu/BateauPeche.cpp
+        cartes/batiment/bleu/BateauPeche.h
+        cartes/batiment/bleu/Chalutier.cpp
+        cartes/batiment/bleu/Chalutier.h
+        cartes/batiment/bleu/ChampBle.cpp
+        cartes/batiment/bleu/ChampBle.h
+        cartes/batiment/bleu/ChampFleur.cpp
+        cartes/batiment/bleu/ChampFleur.h
+        cartes/batiment/bleu/ChampMais.cpp
+        cartes/batiment/bleu/ChampMais.h
+        cartes/batiment/bleu/Ferme.cpp
+        cartes/batiment/bleu/Ferme.h
+        cartes/batiment/bleu/Foret.cpp
+        cartes/batiment/bleu/Foret.h
+        cartes/batiment/bleu/Mine.cpp
+        cartes/batiment/bleu/Mine.h
+        cartes/batiment/bleu/Verger.cpp
+        cartes/batiment/bleu/Verger.h
+        cartes/batiment/bleu/Vignoble.cpp
+        cartes/batiment/bleu/Vignoble.h
+        )

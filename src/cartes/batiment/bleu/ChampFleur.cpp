@@ -12,7 +12,7 @@ ChampFleur::ChampFleur() :
 
 void ChampFleur::declencher_effet() const {
     //j'ai deliberement retire le parametre joueur actuel de declencher effet pour respecter la methode virtuelle declaree dans Batiment.h
-    cout<<"declencher effet de ChampFleur";
+    cout << "Activation de l'effet de ChampFleur" << endl;
     /*
     joueur_affecte->set_argent(joueur_affecte->get_argent() + 1);
     //On augmente de un l'argent du joueur actuel

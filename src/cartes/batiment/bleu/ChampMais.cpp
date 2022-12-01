@@ -12,7 +12,7 @@ ChampMais::ChampMais() :
 
 void ChampMais::declencher_effet() const{
     //j'ai deliberement retire le parametre joueur actuel de declencher effet pour respecter la methode virtuelle declaree dans Batiment.h
-    cout<<"declencher effet de ChampMais";
+    cout << "Activation de l'effet de ChampMais" << endl;
     /*
     if(joueur_affecte->get_liste_monument().size() < 2){
         joueur_affecte->set_argent(joueur_affecte->get_argent() + 1);
