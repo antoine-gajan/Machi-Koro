@@ -1,21 +1,11 @@
 #include <iostream>
-
-#include "BanqueDeMinivilles.h"
-#include "Boulangerie.h"
-#include "EntrepriseDeDemenagement.h"
-#include "EntrepriseDeTravauxPublics.h"
-#include "Epicerie.h"
-#include "FabriqueDeMeubles.h"
-#include "Fleuriste.h"
-#include "Fromagerie.h"
-#include "HalleDeMarche.h"
-#include "MarcheDeFruitsEtLegumes.h"
-#include "MoonsterSoda.h"
-#include "Superette.h"
 using namespace std;
 
+
+#include "Arboretum.h"
+
 int main() {
-    BanqueDeMinivilles x;
+    Arboretum x;
     x.declencher_effet();
     cout << x.get_nom() << endl;
     cout << x.get_path_image() << endl;

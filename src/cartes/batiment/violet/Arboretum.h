@@ -2,7 +2,6 @@
 #define SRC_ARBORETUM_H
 
 #include "Batiment.h"
-#include "Joueur.h"
 
 class Arboretum : public Batiment {
 public:

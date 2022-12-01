@@ -3,7 +3,6 @@
 
 #include <vector>
 #include "Batiment.h"
-#include "Joueur.h"
 
 class ChaineTelevision : public Batiment {
 public:

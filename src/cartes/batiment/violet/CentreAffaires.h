@@ -2,7 +2,6 @@
 #define MACHI_KORO_CENTREAFFAIRES_H
 
 #include "Batiment.h"
-#include "Joueur.h"
 #include <list>
 #include <vector>
 

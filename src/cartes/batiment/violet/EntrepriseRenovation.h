@@ -2,7 +2,6 @@
 #define SRC_ENTREPRISERENOVATION_H
 
 #include "Batiment.h"
-#include "Joueur.h"
 
 class EntrepriseRenovation : public Batiment {
 public:

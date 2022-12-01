@@ -2,7 +2,6 @@
 #define SRC_STARTUP_H
 
 #include "Batiment.h"
-#include "Joueur.h"
 
 class Startup : public Batiment {
 public:
