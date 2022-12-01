@@ -2,10 +2,17 @@
 using namespace std;
 
 
-#include "Arboretum.h"
+#include "Cafe.h"
+#include "ClubPrive.h"
+#include "Pizzeria.h"
+#include "Restaurant5Etoiles.h"
+#include "RestaurantFamilial.h"
+#include "StandDeHamburger.h"
+#include "SushiBar.h"
+
 
 int main() {
-    Arboretum x;
+    SushiBar x;
     x.declencher_effet();
     cout << x.get_nom() << endl;
     cout << x.get_path_image() << endl;

@@ -1,7 +1,7 @@
 #ifndef MACHI_KORO_CAFE_H
 #define MACHI_KORO_CAFE_H
 
-#include "../Batiment.h"
+#include "Batiment.h"
 
 class Cafe : public Batiment {
 public:

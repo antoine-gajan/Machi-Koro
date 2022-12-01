@@ -11,7 +11,7 @@ Cafe::Cafe() :
 
 void Cafe::declencher_effet() const{
     //j'ai deliberement retire le parametre joueur actuel de declencher effet pour respecter la methode virtuelle declaree dans Batiment.h
-    cout<<"Activation de l'effet du cafe";
+    cout << "Activation de l'effet du cafe" << endl;
 }
 
 

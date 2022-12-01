@@ -10,11 +10,13 @@ set(CMAKE_CXX_STANDARD 14)
 
 include_directories(cartes)
 include_directories(cartes/batiment)
+include_directories(cartes/batiment/bleu)
+include_directories(cartes/batiment/rouge)
 include_directories(cartes/batiment/vert)
+include_directories(cartes/batiment/violet)
 include_directories(cartes/monument)
 include_directories(Joueur)
 include_directories(controleur)
-include_directories(Joueur)
 
 add_executable(src
         main.cpp
@@ -72,6 +74,38 @@ add_executable(src
         cartes/batiment/vert/MoonsterSoda.cpp
         cartes/batiment/vert/Superette.h
         cartes/batiment/vert/Superette.cpp
+
+        cartes/batiment/violet/Arboretum.cpp
+        cartes/batiment/violet/Arboretum.h
+        cartes/batiment/violet/CentreAffaires.cpp
+        cartes/batiment/violet/CentreAffaires.h
+        cartes/batiment/violet/CentreImpots.cpp
+        cartes/batiment/violet/CentreImpots.h
+        cartes/batiment/violet/ChaineTelevision.cpp
+        cartes/batiment/violet/ChaineTelevision.h
+        cartes/batiment/violet/EntrepriseRenovation.cpp
+        cartes/batiment/violet/EntrepriseRenovation.h
+        cartes/batiment/violet/MaisonEdition.cpp
+        cartes/batiment/violet/MaisonEdition.h
+        cartes/batiment/violet/Stade.cpp
+        cartes/batiment/violet/Stade.h
+        cartes/batiment/violet/Startup.cpp
+        cartes/batiment/violet/Startup.h
+        
+        cartes/batiment/rouge/Cafe.cpp
+        cartes/batiment/rouge/Cafe.h
+        cartes/batiment/rouge/ClubPrive.cpp
+        cartes/batiment/rouge/ClubPrive.h
+        cartes/batiment/rouge/Pizzeria.cpp
+        cartes/batiment/rouge/Pizzeria.h
+        cartes/batiment/rouge/Restaurant5Etoiles.cpp
+        cartes/batiment/rouge/Restaurant5Etoiles.h
+        cartes/batiment/rouge/RestaurantFamilial.cpp
+        cartes/batiment/rouge/RestaurantFamilial.h
+        cartes/batiment/rouge/StandDeHamburger.cpp
+        cartes/batiment/rouge/StandDeHamburger.h
+        cartes/batiment/rouge/SushiBar.cpp
+        cartes/batiment/rouge/SushiBar.h
 )
 ```
 
@@ -104,8 +138,23 @@ add_executable(src
 /// Importation des batiments bleus
 
 /// Importation des batiments rouges
+#include "Cafe.h"
+#include "ClubPrive.h"
+#include "Pizzeria.h"
+#include "Restaurant5Etoiles.h"
+#include "RestaurantFamilial.h"
+#include "StandDeHamburger.h"
+#include "SushiBar.h"
 
 /// Importation des batiments violets
+#include "Arboretum.h"
+#include "CentreAffaires.h"
+#include "CentreImpots.h"
+#include "ChaineTelevision.h"
+#include "EntrepriseRenovation.h"
+#include "MaisonEdition.h"
+#include "Stade.h"
+#include "Startup.h"
 
 /// Importation des controleurs
 

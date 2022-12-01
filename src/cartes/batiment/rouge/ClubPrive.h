@@ -1,7 +1,7 @@
 #ifndef CLUB_PRIVE_H
 #define CLUB_PRIVE_H
 
-#include "../Batiment.h"
+#include "Batiment.h"
 
 class ClubPrive : public Batiment {
 public:

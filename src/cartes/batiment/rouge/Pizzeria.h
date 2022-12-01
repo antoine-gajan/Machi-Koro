@@ -1,7 +1,7 @@
 #ifndef PIZZERIA_H
 #define PIZZERIA_H
 
-#include "../Batiment.h"
+#include "Batiment.h"
 
 class Pizzeria : public Batiment {
 public:
