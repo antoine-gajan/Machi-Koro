@@ -5,7 +5,8 @@
 
 class Pizzeria : public Batiment {
 public:
-    Pizzeria(const string& path_image);
+    Pizzeria();
+    void declencher_effet() const;
   
 };
 

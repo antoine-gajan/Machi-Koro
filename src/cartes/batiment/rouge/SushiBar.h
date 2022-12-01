@@ -5,7 +5,8 @@
 
 class SushiBar : public Batiment {
 public:
-    SushiBar(const string& path_image);
+    SushiBar();
+    void declencher_effet() const;
   
 };
 

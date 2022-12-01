@@ -5,7 +5,8 @@
 
 class StandDeHamburger : public Batiment {
 public:
-    StandDeHamburger(const string& path_image);
+    StandDeHamburger();
+    void declencher_effet() const;
   
 };
 

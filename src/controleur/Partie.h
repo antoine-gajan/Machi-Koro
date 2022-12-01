@@ -10,10 +10,11 @@
 class Partie {
 private:
     list<Joueur*> tab_joueurs;
-    Joueur* joueur_actuel;
+    unsigned int joueur_actuel;
     unsigned int nb_monuments_win;
     Shop shop;
     Pioche pioche;
+    vector<EditionDeJeu*> editions;
 
 public:
     //********** Jouer une partie **********//
@@ -23,7 +24,7 @@ public:
 
     //********** Constructeurs et getters **********//
     Partie(vector<Joueur*> liste_joueurs, vector<EditionDeJeu*> editions);
-    Joueur* get_joueur_actuel() const {return joueur_actuel;};
+    unsigned int get_joueur_actuel() const {return joueur_actuel;};
     ~Partie() = default;
 };
 

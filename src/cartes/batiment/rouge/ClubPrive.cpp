@@ -1,10 +1,18 @@
 #include "ClubPrive.h"
 
-ClubPrive::ClubPrive(const string &path_image) :
+ClubPrive::ClubPrive() :
             Batiment("Club prive",
                      4 ,
                      "Recevez toutes les pieces du joueur qui a lance les des si celui-ci possede au moins trois monuments construits.",
-                     path_image,
+                     "../../assets/batiments/Rouge/Club-prive.jpg",
                      Rouge ,
-                     {12,13,14},
+                     list<unsigned int>{12,13,14},
                      "restaurant"){};
+
+void ClubPrive::declencher_effet() const{
+    //j'ai deliberement retire le parametre joueur actuel de declencher effet pour respecter la methode virtuelle declaree dans Batiment.h
+    cout<<"Activation de l'effet du club prive";
+    //Trouver un joueur qui a cette carte
+    // verifier si le joueur actuel à au moins 3 monuments
+    //si il y en a un enlever toutes les pièces(get_argent()) au joueur actuel et ajouter toutes les pièces au joueur qui en a une
+}

@@ -1,10 +1,17 @@
 #include "Pizzeria.h"
 
-Pizzeria::Pizzeria(const string &path_image) :
+Pizzeria::Pizzeria() :
             Batiment("Pizzeria",
                      1 ,
                      "Recevez 1 piece du joueur qui a lance les des.",
-                     path_image,
+                     "../../assets/batiments/Rouge/Pizzeria.jpg",
                      Rouge,
-                     {7},
+                     list<unsigned int>{7},
                      "restaurant"){};
+
+void Pizeria::declencher_effet() const{
+    //j'ai deliberement retire le parametre joueur actuel de declencher effet pour respecter la methode virtuelle declaree dans Batiment.h
+    cout<<"Activation de l'effet de la pizzeria";
+    //Trouver un joueur qui a cette carte
+    //si il y en a un enlever une pièce au joueur actuel et ajouter un au joueur qui en a une
+}
