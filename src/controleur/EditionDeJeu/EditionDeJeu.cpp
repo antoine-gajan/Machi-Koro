@@ -1,57 +1,4 @@
 #include "EditionDeJeu.h"
-/// Importation des classes monuments
-#include "Aeroport.h"
-#include "CentreCommercial.h"
-#include "FabriqueDuPereNoel.h"
-#include "Gare.h"
-#include "HotelDeVille.h"
-#include "ParcAttraction.h"
-#include "Port.h"
-#include "TourRadio.h"
-
-/// Importation des batiments verts
-#include "BanqueDeMinivilles.h"
-#include "Boulangerie.h"
-#include "EntrepriseDeDemenagement.h"
-#include "EntrepriseDeTravauxPublics.h"
-#include "Epicerie.h"
-#include "FabriqueDeMeubles.h"
-#include "Fleuriste.h"
-#include "Fromagerie.h"
-#include "HalleDeMarche.h"
-#include "MarcheDeFruitsEtLegumes.h"
-#include "MoonsterSoda.h"
-#include "Superette.h"
-
-/// Importation des batiments bleus
-#include "Chalutier.h"
-#include "ChampBle.h"
-#include "ChampFleur.h"
-#include "ChampMais.h"
-#include "Ferme.h"
-#include "Foret.h"
-#include "Mine.h"
-#include "Verger.h"
-#include "Vignoble.h"
-
-/// Importation des batiments rouges
-#include "Cafe.h"
-#include "ClubPrive.h"
-#include "Pizzeria.h"
-#include "Restaurant5Etoiles.h"
-#include "RestaurantFamilial.h"
-#include "StandDeHamburger.h"
-#include "SushiBar.h"
-
-/// Importation des batiments violets
-#include "Arboretum.h"
-#include "CentreAffaires.h"
-#include "CentreImpots.h"
-#include "ChaineTelevision.h"
-#include "EntrepriseRenovation.h"
-#include "MaisonEdition.h"
-#include "Stade.h"
-#include "Startup.h"
 
 
 EditionDeJeu::EditionDeJeu(const string& nom_edition) {
@@ -63,6 +10,7 @@ EditionDeJeu::EditionDeJeu(const string& nom_edition) {
     }
 
     if (nom_edition == "Deluxe") {
+        /// Constructeur de Deluxe
         nom = "Deluxe";
         est_edition = true;
         nb_joueurs_max = 5;
@@ -70,6 +18,46 @@ EditionDeJeu::EditionDeJeu(const string& nom_edition) {
         nb_monuments_win = 5;
 
         // Liste des monuments spécifiques à Deluxe
-        mon = vector<Monument>();
+        monument.push_back(new Aeroport());
+        monument.push_back(new CentreCommercial());
+        monument.push_back(new Gare());
+        monument.push_back(new ParcAttraction());
+        monument.push_back(new Port());
+        monument.push_back(new TourRadio());
+
+        // Liste des batiments spécifiques à Deluxe
+        // Batiments violets
+        batiment.insert(pair<Batiment*, unsigned int>(new CentreAffaires(), 2));
+        batiment.insert(pair<Batiment*, unsigned int>(new ChaineTelevision(), 2));
+        batiment.insert(pair<Batiment*, unsigned int>(new Stade(), 2));
+        batiment.insert(pair<Batiment*, unsigned int>(new CentreImpots(), 2));
+        batiment.insert(pair<Batiment*, unsigned int>(new MaisonEdition(), 2));
+
+        // Batiments verts
+        batiment.insert(pair<Batiment*, unsigned int>(new Boulangerie(), 5));
+        batiment.insert(pair<Batiment*, unsigned int>(new EntrepriseDeDemenagement(), 5));
+        batiment.insert(pair<Batiment*, unsigned int>(new EntrepriseDeTravauxPublics(), 5));
+        batiment.insert(pair<Batiment*, unsigned int>(new Epicerie(), 5));
+        batiment.insert(pair<Batiment*, unsigned int>(new FabriqueDeMeubles(), 5));
+        batiment.insert(pair<Batiment*, unsigned int>(new HalleDeMarche(), 5));
+        batiment.insert(pair<Batiment*, unsigned int>(new MarcheDeFruitsEtLegumes(), 5));
+        batiment.insert(pair<Batiment*, unsigned int>(new MoonsterSoda(), 5));
+        batiment.insert(pair<Batiment*, unsigned int>(new Superette(), 5));
+
+        // Batiments bleus
+        batiment.insert(pair<Batiment*, unsigned int>(new Chalutier(), 5));
+        batiment.insert(pair<Batiment*, unsigned int>(new ChampBle(), 5));
+        batiment.insert(pair<Batiment*, unsigned int>(new Ferme(), 5));
+        batiment.insert(pair<Batiment*, unsigned int>(new Foret(), 5));
+        batiment.insert(pair<Batiment*, unsigned int>(new Mine(), 5));
+        batiment.insert(pair<Batiment*, unsigned int>(new Verger(), 5));
+        batiment.insert(pair<Batiment*, unsigned int>(new Vignoble(), 5));
+
+        // Batiments rouges
+        batiment.insert(pair<Batiment*, unsigned int>(new Cafe(), 5));
+        batiment.insert(pair<Batiment*, unsigned int>(new ClubPrive(), 5));
+        batiment.insert(pair<Batiment*, unsigned int>(new Pizzeria(), 5));
+        batiment.insert(pair<Batiment*, unsigned int>(new Restaurant5Etoiles(), 5));
+        batiment.insert(pair<Batiment*, unsigned int>(new RestaurantFamilial(), 5));
     }
 }
