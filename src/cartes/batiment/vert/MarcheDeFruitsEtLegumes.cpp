@@ -1,7 +1,7 @@
 #include "MarcheDeFruitsEtLegumes.h"
 
 MarcheDeFruitsEtLegumes::MarcheDeFruitsEtLegumes()
-        : Batiment("Marche de fruits et legumes",
+        : Batiment("MarcheDeFruitsEtLegumes",
                    2,
                    "Recevez 2 pieces de la banque pour chaque etablissement de type champ que vous possedez.",
                    "../../../assets/batiments/Vert/Marche-de-fruits-et-legumes.jpg",

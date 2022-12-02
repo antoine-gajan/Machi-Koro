@@ -1,7 +1,7 @@
 #include "EntrepriseDeDemenagement.h"
 
 EntrepriseDeDemenagement::EntrepriseDeDemenagement()
-        : Batiment("Entreprise de demenagement",
+        : Batiment("EntrepriseDeDemenagement",
                    2,
                    "Donnez a un autre joueur un de vos etablissements qui ne soit pas de type special. Puis recevez 4 pieces de la banque.",
                    "../../../assets/batiments/Vert/Entreprise-de-demenagement.jpeg",

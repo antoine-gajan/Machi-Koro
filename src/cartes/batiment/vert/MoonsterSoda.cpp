@@ -1,7 +1,7 @@
 #include "MoonsterSoda.h"
 
 MoonsterSoda::MoonsterSoda()
-        : Batiment("Moonster soda",
+        : Batiment("MoonsterSoda",
                    5,
                    "Recevez 1 piece de la banque pour chaque etablissement de type restaurant que possedent tous les joueurs.",
                    "../../../assets/batiments/Vert/Moonster-soda.jpeg",
