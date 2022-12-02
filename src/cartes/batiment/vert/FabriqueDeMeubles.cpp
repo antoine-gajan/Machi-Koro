@@ -1,7 +1,7 @@
 #include "FabriqueDeMeubles.h"
 
 FabriqueDeMeubles::FabriqueDeMeubles()
-        : Batiment("Fabrique de meubles",
+        : Batiment("FabriqueDeMeubles",
                    3,
                    "Recevez 3 pieces de la banque pour chaque etablissement de type engrenage que vous possedez.",
                    "../../../assets/batiments/Vert/Fabrique-de-meubles.jpeg",

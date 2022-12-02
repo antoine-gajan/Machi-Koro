@@ -1,7 +1,7 @@
 #include "HalleDeMarche.h"
 
 HalleDeMarche::HalleDeMarche()
-        : Batiment("Halle de marche",
+        : Batiment("HalleDeMarche",
                    2,
                    "Recevez 2 pieces de la banque pour chaque etablissement de type restaurant que vous possedez",
                    "../../../assets/batiments/Vert/Halle-de-marche.jpg",

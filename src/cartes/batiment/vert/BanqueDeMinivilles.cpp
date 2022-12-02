@@ -1,7 +1,7 @@
 #include "BanqueDeMinivilles.h"
 
 BanqueDeMinivilles::BanqueDeMinivilles()
-        : Batiment("Banque de minivilles",
+        : Batiment("BanqueDeMinivilles",
                    0,
                    "Lorsque vous achetez cet etablissement, recevez 5 pieces de la banque. Payez 2 pieces a la banque.",
                    "../../../assets/batiments/Vert/Banque-de-minivilles.jpeg",

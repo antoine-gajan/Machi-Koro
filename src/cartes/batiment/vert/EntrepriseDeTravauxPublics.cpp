@@ -2,7 +2,7 @@
 
 
 EntrepriseDeTravauxPublics::EntrepriseDeTravauxPublics()
-        : Batiment("Entreprise de travaux publics",
+        : Batiment("EntrepriseDeTravauxPublics",
                    2,
                    "Vous devez retourner une de vos cartes monuments sur sa face en travaux. Ce faisant, vous recevez 8 pieces de la banque.",
                    "../../../assets/batiments/Vert/Entreprise-de-travaux-publics.jpeg",
