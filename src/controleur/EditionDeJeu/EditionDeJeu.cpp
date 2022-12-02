@@ -69,7 +69,6 @@ EditionDeJeu::EditionDeJeu(const string& nom_edition) {
         nb_monuments_win = 4;
 
         /// Liste des monuments spécifiques à Standard
-        monument.push_back(new Aeroport());
         monument.push_back(new CentreCommercial());
         monument.push_back(new Gare());
         monument.push_back(new ParcAttraction());
