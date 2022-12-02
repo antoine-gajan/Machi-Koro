@@ -18,7 +18,7 @@ protected:
     bool est_edition;
 
 public:
-    EditionDeJeu(const string& nom, unsigned int joueurs_min, unsigned int joueurs_max, unsigned int mon_win, vector<Monument*> monuments, map<Batiment*, unsigned int> batiments, bool edition);
+    EditionDeJeu(const string& nom);
     EditionDeJeu() = default;
     ~EditionDeJeu()=default;
     const std::string& get_nom() const {return nom;};
