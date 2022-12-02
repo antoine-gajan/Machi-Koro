@@ -4,7 +4,7 @@
 using namespace std;
 
 Joueur::Joueur(const string& name, Monument *list_mon[], Batiment *list_bat[], unsigned int arg_depart)
-            : nom(name), argent(arg_depart), est_ia(false){
+            : nom(name), argent(arg_depart), est_ia(false), strategie(strat_IA::none) {
     /// Création d'un joueur non IA
 
     if (name.empty()) {
