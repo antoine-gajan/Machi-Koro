@@ -98,4 +98,34 @@ EditionDeJeu::EditionDeJeu(const string& nom_edition) {
         batiment.insert(pair<Batiment*, unsigned int>(new Cafe(), 6));
         batiment.insert(pair<Batiment*, unsigned int>(new RestaurantFamilial(), 6));
     }
+    else if (nom_edition == "GreenValley") {
+        /// Constructeur de GreenValley
+        nom = "GreenValley";
+        est_edition = false;
+        nb_joueurs_max = 4;
+        nb_joueurs_min = 2;
+        nb_monuments_win = 4;
+
+
+        /// Liste des batiments spécifiques à GreenValley
+        // Batiments violets
+        batiment.insert(pair<Batiment*, unsigned int>(new Startup(), 4));
+        batiment.insert(pair<Batiment*, unsigned int>(new Arboretum(), 4));
+        batiment.insert(pair<Batiment*, unsigned int>(new EntrepriseRenovation(), 4));
+
+        // Batiments verts
+        batiment.insert(pair<Batiment*, unsigned int>(new BanqueDeMinivilles(), 6));
+        batiment.insert(pair<Batiment*, unsigned int>(new EntrepriseDeTravauxPublics(), 6));
+        batiment.insert(pair<Batiment*, unsigned int>(new MoonsterSoda(), 6));
+        batiment.insert(pair<Batiment*, unsigned int>(new Epicerie(), 6));
+        batiment.insert(pair<Batiment*, unsigned int>(new EntrepriseDeDemenagement(), 6));
+
+        // Batiments bleus
+        batiment.insert(pair<Batiment*, unsigned int>(new ChampMais(), 6));
+        batiment.insert(pair<Batiment*, unsigned int>(new Vignoble(), 6));
+
+        // Batiments rouges
+        batiment.insert(pair<Batiment*, unsigned int>(new ClubPrive(), 6));
+        batiment.insert(pair<Batiment*, unsigned int>(new Restaurant5Etoiles(), 6));
+    }
 }
