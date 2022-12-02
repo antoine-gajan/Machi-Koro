@@ -4,7 +4,7 @@ using namespace std;
 #include "EditionDeJeu.h"
 
 int main() {
-    EditionDeJeu edj("Standard");
+    EditionDeJeu edj("GreenValley");
 
     cout << edj.get_nom() << endl;
     auto bat = edj.get_batiment();

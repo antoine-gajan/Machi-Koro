@@ -1,5 +1,4 @@
 #include "Partie.h"
-#include <list>
 
 Partie::Partie(vector<Joueur*> liste_joueurs, vector<EditionDeJeu *> editions) : nb_monuments_win(0), joueur_actuel(0){
     ///Constructeur de Partie
@@ -15,7 +14,7 @@ Partie::Partie(vector<Joueur*> liste_joueurs, vector<EditionDeJeu *> editions) :
         tab_joueurs.push_back(joueur);
     }
 
-    joueur_actuel= tab_joueurs.front();
+    joueur_actuel = 0;
 }
 
 void Partie::jouer_partie() {

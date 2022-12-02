@@ -15,6 +15,15 @@ private:
     Shop shop;
     Pioche pioche;
     vector<EditionDeJeu*> editions;
+    class Singleton {
+    public :
+        Partie* instance = nullptr;
+        ~Singleton() {delete instance; instance = nullptr;};
+    };
+    static Singleton singleton;
+    Partie(vector<Joueur*> liste_joueurs, vector<EditionDeJeu*> editions);
+    ~Partie() = default;
+
 
 public:
     //********** Jouer une partie **********//
@@ -23,9 +32,9 @@ public:
     bool est_gagnant(Joueur *joueur);
 
     //********** Constructeurs et getters **********//
-    Partie(vector<Joueur*> liste_joueurs, vector<EditionDeJeu*> editions);
     unsigned int get_joueur_actuel() const {return joueur_actuel;};
-    ~Partie() = default;
+    Singleton& get_instance();
+
 };
 
 #endif //MACHI_KORO_PARTIE_H

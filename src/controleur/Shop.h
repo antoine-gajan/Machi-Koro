@@ -11,10 +11,12 @@ private:
     std::map<Batiment*, unsigned int> contenu;
     void completer_shop(Batiment* new_bat);
     Shop(unsigned int nb_tas);
-    ~Shop() = default;
+
 public:
     unsigned int get_nb_tas_possibles() const {return nb_tas_possibles;};
     const std::map<Batiment*, unsigned int>& get_contenu() {return contenu;};
+    ~Shop() = default;
+    Shop() = default;
 };
 
 #endif //MACHI_KORO_SHOP_H
