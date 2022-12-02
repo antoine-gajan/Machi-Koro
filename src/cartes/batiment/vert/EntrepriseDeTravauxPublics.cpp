@@ -5,7 +5,7 @@ EntrepriseDeTravauxPublics::EntrepriseDeTravauxPublics()
         : Batiment("EntrepriseDeTravauxPublics",
                    2,
                    "Vous devez retourner une de vos cartes monuments sur sa face en travaux. Ce faisant, vous recevez 8 pieces de la banque.",
-                   "../../../assets/batiments/Vert/Entreprise-de-travaux-publics.jpeg",
+                   "../../../assets/batiments/Vert/Entreprise-de-travaux-publics.jpg",
                    Vert,
                    {4},
                    "entreprise") {}

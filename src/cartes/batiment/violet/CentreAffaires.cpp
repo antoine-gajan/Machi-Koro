@@ -4,7 +4,7 @@ CentreAffaires::CentreAffaires():
     Batiment("Centre d'Affaires",
              8,
              "Vous pouvez echanger avec le joueur de votre choix un etablissement qui n'est pas de type special",
-             "../../../assets/batiments/Violet/Centre-d-'affaires.jpeg",
+             "../../../assets/batiments/Violet/Centre-d-'affaires.jpg",
              Violet,
              list<unsigned int>{6},
              "special") {
