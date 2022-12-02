@@ -12,6 +12,7 @@ include_directories(cartes/batiment/violet)
 include_directories(cartes/monument)
 include_directories(Joueur)
 include_directories(controleur)
+include_directories(controleur/EditionDeJeu)
 
 add_executable(src
         main.cpp
@@ -122,4 +123,7 @@ add_executable(src
         cartes/batiment/bleu/Verger.h
         cartes/batiment/bleu/Vignoble.cpp
         cartes/batiment/bleu/Vignoble.h
-)
+
+        controleur/EditionDeJeu/EditionDeJeu.cpp
+        controleur/EditionDeJeu/EditionDeJeu.h
+        )
