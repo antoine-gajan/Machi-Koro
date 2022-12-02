@@ -4,7 +4,7 @@ EntrepriseDeDemenagement::EntrepriseDeDemenagement()
         : Batiment("EntrepriseDeDemenagement",
                    2,
                    "Donnez a un autre joueur un de vos etablissements qui ne soit pas de type special. Puis recevez 4 pieces de la banque.",
-                   "../../../assets/batiments/Vert/Entreprise-de-demenagement.jpeg",
+                   "../../../assets/batiments/Vert/Entreprise-de-demenagement.jpg",
                    Vert,
                    {9, 10},
                    "entreprise") {}

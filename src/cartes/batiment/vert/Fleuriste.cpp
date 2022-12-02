@@ -4,7 +4,7 @@ Fleuriste::Fleuriste()
         : Batiment("Fleuriste",
                    1,
                    "Recevez 1 piece de la banque pour chaque Champ de fleurs que vous possedez.",
-                   "../../../assets/batiments/Vert/Fleuriste.jpeg",
+                   "../../../assets/batiments/Vert/Fleuriste.jpg",
                    Vert,
                    {6},
                    "commerce") {}

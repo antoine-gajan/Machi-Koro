@@ -5,7 +5,7 @@ Aeroport::Aeroport() :
                 "Aeroport",
                 30,
                 "Si rien n'a ete construit durant le tour, la banque donne 10 au joueur",
-                "../../assets/Monuments/Aeroport-travaux.jpeg") {
+                "../../assets/Monuments/Aeroport-travaux.jpg") {
     /// Constructeur de Aeroport
 }
 
