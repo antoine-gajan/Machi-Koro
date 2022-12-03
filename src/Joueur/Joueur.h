@@ -26,9 +26,9 @@ class Joueur {
 
     public:
         /*** Constructeurs et destructeur ***/
-        Joueur(const string& nom, Monument *list_mon[], Batiment *list_bat[], unsigned int arg_depart);
-        Joueur(const string& nom, Monument *list_mon[], Batiment *list_bat[], unsigned int arg_depart, strat_IA stratIa);
-        ~Joueur();
+        Joueur(const string& nom, Monument *list_mon[], Batiment *list_bat[], unsigned int arg_depart); // Si humain
+        Joueur(const string& nom, Monument *list_mon[], Batiment *list_bat[], unsigned int arg_depart, strat_IA stratIa); // Si IA
+        ~Joueur() = default;
 
         /***** Getters *****/
         unsigned int get_argent() const {return argent;};
@@ -38,14 +38,12 @@ class Joueur {
         unsigned int * get_repartition_argent() const;
 
         const map<Monument*, bool>& get_liste_monument() const {return liste_monument;};
-        // Version lecture
-        const map<string, map<Batiment*, unsigned int>>& get_liste_batiment() const {return liste_batiment;};
-        // Version écriture
-        map<string, map<Batiment*, unsigned int>>& get_liste_batiment() {return liste_batiment;};
-        const vector<Monument*>& get_monument_jouables() const;
+        map<string, map<Batiment*, unsigned int>> get_liste_batiment() const {return liste_batiment;};
+        const vector<Monument*> get_monument_jouables() const;
 
         /***** Setters *****/
-        void set_argent(unsigned int arg) {argent = arg;};
+        void set_argent(unsigned int arg);
+        void set_liste_batiment(const map<string, map<Batiment*, unsigned int>>& liste_bat);
 
         /***** Autres méthodes *****/
         void activer_monument(Monument *mon);

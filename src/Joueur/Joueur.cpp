@@ -62,18 +62,6 @@ Joueur::Joueur(const string& name, Monument *list_mon[], Batiment *list_bat[], u
     }
 }
 
-Joueur::~Joueur() {
-    /// Destructeur de Joueur
-
-    // Destruction des monuments
-    liste_monument.clear();
-    // Destruction des batiments
-    for (auto it = liste_batiment.begin(); it != liste_batiment.end(); ++it) {
-        it->second.clear();
-    }
-    liste_batiment.clear();
-}
-
 unsigned int * Joueur::get_repartition_argent() const {
     /// Répartition de l'argent en fonction des types de pièces
     unsigned int *repartition = new unsigned int [3];
@@ -211,7 +199,7 @@ void Joueur::acheter_carte(Carte *carte) {
     }
 }
 
-const vector<Monument*>& Joueur::get_monument_jouables() const {
+const vector<Monument*> Joueur::get_monument_jouables() const {
     /// Fonction qui retourne la liste des monuments actifs d'un joueur
     vector<Monument*> liste;
     for (auto monument : liste_monument) {
@@ -219,4 +207,13 @@ const vector<Monument*>& Joueur::get_monument_jouables() const {
             liste.push_back(monument.first);
     }
     return liste;
+}
+
+void Joueur::set_argent(unsigned int arg){
+    /// Mise à jour de l'argent du joueur
+    argent = arg;
+}
+void Joueur::set_liste_batiment(const map<string, map<Batiment*, unsigned int>>& liste_bat){
+    /// Mise à jour de la liste des batiments du joueur
+    liste_batiment = liste_bat;
 }
