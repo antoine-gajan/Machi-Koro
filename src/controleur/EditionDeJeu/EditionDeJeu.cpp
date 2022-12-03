@@ -1,11 +1,11 @@
 #include "EditionDeJeu.h"
 
 
-EditionDeJeu::EditionDeJeu(const string& nom_edition) {
+EditionDeJeu::EditionDeJeu(const string& nom_edition) : nom(nom_edition) {
     /// Constructeur de EditionDeJeu
 
     //Gestion des erreurs
-    if (nom_edition.empty()){
+    if (nom.empty()){
         throw invalid_argument("Le nom de l'édition ne peut être vide.");
     }
 
@@ -131,12 +131,16 @@ EditionDeJeu::EditionDeJeu(const string& nom_edition) {
 }
 
 EditionDeJeu::~EditionDeJeu() {
-    for (auto & i : monument) {
-        delete i;
+    /// Destructeur d'Edition de Jeu
+
+    // Destruction des monuments
+    for (auto& mon : monument) {
+        delete mon;
     }
     monument.clear();
-    for (auto & it : batiment) {
-        delete it.first;
+    // Destruction des batiments
+    for (auto& bat : batiment) {
+        delete bat.first;
     }
     batiment.clear();
 }

@@ -21,6 +21,7 @@ Batiment* Pioche::getCarte() {
     // Sinon, on renvoie nullptr (erreur)
     else
     {
+        cout << "La pioche est vide." <<endl;
         return nullptr;
     }
 }
