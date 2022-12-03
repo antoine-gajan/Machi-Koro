@@ -15,9 +15,9 @@ class Batiment : public Carte {
         list<unsigned int> num_activation;
         string type;
         Batiment(const string& nom, unsigned int prix, const string& description_effet, const string& path_image, couleur_bat coul, const list<unsigned int>& num, const string& type_bat);
-        virtual ~Batiment() = default;
 
     public:
+        virtual ~Batiment() = default;
         couleur_bat get_couleur() const {return couleur;};
         const list<unsigned int>& get_num_activation() const {return num_activation;};
         const string& get_bat_type() const {return type;};

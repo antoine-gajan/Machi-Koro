@@ -75,7 +75,7 @@ protected:
 public:
     /// *** Constructeur et destructeur *** ///
     EditionDeJeu(const string& nom);
-    ~EditionDeJeu()=default;
+    ~EditionDeJeu();
 
     /// *** Getters *** ///
     const std::string& get_nom() const {return nom;};

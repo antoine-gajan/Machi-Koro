@@ -129,3 +129,14 @@ EditionDeJeu::EditionDeJeu(const string& nom_edition) {
         batiment.insert(pair<Batiment*, unsigned int>(new Restaurant5Etoiles(), 6));
     }
 }
+
+EditionDeJeu::~EditionDeJeu() {
+    for (auto & i : monument) {
+        delete i;
+    }
+    monument.clear();
+    for (auto & it : batiment) {
+        delete it.first;
+    }
+    batiment.clear();
+}
