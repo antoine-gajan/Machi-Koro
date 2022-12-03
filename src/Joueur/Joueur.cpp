@@ -3,43 +3,20 @@
 
 using namespace std;
 
-Joueur::Joueur(const string& name, Monument *list_mon[], Batiment *list_bat[], unsigned int arg_depart)
-            : nom(name), argent(arg_depart), est_ia(false), strategie(strat_IA::none) {
-    /// Création d'un joueur non IA
-
-    if (name.empty()) {
-        throw invalid_argument("Le nom du joueur ne peut pas être vide");
-    }
-
-    if (list_mon == nullptr || list_bat == nullptr) {
-        throw invalid_argument("Les listes de cartes ne peuvent pas être nulles");
-    }
-
-    // Ajout des batiments initiaux
-    size_t i = 0;
-    while (list_bat[i] != nullptr) {
-        ajouter_batiment(list_bat[i]);
-        i++;
-    }
-
-    // Ajout des monuments initiaux
-    Monument * mon = list_mon[0];
-    i = 0;
-    while (mon != nullptr) {
-        liste_monument.insert(pair<Monument*, bool>(mon, false));
-        i++;
-        mon = list_mon[i];
-    }
-}
-
 Joueur::Joueur(const string& name, Monument *list_mon[], Batiment *list_bat[], unsigned int arg_depart, strat_IA stratIa)
-            : argent(arg_depart), nom(name), est_ia(true), strategie(stratIa){
-    /// Création d'un joueur IA
+            : argent(arg_depart), nom(name), strategie(stratIa){
+    /// Création d'un joueur IA ou non
+    if (stratIa != none) {
+        // Si c'est une IA, on met est_ia à true
+        est_ia = true;
+    } else {
+        // Sinon, on met est_ia à false
+        est_ia = false;
+    }
 
-    if (name.empty()) {
+    if (nom.empty()) {
         throw invalid_argument("Le nom du joueur ne peut pas être vide");
     }
-    nom = name;
 
     if (list_mon == nullptr || list_bat == nullptr) {
         throw invalid_argument("Les listes de cartes ne peuvent pas être nulles");

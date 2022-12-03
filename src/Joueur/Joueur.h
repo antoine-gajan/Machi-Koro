@@ -26,8 +26,7 @@ class Joueur {
 
     public:
         /*** Constructeurs et destructeur ***/
-        Joueur(const string& nom, Monument *list_mon[], Batiment *list_bat[], unsigned int arg_depart); // Si humain
-        Joueur(const string& nom, Monument *list_mon[], Batiment *list_bat[], unsigned int arg_depart, strat_IA stratIa); // Si IA
+        Joueur(const string& nom, Monument *list_mon[], Batiment *list_bat[], unsigned int arg_depart, strat_IA stratIa=none);
         ~Joueur() = default;
 
         /***** Getters *****/
