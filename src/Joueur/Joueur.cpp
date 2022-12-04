@@ -3,52 +3,50 @@
 
 using namespace std;
 
-Joueur::Joueur(const string& name, Monument *list_mon[], Batiment *list_bat[], unsigned int arg_depart, strat_IA stratIa)
-            : argent(arg_depart), nom(name), strategie(stratIa){
-    /// Création d'un joueur IA ou non
-    if (stratIa != none) {
-        // Si c'est une IA, on met est_ia à true
-        est_ia = true;
-    } else {
-        // Sinon, on met est_ia à false
-        est_ia = false;
-    }
-
-    if (nom.empty()) {
-        throw invalid_argument("Le nom du joueur ne peut pas être vide");
-    }
-
-    if (list_mon == nullptr || list_bat == nullptr) {
-        throw invalid_argument("Les listes de cartes ne peuvent pas être nulles");
-    }
-
-    // Ajout des batiments initiaux
-    size_t i = 0;
-    while (list_bat[i] != nullptr) {
-        ajouter_batiment(list_bat[i]);
-        i++;
-    }
-
-    // Ajout des monuments initiaux
-    Monument * mon = list_mon[0];
-    i = 0;
-    while (mon != nullptr) {
-        liste_monument.insert(pair<Monument*, bool>(mon, false));
-        i++;
-        mon = list_mon[i];
-    }
+Joueur::Joueur(const string& nom, const vector<Monument *>&list_mon, const vector<Batiment *>&list_bat, unsigned int arg_depart, strat_IA stratIa)
+: strategie(stratIa), est_ia(stratIa != none), nom(nom), argent(arg_depart)
+{
+    for (auto mon : list_mon)
+        liste_monument[mon] = false;
+    for (auto bat : list_bat)
+        liste_batiment[bat->get_couleur()][bat] = 1;
 }
 
-unsigned int * Joueur::get_repartition_argent() const {
+vector<unsigned int> Joueur::get_repartition_argent() const {
     /// Répartition de l'argent en fonction des types de pièces
-    unsigned int *repartition = new unsigned int [3];
-    // Pièces de 10
-    repartition[0] = argent/10;
-    // Pièces de 5
-    repartition[1] = (argent%10)/5;
-    //Pièces de 1
-    repartition[2] = (argent%10)%5;
+    vector<unsigned int> repartition;
+    unsigned int temp = argent;
+    repartition.push_back(temp/10);
+    temp = temp%10;
+    repartition.push_back(temp/5);
+    temp = temp%5;
+    repartition.push_back(temp/1);
     return repartition;
+}
+
+Joueur::~Joueur() {
+    liste_monument.clear();
+
+    // Itération sur les couleurs de batiments
+    for (auto it = liste_batiment.begin(); it != liste_batiment.end(); ++it) {
+        // Itération sur les batiments
+        it->second.clear();
+    }
+    liste_batiment.clear();
+}
+
+vector<Monument*> Joueur::get_monument_jouables() const {
+    vector<Monument*> liste_monument_jouables;
+    for (auto it : liste_monument) {
+        if (!it.second)
+            liste_monument_jouables.push_back(it.first);
+    }
+    return liste_monument_jouables;
+}
+
+void Joueur::set_argent(unsigned int arg){
+    /// Mise à jour de l'argent du joueur
+    argent = arg;
 }
 
 void Joueur::activer_monument(Monument *mon) {
@@ -76,47 +74,38 @@ void Joueur::desactiver_monument(Monument *mon) {
 }
 
 void Joueur::ajouter_batiment(Batiment *bat) {
+    cout << "Ajout du batiment " << bat->get_nom() << " au joueur " << nom << endl;
+
     if (bat == nullptr) {
         throw invalid_argument("Le batiment ne peut pas être nul");
     }
 
     /// Ajout du batiment
-    couleur_bat coul_bat = bat->get_couleur();
-    string couleur;
+    map<Batiment *, unsigned int> bat_couleur_liste = liste_batiment.at(bat->get_couleur());
 
-    if (coul_bat == Bleu)
-        couleur = "Bleu";
-    else if (coul_bat == Rouge)
-        couleur = "Rouge";
-    else if (coul_bat == Vert)
-        couleur = "Vert";
-    else if (coul_bat == Violet)
-        couleur = "Violet";
-
-    auto bat_couleur = liste_batiment.at(couleur);
-    if (couleur == "Violet") {
-        // On vérifie que le batiment n'est pas déjà présent
-        auto it = bat_couleur.find(bat);
-        if (it == bat_couleur.end()) {
+    if (bat->get_couleur() == Violet) {
+        // On vérifie que le batiment n'est pas déjà dans la liste
+        if (bat_couleur_liste.find(bat) == bat_couleur_liste.end()) {
             // On ajoute le batiment
-            liste_batiment.at(couleur).insert(pair<Batiment*, unsigned int>(bat, 1));
+            bat_couleur_liste.insert(pair<Batiment *, unsigned int>(bat, 1));
         }
-        // Sinon on ne fait rien
     }
     else {
-        // On vérifie si le batiment est déjà présent
-        auto it = bat_couleur.find(bat);
-        if (it == bat_couleur.end()) {
-            // On ajoute le batiment
-            liste_batiment.at(couleur).insert(pair<Batiment*, unsigned int>(bat, 1));
+        // On traite le cas où le batiment est déjà dans la liste
+        if (bat_couleur_liste.find(bat) != bat_couleur_liste.end()) {
+            // On incrémente le nombre de batiment
+            bat_couleur_liste.at(bat)++;
         }
         else {
-            // On incrémente le nombre de batiment
-            it->second++;
+            // On ajoute le batiment
+            bat_couleur_liste.insert(pair<Batiment *, unsigned int>(bat, 1));
         }
     }
+
+    cout << "Ajout du batiment " << bat->get_nom() << " au joueur " << nom << " termine" << endl;
 }
 
+/*
 void Joueur::retirer_batiment(Batiment *bat) {
     // on vérifie si le joueur possède le batiment et si oui on retire 1 à sa quantité
     // si la quantité est nulle on retire le batiment de la liste
@@ -176,21 +165,9 @@ void Joueur::acheter_carte(Carte *carte) {
     }
 }
 
-const vector<Monument*> Joueur::get_monument_jouables() const {
-    /// Fonction qui retourne la liste des monuments actifs d'un joueur
-    vector<Monument*> liste;
-    for (auto monument : liste_monument) {
-        if (monument.second)
-            liste.push_back(monument.first);
-    }
-    return liste;
-}
 
-void Joueur::set_argent(unsigned int arg){
-    /// Mise à jour de l'argent du joueur
-    argent = arg;
-}
 void Joueur::set_liste_batiment(const map<string, map<Batiment*, unsigned int>>& liste_bat){
     /// Mise à jour de la liste des batiments du joueur
     liste_batiment = liste_bat;
 }
+ */

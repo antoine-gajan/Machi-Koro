@@ -13,6 +13,7 @@ include_directories(cartes/monument)
 include_directories(Joueur)
 include_directories(controleur)
 include_directories(controleur/EditionDeJeu)
+include_directories(Joueur)
 
 add_executable(src
         main.cpp

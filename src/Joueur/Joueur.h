@@ -19,26 +19,26 @@ class Joueur {
 
         string nom;
         map<Monument*, bool> liste_monument;
-        map<string, map<Batiment*, unsigned int>> liste_batiment;
+        map<couleur_bat, map<Batiment*, unsigned int>> liste_batiment;
         unsigned int argent;
         bool est_ia;
         strat_IA strategie;
 
     public:
         /*** Constructeurs et destructeur ***/
-        Joueur(const string& nom, Monument *list_mon[], Batiment *list_bat[], unsigned int arg_depart, strat_IA stratIa=none);
-        ~Joueur() = default;
+        Joueur(const string& nom, const vector<Monument *>&list_mon, const vector<Batiment *>&list_bat, unsigned int arg_depart, strat_IA stratIa=none);
+        ~Joueur();
 
         /***** Getters *****/
         unsigned int get_argent() const {return argent;};
         const string& get_nom() const {return nom;};
         bool get_est_ia() const {return est_ia;};
         strat_IA get_strategie() const {return strategie;};
-        unsigned int * get_repartition_argent() const;
-
         const map<Monument*, bool>& get_liste_monument() const {return liste_monument;};
-        map<string, map<Batiment*, unsigned int>> get_liste_batiment() const {return liste_batiment;};
-        const vector<Monument*> get_monument_jouables() const;
+        map<couleur_bat, map<Batiment*, unsigned int>> get_liste_batiment() const {return liste_batiment;};
+
+        vector<unsigned int> get_repartition_argent() const;
+        vector<Monument*> get_monument_jouables() const;
 
         /***** Setters *****/
         void set_argent(unsigned int arg);
