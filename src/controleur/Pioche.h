@@ -15,6 +15,7 @@ class Pioche {
 
     public:
         Pioche(const vector<Batiment*>& batiments);
+        Pioche() = default;
         ~Pioche() = default;
         Batiment* getCarte(); // retourne la carte du dessus de la pioche
         void melanger(); // mélange la pioche

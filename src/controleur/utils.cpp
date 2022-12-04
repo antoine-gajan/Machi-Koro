@@ -2,19 +2,16 @@
 
 unsigned int count_type(Joueur *joueur, const string& type) {
     unsigned int count = 0;
-
+    auto liste_bat = joueur->get_liste_batiment();
     // pour chaque couleur de la liste de batiments du joueur
-    for (auto it=joueur->get_liste_batiment().begin(); it!=joueur->get_liste_batiment().end(); ++it) {
-
+    for (auto couleur : liste_bat) {
         // pour chaque batiment de la couleur, (batiments sous forme de map(Batiment*, unsigned int))
-        map<Batiment*, unsigned int>::iterator it2;
-        for (it2=it->second.begin(); it2!=it->second.end(); ++it2) {
-            if (it2->first->get_type() == type) {
-                count += it2->second;
+        for (auto batiment : liste_bat[couleur.first]) {
+            if (batiment.first->get_type() == type) {
+                count += batiment.second;
             }
         }
     }
-
     return count;
 }
 
@@ -86,32 +83,17 @@ Batiment* selectionner_batiment(Joueur *joueur){
 }
 
 Batiment* possede_batiment(Joueur *joueur,string nom_bat){
-    map<couleur_bat, map<Batiment*, unsigned int>>::iterator it;
-    map<Batiment*, unsigned int>::iterator it2;
-    unsigned int check = 0;
-    Batiment* bat_a_retourner;
-
-    it = joueur->get_liste_batiment().begin();
-    it2 = it->second.begin();
-    //on vient parcourir pour chaque couleur
-    while(it!=joueur->get_liste_batiment().end() && check!=1){
-        //on vient parcourir pour chaque carte dans un groupe de couleur
-        while(it2!=it->second.end() && it2->first->get_nom()!=nom_bat){
-            it2++;
+    auto liste_bat = joueur->get_liste_batiment();
+    // pour chaque couleur de la liste de batiments du joueur
+    for (auto couleur : liste_bat) {
+        // pour chaque batiment de la couleur, (batiments sous forme de map(Batiment*, unsigned int))
+        for (auto batiment : liste_bat[couleur.first]) {
+            // Si c'est l'élement qu'on recherche, on le renvoie
+            if (batiment.first->get_nom() == nom_bat) {
+                 return batiment.first;
+            }
         }
-        //attribut check pour exit le premier while (à voir s'il n'est pas possible de faire plus simple?)
-        if(it2->first->get_nom()==nom_bat){
-            check = 1;
-            bat_a_retourner = it2->first;
-        }
-        it++;
     }
-
-    if(it == joueur->get_liste_batiment().end()){
-        bat_a_retourner = nullptr;
-    }
-
-    return bat_a_retourner;
 }
 
 Monument* selectionner_monument(Joueur *joueur){

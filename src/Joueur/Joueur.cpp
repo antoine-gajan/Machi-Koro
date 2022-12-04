@@ -89,6 +89,9 @@ void Joueur::ajouter_batiment(Batiment *bat) {
             // On ajoute le batiment
             bat_couleur_liste.insert(pair<Batiment *, unsigned int>(bat, 1));
         }
+        else{
+            cout << "Vous ne pouvez posséder qu'un exemplaire d'un batiment violet" <<endl;
+        }
     }
     else {
         // On traite le cas où le batiment est déjà dans la liste
