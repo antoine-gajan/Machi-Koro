@@ -42,7 +42,7 @@ class Joueur {
 
         /***** Setters *****/
         void set_argent(unsigned int arg);
-        void set_liste_batiment(const map<string, map<Batiment*, unsigned int>>& liste_bat);
+        void set_liste_batiment(map<couleur_bat, map<Batiment*, unsigned int>>& liste_bat);
 
         /***** Autres méthodes *****/
         void activer_monument(Monument *mon);

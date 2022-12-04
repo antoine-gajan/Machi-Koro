@@ -104,45 +104,36 @@ void Joueur::ajouter_batiment(Batiment *bat) {
     cout << "Le joueur " << nom << "possede 1 exemplaire du batiment " << bat->get_nom() << endl;
 }
 
-/*
+
 void Joueur::retirer_batiment(Batiment *bat) {
-    // on vérifie si le joueur possède le batiment et si oui on retire 1 à sa quantité
-    // si la quantité est nulle on retire le batiment de la liste
+    /// Retire 1 exemplaire du batiment d'un joueur
     if (bat == nullptr) {
         throw invalid_argument("Le batiment ne peut pas être nul");
     }
 
-    /// Enlever le batiment
-    couleur_bat coul_bat = bat->get_couleur();
-    string couleur;
+    // Récupération de la couleur du batiment
+    couleur_bat couleur = bat->get_couleur();
 
-    if (coul_bat == Bleu)
-        couleur = "Bleu";
-    else if (coul_bat == Rouge)
-        couleur = "Rouge";
-    else if (coul_bat == Vert)
-        couleur = "Vert";
-    else if (coul_bat == Violet)
-        couleur = "Violet";
-
-    auto bat_couleur = liste_batiment.at(couleur);
-
-    // On vérifie si le batiment est déjà présent
-    auto it = bat_couleur.find(bat);
-    if (it != bat_couleur.end()) {
-        // On décrémente le nombre de batiment
-        if (it->second > 1) {
-            it->second--;
-        }
-        else {
-            // On retire le batiment
-            liste_batiment.at(couleur).erase(it);
+    // On regarde si le joueur possède déjà un exemplaire du batiment
+    for (auto batiment : liste_batiment[couleur]){
+        if (batiment.first == bat){
+            // Si un seul exemplaire, on supprime l'élément
+            if (batiment.second == 1){
+                liste_batiment[couleur].erase(batiment.first);
+            }
+            // Sinon, on décrémente le nombre d'exemplaires
+            else{
+                batiment.second --;
+            }
+            cout << "Le batiment " << bat->get_nom() << " a ete retire du joueur " << nom << endl;
+            return;
         }
     }
-    // Sinon on ne fait rien
-
+    // Sinon, aucun batiment correspondant pour le joueur, on renvoie une erreur
+    cout << "Impossible de retirer le batiment. Le joueur " << nom << "ne possede aucun batiment " << bat->get_nom() << endl;
 }
 
+/*
 void Joueur::acheter_carte(Carte *carte) {
     if (carte == nullptr) {
         throw invalid_argument("La carte ne peut pas être nulle");
@@ -164,9 +155,8 @@ void Joueur::acheter_carte(Carte *carte) {
     }
 }
 
-
-void Joueur::set_liste_batiment(const map<string, map<Batiment*, unsigned int>>& liste_bat){
+*/
+void Joueur::set_liste_batiment(map<couleur_bat, map<Batiment*, unsigned int>>& liste_bat){
     /// Mise à jour de la liste des batiments du joueur
     liste_batiment = liste_bat;
 }
- */
