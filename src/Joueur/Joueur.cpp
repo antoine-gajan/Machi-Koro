@@ -133,29 +133,30 @@ void Joueur::retirer_batiment(Batiment *bat) {
     cout << "Impossible de retirer le batiment. Le joueur " << nom << "ne possede aucun batiment " << bat->get_nom() << endl;
 }
 
-/*
+
 void Joueur::acheter_carte(Carte *carte) {
+    /// Permet à un joueur d'acheter une carte (monument ou batiment)
     if (carte == nullptr) {
         throw invalid_argument("La carte ne peut pas être nulle");
     }
 
     // On vérifie que le joueur a assez d'argent
     if (argent < carte->get_prix()) {
+        cout << "Impossible d'acheter cette carte. Le joueur " << nom << "ne possede pas assez d'argent." << endl;
         return;
     }
 
-    // On retire l'argent
-    argent -= carte->get_prix();
+    // Mise à jour l'argent
+    set_argent(argent - carte->get_prix());
 
     // On ajoute la carte
     if (carte->get_type() == "Batiment") {
-        ajouter_batiment((Batiment*) carte);
+        ajouter_batiment(dynamic_cast<Batiment*>(carte));
     } else if (carte->get_type() == "Monument") {
-        activer_monument((Monument*) carte);
+        activer_monument(dynamic_cast<Monument*>(carte));
     }
 }
 
-*/
 void Joueur::set_liste_batiment(map<couleur_bat, map<Batiment*, unsigned int>>& liste_bat){
     /// Mise à jour de la liste des batiments du joueur
     liste_batiment = liste_bat;
