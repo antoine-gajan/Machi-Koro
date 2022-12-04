@@ -74,38 +74,34 @@ void Joueur::desactiver_monument(Monument *mon) {
 }
 
 void Joueur::ajouter_batiment(Batiment *bat) {
-    cout << "Ajout du batiment " << bat->get_nom() << " au joueur " << nom << endl;
+    /// Ajout du batiment
 
     if (bat == nullptr) {
         throw invalid_argument("Le batiment ne peut pas être nul");
     }
-
-    /// Ajout du batiment
-    map<Batiment *, unsigned int> bat_couleur_liste = liste_batiment.at(bat->get_couleur());
-
-    if (bat->get_couleur() == Violet) {
-        // On vérifie que le batiment n'est pas déjà dans la liste
-        if (bat_couleur_liste.find(bat) == bat_couleur_liste.end()) {
-            // On ajoute le batiment
-            bat_couleur_liste.insert(pair<Batiment *, unsigned int>(bat, 1));
-        }
-        else{
-            cout << "Vous ne pouvez posséder qu'un exemplaire d'un batiment violet" <<endl;
-        }
-    }
-    else {
-        // On traite le cas où le batiment est déjà dans la liste
-        if (bat_couleur_liste.find(bat) != bat_couleur_liste.end()) {
-            // On incrémente le nombre de batiment
-            bat_couleur_liste.at(bat)++;
-        }
-        else {
-            // On ajoute le batiment
-            bat_couleur_liste.insert(pair<Batiment *, unsigned int>(bat, 1));
+    // Récupération de la couleur du batiment
+    couleur_bat couleur = bat->get_couleur();
+    // On regarde si le joueur possède déjà un exemplaire du batiment
+    for (auto batiment : liste_batiment[couleur]){
+        if (batiment.first == bat){
+            // Si l'utilisateur a déjà un exemplaire de ce batiment et qu'il est violet : erreur
+            if (bat->get_couleur() == Violet){
+                cout << "Le joueur" << nom << "possede deja un exemplaire du batiment violet" << bat->get_nom()<<endl;
+                return;
+            }
+            // Sinon, on augmente le nombre d'exemplaires possédés
+            else{
+                batiment.second ++;
+                cout << "Ajout du batiment " << bat->get_nom() << " au joueur " << nom << endl;
+                cout << "Le joueur " << nom << "possede " << batiment.second << " exemplaires du batiment " << bat->get_nom() << endl;
+                return;
+            }
         }
     }
-
-    cout << "Ajout du batiment " << bat->get_nom() << " au joueur " << nom << " termine" << endl;
+    // Si aucun exemplaire du batiment, on l'ajoute
+    liste_batiment[couleur].insert(pair<Batiment*, unsigned int> (bat, 1));
+    cout << "Ajout du batiment " << bat->get_nom() << " au joueur " << nom << endl;
+    cout << "Le joueur " << nom << "possede 1 exemplaire du batiment " << bat->get_nom() << endl;
 }
 
 /*
