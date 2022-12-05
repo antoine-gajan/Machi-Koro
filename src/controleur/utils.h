@@ -3,6 +3,7 @@
 
 #include "../Joueur/Joueur.h"
 #include "../cartes/batiment/Batiment.h"
+#include "EditionDeJeu.h"
 #include <string>
 
 // Compte le nombre de cartes d'un type donné dans le jeu d'un Joueur
