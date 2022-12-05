@@ -23,22 +23,23 @@ void Partie::jouer_partie() {
 }
 
 
-void Partie::jouer_tour(Joueur *joueur_actuel) {
+void Partie::jouer_tour() {
     ///Fonction pour jouer un tour
-    if (est_gagnant(joueur_actuel)) {
-        cout << "Le joueur " << joueur_actuel->get_nom() << " a gagné la partie !" << endl;
+    Joueur *j_actuel = tab_joueurs[joueur_actuel];
+    if (est_gagnant(j_actuel)) {
+        cout << "Le joueur " << j_actuel->get_nom() << " a gagné la partie !" << endl;
         return;
     }
 
     /// Jet de dé pour le joueur
-    vector<Monument*> monuments_jouables = joueur_actuel->get_monument_jouables();
+    vector<Monument*> monuments_jouables = j_actuel->get_monument_jouables();
 
 
     unsigned int res_de1 = rand() % 6 + 1;
     unsigned int res_de2 = 0;
     unsigned int res_tot = res_de1;
 
-    cout << "Le joueur " << joueur_actuel->get_nom() << " a fait " << res_de1 << endl;
+    cout << "Le joueur " << j_actuel->get_nom() << " a fait " << res_de1 << endl;
 
 
 

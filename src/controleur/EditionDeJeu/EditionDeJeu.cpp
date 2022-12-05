@@ -58,7 +58,7 @@ EditionDeJeu::EditionDeJeu(const string& nom_edition) : nom(nom_edition) {
         batiment.insert(pair<Batiment*, unsigned int>(new ClubPrive(), 5));
         batiment.insert(pair<Batiment*, unsigned int>(new Pizzeria(), 5));
         batiment.insert(pair<Batiment*, unsigned int>(new Restaurant5Etoiles(), 5));
-        batiment.insert(pair<Batiment*, unsigned int>(new RestaurantFamilial(), 5));
+        batiment.insert(pair<Batiment*, unsigned int>(new Restaurant(), 5));
     }
     else if (nom_edition == "Standard") {
         /// Constructeur de Standard
@@ -96,7 +96,7 @@ EditionDeJeu::EditionDeJeu(const string& nom_edition) : nom(nom_edition) {
 
         // Batiments rouges
         batiment.insert(pair<Batiment*, unsigned int>(new Cafe(), 6));
-        batiment.insert(pair<Batiment*, unsigned int>(new RestaurantFamilial(), 6));
+        batiment.insert(pair<Batiment*, unsigned int>(new Restaurant(), 6));
     }
     else if (nom_edition == "GreenValley") {
         /// Constructeur de GreenValley
@@ -127,6 +127,49 @@ EditionDeJeu::EditionDeJeu(const string& nom_edition) : nom(nom_edition) {
         // Batiments rouges
         batiment.insert(pair<Batiment*, unsigned int>(new ClubPrive(), 6));
         batiment.insert(pair<Batiment*, unsigned int>(new Restaurant5Etoiles(), 6));
+    }
+    else if (nom_edition == "Marina") {
+
+        /// Constructeur de Marina
+        nom = "Marina";
+        est_edition = false;
+        nb_joueurs_max = 5;
+        nb_joueurs_min = 2;
+        nb_monuments_win = 5;
+
+        /// Constructeur de Marina
+        // Liste des monuments
+
+        monument.push_back(new Aeroport());
+        monument.push_back(new Port());
+        monument.push_back(new HotelDeVille());
+
+        /// Liste des batiments spécifiques à Marina
+        // Liste des batiments
+
+        // Batiments violets
+        batiment.insert(pair<Batiment*, unsigned int>(new ChaineTelevision(), 1));
+        batiment.insert(pair<Batiment*, unsigned int>(new CentreAffaires(), 1));
+        batiment.insert(pair<Batiment*, unsigned int>(new CentreImpots(), 5));
+        batiment.insert(pair<Batiment*, unsigned int>(new MaisonEdition(), 5));
+        batiment.insert(pair<Batiment*, unsigned int>(new Stade(), 1));
+
+        // Batiments rouges
+        batiment.insert(pair<Batiment*, unsigned int>(new StandDeHamburger(), 6));
+        batiment.insert(pair<Batiment*, unsigned int>(new SushiBar(), 6));
+        batiment.insert(pair<Batiment*, unsigned int>(new Pizzeria(), 6));
+        batiment.insert(pair<Batiment*, unsigned int>(new Boulangerie(), 1));
+
+        // Batiments bleus
+        batiment.insert(pair<Batiment*, unsigned int>(new PetitBateauDePeche(), 6));
+        batiment.insert(pair<Batiment*, unsigned int>(new ChampFleur(), 6));
+        batiment.insert(pair<Batiment*, unsigned int>(new Chalutier(), 6));
+        batiment.insert(pair<Batiment*, unsigned int>(new ChampBle(), 1));
+
+        // Batiments verts
+        batiment.insert(pair<Batiment*, unsigned int>(new Superette(), 6));
+        batiment.insert(pair<Batiment*, unsigned int>(new Fleuriste(), 6));
+        batiment.insert(pair<Batiment*, unsigned int>(new MoonsterSoda(), 6));
     }
 }
 

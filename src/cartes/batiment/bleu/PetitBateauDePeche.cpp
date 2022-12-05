@@ -1,5 +1,5 @@
-#include "BateauPeche.h"
-BateauPeche::BateauPeche() :
+#include "PetitBateauDePeche.h"
+PetitBateauDePeche::PetitBateauDePeche() :
         Batiment("Petit bateau de peche",
                  2,
                  "Si vous avez le port, recevez 3 pieces",
@@ -10,7 +10,7 @@ BateauPeche::BateauPeche() :
 ///Constructeur de BateauPeche
 
 
-void BateauPeche::declencher_effet() const{
+void PetitBateauDePeche::declencher_effet() const{
     //j'ai deliberement retire le parametre joueur actuel de declencher effet pour respecter la methode virtuelle declaree dans Batiment.h
     cout << "Activation de l'effet de BateauPeche" << endl;
     /*

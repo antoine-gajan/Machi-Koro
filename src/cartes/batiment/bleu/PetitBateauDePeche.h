@@ -8,9 +8,9 @@
 #include <list>
 #include <vector>
 
-class BateauPeche : public Batiment{
+class PetitBateauDePeche : public Batiment{
 public:
-    BateauPeche();
+    PetitBateauDePeche();
     void declencher_effet() const;
 };
 

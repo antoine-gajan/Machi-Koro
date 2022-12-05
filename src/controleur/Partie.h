@@ -9,7 +9,7 @@
 
 class Partie {
 private:
-    list<Joueur*> tab_joueurs;
+    vector<Joueur*> tab_joueurs;
     unsigned int joueur_actuel;
     unsigned int nb_monuments_win;
     Shop shop;
@@ -28,7 +28,7 @@ private:
 public:
     //********** Jouer une partie **********//
     void jouer_partie();
-    void jouer_tour(Joueur* joueur_actuel);
+    void jouer_tour();
     bool est_gagnant(Joueur *joueur);
 
     //********** Constructeurs et getters **********//

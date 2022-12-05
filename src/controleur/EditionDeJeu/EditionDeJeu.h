@@ -38,6 +38,7 @@
 #include "Ferme.h"
 #include "Foret.h"
 #include "Mine.h"
+#include "PetitBateauDePeche.h"
 #include "Verger.h"
 #include "Vignoble.h"
 
@@ -46,7 +47,7 @@
 #include "ClubPrive.h"
 #include "Pizzeria.h"
 #include "Restaurant5Etoiles.h"
-#include "RestaurantFamilial.h"
+#include "Restaurant.h"
 #include "StandDeHamburger.h"
 #include "SushiBar.h"
 

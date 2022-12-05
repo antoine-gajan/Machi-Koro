@@ -1,6 +1,6 @@
-#include "RestaurantFamilial.h"
+#include "Restaurant.h"
 
-RestaurantFamilial::RestaurantFamilial() :
+Restaurant::Restaurant() :
             Batiment("Restaurant",
                      3,
                      "Recevez 2 pieces du joueur qui a lance les des",
@@ -10,7 +10,7 @@ RestaurantFamilial::RestaurantFamilial() :
                      "restaurant") {};
 
 
-void RestaurantFamilial::declencher_effet() const{
+void Restaurant::declencher_effet() const{
     //j'ai deliberement retire le parametre joueur actuel de declencher effet pour respecter la methode virtuelle declaree dans Batiment.h
     cout << "Activation de l'effet du restaurant" << endl;
     //Trouver un joueur qui a cette carte

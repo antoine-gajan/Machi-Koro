@@ -2,6 +2,7 @@
 
 
 ## CMakeLists.txt
+
 ```cmake
 cmake_minimum_required(VERSION 3.23)
 project(src)
@@ -33,7 +34,7 @@ add_executable(src
 
         cartes/monument/Monument.cpp
         cartes/monument/Monument.h
-        
+
         cartes/monument/Aeroport.cpp
         cartes/monument/Aeroport.h
         cartes/monument/CentreCommercial.cpp
@@ -92,7 +93,7 @@ add_executable(src
         cartes/batiment/violet/Stade.h
         cartes/batiment/violet/Startup.cpp
         cartes/batiment/violet/Startup.h
-        
+
         cartes/batiment/rouge/Cafe.cpp
         cartes/batiment/rouge/Cafe.h
         cartes/batiment/rouge/ClubPrive.cpp
@@ -101,15 +102,15 @@ add_executable(src
         cartes/batiment/rouge/Pizzeria.h
         cartes/batiment/rouge/Restaurant5Etoiles.cpp
         cartes/batiment/rouge/Restaurant5Etoiles.h
-        cartes/batiment/rouge/RestaurantFamilial.cpp
-        cartes/batiment/rouge/RestaurantFamilial.h
+        cartes/batiment/rouge/Restaurant.cpp
+        cartes/batiment/rouge/Restaurant.h
         cartes/batiment/rouge/StandDeHamburger.cpp
         cartes/batiment/rouge/StandDeHamburger.h
         cartes/batiment/rouge/SushiBar.cpp
         cartes/batiment/rouge/SushiBar.h
 
-        cartes/batiment/bleu/BateauPeche.cpp
-        cartes/batiment/bleu/BateauPeche.h
+        cartes/batiment/bleu/PetitBateauDePeche.cpp
+        cartes/batiment/bleu/PetitBateauDePeche.h
         cartes/batiment/bleu/Chalutier.cpp
         cartes/batiment/bleu/Chalutier.h
         cartes/batiment/bleu/ChampBle.cpp
@@ -128,10 +129,10 @@ add_executable(src
         cartes/batiment/bleu/Verger.h
         cartes/batiment/bleu/Vignoble.cpp
         cartes/batiment/bleu/Vignoble.h
-        
+
         controleur/EditionDeJeu/EditionDeJeu.cpp
         controleur/EditionDeJeu/EditionDeJeu.h
-)
+        )
 ```
 
 ## Imports
