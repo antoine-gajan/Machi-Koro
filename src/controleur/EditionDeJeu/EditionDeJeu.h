@@ -68,7 +68,6 @@ protected:
     unsigned int nb_joueurs_max;
     unsigned int nb_monuments_win;
 
-    vector<Batiment*> starter;
     vector<Monument*> monument;
     map<Batiment*, unsigned int> batiment;
 
@@ -84,10 +83,12 @@ public:
     unsigned int get_nb_joueurs_min() const {return nb_joueurs_min;};
     unsigned int get_nb_joueurs_max() const {return nb_joueurs_max;};
     unsigned int get_nb_monuments_win() const {return nb_monuments_win;};
-    bool get_est_edition() const {return est_edition;};
+    vector<Batiment*> get_starter() const;
 
+    bool get_est_edition() const {return est_edition;};
     /// *** Récupération des monuments et des batiments *** ///
     vector<Monument*> get_monument() const {return monument;};
+
     map<Batiment*, unsigned int> get_batiment() const {return batiment;};
 };
 #endif //MACHI_KORO_EDITIONDEJEU_H
