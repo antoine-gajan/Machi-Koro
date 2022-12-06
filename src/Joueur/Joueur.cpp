@@ -184,13 +184,18 @@ void Joueur::afficher_cartes() const {
             cout << batiment.second << " : " << batiment.first->get_nom() << endl;
         }
     }
-
-    cout << "Fin de la liste des cartes du joueur " << endl;
 }
 
 void Joueur::afficher_joueur() const {
-    cout << "Joueur : " << nom << endl;
+    cout << "\n**********" << endl;
+    cout << "Joueur : \"" << nom ;
+    if (est_ia){
+        cout << "\" est une IA" << endl;
+    }
+    else{
+        cout << "\" est un Humain" << endl;
+    }
     cout << "Argent : " << argent << endl;
     afficher_cartes();
-    cout << "Fin de l'affichage joueur\n\n" << endl;
+    cout << "**********\n" << endl;
 }
