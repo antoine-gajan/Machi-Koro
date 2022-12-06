@@ -68,6 +68,7 @@ protected:
     unsigned int nb_joueurs_max;
     unsigned int nb_monuments_win;
 
+    vector<Batiment*> starter;
     vector<Monument*> monument;
     map<Batiment*, unsigned int> batiment;
 
