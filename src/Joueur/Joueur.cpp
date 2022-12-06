@@ -187,7 +187,7 @@ void Joueur::afficher_cartes() const {
 }
 
 void Joueur::afficher_joueur() const {
-    cout << "\n**********" << endl;
+    cout << "\n********************" << endl;
     cout << "Joueur : \"" << nom ;
     if (est_ia){
         cout << "\" est une IA" << endl;
@@ -197,6 +197,6 @@ void Joueur::afficher_joueur() const {
     }
     cout << "Argent : " << argent << endl;
     afficher_cartes();
-    cout << "************\n" << endl;
+    cout << "********************\n" << endl;
 }
 
