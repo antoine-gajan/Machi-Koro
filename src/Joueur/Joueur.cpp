@@ -197,5 +197,6 @@ void Joueur::afficher_joueur() const {
     }
     cout << "Argent : " << argent << endl;
     afficher_cartes();
-    cout << "**********\n" << endl;
+    cout << "************\n" << endl;
 }
+
