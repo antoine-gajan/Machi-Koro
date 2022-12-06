@@ -109,8 +109,6 @@ add_executable(src
         cartes/batiment/rouge/SushiBar.cpp
         cartes/batiment/rouge/SushiBar.h
 
-        cartes/batiment/bleu/PetitBateauDePeche.cpp
-        cartes/batiment/bleu/PetitBateauDePeche.h
         cartes/batiment/bleu/Chalutier.cpp
         cartes/batiment/bleu/Chalutier.h
         cartes/batiment/bleu/ChampBle.cpp
@@ -125,6 +123,8 @@ add_executable(src
         cartes/batiment/bleu/Foret.h
         cartes/batiment/bleu/Mine.cpp
         cartes/batiment/bleu/Mine.h
+        cartes/batiment/bleu/PetitBateauDePeche.cpp
+        cartes/batiment/bleu/PetitBateauDePeche.h
         cartes/batiment/bleu/Verger.cpp
         cartes/batiment/bleu/Verger.h
         cartes/batiment/bleu/Vignoble.cpp
@@ -132,6 +132,8 @@ add_executable(src
 
         controleur/EditionDeJeu/EditionDeJeu.cpp
         controleur/EditionDeJeu/EditionDeJeu.h
+        controleur/Shop.cpp
+        controleur/Shop.h
 )
 ```
 
@@ -169,6 +171,7 @@ add_executable(src
 #include "Ferme.h"
 #include "Foret.h"
 #include "Mine.h"
+#include "PetitBateauDePeche.h"
 #include "Verger.h"
 #include "Vignoble.h"
 
@@ -176,8 +179,8 @@ add_executable(src
 #include "Cafe.h"
 #include "ClubPrive.h"
 #include "Pizzeria.h"
+#include "Restaurant.h"
 #include "Restaurant5Etoiles.h"
-#include "RestaurantFamilial.h"
 #include "StandDeHamburger.h"
 #include "SushiBar.h"
 
