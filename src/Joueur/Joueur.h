@@ -6,10 +6,9 @@
 #include "Monument.h"
 #include "Batiment.h"
 
-enum strat_IA {aleatoire, agressive, defensif, neutre, none};
+enum strat_IA {aleatoire, agressive, defensif, none};
 // Agressive : veut construire des batiments de couleur rouge
 // Defensif : veut construire des batiments de couleur bleu
-// Neutre : veut construire des batiments
 // Aleatoire : va construire ou pas un batiment au hasard
 // None : n'est pas une IA
 
@@ -51,6 +50,9 @@ class Joueur {
         void retirer_batiment(Batiment *bat);
 
         void acheter_carte(Carte *carte);
+
+        void afficher_cartes() const;
+        void afficher_joueur() const;
 };
 
 #endif //MACHI_KORO_JOUEUR_H

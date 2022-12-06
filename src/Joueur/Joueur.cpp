@@ -123,7 +123,7 @@ void Joueur::retirer_batiment(Batiment *bat) {
             }
             // Sinon, on décrémente le nombre d'exemplaires
             else{
-                batiment.second --;
+                liste_batiment[couleur][batiment.first]--;
             }
             cout << "Le batiment " << bat->get_nom() << " a ete retire du joueur " << nom << endl;
             return;
@@ -160,4 +160,37 @@ void Joueur::acheter_carte(Carte *carte) {
 void Joueur::set_liste_batiment(map<couleur_bat, map<Batiment*, unsigned int>>& liste_bat){
     /// Mise à jour de la liste des batiments du joueur
     liste_batiment = liste_bat;
+}
+
+
+void Joueur::afficher_cartes() const {
+    cout << "Cartes du joueur " << endl;
+
+    cout << "Monuments : " << endl;
+    for (const auto& monument : liste_monument){
+        if (monument.second){
+            cout << "[X]";
+        }
+        else{
+            cout << "[ ]";
+        }
+
+        cout << " : " << monument.first->get_nom() << endl;
+    }
+
+    cout << "Batiments : " << endl;
+    for (const auto& couleur : liste_batiment){
+        for (const auto& batiment : couleur.second){
+            cout << batiment.second << " : " << batiment.first->get_nom() << endl;
+        }
+    }
+
+    cout << "Fin de la liste des cartes du joueur " << endl;
+}
+
+void Joueur::afficher_joueur() const {
+    cout << "Joueur : " << nom << endl;
+    cout << "Argent : " << argent << endl;
+    afficher_cartes();
+    cout << "Fin de l'affichage joueur\n\n" << endl;
 }

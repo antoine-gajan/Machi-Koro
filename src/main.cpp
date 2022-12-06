@@ -6,21 +6,20 @@ using namespace std;
 #include "Gare.h"
 
 int main() {
+    Boulangerie test = Boulangerie();
 
-    Joueur j1("Joueur 1", {new Gare()}, {new Boulangerie()} , 3, neutre);
-    cout << j1.get_nom() << endl;
-    vector<unsigned int> repartition = j1.get_repartition_argent();
-    for (auto i : repartition) {
-        cout << i << endl;
-    }
-    if (j1.get_est_ia()) {
-        cout << "IA" << endl;
-    } else {
-        cout << "Humain" << endl;
-    }
+    Joueur j1("Joueur 1", {new Gare()}, {&test} , 3, aleatoire);
 
-    j1.ajouter_batiment(new Boulangerie());
+    j1.afficher_joueur();
 
+    j1.ajouter_batiment(&test);
+
+
+    j1.afficher_joueur();
+
+    j1.retirer_batiment(&test);
+
+    j1.afficher_joueur();
 
     return 0;
 }
