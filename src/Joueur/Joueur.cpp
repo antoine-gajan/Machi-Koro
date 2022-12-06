@@ -91,7 +91,7 @@ void Joueur::ajouter_batiment(Batiment *bat) {
             }
             // Sinon, on augmente le nombre d'exemplaires possédés
             else{
-                batiment.second ++;
+                liste_batiment[couleur][batiment.first]++;
                 cout << "Ajout du batiment " << bat->get_nom() << " au joueur " << nom << endl;
                 cout << "Le joueur " << nom << "possede " << batiment.second << " exemplaires du batiment " << bat->get_nom() << endl;
                 return;
