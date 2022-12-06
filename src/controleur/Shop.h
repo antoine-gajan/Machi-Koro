@@ -5,18 +5,24 @@
 #include "Batiment.h"
 
 class Shop{
-private:
-    unsigned int nb_tas_possibles;
-    unsigned int nb_tas_actuel;
-    std::map<Batiment*, unsigned int> contenu;
-    void completer_shop(Batiment* new_bat);
-    Shop(unsigned int nb_tas);
+    private:
+        unsigned int nb_tas_max;
+        unsigned int nb_tas_reel;
+        map<Batiment*, unsigned int> contenu;
+    public:
+        /**** Constructeur et destructeur ****/
+        Shop(unsigned int nb_tas);
+        ~Shop();
 
-public:
-    unsigned int get_nb_tas_possibles() const {return nb_tas_possibles;};
-    const std::map<Batiment*, unsigned int>& get_contenu() {return contenu;};
-    ~Shop() = default;
-    Shop() = default;
+        /**** Getters ****/
+        unsigned int get_nb_tas_max() const {return nb_tas_max;};
+        unsigned int get_nb_tas_reel() const {return nb_tas_reel;};
+        const std::map<Batiment*, unsigned int>& get_contenu() {return contenu;};
+
+        /**** Méthodes ****/
+        void completer_shop(Batiment* new_bat);
+        void affiche_shop();
+        Batiment *acheter_batiment(Batiment* bat);
 };
 
 #endif //MACHI_KORO_SHOP_H

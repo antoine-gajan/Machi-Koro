@@ -1,21 +1,31 @@
 #include <iostream>
 using namespace std;
 
-#include "Joueur.h"
-#include "Boulangerie.h"
-#include "Gare.h"
+#include "EditionDeJeu.h"
+#include "Shop.h"
+#include <random>
 
 int main() {
-    Boulangerie test = Boulangerie();
-    Gare test2 = Gare();
+    EditionDeJeu edj("Standard");
 
-    Joueur j1("Joueur 1", {&test2}, {&test} , 3, aleatoire);
+    auto bat = edj.get_batiment();
+    vector<Batiment*> batiments;
 
-    j1.afficher_joueur();
+    for (auto it = bat.begin(); it != bat.end(); it++) {
+        for (unsigned int i = 0; i < it->second; i++) {
+            batiments.push_back(it->first);
+        }
+    }
 
-    j1.activer_monument(&test2);
-    j1.retirer_batiment(&test);
-    j1.afficher_joueur();
+    random_shuffle(batiments.begin(), batiments.end());
 
+    Shop shop(4);
+    shop.affiche_shop();
+    while (shop.get_nb_tas_reel() < shop.get_nb_tas_max() && !batiments.empty()) {
+        shop.completer_shop(batiments.back());
+        batiments.pop_back();
+    }
+
+    shop.affiche_shop();
     return 0;
 }

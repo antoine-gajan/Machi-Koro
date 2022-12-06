@@ -127,4 +127,6 @@ add_executable(src
 
         controleur/EditionDeJeu/EditionDeJeu.cpp
         controleur/EditionDeJeu/EditionDeJeu.h
+        controleur/Shop.cpp
+        controleur/Shop.h
         )

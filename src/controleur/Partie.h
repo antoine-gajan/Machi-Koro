@@ -21,7 +21,7 @@ private:
         ~Singleton() {delete instance; instance = nullptr;};
     };
     static Singleton singleton;
-    Partie(vector<Joueur*> liste_joueurs, vector<EditionDeJeu*> editions);
+    Partie();
     ~Partie() = default;
 
 
