@@ -27,11 +27,14 @@ EditionDeJeu::EditionDeJeu(const string& nom_edition) : nom(nom_edition) {
 
         // Liste des batiments spécifiques à Deluxe
         // Batiments violets
-        batiment.insert(pair<Batiment*, unsigned int>(new CentreAffaires(), 2));
-        batiment.insert(pair<Batiment*, unsigned int>(new ChaineTelevision(), 2));
-        batiment.insert(pair<Batiment*, unsigned int>(new Stade(), 2));
-        batiment.insert(pair<Batiment*, unsigned int>(new CentreImpots(), 2));
-        batiment.insert(pair<Batiment*, unsigned int>(new MaisonEdition(), 2));
+        batiment.insert(pair<Batiment*, unsigned int>(new CentreAffaires(), 5));
+        batiment.insert(pair<Batiment*, unsigned int>(new ChaineTelevision(), 5));
+        batiment.insert(pair<Batiment*, unsigned int>(new Stade(), 5));
+        batiment.insert(pair<Batiment*, unsigned int>(new CentreImpots(), 5));
+        batiment.insert(pair<Batiment*, unsigned int>(new MaisonEdition(), 5));
+        batiment.insert(pair<Batiment*, unsigned int>(new Startup(), 5));
+        batiment.insert(pair<Batiment*, unsigned int>(new Arboretum(), 5));
+        batiment.insert(pair<Batiment*, unsigned int>(new EntrepriseRenovation(), 5));
 
         // Batiments verts
         batiment.insert(pair<Batiment*, unsigned int>(new Boulangerie(), 5));
@@ -43,6 +46,12 @@ EditionDeJeu::EditionDeJeu(const string& nom_edition) : nom(nom_edition) {
         batiment.insert(pair<Batiment*, unsigned int>(new MarcheDeFruitsEtLegumes(), 5));
         batiment.insert(pair<Batiment*, unsigned int>(new MoonsterSoda(), 5));
         batiment.insert(pair<Batiment*, unsigned int>(new Superette(), 5));
+        batiment.insert(pair<Batiment*, unsigned int>(new Vignoble, 5));
+        batiment.insert(pair<Batiment*, unsigned int>(new EntrepriseRenovation(), 5));
+        batiment.insert(pair<Batiment*, unsigned int>(new Fromagerie(), 5));
+        batiment.insert(pair<Batiment*, unsigned int>(new Fleuriste(), 5));
+
+
 
         // Batiments bleus
         batiment.insert(pair<Batiment*, unsigned int>(new Chalutier(), 5));
@@ -51,7 +60,9 @@ EditionDeJeu::EditionDeJeu(const string& nom_edition) : nom(nom_edition) {
         batiment.insert(pair<Batiment*, unsigned int>(new Foret(), 5));
         batiment.insert(pair<Batiment*, unsigned int>(new Mine(), 5));
         batiment.insert(pair<Batiment*, unsigned int>(new Verger(), 5));
-        batiment.insert(pair<Batiment*, unsigned int>(new Vignoble(), 5));
+        batiment.insert(pair<Batiment*, unsigned int>(new ChampMais(), 5));
+        batiment.insert(pair<Batiment*, unsigned int>(new ChampFleur(), 5));
+        batiment.insert(pair<Batiment*, unsigned int>(new PetitBateauDePeche(), 5));
 
         // Batiments rouges
         batiment.insert(pair<Batiment*, unsigned int>(new Cafe(), 5));
@@ -59,6 +70,8 @@ EditionDeJeu::EditionDeJeu(const string& nom_edition) : nom(nom_edition) {
         batiment.insert(pair<Batiment*, unsigned int>(new Pizzeria(), 5));
         batiment.insert(pair<Batiment*, unsigned int>(new Restaurant5Etoiles(), 5));
         batiment.insert(pair<Batiment*, unsigned int>(new Restaurant(), 5));
+        batiment.insert(pair<Batiment*, unsigned int>(new SushiBar(), 5));
+        batiment.insert(pair<Batiment*, unsigned int>(new StandDeHamburger(), 5));
     }
     else if (nom_edition == "Standard") {
         /// Constructeur de Standard
@@ -119,10 +132,10 @@ EditionDeJeu::EditionDeJeu(const string& nom_edition) : nom(nom_edition) {
         batiment.insert(pair<Batiment*, unsigned int>(new MoonsterSoda(), 6));
         batiment.insert(pair<Batiment*, unsigned int>(new Epicerie(), 6));
         batiment.insert(pair<Batiment*, unsigned int>(new EntrepriseDeDemenagement(), 6));
+        batiment.insert(pair<Batiment*, unsigned int>(new Vignoble(), 6));
 
         // Batiments bleus
         batiment.insert(pair<Batiment*, unsigned int>(new ChampMais(), 6));
-        batiment.insert(pair<Batiment*, unsigned int>(new Vignoble(), 6));
 
         // Batiments rouges
         batiment.insert(pair<Batiment*, unsigned int>(new ClubPrive(), 6));
@@ -158,7 +171,6 @@ EditionDeJeu::EditionDeJeu(const string& nom_edition) : nom(nom_edition) {
         batiment.insert(pair<Batiment*, unsigned int>(new StandDeHamburger(), 6));
         batiment.insert(pair<Batiment*, unsigned int>(new SushiBar(), 6));
         batiment.insert(pair<Batiment*, unsigned int>(new Pizzeria(), 6));
-        batiment.insert(pair<Batiment*, unsigned int>(new Boulangerie(), 1));
 
         // Batiments bleus
         batiment.insert(pair<Batiment*, unsigned int>(new PetitBateauDePeche(), 6));
@@ -167,7 +179,8 @@ EditionDeJeu::EditionDeJeu(const string& nom_edition) : nom(nom_edition) {
         batiment.insert(pair<Batiment*, unsigned int>(new ChampBle(), 1));
 
         // Batiments verts
-        batiment.insert(pair<Batiment*, unsigned int>(new Superette(), 6));
+        batiment.insert(pair<Batiment*, unsigned int>(new Boulangerie(), 1));
+        batiment.insert(pair<Batiment*, unsigned int>(new Epicerie(), 6));
         batiment.insert(pair<Batiment*, unsigned int>(new Fleuriste(), 6));
         batiment.insert(pair<Batiment*, unsigned int>(new MoonsterSoda(), 6));
     }
