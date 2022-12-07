@@ -25,3 +25,4 @@ Batiment* Pioche::getCarte() {
         return nullptr;
     }
 }
+

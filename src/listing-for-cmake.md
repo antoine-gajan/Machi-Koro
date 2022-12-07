@@ -134,6 +134,8 @@ add_executable(src
         controleur/EditionDeJeu/EditionDeJeu.h
         controleur/Shop.cpp
         controleur/Shop.h
+        controleur/Pioche.cpp
+        controleur/Pioche.h
 )
 ```
 
@@ -196,6 +198,8 @@ add_executable(src
 
 /// Importation des controleurs
 #include "EditionDeJeu.h"
+#include "Pioche.h"
+#include "Shop.h"
 
 /// Importation des joueurs
 )
