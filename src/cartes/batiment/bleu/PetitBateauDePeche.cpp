@@ -1,6 +1,6 @@
 #include "PetitBateauDePeche.h"
 PetitBateauDePeche::PetitBateauDePeche() :
-        Batiment("Petit bateau de peche",
+        Batiment("PetitBateauDePeche",
                  2,
                  "Si vous avez le port, recevez 3 pieces",
                  "../../assets/batiments/bleu/Petit-bateau-peche.jpg",

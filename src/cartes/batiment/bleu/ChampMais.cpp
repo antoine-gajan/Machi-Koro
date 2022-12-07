@@ -1,7 +1,7 @@
 #include "ChampMais.h"
 
 ChampMais::ChampMais() :
-    Batiment("Champs de mais",
+    Batiment("ChampMais",
          2,
         "Recevez une piece de la banque si vous avez moins de deux monuments construits",
         "../../assets/batiments/bleu/ChampMais.jpg",

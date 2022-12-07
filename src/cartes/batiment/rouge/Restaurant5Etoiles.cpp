@@ -1,7 +1,7 @@
 #include "Restaurant5Etoiles.h"
 
 Restaurant5Etoiles::Restaurant5Etoiles() :
-            Batiment("Restaurant 5 etoiles",
+            Batiment("Restaurant5Etoiles",
                      3 ,
                      "Recevez 5 pieces du joueur qui a lance les des si celui-ci possede au moins deux monuments construits.",
                      "../../assets/batiments/Rouge/Restaurant-5-etoiles.jpg",

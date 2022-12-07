@@ -1,7 +1,7 @@
 #include "CentreAffaires.h"
 
 CentreAffaires::CentreAffaires():
-    Batiment("Centre d'Affaires",
+    Batiment("CentreAffaires",
              8,
              "Vous pouvez echanger avec le joueur de votre choix un etablissement qui n'est pas de type special",
              "../../../assets/batiments/Violet/Centre-d-'affaires.jpg",

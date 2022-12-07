@@ -1,7 +1,7 @@
 #include "ChampFleur.h"
 
 ChampFleur::ChampFleur() :
-    Batiment("Champ de fleurs",
+    Batiment("ChampFleur",
          2,
         "Recevez une piece de la banque",
         "../../assets/batiments/bleu/ChampFleur.jpg",

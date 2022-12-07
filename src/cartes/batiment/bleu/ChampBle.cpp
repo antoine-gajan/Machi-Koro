@@ -1,7 +1,7 @@
 #include "ChampBle.h"
 
 ChampBle::ChampBle() :
-    Batiment("Champ de ble",
+    Batiment("ChampBle",
         1,
         "Recevez une piece de la banque",
         "../../assets/batiments/bleu/Champs-ble.jpg",

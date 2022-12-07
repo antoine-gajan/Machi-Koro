@@ -1,7 +1,7 @@
 #include "StandDeHamburger.h"
 
 StandDeHamburger::StandDeHamburger() :
-            Batiment("Stand de hamburger",
+            Batiment("StandDeHamburger",
                      1 ,
                      "Recevez 1 piece du joueur qui a lance les des.",
                      "../../assets/batiments/Rouge/Monster-burger.jpg",

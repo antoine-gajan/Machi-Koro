@@ -2,7 +2,7 @@
 
 
 CentreImpots::CentreImpots():
-        Batiment("Centre des Impots",
+        Batiment("CentreImpots",
                  4,
                  "Recevez la moitie (arrondie a l'inferieur) des pieces de chaque joueur qui en possede 10 ou plus.",
                  "../../../assets/batiments/Violet/Centre-des-impots.jpg",

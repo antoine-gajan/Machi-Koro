@@ -4,7 +4,7 @@
 using namespace std;
 
 ChaineTelevision::ChaineTelevision():
-    Batiment("Chaine de television",
+    Batiment("ChaineTelevision",
              7,
              "Recevez 5 pieces du joueur de votre choix",
              "../../../assets/batiments/Violet/Chaine-de-television.jpg",
