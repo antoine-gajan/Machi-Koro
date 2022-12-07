@@ -184,6 +184,9 @@ EditionDeJeu::EditionDeJeu(const string& nom_edition) : nom(nom_edition) {
         batiment.insert(pair<Batiment*, unsigned int>(new Fleuriste(), 6));
         batiment.insert(pair<Batiment*, unsigned int>(new MoonsterSoda(), 6));
     }
+    else{
+        cout<<"Ce nom d edition est invalide"<<endl;
+    }
 }
 
 vector<Batiment*> EditionDeJeu::get_starter() const {
