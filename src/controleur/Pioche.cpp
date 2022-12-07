@@ -12,9 +12,9 @@ Pioche::Pioche(const vector<Batiment*>& batiments) {
 Batiment* Pioche::getCarte() {
     /// Fonction qui retourne la première carte de la pioche
     // Si la pioche est non vide
-    if (contenu.size() > 0){
+    if (!contenu.empty()){
         // Récupère la tête et on la renvoie
-        Batiment * bat = contenu.top();
+        Batiment *bat = contenu.top();
         contenu.pop();
         return bat;
     }
