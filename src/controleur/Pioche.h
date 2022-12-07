@@ -18,8 +18,6 @@ class Pioche {
         Pioche() = default;
         ~Pioche() = default;
         Batiment* getCarte(); // retourne la carte du dessus de la pioche
-        void melanger(); // mélange la pioche
-        bool est_vide() {return contenu.empty();}; // vérifie si la pioche est vide
 };
 
 #endif //MACHI_KORO_PIOCHE_H
