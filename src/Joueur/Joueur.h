@@ -49,8 +49,6 @@ class Joueur {
         void ajouter_batiment(Batiment *bat);
         void retirer_batiment(Batiment *bat);
 
-        void acheter_carte(Carte *carte);
-
         void afficher_cartes() const;
         void afficher_joueur() const;
 };
