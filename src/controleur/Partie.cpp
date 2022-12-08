@@ -251,6 +251,26 @@ void Partie::acheter_monu(Joueur *joueur_actuel) {
     }
 }
 
+void Partie::echanger_argent(Joueur* joueur1,Joueur* joueur2){
+    //méthode qui permet d'échanger une somme d'argent entre deux joueurs
+    unsigned int sens;
+    unsigned int somme;
+
+    cout<<"Dans quel sens souhaitez faire l'echange (1) pour "<<joueur1->get_nom()<<" vers "<<joueur2->get_nom()<<" ou (2) pour "<<joueur2->get_nom()<<" vers "<< joueur1->get_nom()<<endl;
+    cin>>sens;
+    cout<<"Quelle somme souhaitez vous transferer?"<<endl;
+    cin>>somme;
+    if(sens == 1){
+        joueur1->set_argent(max((unsigned int)0,joueur1->get_argent() - somme));
+        joueur2->set_argent(joueur2->get_argent() + somme);
+    }else if(sens == 2){
+        joueur2->set_argent(max((unsigned int)0,joueur2->get_argent() - somme));
+        joueur1->set_argent(joueur1->get_argent() + somme);
+    }else{
+        cout<<"On ne peut choisir que (1) ou (2)"<<endl;
+    }
+}
+
 bool Partie::est_gagnant(Joueur *joueur) {
     ///Fonction pour vérifier si un joueur a gagné
     return joueur->get_monument_jouables().size() >= nb_monuments_win;

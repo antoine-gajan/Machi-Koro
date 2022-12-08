@@ -49,6 +49,7 @@ public:
     void acheter_monu(Joueur* joueur_actuel);//sous fonction appelée dans acheter_carte
     void acheter_bat(Joueur* joueur_actuel);//sous fonction appelée dans acheter_carte
 
+    void echanger_argent(Joueur* joueur1,Joueur* joueur2);
 };
 
 #endif //MACHI_KORO_PARTIE_H
