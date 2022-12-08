@@ -22,7 +22,7 @@ Batiment* possede_batiment(Joueur *joueur,string nom_bat);
 
 // idem mais pour monument
 Monument* selectionner_monument(Joueur *joueur);
-Monument* possede_monument(Joueur *joueur,string nom_monu);
+Monument* possede_monument(Joueur *joueur,string nom_mon);
 
 // Fonction qui retourne une liste des monuments non violets possédé par un joueur
 map<Batiment*, unsigned int> get_liste_bat_non_special(Joueur* j);

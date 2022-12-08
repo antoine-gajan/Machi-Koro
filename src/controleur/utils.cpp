@@ -169,6 +169,8 @@ Batiment* possede_batiment(Joueur *joueur,string nom_bat){
             }
         }
     }
+    // Sinon, retourne nullptr
+    return nullptr;
 }
 
 Monument* selectionner_monument(Joueur *joueur){
@@ -201,24 +203,16 @@ Monument* selectionner_monument(Joueur *joueur){
     return monu_a_retourner;
 }
 
-Monument* possede_monument(Joueur *joueur,string nom_monu){
-    auto it = joueur->get_liste_monument().begin();
-    Monument* monu_a_retourner;
-
-    //parcours des monuments du joueur à la recherche du monument à trouver
-    it = joueur->get_liste_monument().begin();
-    while(it!=joueur->get_liste_monument().end() && it->first->get_nom()!=nom_monu){
-        it++;
+Monument* possede_monument(Joueur *joueur,string nom_mon){
+    auto liste_mon = joueur->get_liste_monument();
+    // pour chaque monument dans la liste de monuments du joueur
+    for (auto mon : liste_mon) {
+        if (mon.first->get_nom() == nom_mon) {
+            return mon.first;
+        }
     }
-
-    //cas où erreur (monument entré pas dans la liste)
-    if(it == joueur->get_liste_monument().end()) {
-        monu_a_retourner = nullptr;
-    }else{
-        monu_a_retourner = it->first;
-    }
-
-    return monu_a_retourner;
+    // Sinon, retourne nullptr
+    return nullptr;
 }
 
 map<Batiment*, unsigned int> get_liste_bat_non_special(Joueur* j){
@@ -242,5 +236,24 @@ void swap_bat_players(Joueur *j1, Joueur *j2, Batiment* bat1, Batiment* bat2){
     // Gestion du batiment 1 dans l'échange
     j1->retirer_batiment(bat1);
     j2->ajouter_batiment(bat1);
-
 }
+
+void don_argent(Joueur* j1, unsigned int argent, Joueur* j2){
+    /// Don d'argent du joueur j1 au joueur j2
+    if (j1->get_argent() - argent >= 0){
+        j1->set_argent(j1->get_argent() - argent);
+        j2->set_argent(j2->get_argent() + argent);
+    }
+    else{
+        cout << "Impossible, le joueur " << j1->get_nom() << " n'a pas assez d'argent." << endl;
+    }
+}
+
+void echange_argent(Joueur* j1, unsigned int arg1, Joueur* j2, unsigned int arg2){
+    /// Echange d'argent entre j1 et j2
+    // Don d'arg1 de j1 à j2
+    don_argent(j1, arg1, j2);
+    // Don d'arg2 de j2 à j1
+    don_argent(j2, arg2, j1);
+}
+
