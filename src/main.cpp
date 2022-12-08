@@ -7,43 +7,32 @@ using namespace std;
 #include "Pioche.h"
 
 int main() {
-    EditionDeJeu edj("Standard");
 
-    auto bat = edj.get_batiment();
+
+    auto * edj = new EditionDeJeu("Standard");
+
+    auto bat = edj->get_batiment();
     vector<Batiment*> batiments;
 
     for (auto it = bat.begin(); it != bat.end(); it++) {
         for (unsigned int i = 0; i < it->second; i++) {
-            batiments.push_back(it->first);
+            batiments.push_back(it->first->clone());
         }
     }
 
-    // on mélange la liste des batiments
-    // Obtention d'un seed aléatoire
-    random_device rd;
-    mt19937 g(rd());
-    // Mélange des batiments avec le seed
-    shuffle(batiments.begin(), batiments.end(), g);
 
-    // Création de la pioche
-    Pioche pioche(batiments);
+    cout << "Taille du map de edj : " << edj->get_batiment().size() << endl;
 
-    Batiment * carte = pioche.getCarte();
-    int i = 1;
-    while (carte != nullptr) {
-        cout << "Carte numero " << i << " tiree : " << carte->get_nom() << endl;
-        carte = pioche.getCarte(); // affichera "la pioche est vide" à la fin
-        i++;
-    }
+    cout << "Taille du vector batiment contenant les clones : " << batiments.size() << endl;
 
-/*
-    Shop shop(4);
-    shop.affiche_shop();
-    while (shop.get_nb_tas_reel() < shop.get_nb_tas_max() && !batiments.empty()) {
-        shop.completer_shop(batiments.back());
-        batiments.pop_back();
-    }
+    cout << "Suppression de edj et donc des cartes : " << endl;
+    delete edj;
 
-    shop.affiche_shop();*/
+    //cout << edj->get_batiment().size() << endl; // Erreur, n'existe plus ou pointe vers un espace mémoire non alloué
+
+    cout << "Taille du vector batiment contenant les clones : " << batiments.size() << endl;
+    cout << batiments.size() << endl; // OK, batiments est toujours alloué
+
+
     return 0;
 }
