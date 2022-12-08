@@ -10,6 +10,8 @@
 class MoonsterSoda : public Batiment {
 public:
     MoonsterSoda();
+    MoonsterSoda(const MoonsterSoda& moonsterSoda) = default;
+    Batiment* clone() const override {return new MoonsterSoda(*this);};
     void declencher_effet() const;
 };
 

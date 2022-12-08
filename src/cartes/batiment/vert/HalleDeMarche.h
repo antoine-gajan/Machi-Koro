@@ -10,6 +10,8 @@
 class HalleDeMarche : public Batiment {
 public:
     HalleDeMarche();
+    HalleDeMarche(const HalleDeMarche& halleDeMarche) = default;
+    Batiment* clone() const override {return new HalleDeMarche(*this);};
     void declencher_effet() const;
 };
 

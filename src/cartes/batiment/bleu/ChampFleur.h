@@ -9,6 +9,8 @@
 class ChampFleur : public Batiment{
 public:
     ChampFleur();
+    ChampFleur(const ChampFleur& champFleur) = default;
+    Batiment* clone() const override {return new ChampFleur(*this);};
     void declencher_effet() const;
 };
 

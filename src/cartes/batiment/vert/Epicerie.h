@@ -10,6 +10,8 @@
 class Epicerie : public Batiment {
 public:
     Epicerie();
+    Epicerie(const Epicerie& epicerie) = default;
+    Batiment* clone() const override {return new Epicerie(*this);};
     void declencher_effet() const;
 
 };

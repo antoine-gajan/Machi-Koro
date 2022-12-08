@@ -11,6 +11,8 @@
 class Chalutier : public Batiment{
 public:
     Chalutier();
+    Chalutier(const Chalutier& chalutier) = default;
+    Batiment* clone() const override {return new Chalutier(*this);};
     void declencher_effet() const;
 };
 #endif //MACHI_KORO_MASTER_CHALUTIER_H

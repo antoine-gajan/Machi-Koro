@@ -9,7 +9,6 @@ Boulangerie::Boulangerie()
                    {2, 3},
                    "commerce") {}
 
-
 void Boulangerie::declencher_effet() const {
     cout << "Declenchement de l'effet de la carte Boulangerie" << endl;
     /*

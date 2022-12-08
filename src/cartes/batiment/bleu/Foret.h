@@ -9,6 +9,8 @@
 class Foret : public Batiment{
 public:
     Foret();
+    Foret(const Foret& foret) = default;
+    Batiment* clone() const override {return new Foret(*this);};
     void declencher_effet() const;
 };
 

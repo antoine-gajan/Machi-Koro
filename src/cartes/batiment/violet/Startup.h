@@ -6,6 +6,8 @@
 class Startup : public Batiment {
 public:
     Startup();
+    Startup(const Startup& startup) = default;
+    Batiment* clone() const override {return new Startup(*this);};
     void declencher_effet() const;
 };
 

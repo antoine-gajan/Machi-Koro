@@ -8,6 +8,8 @@ class TourRadio : public Monument {
         //*** Constructeur et destructeur ***//
         TourRadio();
         ~TourRadio()=default;
+        TourRadio(const TourRadio& tourRadio) = default;
+        TourRadio* clone() const override {return new TourRadio(*this);};
 
         //*** Methodes ***//
         void declencher_effet() const;

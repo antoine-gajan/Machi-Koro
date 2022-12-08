@@ -11,6 +11,8 @@
 class PetitBateauDePeche : public Batiment{
 public:
     PetitBateauDePeche();
+    PetitBateauDePeche(const PetitBateauDePeche& petitBateauDePeche) = default;
+    Batiment* clone() const override {return new PetitBateauDePeche(*this);};
     void declencher_effet() const;
 };
 

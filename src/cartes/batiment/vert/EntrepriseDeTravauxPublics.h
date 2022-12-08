@@ -11,6 +11,8 @@
 class EntrepriseDeTravauxPublics : public Batiment {
 public:
     EntrepriseDeTravauxPublics();
+    EntrepriseDeTravauxPublics(const EntrepriseDeTravauxPublics& entrepriseDeTravauxPublics) = default;
+    Batiment* clone() const override {return new EntrepriseDeTravauxPublics(*this);};
     void declencher_effet() const;
 };
 

@@ -6,6 +6,8 @@
 class Pizzeria : public Batiment {
 public:
     Pizzeria();
+    Pizzeria(const Pizzeria& pizzeria) = default;
+    Batiment* clone() const override {return new Pizzeria(*this);};
     void declencher_effet() const;
   
 };

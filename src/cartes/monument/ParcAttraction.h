@@ -8,6 +8,8 @@ public:
     //*** Constructeur et destructeur ***//
     ParcAttraction();
     ~ParcAttraction()=default;
+    ParcAttraction(const ParcAttraction &parcAttraction) = default;
+    ParcAttraction* clone() const override {return new ParcAttraction(*this);};
 
     //*** Methodes ***//
     void declencher_effet() const;

@@ -10,6 +10,8 @@
 class Superette : public Batiment {
 public:
     Superette();
+    Superette(const Superette& superette) = default;
+    Batiment* clone() const override {return new Superette(*this);};
     void declencher_effet() const;
 };
 

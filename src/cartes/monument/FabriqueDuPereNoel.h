@@ -8,6 +8,8 @@ public :
     //*** Constructeur et destructeur ***//
     FabriqueDuPereNoel();
     ~FabriqueDuPereNoel()=default;
+    FabriqueDuPereNoel(const FabriqueDuPereNoel &fabriqueDuPereNoel) = default;
+    FabriqueDuPereNoel* clone() const override {return new FabriqueDuPereNoel(*this);};
 
     //*** Methodes ***//
     void declencher_effet() const;

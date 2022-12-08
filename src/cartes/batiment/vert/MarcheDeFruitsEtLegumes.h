@@ -10,6 +10,8 @@
 class MarcheDeFruitsEtLegumes : public Batiment {
 public:
     MarcheDeFruitsEtLegumes();
+    MarcheDeFruitsEtLegumes(const MarcheDeFruitsEtLegumes& marcheDeFruitsEtLegumes) = default;
+    Batiment* clone() const override {return new MarcheDeFruitsEtLegumes(*this);};
     void declencher_effet() const;
 };
 

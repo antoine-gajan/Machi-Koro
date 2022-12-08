@@ -8,6 +8,8 @@ class Aeroport : public Monument {
         //*** Constructeur et destructeur ***//
         Aeroport();
         ~Aeroport()=default;
+        Aeroport(const Aeroport& aeroport) = default;
+        Aeroport* clone() const override {return new Aeroport(*this);};
 
         //*** Methodes ***//
         void declencher_effet() const;

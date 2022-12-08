@@ -13,6 +13,7 @@ class Monument : public Carte{
         //*** Constructeur et destructeur ***//
         Monument(Moment_Effet moment, const std::string& nom, unsigned int prix, const std::string& description_effet, const std::string& path_image);
         ~Monument()=default;
+        virtual Monument* clone() const = 0;
 
         //*** GETTER ***//
         std::string get_type() const {return "Monument";};

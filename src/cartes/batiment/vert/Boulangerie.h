@@ -9,6 +9,8 @@
 class Boulangerie : public Batiment {
 public:
     Boulangerie();
+    Boulangerie(const Boulangerie& boulangerie) = default;
+    Batiment* clone() const override {return new Boulangerie(*this);};
     void declencher_effet() const;
 };
 

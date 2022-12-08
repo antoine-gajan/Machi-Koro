@@ -6,6 +6,8 @@
 class CentreImpots : public Batiment {
 public:
     CentreImpots();
+    CentreImpots(const CentreImpots& centreImpots) = default;
+    Batiment* clone() const override {return new CentreImpots(*this);};
     void declencher_effet() const;
 };
 

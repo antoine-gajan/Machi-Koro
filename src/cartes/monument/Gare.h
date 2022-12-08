@@ -8,6 +8,8 @@ public :
     //*** Constructeur et destructeur ***//
     Gare();
     ~Gare()=default;
+    Gare(const Gare &gare) = default;
+    Gare* clone() const override {return new Gare(*this);};
 
     //*** Methodes ***//
     void declencher_effet() const;

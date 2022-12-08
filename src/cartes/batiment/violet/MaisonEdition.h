@@ -6,6 +6,8 @@
 class MaisonEdition : public Batiment {
 public:
     MaisonEdition();
+    MaisonEdition(const MaisonEdition& maisonEdition) = default;
+    Batiment* clone() const override {return new MaisonEdition(*this);};
     void declencher_effet() const;
 };
 

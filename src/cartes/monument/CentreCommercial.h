@@ -8,6 +8,8 @@ class CentreCommercial : public Monument {
         //*** Constructeur et destructeur ***//
         CentreCommercial();
         ~CentreCommercial()=default;
+        CentreCommercial(const CentreCommercial& centreCommercial) = default;
+        CentreCommercial* clone() const override {return new CentreCommercial(*this);};
 
         //*** Methodes ***//
         void declencher_effet() const;

@@ -9,6 +9,8 @@
 class Ferme : public Batiment{
 public:
     Ferme();
+    Ferme(const Ferme& ferme) = default;
+    Batiment* clone() const override {return new Ferme(*this);};
     void declencher_effet() const;
 };
 

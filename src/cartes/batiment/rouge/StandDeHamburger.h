@@ -6,6 +6,8 @@
 class StandDeHamburger : public Batiment {
 public:
     StandDeHamburger();
+    StandDeHamburger(const StandDeHamburger& standDeHamburger) = default;
+    Batiment* clone() const override {return new StandDeHamburger(*this);};
     void declencher_effet() const;
   
 };

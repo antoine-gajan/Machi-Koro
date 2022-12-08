@@ -6,6 +6,8 @@
 class Arboretum : public Batiment {
 public:
     Arboretum();
+    Arboretum(const Arboretum& arboretum) = default;
+    Batiment* clone() const override {return new Arboretum(*this);};
     void declencher_effet() const;
 };
 

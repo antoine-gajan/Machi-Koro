@@ -8,6 +8,8 @@
 class CentreAffaires : public Batiment {
 public:
     CentreAffaires();
+    CentreAffaires(const CentreAffaires& centreAffaires) = default;
+    Batiment* clone() const override {return new CentreAffaires(*this);};
     void declencher_effet() const;
 };
 

@@ -8,6 +8,8 @@ class Port : public Monument {
         //*** Constructeur et destructeur ***//
         Port();
         ~Port()=default;
+        Port(const Port& port) = default;
+        Port* clone() const override {return new Port(*this);};
 
         //*** Methodes ***//
         void declencher_effet() const;

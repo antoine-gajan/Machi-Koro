@@ -7,6 +7,8 @@
 class ChaineTelevision : public Batiment {
 public:
     ChaineTelevision();
+    ChaineTelevision(const ChaineTelevision& chaineTelevision) = default;
+    Batiment* clone() const override {return new ChaineTelevision(*this);};
     void declencher_effet() const;
 };
 

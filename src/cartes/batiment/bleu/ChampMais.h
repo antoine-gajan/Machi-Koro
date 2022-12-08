@@ -9,6 +9,8 @@
 class ChampMais : public Batiment{
 public:
     ChampMais();
+    ChampMais(const ChampMais& champMais) = default;
+    Batiment* clone() const override {return new ChampMais(*this);};
     void declencher_effet() const;
 };
 
