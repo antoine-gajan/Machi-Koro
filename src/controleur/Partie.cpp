@@ -1,11 +1,107 @@
 #include "Partie.h"
 
-Partie::Partie(vector<EditionDeJeu *> editions) {
+Partie::Partie(vector<EditionDeJeu *> editions) : nb_monuments_win(0), joueur_actuel(0) {
     ///Constructeur de Partie
 
     //Initialisation des attributs
+    unsigned int max_joueurs = 0;
 
+    vector<Batiment*> starter_bat;
 
+    for(auto edition : editions){
+        if(edition->get_nb_joueurs_max() > max_joueurs){
+            max_joueurs = edition->get_nb_joueurs_max();
+        }
+        if(edition->get_nb_monuments_win() > nb_monuments_win){
+            nb_monuments_win = edition->get_nb_monuments_win();
+        }
+        list_monuments.insert(list_monuments.end(), edition->get_monument().begin(), edition->get_monument().end());
+        starter_bat.insert(starter_bat.end(), edition->get_starter().begin(), edition->get_starter().end());
+
+        ///TODO : ajouter les batiments de l'edition dans list_batiments
+    }
+
+    for (unsigned int i = 0; i < max_joueurs; i++) {
+        if (i > 2) {
+            cout << "Voulez-vous ajouter un joueur ? (0 : non, 1 : oui)" << endl;
+            int choix;
+            cin >> choix;
+            if (choix == 0) {
+                break;
+            }
+        }
+
+        cout << "Nom du joueur " << i + 1 << " : " ;
+        string nom;
+        cin >> nom;
+        cout << "\nLe jouer est-il un humain ? (1 : oui, 0 : non)  :";
+        bool humain;
+        cin >> humain;
+        if (humain) {
+            tab_joueurs.push_back(new Joueur(nom, list_monuments, starter_bat, 3));
+        } else {
+            cout << "\nQuelle est la strategie du joueur ? (1 : aleatoire, 2 : agressive, 3 : defensif) :";
+            unsigned int strategie;
+            cin >> strategie;
+            while (strategie < 1 || strategie > 3) {
+                cout << "\nQuelle est la strategie du joueur ? (1 : aleatoire, 2 : agressive, 3 : defensif) :";
+                cin >> strategie;
+            }
+            switch (strategie) {
+                case 1:
+                    tab_joueurs.push_back(new Joueur(nom, list_monuments, starter_bat, 3, aleatoire));
+                    break;
+                case 2:
+                    tab_joueurs.push_back(new Joueur(nom, list_monuments, starter_bat, 3, agressive));
+                    break;
+                case 3:
+                    tab_joueurs.push_back(new Joueur(nom, list_monuments, starter_bat, 3, defensif));
+                    break;
+            }
+        }
+    }
+
+    ///Todo : initialiser shop et pioche
+    pioche = new Pioche(map_to_vector(list_batiments));
+
+    cout << "Quel est le format de la partie ? (1 : standard, 2 : extended) :" << endl;
+    cout <<"1 : standard :" << endl;
+    cout << "\tAvec ce format vous pouvez choisir le nombre de tas de cartes que vous voulez." << endl;
+    cout << "2 : extended :" << endl;
+    cout << "\tAvec ce format toutes les cartes sont dans le shop." << endl;
+    cout << "Votre choix : ";
+    unsigned int format;
+    cin >> format;
+    unsigned int nb_tas;
+
+    if (format == 1) {
+        cout << "Combien de tas voulez-vous ? (9 < tas < " << list_batiments.size() - 1 << ") :";
+        cin >> nb_tas;
+        while (nb_tas < 9 || nb_tas > list_batiments.size() - 1) {
+            cout << "Combien de tas voulez-vous ? (9 < tas < " << list_batiments.size() - 1 << ") :";
+            cin >> nb_tas;
+        }
+    }
+    else
+        nb_tas = list_batiments.size();
+
+    shop = new Shop(nb_tas);
+
+    while (!pioche->est_vide() && shop->get_nb_tas_reel() < shop->get_nb_tas_max()){
+        shop->completer_shop(pioche->get_carte());
+    }
+
+    cout << "Construction de la partie terminée" << endl;
+}
+
+vector<Batiment*> Partie::map_to_vector(map<Batiment*, unsigned int> map_batiments){
+    vector<Batiment*> vector_batiments;
+    for(auto batiment : map_batiments){
+        for(unsigned int i = 0; i < batiment.second; i++){
+            vector_batiments.push_back(batiment.first);
+        }
+    }
+    return vector_batiments;
 }
 
 void Partie::jouer_partie() {

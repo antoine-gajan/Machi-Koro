@@ -13,10 +13,10 @@ private:
 
     vector<Monument*> list_monuments;
     vector<Joueur*> tab_joueurs;
-    vector<EditionDeJeu*> editions;
 
     unsigned int joueur_actuel;
     unsigned int nb_monuments_win;
+
     Shop* shop;
     Pioche* pioche;
 
@@ -28,7 +28,7 @@ private:
     };
     static Singleton singleton;
 
-    Partie();
+    Partie(vector<EditionDeJeu *> editions);
     ~Partie() = default;
 
 
@@ -42,6 +42,8 @@ public:
     unsigned int get_joueur_actuel() const {return joueur_actuel;};
     Singleton& get_instance();
 
+    //********** Méthodes **********//
+    vector<Batiment*> map_to_vector(map<Batiment*, unsigned int> map_batiments);
 };
 
 #endif //MACHI_KORO_PARTIE_H
