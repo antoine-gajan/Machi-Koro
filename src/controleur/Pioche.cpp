@@ -9,7 +9,7 @@ Pioche::Pioche(const vector<Batiment*>& batiments) {
     }
 }
 
-Batiment* Pioche::getCarte() {
+Batiment* Pioche::get_carte() {
     /// Fonction qui retourne la première carte de la pioche
     // Si la pioche est non vide
     if (!contenu.empty()){

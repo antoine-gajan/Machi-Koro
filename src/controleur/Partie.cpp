@@ -111,7 +111,7 @@ Partie::Partie(vector<EditionDeJeu *> editions) : nb_monuments_win(0), joueur_ac
     shop = new Shop(nb_tas);
 
     while (!pioche->est_vide() && shop->get_nb_tas_reel() < shop->get_nb_tas_max()){
-        shop->completer_shop(pioche->getCarte());
+        shop->completer_shop(pioche->get_carte());
     }
     cout << "Construction de la partie terminée" << endl;
 }
@@ -169,6 +169,86 @@ void Partie::jouer_tour() {
 
 
     /// Phase d'achat
+}
+
+void Partie::acheter_carte(Joueur *joueur_actuel) {
+    //fonction qui permet à un joueur donné d'acheter une carte (batiment ou monument)
+    string choix;
+
+    cout<<"Que voulez vous faire, acheter un batiment (b), un monument (m), ou rien (r)?\n"<<endl;
+    cin>>choix;
+
+    if(choix == "b"){
+        acheter_bat(joueur_actuel);
+    }else if(choix == "m"){
+        acheter_monu(joueur_actuel);
+    }else{
+        return;
+    }
+
+}
+
+void Partie::acheter_bat(Joueur *joueur_actuel) {
+    //fonction qui permet à un joueur donné d'acheter un batiment
+    string nom_bat;
+    Batiment* bat_picked;
+    unsigned int choix = 0;
+    auto it = shop->get_contenu().begin();
+
+    while(choix != 1){
+        cout<<"Quelle carte voulez vous acheter parmis celles-ci :"<<endl;
+        shop->affiche_shop();
+        cout<<"Veuillez rentrer le nom de la carte : \n"<<endl;
+        cin>>nom_bat;
+
+        while(it != shop->get_contenu().end() || it->first->get_nom() != nom_bat) {it++;}
+
+        if(it == shop->get_contenu().end()) throw invalid_argument("Le batiment entre n'est pas dans le shop");
+
+        if(bat_picked->get_prix() < joueur_actuel->get_argent()){
+            bat_picked = shop->acheter_batiment(bat_picked);
+            if(!pioche->est_vide()){
+                shop->completer_shop(pioche->get_carte());
+            }else{
+                cout<<"Plus de cartes dans la pioche"<<endl;
+            }
+
+            joueur_actuel->ajouter_batiment(bat_picked);
+            joueur_actuel->set_argent(joueur_actuel->get_argent() - bat_picked->get_prix());
+        }else{
+            cout<<"Vous n'avez pas assez d'argent pour acheter ce batiment"<<endl;
+        }
+
+        cout<<"Voulez vous acheter a nouveau un batiment (1 pour non 0 pour oui)?"<<endl;
+        cin>>choix;
+    }
+}
+
+void Partie::acheter_monu(Joueur *joueur_actuel) {
+    //fonction qui permet à un joueur donné d'acheter un monument
+    string nom_monu;
+    Monument* monu_picked;
+    unsigned int choix = 0;
+    auto it = list_monuments.begin();
+
+    while(choix != 1){
+        cout<<"Quel est le nom du monument que vous voulez acheter?"<<endl;
+        for(auto mon : list_monuments) cout<<mon->get_nom()<<"\n"<<endl;
+        cin>>nom_monu;
+
+        while(it != list_monuments.end() || (*it)->get_nom() != nom_monu) {it++;}
+        if(it == list_monuments.end()) throw invalid_argument("Erreur de frappe, ce monument n'existe pas");
+
+        monu_picked = *it;
+        if(monu_picked->get_prix() < joueur_actuel->get_argent()){
+            joueur_actuel->set_argent(joueur_actuel->get_argent() - monu_picked->get_prix());
+            joueur_actuel->activer_monument(monu_picked);
+        }else{
+            cout<<"Vous n'avez pas assez d'argent pour acheter ce monument"<<endl;
+        }
+        cout<<"Voulez vous acheter a nouveau un monument (1 pour non 0 pour oui)?"<<endl;
+        cin>>choix;
+    }
 }
 
 bool Partie::est_gagnant(Joueur *joueur) {

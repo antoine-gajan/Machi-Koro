@@ -10,7 +10,6 @@
 class Partie {
 private:
     map<Batiment*, unsigned int> list_batiments;
-
     vector<Monument*> list_monuments;
     vector<Joueur*> tab_joueurs;
 
@@ -45,6 +44,11 @@ public:
     //********** Méthodes **********//
     vector<Batiment*> map_to_vector(map<Batiment*, unsigned int> map_batiments);
     void ajout_batiment(Batiment *batiment);
+
+    void acheter_carte(Joueur* joueur_actuel);
+    void acheter_monu(Joueur* joueur_actuel);//sous fonction appelée dans acheter_carte
+    void acheter_bat(Joueur* joueur_actuel);//sous fonction appelée dans acheter_carte
+
 };
 
 #endif //MACHI_KORO_PARTIE_H

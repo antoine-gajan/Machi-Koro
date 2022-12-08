@@ -18,7 +18,7 @@ class Pioche {
         Pioche() = default;
         ~Pioche() = default;
         bool est_vide() {return contenu.empty();};
-        Batiment* getCarte(); // retourne la carte du dessus de la pioche
+        Batiment* get_carte(); // retourne la carte du dessus de la pioche
 };
 
 #endif //MACHI_KORO_PIOCHE_H
