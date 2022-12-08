@@ -1,10 +1,12 @@
 #include "Partie.h"
 
-Partie::Partie(vector<EditionDeJeu *> editions) : nb_monuments_win(0), joueur_actuel(0) {
+Partie::Partie(EditionDeJeu* edition, vector<EditionDeJeu *> extensions) : nb_monuments_win(0), joueur_actuel(0) {
     ///Constructeur de Partie
 
     //Initialisation des attributs
     unsigned int max_joueurs = 0;
+
+    ///TODO : Revoir la fonction car modification
 
     vector<Batiment*> starter_bat;
     // Détermination du nombre de monuments pour gagner et des batiments de départ

@@ -31,7 +31,7 @@ private:
 
 
 public:
-    Partie(vector<EditionDeJeu *> editions);
+    Partie(EditionDeJeu* edition, vector<EditionDeJeu *> extensions);
     //********** Jouer une partie **********//
     void jouer_partie();
     void jouer_tour();
