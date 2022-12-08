@@ -1,20 +1,11 @@
 #include "Partie.h"
 
-Partie::Partie(vector<Joueur*> liste_joueurs, vector<EditionDeJeu *> editions) : nb_monuments_win(0), joueur_actuel(0){
+Partie::Partie(vector<EditionDeJeu *> editions) {
     ///Constructeur de Partie
 
-    // On détermine le nombre de monuments pour gagner
-    for (auto& edition : editions){
-        if (edition->get_nb_monuments_win() > nb_monuments_win){
-            nb_monuments_win = edition->get_nb_monuments_win();
-        }
-    }
+    //Initialisation des attributs
 
-    for (auto& joueur : liste_joueurs){
-        tab_joueurs.push_back(joueur);
-    }
 
-    joueur_actuel = 0;
 }
 
 void Partie::jouer_partie() {

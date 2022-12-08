@@ -9,18 +9,25 @@
 
 class Partie {
 private:
+    map<Batiment*, unsigned int> list_batiments;
+
+    vector<Monument*> list_monuments;
     vector<Joueur*> tab_joueurs;
+    vector<EditionDeJeu*> editions;
+
     unsigned int joueur_actuel;
     unsigned int nb_monuments_win;
-    Shop shop;
-    Pioche pioche;
-    vector<EditionDeJeu*> editions;
+    Shop* shop;
+    Pioche* pioche;
+
+
     class Singleton {
     public :
         Partie* instance = nullptr;
         ~Singleton() {delete instance; instance = nullptr;};
     };
     static Singleton singleton;
+
     Partie();
     ~Partie() = default;
 
