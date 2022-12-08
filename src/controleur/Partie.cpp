@@ -18,6 +18,25 @@ Partie::Partie(vector<EditionDeJeu *> editions) : nb_monuments_win(0), joueur_ac
         // Ajout des monuments et des batiments starter
         list_monuments.insert(list_monuments.end(), edition->get_monument().begin(), edition->get_monument().end());
         starter_bat.insert(starter_bat.end(), edition->get_starter().begin(), edition->get_starter().end());
+        // Ajout des batiments à acheter au fil de la partie
+        for (auto batiment : edition->get_batiment()){
+            // On vérifie que c'est pas un batiment starter
+            if (batiment.first->get_nom() != "Boulangerie" && batiment.first->get_nom() != "Boulangerie"){
+                bool est_present = false;
+                // Si le batiment n'est pas dans la list_batiments, on l'ajoute
+                for (auto bat : list_batiments){
+                    // Si le batiment est déjà dans la liste, on augmente le nombre d'exemplaires
+                    if (bat.first->get_nom() == batiment.first->get_nom()){
+                        bat.second += batiment.second;
+                        est_present = true;
+                    }
+                }
+                // Sinon, on ajoute le batiment à la liste des batiments
+                if (!est_present){
+                    list_batiments.insert(pair<Batiment* const, unsigned int>(batiment.first->clone(), batiment.second));
+                }
+            }
+        }
     }
     // Ajout des joueurs
     for (unsigned int i = 0; i < max_joueurs; i++) {
