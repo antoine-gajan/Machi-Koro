@@ -7,7 +7,7 @@ Partie::Partie(vector<EditionDeJeu *> editions) : nb_monuments_win(0), joueur_ac
     unsigned int max_joueurs = 0;
 
     vector<Batiment*> starter_bat;
-
+    // Détermination du nombre de monuments pour gagner et des batiments de départ
     for(auto edition : editions){
         if(edition->get_nb_joueurs_max() > max_joueurs){
             max_joueurs = edition->get_nb_joueurs_max();
@@ -15,11 +15,13 @@ Partie::Partie(vector<EditionDeJeu *> editions) : nb_monuments_win(0), joueur_ac
         if(edition->get_nb_monuments_win() > nb_monuments_win){
             nb_monuments_win = edition->get_nb_monuments_win();
         }
+        // Ajout des monuments et des batiments starter
         list_monuments.insert(list_monuments.end(), edition->get_monument().begin(), edition->get_monument().end());
         starter_bat.insert(starter_bat.end(), edition->get_starter().begin(), edition->get_starter().end());
     }
-
+    // Ajout des joueurs
     for (unsigned int i = 0; i < max_joueurs; i++) {
+        // Si plus de 2 joueurs, l'ajout devient optionnel
         if (i > 2) {
             cout << "Voulez-vous ajouter un joueur ? (0 : non, 1 : oui)" << endl;
             int choix;
@@ -28,7 +30,7 @@ Partie::Partie(vector<EditionDeJeu *> editions) : nb_monuments_win(0), joueur_ac
                 break;
             }
         }
-
+        // Info du joueur
         cout << "Nom du joueur " << i + 1 << " : " ;
         string nom;
         cin >> nom;
@@ -37,7 +39,9 @@ Partie::Partie(vector<EditionDeJeu *> editions) : nb_monuments_win(0), joueur_ac
         cin >> humain;
         if (humain) {
             tab_joueurs.push_back(new Joueur(nom, list_monuments, starter_bat, 3));
-        } else {
+        }
+        // Demande de la stratégie IA
+        else {
             cout << "\nQuelle est la strategie du joueur ? (1 : aleatoire, 2 : agressive, 3 : defensif) :";
             unsigned int strategie;
             cin >> strategie;
@@ -45,6 +49,7 @@ Partie::Partie(vector<EditionDeJeu *> editions) : nb_monuments_win(0), joueur_ac
                 cout << "\nQuelle est la strategie du joueur ? (1 : aleatoire, 2 : agressive, 3 : defensif) :";
                 cin >> strategie;
             }
+            // Ajout du joueur au tableau de joueurs
             switch (strategie) {
                 case 1:
                     tab_joueurs.push_back(new Joueur(nom, list_monuments, starter_bat, 3, aleatoire));
@@ -60,8 +65,8 @@ Partie::Partie(vector<EditionDeJeu *> editions) : nb_monuments_win(0), joueur_ac
     }
 
     pioche = new Pioche(map_to_vector(list_batiments));
-
-    cout << "Quel est le format de la partie ? (1 : standard, 2 : extended) :" << endl;
+    // Demande du format du shop
+    cout << "Quel est le format du shop la partie ? (1 : standard, 2 : extended) :" << endl;
     cout <<"1 : standard :" << endl;
     cout << "\tAvec ce format vous pouvez choisir le nombre de tas de cartes que vous voulez." << endl;
     cout << "2 : extended :" << endl;
@@ -81,11 +86,11 @@ Partie::Partie(vector<EditionDeJeu *> editions) : nb_monuments_win(0), joueur_ac
     }
     else
         nb_tas = list_batiments.size();
-
+    // Construction du Shop
     shop = new Shop(nb_tas);
 
     while (!pioche->est_vide() && shop->get_nb_tas_reel() < shop->get_nb_tas_max()){
-        shop->completer_shop(pioche->get_carte());
+        shop->completer_shop(pioche->getCarte());
     }
 
     cout << "Construction de la partie terminée" << endl;
@@ -93,9 +98,9 @@ Partie::Partie(vector<EditionDeJeu *> editions) : nb_monuments_win(0), joueur_ac
 
 void Partie::ajout_batiment(Batiment *batiment) {
     ///Ajoute un batiment dans la liste des batiments
-    for (auto it: list_batiments) {
-        if (batiment->get_nom() == it.first->get_nom()) {
-            it.second++;
+    for (auto bat: list_batiments) {
+        if (batiment->get_nom() == bat.first->get_nom()) {
+            bat.second++;
         }
         else {
             list_batiments.insert(pair<Batiment*, unsigned int>(batiment->clone(), 1));
@@ -104,6 +109,7 @@ void Partie::ajout_batiment(Batiment *batiment) {
 }
 
 vector<Batiment*> Partie::map_to_vector(map<Batiment*, unsigned int> map_batiments){
+    /// Retourne un vecteur avec l'adresse des batiments
     vector<Batiment*> vector_batiments;
     for(auto batiment : map_batiments){
         for(unsigned int i = 0; i < batiment.second; i++){

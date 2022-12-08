@@ -14,9 +14,7 @@ Batiment("Stade",
 void Stade::declencher_effet() const{
     /// Effet de la classe Stade
     std::cout << "Activation de l'effet du stade." << std::endl;
-
-    /*
-    Joueur* j_actuel = tab_joueurs[joueur_actuel];
+    /*Joueur* j_actuel = tab_joueurs[joueur_actuel];
     // Pour chaque joueur de la partie
     for (auto joueur : tab_joueurs){
         // Si le joueur est different du joueur actuel
