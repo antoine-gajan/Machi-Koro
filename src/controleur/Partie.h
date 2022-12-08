@@ -44,6 +44,7 @@ public:
 
     //********** Méthodes **********//
     vector<Batiment*> map_to_vector(map<Batiment*, unsigned int> map_batiments);
+    void ajout_batiment(Batiment *batiment);
 };
 
 #endif //MACHI_KORO_PARTIE_H

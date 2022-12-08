@@ -17,8 +17,6 @@ Partie::Partie(vector<EditionDeJeu *> editions) : nb_monuments_win(0), joueur_ac
         }
         list_monuments.insert(list_monuments.end(), edition->get_monument().begin(), edition->get_monument().end());
         starter_bat.insert(starter_bat.end(), edition->get_starter().begin(), edition->get_starter().end());
-
-        ///TODO : ajouter les batiments de l'edition dans list_batiments
     }
 
     for (unsigned int i = 0; i < max_joueurs; i++) {
@@ -61,7 +59,6 @@ Partie::Partie(vector<EditionDeJeu *> editions) : nb_monuments_win(0), joueur_ac
         }
     }
 
-    ///Todo : initialiser shop et pioche
     pioche = new Pioche(map_to_vector(list_batiments));
 
     cout << "Quel est le format de la partie ? (1 : standard, 2 : extended) :" << endl;
@@ -92,6 +89,18 @@ Partie::Partie(vector<EditionDeJeu *> editions) : nb_monuments_win(0), joueur_ac
     }
 
     cout << "Construction de la partie terminée" << endl;
+}
+
+void Partie::ajout_batiment(Batiment *batiment) {
+    ///Ajoute un batiment dans la liste des batiments
+    for (auto it: list_batiments) {
+        if (batiment->get_nom() == it.first->get_nom()) {
+            it.second++;
+        }
+        else {
+            list_batiments.insert(pair<Batiment*, unsigned int>(batiment->clone(), 1));
+        }
+    }
 }
 
 vector<Batiment*> Partie::map_to_vector(map<Batiment*, unsigned int> map_batiments){
