@@ -16,7 +16,7 @@ class Monument : public Carte{
         virtual Monument* clone() const = 0;
 
         //*** GETTER ***//
-        const std::string& get_type() const override {return "Monument";};
+        std::string get_type() const override {return "Monument";};
         Moment_Effet getMoment() const {return moment;}
 
         //*** SETTER ***//

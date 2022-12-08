@@ -19,7 +19,7 @@ public:
     const std::string& get_path_image() const { return path_image; }
 
 
-    virtual const std::string& get_type() const = 0;
+    virtual std::string get_type() const = 0;
 
     virtual void declencher_effet() const = 0;
 };

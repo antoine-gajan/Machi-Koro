@@ -21,6 +21,6 @@ class Batiment : public Carte {
         virtual Batiment* clone() const = 0;
         couleur_bat get_couleur() const {return couleur;};
         const list<unsigned int>& get_num_activation() const {return num_activation;};
-        const string& get_type() const override {return type;};
+        string get_type() const override {return type;};
 };
 #endif //MACHI_KORO_BATIMENT_H
