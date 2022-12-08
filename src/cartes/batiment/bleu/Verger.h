@@ -9,8 +9,9 @@
 class Verger : public Batiment{
 public:
     Verger();
+    ~Verger() override = default;
     Verger(const Verger& verger) = default;
     Batiment* clone() const override {return new Verger(*this);};
-    void declencher_effet() const;
+    void declencher_effet() const override;
 };
 #endif //MACHI_KORO_MASTER_VERGER_H

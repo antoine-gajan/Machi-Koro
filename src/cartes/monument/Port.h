@@ -7,12 +7,12 @@ class Port : public Monument {
     public :
         //*** Constructeur et destructeur ***//
         Port();
-        ~Port()=default;
+        ~Port()override=default;
         Port(const Port& port) = default;
         Port* clone() const override {return new Port(*this);};
 
         //*** Methodes ***//
-        void declencher_effet() const;
+        void declencher_effet() const override;
 };
 
 

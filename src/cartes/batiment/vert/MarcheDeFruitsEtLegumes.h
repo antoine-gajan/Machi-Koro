@@ -10,9 +10,10 @@
 class MarcheDeFruitsEtLegumes : public Batiment {
 public:
     MarcheDeFruitsEtLegumes();
+    ~MarcheDeFruitsEtLegumes() override = default;
     MarcheDeFruitsEtLegumes(const MarcheDeFruitsEtLegumes& marcheDeFruitsEtLegumes) = default;
     Batiment* clone() const override {return new MarcheDeFruitsEtLegumes(*this);};
-    void declencher_effet() const;
+    void declencher_effet() const override;
 };
 
 #endif //MACHI_KORO_MARCHE_DE_FRUITS_ET_LEGUMES_H

@@ -7,12 +7,12 @@ class ParcAttraction : public Monument {
 public:
     //*** Constructeur et destructeur ***//
     ParcAttraction();
-    ~ParcAttraction()=default;
+    ~ParcAttraction()override=default;
     ParcAttraction(const ParcAttraction &parcAttraction) = default;
     ParcAttraction* clone() const override {return new ParcAttraction(*this);};
 
     //*** Methodes ***//
-    void declencher_effet() const;
+    void declencher_effet() const override;
 };
 
 

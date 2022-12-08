@@ -9,9 +9,10 @@
 class Foret : public Batiment{
 public:
     Foret();
+    ~Foret() override = default;
     Foret(const Foret& foret) = default;
     Batiment* clone() const override {return new Foret(*this);};
-    void declencher_effet() const;
+    void declencher_effet() const override;
 };
 
 #endif //MACHI_KORO_MASTER_FORET_H

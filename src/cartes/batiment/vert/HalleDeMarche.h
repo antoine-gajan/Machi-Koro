@@ -10,9 +10,10 @@
 class HalleDeMarche : public Batiment {
 public:
     HalleDeMarche();
+    ~HalleDeMarche() override = default;
     HalleDeMarche(const HalleDeMarche& halleDeMarche) = default;
     Batiment* clone() const override {return new HalleDeMarche(*this);};
-    void declencher_effet() const;
+    void declencher_effet() const override;
 };
 
 #endif //MACHI_KORO_HALLE_DE_MARCHE_H

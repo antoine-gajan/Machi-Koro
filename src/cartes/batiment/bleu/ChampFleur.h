@@ -9,9 +9,10 @@
 class ChampFleur : public Batiment{
 public:
     ChampFleur();
+    ~ChampFleur() override = default;
     ChampFleur(const ChampFleur& champFleur) = default;
     Batiment* clone() const override {return new ChampFleur(*this);};
-    void declencher_effet() const;
+    void declencher_effet() const override;
 };
 
 #endif //MACHI_KORO_MASTER_CHAMPFLEUR_H

@@ -9,8 +9,9 @@
 class Mine : public Batiment{
 public:
     Mine();
+    ~Mine() override = default;
     Mine(const Mine& mine) = default;
     Batiment* clone() const override {return new Mine(*this);};
-    void declencher_effet() const;
+    void declencher_effet() const override;
 };
 #endif //MACHI_KORO_MASTER_MINE_H

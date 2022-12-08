@@ -7,9 +7,10 @@
 class ChaineTelevision : public Batiment {
 public:
     ChaineTelevision();
+    ~ChaineTelevision() override = default;
     ChaineTelevision(const ChaineTelevision& chaineTelevision) = default;
     Batiment* clone() const override {return new ChaineTelevision(*this);};
-    void declencher_effet() const;
+    void declencher_effet() const override;
 };
 
 #endif //MACHI_KORO_CHAINETELEVISION_H

@@ -6,9 +6,10 @@
 class SushiBar : public Batiment {
 public:
     SushiBar();
+    ~SushiBar() override = default;
     SushiBar(const SushiBar& sushiBar) = default;
     Batiment* clone() const override {return new SushiBar(*this);};
-    void declencher_effet() const;
+    void declencher_effet() const override;
   
 };
 

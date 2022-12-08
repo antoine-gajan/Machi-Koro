@@ -9,8 +9,9 @@
 class Vignoble : public Batiment{
 public:
     Vignoble();
+    ~Vignoble() override = default;
     Vignoble(const Vignoble& vignoble) = default;
     Batiment* clone() const override {return new Vignoble(*this);};
-    void declencher_effet() const;
+    void declencher_effet() const override;
 };
 #endif //MACHI_KORO_VIGNOBLE_H

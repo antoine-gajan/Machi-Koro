@@ -7,12 +7,12 @@ class CentreCommercial : public Monument {
     public :
         //*** Constructeur et destructeur ***//
         CentreCommercial();
-        ~CentreCommercial()=default;
+        ~CentreCommercial()override=default;
         CentreCommercial(const CentreCommercial& centreCommercial) = default;
         CentreCommercial* clone() const override {return new CentreCommercial(*this);};
 
         //*** Methodes ***//
-        void declencher_effet() const;
+        void declencher_effet() const override;
 };
 
 #endif //MACHI_KORO_CENTRECOMMERCIAL_H

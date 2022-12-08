@@ -10,9 +10,10 @@
 class FabriqueDeMeubles : public Batiment {
 public:
     FabriqueDeMeubles();
+    ~FabriqueDeMeubles() override = default;
     FabriqueDeMeubles(const FabriqueDeMeubles& fabriqueDeMeubles) = default;
     Batiment* clone() const override {return new FabriqueDeMeubles(*this);};
-    void declencher_effet() const;
+    void declencher_effet() const override;
 };
 
 #endif //MACHI_KORO_FABRIQUE_DE_MEUBLES_H

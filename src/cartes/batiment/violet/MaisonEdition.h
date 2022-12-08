@@ -6,9 +6,10 @@
 class MaisonEdition : public Batiment {
 public:
     MaisonEdition();
+    ~MaisonEdition() override = default;
     MaisonEdition(const MaisonEdition& maisonEdition) = default;
     Batiment* clone() const override {return new MaisonEdition(*this);};
-    void declencher_effet() const;
+    void declencher_effet() const override;
 };
 
 #endif //MACHI_KORO_MAISONEDITION_H

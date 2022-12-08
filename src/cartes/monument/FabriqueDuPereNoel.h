@@ -7,12 +7,12 @@ class FabriqueDuPereNoel : public Monument {
 public :
     //*** Constructeur et destructeur ***//
     FabriqueDuPereNoel();
-    ~FabriqueDuPereNoel()=default;
+    ~FabriqueDuPereNoel()override=default;
     FabriqueDuPereNoel(const FabriqueDuPereNoel &fabriqueDuPereNoel) = default;
     FabriqueDuPereNoel* clone() const override {return new FabriqueDuPereNoel(*this);};
 
     //*** Methodes ***//
-    void declencher_effet() const;
+    void declencher_effet() const override;
 };
 
 #endif //SRC_FABRIQUEDUPERENOEL_H

@@ -6,9 +6,10 @@
 class ClubPrive : public Batiment {
 public:
     ClubPrive();
+    ~ClubPrive() override = default;
     ClubPrive(const ClubPrive& clubPrive) = default;
     Batiment* clone() const override {return new ClubPrive(*this);};
-    void declencher_effet() const;
+    void declencher_effet() const override;
   
 };
 

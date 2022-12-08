@@ -10,9 +10,10 @@
 class Fleuriste : public Batiment {
 public:
     Fleuriste();
+    ~Fleuriste() override = default;
     Fleuriste(const Fleuriste& fleuriste) = default;
     Batiment* clone() const override {return new Fleuriste(*this);};
-    void declencher_effet() const;
+    void declencher_effet() const override;
 };
 
 #endif //MACHI_KORO_FLEURISTE_H

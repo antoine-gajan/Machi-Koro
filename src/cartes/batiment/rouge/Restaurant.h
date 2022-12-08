@@ -6,9 +6,10 @@
 class Restaurant : public Batiment {
 public:
     Restaurant();
+    ~Restaurant() override = default;
     Restaurant(const Restaurant& restaurant) = default;
     Batiment* clone() const override {return new Restaurant(*this);};
-    void declencher_effet() const;
+    void declencher_effet() const override;
 
 };
 

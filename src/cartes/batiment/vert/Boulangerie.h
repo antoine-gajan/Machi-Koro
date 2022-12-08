@@ -9,9 +9,10 @@
 class Boulangerie : public Batiment {
 public:
     Boulangerie();
+    ~Boulangerie() override = default;
     Boulangerie(const Boulangerie& boulangerie) = default;
     Batiment* clone() const override {return new Boulangerie(*this);};
-    void declencher_effet() const;
+    void declencher_effet() const override;
 };
 
 #endif //MACHI_KORO_BOULANGERIE_H

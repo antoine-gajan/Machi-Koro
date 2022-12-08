@@ -6,9 +6,10 @@
 class Cafe : public Batiment {
 public:
     Cafe();
+    ~Cafe() override = default;
     Cafe(const Cafe& cafe) = default;
     Batiment* clone() const override {return new Cafe(*this);};
-    void declencher_effet() const;
+    void declencher_effet() const override;
 
 };
 

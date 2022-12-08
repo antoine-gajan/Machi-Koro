@@ -10,9 +10,10 @@
 class BanqueDeMinivilles : public Batiment {
 public:
     BanqueDeMinivilles();
+    ~BanqueDeMinivilles() override = default;
     BanqueDeMinivilles(const BanqueDeMinivilles& banqueDeMinivilles) = default;
     Batiment* clone() const override {return new BanqueDeMinivilles(*this);};
-    void declencher_effet() const;
+    void declencher_effet() const override;
 
 };
 

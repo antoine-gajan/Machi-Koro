@@ -6,9 +6,10 @@
 class CentreImpots : public Batiment {
 public:
     CentreImpots();
+    ~CentreImpots() override = default;
     CentreImpots(const CentreImpots& centreImpots) = default;
     Batiment* clone() const override {return new CentreImpots(*this);};
-    void declencher_effet() const;
+    void declencher_effet() const override;
 };
 
 #endif //MACHI_KORO_CENTREIMPOTS_H

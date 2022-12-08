@@ -10,9 +10,10 @@
 class Superette : public Batiment {
 public:
     Superette();
+    ~Superette() override = default;
     Superette(const Superette& superette) = default;
     Batiment* clone() const override {return new Superette(*this);};
-    void declencher_effet() const;
+    void declencher_effet() const override;
 };
 
 #endif //MACHI_KORO_SUPERETTE_H

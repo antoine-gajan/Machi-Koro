@@ -10,9 +10,10 @@
 class Fromagerie : public Batiment {
 public:
     Fromagerie();
+    ~Fromagerie() override = default;
     Fromagerie(const Fromagerie& fromagerie) = default;
     Batiment* clone() const override {return new Fromagerie(*this);};
-    void declencher_effet() const;
+    void declencher_effet() const override;
 };
 
 #endif //MACHI_KORO_FROMAGERIE_H

@@ -8,9 +8,10 @@
 class CentreAffaires : public Batiment {
 public:
     CentreAffaires();
+    ~CentreAffaires() override = default;
     CentreAffaires(const CentreAffaires& centreAffaires) = default;
     Batiment* clone() const override {return new CentreAffaires(*this);};
-    void declencher_effet() const;
+    void declencher_effet() const override;
 };
 
 #endif //MACHI_KORO_CENTREAFFAIRES_H
