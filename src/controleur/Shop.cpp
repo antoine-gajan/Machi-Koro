@@ -54,12 +54,3 @@ void Shop::affiche_shop() {
         cout << it->first->get_nom() << " : " << it->second << endl;
     }
 }
-
-const vector<Batiment *> &Shop::get_contenu() const {
-    ///Retourne le contenu du shop
-    vector<Batiment*> contenu_vect;
-    for (auto it = contenu.begin(); it != contenu.end(); it++) {
-        contenu_vect.push_back(it->first);
-    }
-    return contenu_vect;
-}

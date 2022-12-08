@@ -129,4 +129,8 @@ add_executable(src
         controleur/EditionDeJeu/EditionDeJeu.h
         controleur/Pioche.cpp
         controleur/Pioche.h
+        controleur/Partie.cpp
+        controleur/Partie.h
+        controleur/Shop.cpp
+        controleur/Shop.h
         )

@@ -19,6 +19,7 @@ Partie::Partie(vector<EditionDeJeu *> editions) : nb_monuments_win(0), joueur_ac
         list_monuments.insert(list_monuments.end(), edition->get_monument().begin(), edition->get_monument().end());
         starter_bat.insert(starter_bat.end(), edition->get_starter().begin(), edition->get_starter().end());
         // Ajout des batiments à acheter au fil de la partie
+
         for (auto batiment : edition->get_batiment()){
             // On vérifie que c'est pas un batiment starter
             if (batiment.first->get_nom() != "Boulangerie" && batiment.first->get_nom() != "Boulangerie"){
@@ -39,6 +40,7 @@ Partie::Partie(vector<EditionDeJeu *> editions) : nb_monuments_win(0), joueur_ac
         }
     }
     // Ajout des joueurs
+
     for (unsigned int i = 0; i < max_joueurs; i++) {
         // Si plus de 2 joueurs, l'ajout devient optionnel
         if (i > 2) {
@@ -111,7 +113,6 @@ Partie::Partie(vector<EditionDeJeu *> editions) : nb_monuments_win(0), joueur_ac
     while (!pioche->est_vide() && shop->get_nb_tas_reel() < shop->get_nb_tas_max()){
         shop->completer_shop(pioche->getCarte());
     }
-
     cout << "Construction de la partie terminée" << endl;
 }
 
