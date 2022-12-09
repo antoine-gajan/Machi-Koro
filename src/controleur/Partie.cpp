@@ -3,12 +3,13 @@
 Partie::Partie(EditionDeJeu* edition, vector<EditionDeJeu *> extensions) : nb_monuments_win(0), joueur_actuel(0) {
     ///Constructeur de Partie
 
-    //Initialisation des attributs
+    //Initialisation des variables utiles
     unsigned int max_joueurs = edition->get_nb_joueurs_max();
     unsigned int nb_monuments = edition->get_nb_monuments_win();
+    unsigned int format = 0;
+    unsigned int nb_tas = 0;
 
 
-    vector<Batiment*> starter_bat;
     for (auto bat : edition->get_batiment()) {
         for (unsigned int i = 0; i < bat.second; i++) {
             ajout_batiment(bat.first);
@@ -40,10 +41,9 @@ Partie::Partie(EditionDeJeu* edition, vector<EditionDeJeu *> extensions) : nb_mo
     }
 
     // Initialisation du starter
-    starter_bat = get_starter();
+    vector<Batiment*> starter_bat = get_starter();
 
     // Ajout des joueurs
-
     for (unsigned int i = 0; i < max_joueurs; i++) {
         // Si plus de 2 joueurs, l'ajout devient optionnel
         if (i >= 2) {
@@ -59,10 +59,10 @@ Partie::Partie(EditionDeJeu* edition, vector<EditionDeJeu *> extensions) : nb_mo
             }
         }
         // Info du joueur
-        cout << "Nom du joueur " << i + 1 << " : " ;
+        cout << "Nom du joueur " << i + 1 << " : "  << endl;
         string nom;
         cin >> nom;
-        cout << "\nLe jouer est-il un humain ? (1 : oui, 0 : non)  :";
+        cout << "\nLe jouer est-il un humain ? (1 : oui, 0 : non)  :" << endl;
         bool humain;
         cin >> humain;
         if (humain) {
@@ -70,11 +70,11 @@ Partie::Partie(EditionDeJeu* edition, vector<EditionDeJeu *> extensions) : nb_mo
         }
         // Demande de la stratégie IA
         else {
-            cout << "\nQuelle est la strategie du joueur ? (1 : aleatoire, 2 : agressive, 3 : defensif) :";
             unsigned int strategie;
+            cout << "\nQuelle est la strategie du joueur ? (1 : aleatoire, 2 : agressive, 3 : defensif) :" << endl;
             cin >> strategie;
             while (strategie < 1 || strategie > 3) {
-                cout << "\nQuelle est la strategie du joueur ? (1 : aleatoire, 2 : agressive, 3 : defensif) :";
+                cout << "\nQuelle est la strategie du joueur ? (1 : aleatoire, 2 : agressive, 3 : defensif) :" << endl;
                 cin >> strategie;
             }
             // Ajout du joueur au tableau de joueurs
@@ -97,33 +97,34 @@ Partie::Partie(EditionDeJeu* edition, vector<EditionDeJeu *> extensions) : nb_mo
 
     pioche = new Pioche(map_to_vector(list_batiments));
     // Demande du format du shop
-    cout << "Quel est le format du shop la partie ? (1 : standard, 2 : extended) :" << endl;
-    cout <<"1 : standard :" << endl;
-    cout << "\tAvec ce format vous pouvez choisir le nombre de tas de cartes que vous voulez." << endl;
-    cout << "2 : extended :" << endl;
-    cout << "\tAvec ce format toutes les cartes sont dans le shop." << endl;
-    cout << "Votre choix : ";
-    unsigned int format;
-    cin >> format;
-    unsigned int nb_tas;
+    while (format < 1 || format > 2) {
+        cout << "Quel est le format du shop la partie ? (1 : standard, 2 : extended) :" << endl;
+        cout <<"1 : standard :" << endl;
+        cout << "\tAvec ce format vous pouvez choisir le nombre de tas de cartes que vous voulez." << endl;
+        cout << "2 : extended :" << endl;
+        cout << "\tAvec ce format toutes les cartes sont dans le shop." << endl;
+        cout << "Votre choix : " << endl;
+        cin >> format;
+    }
 
     if (format == 1) {
-        cout << "Combien de tas voulez-vous ? (9 < tas < " << list_batiments.size() - 1 << ") :";
-        cin >> nb_tas;
         while (nb_tas < 9 || nb_tas > list_batiments.size() - 1) {
-            cout << "Combien de tas voulez-vous ? (9 < tas < " << list_batiments.size() - 1 << ") :";
+            cout << "Combien de tas voulez-vous ? (9 < tas < " << list_batiments.size() - 1 << ") :" << endl;
             cin >> nb_tas;
         }
     }
     else
         nb_tas = list_batiments.size();
+
     // Construction du Shop
     shop = new Shop(nb_tas);
 
     while (!pioche->est_vide() && shop->get_nb_tas_reel() < shop->get_nb_tas_max()){
         shop->completer_shop(pioche->get_carte());
     }
-    cout << "Construction de la partie terminée" << endl;
+
+    cout << "Construction de la partie terminee" << endl;
+    cout << "Bon jeu !" << endl;
 }
 
 void Partie::ajout_batiment(Batiment *batiment) {
