@@ -9,11 +9,9 @@ using namespace std;
 
 int main() {
 
-    EditionDeJeu *edj = new EditionDeJeu("Standard");
-    vector<EditionDeJeu*> editions;
-    editions.push_back(edj);
+    EditionDeJeu edj = EditionDeJeu("Standard");
 
-    Partie *partie = new Partie(editions);
+    Partie test = Partie(&edj);
 
     return 0;
 }

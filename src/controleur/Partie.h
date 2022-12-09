@@ -27,11 +27,11 @@ private:
     };
     static Singleton singleton;
 
-    ~Partie() = default;
-
-
 public:
-    Partie(EditionDeJeu* edition, vector<EditionDeJeu *> extensions);
+
+
+    Partie(EditionDeJeu* edition, vector<EditionDeJeu *> extensions = vector<EditionDeJeu *>());
+    ~Partie() = default;
     //********** Jouer une partie **********//
     void jouer_partie();
     void jouer_tour();

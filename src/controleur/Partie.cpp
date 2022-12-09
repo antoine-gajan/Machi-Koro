@@ -18,25 +18,27 @@ Partie::Partie(EditionDeJeu* edition, vector<EditionDeJeu *> extensions) : nb_mo
         list_monuments.push_back(monu);
     }
 
+    if (!extensions.empty()) {
+        for (auto ext : extensions) {
+            for (auto bat : ext->get_batiment()) {
+                for (unsigned int i = 0; i < bat.second; i++) {
+                    ajout_batiment(bat.first);
+                }
+            }
+            for (auto monu : ext->get_monument()) {
+                list_monuments.push_back(monu);
+            }
 
-    for (auto ext : extensions) {
-        for (auto bat : ext->get_batiment()) {
-            for (unsigned int i = 0; i < bat.second; i++) {
-                ajout_batiment(bat.first);
+            if (ext->get_nb_joueurs_max() > max_joueurs) {
+                max_joueurs = ext->get_nb_joueurs_max();
+            }
+
+            if (ext->get_nb_monuments_win() > nb_monuments) {
+                nb_monuments = ext->get_nb_monuments_win();
             }
         }
-        for (auto monu : ext->get_monument()) {
-            list_monuments.push_back(monu);
-        }
-
-        if (ext->get_nb_joueurs_max() > max_joueurs) {
-            max_joueurs = ext->get_nb_joueurs_max();
-        }
-
-        if (ext->get_nb_monuments_win() > nb_monuments) {
-            nb_monuments = ext->get_nb_monuments_win();
-        }
     }
+
     // Initialisation du starter
     starter_bat = get_starter();
 
