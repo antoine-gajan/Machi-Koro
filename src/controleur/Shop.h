@@ -21,7 +21,7 @@ class Shop{
         const std::map<Batiment*, unsigned int>& get_contenu() {return contenu;};
         // const vector<Batiment*>& get_contenu() const;
 
-        /**** Méthodes ****/
+        /**** Methodes ****/
         void completer_shop(Batiment* new_bat);
         void affiche_shop();
         Batiment *acheter_batiment(Batiment* bat);

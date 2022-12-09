@@ -41,13 +41,13 @@ public:
     unsigned int get_joueur_actuel() const {return joueur_actuel;};
     Singleton& get_instance();
 
-    //********** Méthodes **********//
+    //********** Methodes **********//
     vector<Batiment*> map_to_vector(map<Batiment*, unsigned int> map_batiments);
     void ajout_batiment(Batiment *batiment);
 
     void acheter_carte(Joueur* joueur_actuel);
-    void acheter_monu(Joueur* joueur_actuel);//sous fonction appelée dans acheter_carte
-    void acheter_bat(Joueur* joueur_actuel);//sous fonction appelée dans acheter_carte
+    void acheter_monu(Joueur* joueur_actuel);//sous fonction appelee dans acheter_carte
+    void acheter_bat(Joueur* joueur_actuel);//sous fonction appelee dans acheter_carte
     void echanger_argent(Joueur* joueur1,Joueur* joueur2);
 
     vector<Batiment *> get_starter();

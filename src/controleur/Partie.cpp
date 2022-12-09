@@ -68,7 +68,7 @@ Partie::Partie(EditionDeJeu* edition, vector<EditionDeJeu *> extensions) : nb_mo
         if (humain) {
             tab_joueurs.push_back(new Joueur(nom, list_monuments, starter_bat, 3));
         }
-        // Demande de la stratégie IA
+        // Demande de la strategie IA
         else {
             unsigned int strategie;
             cout << "\nQuelle est la strategie du joueur ? (1 : aleatoire, 2 : agressive, 3 : defensif) :" << endl;
@@ -182,11 +182,11 @@ void Partie::jouer_tour() {
     ///Fonction pour jouer un tour
     Joueur *j_actuel = tab_joueurs[joueur_actuel];
     if (est_gagnant(j_actuel)) {
-        cout << "Le joueur " << j_actuel->get_nom() << " a gagné la partie !" << endl;
+        cout << "Le joueur " << j_actuel->get_nom() << " a gagne la partie !" << endl;
         return;
     }
 
-    /// Jet de dé pour le joueur
+    /// Jet de de pour le joueur
     vector<Monument*> monuments_jouables = j_actuel->get_monument_jouables();
 
 
@@ -205,7 +205,7 @@ void Partie::jouer_tour() {
 }
 
 void Partie::acheter_carte(Joueur *joueur_actuel) {
-    //fonction qui permet à un joueur donné d'acheter une carte (batiment ou monument)
+    //fonction qui permet a un joueur donne d'acheter une carte (batiment ou monument)
     string choix;
 
     cout<<"Que voulez vous faire, acheter un batiment (b), un monument (m), ou rien (r)?\n"<<endl;
@@ -222,7 +222,7 @@ void Partie::acheter_carte(Joueur *joueur_actuel) {
 }
 
 void Partie::acheter_bat(Joueur *joueur_actuel) {
-    //fonction qui permet à un joueur donné d'acheter un batiment
+    //fonction qui permet a un joueur donne d'acheter un batiment
     string nom_bat;
     Batiment* bat_picked;
     unsigned int choix = 0;
@@ -258,7 +258,7 @@ void Partie::acheter_bat(Joueur *joueur_actuel) {
 }
 
 void Partie::acheter_monu(Joueur *joueur_actuel) {
-    //fonction qui permet à un joueur donné d'acheter un monument
+    //fonction qui permet a un joueur donne d'acheter un monument
     string nom_monu;
     Monument* monu_picked;
     unsigned int choix = 0;
@@ -285,7 +285,7 @@ void Partie::acheter_monu(Joueur *joueur_actuel) {
 }
 
 void Partie::echanger_argent(Joueur* joueur1,Joueur* joueur2){
-    //méthode qui permet d'échanger une somme d'argent entre deux joueurs
+    //methode qui permet d'echanger une somme d'argent entre deux joueurs
     unsigned int sens;
     unsigned int somme;
 
@@ -305,6 +305,6 @@ void Partie::echanger_argent(Joueur* joueur1,Joueur* joueur2){
 }
 
 bool Partie::est_gagnant(Joueur *joueur) {
-    ///Fonction pour vérifier si un joueur a gagné
+    ///Fonction pour verifier si un joueur a gagne
     return joueur->get_monument_jouables().size() >= nb_monuments_win;
 }

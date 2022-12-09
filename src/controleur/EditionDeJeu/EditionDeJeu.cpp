@@ -6,7 +6,7 @@ EditionDeJeu::EditionDeJeu(const string& nom_edition) : nom(nom_edition) {
 
     //Gestion des erreurs
     if (nom.empty()){
-        throw invalid_argument("Le nom de l'édition ne peut être vide.");
+        throw invalid_argument("Le nom de l'edition ne peut être vide.");
     }
 
     if (nom_edition == "Deluxe") {
@@ -17,7 +17,7 @@ EditionDeJeu::EditionDeJeu(const string& nom_edition) : nom(nom_edition) {
         nb_joueurs_min = 2;
         nb_monuments_win = 5;
 
-        // Liste des monuments spécifiques à Deluxe
+        // Liste des monuments specifiques a Deluxe
         monument.push_back(new Aeroport());
         monument.push_back(new CentreCommercial());
         monument.push_back(new Gare());
@@ -25,7 +25,7 @@ EditionDeJeu::EditionDeJeu(const string& nom_edition) : nom(nom_edition) {
         monument.push_back(new Port());
         monument.push_back(new TourRadio());
 
-        // Liste des batiments spécifiques à Deluxe
+        // Liste des batiments specifiques a Deluxe
         // Batiments violets
         batiment.insert(pair<Batiment*, unsigned int>(new CentreAffaires(), 5));
         batiment.insert(pair<Batiment*, unsigned int>(new ChaineTelevision(), 5));
@@ -81,13 +81,13 @@ EditionDeJeu::EditionDeJeu(const string& nom_edition) : nom(nom_edition) {
         nb_joueurs_min = 2;
         nb_monuments_win = 4;
 
-        /// Liste des monuments spécifiques à Standard
+        /// Liste des monuments specifiques a Standard
         monument.push_back(new CentreCommercial());
         monument.push_back(new Gare());
         monument.push_back(new ParcAttraction());
         monument.push_back(new TourRadio());
 
-        /// Liste des batiments spécifiques à Standard
+        /// Liste des batiments specifiques a Standard
         // Batiments violets
         batiment.insert(pair<Batiment*, unsigned int>(new CentreAffaires(), 4));
         batiment.insert(pair<Batiment*, unsigned int>(new ChaineTelevision(), 4));
@@ -120,7 +120,7 @@ EditionDeJeu::EditionDeJeu(const string& nom_edition) : nom(nom_edition) {
         nb_monuments_win = 4;
 
 
-        /// Liste des batiments spécifiques à GreenValley
+        /// Liste des batiments specifiques a GreenValley
         // Batiments violets
         batiment.insert(pair<Batiment*, unsigned int>(new Startup(), 4));
         batiment.insert(pair<Batiment*, unsigned int>(new Arboretum(), 4));
@@ -157,7 +157,7 @@ EditionDeJeu::EditionDeJeu(const string& nom_edition) : nom(nom_edition) {
         monument.push_back(new Port());
         monument.push_back(new HotelDeVille());
 
-        /// Liste des batiments spécifiques à Marina
+        /// Liste des batiments specifiques a Marina
         // Liste des batiments
 
         // Batiments violets

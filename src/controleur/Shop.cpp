@@ -5,7 +5,7 @@ Shop::Shop(unsigned int nb_tas) : nb_tas_max(nb_tas), nb_tas_reel(0), contenu() 
 }
 
 void Shop::completer_shop(Batiment *new_bat) {
-    ///Complète le shop en ajoutant des cartes
+    ///Complete le shop en ajoutant des cartes
     if (nb_tas_reel == nb_tas_max) {
         auto it = contenu.find(new_bat);
         if (it != contenu.end()) {
@@ -30,7 +30,7 @@ Shop::~Shop() {
 }
 
 Batiment * Shop::acheter_batiment(Batiment *bat) {
-    ///Achète un batiment
+    ///Achete un batiment
     auto it = contenu.find(bat);
     if (it != contenu.end()) {
         if (it->second > 1) {

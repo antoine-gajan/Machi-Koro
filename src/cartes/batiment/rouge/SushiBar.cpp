@@ -13,5 +13,5 @@ void SushiBar::declencher_effet() const{
     //j'ai deliberement retire le parametre joueur actuel de declencher effet pour respecter la methode virtuelle declaree dans Batiment.h
     cout << "Activation de l'effet du Sushi Bar" << endl;
     //Trouver un joueur qui a cette carte
-    //si il y en a un enlever 2 pièce au joueur actuel et ajouter 2 pièce au joueur qui en a une
+    //si il y en a un enlever 2 piece au joueur actuel et ajouter 2 piece au joueur qui en a une
 }

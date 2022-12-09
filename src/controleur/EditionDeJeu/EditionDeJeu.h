@@ -85,7 +85,7 @@ public:
     unsigned int get_nb_monuments_win() const {return nb_monuments_win;};
 
     bool get_est_edition() const {return est_edition;};
-    /// *** Récupération des monuments et des batiments *** ///
+    /// *** Recuperation des monuments et des batiments *** ///
     vector<Monument*> get_monument() const {return monument;};
 
     map<Batiment*, unsigned int> get_batiment() const {return batiment;};

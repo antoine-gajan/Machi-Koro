@@ -43,7 +43,7 @@ class Joueur {
         void set_argent(unsigned int arg);
         void set_liste_batiment(map<couleur_bat, map<Batiment*, unsigned int>>& liste_bat);
 
-        /***** Autres méthodes *****/
+        /***** Autres methodes *****/
         void activer_monument(Monument *mon);
         void desactiver_monument(Monument *mon);
         void ajouter_batiment(Batiment *bat);

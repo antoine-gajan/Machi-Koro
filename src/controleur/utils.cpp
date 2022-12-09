@@ -101,16 +101,16 @@ unsigned int selectionner_joueur(vector<Joueur*>& tab_joueurs, unsigned int joue
         std::cout<<"\n -"<<curseur->get_nom();
     }
 
-    //Scan de tab_joueurs à la recherche du nom entré
+    //Scan de tab_joueurs a la recherche du nom entre
     std::cin >> nom_joueur;
     while(tab_joueurs.at(count)->get_nom() != nom_joueur && it != tab_joueurs.end()){
         count++;
         it++;
     }
 
-    //cas où erreur (nom entré pas dans la liste ou nom entré = joueur actuel)
-    if(it == tab_joueurs.end()) throw invalid_argument("Le nom entré n'est pas valide");
-    if(count == joueur_actuel) throw invalid_argument("On ne peut pas sélectionner le joueur actuel");
+    //cas où erreur (nom entre pas dans la liste ou nom entre = joueur actuel)
+    if(it == tab_joueurs.end()) throw invalid_argument("Le nom entre n'est pas valide");
+    if(count == joueur_actuel) throw invalid_argument("On ne peut pas selectionner le joueur actuel");
 
     return count;
 }
@@ -122,8 +122,8 @@ Batiment* selectionner_batiment(Joueur *joueur){
     unsigned int check = 0;
     Batiment* bat_a_retourner;
 
-    std::cout<<"Quel batiment voulez-vous sélectionner parmis la liste ci-dessous :";
-    // affichage des monuments que le joueur possède
+    std::cout<<"Quel batiment voulez-vous selectionner parmis la liste ci-dessous :";
+    // affichage des monuments que le joueur possede
     // pour chaque couleur de la liste de batiment du joueur
     for (it=joueur->get_liste_batiment().begin();it!=joueur->get_liste_batiment().end();++it) {
 
@@ -143,7 +143,7 @@ Batiment* selectionner_batiment(Joueur *joueur){
         while(it2!=it->second.end() && it2->first->get_nom()!=nom_bat){
             it2++;
         }
-        //attribut check pour exit le premier while (à voir s'il n'est pas possible de faire plus simple?)
+        //attribut check pour exit le premier while (a voir s'il n'est pas possible de faire plus simple?)
         if(it2->first->get_nom()==nom_bat){
             check = 1;
             bat_a_retourner = it2->first;
@@ -151,8 +151,8 @@ Batiment* selectionner_batiment(Joueur *joueur){
         it++;
     }
 
-    //cas où erreur (batiment entré pas dans la liste)
-    if(it == joueur->get_liste_batiment().end()) throw invalid_argument("Le batiment entré n'est pas valide");
+    //cas où erreur (batiment entre pas dans la liste)
+    if(it == joueur->get_liste_batiment().end()) throw invalid_argument("Le batiment entre n'est pas valide");
 
     return bat_a_retourner;
 }
@@ -163,7 +163,7 @@ Batiment* possede_batiment(Joueur *joueur,string nom_bat){
     for (auto couleur : liste_bat) {
         // pour chaque batiment de la couleur, (batiments sous forme de map(Batiment*, unsigned int))
         for (auto batiment : liste_bat[couleur.first]) {
-            // Si c'est l'élement qu'on recherche, on le renvoie
+            // Si c'est l'element qu'on recherche, on le renvoie
             if (batiment.first->get_nom() == nom_bat) {
                  return batiment.first;
             }
@@ -178,8 +178,8 @@ Monument* selectionner_monument(Joueur *joueur){
     Monument* monu_a_retourner;
     auto it = joueur->get_liste_monument().begin();
 
-    std::cout<<"Quel monument voulez-vous sélectionner parmis la liste ci-dessous :";
-    // affichage des monuments que le joueur possède
+    std::cout<<"Quel monument voulez-vous selectionner parmis la liste ci-dessous :";
+    // affichage des monuments que le joueur possede
     // pour chaque monument du joueur
     for (it; it!=joueur->get_liste_monument().end(); ++it) {
             cout<<"\n -"<<it->first->get_nom();
@@ -187,15 +187,15 @@ Monument* selectionner_monument(Joueur *joueur){
 
     cin >> nom_monu;
 
-    //parcours des monuments du joueur à la recherche du monument à trouver
+    //parcours des monuments du joueur a la recherche du monument a trouver
     it = joueur->get_liste_monument().begin();
     while(it!=joueur->get_liste_monument().end() && it->first->get_nom()!=nom_monu){
         it++;
     }
 
-    //cas où erreur (monument entré pas dans la liste)
+    //cas où erreur (monument entre pas dans la liste)
     if(it == joueur->get_liste_monument().end()) {
-        throw invalid_argument("Le monument entré n'est pas valide");
+        throw invalid_argument("Le monument entre n'est pas valide");
     }else{
         monu_a_retourner = it->first;
     }
@@ -219,7 +219,7 @@ map<Batiment*, unsigned int> get_liste_bat_non_special(Joueur* j){
     map<Batiment* ,unsigned int> liste;
     for (auto couleur : j->get_liste_batiment()){
         for (auto bat : couleur.second){
-            if (bat.first->get_type() != "spécial")
+            if (bat.first->get_type() != "special")
             {
                 liste.insert(pair<Batiment*, unsigned int>(bat.first, bat.second));
             }
@@ -229,11 +229,11 @@ map<Batiment*, unsigned int> get_liste_bat_non_special(Joueur* j){
 }
 
 void swap_bat_players(Joueur *j1, Joueur *j2, Batiment* bat1, Batiment* bat2){
-    ///Fonction qui échange les batiments de 2 joueurs
-    // Gestion du batiment 2 dans l'échange
+    ///Fonction qui echange les batiments de 2 joueurs
+    // Gestion du batiment 2 dans l'echange
     j2->retirer_batiment(bat2);
     j1->ajouter_batiment(bat2);
-    // Gestion du batiment 1 dans l'échange
+    // Gestion du batiment 1 dans l'echange
     j1->retirer_batiment(bat1);
     j2->ajouter_batiment(bat1);
 }
@@ -251,9 +251,9 @@ void don_argent(Joueur* j1, unsigned int argent, Joueur* j2){
 
 void echange_argent(Joueur* j1, unsigned int arg1, Joueur* j2, unsigned int arg2){
     /// Echange d'argent entre j1 et j2
-    // Don d'arg1 de j1 à j2
+    // Don d'arg1 de j1 a j2
     don_argent(j1, arg1, j2);
-    // Don d'arg2 de j2 à j1
+    // Don d'arg2 de j2 a j1
     don_argent(j2, arg2, j1);
 }
 

@@ -13,5 +13,5 @@ void Pizzeria::declencher_effet() const{
     //j'ai deliberement retire le parametre joueur actuel de declencher effet pour respecter la methode virtuelle declaree dans Batiment.h
     cout << "Activation de l'effet de la pizzeria" << endl;
     //Trouver un joueur qui a cette carte
-    //si il y en a un enlever une pièce au joueur actuel et ajouter un au joueur qui en a une
+    //si il y en a un enlever une piece au joueur actuel et ajouter un au joueur qui en a une
 }

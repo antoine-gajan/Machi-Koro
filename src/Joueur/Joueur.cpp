@@ -13,7 +13,7 @@ Joueur::Joueur(const string& nom, const vector<Monument *>&list_mon, const vecto
 }
 
 vector<unsigned int> Joueur::get_repartition_argent() const {
-    /// Répartition de l'argent en fonction des types de pièces
+    /// Repartition de l'argent en fonction des types de pieces
     vector<unsigned int> repartition;
     unsigned int temp = argent;
     repartition.push_back(temp/10);
@@ -27,9 +27,9 @@ vector<unsigned int> Joueur::get_repartition_argent() const {
 Joueur::~Joueur() {
     liste_monument.clear();
 
-    // Itération sur les couleurs de batiments
+    // Iteration sur les couleurs de batiments
     for (auto it = liste_batiment.begin(); it != liste_batiment.end(); ++it) {
-        // Itération sur les batiments
+        // Iteration sur les batiments
         it->second.clear();
     }
     liste_batiment.clear();
@@ -45,7 +45,7 @@ vector<Monument*> Joueur::get_monument_jouables() const {
 }
 
 void Joueur::set_argent(unsigned int arg){
-    /// Mise à jour de l'argent du joueur
+    /// Mise a jour de l'argent du joueur
     argent = arg;
 }
 
@@ -79,17 +79,17 @@ void Joueur::ajouter_batiment(Batiment *bat) {
     if (bat == nullptr) {
         throw invalid_argument("Le batiment ne peut pas être nul");
     }
-    // Récupération de la couleur du batiment
+    // Recuperation de la couleur du batiment
     couleur_bat couleur = bat->get_couleur();
-    // On regarde si le joueur possède déjà un exemplaire du batiment
+    // On regarde si le joueur possede deja un exemplaire du batiment
     for (auto batiment : liste_batiment[couleur]){
         if (batiment.first == bat){
-            // Si l'utilisateur a déjà un exemplaire de ce batiment et qu'il est violet : erreur
+            // Si l'utilisateur a deja un exemplaire de ce batiment et qu'il est violet : erreur
             if (bat->get_couleur() == Violet){
                 cout << "Le joueur" << nom << "possede deja un exemplaire du batiment violet" << bat->get_nom()<<endl;
                 return;
             }
-            // Sinon, on augmente le nombre d'exemplaires possédés
+            // Sinon, on augmente le nombre d'exemplaires possedes
             else{
                 liste_batiment[couleur][batiment.first]++;
                 cout << "Ajout du batiment " << bat->get_nom() << " au joueur " << nom << endl;
@@ -111,17 +111,17 @@ void Joueur::retirer_batiment(Batiment *bat) {
         throw invalid_argument("Le batiment ne peut pas être nul");
     }
 
-    // Récupération de la couleur du batiment
+    // Recuperation de la couleur du batiment
     couleur_bat couleur = bat->get_couleur();
 
-    // On regarde si le joueur possède déjà un exemplaire du batiment
+    // On regarde si le joueur possede deja un exemplaire du batiment
     for (auto batiment : liste_batiment[couleur]){
         if (batiment.first == bat){
-            // Si un seul exemplaire, on supprime l'élément
+            // Si un seul exemplaire, on supprime l'element
             if (batiment.second == 1){
                 liste_batiment[couleur].erase(batiment.first);
             }
-            // Sinon, on décrémente le nombre d'exemplaires
+            // Sinon, on decremente le nombre d'exemplaires
             else{
                 liste_batiment[couleur][batiment.first]--;
             }
@@ -134,7 +134,7 @@ void Joueur::retirer_batiment(Batiment *bat) {
 }
 
 void Joueur::set_liste_batiment(map<couleur_bat, map<Batiment*, unsigned int>>& liste_bat){
-    /// Mise à jour de la liste des batiments du joueur
+    /// Mise a jour de la liste des batiments du joueur
     liste_batiment = liste_bat;
 }
 
