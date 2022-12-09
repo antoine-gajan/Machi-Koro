@@ -10,7 +10,7 @@ public:
     ~ChaineTelevision() override = default;
     ChaineTelevision(const ChaineTelevision& chaineTelevision) = default;
     Batiment* clone() const override {return new ChaineTelevision(*this);};
-    void declencher_effet() const override;
+    void declencher_effet(unigned int possesseur) const override;
 };
 
 #endif //MACHI_KORO_CHAINETELEVISION_H

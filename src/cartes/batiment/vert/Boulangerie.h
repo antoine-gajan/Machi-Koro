@@ -12,7 +12,7 @@ public:
     ~Boulangerie() override = default;
     Boulangerie(const Boulangerie& boulangerie) = default;
     Batiment* clone() const override {return new Boulangerie(*this);};
-    void declencher_effet() const override;
+    void declencher_effet(unigned int possesseur) const override;
 };
 
 #endif //MACHI_KORO_BOULANGERIE_H

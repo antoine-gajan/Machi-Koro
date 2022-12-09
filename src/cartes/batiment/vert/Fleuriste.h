@@ -13,7 +13,7 @@ public:
     ~Fleuriste() override = default;
     Fleuriste(const Fleuriste& fleuriste) = default;
     Batiment* clone() const override {return new Fleuriste(*this);};
-    void declencher_effet() const override;
+    void declencher_effet(unigned int possesseur) const override;
 };
 
 #endif //MACHI_KORO_FLEURISTE_H

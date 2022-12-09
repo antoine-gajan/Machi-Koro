@@ -13,7 +13,7 @@ CentreAffaires::CentreAffaires():
 
 
 
-void CentreAffaires::declencher_effet() const{
+void CentreAffaires::declencher_effet(unigned int possesseur) const{
     /// Effet du Centre d'affaires
     std::cout << "Activation de l'effet du centre d'affaires." << std::endl;
     /*

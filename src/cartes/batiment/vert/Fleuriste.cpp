@@ -9,7 +9,7 @@ Fleuriste::Fleuriste()
                    {6},
                    "commerce") {}
 
-void Fleuriste::declencher_effet() const {
+void Fleuriste::declencher_effet(unigned int possesseur) const {
     cout << "Declenchement de l'effet de la carte Fleuriste" << endl;
     /*
     /// Effet de la FabriqueDeMeubles

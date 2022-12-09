@@ -12,6 +12,6 @@ public:
     ~Vignoble() override = default;
     Vignoble(const Vignoble& vignoble) = default;
     Batiment* clone() const override {return new Vignoble(*this);};
-    void declencher_effet() const override;
+    void declencher_effet(unigned int possesseur) const override;
 };
 #endif //MACHI_KORO_VIGNOBLE_H

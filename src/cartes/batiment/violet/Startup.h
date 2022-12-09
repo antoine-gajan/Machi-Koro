@@ -9,7 +9,7 @@ public:
     ~Startup() override = default;
     Startup(const Startup& startup) = default;
     Batiment* clone() const override {return new Startup(*this);};
-    void declencher_effet() const override;
+    void declencher_effet(unigned int possesseur) const override;
 };
 
 

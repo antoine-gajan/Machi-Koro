@@ -12,7 +12,7 @@ public:
     ~Ferme() override = default;
     Ferme(const Ferme& ferme) = default;
     Batiment* clone() const override {return new Ferme(*this);};
-    void declencher_effet() const override;
+    void declencher_effet(unigned int possesseur) const override;
 };
 
 #endif //MACHI_KORO_MASTER_RANCH_H

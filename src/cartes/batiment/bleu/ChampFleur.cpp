@@ -10,7 +10,7 @@ ChampFleur::ChampFleur() :
         "Champ"){};
 ///Constructeur de ChampFleur
 
-void ChampFleur::declencher_effet() const {
+void ChampFleur::declencher_effet(unigned int possesseur) const {
     //j'ai deliberement retire le parametre joueur actuel de declencher effet pour respecter la methode virtuelle declaree dans Batiment.h
     cout << "Activation de l'effet de ChampFleur" << endl;
     /*

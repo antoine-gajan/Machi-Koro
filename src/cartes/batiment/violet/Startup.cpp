@@ -11,7 +11,7 @@ Startup::Startup() :
     ///Constructeur de Startup
 }
 
-void Startup::declencher_effet() const{
+void Startup::declencher_effet(unigned int possesseur) const{
     /// Effet de la classe Startup
     std::cout << "Activation de l'effet de la startup." << std::endl;
 }

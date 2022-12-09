@@ -14,7 +14,7 @@ MaisonEdition::MaisonEdition():
 
 
 
-void MaisonEdition::declencher_effet() const{
+void MaisonEdition::declencher_effet(unigned int possesseur) const{
     /// Effet de la maison d'edition
     std::cout << "Activation de l'effet de la maison d'edition." << std::endl;
 

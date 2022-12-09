@@ -10,7 +10,7 @@ Chalutier::Chalutier() :
         "Bateau"){};
 ///Constructeur de Chalutier
 
-void Chalutier::declencher_effet() const{
+void Chalutier::declencher_effet(unigned int possesseur) const{
     //j'ai deliberement retire les parametres joueur actuel et val_des de declencher effet pour respecter la methode virtuelle declaree dans Batiment.h
     cout << "Activation de l'effet de Chalutier" << endl;
     /*

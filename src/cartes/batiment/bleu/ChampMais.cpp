@@ -10,7 +10,7 @@ ChampMais::ChampMais() :
         "Champ"){};
 ///Constructeur de Ferme
 
-void ChampMais::declencher_effet() const{
+void ChampMais::declencher_effet(unigned int possesseur) const{
     //j'ai deliberement retire le parametre joueur actuel de declencher effet pour respecter la methode virtuelle declaree dans Batiment.h
     cout << "Activation de l'effet de ChampMais" << endl;
     /*

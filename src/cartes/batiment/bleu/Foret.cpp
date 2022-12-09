@@ -10,7 +10,7 @@ Foret::Foret() :
         "Engrenage"){};
 ///Constructeur de Foret
 
-void Foret::declencher_effet() const {
+void Foret::declencher_effet(unigned int possesseur) const {
     //j'ai deliberement retire le parametre joueur actuel de declencher effet pour respecter la methode virtuelle declaree dans Batiment.h
     cout << "Activation de l'effet de Foret" << endl;
     /*

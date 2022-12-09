@@ -9,7 +9,7 @@ public:
     ~SushiBar() override = default;
     SushiBar(const SushiBar& sushiBar) = default;
     Batiment* clone() const override {return new SushiBar(*this);};
-    void declencher_effet() const override;
+    void declencher_effet(unigned int possesseur) const override;
   
 };
 

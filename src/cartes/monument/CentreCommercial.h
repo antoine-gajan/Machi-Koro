@@ -12,7 +12,7 @@ class CentreCommercial : public Monument {
         CentreCommercial* clone() const override {return new CentreCommercial(*this);};
 
         //*** Methodes ***//
-        void declencher_effet() const override;
+        void declencher_effet(unigned int possesseur) const override;
 };
 
 #endif //MACHI_KORO_CENTRECOMMERCIAL_H

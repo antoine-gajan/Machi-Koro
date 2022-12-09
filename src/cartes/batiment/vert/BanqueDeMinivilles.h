@@ -13,7 +13,7 @@ public:
     ~BanqueDeMinivilles() override = default;
     BanqueDeMinivilles(const BanqueDeMinivilles& banqueDeMinivilles) = default;
     Batiment* clone() const override {return new BanqueDeMinivilles(*this);};
-    void declencher_effet() const override;
+    void declencher_effet(unigned int possesseur) const override;
 
 };
 

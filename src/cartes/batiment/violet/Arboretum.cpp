@@ -13,7 +13,7 @@ Arboretum::Arboretum():
 
 
 
-void Arboretum::declencher_effet() const{
+void Arboretum::declencher_effet(unigned int possesseur) const{
     /// Effet de l'arboretum
     std::cout << "Activation de l'effet de l'arboretum." << std::endl;
 

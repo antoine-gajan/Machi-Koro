@@ -13,7 +13,7 @@ public:
     ~Epicerie() override = default;
     Epicerie(const Epicerie& epicerie) = default;
     Batiment* clone() const override {return new Epicerie(*this);};
-    void declencher_effet() const override;
+    void declencher_effet(unigned int possesseur) const override;
 
 };
 

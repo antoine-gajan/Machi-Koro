@@ -10,7 +10,7 @@ FabriqueDeMeubles::FabriqueDeMeubles()
                    "usine") {}
 
 
-void FabriqueDeMeubles::declencher_effet() const {
+void FabriqueDeMeubles::declencher_effet(unigned int possesseur) const {
     cout << "Declenchement de l'effet de la carte Fabrique de meubles" << endl;
     /*
     /// Effet de la FabriqueDeMeubles

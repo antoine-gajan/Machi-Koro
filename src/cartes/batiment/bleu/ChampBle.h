@@ -12,7 +12,7 @@ public:
     ~ChampBle() override = default;
     ChampBle(const ChampBle& champBle) = default;
     Batiment* clone() const override {return new ChampBle(*this);};
-    void declencher_effet() const override;
+    void declencher_effet(unigned int possesseur) const override;
 };
 
 #endif //MACHI_KORO_CHAMPBLE_H

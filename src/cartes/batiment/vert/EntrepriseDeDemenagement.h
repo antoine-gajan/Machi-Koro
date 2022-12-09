@@ -13,7 +13,7 @@ public:
     ~EntrepriseDeDemenagement() override = default;
     EntrepriseDeDemenagement(const EntrepriseDeDemenagement& entrepriseDeDemenagement) = default;
     Batiment* clone() const override {return new EntrepriseDeDemenagement(*this);};
-    void declencher_effet() const override;
+    void declencher_effet(unigned int possesseur) const override;
 };
 
 #endif //MACHI_KORO_ENTREPRISE_DE_DEMENAGEMENT_H

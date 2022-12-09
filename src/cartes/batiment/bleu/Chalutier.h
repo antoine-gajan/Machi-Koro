@@ -14,6 +14,6 @@ public:
     ~Chalutier() override = default;
     Chalutier(const Chalutier& chalutier) = default;
     Batiment* clone() const override {return new Chalutier(*this);};
-    void declencher_effet() const override;
+    void declencher_effet(unigned int possesseur) const override;
 };
 #endif //MACHI_KORO_MASTER_CHALUTIER_H

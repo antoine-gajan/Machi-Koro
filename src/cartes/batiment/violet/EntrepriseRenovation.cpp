@@ -11,7 +11,7 @@ EntrepriseRenovation::EntrepriseRenovation() :
     ///Constructeur de EntrepriseRenovation
 }
 
-void EntrepriseRenovation::declencher_effet() const{
+void EntrepriseRenovation::declencher_effet(unigned int possesseur) const{
     /// Effet de la classe Entreprise de Renovation
     std::cout << "Activation de l'effet de la Entreprise de renovation." << std::endl;
 }

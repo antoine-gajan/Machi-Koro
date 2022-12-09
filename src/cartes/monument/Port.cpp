@@ -9,6 +9,6 @@ Port::Port()
     /// Constructeur de Port
 }
 
-void Port::declencher_effet() const {
+void Port::declencher_effet(unigned int possesseur) const {
     std::cout << "Activation de l'effet du Port" << std::endl;
 }

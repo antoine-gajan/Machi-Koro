@@ -9,6 +9,6 @@ FabriqueDuPereNoel::FabriqueDuPereNoel() :
     /// Constructeur de Centre commercial
 }
 
-void FabriqueDuPereNoel::declencher_effet() const {
+void FabriqueDuPereNoel::declencher_effet(unigned int possesseur) const {
     std::cout << "Activation de l'effet de la Fabrique du Pere Noel" << std::endl;
 }
