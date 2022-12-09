@@ -83,7 +83,6 @@ public:
     unsigned int get_nb_joueurs_min() const {return nb_joueurs_min;};
     unsigned int get_nb_joueurs_max() const {return nb_joueurs_max;};
     unsigned int get_nb_monuments_win() const {return nb_monuments_win;};
-    vector<Batiment*> get_starter() const;
 
     bool get_est_edition() const {return est_edition;};
     /// *** Récupération des monuments et des batiments *** ///

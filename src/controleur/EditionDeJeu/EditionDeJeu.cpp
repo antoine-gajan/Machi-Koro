@@ -189,17 +189,6 @@ EditionDeJeu::EditionDeJeu(const string& nom_edition) : nom(nom_edition) {
     }
 }
 
-vector<Batiment*> EditionDeJeu::get_starter() const {
-    /// Retourne les batiments de départ de l'édition
-    vector<Batiment*> starter;
-    for (auto it = batiment.begin(); it != batiment.end(); it++) {
-        if (it->first->get_nom() == "Boulangerie" || it->first->get_nom() == "ChampBle") {
-            starter.push_back(it->first);
-        }
-    }
-    return starter;
-}
-
 EditionDeJeu::~EditionDeJeu() {
     /// Destructeur d'Edition de Jeu
 

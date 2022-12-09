@@ -4,51 +4,54 @@ Partie::Partie(EditionDeJeu* edition, vector<EditionDeJeu *> extensions) : nb_mo
     ///Constructeur de Partie
 
     //Initialisation des attributs
-    unsigned int max_joueurs = 0;
+    unsigned int max_joueurs = edition->get_nb_joueurs_max();
+    unsigned int nb_monuments = edition->get_nb_monuments_win();
 
-    ///TODO : Revoir la fonction car modification
 
     vector<Batiment*> starter_bat;
-    // Détermination du nombre de monuments pour gagner et des batiments de départ
-    for(auto edition : editions){
-        if(edition->get_nb_joueurs_max() > max_joueurs){
-            max_joueurs = edition->get_nb_joueurs_max();
-        }
-        if(edition->get_nb_monuments_win() > nb_monuments_win){
-            nb_monuments_win = edition->get_nb_monuments_win();
-        }
-        // Ajout des monuments et des batiments starter
-        list_monuments.insert(list_monuments.end(), edition->get_monument().begin(), edition->get_monument().end());
-        starter_bat.insert(starter_bat.end(), edition->get_starter().begin(), edition->get_starter().end());
-        // Ajout des batiments à acheter au fil de la partie
-
-        for (auto batiment : edition->get_batiment()){
-            // On vérifie que c'est pas un batiment starter
-            if (batiment.first->get_nom() != "Boulangerie" && batiment.first->get_nom() != "Boulangerie"){
-                bool est_present = false;
-                // Si le batiment n'est pas dans la list_batiments, on l'ajoute
-                for (auto bat : list_batiments){
-                    // Si le batiment est déjà dans la liste, on augmente le nombre d'exemplaires
-                    if (bat.first->get_nom() == batiment.first->get_nom()){
-                        bat.second += batiment.second;
-                        est_present = true;
-                    }
-                }
-                // Sinon, on ajoute le batiment à la liste des batiments
-                if (!est_present){
-                    list_batiments.insert(pair<Batiment* const, unsigned int>(batiment.first->clone(), batiment.second));
-                }
-            }
+    for (auto bat : edition->get_batiment()) {
+        for (unsigned int i = 0; i < bat.second; i++) {
+            ajout_batiment(bat.first);
         }
     }
+    for (auto monu : edition->get_monument()) {
+        list_monuments.push_back(monu);
+    }
+
+
+    for (auto ext : extensions) {
+        for (auto bat : ext->get_batiment()) {
+            for (unsigned int i = 0; i < bat.second; i++) {
+                ajout_batiment(bat.first);
+            }
+        }
+        for (auto monu : ext->get_monument()) {
+            list_monuments.push_back(monu);
+        }
+
+        if (ext->get_nb_joueurs_max() > max_joueurs) {
+            max_joueurs = ext->get_nb_joueurs_max();
+        }
+
+        if (ext->get_nb_monuments_win() > nb_monuments) {
+            nb_monuments = ext->get_nb_monuments_win();
+        }
+    }
+    // Initialisation du starter
+    starter_bat = get_starter();
+
     // Ajout des joueurs
 
     for (unsigned int i = 0; i < max_joueurs; i++) {
         // Si plus de 2 joueurs, l'ajout devient optionnel
-        if (i > 2) {
+        if (i >= 2) {
             cout << "Voulez-vous ajouter un joueur ? (0 : non, 1 : oui)" << endl;
             int choix;
             cin >> choix;
+            while (choix != 0 && choix != 1) {
+                cout << "Veuillez entrer 0 ou 1" << endl;
+                cin >> choix;
+            }
             if (choix == 0) {
                 break;
             }
@@ -82,6 +85,9 @@ Partie::Partie(EditionDeJeu* edition, vector<EditionDeJeu *> extensions) : nb_mo
                     break;
                 case 3:
                     tab_joueurs.push_back(new Joueur(nom, list_monuments, starter_bat, 3, defensif));
+                    break;
+                default :
+                    cout << "Erreur de strategie" << endl;
                     break;
             }
         }
@@ -120,12 +126,19 @@ Partie::Partie(EditionDeJeu* edition, vector<EditionDeJeu *> extensions) : nb_mo
 
 void Partie::ajout_batiment(Batiment *batiment) {
     ///Ajoute un batiment dans la liste des batiments
-    for (auto bat: list_batiments) {
-        if (batiment->get_nom() == bat.first->get_nom()) {
-            bat.second++;
+    if (list_batiments.empty()) {
+        list_batiments.insert(pair<Batiment* const, unsigned int>(batiment->clone(), 1));
+    }
+    else {
+        bool est_present = false;
+        for (auto bat : list_batiments){
+            if (bat.first->get_nom() == batiment->get_nom()){
+                list_batiments[bat.first] += 1;
+                est_present = true;
+            }
         }
-        else {
-            list_batiments.insert(pair<Batiment*, unsigned int>(batiment->clone(), 1));
+        if (!est_present){
+            list_batiments.insert(pair<Batiment* const, unsigned int>(batiment->clone(), 1));
         }
     }
 }
@@ -139,6 +152,21 @@ vector<Batiment*> Partie::map_to_vector(map<Batiment*, unsigned int> map_batimen
         }
     }
     return vector_batiments;
+}
+
+vector<Batiment *> Partie::get_starter() {
+    if (list_batiments.empty()) {
+        cout << "Erreur : la liste des batiments est vide" << endl;
+        return {};
+    }
+    else {
+        vector<Batiment*> starter;
+        for (auto bat : list_batiments) {
+            if (bat.first->get_nom() == "Boulangerie" && bat.first->get_nom() == "ChampBle")
+                starter.push_back(bat.first);
+        }
+        return starter;
+    }
 }
 
 void Partie::jouer_partie() {

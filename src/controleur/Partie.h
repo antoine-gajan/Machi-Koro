@@ -48,8 +48,9 @@ public:
     void acheter_carte(Joueur* joueur_actuel);
     void acheter_monu(Joueur* joueur_actuel);//sous fonction appelée dans acheter_carte
     void acheter_bat(Joueur* joueur_actuel);//sous fonction appelée dans acheter_carte
-
     void echanger_argent(Joueur* joueur1,Joueur* joueur2);
+
+    vector<Batiment *> get_starter();
 };
 
 #endif //MACHI_KORO_PARTIE_H
