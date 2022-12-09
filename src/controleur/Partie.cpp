@@ -1,4 +1,5 @@
 #include "Partie.h"
+#include <algorithm>
 
 Partie::Partie(EditionDeJeu* edition, vector<EditionDeJeu *> extensions) : nb_monuments_win(0), joueur_actuel(0) {
     ///Constructeur de Partie
@@ -154,6 +155,15 @@ vector<Batiment*> Partie::map_to_vector(map<Batiment*, unsigned int> map_batimen
             vector_batiments.push_back(batiment.first);
         }
     }
+
+    // Mélange du vecteur
+    // Obtention d'un nombre aleatoire (seed)
+    random_device rd;
+    mt19937 g(rd());
+
+    // Mélange du vecteur avec le seed
+    shuffle(vector_batiments.begin(), vector_batiments.end(), g);
+
     return vector_batiments;
 }
 
