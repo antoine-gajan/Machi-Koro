@@ -35,13 +35,12 @@ class Joueur {
         strat_IA get_strategie() const {return strategie;};
         const map<Monument*, bool>& get_liste_monument() const {return liste_monument;};
         map<couleur_bat, map<Batiment*, unsigned int>> get_liste_batiment() const {return liste_batiment;};
-        map<Batiment*, unsigned int> get_liste_batiment(couleur_bat couleur);
-
+        map<Batiment*, unsigned int> get_liste_batiment(couleur_bat couleur) {return liste_batiment[couleur];};
         vector<unsigned int> get_repartition_argent() const;
         vector<Monument*> get_monument_jouables() const;
 
         /***** Setters *****/
-        void set_argent(unsigned int arg);
+        void set_argent(unsigned int arg) {argent = arg;};
         void set_liste_batiment(map<couleur_bat, map<Batiment*, unsigned int>>& liste_bat);
 
         /***** Autres methodes *****/
@@ -49,7 +48,6 @@ class Joueur {
         void desactiver_monument(Monument *mon);
         void ajouter_batiment(Batiment *bat);
         void retirer_batiment(Batiment *bat);
-
         void afficher_cartes() const;
         void afficher_joueur() const;
 };

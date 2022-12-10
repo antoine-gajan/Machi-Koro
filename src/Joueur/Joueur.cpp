@@ -6,6 +6,7 @@ using namespace std;
 Joueur::Joueur(const string& nom, const vector<Monument *>&list_mon, const vector<Batiment *>&list_bat, unsigned int arg_depart, strat_IA stratIa)
 : strategie(stratIa), est_ia(stratIa != none), nom(nom), argent(arg_depart)
 {
+    /// Constructeur de Joueur
     for (auto mon : list_mon)
         liste_monument[mon] = false;
     for (auto bat : list_bat)
@@ -16,40 +17,44 @@ vector<unsigned int> Joueur::get_repartition_argent() const {
     /// Repartition de l'argent en fonction des types de pieces
     vector<unsigned int> repartition;
     unsigned int temp = argent;
+
     repartition.push_back(temp/10);
     temp = temp%10;
     repartition.push_back(temp/5);
     temp = temp%5;
     repartition.push_back(temp/1);
+
     return repartition;
 }
 
 Joueur::~Joueur() {
+    /// Destructeur de Joueur
     liste_monument.clear();
 
     // Iteration sur les couleurs de batiments
-    for (auto it = liste_batiment.begin(); it != liste_batiment.end(); ++it) {
+    for (auto & it : liste_batiment) {
         // Iteration sur les batiments
-        it->second.clear();
+        it.second.clear();
     }
+
     liste_batiment.clear();
 }
 
 vector<Monument*> Joueur::get_monument_jouables() const {
+    /// Retourne la liste des monuments actifs
     vector<Monument*> liste_monument_jouables;
+
     for (auto it : liste_monument) {
         if (it.second)
             liste_monument_jouables.push_back(it.first);
     }
+
     return liste_monument_jouables;
 }
 
-void Joueur::set_argent(unsigned int arg){
-    /// Mise a jour de l'argent du joueur
-    argent = arg;
-}
 
 void Joueur::activer_monument(Monument *mon) {
+    /// Activer un monument passé en paramètre
     if (mon == nullptr) {
         throw invalid_argument("Le monument ne peut pas être nul");
     }
@@ -63,6 +68,7 @@ void Joueur::activer_monument(Monument *mon) {
 }
 
 void Joueur::desactiver_monument(Monument *mon) {
+    /// Désactiver un monument passé en paramètre
     if (mon == nullptr) {
         throw invalid_argument("Le monument ne peut pas être nul");
     }
@@ -80,8 +86,10 @@ void Joueur::ajouter_batiment(Batiment *bat) {
     if (bat == nullptr) {
         throw invalid_argument("Le batiment ne peut pas être nul");
     }
+
     // Recuperation de la couleur du batiment
     couleur_bat couleur = bat->get_couleur();
+
     // On regarde si le joueur possede deja un exemplaire du batiment
     for (auto batiment : liste_batiment[couleur]){
         if (batiment.first == bat){
@@ -90,7 +98,7 @@ void Joueur::ajouter_batiment(Batiment *bat) {
                 cout << "Le joueur" << nom << " possede deja un exemplaire du batiment violet" << bat->get_nom()<<endl;
                 return;
             }
-            // Sinon, on augmente le nombre d'exemplaires possedes
+            // Sinon, on augmente le nombre d'exemplaires de celui-ci
             else{
                 liste_batiment[couleur][batiment.first]++;
                 cout << "Ajout du batiment " << bat->get_nom() << " au joueur " << nom << endl;
@@ -99,6 +107,7 @@ void Joueur::ajouter_batiment(Batiment *bat) {
             }
         }
     }
+
     // Si aucun exemplaire du batiment, on l'ajoute
     liste_batiment[couleur].insert(pair<Batiment*, unsigned int> (bat, 1));
     cout << "Ajout du batiment " << bat->get_nom() << " au joueur " << nom << endl;
@@ -108,6 +117,7 @@ void Joueur::ajouter_batiment(Batiment *bat) {
 
 void Joueur::retirer_batiment(Batiment *bat) {
     /// Retire 1 exemplaire du batiment d'un joueur
+
     if (bat == nullptr) {
         throw invalid_argument("Le batiment ne peut pas être nul");
     }
@@ -141,6 +151,8 @@ void Joueur::set_liste_batiment(map<couleur_bat, map<Batiment*, unsigned int>>& 
 
 
 void Joueur::afficher_cartes() const {
+    /// Affiche toutes les cartes du Joueur
+
     cout << "Cartes du joueur " << endl;
 
     cout << "Monuments : " << endl;
@@ -164,6 +176,8 @@ void Joueur::afficher_cartes() const {
 }
 
 void Joueur::afficher_joueur() const {
+    /// Affiche les informations d'un joueur
+
     cout << "\n********************" << endl;
     cout << "Joueur : \"" << nom ;
     if (est_ia){
@@ -175,10 +189,4 @@ void Joueur::afficher_joueur() const {
     cout << "Argent : " << argent << endl;
     afficher_cartes();
     cout << "********************\n" << endl;
-}
-
-
-map<Batiment*, unsigned int> Joueur::get_liste_batiment(couleur_bat couleur)  {
-    /// Retourne la liste des batiments d'une couleur
-    return liste_batiment[couleur];
 }
