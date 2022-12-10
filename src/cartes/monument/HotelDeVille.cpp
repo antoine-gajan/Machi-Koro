@@ -5,7 +5,7 @@ HotelDeVille::HotelDeVille() :
              "HotelDeVille",
              0,
              "Une fois par tour vous pouvez relancer vos des",
-             "../../assets/Monuments/HotelDeVille.jpg") {
+             "../../assets/monuments/HotelDeVille.jpg") {
     /// Constructeur de HotelDeVille
 }
 
@@ -14,5 +14,5 @@ void HotelDeVille::declencher_effet(unsigned int possesseur, int bonus) const {
 }
 
 void HotelDeVille::activer() {
-    set_image("../../assets/Monuments/HotelDeVille.jpg");
+    set_image("../../assets/monuments/HotelDeVille.jpg");
 }

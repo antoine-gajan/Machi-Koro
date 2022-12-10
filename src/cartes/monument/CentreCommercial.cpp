@@ -5,7 +5,7 @@ CentreCommercial::CentreCommercial() :
              "CentreCommercial",
              10,
              "Les etablissement rouge et vert vous rapportent une piece de plus",
-             "../../assets/Monuments/CentreCommercial-travaux.png") {
+             "../../assets/monuments/CentreCommercial-travaux.png") {
     /// Constructeur de Centre commercial
 }
 
@@ -14,5 +14,5 @@ void CentreCommercial::declencher_effet(unsigned int possesseur, int bonus) cons
 }
 
 void CentreCommercial::activer() {
-    set_image("../../assets/Monuments/CentreCommercial-active.png");
+    set_image("../../assets/monuments/CentreCommercial-active.png");
 }

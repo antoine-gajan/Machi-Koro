@@ -5,7 +5,7 @@ ParcAttraction::ParcAttraction() :
              "ParcAttraction",
              16,
              "Si le jet de de est un double vous pouvez rejouer",
-             "../../assets/Monuments/ParcAttraction-travaux.png") {
+             "../../assets/monuments/ParcAttraction-travaux.png") {
     /// Constructeur de ParcAttraction
 }
 
@@ -14,5 +14,5 @@ void ParcAttraction::declencher_effet(unsigned int possesseur, int bonus) const 
 }
 
 void ParcAttraction::activer(){
-    set_image("../../assets/Monuments/ParcAttraction-active.png");
+    set_image("../../assets/monuments/ParcAttraction-active.png");
 }
