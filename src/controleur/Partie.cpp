@@ -580,14 +580,6 @@ void Partie::don_argent(Joueur* j1, unsigned int argent, Joueur* j2){
     }
 }
 
-void Partie::echange_argent(Joueur* j1, unsigned int arg1, Joueur* j2, unsigned int arg2){
-    /// Echange d'argent entre j1 et j2
-    // Don d'arg1 de j1 a j2
-    don_argent(j1, arg1, j2);
-    // Don d'arg2 de j2 a j1
-    don_argent(j2, arg2, j1);
-}
-
 vector<Batiment*> Partie::map_to_vector(const map<Batiment*, unsigned int>& map_batiments){
     /// Retourne un vecteur avec l'adresse des batiments
     vector<Batiment*> vector_batiments;

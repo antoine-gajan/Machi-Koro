@@ -74,9 +74,6 @@ public:
 
     static void don_argent(Joueur* j1, unsigned int argent, Joueur* j2);
 
-    static void echange_argent(Joueur* j1, unsigned int arg1, Joueur* j2, unsigned int arg2);
-
-
     //********** Methodes non statiques **********//
     void ajout_batiment(Batiment *batiment);
 
