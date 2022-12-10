@@ -38,7 +38,7 @@ Joueur::~Joueur() {
 vector<Monument*> Joueur::get_monument_jouables() const {
     vector<Monument*> liste_monument_jouables;
     for (auto it : liste_monument) {
-        if (!it.second)
+        if (it.second)
             liste_monument_jouables.push_back(it.first);
     }
     return liste_monument_jouables;
@@ -87,14 +87,14 @@ void Joueur::ajouter_batiment(Batiment *bat) {
         if (batiment.first == bat){
             // Si l'utilisateur a deja un exemplaire de ce batiment et qu'il est violet : erreur
             if (bat->get_couleur() == Violet){
-                cout << "Le joueur" << nom << "possede deja un exemplaire du batiment violet" << bat->get_nom()<<endl;
+                cout << "Le joueur" << nom << " possede deja un exemplaire du batiment violet" << bat->get_nom()<<endl;
                 return;
             }
             // Sinon, on augmente le nombre d'exemplaires possedes
             else{
                 liste_batiment[couleur][batiment.first]++;
                 cout << "Ajout du batiment " << bat->get_nom() << " au joueur " << nom << endl;
-                cout << "Le joueur " << nom << "possede " << batiment.second << " exemplaires du batiment " << bat->get_nom() << endl;
+                cout << "Le joueur " << nom << " possede " << batiment.second << " exemplaires du batiment " << bat->get_nom() << endl;
                 return;
             }
         }
@@ -102,7 +102,7 @@ void Joueur::ajouter_batiment(Batiment *bat) {
     // Si aucun exemplaire du batiment, on l'ajoute
     liste_batiment[couleur].insert(pair<Batiment*, unsigned int> (bat, 1));
     cout << "Ajout du batiment " << bat->get_nom() << " au joueur " << nom << endl;
-    cout << "Le joueur " << nom << "possede 1 exemplaire du batiment " << bat->get_nom() << endl;
+    cout << "Le joueur " << nom << " possede 1 exemplaire du batiment " << bat->get_nom() << endl;
 }
 
 
@@ -177,3 +177,8 @@ void Joueur::afficher_joueur() const {
     cout << "********************\n" << endl;
 }
 
+
+map<Batiment*, unsigned int> Joueur::get_liste_batiment(couleur_bat couleur)  {
+    /// Retourne la liste des batiments d'une couleur
+    return liste_batiment[couleur];
+}

@@ -190,24 +190,31 @@ void Partie::ajout_batiment(Batiment *batiment) {
 
 bool Partie::acheter_carte() {
     //fonction qui permet a un joueur donne d'acheter une carte (batiment ou monument)
-    string choix;
+    int choix = -1;
 
-    cout<<"Que voulez vous faire, acheter un batiment (b), un monument (m), ou rien (r)?\n"<<endl;
-    cin>>choix;
+    while(choix < 1 || choix > 3){
+        cout << "Voulez-vous acheter un batiment ou un monument ? (1 : batiment, 2 : monument, 3 : rien) :" << endl;
+        cin >> choix;
+    }
 
-    if(choix == "b")
-        return acheter_bat();
-    else if(choix == "m")
-        return acheter_monu();
-    else
-        return false;
+    switch (choix){
+        case 1:
+            return acheter_bat();
+        case 2:
+            return acheter_monu();
+        case 3:
+            return false;
+        default:
+            cout << "Erreur de choix" << endl;
+            return false;
+    }
 }
 
 bool Partie::acheter_monu() {
     //fonction qui permet a un joueur donne d'acheter un monument
     Monument* mon_picked;
     Joueur *joueur_act = tab_joueurs[joueur_actuel];
-    unsigned int choix = 0;
+    int choix = -1;
     unsigned int pos = 1;
     vector<Monument*> monuments_dispo;
 
@@ -246,7 +253,7 @@ bool Partie::acheter_bat() {
     //fonction qui permet a un joueur donne d'acheter un batiment
     Batiment* bat_picked;
     Joueur *joueur_act = tab_joueurs[joueur_actuel];
-    unsigned int choix = 0;
+    int choix = -1;
     vector<Batiment*> bat_shop = shop->get_contenu_v();
 
     cout<<"Quel est le numero du batiment que vous voulez acheter?"<<endl;
@@ -353,8 +360,8 @@ bool Partie::transfert_argent(unsigned int indice_joueur1, unsigned int indice_j
 
 void Partie::jouer_partie() {
     joueur_actuel = 0;
-
     /// Tant que le joueur precedent n'a pas gagne on continue la partie
+
     while (!est_gagnant((joueur_actuel + tab_joueurs.size() - 1))%tab_joueurs.size()) {
         jouer_tour();
     }
@@ -372,6 +379,8 @@ void Partie::jouer_tour() {
     de_1 = rand() % 6 + 1;
     de_2 = 0;
     de_casse = rand() % 50 + 1;
+
+    tab_joueurs[joueur_actuel]->afficher_joueur();
 
     // Si le joueur a un centre commercial
     auto it_cc = find_if(monuments_joueurs.begin(), monuments_joueurs.end(), [](Monument* m){return m->get_nom() == "CentreCommercial";});
@@ -401,6 +410,8 @@ void Partie::jouer_tour() {
             mon->declencher_effet(joueur_actuel);
         }
     }
+
+
 
     cout << "Resultat du premier de : " << de_1 << endl;
 
@@ -500,6 +511,7 @@ void Partie::jouer_tour() {
     while (!pioche->est_vide() && shop->get_nb_tas_reel() < shop->get_nb_tas_max()) {
         shop->completer_shop(pioche->get_carte());
     }
+
 
     cout << "Fin du tour" << endl;
 }
