@@ -1,12 +1,11 @@
 #include "Partie.h"
 #include <algorithm>
 
-Partie::Partie(EditionDeJeu* edition, const vector<EditionDeJeu *>& extensions) : nb_monuments_win(0), joueur_actuel(0), de_1(0), de_2(0) {
+Partie::Partie(EditionDeJeu* edition, const vector<EditionDeJeu *>& extensions) : nb_monuments_win(edition->get_nb_monuments_win()), joueur_actuel(0), de_1(0), de_2(0) {
     ///Constructeur de Partie
 
     //Initialisation des variables utiles
     unsigned int max_joueurs = edition->get_nb_joueurs_max();
-    unsigned int nb_monuments = edition->get_nb_monuments_win();
     unsigned int format = 0;
     unsigned int nb_tas = 0;
 
@@ -35,8 +34,8 @@ Partie::Partie(EditionDeJeu* edition, const vector<EditionDeJeu *>& extensions) 
                 max_joueurs = ext->get_nb_joueurs_max();
             }
 
-            if (ext->get_nb_monuments_win() > nb_monuments) {
-                nb_monuments = ext->get_nb_monuments_win();
+            if (ext->get_nb_monuments_win() > nb_monuments_win) {
+                nb_monuments_win = ext->get_nb_monuments_win();
             }
         }
     }
@@ -66,6 +65,8 @@ Partie::Partie(EditionDeJeu* edition, const vector<EditionDeJeu *>& extensions) 
         cout << "\nLe jouer est-il un humain ? (1 : oui, 0 : non)  :" << endl;
         bool humain;
         cin >> humain;
+
+
         if (humain) {
             tab_joueurs.push_back(new Joueur(nom, list_monuments, starter_bat, 3));
         }
@@ -163,10 +164,16 @@ vector<Batiment *> Partie::get_starter() {
 }
 
 void Partie::jouer_partie() {
+    joueur_actuel = 0;
+    Joueur* joueur_pointe;
+    joueur_pointe = tab_joueurs.at(joueur_actuel);
     ///Fonction principale pour jouer une partie
 
+    while(!est_gagnant(joueur_pointe)){
+        jouer_tour();
+        joueur_pointe = tab_joueurs.at(joueur_actuel);
+    }
 }
-
 
 void Partie::jouer_tour() {
     unsigned int de_casse;
@@ -185,7 +192,6 @@ void Partie::jouer_tour() {
         centre_c = true;
     }
 
-
     /// Monument avant le jet de dé
     auto it_gare = find_if(monuments_joueurs.begin(), monuments_joueurs.end(), [](Monument* m){return m->get_nom() == "Gare";});
     if (it_gare != monuments_joueurs.end()){
@@ -194,7 +200,6 @@ void Partie::jouer_tour() {
     }
     if (de_2 != 0)
         deux_des = true;
-
 
     /// Monument apres le jet de dé
     for (auto mon : monuments_joueurs) {
@@ -208,21 +213,30 @@ void Partie::jouer_tour() {
 
     /// Activations des effets des batiments
     /// En premier ce sont les batiments rouges des autres joueurs
-    int j_prec = (int)((joueur_actuel + tab_joueurs.size() - 1) % joueur_actuel);
+
+    int j_prec = (int)((joueur_actuel + tab_joueurs.size() - 1) % tab_joueurs.size());
+
+    cout<<tab_joueurs[joueur_actuel]->get_liste_batiment().begin()->second.begin()->first->get_nom();
     for (int i = j_prec; i >= 0; i--) {
-        for (auto it : tab_joueurs[i]->get_liste_batiment(Rouge)) {
-            if (it.first->get_type() == "Restaurant" && centre_c) {
-                for (unsigned int effectif = 0; effectif < it.second; effectif++) {
-                    it.first->declencher_effet(i, 1);
+
+        if (tab_joueurs[i]->get_liste_batiment().find(Rouge) != tab_joueurs[i]->get_liste_batiment().end()){
+
+            for (auto it : tab_joueurs[i]->get_liste_batiment(Rouge)) {
+                if (it.first->get_type() == "Restaurant" && centre_c) {
+                    for (unsigned int effectif = 0; effectif < it.second; effectif++) {
+                        it.first->declencher_effet(i, 1);
+                    }
                 }
-            }
-            else {
-                for (unsigned int effectif = 0; effectif < it.second; effectif++) {
-                    it.first->declencher_effet(i);
+                else {
+                    for (unsigned int effectif = 0; effectif < it.second; effectif++) {
+                        it.first->declencher_effet(i);
+                    }
                 }
             }
         }
+
     }
+
     for (unsigned int i  = joueur_actuel + 1 ; i < tab_joueurs.size(); i++) {
         for (auto it : tab_joueurs[i]->get_liste_batiment(Rouge)) {
             for (unsigned int effectif = 0; effectif < it.second; effectif++) {
