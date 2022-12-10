@@ -50,7 +50,7 @@ Batiment * Shop::acheter_batiment(Batiment *bat) {
 void Shop::affiche_shop() {
     ///Affiche le shop
     cout << "Shop :" << endl;
-    for (auto it = contenu.begin(); it != contenu.end(); it++) {
-        cout << it->first->get_nom() << " : " << it->second << endl;
+    for (auto & it : contenu) {
+        cout << it.first->get_nom() << " : " << it.second << endl;
     }
 }

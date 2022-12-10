@@ -23,6 +23,9 @@ include_directories(controleur/EditionDeJeu)
 add_executable(src
         main.cpp
 
+        controleur/utils.cpp
+        controleur/utils.h
+
         Joueur/Joueur.cpp
         Joueur/Joueur.h
 

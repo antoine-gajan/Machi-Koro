@@ -4,8 +4,8 @@
 Pioche::Pioche(const vector<Batiment*>& batiments) {
     /// Constructeur de la classe Pioche
 
-    for (size_t i = 0; i < batiments.size(); i++) {
-        contenu.push(batiments[i]);
+    for (auto batiment : batiments) {
+        contenu.push(batiment);
     }
 }
 

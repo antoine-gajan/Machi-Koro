@@ -12,7 +12,7 @@ class Shop{
         map<Batiment*, unsigned int> contenu;
     public:
         /**** Constructeur et destructeur ****/
-        Shop(unsigned int nb_tas);
+        explicit Shop(unsigned int nb_tas);
         ~Shop();
 
         /**** Getters ****/

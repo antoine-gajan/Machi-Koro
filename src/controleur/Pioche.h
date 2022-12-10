@@ -14,7 +14,7 @@ class Pioche {
         std::stack<Batiment *> contenu;
 
     public:
-        Pioche(const vector<Batiment*>& batiments);
+        explicit Pioche(const vector<Batiment*>& batiments);
         Pioche() = default;
         ~Pioche() = default;
         bool est_vide() {return contenu.empty();};
