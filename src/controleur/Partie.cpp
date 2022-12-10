@@ -15,8 +15,9 @@ Partie::Partie(EditionDeJeu* edition, const vector<EditionDeJeu *>& extensions) 
             ajout_batiment(bat.first);
         }
     }
+
     for (auto monu : edition->get_monument()) {
-        list_monuments.push_back(monu);
+        list_monuments.push_back(monu->clone());
     }
 
     if (!extensions.empty()) {
@@ -27,16 +28,16 @@ Partie::Partie(EditionDeJeu* edition, const vector<EditionDeJeu *>& extensions) 
                 }
             }
             for (auto monu : ext->get_monument()) {
-                list_monuments.push_back(monu);
+                list_monuments.push_back(monu->clone());
             }
 
-            if (ext->get_nb_joueurs_max() > max_joueurs) {
+            if (ext->get_nb_joueurs_max() > max_joueurs)
                 max_joueurs = ext->get_nb_joueurs_max();
-            }
 
-            if (ext->get_nb_monuments_win() > nb_monuments_win) {
+
+            if (ext->get_nb_monuments_win() > nb_monuments_win)
                 nb_monuments_win = ext->get_nb_monuments_win();
-            }
+
         }
     }
 
@@ -72,9 +73,7 @@ Partie::Partie(EditionDeJeu* edition, const vector<EditionDeJeu *>& extensions) 
         }
         // Demande de la strategie IA
         else {
-            unsigned int strategie;
-            cout << "\nQuelle est la strategie du joueur ? (1 : aleatoire, 2 : agressive, 3 : defensif) :" << endl;
-            cin >> strategie;
+            unsigned int strategie = -1;
             while (strategie < 1 || strategie > 3) {
                 cout << "\nQuelle est la strategie du joueur ? (1 : aleatoire, 2 : agressive, 3 : defensif) :" << endl;
                 cin >> strategie;
@@ -129,6 +128,46 @@ Partie::Partie(EditionDeJeu* edition, const vector<EditionDeJeu *>& extensions) 
     cout << "Bon jeu !" << endl;
 }
 
+vector<Batiment *> Partie::get_starter() {
+    if (list_batiments.empty()) {
+        cout << "Erreur : la liste des batiments est vide" << endl;
+        return {};
+    }
+    else {
+        vector<Batiment*> starter;
+        for (auto bat : list_batiments) {
+            if (bat.first->get_nom() == "Boulangerie" ||
+                bat.first->get_nom() == "ChampBle")
+                starter.push_back(bat.first);
+            if (starter.size() == 2)
+                break;
+        }
+        return starter;
+    }
+}
+
+Partie::~Partie() {
+    /// Destructeur de la classe Partie
+    // Destruction des joueurs
+    for (auto joueur : tab_joueurs){
+        delete joueur;
+    }
+
+    // Destruction des batiments
+    for (auto batiment : list_batiments){
+        delete batiment.first;
+    }
+
+    // Destruction des monuments
+    for (auto monument : list_monuments){
+        delete monument;
+    }
+
+    delete shop;
+    delete pioche;
+}
+
+///// ***** A VOIR ***** /////
 void Partie::ajout_batiment(Batiment *batiment) {
     ///Ajoute un batiment dans la liste des batiments
     if (list_batiments.empty()) {
@@ -145,21 +184,6 @@ void Partie::ajout_batiment(Batiment *batiment) {
         if (!est_present){
             list_batiments.insert(pair<Batiment* const, unsigned int>(batiment->clone(), 1));
         }
-    }
-}
-
-vector<Batiment *> Partie::get_starter() {
-    if (list_batiments.empty()) {
-        cout << "Erreur : la liste des batiments est vide" << endl;
-        return {};
-    }
-    else {
-        vector<Batiment*> starter;
-        for (auto bat : list_batiments) {
-            if (bat.first->get_nom() == "Boulangerie" && bat.first->get_nom() == "ChampBle")
-                starter.push_back(bat.first);
-        }
-        return starter;
     }
 }
 
