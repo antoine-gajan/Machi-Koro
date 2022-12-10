@@ -6,6 +6,7 @@
 #include "Joueur.h"
 #include "Shop.h"
 #include "Pioche.h"
+#include <vector>
 
 class Partie {
 private:
@@ -15,6 +16,8 @@ private:
 
     unsigned int joueur_actuel;
     unsigned int nb_monuments_win;
+    unsigned int de_1;
+    unsigned int de_2;
 
     Shop* shop;
     Pioche* pioche;
@@ -49,6 +52,7 @@ public:
     void acheter_monu(unsigned int indice_joueur_actuel);//sous fonction appelee dans acheter_carte
     void acheter_bat(unsigned int indice_joueur_actuel);//sous fonction appelee dans acheter_carte
     bool echanger_argent(unsigned int indice_joueur1, unsigned int indice_joueur2, unsigned int somme);
+    void rejouer_tour();
 
     vector<Batiment *> get_starter();
 };

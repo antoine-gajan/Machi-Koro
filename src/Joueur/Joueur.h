@@ -35,6 +35,7 @@ class Joueur {
         strat_IA get_strategie() const {return strategie;};
         const map<Monument*, bool>& get_liste_monument() const {return liste_monument;};
         map<couleur_bat, map<Batiment*, unsigned int>> get_liste_batiment() const {return liste_batiment;};
+        map<Batiment*, unsigned int> get_liste_batiment(couleur_bat couleur) const {return liste_batiment.at(couleur);};
 
         vector<unsigned int> get_repartition_argent() const;
         vector<Monument*> get_monument_jouables() const;

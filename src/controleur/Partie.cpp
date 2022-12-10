@@ -1,7 +1,7 @@
 #include "Partie.h"
 #include <algorithm>
 
-Partie::Partie(EditionDeJeu* edition, vector<EditionDeJeu *> extensions) : nb_monuments_win(0), joueur_actuel(0) {
+Partie::Partie(EditionDeJeu* edition, vector<EditionDeJeu *> extensions) : nb_monuments_win(0), joueur_actuel(0), de_1(0), de_2(0) {
     ///Constructeur de Partie
 
     //Initialisation des variables utiles
@@ -189,29 +189,118 @@ void Partie::jouer_partie() {
 
 
 void Partie::jouer_tour() {
-    ///Fonction pour jouer un tour
-    Joueur *j_actuel = tab_joueurs[joueur_actuel];
-    if (est_gagnant(j_actuel)) {
-        cout << "Le joueur " << j_actuel->get_nom() << " a gagne la partie !" << endl;
-        return;
+    unsigned int de_casse;
+    bool deux_des = false;
+    bool centre_c = false;
+    vector <Monument*> monuments_joueurs = tab_joueurs[joueur_actuel]->get_monument_jouables();
+
+    de_1 = rand() % 6 + 1;
+    de_2 = 0;
+    de_casse = rand() % 52 + 1;
+
+    // Si le joueur a un centre commercial
+    auto it_cc = find_if(monuments_joueurs.begin(), monuments_joueurs.end(), [](Monument* m){return m->get_nom() == "CentreCommercial";});
+    if (it_cc != monuments_joueurs.end()){
+        // Si le monument est trouvé, on le joue
+        centre_c = true;
     }
 
-    /// Jet de de pour le joueur
-    vector<Monument*> monuments_jouables = j_actuel->get_monument_jouables();
+
+    /// Monument avant le jet de dé
+    auto it_gare = find_if(monuments_joueurs.begin(), monuments_joueurs.end(), [](Monument* m){return m->get_nom() == "Gare";});
+    if (it_gare != monuments_joueurs.end()){
+        // Si le monument est trouvé, on le joue
+        monuments_joueurs[it_gare - monuments_joueurs.begin()]->declencher_effet(joueur_actuel);
+    }
+    if (de_2 != 0)
+        deux_des = true;
 
 
-    unsigned int res_de1 = rand() % 6 + 1;
-    unsigned int res_de2 = 0;
-    unsigned int res_tot = res_de1;
+    /// Monument apres le jet de dé
+    for (auto mon : monuments_joueurs) {
+        if (mon->get_nom() == "ParcAttraction" && deux_des && de_1 == de_2) {
+            mon->declencher_effet(joueur_actuel);
+        } else if (mon->get_nom() == "TourRadio") {
+            mon->declencher_effet(joueur_actuel);
+        } else if (mon->get_nom() == "Port" && deux_des && ((de_1 + de_2) >= 10)) {
+            mon->declencher_effet(joueur_actuel);
+        } else if (mon->get_nom() == "FabriqueDuPereNoel" && de_casse == 1) {
+            mon->declencher_effet(joueur_actuel);
+        }
+    }
 
-    cout << "Le joueur " << j_actuel->get_nom() << " a fait " << res_de1 << endl;
+    /// Activations des effets des batiments
+    /// En premier ce sont les batiments rouges des autres joueurs
+    int j_prec = (int)((joueur_actuel + tab_joueurs.size() - 1) % joueur_actuel);
+    for (int i = j_prec; i >= 0; i--) {
+        for (auto it : tab_joueurs[i]->get_liste_batiment(Rouge)) {
+            if (it.first->get_type() == "Restaurant" && centre_c) {
+                for (unsigned int effectif = 0; effectif < it.second; effectif++) {
+                    it.first->declencher_effet(i, 1);
+                }
+            }
+            else {
+                for (unsigned int effectif = 0; effectif < it.second; effectif++) {
+                    it.first->declencher_effet(i);
+                }
+            }
+        }
+    }
+    for (int i  = joueur_actuel + 1 ; i < tab_joueurs.size(); i++) {
+        for (auto it : tab_joueurs[i]->get_liste_batiment(Rouge)) {
+            for (unsigned int effectif = 0; effectif < it.second; effectif++) {
+                it.first->declencher_effet(i);
+            }
+        }
+    }
+
+    /// Ensuite ce sont les batiments violets du joueur actuel
+    for (auto it : tab_joueurs[joueur_actuel]->get_liste_batiment(Violet)) {
+        for (unsigned int effectif = 0; effectif < it.second; effectif++) {
+            it.first->declencher_effet(joueur_actuel);
+        }
+    }
+
+    /// Puis, les batiments bleus de tous les joueurs
+    for (int i = 0; i < tab_joueurs.size(); i++) {
+        for (auto it : tab_joueurs[i]->get_liste_batiment(Bleu)) {
+            for (unsigned int effectif = 0; effectif < it.second; effectif++) {
+                it.first->declencher_effet(i);
+            }
+        }
+    }
+
+    /// Enfin, les batiments verts du joueur actuel
+    for (auto it : tab_joueurs[joueur_actuel]->get_liste_batiment(Vert)) {
+        if (it.first->get_type() == "Commerce" && centre_c) {
+            for (unsigned int effectif = 0; effectif < it.second; effectif++) {
+                it.first->declencher_effet(joueur_actuel, 1);
+            }
+        }
+        else {
+            for (unsigned int effectif = 0; effectif < it.second; effectif++) {
+                it.first->declencher_effet(joueur_actuel);
+            }
+        }
+    }
+    /// Fin des effets des batiments
+
+    /// Début de la phase de construction
+    auto it_hdv = find_if(monuments_joueurs.begin(), monuments_joueurs.end(), [](Monument* m){return m->get_nom() == "HotelDeVille";});
+    if (it_hdv != monuments_joueurs.end()){
+        // Si le monument est trouvé, on le joue
+        monuments_joueurs[it_hdv - monuments_joueurs.begin()]->declencher_effet(joueur_actuel);
+    }
 
 
+    /// Fin de la phase de construction
+    /// Fin du tour
 
-    /// Activation des bâtiments
+    joueur_actuel = (joueur_actuel + 1) % tab_joueurs.size();
+}
 
-
-    /// Phase d'achat
+void Partie::rejouer_tour() {
+    joueur_actuel = (joueur_actuel + tab_joueurs.size() - 1) % tab_joueurs.size();
 }
 
 void Partie::acheter_carte(unsigned int indice_joueur_actuel) {
@@ -230,7 +319,6 @@ void Partie::acheter_carte(unsigned int indice_joueur_actuel) {
     }else{
         return;
     }
-
 }
 
 void Partie::acheter_bat(unsigned int indice_joueur_actuel) {
