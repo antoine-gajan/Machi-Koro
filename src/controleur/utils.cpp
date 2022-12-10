@@ -7,7 +7,8 @@
 
 void menu () {
     int rep_ed = -1;
-    vector<EditionDeJeu *> listing_edition;
+    EditionDeJeu * edition;
+    vector<EditionDeJeu *> listing_extension;
 
     cout << "/********\tMenu\t********/" << endl;
     while (!(REP_ED_MIN <= rep_ed && rep_ed <= REP_ED_MAX)) {
@@ -20,7 +21,7 @@ void menu () {
     }
 
     if (rep_ed == 1) {
-        listing_edition.push_back(new EditionDeJeu("Standard"));
+        edition = new EditionDeJeu("Standard");
         int rep_ext = -1;
         while (!(REP_EXT_MIN <= rep_ext && rep_ext <= REP_EXT_MAX)) {
             cout << "Vous avez choisi l'edition standard\n"
@@ -34,43 +35,34 @@ void menu () {
             cin >> rep_ext;
         }
         if (rep_ext == 1)
-            listing_edition.push_back(new EditionDeJeu("GreenValley"));
+            listing_extension.push_back(new EditionDeJeu("GreenValley"));
         else if (rep_ext == 2)
-            listing_edition.push_back(new EditionDeJeu("Marina"));
+            listing_extension.push_back(new EditionDeJeu("Marina"));
         else if (rep_ext == 3) {
-            listing_edition.push_back(new EditionDeJeu("GreenValley"));
-            listing_edition.push_back(new EditionDeJeu("Marina"));
+            listing_extension.push_back(new EditionDeJeu("GreenValley"));
+            listing_extension.push_back(new EditionDeJeu("Marina"));
         }
         else
             cout << "Vous avez choisi de jouer sans extension"<< endl;
 
 
     } else if (rep_ed == 2) {
-        listing_edition.push_back(new EditionDeJeu("Deluxe"));
+        edition = new EditionDeJeu("Deluxe");
     } else if (rep_ed == 3) {
         cout << "Vous avez choisi de quitter." << endl;
+        return;
     }
 
 
-    vector<Monument*> list_total_monument;
-    map<Monument*, unsigned int> list_total_batiment;
-
-    /// Ajout des monuments :
-    for (auto edj : listing_edition) {
-        for (Monument * mon : edj->get_monument())
-            list_total_monument.push_back(mon);
+    if (listing_extension.empty()) {
+        Partie ma_partie(edition);
+        ma_partie.jouer_partie();
     }
-
-    /// Ajout des batiments :
-    for (auto edj : listing_edition) {
-        for (auto bat_it : edj->get_batiment()) {
-            /// TODO
-            // si pas deja present simple ajout
-            // sinon on augmente le nombre
-        }
+    else {
+        Partie ma_partie(edition, listing_extension);
+        ma_partie.jouer_partie();
     }
 
     /// Creation de la partie
-
     cout << "/********\tFin\t********/" << endl;
 }

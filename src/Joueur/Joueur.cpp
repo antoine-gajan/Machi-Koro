@@ -1,5 +1,4 @@
 #include "Joueur.h"
-#include <map>
 
 using namespace std;
 

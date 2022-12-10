@@ -6,6 +6,7 @@
 #include <vector>
 #include "Batiment.h"
 #include "Monument.h"
+
 /// Importation des classes monuments
 #include "Aeroport.h"
 #include "CentreCommercial.h"

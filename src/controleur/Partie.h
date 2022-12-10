@@ -2,13 +2,12 @@
 #define MACHI_KORO_PARTIE_H
 
 #include <list>
-#include "EditionDeJeu/EditionDeJeu.h"
-#include "Joueur.h"
+#include <vector>
+#include <string>
+
+#include "EditionDeJeu.h"
 #include "Shop.h"
 #include "Pioche.h"
-#include <vector>
-#include "../cartes/batiment/Batiment.h"
-#include <string>
 
 class Partie {
     private:

@@ -1,5 +1,4 @@
 #include "Pioche.h"
-#include "Batiment.h"
 
 Pioche::Pioche(const vector<Batiment*>& batiments) {
     /// Constructeur de la classe Pioche
