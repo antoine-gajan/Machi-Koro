@@ -360,10 +360,12 @@ bool Partie::transfert_argent(unsigned int indice_joueur1, unsigned int indice_j
 
 void Partie::jouer_partie() {
     joueur_actuel = 0;
+    bool fin_partie = false;
     /// Tant que le joueur precedent n'a pas gagne on continue la partie
 
-    while (!est_gagnant((joueur_actuel + tab_joueurs.size() - 1))%tab_joueurs.size()) {
+    while (!fin_partie) {
         jouer_tour();
+        fin_partie = est_gagnant((joueur_actuel + tab_joueurs.size() - 1) % tab_joueurs.size());
     }
 
     /// On affiche le gagnant
@@ -511,7 +513,6 @@ void Partie::jouer_tour() {
     while (!pioche->est_vide() && shop->get_nb_tas_reel() < shop->get_nb_tas_max()) {
         shop->completer_shop(pioche->get_carte());
     }
-
 
     cout << "Fin du tour" << endl;
 }
