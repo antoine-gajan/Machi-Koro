@@ -58,6 +58,7 @@ void Joueur::activer_monument(Monument *mon) {
     auto it = liste_monument.find(mon);
     if (it != liste_monument.end()) {
         it->second = true;
+        it->first->activer();
     }
 }
 

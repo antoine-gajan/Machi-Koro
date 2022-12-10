@@ -12,3 +12,7 @@ Port::Port()
 void Port::declencher_effet(unsigned int possesseur, int bonus) const {
     std::cout << "Activation de l'effet du Port" << std::endl;
 }
+
+void Port::activer() {
+    set_image("../../assets/Monuments/Port-active.png");
+}

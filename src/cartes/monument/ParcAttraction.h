@@ -13,6 +13,7 @@ public:
 
     //*** Methodes ***//
     void declencher_effet(unsigned int possesseur, int bonus = 0) const override;
+    void activer() override;
 };
 
 

@@ -12,3 +12,7 @@ ParcAttraction::ParcAttraction() :
 void ParcAttraction::declencher_effet(unsigned int possesseur, int bonus) const {
     std::cout << "Activation de l'effet du Parc d'attractions" << std::endl;
 }
+
+void ParcAttraction::activer(){
+    set_image("../../assets/Monuments/ParcAttraction-active.png");
+}

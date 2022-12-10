@@ -42,7 +42,7 @@ class Partie {
         //********** Jouer une partie **********//
         void jouer_partie();
         void jouer_tour();
-        bool est_gagnant(Joueur *joueur) const;
+        bool est_gagnant(unsigned int j) const;
         unsigned int get_de_2() const {return de_2;}
         void set_de_2(unsigned int de2) {Partie::de_2 = de2;}
 
@@ -70,6 +70,8 @@ class Partie {
         static Monument* selectionner_monument(Joueur *joueur);
         static Monument* possede_monument(Joueur *joueur, const string& nom_mon);
 
+        static map<Batiment*, unsigned int> get_liste_bat_non_special(Joueur* j);
+
 
         //Fonction qui echange le batiment 1 du joueur 1 avec le batiment 2 du joueur 2
         static void swap_bat_players(Joueur *j1, Joueur *j2, Batiment *bat1, Batiment *bat2);
@@ -82,7 +84,7 @@ class Partie {
         bool acheter_carte();
         bool acheter_monu();//sous fonction appelee dans acheter_carte
         bool acheter_bat();//sous fonction appelee dans acheter_carte
-        bool echanger_argent(unsigned int indice_joueur1, unsigned int indice_joueur2, unsigned int somme);
+        bool transfert_argent(unsigned int indice_joueur1, unsigned int indice_joueur2, unsigned int somme);
         void rejouer_tour();
 
         vector<Batiment *> get_starter();

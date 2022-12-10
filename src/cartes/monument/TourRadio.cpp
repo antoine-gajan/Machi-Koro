@@ -13,3 +13,7 @@ TourRadio::TourRadio() :
 void TourRadio::declencher_effet(unsigned int possesseur, int bonus) const {
     std::cout << "Activation de l'effet de la Tour radio" << std::endl;
 }
+
+void TourRadio::activer(){
+    set_image("../../assets/Monuments/TourRadio-active.png");
+}

@@ -273,168 +273,40 @@ bool Partie::acheter_bat() {
     return true;
 }
 
-///// ***** A VOIR ***** /////
 
-void Partie::jouer_partie() {
-    joueur_actuel = 0;
-    Joueur* joueur_pointe;
-    joueur_pointe = tab_joueurs.at(joueur_actuel);
-    ///Fonction principale pour jouer une partie
+vector<Batiment*> Partie::map_to_vector(const map<Batiment*, unsigned int>& map_batiments){
+    /// Retourne un vecteur avec l'adresse des batiments
+    vector<Batiment*> vector_batiments;
 
-    while(!est_gagnant(joueur_pointe)){
-        jouer_tour();
-        joueur_pointe = tab_joueurs.at(joueur_actuel);
+    for (auto batiment : map_batiments){
+        for(unsigned int i = 0; i < batiment.second; i++){
+            vector_batiments.push_back(batiment.first);
+        }
     }
+
+    // Mélange du vecteur
+    // Obtention d'un nombre aleatoire (seed)
+    random_device rd;
+    mt19937 g(rd());
+
+    // Mélange du vecteur avec le seed
+    shuffle(vector_batiments.begin(), vector_batiments.end(), g);
+
+    return vector_batiments;
 }
 
-void Partie::jouer_tour() {
-    unsigned int de_casse;
-    bool deux_des = false;
-    bool centre_c = false;
-    vector <Monument*> monuments_joueurs = tab_joueurs[joueur_actuel]->get_monument_jouables();
-
-    de_1 = rand() % 6 + 1;
-    de_2 = 0;
-    de_casse = rand() % 52 + 1;
-
-    // Si le joueur a un centre commercial
-    auto it_cc = find_if(monuments_joueurs.begin(), monuments_joueurs.end(), [](Monument* m){return m->get_nom() == "CentreCommercial";});
-    if (it_cc != monuments_joueurs.end()){
-        // Si le monument est trouvé, on le joue
-        centre_c = true;
-    }
-
-    /// Monument avant le jet de dé
-    auto it_gare = find_if(monuments_joueurs.begin(), monuments_joueurs.end(), [](Monument* m){return m->get_nom() == "Gare";});
-    if (it_gare != monuments_joueurs.end()){
-        // Si le monument est trouvé, on le joue
-        monuments_joueurs[it_gare - monuments_joueurs.begin()]->declencher_effet(joueur_actuel);
-    }
-    if (de_2 != 0)
-        deux_des = true;
-
-    /// Monument apres le jet de dé
-    for (auto mon : monuments_joueurs) {
-        if (mon->get_nom() == "ParcAttraction" && deux_des && de_1 == de_2 ||
-            mon->get_nom() == "TourRadio" ||
-            mon->get_nom() == "Port" && deux_des && ((de_1 + de_2) >= 10) ||
-            mon->get_nom() == "FabriqueDuPereNoel" && de_casse == 1){
-            mon->declencher_effet(joueur_actuel);
-        }
-    }
-
-    /// Activations des effets des batiments
-    /// En premier ce sont les batiments rouges des autres joueurs
-
-    int j_prec = (int)((joueur_actuel + tab_joueurs.size() - 1) % tab_joueurs.size());
-
-    cout<<tab_joueurs[joueur_actuel]->get_liste_batiment().begin()->second.begin()->first->get_nom();
-    for (int i = j_prec; i >= 0; i--) {
-
-        if (tab_joueurs[i]->get_liste_batiment().find(Rouge) != tab_joueurs[i]->get_liste_batiment().end()){
-
-            for (auto it : tab_joueurs[i]->get_liste_batiment(Rouge)) {
-                if (it.first->get_type() == "Restaurant" && centre_c) {
-                    for (unsigned int effectif = 0; effectif < it.second; effectif++) {
-                        it.first->declencher_effet(i, 1);
-                    }
-                }
-                else {
-                    for (unsigned int effectif = 0; effectif < it.second; effectif++) {
-                        it.first->declencher_effet(i);
-                    }
-                }
-            }
-        }
-
-    }
-
-    for (unsigned int i  = joueur_actuel + 1 ; i < tab_joueurs.size(); i++) {
-        for (auto it : tab_joueurs[i]->get_liste_batiment(Rouge)) {
-            for (unsigned int effectif = 0; effectif < it.second; effectif++) {
-                it.first->declencher_effet(i);
+map<Batiment*, unsigned int> Partie::get_liste_bat_non_special(Joueur* j){
+    map<Batiment* ,unsigned int> liste;
+    for (const auto& couleur : j->get_liste_batiment()){
+        for (auto bat : couleur.second){
+            if (bat.first->get_type() != "special")
+            {
+                liste.insert(pair<Batiment*, unsigned int>(bat.first, bat.second));
             }
         }
     }
-
-    /// Ensuite ce sont les batiments violets du joueur actuel
-    for (auto it : tab_joueurs[joueur_actuel]->get_liste_batiment(Violet)) {
-        for (unsigned int effectif = 0; effectif < it.second; effectif++) {
-            it.first->declencher_effet(joueur_actuel);
-        }
-    }
-
-    /// Puis, les batiments bleus de tous les joueurs
-    for (int i = 0; i < tab_joueurs.size(); i++) {
-        for (auto it : tab_joueurs[i]->get_liste_batiment(Bleu)) {
-            for (unsigned int effectif = 0; effectif < it.second; effectif++) {
-                it.first->declencher_effet(i);
-            }
-        }
-    }
-
-    /// Enfin, les batiments verts du joueur actuel
-    for (auto it : tab_joueurs[joueur_actuel]->get_liste_batiment(Vert)) {
-        if (it.first->get_type() == "Commerce" && centre_c) {
-            for (unsigned int effectif = 0; effectif < it.second; effectif++) {
-                it.first->declencher_effet(joueur_actuel, 1);
-            }
-        }
-        else {
-            for (unsigned int effectif = 0; effectif < it.second; effectif++) {
-                it.first->declencher_effet(joueur_actuel);
-            }
-        }
-    }
-    /// Fin des effets des batiments
-
-    /// Début de la phase de construction
-    auto it_hdv = find_if(monuments_joueurs.begin(), monuments_joueurs.end(), [](Monument* m){return m->get_nom() == "HotelDeVille";});
-    if (it_hdv != monuments_joueurs.end()){
-        // Si le monument est trouvé, on le joue
-        monuments_joueurs[it_hdv - monuments_joueurs.begin()]->declencher_effet(joueur_actuel);
-    }
-
-
-    /// Fin de la phase de construction
-    /// Fin du tour
-
-    joueur_actuel = (joueur_actuel + 1) % tab_joueurs.size();
+    return liste;
 }
-
-
-
-
-bool Partie::echanger_argent(unsigned int indice_joueur1, unsigned int indice_joueur2, unsigned int somme){
-    //methode qui permet d'echanger une somme d'argent entre deux joueurs
-
-    Joueur *joueur1 = tab_joueurs[indice_joueur1];
-    Joueur *joueur2 = tab_joueurs[indice_joueur2];
-    if(somme == 0){
-        return false;
-    }
-    if(joueur1->get_argent() == somme) {
-        joueur1->set_argent(0);
-        joueur2->set_argent(joueur2->get_argent() + somme);
-    }
-    else if(joueur1->get_argent() < somme){
-        unsigned int argent_joueur1 = joueur1->get_argent();
-        joueur1->set_argent(0);
-        joueur2->set_argent(joueur2->get_argent() + argent_joueur1);
-    }
-    else if(joueur1->get_argent() > somme){
-        joueur1->set_argent(joueur1->get_argent() - somme);
-        joueur2->set_argent(joueur2->get_argent() + somme);
-    }
-    return true;
-}
-
-bool Partie::est_gagnant(Joueur *joueur) const {
-    ///Fonction pour verifier si un joueur a gagne
-    return joueur->get_monument_jouables().size() >= nb_monuments_win;
-}
-
-/* Methodes statiques */
 
 unsigned int Partie::count_type(Joueur *joueur, const string& type) {
     unsigned int count = 0;
@@ -451,29 +323,249 @@ unsigned int Partie::count_type(Joueur *joueur, const string& type) {
     return count;
 }
 
-unsigned int Partie::selectionner_joueur(vector<Joueur*>& tab_joueurs, unsigned int joueur_actuel){
-    unsigned int count = 0;
-    string nom_joueur;
-    auto it = tab_joueurs.begin();
+bool Partie::est_gagnant(unsigned int j) const {
+    ///Fonction pour verifier si un joueur a gagne
+    Joueur * joueur = tab_joueurs[j];
+    return joueur->get_monument_jouables().size() >= nb_monuments_win;
+}
 
-    //Affichage de tous les joueus de tab_joueurs
-    std::cout<<"Quel joueur voulez vous choisir parmis la liste suivante :";
-    for(Joueur* curseur:tab_joueurs){
-        std::cout<<"\n -"<<curseur->get_nom();
+bool Partie::transfert_argent(unsigned int indice_joueur1, unsigned int indice_joueur2, unsigned int somme){
+    //methode qui permet d'echanger une somme d'argent entre deux joueurs
+    // Transfert de l'argent du joueur 1 au joueur 2
+
+    Joueur *joueur1 = tab_joueurs[indice_joueur1];
+    Joueur *joueur2 = tab_joueurs[indice_joueur2];
+    if(somme == 0){
+        return false;
     }
 
-    //Scan de tab_joueurs a la recherche du nom entre
-    std::cin >> nom_joueur;
-    while(tab_joueurs.at(count)->get_nom() != nom_joueur && it != tab_joueurs.end()){
-        count++;
+    if(joueur1->get_argent() < somme){
+        unsigned int argent_joueur1 = joueur1->get_argent();
+        joueur1->set_argent(0);
+        joueur2->set_argent(joueur2->get_argent() + argent_joueur1);
+    }
+    else if(joueur1->get_argent() >= somme){
+        joueur1->set_argent(joueur1->get_argent() - somme);
+        joueur2->set_argent(joueur2->get_argent() + somme);
+    }
+    return true;
+}
+
+void Partie::jouer_partie() {
+    joueur_actuel = 0;
+
+    /// Tant que le joueur precedent n'a pas gagne on continue la partie
+    while (!est_gagnant((joueur_actuel + tab_joueurs.size() - 1))%tab_joueurs.size()) {
+        jouer_tour();
+    }
+
+    /// On affiche le gagnant
+    cout << "Le gagnant est " << tab_joueurs[((joueur_actuel + tab_joueurs.size() - 1))%tab_joueurs.size()]->get_nom() << endl;
+    cout << "Felicitations !!!" << endl;
+}
+
+void Partie::jouer_tour() {
+    unsigned int de_casse;
+    bool centre_c = false;
+    vector <Monument*> monuments_joueurs = tab_joueurs[joueur_actuel]->get_monument_jouables();
+
+    de_1 = rand() % 6 + 1;
+    de_2 = 0;
+    de_casse = rand() % 50 + 1;
+
+    // Si le joueur a un centre commercial
+    auto it_cc = find_if(monuments_joueurs.begin(), monuments_joueurs.end(), [](Monument* m){return m->get_nom() == "CentreCommercial";});
+    if (it_cc != monuments_joueurs.end()){
+        // Si le monument est trouvé, on le joue
+        centre_c = true;
+    }
+
+    /// Monument avant le jet de dé
+    auto it_gare = find_if(monuments_joueurs.begin(), monuments_joueurs.end(), [](Monument* m){return m->get_nom() == "Gare";});
+    if (it_gare != monuments_joueurs.end()){
+        // Si le monument est trouvé, on le joue
+        monuments_joueurs[it_gare - monuments_joueurs.begin()]->declencher_effet(joueur_actuel);
+    }
+
+    auto it_tr = find_if(monuments_joueurs.begin(), monuments_joueurs.end(), [](Monument* m){return m->get_nom() == "TourRadio";});
+    if (it_tr != monuments_joueurs.end()){
+        // Si le monument est trouvé, on le joue
+        monuments_joueurs[it_tr - monuments_joueurs.begin()]->declencher_effet(joueur_actuel);
+    }
+
+
+    /// Monument apres le jet de dé
+    for (auto mon : monuments_joueurs) {
+        if (mon->get_nom() == "Port" &&  ((de_1 + de_2) >= 10) ||
+            mon->get_nom() == "FabriqueDuPereNoel" && de_casse == 1){
+            mon->declencher_effet(joueur_actuel);
+        }
+    }
+
+    cout << "Resultat du premier de : " << de_1 << endl;
+
+    if (de_2 != 0)
+        cout << "Resultat du deuxieme de : " << de_2 << endl;
+
+    /// Activations des effets des batiments
+    /// En premier ce sont les batiments rouges des autres joueurs
+
+    unsigned int j_act_paiement = (joueur_actuel + tab_joueurs.size() - 1) % tab_joueurs.size();
+
+    while (j_act_paiement != joueur_actuel) {
+        for (auto it : tab_joueurs[j_act_paiement]->get_liste_batiment(Rouge)) {
+            if (find(it.first->get_num_activation().begin(), it.first->get_num_activation().end(), de_1 + de_2) != it.first->get_num_activation().end()) {
+                if (it.first->get_type() == "restaurant" && centre_c) {
+                    for (unsigned int effectif = 0; effectif < it.second; effectif++) {
+                        it.first->declencher_effet(j_act_paiement, 1);
+                    }
+                } else {
+                    for (unsigned int effectif = 0; effectif < it.second; effectif++) {
+                        it.first->declencher_effet(j_act_paiement);
+                    }
+                }
+            }
+        }
+
+        j_act_paiement = (j_act_paiement + tab_joueurs.size() - 1) % tab_joueurs.size();
+    }
+
+
+    /// Ensuite ce sont les batiments violets du joueur actuel
+    for (auto it : tab_joueurs[joueur_actuel]->get_liste_batiment(Violet)) {
+        if (find(it.first->get_num_activation().begin(), it.first->get_num_activation().end(), de_1 + de_2) != it.first->get_num_activation().end()) {
+            for (unsigned int effectif = 0; effectif < it.second; effectif++) {
+                it.first->declencher_effet(joueur_actuel);
+            }
+        }
+    }
+
+    /// Puis, les batiments bleus de tous les joueurs
+    for (int i = 0; i < tab_joueurs.size(); i++) {
+        for (auto it : tab_joueurs[i]->get_liste_batiment(Bleu)) {
+            if (find(it.first->get_num_activation().begin(), it.first->get_num_activation().end(), de_1 + de_2) != it.first->get_num_activation().end()) {
+                for (unsigned int effectif = 0; effectif < it.second; effectif++) {
+                    it.first->declencher_effet(i);
+                }
+            }
+        }
+    }
+
+    /// Enfin, les batiments verts du joueur actuel
+    for (auto it : tab_joueurs[joueur_actuel]->get_liste_batiment(Vert)) {
+        if (find(it.first->get_num_activation().begin(), it.first->get_num_activation().end(), de_1 + de_2) != it.first->get_num_activation().end()) {
+            if (it.first->get_type() == "commerce" && centre_c) {
+                for (unsigned int effectif = 0; effectif < it.second; effectif++) {
+                    it.first->declencher_effet(joueur_actuel, 1);
+                }
+            } else {
+                for (unsigned int effectif = 0; effectif < it.second; effectif++) {
+                    it.first->declencher_effet(joueur_actuel);
+                }
+            }
+        }
+    }
+    /// Fin des effets des batiments
+
+    /// Début de la phase de construction
+    auto it_hdv = find_if(monuments_joueurs.begin(), monuments_joueurs.end(), [](Monument* m){return m->get_nom() == "HotelDeVille";});
+    if (it_hdv != monuments_joueurs.end()){
+        // Si le monument est trouvé, on le joue
+        monuments_joueurs[it_hdv - monuments_joueurs.begin()]->declencher_effet(joueur_actuel);
+    }
+
+    if (!acheter_carte()) {
+        cout << "Vous n'avez rien achete" << endl;
+        if (tab_joueurs[joueur_actuel]->get_argent() < 2)
+            tab_joueurs[joueur_actuel]->set_argent(2);
+
+        auto it_aero = find_if(monuments_joueurs.begin(), monuments_joueurs.end(), [](Monument* m){return m->get_nom() == "Aeroport";});
+        if (it_aero != monuments_joueurs.end()){
+            // Si le monument est trouvé, on le joue
+            monuments_joueurs[it_aero - monuments_joueurs.begin()]->declencher_effet(joueur_actuel);
+        }
+
+    }
+    /// Fin de la phase de construction
+    /// Fin du tour
+
+    auto it_parc = find_if(monuments_joueurs.begin(), monuments_joueurs.end(), [](Monument* m){return m->get_nom() == "ParcAttraction";});
+    if (it_parc != monuments_joueurs.end()){
+        // Si le monument est trouvé, on le joue
+        monuments_joueurs[it_parc - monuments_joueurs.begin()]->declencher_effet(joueur_actuel);
+    }
+
+    joueur_actuel = (joueur_actuel + 1) % tab_joueurs.size();
+
+    while (!pioche->est_vide() && shop->get_nb_tas_reel() < shop->get_nb_tas_max()) {
+        shop->completer_shop(pioche->get_carte());
+    }
+
+    cout << "Fin du tour" << endl;
+}
+
+/// Questionnable :
+
+void Partie::swap_bat_players(Joueur *j1, Joueur *j2, Batiment* bat1, Batiment* bat2){
+    ///Fonction qui echange les batiments de 2 joueurs
+    // Gestion du batiment 2 dans l'echange
+    j2->retirer_batiment(bat2);
+    j1->ajouter_batiment(bat2);
+    // Gestion du batiment 1 dans l'echange
+    j1->retirer_batiment(bat1);
+    j2->ajouter_batiment(bat1);
+}
+
+void Partie::don_argent(Joueur* j1, unsigned int argent, Joueur* j2){
+    /// Don d'argent du joueur j1 au joueur j2
+    if (j1->get_argent() - argent >= 0){
+        j1->set_argent(j1->get_argent() - argent);
+        j2->set_argent(j2->get_argent() + argent);
+    }
+    else{
+        cout << "Impossible, le joueur " << j1->get_nom() << " n'a pas assez d'argent." << endl;
+    }
+}
+
+Monument* Partie::possede_monument(Joueur *joueur, const string& nom_mon){
+    auto liste_mon = joueur->get_liste_monument();
+    // pour chaque monument dans la liste de monuments du joueur
+    for (auto mon : liste_mon) {
+        if (mon.first->get_nom() == nom_mon) {
+            return mon.first;
+        }
+    }
+    // Sinon, retourne nullptr
+    return nullptr;
+}
+
+Monument* Partie::selectionner_monument(Joueur *joueur){
+    string nom_monu;
+    Monument* monu_a_retourner;
+
+    std::cout<<"Quel monument voulez-vous selectionner parmis la liste ci-dessous :" << endl;
+    // affichage des monuments que le joueur possede
+    // pour chaque monument du joueur
+    for (auto monu : joueur->get_liste_monument()) {
+        cout << "-" << monu.first->get_nom() << endl;
+    }
+
+    cin >> nom_monu;
+
+    //parcours des monuments du joueur a la recherche du monument a trouver
+    auto it = joueur->get_liste_monument().begin();
+    while(it!=joueur->get_liste_monument().end() && it->first->get_nom()!=nom_monu){
         it++;
     }
 
-    //cas où erreur (nom entre pas dans la liste ou nom entre = joueur actuel)
-    if(it == tab_joueurs.end()) throw invalid_argument("Le nom entre n'est pas valide");
-    if(count == joueur_actuel) throw invalid_argument("On ne peut pas selectionner le joueur actuel");
+    //cas où erreur (monument entre pas dans la liste)
+    if(it == joueur->get_liste_monument().end()) {
+        throw invalid_argument("Le monument entre n'est pas valide");
+    }else{
+        monu_a_retourner = it->first;
+    }
 
-    return count;
+    return monu_a_retourner;
 }
 
 Batiment* Partie::selectionner_batiment(Joueur *joueur){
@@ -534,97 +626,28 @@ Batiment* Partie::possede_batiment(Joueur *joueur, const string& nom_bat){
     return nullptr;
 }
 
-Monument* Partie::selectionner_monument(Joueur *joueur){
-    string nom_monu;
-    Monument* monu_a_retourner;
 
-    std::cout<<"Quel monument voulez-vous selectionner parmis la liste ci-dessous :";
-    // affichage des monuments que le joueur possede
-    // pour chaque monument du joueur
-    for (auto monu : joueur->get_liste_monument()) {
-        cout << "\n -" << monu.first->get_nom();
+unsigned int Partie::selectionner_joueur(vector<Joueur*>& tab_joueurs, unsigned int joueur_actuel){
+    unsigned int count = 0;
+    string nom_joueur;
+    auto it = tab_joueurs.begin();
+
+    //Affichage de tous les joueus de tab_joueurs
+    std::cout<<"Quel joueur voulez vous choisir parmis la liste suivante :";
+    for(Joueur* curseur:tab_joueurs){
+        std::cout<<"\n -"<<curseur->get_nom();
     }
 
-    cin >> nom_monu;
-
-    //parcours des monuments du joueur a la recherche du monument a trouver
-    auto it = joueur->get_liste_monument().begin();
-    while(it!=joueur->get_liste_monument().end() && it->first->get_nom()!=nom_monu){
+    //Scan de tab_joueurs a la recherche du nom entre
+    std::cin >> nom_joueur;
+    while(tab_joueurs.at(count)->get_nom() != nom_joueur && it != tab_joueurs.end()){
+        count++;
         it++;
     }
 
-    //cas où erreur (monument entre pas dans la liste)
-    if(it == joueur->get_liste_monument().end()) {
-        throw invalid_argument("Le monument entre n'est pas valide");
-    }else{
-        monu_a_retourner = it->first;
-    }
+    //cas où erreur (nom entre pas dans la liste ou nom entre = joueur actuel)
+    if(it == tab_joueurs.end()) throw invalid_argument("Le nom entre n'est pas valide");
+    if(count == joueur_actuel) throw invalid_argument("On ne peut pas selectionner le joueur actuel");
 
-    return monu_a_retourner;
-}
-
-Monument* Partie::possede_monument(Joueur *joueur, const string& nom_mon){
-    auto liste_mon = joueur->get_liste_monument();
-    // pour chaque monument dans la liste de monuments du joueur
-    for (auto mon : liste_mon) {
-        if (mon.first->get_nom() == nom_mon) {
-            return mon.first;
-        }
-    }
-    // Sinon, retourne nullptr
-    return nullptr;
-}
-
-map<Batiment*, unsigned int> get_liste_bat_non_special(Joueur* j){
-    map<Batiment* ,unsigned int> liste;
-    for (const auto& couleur : j->get_liste_batiment()){
-        for (auto bat : couleur.second){
-            if (bat.first->get_type() != "special")
-            {
-                liste.insert(pair<Batiment*, unsigned int>(bat.first, bat.second));
-            }
-        }
-    }
-    return liste;
-}
-
-void Partie::swap_bat_players(Joueur *j1, Joueur *j2, Batiment* bat1, Batiment* bat2){
-    ///Fonction qui echange les batiments de 2 joueurs
-    // Gestion du batiment 2 dans l'echange
-    j2->retirer_batiment(bat2);
-    j1->ajouter_batiment(bat2);
-    // Gestion du batiment 1 dans l'echange
-    j1->retirer_batiment(bat1);
-    j2->ajouter_batiment(bat1);
-}
-
-void Partie::don_argent(Joueur* j1, unsigned int argent, Joueur* j2){
-    /// Don d'argent du joueur j1 au joueur j2
-    if (j1->get_argent() - argent >= 0){
-        j1->set_argent(j1->get_argent() - argent);
-        j2->set_argent(j2->get_argent() + argent);
-    }
-    else{
-        cout << "Impossible, le joueur " << j1->get_nom() << " n'a pas assez d'argent." << endl;
-    }
-}
-
-vector<Batiment*> Partie::map_to_vector(const map<Batiment*, unsigned int>& map_batiments){
-    /// Retourne un vecteur avec l'adresse des batiments
-    vector<Batiment*> vector_batiments;
-    for(auto batiment : map_batiments){
-        for(unsigned int i = 0; i < batiment.second; i++){
-            vector_batiments.push_back(batiment.first);
-        }
-    }
-
-    // Mélange du vecteur
-    // Obtention d'un nombre aleatoire (seed)
-    random_device rd;
-    mt19937 g(rd());
-
-    // Mélange du vecteur avec le seed
-    shuffle(vector_batiments.begin(), vector_batiments.end(), g);
-
-    return vector_batiments;
+    return count;
 }

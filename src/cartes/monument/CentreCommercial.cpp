@@ -12,3 +12,7 @@ CentreCommercial::CentreCommercial() :
 void CentreCommercial::declencher_effet(unsigned int possesseur, int bonus) const {
     std::cout << "Activation de l'efet du Centre commercial" << std::endl;
 }
+
+void CentreCommercial::activer() {
+    set_image("../../assets/Monuments/CentreCommercial-active.png");
+}
