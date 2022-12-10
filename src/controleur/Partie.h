@@ -41,6 +41,8 @@ public:
     void jouer_partie();
     void jouer_tour();
     bool est_gagnant(Joueur *joueur) const;
+    unsigned int get_de_2() const {return de_2;}
+    void set_de_2(unsigned int de2) {Partie::de_2 = de2;}
 
     //********** Constructeurs et getters **********//
     unsigned int get_joueur_actuel() const {return joueur_actuel;};
