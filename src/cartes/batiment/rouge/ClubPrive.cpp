@@ -9,7 +9,7 @@ ClubPrive::ClubPrive() :
                      list<unsigned int>{12,13,14},
                      "restaurant"){};
 
-void ClubPrive::declencher_effet(unsigned int possesseur) const{
+void ClubPrive::declencher_effet(unsigned int possesseur, int bonus = 0) const{
     //j'ai deliberement retire le parametre joueur actuel de declencher effet pour respecter la methode virtuelle declaree dans Batiment.h
     cout << "Activation de l'effet du club prive" << endl;
     //Trouver un joueur qui a cette carte

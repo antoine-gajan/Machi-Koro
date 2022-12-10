@@ -9,6 +9,6 @@ Aeroport::Aeroport() :
     /// Constructeur de Aeroport
 }
 
-void Aeroport::declencher_effet(unsigned int possesseur) const {
+void Aeroport::declencher_effet(unsigned int possesseur, int bonus = 0) const {
     std::cout << "Activation de l'effet de l'aeroport" << std::endl;
 }

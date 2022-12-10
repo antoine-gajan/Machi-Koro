@@ -14,7 +14,7 @@ CentreImpots::CentreImpots():
 
 
 
-void CentreImpots::declencher_effet(unsigned int possesseur) const{
+void CentreImpots::declencher_effet(unsigned int possesseur, int bonus = 0) const{
     /// Effet du Centre des Impots
     std::cout << "Activation de l'effet du centre des impots." << std::endl;
 }

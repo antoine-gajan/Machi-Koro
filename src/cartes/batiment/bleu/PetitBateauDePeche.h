@@ -14,7 +14,7 @@ public:
     ~PetitBateauDePeche() override = default;
     PetitBateauDePeche(const PetitBateauDePeche& petitBateauDePeche) = default;
     Batiment* clone() const override {return new PetitBateauDePeche(*this);};
-    void declencher_effet(unsigned int possesseur) const override;
+    void declencher_effet(unsigned int possesseur, int bonus = 0) const override;
 };
 
 #endif //MACHI_KORO_MASTER_BATEAUPECHE_H

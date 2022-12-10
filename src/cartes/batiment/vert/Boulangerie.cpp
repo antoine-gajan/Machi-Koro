@@ -9,7 +9,7 @@ Boulangerie::Boulangerie()
                    {2, 3},
                    "commerce") {}
 
-void Boulangerie::declencher_effet(unsigned int possesseur) const {
+void Boulangerie::declencher_effet(unsigned int possesseur, int bonus = 0) const {
     cout << "Declenchement de l'effet de la carte Boulangerie" << endl;
     /*
     /// Effet de la Boulangerie

@@ -10,7 +10,7 @@ Mine::Mine() :
         "Engrenage"){};
 ///Constructeur de Mine
 
-void Mine::declencher_effet(unsigned int possesseur) const{
+void Mine::declencher_effet(unsigned int possesseur, int bonus = 0) const{
     //j'ai deliberement retire le parametre joueur actuel de declencher effet pour respecter la methode virtuelle declaree dans Batiment.h
     cout << "Activation de l'effet de Mine" << endl;
     /*

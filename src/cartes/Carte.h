@@ -21,7 +21,7 @@ public:
 
     virtual std::string get_type() const = 0;
 
-    virtual void declencher_effet(unsigned int possesseur) const = 0;
+    virtual void declencher_effet(unsigned int possesseur, int bonus = 0) const = 0;
 };
 
 
