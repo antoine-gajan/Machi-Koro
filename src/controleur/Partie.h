@@ -45,10 +45,10 @@ public:
     vector<Batiment*> map_to_vector(map<Batiment*, unsigned int> map_batiments);
     void ajout_batiment(Batiment *batiment);
 
-    void acheter_carte(Joueur* joueur_actuel);
-    void acheter_monu(Joueur* joueur_actuel);//sous fonction appelee dans acheter_carte
-    void acheter_bat(Joueur* joueur_actuel);//sous fonction appelee dans acheter_carte
-    void echanger_argent(Joueur* joueur1,Joueur* joueur2);
+    void acheter_carte(unsigned int indice_joueur_actuel);
+    void acheter_monu(unsigned int indice_joueur_actuel);//sous fonction appelee dans acheter_carte
+    void acheter_bat(unsigned int indice_joueur_actuel);//sous fonction appelee dans acheter_carte
+    bool echanger_argent(unsigned int indice_joueur1, unsigned int indice_joueur2, unsigned int somme);
 
     vector<Batiment *> get_starter();
 };

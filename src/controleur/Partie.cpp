@@ -214,9 +214,11 @@ void Partie::jouer_tour() {
     /// Phase d'achat
 }
 
-void Partie::acheter_carte(Joueur *joueur_actuel) {
+void Partie::acheter_carte(unsigned int indice_joueur_actuel) {
+
     //fonction qui permet a un joueur donne d'acheter une carte (batiment ou monument)
     string choix;
+    Joueur *joueur_actuel = tab_joueurs[indice_joueur_actuel];
 
     cout<<"Que voulez vous faire, acheter un batiment (b), un monument (m), ou rien (r)?\n"<<endl;
     cin>>choix;
@@ -231,10 +233,11 @@ void Partie::acheter_carte(Joueur *joueur_actuel) {
 
 }
 
-void Partie::acheter_bat(Joueur *joueur_actuel) {
+void Partie::acheter_bat(unsigned int jindice_joueur_actuel) {
     //fonction qui permet a un joueur donne d'acheter un batiment
     string nom_bat;
     Batiment* bat_picked;
+    Joueur *joueur_actuel = tab_joueurs[indice_joueur_actuel];
     unsigned int choix = 0;
     auto it = shop->get_contenu().begin();
 
@@ -267,10 +270,11 @@ void Partie::acheter_bat(Joueur *joueur_actuel) {
     }
 }
 
-void Partie::acheter_monu(Joueur *joueur_actuel) {
+void Partie::acheter_monu(unsigned int indice_joueur_actuel) {
     //fonction qui permet a un joueur donne d'acheter un monument
     string nom_monu;
     Monument* monu_picked;
+    Joueur *joueur_actuel = tab_joueurs[indice_joueur_actuel];
     unsigned int choix = 0;
     auto it = list_monuments.begin();
 
@@ -294,12 +298,29 @@ void Partie::acheter_monu(Joueur *joueur_actuel) {
     }
 }
 
-void Partie::echanger_argent(Joueur* joueur1,Joueur* joueur2){
+bool Partie::echanger_argent(unsigned int indice_joueur1, unsigned int indice_joueur2, unsigned int somme){
     //methode qui permet d'echanger une somme d'argent entre deux joueurs
-    unsigned int sens;
-    unsigned int somme;
 
-    cout<<"Dans quel sens souhaitez faire l'echange (1) pour "<<joueur1->get_nom()<<" vers "<<joueur2->get_nom()<<" ou (2) pour "<<joueur2->get_nom()<<" vers "<< joueur1->get_nom()<<endl;
+    Joueur *joueur1 = tab_joueurs[indice_joueur1];
+    Joueur *joueur2 = tab_joueurs[indice_joueur2];
+    if(somme == 0){
+        return false;
+    }
+    if(joueur1->get_argent() == somme) {
+        joueur1->set_argent(0);
+        joueur2->set_argent(joueur2->get_argent() + somme);
+    }
+    else if(joueur1->get_argent() < somme){
+        unsigned int argent_joueur1 = joueur1->get_argent();
+        joueur1->set_argent(0);
+        joueur2->set_argent(joueur2->get_argent() + argent_joueur1);
+    }
+    else if(joueur1->get_argent() > somme){
+        joueur1->set_argent(joueur1->get_argent() - somme);
+        joueur2->set_argent(joueur2->get_argent() + somme);
+    }
+    return true;
+    /*cout<<"Dans quel sens souhaitez faire l'echange (1) pour "<<joueur1->get_nom()<<" vers "<<joueur2->get_nom()<<" ou (2) pour "<<joueur2->get_nom()<<" vers "<< joueur1->get_nom()<<endl;
     cin>>sens;
     cout<<"Quelle somme souhaitez vous transferer?"<<endl;
     cin>>somme;
@@ -311,7 +332,7 @@ void Partie::echanger_argent(Joueur* joueur1,Joueur* joueur2){
         joueur1->set_argent(joueur1->get_argent() + somme);
     }else{
         cout<<"On ne peut choisir que (1) ou (2)"<<endl;
-    }
+    }*/
 }
 
 bool Partie::est_gagnant(Joueur *joueur) {
