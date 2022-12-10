@@ -9,6 +9,6 @@ Gare::Gare()
     /// Constructeur de Gare
 }
 
-void Gare::declencher_effet(unigned int possesseur) const {
+void Gare::declencher_effet(unsigned int possesseur) const {
     std::cout << "Activation de l'effet de la gare" << std::endl;
 }

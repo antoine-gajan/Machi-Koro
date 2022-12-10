@@ -9,6 +9,6 @@ CentreCommercial::CentreCommercial() :
     /// Constructeur de Centre commercial
 }
 
-void CentreCommercial::declencher_effet(unigned int possesseur) const {
+void CentreCommercial::declencher_effet(unsigned int possesseur) const {
     std::cout << "Activation de l'efet du Centre commercial" << std::endl;
 }

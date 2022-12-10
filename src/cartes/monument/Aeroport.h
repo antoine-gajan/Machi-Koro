@@ -12,7 +12,7 @@ class Aeroport : public Monument {
         Aeroport* clone() const override {return new Aeroport(*this);};
 
         //*** Methodes ***//
-        void declencher_effet(unigned int possesseur) const override;
+        void declencher_effet(unsigned int possesseur) const override;
 };
 
 #endif //MACHI_KORO_AEROPORT_H

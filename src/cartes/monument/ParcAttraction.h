@@ -12,7 +12,7 @@ public:
     ParcAttraction* clone() const override {return new ParcAttraction(*this);};
 
     //*** Methodes ***//
-    void declencher_effet(unigned int possesseur) const override;
+    void declencher_effet(unsigned int possesseur) const override;
 };
 
 

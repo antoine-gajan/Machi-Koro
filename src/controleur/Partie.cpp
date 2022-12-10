@@ -218,22 +218,22 @@ void Partie::acheter_carte(unsigned int indice_joueur_actuel) {
 
     //fonction qui permet a un joueur donne d'acheter une carte (batiment ou monument)
     string choix;
-    Joueur *joueur_actuel = tab_joueurs[indice_joueur_actuel];
+    //Joueur *joueur_actuel = tab_joueurs[indice_joueur_actuel];
 
     cout<<"Que voulez vous faire, acheter un batiment (b), un monument (m), ou rien (r)?\n"<<endl;
     cin>>choix;
 
     if(choix == "b"){
-        acheter_bat(joueur_actuel);
+        acheter_bat(indice_joueur_actuel);
     }else if(choix == "m"){
-        acheter_monu(joueur_actuel);
+        acheter_monu(indice_joueur_actuel);
     }else{
         return;
     }
 
 }
 
-void Partie::acheter_bat(unsigned int jindice_joueur_actuel) {
+void Partie::acheter_bat(unsigned int indice_joueur_actuel) {
     //fonction qui permet a un joueur donne d'acheter un batiment
     string nom_bat;
     Batiment* bat_picked;

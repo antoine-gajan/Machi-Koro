@@ -9,6 +9,6 @@ ParcAttraction::ParcAttraction() :
     /// Constructeur de ParcAttraction
 }
 
-void ParcAttraction::declencher_effet(unigned int possesseur) const {
+void ParcAttraction::declencher_effet(unsigned int possesseur) const {
     std::cout << "Activation de l'effet du Parc d'attractions" << std::endl;
 }

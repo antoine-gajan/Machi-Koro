@@ -12,7 +12,7 @@ class Port : public Monument {
         Port* clone() const override {return new Port(*this);};
 
         //*** Methodes ***//
-        void declencher_effet(unigned int possesseur) const override;
+        void declencher_effet(unsigned int possesseur) const override;
 };
 
 

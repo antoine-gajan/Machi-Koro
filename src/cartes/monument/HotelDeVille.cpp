@@ -9,6 +9,6 @@ HotelDeVille::HotelDeVille() :
     /// Constructeur de HotelDeVille
 }
 
-void HotelDeVille::declencher_effet(unigned int possesseur) const {
+void HotelDeVille::declencher_effet(unsigned int possesseur) const {
     std::cout << "Activation de l'effet de l'Hotel de ville" << std::endl;
 }

@@ -12,7 +12,7 @@ class TourRadio : public Monument {
         TourRadio* clone() const override {return new TourRadio(*this);};
 
         //*** Methodes ***//
-        void declencher_effet(unigned int possesseur) const override;
+        void declencher_effet(unsigned int possesseur) const override;
 };
 
 #endif //MACHI_KORO_TOURRADIO_H
