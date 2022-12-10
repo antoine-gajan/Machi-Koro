@@ -49,8 +49,22 @@ Batiment * Shop::acheter_batiment(Batiment *bat) {
 
 void Shop::affiche_shop() {
     ///Affiche le shop
-    cout << "Shop :" << endl;
+    unsigned int pos = 1;
+
     for (auto & it : contenu) {
-        cout << it.first->get_nom() << " : " << it.second << endl;
+        cout << pos << " : " << it.first->get_nom() << endl;
+        pos++;
     }
+}
+
+vector<Batiment*> Shop::get_contenu_v() const {
+    ///Retourne le contenu du shop sous forme de vecteur
+
+    vector<Batiment*> contenu_v;
+
+    for (auto & it : contenu) {
+        contenu_v.push_back(it.first);
+    }
+
+    return contenu_v;
 }

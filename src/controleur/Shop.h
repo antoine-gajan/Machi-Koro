@@ -19,7 +19,7 @@ class Shop{
         unsigned int get_nb_tas_max() const {return nb_tas_max;};
         unsigned int get_nb_tas_reel() const {return nb_tas_reel;};
         const std::map<Batiment*, unsigned int>& get_contenu() {return contenu;};
-        // const vector<Batiment*>& get_contenu() const;
+        vector<Batiment*> get_contenu_v() const;
 
         /**** Methodes ****/
         void completer_shop(Batiment* new_bat);
