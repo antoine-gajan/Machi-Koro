@@ -79,9 +79,9 @@ public:
     //********** Methodes non statiques **********//
     void ajout_batiment(Batiment *batiment);
 
-    void acheter_carte();
-    void acheter_monu();//sous fonction appelee dans acheter_carte
-    void acheter_bat();//sous fonction appelee dans acheter_carte
+    bool acheter_carte();
+    bool acheter_monu();//sous fonction appelee dans acheter_carte
+    bool acheter_bat();//sous fonction appelee dans acheter_carte
     bool echanger_argent(unsigned int indice_joueur1, unsigned int indice_joueur2, unsigned int somme);
     void rejouer_tour();
 
