@@ -385,19 +385,6 @@ bool Partie::echanger_argent(unsigned int indice_joueur1, unsigned int indice_jo
         joueur2->set_argent(joueur2->get_argent() + somme);
     }
     return true;
-    /*cout<<"Dans quel sens souhaitez faire l'echange (1) pour "<<joueur1->get_nom()<<" vers "<<joueur2->get_nom()<<" ou (2) pour "<<joueur2->get_nom()<<" vers "<< joueur1->get_nom()<<endl;
-    cin>>sens;
-    cout<<"Quelle somme souhaitez vous transferer?"<<endl;
-    cin>>somme;
-    if(sens == 1){
-        joueur1->set_argent(max((unsigned int)0,joueur1->get_argent() - somme));
-        joueur2->set_argent(joueur2->get_argent() + somme);
-    }else if(sens == 2){
-        joueur2->set_argent(max((unsigned int)0,joueur2->get_argent() - somme));
-        joueur1->set_argent(joueur1->get_argent() + somme);
-    }else{
-        cout<<"On ne peut choisir que (1) ou (2)"<<endl;
-    }*/
 }
 
 bool Partie::est_gagnant(Joueur *joueur) const {
