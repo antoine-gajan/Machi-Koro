@@ -10,7 +10,7 @@ Verger::Verger() :
         "Champ"){};
 ///Constructeur de Verger
 
-void Verger::declencher_effet(unsigned int possesseur, int bonus = 0) const {
+void Verger::declencher_effet(unsigned int possesseur, int bonus) const {
     //j'ai deliberement retire le parametre joueur actuel de declencher effet pour respecter la methode virtuelle declaree dans Batiment.h
     cout << "Activation de l'effet de Verger" << endl;
     /*

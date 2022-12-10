@@ -10,6 +10,6 @@ TourRadio::TourRadio() :
     /// Constructeur de TourRadio
 }
 
-void TourRadio::declencher_effet(unsigned int possesseur, int bonus = 0) const {
+void TourRadio::declencher_effet(unsigned int possesseur, int bonus) const {
     std::cout << "Activation de l'effet de la Tour radio" << std::endl;
 }

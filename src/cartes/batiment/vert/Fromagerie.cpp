@@ -9,7 +9,7 @@ Fromagerie::Fromagerie()
                    {7},
                    "usine") {}
 
-void Fromagerie::declencher_effet(unsigned int possesseur, int bonus = 0) const {
+void Fromagerie::declencher_effet(unsigned int possesseur, int bonus) const {
     cout << "Declenchement de l'effet de la carte Fromagerie" << endl;
     /*
     /// Effet de la Fromagerie

@@ -9,7 +9,7 @@ Epicerie::Epicerie()
                    {2},
                    "commerce") {}
 
-void Epicerie::declencher_effet(unsigned int possesseur, int bonus = 0) const{
+void Epicerie::declencher_effet(unsigned int possesseur, int bonus) const{
     cout << "Declenchement de l'effet de la carte Epicerie" << endl;
     /*
     /// Effet de l'Epicerie

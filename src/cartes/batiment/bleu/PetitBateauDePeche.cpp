@@ -10,7 +10,7 @@ PetitBateauDePeche::PetitBateauDePeche() :
 ///Constructeur de BateauPeche
 
 
-void PetitBateauDePeche::declencher_effet(unsigned int possesseur, int bonus = 0) const{
+void PetitBateauDePeche::declencher_effet(unsigned int possesseur, int bonus) const{
     //j'ai deliberement retire le parametre joueur actuel de declencher effet pour respecter la methode virtuelle declaree dans Batiment.h
     cout << "Activation de l'effet de BateauPeche" << endl;
     /*

@@ -11,7 +11,7 @@ Batiment("Stade",
     ///Constructeur de Stade
 }
 
-void Stade::declencher_effet(unsigned int possesseur, int bonus = 0) const{
+void Stade::declencher_effet(unsigned int possesseur, int bonus) const{
     /// Effet de la classe Stade
     std::cout << "Activation de l'effet du stade." << std::endl;
     /*Joueur* j_actuel = tab_joueurs[joueur_actuel];
