@@ -12,7 +12,7 @@ public:
     ~Foret() override = default;
     Foret(const Foret& foret) = default;
     Batiment* clone() const override {return new Foret(*this);};
-    void declencher_effet(unigned int possesseur) const override;
+    void declencher_effet(unsigned int possesseur) const override;
 };
 
 #endif //MACHI_KORO_MASTER_FORET_H

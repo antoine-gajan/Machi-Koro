@@ -9,7 +9,7 @@ public:
     ~Arboretum() override = default;
     Arboretum(const Arboretum& arboretum) = default;
     Batiment* clone() const override {return new Arboretum(*this);};
-    void declencher_effet(unigned int possesseur) const override;
+    void declencher_effet(unsigned int possesseur) const override;
 };
 
 

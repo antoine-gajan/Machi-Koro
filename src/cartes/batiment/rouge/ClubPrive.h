@@ -9,7 +9,7 @@ public:
     ~ClubPrive() override = default;
     ClubPrive(const ClubPrive& clubPrive) = default;
     Batiment* clone() const override {return new ClubPrive(*this);};
-    void declencher_effet(unigned int possesseur) const override;
+    void declencher_effet(unsigned int possesseur) const override;
   
 };
 

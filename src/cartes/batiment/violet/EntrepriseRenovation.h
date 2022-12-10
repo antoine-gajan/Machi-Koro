@@ -9,7 +9,7 @@ public:
     ~EntrepriseRenovation() override = default;
     EntrepriseRenovation(const EntrepriseRenovation& entrepriseRenovation) = default;
     Batiment* clone() const override {return new EntrepriseRenovation(*this);};
-    void declencher_effet(unigned int possesseur) const override;
+    void declencher_effet(unsigned int possesseur) const override;
 };
 
 #endif //SRC_ENTREPRISERENOVATION_H

@@ -9,7 +9,7 @@ BanqueDeMinivilles::BanqueDeMinivilles()
                    {5, 6},
                    "commerce") {}
 
-void BanqueDeMinivilles::declencher_effet(unigned int possesseur) const{
+void BanqueDeMinivilles::declencher_effet(unsigned int possesseur) const{
     cout << "Declenchement de l'effet de la carte Banque de minivilles" << endl;
     /*
 

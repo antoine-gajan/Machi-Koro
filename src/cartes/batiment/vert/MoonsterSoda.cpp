@@ -9,7 +9,7 @@ MoonsterSoda::MoonsterSoda()
                    {11},
                    "usine") {}
 
-void MoonsterSoda::declencher_effet(unigned int possesseur) const {
+void MoonsterSoda::declencher_effet(unsigned int possesseur) const {
     cout << "Declenchement de l'effet de la carte MoonsterSoda" << endl;
     /*
     /// Effet du MoonsterSoda

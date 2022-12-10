@@ -9,7 +9,7 @@ public:
     ~Restaurant5Etoiles() override = default;
     Restaurant5Etoiles(const Restaurant5Etoiles& restaurant5Etoiles) = default;
     Batiment* clone() const override {return new Restaurant5Etoiles(*this);};
-    void declencher_effet(unigned int possesseur) const override;
+    void declencher_effet(unsigned int possesseur) const override;
   
 };
 

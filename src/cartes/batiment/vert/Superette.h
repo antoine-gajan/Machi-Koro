@@ -13,7 +13,7 @@ public:
     ~Superette() override = default;
     Superette(const Superette& superette) = default;
     Batiment* clone() const override {return new Superette(*this);};
-    void declencher_effet(unigned int possesseur) const override;
+    void declencher_effet(unsigned int possesseur) const override;
 };
 
 #endif //MACHI_KORO_SUPERETTE_H

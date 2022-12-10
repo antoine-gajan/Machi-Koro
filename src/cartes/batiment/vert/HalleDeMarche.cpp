@@ -9,7 +9,7 @@ HalleDeMarche::HalleDeMarche()
                    {12, 13},
                    "usine") {}
 
-void HalleDeMarche::declencher_effet(unigned int possesseur) const {
+void HalleDeMarche::declencher_effet(unsigned int possesseur) const {
     cout << "Declenchement de l'effet de la carte Halle de marche" << endl;
     /*
     /// Effet de la HalleDeMarche

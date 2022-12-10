@@ -12,7 +12,7 @@ public:
     ~ChampFleur() override = default;
     ChampFleur(const ChampFleur& champFleur) = default;
     Batiment* clone() const override {return new ChampFleur(*this);};
-    void declencher_effet(unigned int possesseur) const override;
+    void declencher_effet(unsigned int possesseur) const override;
 };
 
 #endif //MACHI_KORO_MASTER_CHAMPFLEUR_H

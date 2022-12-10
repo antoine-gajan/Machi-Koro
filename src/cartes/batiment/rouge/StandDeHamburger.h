@@ -9,7 +9,7 @@ public:
     ~StandDeHamburger() override = default;
     StandDeHamburger(const StandDeHamburger& standDeHamburger) = default;
     Batiment* clone() const override {return new StandDeHamburger(*this);};
-    void declencher_effet(unigned int possesseur) const override;
+    void declencher_effet(unsigned int possesseur) const override;
   
 };
 

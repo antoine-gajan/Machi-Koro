@@ -9,7 +9,7 @@ Superette::Superette()
                    {4},
                    "commerce") {}
 
-void Superette::declencher_effet(unigned int possesseur) const{
+void Superette::declencher_effet(unsigned int possesseur) const{
     cout << "Declenchement de l'effet de la carte Superette" << endl;
     /*
     /// Effet de la Superette

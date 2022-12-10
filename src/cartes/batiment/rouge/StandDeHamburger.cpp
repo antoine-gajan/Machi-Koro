@@ -9,7 +9,7 @@ StandDeHamburger::StandDeHamburger() :
                      list<unsigned int>{8},
                      "restaurant"){};
 
-void StandDeHamburger::declencher_effet(unigned int possesseur) const{
+void StandDeHamburger::declencher_effet(unsigned int possesseur) const{
     //j'ai deliberement retire le parametre joueur actuel de declencher effet pour respecter la methode virtuelle declaree dans Batiment.h
     cout << "Activation de l'effet du stand de hamburger" << endl;
     //Trouver un joueur qui a cette carte

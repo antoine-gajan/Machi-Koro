@@ -13,7 +13,7 @@ public:
     ~Fromagerie() override = default;
     Fromagerie(const Fromagerie& fromagerie) = default;
     Batiment* clone() const override {return new Fromagerie(*this);};
-    void declencher_effet(unigned int possesseur) const override;
+    void declencher_effet(unsigned int possesseur) const override;
 };
 
 #endif //MACHI_KORO_FROMAGERIE_H

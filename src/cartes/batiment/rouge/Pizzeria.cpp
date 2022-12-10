@@ -9,7 +9,7 @@ Pizzeria::Pizzeria() :
                      list<unsigned int>{7},
                      "restaurant"){};
 
-void Pizzeria::declencher_effet(unigned int possesseur) const{
+void Pizzeria::declencher_effet(unsigned int possesseur) const{
     //j'ai deliberement retire le parametre joueur actuel de declencher effet pour respecter la methode virtuelle declaree dans Batiment.h
     cout << "Activation de l'effet de la pizzeria" << endl;
     //Trouver un joueur qui a cette carte
