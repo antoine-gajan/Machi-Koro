@@ -246,7 +246,7 @@ void Partie::jouer_tour() {
             }
         }
     }
-    for (int i  = joueur_actuel + 1 ; i < tab_joueurs.size(); i++) {
+    for (unsigned int i  = joueur_actuel + 1 ; i < tab_joueurs.size(); i++) {
         for (auto it : tab_joueurs[i]->get_liste_batiment(Rouge)) {
             for (unsigned int effectif = 0; effectif < it.second; effectif++) {
                 it.first->declencher_effet(i);
@@ -303,7 +303,7 @@ void Partie::rejouer_tour() {
     joueur_actuel = (joueur_actuel + tab_joueurs.size() - 1) % tab_joueurs.size();
 }
 
-void Partie::acheter_carte(unsigned int indice_joueur_actuel) {
+void Partie::acheter_carte() {
 
     //fonction qui permet a un joueur donne d'acheter une carte (batiment ou monument)
     string choix;
@@ -313,19 +313,19 @@ void Partie::acheter_carte(unsigned int indice_joueur_actuel) {
     cin>>choix;
 
     if(choix == "b"){
-        acheter_bat(indice_joueur_actuel);
+        acheter_bat();
     }else if(choix == "m"){
-        acheter_monu(indice_joueur_actuel);
+        acheter_monu();
     }else{
         return;
     }
 }
 
-void Partie::acheter_bat(unsigned int indice_joueur_actuel) {
+void Partie::acheter_bat() {
     //fonction qui permet a un joueur donne d'acheter un batiment
     string nom_bat;
     Batiment* bat_picked;
-    Joueur *joueur_actuel = tab_joueurs[indice_joueur_actuel];
+    Joueur *joueur_act = tab_joueurs[joueur_actuel];
     unsigned int choix = 0;
     auto it = shop->get_contenu().begin();
 
@@ -339,7 +339,7 @@ void Partie::acheter_bat(unsigned int indice_joueur_actuel) {
 
         if(it == shop->get_contenu().end()) throw invalid_argument("Le batiment entre n'est pas dans le shop");
 
-        if(bat_picked->get_prix() < joueur_actuel->get_argent()){
+        if(bat_picked->get_prix() < joueur_act->get_argent()){
             bat_picked = shop->acheter_batiment(bat_picked);
             if(!pioche->est_vide()){
                 shop->completer_shop(pioche->get_carte());
@@ -347,8 +347,8 @@ void Partie::acheter_bat(unsigned int indice_joueur_actuel) {
                 cout<<"Plus de cartes dans la pioche"<<endl;
             }
 
-            joueur_actuel->ajouter_batiment(bat_picked);
-            joueur_actuel->set_argent(joueur_actuel->get_argent() - bat_picked->get_prix());
+            joueur_act->ajouter_batiment(bat_picked);
+            joueur_act->set_argent(joueur_act->get_argent() - bat_picked->get_prix());
         }else{
             cout<<"Vous n'avez pas assez d'argent pour acheter ce batiment"<<endl;
         }
@@ -358,11 +358,11 @@ void Partie::acheter_bat(unsigned int indice_joueur_actuel) {
     }
 }
 
-void Partie::acheter_monu(unsigned int indice_joueur_actuel) {
+void Partie::acheter_monu() {
     //fonction qui permet a un joueur donne d'acheter un monument
     string nom_monu;
     Monument* monu_picked;
-    Joueur *joueur_actuel = tab_joueurs[indice_joueur_actuel];
+    Joueur *joueur_act = tab_joueurs[joueur_actuel];
     unsigned int choix = 0;
     auto it = list_monuments.begin();
 
@@ -375,9 +375,9 @@ void Partie::acheter_monu(unsigned int indice_joueur_actuel) {
         if(it == list_monuments.end()) throw invalid_argument("Erreur de frappe, ce monument n'existe pas");
 
         monu_picked = *it;
-        if(monu_picked->get_prix() < joueur_actuel->get_argent()){
-            joueur_actuel->set_argent(joueur_actuel->get_argent() - monu_picked->get_prix());
-            joueur_actuel->activer_monument(monu_picked);
+        if(monu_picked->get_prix() < joueur_act->get_argent()){
+            joueur_act->set_argent(joueur_act->get_argent() - monu_picked->get_prix());
+            joueur_act->activer_monument(monu_picked);
         }else{
             cout<<"Vous n'avez pas assez d'argent pour acheter ce monument"<<endl;
         }
@@ -423,7 +423,7 @@ bool Partie::echanger_argent(unsigned int indice_joueur1, unsigned int indice_jo
     }*/
 }
 
-bool Partie::est_gagnant(Joueur *joueur) {
+bool Partie::est_gagnant(Joueur *joueur) const {
     ///Fonction pour verifier si un joueur a gagne
     return joueur->get_monument_jouables().size() >= nb_monuments_win;
 }

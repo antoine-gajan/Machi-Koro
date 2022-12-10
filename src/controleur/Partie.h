@@ -38,7 +38,7 @@ public:
     //********** Jouer une partie **********//
     void jouer_partie();
     void jouer_tour();
-    bool est_gagnant(Joueur *joueur);
+    bool est_gagnant(Joueur *joueur) const;
 
     //********** Constructeurs et getters **********//
     unsigned int get_joueur_actuel() const {return joueur_actuel;};
@@ -48,9 +48,9 @@ public:
     vector<Batiment*> map_to_vector(map<Batiment*, unsigned int> map_batiments);
     void ajout_batiment(Batiment *batiment);
 
-    void acheter_carte(unsigned int indice_joueur_actuel);
-    void acheter_monu(unsigned int indice_joueur_actuel);//sous fonction appelee dans acheter_carte
-    void acheter_bat(unsigned int indice_joueur_actuel);//sous fonction appelee dans acheter_carte
+    void acheter_carte();
+    void acheter_monu();//sous fonction appelee dans acheter_carte
+    void acheter_bat();//sous fonction appelee dans acheter_carte
     bool echanger_argent(unsigned int indice_joueur1, unsigned int indice_joueur2, unsigned int somme);
     void rejouer_tour();
 
