@@ -5,7 +5,7 @@ HotelDeVille::HotelDeVille() :
              "HotelDeVille",
              0,
              "Une fois par tour vous pouvez relancer vos des",
-             "../../assets/Monuments/HotelDeVille.png") {
+             "../../assets/Monuments/HotelDeVille.jpg") {
     /// Constructeur de HotelDeVille
 }
 
