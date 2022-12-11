@@ -43,9 +43,15 @@ public:
     void jouer_partie();
     void jouer_tour();
     bool est_gagnant(unsigned int j) const;
-    unsigned int get_de_2() const {return de_2;}
 
+
+    //********** Gestion des des **********//
+    unsigned int get_de_1() const { return de_1; }
+    void set_de_1(unsigned int de1) {de_1 = de1;}
+    unsigned int get_de_2() const {return de_2;}
     void set_de_2(unsigned int de2) {de_2 = de2;}
+
+
     //********** Constructeurs et getters **********//
     unsigned int get_joueur_actuel() const {return joueur_actuel;};
     const vector <Joueur*>& get_tab_joueurs() const {return tab_joueurs;};
