@@ -19,9 +19,9 @@ void TourRadio::declencher_effet(unsigned int possesseur, int bonus) const {
         cin >> choix;
     }
     if(choix == 1) {
-        partie->set_de_1(1 + rand() % 6);
+        partie->set_de_1(1 + (rand() % 6));
         if (partie->get_de_2() != 0) {
-            partie->set_de_2(1 + rand() % 6);
+            partie->set_de_2(1 + (rand() % 6));
         }
     }
 

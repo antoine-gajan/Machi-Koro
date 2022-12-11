@@ -19,7 +19,7 @@ void Gare::declencher_effet(unsigned int possesseur, int bonus) const {
         std::cin >> choix;
     }
     if (choix == 1) {
-        partie->set_de_2(rand() % 6 + 1);
+        partie->set_de_2((rand() % 6) + 1);
     }
 }
 
