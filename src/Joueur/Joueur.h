@@ -3,8 +3,7 @@
 
 #include <map>
 #include <vector>
-#include "Monument.h"
-#include "Batiment.h"
+#include "Carte.h"
 
 enum strat_IA {aleatoire, agressive, defensif, none};
 // Agressive : veut construire des batiments de couleur rouge
@@ -16,7 +15,7 @@ class Joueur {
     private:
     /*** Attributs de la classe ***/
 
-        string nom;
+        const string nom;
         map<Monument*, bool> liste_monument;
         map<couleur_bat, map<Batiment*, unsigned int>> liste_batiment;
         unsigned int argent;

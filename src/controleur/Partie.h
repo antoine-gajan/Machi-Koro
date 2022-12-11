@@ -8,6 +8,7 @@
 #include "EditionDeJeu.h"
 #include "Shop.h"
 #include "Pioche.h"
+#include "Joueur.h"
 
 class Partie {
     private:
