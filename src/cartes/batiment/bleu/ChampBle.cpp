@@ -7,7 +7,7 @@ ChampBle::ChampBle() :
         "../../assets/batiments/bleu/Champs-ble.jpg",
         Bleu,
         list<unsigned int>{1},
-        "Champ"){};
+        "Champ"){}
 ///Constructeur de ChampBle
 
 void ChampBle::declencher_effet(unsigned int possesseur, int bonus) const {

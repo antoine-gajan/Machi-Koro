@@ -7,7 +7,7 @@ Mine::Mine() :
         "../../assets/batiments/bleu/Mine.jpg",
         Bleu,
         list<unsigned int>{9},
-        "Engrenage"){};
+        "Engrenage"){}
 ///Constructeur de Mine
 
 void Mine::declencher_effet(unsigned int possesseur, int bonus) const{

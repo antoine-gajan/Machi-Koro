@@ -1,10 +1,7 @@
 #ifndef MACHI_KORO_FROMAGERIE_H
 #define MACHI_KORO_FROMAGERIE_H
 
-#include "../Batiment.h"
-#include "Joueur.h"
-#include <list>
-#include <vector>
+#include "Batiment.h"
 
 class Fromagerie : public Batiment {
 public:

@@ -1,10 +1,7 @@
-#ifndef MACHI_KORO_MASTER_RANCH_H
-#define MACHI_KORO_MASTER_RANCH_H
+#ifndef MACHI_KORO_FERME_H
+#define MACHI_KORO_FERME_H
 
 #include "Batiment.h"
-//#include "Joueur.h"
-#include <list>
-#include <vector>
 
 class Ferme : public Batiment{
 public:

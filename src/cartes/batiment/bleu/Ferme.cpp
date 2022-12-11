@@ -7,7 +7,7 @@ Ferme::Ferme() :
         "../../assets/batiments/bleu/Ferme.jpg",
         Bleu,
         list<unsigned int>{2},
-        "Betail"){};
+        "Betail"){}
 ///Constructeur de Ferme
 
 void Ferme::declencher_effet(unsigned int possesseur, int bonus) const {

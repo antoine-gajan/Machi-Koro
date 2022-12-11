@@ -7,7 +7,7 @@ Vignoble::Vignoble() :
         "../../assets/batiments/bleu/Vignoble.jpg",
         Bleu,
         list<unsigned int>{7},
-        "Champ"){};
+        "Champ"){}
 ///Constructeur de Vignoble
 
 void Vignoble::declencher_effet(unsigned int possesseur, int bonus) const {

@@ -1,10 +1,7 @@
 #ifndef MACHI_KORO_EPICERIE_H
 #define MACHI_KORO_EPICERIE_H
 
-#include "../Batiment.h"
-#include "Joueur.h"
-#include <list>
-#include <vector>
+#include "Batiment.h"
 
 class Epicerie : public Batiment {
 public:

@@ -2,9 +2,6 @@
 #define MACHI_KORO_CHAMPBLE_H
 
 #include "Batiment.h"
-//#include "Joueur.h"
-#include <list>
-#include <vector>
 
 class ChampBle : public Batiment{
 public:

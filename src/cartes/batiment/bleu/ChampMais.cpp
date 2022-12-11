@@ -7,7 +7,7 @@ ChampMais::ChampMais() :
         "../../assets/batiments/bleu/ChampMais.jpg",
         Bleu,
         list<unsigned int>{3,4},
-        "Champ"){};
+        "Champ"){}
 ///Constructeur de Ferme
 
 void ChampMais::declencher_effet(unsigned int possesseur, int bonus) const{

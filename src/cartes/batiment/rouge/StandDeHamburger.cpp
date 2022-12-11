@@ -7,7 +7,7 @@ StandDeHamburger::StandDeHamburger() :
                      "../../assets/batiments/Rouge/Monster-burger.jpg",
                      Rouge,
                      list<unsigned int>{8},
-                     "restaurant"){};
+                     "restaurant"){}
 
 void StandDeHamburger::declencher_effet(unsigned int possesseur, int bonus) const{
     //j'ai deliberement retire le parametre joueur actuel de declencher effet pour respecter la methode virtuelle declaree dans Batiment.h

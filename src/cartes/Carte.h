@@ -2,6 +2,8 @@
 #define MACHI_KORO_CARTE_H
 
 #include <string>
+#include <list>
+#include <vector>
 #include <iostream>
 
 class Carte {

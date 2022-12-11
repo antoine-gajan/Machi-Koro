@@ -1,7 +1,6 @@
 #ifndef MACHI_KORO_STADE_H
 #define MACHI_KORO_STADE_H
 
-#include <vector>
 #include "Batiment.h"
 
 class Stade : public Batiment {

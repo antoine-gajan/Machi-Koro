@@ -7,7 +7,8 @@ Chalutier::Chalutier() :
         "../../assets/batiments/bleu/Chalutier.jpg",
         Bleu,
         list<unsigned int>{12,13,14},
-        "Bateau"){};
+        "Bateau"){}
+
 ///Constructeur de Chalutier
 
 void Chalutier::declencher_effet(unsigned int possesseur, int bonus) const{

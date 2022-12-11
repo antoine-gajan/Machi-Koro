@@ -1,4 +1,5 @@
 #include "PetitBateauDePeche.h"
+
 PetitBateauDePeche::PetitBateauDePeche() :
         Batiment("PetitBateauDePeche",
                  2,
@@ -6,7 +7,7 @@ PetitBateauDePeche::PetitBateauDePeche() :
                  "../../assets/batiments/bleu/Petit-bateau-peche.jpg",
                  Bleu,
                  list<unsigned int>{8},
-                 "Bateau"){};
+                 "Bateau"){}
 ///Constructeur de BateauPeche
 
 

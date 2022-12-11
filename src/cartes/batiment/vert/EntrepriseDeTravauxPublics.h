@@ -2,10 +2,6 @@
 #define MACHI_KORO_ENTREPRISE_DE_TRAVAUX_PUBLICS_H
 
 #include "Batiment.h"
-#include "Joueur.h"
-#include "algorithm"
-#include <list>
-#include <vector>
 
 class EntrepriseDeTravauxPublics : public Batiment {
 public:

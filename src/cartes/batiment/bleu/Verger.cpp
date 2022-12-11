@@ -7,7 +7,7 @@ Verger::Verger() :
         "../../assets/batiments/bleu/Verger.jpg",
         Bleu,
         list<unsigned int>{10},
-        "Champ"){};
+        "Champ"){}
 ///Constructeur de Verger
 
 void Verger::declencher_effet(unsigned int possesseur, int bonus) const {

@@ -7,7 +7,7 @@ Restaurant5Etoiles::Restaurant5Etoiles() :
                      "../../assets/batiments/Rouge/Restaurant-5-etoiles.jpg",
                      Rouge,
                      list<unsigned int>{5},
-                     "restaurant"){};
+                     "restaurant"){}
 
 
 void Restaurant5Etoiles::declencher_effet(unsigned int possesseur, int bonus) const{

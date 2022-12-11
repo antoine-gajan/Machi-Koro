@@ -7,7 +7,7 @@ Foret::Foret() :
         "../../assets/batiments/bleu/Foret.jpg",
         Bleu,
         list<unsigned int>{5},
-        "Engrenage"){};
+        "Engrenage"){}
 ///Constructeur de Foret
 
 void Foret::declencher_effet(unsigned int possesseur, int bonus) const {

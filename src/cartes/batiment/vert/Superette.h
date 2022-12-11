@@ -1,10 +1,7 @@
 #ifndef MACHI_KORO_SUPERETTE_H
 #define MACHI_KORO_SUPERETTE_H
 
-#include "../Batiment.h"
-#include "Joueur.h"
-#include <list>
-#include <vector>
+#include "Batiment.h"
 
 class Superette : public Batiment {
 public:

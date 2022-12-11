@@ -7,7 +7,7 @@ Pizzeria::Pizzeria() :
                      "../../assets/batiments/Rouge/Pizzeria.jpg",
                      Rouge,
                      list<unsigned int>{7},
-                     "restaurant"){};
+                     "restaurant"){}
 
 void Pizzeria::declencher_effet(unsigned int possesseur, int bonus) const{
     //j'ai deliberement retire le parametre joueur actuel de declencher effet pour respecter la methode virtuelle declaree dans Batiment.h

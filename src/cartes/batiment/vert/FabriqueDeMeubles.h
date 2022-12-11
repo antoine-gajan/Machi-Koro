@@ -1,10 +1,7 @@
 #ifndef MACHI_KORO_FABRIQUE_DE_MEUBLES_H
 #define MACHI_KORO_FABRIQUE_DE_MEUBLES_H
 
-#include "../Batiment.h"
-#include "Joueur.h"
-#include <list>
-#include <vector>
+#include "Batiment.h"
 
 class FabriqueDeMeubles : public Batiment {
 public:

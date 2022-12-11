@@ -7,7 +7,7 @@ ChampFleur::ChampFleur() :
         "../../assets/batiments/bleu/ChampFleur.jpg",
         Bleu,
         list<unsigned int>{4},
-        "Champ"){};
+        "Champ"){}
 ///Constructeur de ChampFleur
 
 void ChampFleur::declencher_effet(unsigned int possesseur, int bonus) const {
