@@ -39,8 +39,10 @@ class Joueur {
         map<Batiment*, unsigned int> get_liste_batiment(couleur_bat couleur) {return liste_batiment[couleur];};
         vector<unsigned int> get_repartition_argent() const;
         vector<Monument*> get_monument_jouables() const;
-        const map<Batiment*, unsigned int>& get_liste_bat_non_special() const;
+        unsigned int count_type(const string& type) const;
 
+
+        const map<Batiment*, unsigned int>& get_liste_bat_non_special() const;
         Monument* selectionner_monument() const;
         Batiment* selectionner_batiment() const;
         Batiment* possede_batiment(const string& nom_bat) const;

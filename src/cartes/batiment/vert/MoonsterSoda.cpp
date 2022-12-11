@@ -1,4 +1,5 @@
 #include "MoonsterSoda.h"
+#include "Partie.h"
 
 MoonsterSoda::MoonsterSoda()
         : Batiment("MoonsterSoda",
@@ -11,17 +12,17 @@ MoonsterSoda::MoonsterSoda()
 
 void MoonsterSoda::declencher_effet(unsigned int possesseur, int bonus) const {
     cout << "Declenchement de l'effet de la carte MoonsterSoda" << endl;
-    /*
     /// Effet du MoonsterSoda
-    Joueur* j_actuel = tab_joueurs[joueur_actuel];
+    unsigned int j_act_index =  Partie::get_instance()->get_joueur_actuel();
+    Joueur* j_actuel = Partie::get_instance()->get_tab_joueurs()[j_act_index];
+    vector<Joueur*> tab_joueurs = Partie::get_instance()->get_tab_joueurs();
 
     // On compte le nombre d'etablissements de type restaurant de tous les joueurs
     unsigned int nb_restaurants = 0;
     for (Joueur* j : tab_joueurs) {
-        nb_restaurants += count_type(j, "restaurant");
+        nb_restaurants += j->count_type("restaurant");
     }
 
     // On donne 1 piece par restaurant
-    j_actuel->set_argent(j_actuel->get_argent() + nb_restaurants);
-    */
+    j_actuel->set_argent(j_actuel->get_argent() + nb_restaurants * (1 + bonus));
 }

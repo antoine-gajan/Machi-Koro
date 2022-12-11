@@ -1,4 +1,5 @@
 #include "Superette.h"
+#include "Partie.h"
 
 Superette::Superette()
         : Batiment("Superette",
@@ -11,11 +12,10 @@ Superette::Superette()
 
 void Superette::declencher_effet(unsigned int possesseur, int bonus) const{
     cout << "Declenchement de l'effet de la carte Superette" << endl;
-    /*
     /// Effet de la Superette
-    Joueur* j_actuel = tab_joueurs[joueur_actuel];
+    unsigned int j_act_index =  Partie::get_instance()->get_joueur_actuel();
+    Joueur* j_actuel = Partie::get_instance()->get_tab_joueurs()[j_act_index];
 
     // On donne 3 pieces
-    j_actuel->set_argent(j_actuel->get_argent() + 3);
-    */
+    j_actuel->set_argent(j_actuel->get_argent() + 3 + bonus);
 }

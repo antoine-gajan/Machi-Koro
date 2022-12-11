@@ -16,7 +16,7 @@ void EntrepriseDeDemenagement::declencher_effet(unsigned int possesseur, int bon
     /// Effet de l'EntrepriseDeDemenagement
 
     /// DON DE L'ETABLISSEMENT
-    unsigned int j_act_index =  Partie::get_instance()->get_joueur_actuel();
+    unsigned int j_act_index = Partie::get_instance()->get_joueur_actuel();
     Joueur* j_actuel = Partie::get_instance()->get_tab_joueurs()[j_act_index];
 
     vector<Joueur*> tab_joueurs = Partie::get_instance()->get_tab_joueurs();
@@ -42,6 +42,6 @@ void EntrepriseDeDemenagement::declencher_effet(unsigned int possesseur, int bon
 
     /// TRANSACTION AVEC LA BANQUE
     // On donne 4 pieces au joueur actuel
-    j_actuel->set_argent(j_actuel->get_argent() + 4);
+    j_actuel->set_argent(j_actuel->get_argent() + 4 + bonus);
 
 }

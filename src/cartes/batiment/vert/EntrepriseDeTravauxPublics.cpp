@@ -1,5 +1,5 @@
 #include "EntrepriseDeTravauxPublics.h"
-
+#include "Partie.h"
 
 EntrepriseDeTravauxPublics::EntrepriseDeTravauxPublics()
         : Batiment("EntrepriseDeTravauxPublics",
@@ -12,14 +12,16 @@ EntrepriseDeTravauxPublics::EntrepriseDeTravauxPublics()
 
 void EntrepriseDeTravauxPublics::declencher_effet(unsigned int possesseur, int bonus) const {
     cout << "Declenchement de l'effet de la carte Entreprise de travaux publics" << endl;
-    /*
+
     /// Effet de l'EntrepriseDeTravauxPublics
 
     /// DESACTIVATION DU MONUMENT
-    Joueur* j_actuel = tab_joueurs[joueur_actuel];
+
+    unsigned int j_act_index =  Partie::get_instance()->get_joueur_actuel();
+    Joueur* j_actuel = Partie::get_instance()->get_tab_joueurs()[j_act_index];
 
     // On demande a l'utilisateur de selectionner un de ses monuments
-    Monument* monument = selectionner_monument(j_actuel);
+    Monument* monument = j_actuel->selectionner_monument();
 
     // On recupere la liste des monuments actifs du joueur
     vector<Monument*> monuments_jouables = j_actuel->get_monument_jouables();
@@ -27,7 +29,7 @@ void EntrepriseDeTravauxPublics::declencher_effet(unsigned int possesseur, int b
     // On verifie que le monument est jouable
     while (find(monuments_jouables.begin(), monuments_jouables.end(), monument) == monuments_jouables.end()){
         cout << "Vous ne pouvez pas retourner un monument qui n'est pas actif." << endl;
-        monument = selectionner_monument(j_actuel);
+        monument = j_actuel->selectionner_monument();
     }
 
     // On desactive le monument
@@ -35,7 +37,7 @@ void EntrepriseDeTravauxPublics::declencher_effet(unsigned int possesseur, int b
 
     /// TRANSACTION AVEC LA BANQUE
     // On donne 8 pieces au joueur actuel
-    j_actuel->set_argent(j_actuel->get_argent() + 8);
-*/
+    j_actuel->set_argent(j_actuel->get_argent() + 8 + bonus);
+
 
 }

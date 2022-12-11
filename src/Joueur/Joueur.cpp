@@ -190,6 +190,23 @@ void Joueur::afficher_joueur() const {
     cout << "********************\n" << endl;
 }
 
+unsigned int Joueur::count_type(const string& type) const {
+    unsigned int count = 0;
+    auto liste_bat = get_liste_batiment();
+    // pour chaque couleur de la liste de batiments du joueur
+    for (const auto& couleur : liste_bat) {
+        // pour chaque batiment de la couleur, (batiments sous forme de map(Batiment*, unsigned int))
+        for (auto batiment : liste_bat[couleur.first]) {
+            if (batiment.first->get_type() == type) {
+                count += batiment.second;
+            }
+        }
+    }
+    return count;
+}
+
+//// a revoir
+
 const map<Batiment*, unsigned int>& Joueur::get_liste_bat_non_special() const{
     map<Batiment* ,unsigned int> liste;
     for (const auto& couleur : get_liste_batiment()){
@@ -202,9 +219,6 @@ const map<Batiment*, unsigned int>& Joueur::get_liste_bat_non_special() const{
     }
     return liste;
 }
-
-//// a revoir
-
 
 Monument* Joueur::selectionner_monument() const{
     string nom_monu;
