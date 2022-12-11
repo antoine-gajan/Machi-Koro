@@ -315,6 +315,7 @@ bool Partie::acheter_monu() {
     mon_picked = monuments_dispo[choix - 1];
 
     joueur_act->activer_monument(mon_picked);
+    joueur_act->set_argent(joueur_act->get_argent() - mon_picked->get_prix());
 
     return true;
 }
