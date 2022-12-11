@@ -61,6 +61,14 @@ Partie* Partie::get_instance() {
     return singleton;
 }
 
+void Partie::liberer_instance() {
+    if (singleton != nullptr) {
+        delete singleton;
+        singleton = nullptr;
+    }
+}
+
+
 Partie::Partie(EditionDeJeu* edition, const vector<EditionDeJeu *>& extensions) : nb_monuments_win(edition->get_nb_monuments_win()), joueur_actuel(0), de_1(0), de_2(0) {
     ///Constructeur de Partie
 

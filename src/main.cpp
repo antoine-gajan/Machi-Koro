@@ -1,12 +1,10 @@
 #include <iostream>
 using namespace std;
 
-#include "Partie.h"
+#include "utils.h"
 
 int main() {
-    Partie* p = Partie::get_instance();
-
-    p->jouer_partie();
+    menu();
 
     return 0;
 }
