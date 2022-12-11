@@ -438,9 +438,9 @@ void Partie::jouer_tour() {
     bool centre_c = false;
     vector <Monument*> monuments_joueurs = tab_joueurs[joueur_actuel]->get_monument_jouables();
 
-    de_1 = rand() % 6 + 1;
+    de_1 = (rand() % 6) + 1;
     de_2 = 0;
-    de_casse = rand() % 50 + 1;
+    de_casse = (rand() % 50) + 1;
 
     tab_joueurs[joueur_actuel]->afficher_joueur();
 
