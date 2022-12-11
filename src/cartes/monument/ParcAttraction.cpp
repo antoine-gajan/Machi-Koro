@@ -1,4 +1,5 @@
 #include "ParcAttraction.h"
+#include "Partie.h"
 
 ParcAttraction::ParcAttraction() :
     Monument(APRES,
@@ -11,6 +12,7 @@ ParcAttraction::ParcAttraction() :
 
 void ParcAttraction::declencher_effet(unsigned int possesseur, int bonus) const {
     std::cout << "Activation de l'effet du Parc d'attractions" << std::endl;
+    Partie::get_instance()->rejouer_tour();
 }
 
 void ParcAttraction::activer(){

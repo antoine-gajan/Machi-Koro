@@ -346,6 +346,9 @@ bool Partie::acheter_bat() {
     joueur_act->ajouter_batiment(bat_picked);
     shop->acheter_batiment(bat_picked);
     joueur_act->set_argent(joueur_act->get_argent() - bat_picked->get_prix());
+    if (bat_picked->get_nom() == "BanqueDeMiniville") {
+        joueur_act->set_argent(joueur_act->get_argent() + 5);
+    }
 
     return true;
 }

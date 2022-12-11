@@ -1,4 +1,5 @@
 #include "Gare.h"
+#include "Partie.h"
 
 Gare::Gare()
     : Monument(AVANT,
@@ -11,6 +12,15 @@ Gare::Gare()
 
 void Gare::declencher_effet(unsigned int possesseur, int bonus) const {
     std::cout << "Activation de l'effet de la gare" << std::endl;
+    Partie *partie = Partie::get_instance();
+    int choix = -1;
+    while (choix != 0 && choix != 1) {
+        std::cout << "Voulez-vous lancer 2 dés ? (0 : non, 1 : oui)" << std::endl;
+        std::cin >> choix;
+    }
+    if (choix == 1) {
+        partie->set_de_2(rand() % 6 + 1);
+    }
 }
 
 void Gare::activer() {
