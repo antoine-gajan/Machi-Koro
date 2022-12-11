@@ -9,6 +9,7 @@
 #include "Shop.h"
 #include "Pioche.h"
 #include "Joueur.h"
+#include "Carte.h"
 
 class Partie {
     private:
