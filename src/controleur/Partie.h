@@ -4,6 +4,7 @@
 #include <list>
 #include <vector>
 #include <string>
+#include <algorithm>
 
 #include "EditionDeJeu.h"
 #include "Joueur.h"

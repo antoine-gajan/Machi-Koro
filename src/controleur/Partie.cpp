@@ -1,5 +1,4 @@
 #include "Partie.h"
-#include <algorithm>
 #define REP_ED_MIN 1
 #define REP_ED_MAX 3
 
