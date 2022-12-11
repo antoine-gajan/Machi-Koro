@@ -1,7 +1,6 @@
 #ifndef MACHI_KORO_EDITIONDEJEU_H
 #define MACHI_KORO_EDITIONDEJEU_H
 
-#include <string>
 #include <map>
 #include <vector>
 #include "Batiment.h"
@@ -64,7 +63,7 @@
 
 class EditionDeJeu{
 protected:
-    std::string nom;
+    string nom;
     unsigned int nb_joueurs_min;
     unsigned int nb_joueurs_max;
     unsigned int nb_monuments_win;
@@ -80,7 +79,7 @@ public:
     ~EditionDeJeu();
 
     /// *** Getters *** ///
-    const std::string& get_nom() const {return nom;};
+    const string& get_nom() const {return nom;};
     unsigned int get_nb_joueurs_min() const {return nb_joueurs_min;};
     unsigned int get_nb_joueurs_max() const {return nb_joueurs_max;};
     unsigned int get_nb_monuments_win() const {return nb_monuments_win;};

@@ -6,6 +6,7 @@
 #include <string>
 
 #include "EditionDeJeu.h"
+#include "Joueur.h"
 #include "Shop.h"
 #include "Pioche.h"
 
