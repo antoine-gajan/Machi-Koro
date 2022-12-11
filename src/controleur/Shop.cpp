@@ -52,7 +52,8 @@ void Shop::affiche_shop() {
     unsigned int pos = 1;
 
     for (auto & it : contenu) {
-        cout << pos << " : " << it.first->get_nom() << "(cout : " << it.first->get_prix() << ")" << endl;
+        cout << pos << " : " << it.first->get_nom() << "(cout : " << it.first->get_prix() <<" ; quantite :" << it.second <<")" << endl;
+        //cout << "\tDescription : " << it.first->get_description() << endl;
         pos++;
     }
 }

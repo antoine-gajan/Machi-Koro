@@ -11,13 +11,20 @@ TourRadio::TourRadio() :
 }
 
 void TourRadio::declencher_effet(unsigned int possesseur, int bonus) const {
-    std::cout << "Activation de l'effet de la Tour radio" << std::endl;
+    cout << "Activation de l'effet de la Tour radio" << endl;
     Partie *partie = Partie::get_instance();
     int choix = -1;
-    while(choix !=0 && choix !=1) {
-        cout << "Voulez-vous relancer vos dés ? (0: Non, 1: Oui)" << endl;
-        cin >> choix;
+
+    if (partie->get_tab_joueurs()[possesseur]->get_est_ia()) {
+        choix = rand() % 2;
     }
+    else {
+        while (choix != 0 && choix != 1) {
+            cout << "Voulez-vous relancer vos dés ? (0 : non, 1 : oui)" << endl;
+            cin >> choix;
+        }
+    }
+
     if(choix == 1) {
         partie->set_de_1(1 + (rand() % 6));
         if (partie->get_de_2() != 0) {

@@ -11,18 +11,26 @@ Port::Port()
 }
 
 void Port::declencher_effet(unsigned int possesseur, int bonus) const {
-    std::cout << "Activation de l'effet du Port" << std::endl;
+    cout << "Activation de l'effet du Port" << endl;
     Partie *partie = Partie::get_instance();
     if (partie->get_de_1() + partie->get_de_2() >= 10) {
         int choix = -1;
-        while (choix != 0 && choix != 1) {
-            std::cout << "Voulez-vous ajouter 2 au resultat du jet de de ? (0 : non, 1 : oui)" << std::endl;
-            std::cin >> choix;
+        
+        if (partie->get_tab_joueurs()[possesseur]->get_est_ia()) {
+            choix = rand() % 2;
         }
+        else {
+            while (choix != 0 && choix != 1) {
+                cout << "Voulez-vous ajouter 2 au resultat du jet de de ? (0 : non, 1 : oui)" << endl;
+                cin >> choix;
+            }
+        }
+        
         if (choix == 1) {
             partie->set_de_1(partie->get_de_1() + 1);
             partie->set_de_2(partie->get_de_2() + 1);
         }
+        
     }
 }
 
