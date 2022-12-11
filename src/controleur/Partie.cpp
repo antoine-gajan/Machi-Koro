@@ -369,19 +369,6 @@ vector<Batiment*> Partie::map_to_vector(const map<Batiment*, unsigned int>& map_
     return vector_batiments;
 }
 
-map<Batiment*, unsigned int> Partie::get_liste_bat_non_special(Joueur* j){
-    map<Batiment* ,unsigned int> liste;
-    for (const auto& couleur : j->get_liste_batiment()){
-        for (auto bat : couleur.second){
-            if (bat.first->get_type() != "special")
-            {
-                liste.insert(pair<Batiment*, unsigned int>(bat.first, bat.second));
-            }
-        }
-    }
-    return liste;
-}
-
 unsigned int Partie::count_type(Joueur *joueur, const string& type) {
     unsigned int count = 0;
     auto liste_bat = joueur->get_liste_batiment();
@@ -586,15 +573,6 @@ void Partie::jouer_tour() {
 
 /// Questionnable :
 
-void Partie::swap_bat_players(Joueur *j1, Joueur *j2, Batiment* bat1, Batiment* bat2){
-    ///Fonction qui echange les batiments de 2 joueurs
-    // Gestion du batiment 2 dans l'echange
-    j2->retirer_batiment(bat2);
-    j1->ajouter_batiment(bat2);
-    // Gestion du batiment 1 dans l'echange
-    j1->retirer_batiment(bat1);
-    j2->ajouter_batiment(bat1);
-}
 
 void Partie::don_argent(Joueur* j1, unsigned int argent, Joueur* j2){
     /// Don d'argent du joueur j1 au joueur j2

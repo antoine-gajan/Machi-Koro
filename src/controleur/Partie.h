@@ -50,6 +50,7 @@ class Partie {
         unsigned int get_joueur_actuel() const {return joueur_actuel;};
         static Partie& get_instance();
         void liberer_instance();
+        const vector <Joueur*>& get_tab_joueurs() const {return tab_joueurs;};
 
         //********** Methodes **********//
         //********** Methodes statiques **********//
@@ -70,12 +71,6 @@ class Partie {
         // idem mais pour monument
         static Monument* selectionner_monument(Joueur *joueur);
         static Monument* possede_monument(Joueur *joueur, const string& nom_mon);
-
-        static map<Batiment*, unsigned int> get_liste_bat_non_special(Joueur* j);
-
-
-        //Fonction qui echange le batiment 1 du joueur 1 avec le batiment 2 du joueur 2
-        static void swap_bat_players(Joueur *j1, Joueur *j2, Batiment *bat1, Batiment *bat2);
 
         static void don_argent(Joueur* j1, unsigned int argent, Joueur* j2);
 
