@@ -3,6 +3,8 @@
 
 #include <string>
 #include <iostream>
+#include <Partie.h>
+#include <Joueur.h>
 
 class Carte {
 protected:

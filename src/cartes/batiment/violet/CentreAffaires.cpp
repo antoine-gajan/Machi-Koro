@@ -16,8 +16,8 @@ CentreAffaires::CentreAffaires():
 void CentreAffaires::declencher_effet(unsigned int possesseur, int bonus) const{
     /// Effet du Centre d'affaires
     std::cout << "Activation de l'effet du centre d'affaires." << std::endl;
-    /*
-    Joueur* j_actuel = tab_joueurs[joueur_actuel];
+    const vector<Joueur*>& tab_joueurs = Partie::get_instance().get_tab_joueurs();
+    Joueur* j_actuel = tab_joueurs[possesseur];
     
     // Choix du joueur
     unsigned int num_joueur;
@@ -30,7 +30,7 @@ void CentreAffaires::declencher_effet(unsigned int possesseur, int bonus) const{
     // Demande du nombre et validite de la saisie
     cout << "Entrez le numero associe au joueur qui va vous donner 5 pieces : ";
     cin >> num_joueur;
-    while (num_joueur < 0 || num_joueur >= tab_joueurs.size() || num_joueur == joueur_actuel) {
+    while (num_joueur < 0 || num_joueur >= tab_joueurs.size() || num_joueur == possesseur) {
         cout << "Erreur dans la saisie. Veuillez saisir un nombre valide : ";
         cin >> num_joueur;
     }
@@ -40,8 +40,8 @@ void CentreAffaires::declencher_effet(unsigned int possesseur, int bonus) const{
     
     // Liste des batiments du joueur actuel et de l'autre joueur
     unsigned int bat_don;
-    auto liste_batiments_echange = get_liste_bat_non_special(joueur_echange);
-    auto liste_batiments_joueur = get_liste_bat_non_special(j_actuel);
+    auto liste_batiments_echange = joueur_echange->get_liste_bat_non_special();
+    auto liste_batiments_joueur = j_actuel->get_liste_bat_non_special();
 
     // Demande du batiment a echanger
     cout << "Les batiments que vous pouvez donner : " << endl;
@@ -96,10 +96,15 @@ void CentreAffaires::declencher_effet(unsigned int possesseur, int bonus) const{
     // Affichage du recapitulatif
     cout << "Vous allez recevoir de " << joueur_echange->get_nom() << " le batiment " << batiment_a_recevoir.first->get_nom();
 
-    // Echange des batiments
-    swap_bat_players(j_actuel, joueur_echange, batiment_a_donner.first, batiment_a_recevoir.first);
-     */
+    // Gestion du batiment 2 dans l'echange
+    joueur_echange->retirer_batiment(batiment_a_recevoir);
+    j_actuel->ajouter_batiment(batiment_a_recevoir);
+    // Gestion du batiment 1 dans l'echange
+    j_actuel->retirer_batiment(batiment_a_donner);
+    joueur_echange->ajouter_batiment(batiment_a_donner);
+
 }
+
 
 
 
