@@ -70,7 +70,7 @@ public:
     static Monument* selectionner_monument(Joueur *joueur);
     static Monument* possede_monument(Joueur *joueur, const string& nom_mon);
 
-static void don_argent(Joueur* j1, unsigned int argent, Joueur* j2);
+    static void don_argent(Joueur* j1, unsigned int argent, Joueur* j2);
 
     //********** Methodes non statiques **********//
     void ajout_batiment(Batiment *batiment);
