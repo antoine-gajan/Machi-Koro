@@ -1,4 +1,5 @@
 #include "EntrepriseDeDemenagement.h"
+#include "Partie.h"
 
 EntrepriseDeDemenagement::EntrepriseDeDemenagement()
         : Batiment("EntrepriseDeDemenagement",
@@ -11,22 +12,25 @@ EntrepriseDeDemenagement::EntrepriseDeDemenagement()
 
 void EntrepriseDeDemenagement::declencher_effet(unsigned int possesseur, int bonus) const {
     cout << "Declenchement de l'effet de la carte Entreprise de demenagement" << endl;
-    /*
+
     /// Effet de l'EntrepriseDeDemenagement
 
     /// DON DE L'ETABLISSEMENT
-    Joueur* j_actuel = tab_joueurs[joueur_actuel];
+    unsigned int j_act_index =  Partie::get_instance()->get_joueur_actuel();
+    Joueur* j_actuel = Partie::get_instance()->get_tab_joueurs()[j_act_index];
+
+    vector<Joueur*> tab_joueurs = Partie::get_instance()->get_tab_joueurs();
 
     // On demande a l'utilisateur de selectionner un joueur
-    unsigned int joueur_selectionne = selectionner_joueur(tab_joueurs, joueur_actuel);
+    unsigned int joueur_selectionne = Partie::selectionner_joueur(tab_joueurs, j_act_index);
 
     // On demande a l'utilisateur de selectionner un de ses batiments
-    Batiment* batiment = selectionner_batiment(j_actuel);
+    Batiment* batiment = Partie::selectionner_batiment(j_actuel);
 
     // On verifie que le batiment n'est pas de type special
     while (batiment->get_type() == "special"){
         cout << "Vous ne pouvez pas donner un etablissement de type special." << endl;
-        batiment = selectionner_batiment(j_actuel);
+        batiment = Partie::selectionner_batiment(j_actuel);
     }
 
     // On retire le batiment du joueur actuel
@@ -39,6 +43,5 @@ void EntrepriseDeDemenagement::declencher_effet(unsigned int possesseur, int bon
     /// TRANSACTION AVEC LA BANQUE
     // On donne 4 pieces au joueur actuel
     j_actuel->set_argent(j_actuel->get_argent() + 4);
-*/
 
 }

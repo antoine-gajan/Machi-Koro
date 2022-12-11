@@ -190,7 +190,7 @@ void Joueur::afficher_joueur() const {
     cout << "********************\n" << endl;
 }
 
-const map<Batiment*, unsigned int>& Joueur::get_liste_bat_non_special(){
+const map<Batiment*, unsigned int>& Joueur::get_liste_bat_non_special() const{
     map<Batiment* ,unsigned int> liste;
     for (const auto& couleur : get_liste_batiment()){
         for (auto bat : couleur.second){
@@ -201,4 +201,106 @@ const map<Batiment*, unsigned int>& Joueur::get_liste_bat_non_special(){
         }
     }
     return liste;
+}
+
+//// a revoir
+
+
+Monument* Joueur::selectionner_monument() const{
+    string nom_monu;
+    Monument* monu_a_retourner;
+
+    std::cout<<"Quel monument voulez-vous selectionner parmis la liste ci-dessous :" << endl;
+    // affichage des monuments que le joueur possede
+    // pour chaque monument du joueur
+    for (auto monu : get_liste_monument()) {
+        cout << "-" << monu.first->get_nom() << endl;
+    }
+
+    cin >> nom_monu;
+
+    //parcours des monuments du joueur a la recherche du monument a trouver
+    auto it = get_liste_monument().begin();
+    while(it!=get_liste_monument().end() && it->first->get_nom()!=nom_monu){
+        it++;
+    }
+
+    //cas où erreur (monument entre pas dans la liste)
+    if(it == get_liste_monument().end()) {
+        throw invalid_argument("Le monument entre n'est pas valide");
+    }else{
+        monu_a_retourner = it->first;
+    }
+
+    return monu_a_retourner;
+}
+
+Batiment* Joueur::possede_batiment(const string& nom_bat) const{
+    auto liste_bat = get_liste_batiment();
+    // pour chaque couleur de la liste de batiments du joueur
+    for (const auto& couleur : liste_bat) {
+        // pour chaque batiment de la couleur, (batiments sous forme de map(Batiment*, unsigned int))
+        for (auto batiment : liste_bat[couleur.first]) {
+            // Si c'est l'element qu'on recherche, on le renvoie
+            if (batiment.first->get_nom() == nom_bat) {
+                return batiment.first;
+            }
+        }
+    }
+    // Sinon, retourne nullptr
+    return nullptr;
+}
+
+Batiment* Joueur::selectionner_batiment() const{
+    map<couleur_bat, map<Batiment*, unsigned int>>::iterator it;
+    map<Batiment*, unsigned int>::iterator it2;
+    string nom_bat;
+    unsigned int check = 0;
+    Batiment* bat_a_retourner;
+
+    std::cout<<"Quel batiment voulez-vous selectionner parmis la liste ci-dessous :";
+    // affichage des monuments que le joueur possede
+    // pour chaque couleur de la liste de batiment du joueur
+    for (it=get_liste_batiment().begin();it!=get_liste_batiment().end();++it) {
+
+        // pour chaque batiment de la couleur, (batiments sous forme de map(Batiment*, unsigned int))
+        for (it2=it->second.begin(); it2!=it->second.end(); ++it2) {
+            cout<<"\n -"<<it2->first->get_nom();
+        }
+    }
+
+    cin >> nom_bat;
+
+    it = get_liste_batiment().begin();
+    it2 = it->second.begin();
+    //on vient parcourir pour chaque couleur
+    while(it!=get_liste_batiment().end() && check!=1){
+        //on vient parcourir pour chaque carte dans un groupe de couleur
+        while(it2!=it->second.end() && it2->first->get_nom()!=nom_bat){
+            it2++;
+        }
+        //attribut check pour exit le premier while (a voir s'il n'est pas possible de faire plus simple?)
+        if(it2->first->get_nom()==nom_bat){
+            check = 1;
+            bat_a_retourner = it2->first;
+        }
+        it++;
+    }
+
+    //cas où erreur (batiment entre pas dans la liste)
+    if(it == get_liste_batiment().end()) throw invalid_argument("Le batiment entre n'est pas valide");
+
+    return bat_a_retourner;
+}
+
+Monument* Joueur::possede_monument(const string& nom_mon){
+    auto liste_mon = get_liste_monument();
+    // pour chaque monument dans la liste de monuments du joueur
+    for (auto mon : liste_mon) {
+        if (mon.first->get_nom() == nom_mon) {
+            return mon.first;
+        }
+    }
+    // Sinon, retourne nullptr
+    return nullptr;
 }
