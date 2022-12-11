@@ -8,6 +8,8 @@
 #include "EditionDeJeu.h"
 #include "Shop.h"
 #include "Pioche.h"
+#include "Joueur.h"
+#include "Carte.h"
 
 class Partie {
     private:
@@ -55,8 +57,6 @@ class Partie {
         //********** Methodes **********//
         //********** Methodes statiques **********//
         static vector<Batiment*> map_to_vector(const map<Batiment*, unsigned int>& map_batiments);
-        // Compte le nombre de cartes d'un type donne dans le jeu d'un Joueur
-        static unsigned int count_type(Joueur *joueur, const string& type);
 
         // Renvoie l'indice d'un joueur entier valide different de l'indice du joueur actuel
         static unsigned int selectionner_joueur(vector<Joueur*>& tab_joueurs, unsigned int joueur_actuel);
