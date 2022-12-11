@@ -17,7 +17,7 @@ class Joueur {
     private:
     /*** Attributs de la classe ***/
 
-        string nom;
+        const string nom;
         map<Monument*, bool> liste_monument;
         map<couleur_bat, map<Batiment*, unsigned int>> liste_batiment;
         unsigned int argent;
