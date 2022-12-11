@@ -1,4 +1,6 @@
 #include "BanqueDeMinivilles.h"
+#include "Partie.h"
+
 
 BanqueDeMinivilles::BanqueDeMinivilles()
         : Batiment("BanqueDeMinivilles",
@@ -11,7 +13,6 @@ BanqueDeMinivilles::BanqueDeMinivilles()
 
 void BanqueDeMinivilles::declencher_effet(unsigned int possesseur, int bonus) const{
     cout << "Declenchement de l'effet de la carte Banque de minivilles" << endl;
-    /*
 
     /// Effet de l'BanqueDeMinivilles
 
@@ -19,7 +20,9 @@ void BanqueDeMinivilles::declencher_effet(unsigned int possesseur, int bonus) co
 
     /// TRANSACTION AVEC LA BANQUE
     // Le joueur actuel paye 2 pieces a la banque
-    Joueur* j_actuel = tab_joueurs[joueur_actuel];
+
+    unsigned int j_act_index =  Partie::get_instance()->get_joueur_actuel();
+    Joueur* j_actuel = Partie::get_instance()->get_tab_joueurs()[j_act_index];
 
     if (j_actuel->get_argent() >= 2) {
         j_actuel->set_argent(j_actuel->get_argent() - 2);
@@ -27,6 +30,6 @@ void BanqueDeMinivilles::declencher_effet(unsigned int possesseur, int bonus) co
     else {
         j_actuel->set_argent(0);
     }
-*/
+
 
 }
