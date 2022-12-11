@@ -24,34 +24,29 @@ class Partie {
 
         Shop* shop;
         Pioche* pioche;
-        static Partie* instance;
+
+        static Partie* singleton;
 
 
-        /*class Singleton {
-        public :
-            Partie* instance = nullptr;
-            ~Singleton() {delete instance; instance = nullptr;};
-        };
-        static Singleton singleton;
-        */
     public:
         //// Constructeur et Destructeur ////
         ~Partie();
+        Partie(Partie const&) = delete;
+        void operator=(const Partie&) = delete;
+        static Partie* get_instance();
+
 
         ////********** A VERIFIER **********////
-    explicit Partie(EditionDeJeu* edition, const vector<EditionDeJeu *>& extensions = vector<EditionDeJeu *>());
-
+        explicit Partie(EditionDeJeu* edition, const vector<EditionDeJeu *>& extensions = vector<EditionDeJeu *>());
         //********** Jouer une partie **********//
         void jouer_partie();
         void jouer_tour();
         bool est_gagnant(unsigned int j) const;
         unsigned int get_de_2() const {return de_2;}
-        void set_de_2(unsigned int de2) {Partie::de_2 = de2;}
 
+        void set_de_2(unsigned int de2) {de_2 = de2;}
         //********** Constructeurs et getters **********//
         unsigned int get_joueur_actuel() const {return joueur_actuel;};
-        static Partie& get_instance();
-        void liberer_instance();
         const vector <Joueur*>& get_tab_joueurs() const {return tab_joueurs;};
 
         //********** Methodes **********//
