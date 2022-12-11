@@ -12,7 +12,7 @@ BanqueDeMinivilles::BanqueDeMinivilles()
                    "commerce") {}
 
 void BanqueDeMinivilles::declencher_effet(unsigned int possesseur, int bonus) const{
-    cout << "Declenchement de l'effet de la carte Banque de minivilles" << endl;
+    cout << "Activation de l'effet de la carte Banque de minivilles" << endl;
 
     /// Effet de l'BanqueDeMinivilles
 

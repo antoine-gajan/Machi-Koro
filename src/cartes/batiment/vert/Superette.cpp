@@ -11,7 +11,7 @@ Superette::Superette()
                    "commerce") {}
 
 void Superette::declencher_effet(unsigned int possesseur, int bonus) const{
-    cout << "Declenchement de l'effet de la carte Superette" << endl;
+    cout << "Activation de l'effet de la carte Superette" << endl;
     /// Effet de la Superette
     unsigned int j_act_index =  Partie::get_instance()->get_joueur_actuel();
     Joueur* j_actuel = Partie::get_instance()->get_tab_joueurs()[j_act_index];

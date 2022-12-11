@@ -11,7 +11,7 @@ MoonsterSoda::MoonsterSoda()
                    "usine") {}
 
 void MoonsterSoda::declencher_effet(unsigned int possesseur, int bonus) const {
-    cout << "Declenchement de l'effet de la carte MoonsterSoda" << endl;
+    cout << "Activation de l'effet de la carte MoonsterSoda" << endl;
     /// Effet du MoonsterSoda
     unsigned int j_act_index =  Partie::get_instance()->get_joueur_actuel();
     Joueur* j_actuel = Partie::get_instance()->get_tab_joueurs()[j_act_index];

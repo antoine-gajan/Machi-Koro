@@ -11,7 +11,7 @@ EntrepriseDeTravauxPublics::EntrepriseDeTravauxPublics()
                    "entreprise") {}
 
 void EntrepriseDeTravauxPublics::declencher_effet(unsigned int possesseur, int bonus) const {
-    cout << "Declenchement de l'effet de la carte Entreprise de travaux publics" << endl;
+    cout << "Activation de l'effet de la carte Entreprise de travaux publics" << endl;
 
     /// Effet de l'EntrepriseDeTravauxPublics
 

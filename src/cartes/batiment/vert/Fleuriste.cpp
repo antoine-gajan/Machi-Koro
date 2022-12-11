@@ -11,7 +11,7 @@ Fleuriste::Fleuriste()
                    "commerce") {}
 
 void Fleuriste::declencher_effet(unsigned int possesseur, int bonus) const {
-    cout << "Declenchement de l'effet de la carte Fleuriste" << endl;
+    cout << "Activation de l'effet de la carte Fleuriste" << endl;
 
     /// Effet de la FabriqueDeMeubles
     unsigned int j_act_index =  Partie::get_instance()->get_joueur_actuel();

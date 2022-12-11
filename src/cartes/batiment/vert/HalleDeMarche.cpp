@@ -11,7 +11,7 @@ HalleDeMarche::HalleDeMarche()
                    "usine") {}
 
 void HalleDeMarche::declencher_effet(unsigned int possesseur, int bonus) const {
-    cout << "Declenchement de l'effet de la carte Halle de marche" << endl;
+    cout << "Activation de l'effet de la carte Halle de marche" << endl;
     /// Effet de la HalleDeMarche
     unsigned int j_act_index =  Partie::get_instance()->get_joueur_actuel();
     Joueur* j_actuel = Partie::get_instance()->get_tab_joueurs()[j_act_index];

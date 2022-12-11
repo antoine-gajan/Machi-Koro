@@ -11,7 +11,7 @@ EntrepriseDeDemenagement::EntrepriseDeDemenagement()
                    "entreprise") {}
 
 void EntrepriseDeDemenagement::declencher_effet(unsigned int possesseur, int bonus) const {
-    cout << "Declenchement de l'effet de la carte Entreprise de demenagement" << endl;
+    cout << "Activation de l'effet de la carte Entreprise de demenagement" << endl;
 
     /// Effet de l'EntrepriseDeDemenagement
 
