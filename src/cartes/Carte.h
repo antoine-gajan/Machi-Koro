@@ -4,7 +4,6 @@
 #include <string>
 #include <iostream>
 
-
 class Carte {
 protected:
     std::string nom;

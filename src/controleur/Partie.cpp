@@ -369,6 +369,21 @@ vector<Batiment*> Partie::map_to_vector(const map<Batiment*, unsigned int>& map_
     return vector_batiments;
 }
 
+unsigned int Partie::count_type(Joueur *joueur, const string& type) {
+    unsigned int count = 0;
+    auto liste_bat = joueur->get_liste_batiment();
+    // pour chaque couleur de la liste de batiments du joueur
+    for (const auto& couleur : liste_bat) {
+        // pour chaque batiment de la couleur, (batiments sous forme de map(Batiment*, unsigned int))
+        for (auto batiment : liste_bat[couleur.first]) {
+            if (batiment.first->get_type() == type) {
+                count += batiment.second;
+            }
+        }
+    }
+    return count;
+}
+
 bool Partie::est_gagnant(unsigned int j) const {
     ///Fonction pour verifier si un joueur a gagne
     Joueur * joueur = tab_joueurs[j];

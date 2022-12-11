@@ -202,18 +202,3 @@ const map<Batiment*, unsigned int>& Joueur::get_liste_bat_non_special(){
     }
     return liste;
 }
-
-unsigned int Joueur::count_type(const string& type) const{
-    unsigned int count = 0;
-    auto liste_bat = get_liste_batiment();
-    // pour chaque couleur de la liste de batiments du joueur
-    for (const auto& couleur : liste_bat) {
-        // pour chaque batiment de la couleur, (batiments sous forme de map(Batiment*, unsigned int))
-        for (auto batiment : liste_bat[couleur.first]) {
-            if (batiment.first->get_type() == type) {
-                count += batiment.second;
-            }
-        }
-    }
-    return count;
-}

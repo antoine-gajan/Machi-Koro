@@ -2,7 +2,7 @@
 #define MACHI_KORO_BATIMENT_H
 #include <string>
 #include <list>
-#include "Carte.h"
+#include "../Carte.h"
 #include <iostream>
 
 using namespace std;

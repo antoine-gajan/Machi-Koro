@@ -3,9 +3,8 @@
 
 #include <map>
 #include <vector>
-#include "Carte.h"
-#include "Batiment.h"
 #include "Monument.h"
+#include "Batiment.h"
 
 enum strat_IA {aleatoire, agressive, defensif, none};
 // Agressive : veut construire des batiments de couleur rouge
@@ -52,8 +51,6 @@ class Joueur {
         void retirer_batiment(Batiment *bat);
         void afficher_cartes() const;
         void afficher_joueur() const;
-        // Compte le nombre de cartes d'un type donne dans le jeu d'un Joueur
-        unsigned int count_type(const string& type) const;
 };
 
 #endif //MACHI_KORO_JOUEUR_H
