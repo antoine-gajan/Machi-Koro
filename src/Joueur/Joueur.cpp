@@ -293,7 +293,7 @@ Batiment* Joueur::selectionner_batiment() const{
     return bat_a_retourner;
 }
 
-Monument* Joueur::possede_monument(const string& nom_mon){
+Monument* Joueur::possede_monument(const string& nom_mon) const{
     auto liste_mon = get_liste_monument();
     // pour chaque monument dans la liste de monuments du joueur
     for (auto mon : liste_mon) {

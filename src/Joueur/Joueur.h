@@ -42,7 +42,7 @@ class Joueur {
         const map<Batiment*, unsigned int>& get_liste_bat_non_special() const;
 
         Monument* selectionner_monument() const;
-        Batiment* selectionner_batiment(couleur_bat couleur) const;
+        Batiment* selectionner_batiment() const;
         Batiment* possede_batiment(const string& nom_bat) const;
         Monument* possede_monument(const string& nom_mon) const;
 

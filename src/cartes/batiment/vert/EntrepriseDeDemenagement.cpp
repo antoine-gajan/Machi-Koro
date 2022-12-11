@@ -25,12 +25,12 @@ void EntrepriseDeDemenagement::declencher_effet(unsigned int possesseur, int bon
     unsigned int joueur_selectionne = Partie::selectionner_joueur(tab_joueurs, j_act_index);
 
     // On demande a l'utilisateur de selectionner un de ses batiments
-    Batiment* batiment = Partie::selectionner_batiment(j_actuel);
+    Batiment* batiment = j_actuel->selectionner_batiment();
 
     // On verifie que le batiment n'est pas de type special
     while (batiment->get_type() == "special"){
         cout << "Vous ne pouvez pas donner un etablissement de type special." << endl;
-        batiment = Partie::selectionner_batiment(j_actuel);
+        batiment = j_actuel->selectionner_batiment();
     }
 
     // On retire le batiment du joueur actuel
