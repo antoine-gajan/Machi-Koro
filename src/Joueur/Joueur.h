@@ -38,6 +38,7 @@ class Joueur {
         map<Batiment*, unsigned int> get_liste_batiment(couleur_bat couleur) {return liste_batiment[couleur];};
         vector<unsigned int> get_repartition_argent() const;
         vector<Monument*> get_monument_jouables() const;
+        const map<Batiment*, unsigned int>& get_liste_bat_non_special();
 
         /***** Setters *****/
         void set_argent(unsigned int arg) {argent = arg;};

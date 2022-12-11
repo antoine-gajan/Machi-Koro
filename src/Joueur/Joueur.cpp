@@ -189,3 +189,16 @@ void Joueur::afficher_joueur() const {
     afficher_cartes();
     cout << "********************\n" << endl;
 }
+
+const map<Batiment*, unsigned int>& Joueur::get_liste_bat_non_special(){
+    map<Batiment* ,unsigned int> liste;
+    for (const auto& couleur : get_liste_batiment()){
+        for (auto bat : couleur.second){
+            if (bat.first->get_type() != "special")
+            {
+                liste.insert(pair<Batiment*, unsigned int>(bat.first, bat.second));
+            }
+        }
+    }
+    return liste;
+}
