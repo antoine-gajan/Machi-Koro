@@ -1,5 +1,4 @@
 #include "TourRadio.h"
-#include "Joueur.h"
 
 TourRadio::TourRadio() :
     Monument(APRES,

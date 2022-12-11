@@ -1,20 +1,10 @@
 #include <iostream>
 using namespace std;
 
-#include "EditionDeJeu.h"
-#include "Shop.h"
-#include <algorithm>
-#include "Pioche.h"
-#include "Partie.h"
+#include "utils.h"
 
 int main() {
-
-    EditionDeJeu edj = EditionDeJeu("Standard");
-
-    Partie test = Partie(&edj);
-
-    test.jouer_partie();
-
+    menu();
 
     return 0;
 }

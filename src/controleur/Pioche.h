@@ -5,6 +5,7 @@
 #include <random>
 #include <stack>
 #include <algorithm>
+
 #include "Batiment.h"
 
 class Pioche {

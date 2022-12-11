@@ -1,5 +1,4 @@
 #include "Monument.h"
-#include "Carte.h"
 
 Monument::Monument(Moment_Effet effet_moment, const std::string& nom, unsigned int prix, const std::string& description_effet, const std::string& path_image) :
     Carte(nom, description_effet, prix, path_image) {

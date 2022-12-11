@@ -3,7 +3,6 @@
 
 #include "../Batiment.h"
 #include "Joueur.h"
-#include "../controleur/utils.h"
 #include <list>
 #include <vector>
 

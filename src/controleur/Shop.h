@@ -3,6 +3,7 @@
 
 #include <map>
 #include <vector>
+
 #include "Batiment.h"
 
 class Shop{
