@@ -22,15 +22,16 @@ class Partie {
 
         Shop* shop;
         Pioche* pioche;
+        static Partie* instance;
 
 
-        class Singleton {
+        /*class Singleton {
         public :
             Partie* instance = nullptr;
             ~Singleton() {delete instance; instance = nullptr;};
         };
         static Singleton singleton;
-
+        */
     public:
         //// Constructeur et Destructeur ////
         ~Partie();
@@ -47,7 +48,8 @@ class Partie {
 
         //********** Constructeurs et getters **********//
         unsigned int get_joueur_actuel() const {return joueur_actuel;};
-        Singleton& get_instance();
+        static Partie& get_instance();
+        void liberer_instance();
 
         //********** Methodes **********//
         //********** Methodes statiques **********//

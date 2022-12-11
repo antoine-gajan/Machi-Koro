@@ -14,5 +14,7 @@ int main() {
     Partie test = Partie(&edj);
 
     test.jouer_partie();
+
+
     return 0;
 }
