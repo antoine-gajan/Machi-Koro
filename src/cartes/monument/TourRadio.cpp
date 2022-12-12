@@ -20,7 +20,7 @@ void TourRadio::declencher_effet(unsigned int possesseur, int bonus) const {
     }
     else {
         while (choix != 0 && choix != 1) {
-            cout << "Voulez-vous relancer vos dés ? (0 : non, 1 : oui)" << endl;
+            cout << "Voulez-vous relancer vos des ? (0 : non, 1 : oui)" << endl;
             cin >> choix;
         }
     }

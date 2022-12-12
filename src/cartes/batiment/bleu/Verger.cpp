@@ -14,7 +14,7 @@ Verger::Verger() :
 void Verger::declencher_effet(unsigned int possesseur, int bonus) const {
     cout << "Activation de l'effet de Verger" << endl;
 
-    //création de l'instance de partie
+    //creation de l'instance de partie
     Partie * partie = Partie::get_instance();
     Joueur* joueur_actuel = partie->get_tab_joueurs().at(possesseur);
 

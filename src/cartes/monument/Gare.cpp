@@ -22,7 +22,7 @@ void Gare::declencher_effet(unsigned int possesseur, int bonus) const {
     else {
         int choix = -1;
         while (choix != 0 && choix != 1) {
-            cout << "Voulez-vous lancer 2 dés ? (0 : non, 1 : oui)" << endl;
+            cout << "Voulez-vous lancer 2 des ? (0 : non, 1 : oui)" << endl;
             cin >> choix;
         }
         if (choix == 1) {

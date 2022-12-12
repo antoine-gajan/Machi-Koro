@@ -14,16 +14,16 @@ Chalutier::Chalutier() :
 
 void Chalutier::declencher_effet(unsigned int possesseur, int bonus) const{
 
-    //création de l'instance de partie
+    //creation de l'instance de partie
     Partie * partie = Partie::get_instance();
     Joueur* joueur_actuel = partie->get_tab_joueurs().at(possesseur);
 
-    //on vérifie si le joueur sélectionné possède la carte Port
+    //on verifie si le joueur selectionne possede la carte Port
     if(joueur_actuel->possede_batiment("Port") != nullptr){
         cout << "Activation de l'effet de Chalutier" << endl;//on affiche seulement si le joueur possede le port
         unsigned int result_des;
         unsigned int argent;
-        cout<<"Tirage des deux dés"<<endl;
+        cout<<"Tirage des deux des"<<endl;
         result_des = rand() % 11 + 1;
         argent = joueur_actuel->get_argent();
         joueur_actuel->set_argent(argent+=result_des);

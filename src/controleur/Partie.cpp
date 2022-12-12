@@ -446,12 +446,12 @@ vector<Batiment*> Partie::map_to_vector(const map<Batiment*, unsigned int>& map_
         }
     }
 
-    // Mélange du vecteur
+    // Melange du vecteur
     // Obtention d'un nombre aleatoire (seed)
     random_device rd;
     mt19937 g(rd());
 
-    // Mélange du vecteur avec le seed
+    // Melange du vecteur avec le seed
     shuffle(vector_batiments.begin(), vector_batiments.end(), g);
 
     return vector_batiments;
@@ -520,15 +520,15 @@ void Partie::jouer_tour() {
     // Si le joueur a un centre commercial
     auto it_cc = find_if(monuments_joueurs.begin(), monuments_joueurs.end(), [](Monument* m){return m->get_nom() == "CentreCommercial";});
     if (it_cc != monuments_joueurs.end()){
-        // Si le monument est trouvé, on le joue
+        // Si le monument est trouve, on le joue
         monuments_joueurs[it_cc - monuments_joueurs.begin()]->declencher_effet(joueur_actuel);
         centre_c = true;
     }
 
-    /// Monument avant le jet de dé
+    /// Monument avant le jet de de
     auto it_gare = find_if(monuments_joueurs.begin(), monuments_joueurs.end(), [](Monument* m){return m->get_nom() == "Gare";});
     if (it_gare != monuments_joueurs.end()){
-        // Si le monument est trouvé, on le joue
+        // Si le monument est trouve, on le joue
         monuments_joueurs[it_gare - monuments_joueurs.begin()]->declencher_effet(joueur_actuel);
     }
 
@@ -541,7 +541,7 @@ void Partie::jouer_tour() {
 
     auto it_tr = find_if(monuments_joueurs.begin(), monuments_joueurs.end(), [](Monument* m){return m->get_nom() == "TourRadio";});
     if (it_tr != monuments_joueurs.end()){
-        // Si le monument est trouvé, on le joue
+        // Si le monument est trouve, on le joue
         monuments_joueurs[it_tr - monuments_joueurs.begin()]->declencher_effet(joueur_actuel);
     }
 
@@ -552,7 +552,7 @@ void Partie::jouer_tour() {
         cout << "Resultat du deuxieme de : " << de_2 << endl;
     }
 
-    /// Monument apres le jet de dé
+    /// Monument apres le jet de de
     for (auto mon : monuments_joueurs) {
         if (mon->get_nom() == "Port" &&  ((de_1 + de_2) >= 10) ||
             mon->get_nom() == "FabriqueDuPereNoel" && de_casse == 1){
@@ -624,10 +624,10 @@ void Partie::jouer_tour() {
     }
     /// Fin des effets des batiments
 
-    /// Début de la phase de construction
+    /// Debut de la phase de construction
     auto it_hdv = find_if(monuments_joueurs.begin(), monuments_joueurs.end(), [](Monument* m){return m->get_nom() == "HotelDeVille";});
     if (it_hdv != monuments_joueurs.end()){
-        // Si le monument est trouvé, on le joue
+        // Si le monument est trouve, on le joue
         monuments_joueurs[it_hdv - monuments_joueurs.begin()]->declencher_effet(joueur_actuel);
     }
 
@@ -640,10 +640,10 @@ void Partie::jouer_tour() {
         if (tab_joueurs[joueur_actuel]->get_argent() < 2)
             tab_joueurs[joueur_actuel]->set_argent(2);
 
-        auto it_aero = find_if(monuments_joueurs.begin(), monuments_joueurs.end(), [](Monument* m){return m->get_nom() == "Aeroport";});
-        if (it_aero != monuments_joueurs.end()){
-            // Si le monument est trouvé, on le joue
-            monuments_joueurs[it_aero - monuments_joueurs.begin()]->declencher_effet(joueur_actuel);
+        auto it_earo = find_if(monuments_joueurs.begin(), monuments_joueurs.end(), [](Monument* m){return m->get_nom() == "Aeroport";});
+        if (it_earo != monuments_joueurs.end()){
+            // Si le monument est trouve, on le joue
+            monuments_joueurs[it_earo - monuments_joueurs.begin()]->declencher_effet(joueur_actuel);
         }
 
     }
@@ -652,7 +652,7 @@ void Partie::jouer_tour() {
 
     auto it_parc = find_if(monuments_joueurs.begin(), monuments_joueurs.end(), [](Monument* m){return m->get_nom() == "ParcAttraction";});
     if (it_parc != monuments_joueurs.end()){
-        // Si le monument est trouvé, on le joue
+        // Si le monument est trouve, on le joue
         monuments_joueurs[it_parc - monuments_joueurs.begin()]->declencher_effet(joueur_actuel);
     }
     tab_joueurs[joueur_actuel]->afficher_joueur();
@@ -685,12 +685,12 @@ unsigned int Partie::selectionner_joueur(const vector<Joueur*>& tab_joueurs, uns
     unsigned int count = 0;
     unsigned int selection = 0;
 
-    //cas où la décision doit se faire par une ia
+    //cas où la decision doit se faire par une ia
     if(tab_joueurs.at(joueur_actuel)->get_est_ia()){
         selection = rand() % tab_joueurs.size();
         if(selection == joueur_actuel) selection = (selection + 1)%tab_joueurs.size();
     }
-    //cas où c'est un joueur réel qui prend la décision
+    //cas où c'est un joueur reel qui prend la decision
     else{
         //Affichage de tous les joueus de tab_joueurs
         cout<<"Quel joueur voulez vous choisir parmis la liste suivante :" << endl;

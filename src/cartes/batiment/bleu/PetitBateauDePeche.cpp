@@ -14,12 +14,12 @@ PetitBateauDePeche::PetitBateauDePeche() :
 
 void PetitBateauDePeche::declencher_effet(unsigned int possesseur, int bonus) const{
 
-    //création de l'instance de partie
+    //creation de l'instance de partie
     Partie * partie = Partie::get_instance();
     Joueur* joueur_actuel = partie->get_tab_joueurs().at(possesseur);
 
     if(joueur_actuel->possede_monument("Port")){
-        cout << "Activation de l'effet de BateauPeche" << endl;//on affiche seulement si le joueur possède le port
+        cout << "Activation de l'effet de BateauPeche" << endl;//on affiche seulement si le joueur possede le port
         unsigned int argent = joueur_actuel->get_argent();
         argent+=3;
         joueur_actuel->set_argent(argent);

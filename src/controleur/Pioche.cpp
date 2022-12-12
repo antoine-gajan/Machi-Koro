@@ -12,7 +12,7 @@ Batiment* Pioche::get_carte() {
     /// Fonction qui retourne la premiere carte de la pioche
     // Si la pioche est non vide
     if (!contenu.empty()){
-        // Recupere la tête et on la renvoie
+        // Recupere la tete et on la renvoie
         Batiment *bat = contenu.top();
         contenu.pop();
         return bat;

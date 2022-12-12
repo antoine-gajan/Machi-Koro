@@ -29,11 +29,11 @@ void MaisonEdition::declencher_effet(unsigned int possesseur, int bonus) const{
         nb_bat = joueur->count_type("restaurant") + joueur->count_type("commerce");
         argent_joueur = joueur->get_argent();
         if (argent_joueur >= nb_bat){
-            // On ne prend que l'argent nécessaire
+            // On ne prend que l'argent necessaire
             joueur->set_argent(argent_joueur - nb_bat);
             j_actuel->set_argent(j_actuel->get_argent() + nb_bat);
             // Affichage de la transaction
-            cout << "Le joueur " << joueur->get_nom() << " donne " << nb_bat << " à " << j_actuel->get_nom() <<endl;
+            cout << "Le joueur " << joueur->get_nom() << " donne " << nb_bat << " a " << j_actuel->get_nom() <<endl;
             cout << "Le joueur " << joueur->get_nom() << " a maintenant " << joueur->get_argent() <<endl;
             cout << "Le joueur " << j_actuel->get_nom() << " a maintenant " << j_actuel->get_argent() <<endl;
         }
@@ -42,7 +42,7 @@ void MaisonEdition::declencher_effet(unsigned int possesseur, int bonus) const{
             joueur->set_argent(0);
             j_actuel->set_argent(j_actuel->get_argent() + argent_joueur);
             // Affichage de la transaction
-            cout << "Le joueur " << joueur->get_nom() << " donne " << argent_joueur << " à " << j_actuel->get_nom() <<endl;
+            cout << "Le joueur " << joueur->get_nom() << " donne " << argent_joueur << " a " << j_actuel->get_nom() <<endl;
             cout << "Le joueur " << joueur->get_nom() << " a maintenant " << joueur->get_argent() <<endl;
             cout << "Le joueur " << j_actuel->get_nom() << " a maintenant " << j_actuel->get_argent() <<endl;
         }

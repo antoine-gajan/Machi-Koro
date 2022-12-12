@@ -53,9 +53,9 @@ vector<Monument*> Joueur::get_monument_jouables() const {
 
 
 void Joueur::activer_monument(Monument *mon) {
-    /// Activer un monument passé en paramètre
+    /// Activer un monument passe en parametre
     if (mon == nullptr) {
-        throw invalid_argument("Le monument ne peut pas être nul");
+        throw invalid_argument("Le monument ne peut pas etre nul");
     }
 
     // On active le monument
@@ -67,9 +67,9 @@ void Joueur::activer_monument(Monument *mon) {
 }
 
 void Joueur::desactiver_monument(Monument *mon) {
-    /// Désactiver un monument passé en paramètre
+    /// Desactiver un monument passe en parametre
     if (mon == nullptr) {
-        throw invalid_argument("Le monument ne peut pas être nul");
+        throw invalid_argument("Le monument ne peut pas etre nul");
     }
 
     // On active le monument
@@ -83,7 +83,7 @@ void Joueur::ajouter_batiment(Batiment *bat) {
     /// Ajout du batiment
 
     if (bat == nullptr) {
-        throw invalid_argument("Le batiment ne peut pas être nul");
+        throw invalid_argument("Le batiment ne peut pas etre nul");
     }
 
     // Recuperation de la couleur du batiment
@@ -118,7 +118,7 @@ void Joueur::retirer_batiment(Batiment *bat) {
     /// Retire 1 exemplaire du batiment d'un joueur
 
     if (bat == nullptr) {
-        throw invalid_argument("Le batiment ne peut pas être nul");
+        throw invalid_argument("Le batiment ne peut pas etre nul");
     }
 
     // Recuperation de la couleur du batiment
@@ -240,7 +240,7 @@ Monument* Joueur::selectionner_monument() const{
     else{
         cin >> monu_indice;
         while (monu_indice < 1 || monu_indice > count){
-            cout << "Le numero de monument n'est pas valide.\nNuméro du monument a selectionner :" << endl;
+            cout << "Le numero de monument n'est pas valide.\nNumero du monument a selectionner :" << endl;
             cin >> monu_indice;
         }
     }
@@ -277,7 +277,7 @@ Batiment* Joueur::possede_batiment(const string& nom_bat) const{
 }
 
 Batiment* Joueur::selectionner_batiment() const{
-    /// Fonction pour sélectionner un batiment
+    /// Fonction pour selectionner un batiment
     unsigned int num_bat;
     unsigned int count = 0, count_check = 0;
     Batiment* bat_a_retourner;
@@ -296,17 +296,17 @@ Batiment* Joueur::selectionner_batiment() const{
         num_bat = rand()%count;
     }
     else{
-        // Demande du numéro de batiment
+        // Demande du numero de batiment
         cout<<"Quel batiment voulez-vous selectionner parmis la liste ci-dessous : " << endl;
         cin >> num_bat;
-        // Vérification validité
+        // Verification validite
         while (num_bat < 0 || num_bat >= count){
-            cout << "Le numero de batiment n'est pas valide.\nNuméro du batiment a selectionner :" << endl;
+            cout << "Le numero de batiment n'est pas valide.\nNumero du batiment a selectionner :" << endl;
             cin >> num_bat;
         }
     }
 
-    // Récupération du batiment choisi
+    // Recuperation du batiment choisi
     for (auto& couleur : get_liste_batiment()) {
         for (auto bat : couleur.second){
             if (count_check == num_bat){
