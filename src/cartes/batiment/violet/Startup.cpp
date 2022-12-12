@@ -13,5 +13,5 @@ Startup::Startup() :
 
 void Startup::declencher_effet(unsigned int possesseur, int bonus) const{
     /// Effet de la classe Startup
-    std::cout << "Activation de l'effet de la startup." << std::endl;
+    cout << "Activation de l'effet de la startup." << endl;
 }

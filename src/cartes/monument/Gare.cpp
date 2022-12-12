@@ -11,7 +11,7 @@ Gare::Gare()
 }
 
 void Gare::declencher_effet(unsigned int possesseur, int bonus) const {
-    std::cout << "Activation de l'effet de la gare" << std::endl;
+    cout << "Activation de l'effet de la gare" << endl;
     Partie *partie = Partie::get_instance();
     if (partie->get_tab_joueurs()[possesseur]->get_est_ia()) {
         int choix = rand() % 4;
@@ -22,8 +22,8 @@ void Gare::declencher_effet(unsigned int possesseur, int bonus) const {
     else {
         int choix = -1;
         while (choix != 0 && choix != 1) {
-            std::cout << "Voulez-vous lancer 2 dés ? (0 : non, 1 : oui)" << std::endl;
-            std::cin >> choix;
+            cout << "Voulez-vous lancer 2 dés ? (0 : non, 1 : oui)" << endl;
+            cin >> choix;
         }
         if (choix == 1) {
             partie->set_de_2((rand() % 6) + 1);

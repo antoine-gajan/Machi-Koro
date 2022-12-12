@@ -17,7 +17,7 @@ CentreAffaires::CentreAffaires():
 
 void CentreAffaires::declencher_effet(unsigned int possesseur, int bonus) const{
     /// Effet du Centre d'affaires
-    std::cout << "Activation de l'effet du centre d'affaires." << std::endl;
+    cout << "Activation de l'effet du centre d'affaires." << endl;
     const vector<Joueur*>& tab_joueurs = Partie::get_instance()->get_tab_joueurs();
     Joueur* j_actuel = tab_joueurs[possesseur];
 

@@ -18,7 +18,7 @@ ChaineTelevision::ChaineTelevision():
 
 void ChaineTelevision::declencher_effet(unsigned int possesseur, int bonus) const{
     /// Effet de ChaineTelevision
-    std::cout << "Activation de l'effet de la chaine de television." << std::endl;
+    cout << "Activation de l'effet de la chaine de television." << endl;
 
     // Variables utiles
     const vector<Joueur*> tab_joueurs = Partie::get_instance()->get_tab_joueurs();

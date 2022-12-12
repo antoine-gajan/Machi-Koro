@@ -15,7 +15,7 @@ Batiment("Stade",
 
 void Stade::declencher_effet(unsigned int possesseur, int bonus) const{
     /// Effet de la classe Stade
-    std::cout << "Activation de l'effet du stade." << std::endl;
+    cout << "Activation de l'effet du stade." << endl;
 
     // Variables utiles
     const vector<Joueur*> tab_joueurs = Partie::get_instance()->get_tab_joueurs();

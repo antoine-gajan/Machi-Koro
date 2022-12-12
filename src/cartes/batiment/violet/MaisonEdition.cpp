@@ -17,7 +17,7 @@ MaisonEdition::MaisonEdition():
 
 void MaisonEdition::declencher_effet(unsigned int possesseur, int bonus) const{
     /// Effet de la maison d'edition
-    std::cout << "Activation de l'effet de la maison d'edition." << std::endl;
+    cout << "Activation de l'effet de la maison d'edition." << endl;
 
     // Variables utiles
     const vector<Joueur*> tab_joueurs = Partie::get_instance()->get_tab_joueurs();

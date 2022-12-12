@@ -1,5 +1,7 @@
 #include "CentreCommercial.h"
 
+using namespace std;
+
 CentreCommercial::CentreCommercial() :
     Monument(APRES,
              "CentreCommercial",
@@ -10,7 +12,7 @@ CentreCommercial::CentreCommercial() :
 }
 
 void CentreCommercial::declencher_effet(unsigned int possesseur, int bonus) const {
-    std::cout << "Activation de l'efet du Centre commercial" << std::endl;
+    cout << "Activation de l'efet du Centre commercial" << endl;
 }
 
 void CentreCommercial::activer() {

@@ -11,7 +11,7 @@ HotelDeVille::HotelDeVille() :
 }
 
 void HotelDeVille::declencher_effet(unsigned int possesseur, int bonus) const {
-    std::cout << "Activation de l'effet de l'Hotel de ville" << std::endl;
+    cout << "Activation de l'effet de l'Hotel de ville" << endl;
     Partie * partie = Partie::get_instance();
     Joueur * joueur = partie->get_tab_joueurs()[possesseur];
     if (joueur->get_argent() == 0) {

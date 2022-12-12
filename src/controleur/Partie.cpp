@@ -693,15 +693,15 @@ unsigned int Partie::selectionner_joueur(const vector<Joueur*>& tab_joueurs, uns
     //cas où c'est un joueur réel qui prend la décision
     else{
         //Affichage de tous les joueus de tab_joueurs
-        std::cout<<"Quel joueur voulez vous choisir parmis la liste suivante :";
+        cout<<"Quel joueur voulez vous choisir parmis la liste suivante :" << endl;
         for(Joueur* curseur:tab_joueurs){
-            std::cout<<count<<" : "<<curseur->get_nom()<<endl;
+            cout<<count<<" : "<<curseur->get_nom()<<endl;
             count++;
         }
 
         //Scan de tab_joueurs a la recherche du nom entre
-        std::cout<<"Indice du joueur a selectionner :"<<endl;
-        std::cin >> selection;
+        cout<<"Indice du joueur a selectionner :"<<endl;
+        cin >> selection;
 
         //cas où erreur (nom entre pas dans la liste ou nom entre = joueur actuel)
         if(selection > tab_joueurs.size()) throw invalid_argument("L'indice entre n'est pas valide");

@@ -11,7 +11,7 @@ FabriqueDuPereNoel::FabriqueDuPereNoel() :
 }
 
 void FabriqueDuPereNoel::declencher_effet(unsigned int possesseur, int bonus) const {
-    std::cout << "Activation de l'effet de la Fabrique du Pere Noel" << std::endl;
+    cout << "Activation de l'effet de la Fabrique du Pere Noel" << endl;
     Partie *partie = Partie::get_instance();
     Joueur *joueur = partie->get_tab_joueurs()[possesseur];
     joueur->set_argent(joueur->get_argent() + 3);

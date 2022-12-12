@@ -224,7 +224,7 @@ Monument* Joueur::selectionner_monument() const{
     string nom_monu;
     Monument* monu_a_retourner;
 
-    std::cout<<"Quel monument voulez-vous selectionner parmis la liste ci-dessous :" << endl;
+    cout<<"Quel monument voulez-vous selectionner parmis la liste ci-dessous :" << endl;
     // affichage des monuments que le joueur possede
     // pour chaque monument du joueur
     for (auto monu : get_liste_monument()) {
@@ -271,7 +271,7 @@ Batiment* Joueur::selectionner_batiment() const{
     unsigned int count = 0, count_check = 0;
     Batiment* bat_a_retourner;
 
-    std::cout<<"Voici la liste des batiments que vous possedez :";
+    cout<<"Voici la liste des batiments que vous possedez :";
     // affichage des batiments que le joueur possede
     // pour chaque couleur de la liste de batiment du joueur
     for (auto& couleur : get_liste_batiment()) {
@@ -286,7 +286,7 @@ Batiment* Joueur::selectionner_batiment() const{
     }
     else{
         // Demande du numéro de batiment
-        std::cout<<"Quel batiment voulez-vous selectionner parmis la liste ci-dessous : " << endl;
+        cout<<"Quel batiment voulez-vous selectionner parmis la liste ci-dessous : " << endl;
         cin >> num_bat;
         // Vérification validité
         while (num_bat < 0 || num_bat >= count){
