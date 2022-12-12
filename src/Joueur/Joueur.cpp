@@ -268,7 +268,7 @@ Batiment* Joueur::possede_batiment(const string& nom_bat) const{
 Batiment* Joueur::selectionner_batiment() const{
     /// Fonction pour sélectionner un batiment
     unsigned int num_bat;
-    unsigned int count = 0, count_check;
+    unsigned int count = 0, count_check = 0;
     Batiment* bat_a_retourner;
 
     std::cout<<"Voici la liste des batiments que vous possedez :";
@@ -280,20 +280,26 @@ Batiment* Joueur::selectionner_batiment() const{
             count++;
         }
     }
-    // Demande du numéro de batiment
-    std::cout<<"Quel batiment voulez-vous selectionner parmis la liste ci-dessous : " << endl;
-    cin >> num_bat;
-    // Vérification validité
-    while (num_bat < 0 || num_bat >= count){
-        cout << "Le numero de batiment n'est pas valide.\nNuméro du batiment a selectionner :" << endl;
+    // Si le joueur est une IA, on prend au hasard
+    if (est_ia){
+        num_bat = rand()%count;
+    }
+    else{
+        // Demande du numéro de batiment
+        std::cout<<"Quel batiment voulez-vous selectionner parmis la liste ci-dessous : " << endl;
         cin >> num_bat;
+        // Vérification validité
+        while (num_bat < 0 || num_bat >= count){
+            cout << "Le numero de batiment n'est pas valide.\nNuméro du batiment a selectionner :" << endl;
+            cin >> num_bat;
+        }
     }
 
     // Récupération du batiment choisi
-    count_check = 0;
     for (auto& couleur : get_liste_batiment()) {
         for (auto bat : couleur.second){
             if (count_check == num_bat){
+                cout << "Vous avez choisi : " << bat.first->get_nom() << endl;
                 return bat.first;
             }
             count_check++;
