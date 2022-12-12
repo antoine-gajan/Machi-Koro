@@ -690,7 +690,7 @@ unsigned int Partie::selectionner_joueur(const vector<Joueur*>& tab_joueurs, uns
         selection = rand() % tab_joueurs.size();
         if(selection == joueur_actuel) selection = (selection + 1)%tab_joueurs.size();
     }
-    //cas où c'est un joueur réel qui prends la décision
+    //cas où c'est un joueur réel qui prend la décision
     else{
         //Affichage de tous les joueus de tab_joueurs
         std::cout<<"Quel joueur voulez vous choisir parmis la liste suivante :";
@@ -708,5 +708,6 @@ unsigned int Partie::selectionner_joueur(const vector<Joueur*>& tab_joueurs, uns
         if(selection == joueur_actuel) throw invalid_argument("On ne peut pas selectionner le joueur actuel");
     }
 
+    cout<<"Joueur selectionne : "<<tab_joueurs.at(selection)->get_nom();
     return selection;
 }

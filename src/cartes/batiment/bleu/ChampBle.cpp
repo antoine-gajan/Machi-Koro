@@ -1,4 +1,5 @@
 #include "ChampBle.h"
+#include "Partie.h"
 
 ChampBle::ChampBle() :
     Batiment("ChampBle",
@@ -13,8 +14,13 @@ ChampBle::ChampBle() :
 void ChampBle::declencher_effet(unsigned int possesseur, int bonus) const {
     //j'ai deliberement retire le parametre joueur actuel de declencher effet pour respecter la methode virtuelle declaree dans Batiment.h
     cout << "Activation de l'effet de ChampBle" << endl;
-    /*
-    joueur_affecte->set_argent(joueur_affecte->get_argent() + 1);
+
+    //création de l'instance de partie
+    Partie * partie = Partie::get_instance();
+    Joueur* joueur_actuel = partie->get_tab_joueurs().at(possesseur);
+
     //On augmente de un l'argent du joueur actuel
-     */
+    joueur_actuel->set_argent(joueur_actuel->get_argent() + 1);
+
+
 }

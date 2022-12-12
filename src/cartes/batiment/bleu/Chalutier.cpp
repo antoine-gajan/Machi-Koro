@@ -1,4 +1,5 @@
 #include "Chalutier.h"
+#include "Partie.h"
 
 Chalutier::Chalutier() :
         Batiment("Chalutier",
@@ -12,14 +13,21 @@ Chalutier::Chalutier() :
 ///Constructeur de Chalutier
 
 void Chalutier::declencher_effet(unsigned int possesseur, int bonus) const{
-    //j'ai deliberement retire les parametres joueur actuel et val_des de declencher effet pour respecter la methode virtuelle declaree dans Batiment.h
+
     cout << "Activation de l'effet de Chalutier" << endl;
-    /*
-    if(possede_monument(joueur_actuel,"Port") != nullptr){
-        unsigned int argent = joueur_actuel->get_argent();
-        argent += val_des;
-        joueur_actuel->set_argent(argent);
+
+    //création de l'instance de partie
+    Partie * partie = Partie::get_instance();
+    Joueur* joueur_actuel = partie->get_tab_joueurs().at(possesseur);
+
+    //on vérifie si le joueur sélectionné possède la carte Port
+    if(joueur_actuel->possede_batiment("Port") != nullptr){
+        unsigned int result_des;
+        unsigned int argent;
+        cout<<"Tirage des deux dés"<<endl;
+        result_des = rand() % 11 + 1;
+        argent = joueur_actuel->get_argent();
+        joueur_actuel->set_argent(argent+=result_des);
     }
-     */
 }
-///A voir plus tard, methode declencher effet de chalutier
+
