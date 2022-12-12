@@ -281,11 +281,11 @@ bool Partie::acheter_carte() {
                 transaction_fin = acheter_monu();
             }
         } else {
-            choix_ia = rand() % 2;
+            choix_ia = rand() % 6;
             if (choix_ia == 0) {
                 visit[0] = true;
                 transaction_fin = acheter_bat();
-            } else if (choix_ia == 1) {
+            } else {
                 visit[1] = true;
                 transaction_fin = acheter_monu();
             }
