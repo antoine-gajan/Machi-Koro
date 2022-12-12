@@ -683,25 +683,30 @@ void Partie::don_argent(Joueur* j1, unsigned int argent, Joueur* j2){
 
 unsigned int Partie::selectionner_joueur(vector<Joueur*>& tab_joueurs, unsigned int joueur_actuel){
     unsigned int count = 0;
-    string nom_joueur;
-    auto it = tab_joueurs.begin();
+    unsigned int selection = 0;
 
-    //Affichage de tous les joueus de tab_joueurs
-    std::cout<<"Quel joueur voulez vous choisir parmis la liste suivante :";
-    for(Joueur* curseur:tab_joueurs){
-        std::cout<<"\n -"<<curseur->get_nom();
+    //cas où la décision doit se faire par une ia
+    if(tab_joueurs.at(joueur_actuel)->get_est_ia()){
+        selection = rand() % tab_joueurs.size();
+        if(selection == joueur_actuel) selection = (selection + 1)%tab_joueurs.size();
+    }
+    //cas où c'est un joueur réel qui prends la décision
+    else{
+        //Affichage de tous les joueus de tab_joueurs
+        std::cout<<"Quel joueur voulez vous choisir parmis la liste suivante :";
+        for(Joueur* curseur:tab_joueurs){
+            std::cout<<count<<" : "<<curseur->get_nom()<<endl;
+            count++;
+        }
+
+        //Scan de tab_joueurs a la recherche du nom entre
+        std::cout<<"Indice du joueur a selectionner :"<<endl;
+        std::cin >> selection;
+
+        //cas où erreur (nom entre pas dans la liste ou nom entre = joueur actuel)
+        if(selection > tab_joueurs.size()) throw invalid_argument("L'indice entre n'est pas valide");
+        if(selection == joueur_actuel) throw invalid_argument("On ne peut pas selectionner le joueur actuel");
     }
 
-    //Scan de tab_joueurs a la recherche du nom entre
-    std::cin >> nom_joueur;
-    while(tab_joueurs.at(count)->get_nom() != nom_joueur && it != tab_joueurs.end()){
-        count++;
-        it++;
-    }
-
-    //cas où erreur (nom entre pas dans la liste ou nom entre = joueur actuel)
-    if(it == tab_joueurs.end()) throw invalid_argument("Le nom entre n'est pas valide");
-    if(count == joueur_actuel) throw invalid_argument("On ne peut pas selectionner le joueur actuel");
-
-    return count;
+    return selection;
 }
