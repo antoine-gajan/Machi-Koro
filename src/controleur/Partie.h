@@ -61,7 +61,7 @@ public:
     static vector<Batiment*> map_to_vector(const map<Batiment*, unsigned int>& map_batiments);
 
     // Renvoie l'indice d'un joueur entier valide different de l'indice du joueur actuel
-    static unsigned int selectionner_joueur(vector<Joueur*>& tab_joueurs, unsigned int joueur_actuel);
+    static unsigned int selectionner_joueur(const vector<Joueur*>& tab_joueurs, unsigned int joueur_actuel);
 
     static void don_argent(Joueur* j1, unsigned int argent, Joueur* j2);
 

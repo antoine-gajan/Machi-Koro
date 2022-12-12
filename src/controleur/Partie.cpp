@@ -681,7 +681,7 @@ void Partie::don_argent(Joueur* j1, unsigned int argent, Joueur* j2){
     }
 }
 
-unsigned int Partie::selectionner_joueur(vector<Joueur*>& tab_joueurs, unsigned int joueur_actuel){
+unsigned int Partie::selectionner_joueur(const vector<Joueur*>& tab_joueurs, unsigned int joueur_actuel){
     unsigned int count = 0;
     unsigned int selection = 0;
 
