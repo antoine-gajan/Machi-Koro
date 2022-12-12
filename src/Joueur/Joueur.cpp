@@ -221,32 +221,43 @@ const map<Batiment*, unsigned int> Joueur::get_liste_bat_non_special() const{
 }
 
 Monument* Joueur::selectionner_monument() const{
-    string nom_monu;
+    int monu_indice, count = 1, count_check=1;
     Monument* monu_a_retourner;
+
 
     cout<<"Quel monument voulez-vous selectionner parmis la liste ci-dessous :" << endl;
     // affichage des monuments que le joueur possede
     // pour chaque monument du joueur
     for (auto monu : get_liste_monument()) {
-        cout << "-" << monu.first->get_nom() << endl;
+        cout << count <<"-" << monu.first->get_nom() << endl;
+        count++;
     }
 
-    cin >> nom_monu;
 
-    //parcours des monuments du joueur a la recherche du monument a trouver
+    if (est_ia){
+        monu_indice = rand()%count;
+    }
+    else{
+        cin >> monu_indice;
+        while (monu_indice < 1 || monu_indice > count){
+            cout << "Le numero de monument n'est pas valide.\nNuméro du monument a selectionner :" << endl;
+            cin >> monu_indice;
+        }
+    }
     auto it = get_liste_monument().begin();
-    while(it!=get_liste_monument().end() && it->first->get_nom()!=nom_monu){
+    while(count_check != monu_indice){
         it++;
+        count_check++;
     }
-
-    //cas où erreur (monument entre pas dans la liste)
-    if(it == get_liste_monument().end()) {
-        throw invalid_argument("Le monument entre n'est pas valide");
-    }else{
+    if(it != get_liste_monument().end()){
         monu_a_retourner = it->first;
+        return monu_a_retourner;
+    }
+    else{
+        throw invalid_argument("Le monument entre n'est pas valide");
     }
 
-    return monu_a_retourner;
+
 }
 
 Batiment* Joueur::possede_batiment(const string& nom_bat) const{
