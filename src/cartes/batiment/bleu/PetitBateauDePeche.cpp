@@ -1,4 +1,5 @@
 #include "PetitBateauDePeche.h"
+#include "Partie.h"
 
 PetitBateauDePeche::PetitBateauDePeche() :
         Batiment("PetitBateauDePeche",
@@ -12,12 +13,17 @@ PetitBateauDePeche::PetitBateauDePeche() :
 
 
 void PetitBateauDePeche::declencher_effet(unsigned int possesseur, int bonus) const{
-    //j'ai deliberement retire le parametre joueur actuel de declencher effet pour respecter la methode virtuelle declaree dans Batiment.h
-    cout << "Activation de l'effet de BateauPeche" << endl;
-    /*
-    unsigned int argent = joueur_actuel->get_argent();
-    argent+=3;
-    joueur_actuel->set_argent(argent);
-     */
+
+    //création de l'instance de partie
+    Partie * partie = Partie::get_instance();
+    Joueur* joueur_actuel = partie->get_tab_joueurs().at(possesseur);
+
+    if(joueur_actuel->possede_monument("Port")){
+        cout << "Activation de l'effet de BateauPeche" << endl;//on affiche seulement si le joueur possède le port
+        unsigned int argent = joueur_actuel->get_argent();
+        argent+=3;
+        joueur_actuel->set_argent(argent);
+    }
+
 }
-//L'effet est que le joueur reçoit 3 pieces de la banque si 8 tombe a tout moment de la partie
+
