@@ -17,13 +17,10 @@ void ClubPrive::declencher_effet(unsigned int possesseur, int bonus) const{
     //Trouver un joueur qui a cette carte
     if(joueur_actuel->get_monument_jouables().size()>=3){
         for (unsigned int i = 0; i < partie->get_tab_joueurs().size(); i++){
-            if (partie->get_tab_joueurs().at(i)->possede_batiment("ClubPrive")) {
-                //si il y en a un enlever 1 piece au joueur actuel et ajouter toutes les pieces au joueur qui en a une
-                unsigned int argent_joueur_actuel = joueur_actuel->get_argent();
-                joueur_actuel->set_argent(joueur_actuel->get_argent() - argent_joueur_actuel);
-                partie->get_tab_joueurs().at(i)->set_argent(
-                        partie->get_tab_joueurs().at(i)->get_argent() + argent_joueur_actuel);
-                break;
+            if (partie->get_tab_joueurs().at(i)->possede_batiment("ClubPrive") && i!=possesseur){
+                if(partie->transfert_argent(possesseur, i, joueur_actuel->get_argent())){
+                    return;
+                }
             }
         }
     }
