@@ -266,45 +266,41 @@ Batiment* Joueur::possede_batiment(const string& nom_bat) const{
 }
 
 Batiment* Joueur::selectionner_batiment() const{
-    map<couleur_bat, map<Batiment*, unsigned int>>::iterator it;
-    map<Batiment*, unsigned int>::iterator it2;
-    string nom_bat;
-    unsigned int check = 0;
+    /// Fonction pour sélectionner un batiment
+    unsigned int num_bat;
+    unsigned int count = 0, count_check;
     Batiment* bat_a_retourner;
 
-    std::cout<<"Quel batiment voulez-vous selectionner parmis la liste ci-dessous :";
-    // affichage des monuments que le joueur possede
+    std::cout<<"Voici la liste des batiments que vous possedez :";
+    // affichage des batiments que le joueur possede
     // pour chaque couleur de la liste de batiment du joueur
-    for (it=get_liste_batiment().begin();it!=get_liste_batiment().end();++it) {
-
-        // pour chaque batiment de la couleur, (batiments sous forme de map(Batiment*, unsigned int))
-        for (it2=it->second.begin(); it2!=it->second.end(); ++it2) {
-            cout<<"\n -"<<it2->first->get_nom();
+    for (auto& couleur : get_liste_batiment()) {
+        for (auto bat : couleur.second){
+            cout << count <<" : " << bat.first->get_nom() << endl;
+            count++;
         }
     }
-
-    cin >> nom_bat;
-
-    it = get_liste_batiment().begin();
-    it2 = it->second.begin();
-    //on vient parcourir pour chaque couleur
-    while(it!=get_liste_batiment().end() && check!=1){
-        //on vient parcourir pour chaque carte dans un groupe de couleur
-        while(it2!=it->second.end() && it2->first->get_nom()!=nom_bat){
-            it2++;
-        }
-        //attribut check pour exit le premier while (a voir s'il n'est pas possible de faire plus simple?)
-        if(it2->first->get_nom()==nom_bat){
-            check = 1;
-            bat_a_retourner = it2->first;
-        }
-        it++;
+    // Demande du numéro de batiment
+    std::cout<<"Quel batiment voulez-vous selectionner parmis la liste ci-dessous : " << endl;
+    cin >> num_bat;
+    // Vérification validité
+    while (num_bat < 0 || num_bat >= count){
+        cout << "Le numero de batiment n'est pas valide.\nNuméro du batiment a selectionner :" << endl;
+        cin >> num_bat;
     }
 
+    // Récupération du batiment choisi
+    count_check = 0;
+    for (auto& couleur : get_liste_batiment()) {
+        for (auto bat : couleur.second){
+            if (count_check == num_bat){
+                return bat.first;
+            }
+            count_check++;
+        }
+    }
     //cas où erreur (batiment entre pas dans la liste)
-    if(it == get_liste_batiment().end()) throw invalid_argument("Le batiment entre n'est pas valide");
-
-    return bat_a_retourner;
+    throw invalid_argument("Le batiment entre n'est pas valide");
 }
 
 Monument* Joueur::possede_monument(const string& nom_mon) const{
