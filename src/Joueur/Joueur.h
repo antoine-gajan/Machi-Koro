@@ -42,7 +42,7 @@ class Joueur {
         unsigned int count_type(const string& type) const;
 
 
-        const map<Batiment*, unsigned int>& get_liste_bat_non_special() const;
+        const map<Batiment*, unsigned int> get_liste_bat_non_special() const;
         Monument* selectionner_monument() const;
         Batiment* selectionner_batiment() const;
         Batiment* possede_batiment(const string& nom_bat) const;

@@ -207,7 +207,7 @@ unsigned int Joueur::count_type(const string& type) const {
 
 //// a revoir
 
-const map<Batiment*, unsigned int>& Joueur::get_liste_bat_non_special() const{
+const map<Batiment*, unsigned int> Joueur::get_liste_bat_non_special() const{
     map<Batiment* ,unsigned int> liste;
     for (const auto& couleur : get_liste_batiment()){
         for (auto bat : couleur.second){
