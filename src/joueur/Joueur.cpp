@@ -29,6 +29,7 @@ vector<unsigned int> Joueur::get_repartition_argent() const {
 Joueur::~Joueur() {
     /// Destructeur de joueur
     liste_monument.clear();
+    liste_batiment_fermes.clear();
 
     // Iteration sur les couleurs de batiments
     for (auto & it : liste_batiment) {
@@ -55,7 +56,7 @@ vector<Monument*> Joueur::get_monument_jouables() const {
 void Joueur::activer_monument(Monument *mon) {
     /// Activer un monument passe en parametre
     if (mon == nullptr) {
-        throw invalid_argument("Le monument ne peut pas etre nul");
+        throw gameException("Le monument ne peut pas etre nul");
     }
 
     // On active le monument
@@ -69,7 +70,7 @@ void Joueur::activer_monument(Monument *mon) {
 void Joueur::desactiver_monument(Monument *mon) {
     /// Desactiver un monument passe en parametre
     if (mon == nullptr) {
-        throw invalid_argument("Le monument ne peut pas etre nul");
+        throw gameException("Le monument ne peut pas etre nul");
     }
 
     // On active le monument
@@ -84,7 +85,7 @@ void Joueur::ajouter_batiment(Batiment *bat) {
     /// Ajout du batiment
 
     if (bat == nullptr) {
-        throw invalid_argument("Le batiment ne peut pas etre nul");
+        throw gameException("Le batiment ne peut pas etre nul");
     }
 
     // Recuperation de la couleur du batiment
@@ -95,14 +96,14 @@ void Joueur::ajouter_batiment(Batiment *bat) {
         if (batiment.first == bat){
             // Si l'utilisateur a deja un exemplaire de ce batiment et qu'il est violet : erreur
             if (bat->get_couleur() == Violet){
-                cout << "Le joueur" << nom << " possede deja un exemplaire du batiment violet" << bat->get_nom()<<endl;
+                cout << "Le joueur \"" << nom << "\" possede deja un exemplaire du batiment violet" << bat->get_nom()<<endl;
                 return;
             }
             // Sinon, on augmente le nombre d'exemplaires de celui-ci
             else{
                 liste_batiment[couleur][batiment.first]++;
                 cout << "Ajout du batiment " << bat->get_nom() << " au joueur " << nom << endl;
-                cout << "Le joueur " << nom << " possede " << batiment.second << " exemplaires du batiment " << bat->get_nom() << endl;
+                cout << "Le joueur \"" << nom << "\" possede " << batiment.second << " exemplaires du batiment " << bat->get_nom() << endl;
                 return;
             }
         }
@@ -111,7 +112,7 @@ void Joueur::ajouter_batiment(Batiment *bat) {
     // Si aucun exemplaire du batiment, on l'ajoute
     liste_batiment[couleur].insert(pair<Batiment*, unsigned int> (bat, 1));
     cout << "Ajout du batiment " << bat->get_nom() << " au joueur " << nom << endl;
-    cout << "Le joueur " << nom << " possede 1 exemplaire du batiment " << bat->get_nom() << endl;
+    cout << "Le joueur \"" << nom << "\" possede 1 exemplaire du batiment " << bat->get_nom() << endl;
 }
 
 
@@ -119,7 +120,7 @@ void Joueur::retirer_batiment(Batiment *bat) {
     /// Retire 1 exemplaire du batiment d'un joueur
 
     if (bat == nullptr) {
-        throw invalid_argument("Le batiment ne peut pas etre nul");
+        throw gameException("Le batiment ne peut pas etre nul");
     }
 
     // Recuperation de la couleur du batiment
@@ -136,12 +137,12 @@ void Joueur::retirer_batiment(Batiment *bat) {
             else{
                 liste_batiment[couleur][batiment.first]--;
             }
-            cout << "Le batiment " << bat->get_nom() << " a ete retire du joueur " << nom << endl;
+            cout << "Le batiment " << bat->get_nom() << " a ete retire du joueur \"" << nom << "\"" << endl;
             return;
         }
     }
     // Sinon, aucun batiment correspondant pour le joueur, on renvoie une erreur
-    cout << "Impossible de retirer le batiment. Le joueur " << nom << "ne possede aucun batiment " << bat->get_nom() << endl;
+    cout << "Impossible de retirer le batiment. Le joueur \"" << nom << "\" ne possede aucun batiment " << bat->get_nom() << endl;
 }
 
 void Joueur::set_liste_batiment(map<couleur_bat, map<Batiment*, unsigned int>>& liste_bat){
@@ -179,9 +180,15 @@ void Joueur::afficher_joueur() const {
     /// Affiche les informations d'un joueur
 
     cout << "\n********************" << endl;
-    cout << "joueur : \"" << nom ;
+    cout << "Joueur : \"" << nom ;
     if (est_ia){
-        cout << "\" est une IA" << endl;
+        cout << "\" est une IA ";
+        if (strategie == agressive)
+            cout << " agressive" << endl;
+        else if (strategie == defensif)
+            cout << " defensive" << endl;
+        else if (strategie == aleatoire)
+            cout << " neutre" << endl;
     }
     else{
         cout << "\" est un Humain" << endl;
@@ -192,6 +199,7 @@ void Joueur::afficher_joueur() const {
 }
 
 unsigned int Joueur::count_type(const string& type) const {
+    /// Compte le nombre de cartes d'un type donne
     unsigned int count = 0;
     auto liste_bat = get_liste_batiment();
     // pour chaque couleur de la liste de batiments du joueur
@@ -209,6 +217,7 @@ unsigned int Joueur::count_type(const string& type) const {
 //// a revoir
 
 const map<Batiment*, unsigned int> Joueur::get_liste_bat_non_special() const{
+    /// Retourne la liste des batiments non speciaux du joueur
     map<Batiment* ,unsigned int> liste;
     for (const auto& couleur : get_liste_batiment()){
         for (auto bat : couleur.second){
@@ -222,6 +231,7 @@ const map<Batiment*, unsigned int> Joueur::get_liste_bat_non_special() const{
 }
 
 Monument* Joueur::selectionner_monument() const{
+    /// Selectionne un monument parmis ceux du joueur
     int monu_indice, count = 1, count_check=1;
     Monument* monu_a_retourner;
 
@@ -257,8 +267,6 @@ Monument* Joueur::selectionner_monument() const{
     else{
         throw invalid_argument("Le monument entre n'est pas valide");
     }
-
-
 }
 
 Batiment* Joueur::possede_batiment(const string& nom_bat) const{
@@ -318,7 +326,7 @@ Batiment* Joueur::selectionner_batiment() const{
         }
     }
     //cas où erreur (batiment entre pas dans la liste)
-    throw invalid_argument("Le batiment entre n'est pas valide");
+    throw gameException("Le batiment entre n'est pas valide");
 }
 
 Monument* Joueur::possede_monument(const string& nom_mon) const{
@@ -335,7 +343,7 @@ Monument* Joueur::possede_monument(const string& nom_mon) const{
 
 void Joueur::fermer_batiment(Batiment *bat) {
     if (bat == nullptr){
-        throw invalid_argument("Le batiment entre n'est pas valide");
+        throw gameException("Le batiment entre n'est pas valide");
     }
     // On retire le batiment de la liste de batiments du joueur
     retirer_batiment(bat);
@@ -347,7 +355,7 @@ void Joueur::fermer_batiment(Batiment *bat) {
 void Joueur::ouvrir_batiment(Batiment *bat) {
 
     if (bat == nullptr){
-        throw invalid_argument("Le batiment entre n'est pas valide");
+        throw gameException("Le batiment entre n'est pas valide");
     }
 
     // on le cherche dans les batiments fermes pour avoir un iterateur
@@ -361,6 +369,6 @@ void Joueur::ouvrir_batiment(Batiment *bat) {
         ajouter_batiment(bat);
     }
     else{
-        throw invalid_argument("Le joueur n'a pas de batiment ferme correspondant a ce batiment");
+        throw gameException("Le joueur n'a pas de batiment ferme correspondant a ce batiment");
     }
 }

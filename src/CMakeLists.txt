@@ -19,14 +19,6 @@ include_directories(joueur)
 add_executable(src
         main.cpp
 
-        exception/gameExeption.h
-
-        controleur/utils.cpp
-        controleur/utils.h
-
-        joueur/Joueur.cpp
-        joueur/Joueur.h
-
         cartes/Carte.cpp
         cartes/Carte.h
 
@@ -139,4 +131,11 @@ add_executable(src
         controleur/Partie.h
         controleur/Shop.cpp
         controleur/Shop.h
-        )
+        controleur/utils.cpp
+        controleur/utils.h
+
+        joueur/Joueur.cpp
+        joueur/Joueur.h
+
+        exception/gameExeption.h
+)
