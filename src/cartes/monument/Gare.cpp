@@ -11,11 +11,12 @@ Gare::Gare()
 }
 
 void Gare::declencher_effet(unsigned int possesseur, int bonus) const {
-    cout << "Activation de l'effet de la gare" << endl;
+    Joueur *joueur = Partie::get_instance()->get_tab_joueurs()[possesseur];
     Partie *partie = Partie::get_instance();
-    if (partie->get_tab_joueurs()[possesseur]->get_est_ia()) {
+    if (joueur->get_est_ia()) {
         int choix = rand() % 4;
         if (choix != 0) {
+            cout << "Activation de l'effet de la gare du joueur \"" << joueur->get_nom() << "\"" << endl;
             partie->set_de_2((rand() % 6) + 1);
         }
     }
@@ -26,6 +27,7 @@ void Gare::declencher_effet(unsigned int possesseur, int bonus) const {
             cin >> choix;
         }
         if (choix == 1) {
+            cout << "Activation de l'effet de la gare du joueur \"" << joueur->get_nom() << "\"" << endl;
             partie->set_de_2((rand() % 6) + 1);
         }
     }
@@ -33,4 +35,8 @@ void Gare::declencher_effet(unsigned int possesseur, int bonus) const {
 
 void Gare::activer() {
     set_image("../../assets/monuments/Gare-active.png");
+}
+
+void Gare::desactiver() {
+    set_image("../../assets/monuments/Gare-travaux.png");
 }

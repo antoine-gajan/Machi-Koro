@@ -11,10 +11,16 @@ ParcAttraction::ParcAttraction() :
 }
 
 void ParcAttraction::declencher_effet(unsigned int possesseur, int bonus) const {
-    cout << "Activation de l'effet du Parc d'attractions" << endl;
+    Joueur *joueur = Partie::get_instance()->get_tab_joueurs()[possesseur];
+
+    cout << "Activation de l'effet du Parc d'attractions du joueur \"" << joueur->get_nom() << "\"" << endl;
     Partie::get_instance()->rejouer_tour();
 }
 
 void ParcAttraction::activer(){
     set_image("../../assets/monuments/ParcAttraction-active.png");
+}
+
+void ParcAttraction::desactiver(){
+    set_image("../../assets/monuments/ParcAttraction-travaux.png");
 }

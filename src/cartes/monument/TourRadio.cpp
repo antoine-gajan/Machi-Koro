@@ -11,7 +11,7 @@ TourRadio::TourRadio() :
 }
 
 void TourRadio::declencher_effet(unsigned int possesseur, int bonus) const {
-    cout << "Activation de l'effet de la Tour radio" << endl;
+    Joueur *joueur = Partie::get_instance()->get_tab_joueurs()[possesseur];
     Partie *partie = Partie::get_instance();
     int choix = -1;
 
@@ -26,6 +26,7 @@ void TourRadio::declencher_effet(unsigned int possesseur, int bonus) const {
     }
 
     if(choix == 1) {
+        cout << "Activation de l'effet de la Tour radio du joueur \"" << joueur->get_nom() << "\"" << endl;
         partie->set_de_1(1 + (rand() % 6));
         if (partie->get_de_2() != 0) {
             partie->set_de_2(1 + (rand() % 6));
@@ -36,4 +37,8 @@ void TourRadio::declencher_effet(unsigned int possesseur, int bonus) const {
 
 void TourRadio::activer(){
     set_image("../../assets/monuments/TourRadio-active.png");
+}
+
+void TourRadio::desactiver(){
+    set_image("../../assets/monuments/TourRadio-travaux.png");
 }
