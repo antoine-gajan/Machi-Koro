@@ -5,12 +5,15 @@
 #include <vector>
 
 #include "Batiment.h"
+#include "gameExeption.h"
 
 class Shop{
     private:
         unsigned int nb_tas_max;
         unsigned int nb_tas_reel;
+
         map<Batiment*, unsigned int> contenu;
+
     public:
         /**** Constructeur et destructeur ****/
         explicit Shop(unsigned int nb_tas);
