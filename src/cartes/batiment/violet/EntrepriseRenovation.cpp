@@ -15,9 +15,9 @@ EntrepriseRenovation::EntrepriseRenovation() :
 
 void EntrepriseRenovation::declencher_effet(unsigned int possesseur, int bonus) const{
     /// Effet de la classe Entreprise de Renovation
-    cout << "Activation de l'effet de la Entreprise de renovation." << endl;
     const vector<Joueur *> &tab_joueurs = Partie::get_instance()->get_tab_joueurs();
     Joueur *j_actuel = tab_joueurs[possesseur];
+    cout << "Activation de l'effet de l'entreprise de rénovation du joueur \"" << j_actuel->get_nom()<<"\"" << endl;
 
     // Liste des batiments du joueur actuel et de l'autre joueur
     unsigned int bat_choisi;
