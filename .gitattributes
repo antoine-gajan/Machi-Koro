@@ -1,2 +1,2 @@
 CMakeLists.txt linguist-vendored
-src/controleur/utils.h linguist-language=C++
+src/controleur/utils.h linguist-language=c++
