@@ -10,8 +10,8 @@
 #include "gameExeption.h"
 
 enum strat_IA {aleatoire, agressive, defensif, none};
-// Agressive : veut construire des batiments de couleur rouge
-// Defensif : veut construire des batiments de couleur bleu
+// Agressive : l'IA veut construire des batiments de couleur rouge
+// Defensif : l'IA désire construire des batiments de couleur bleue
 // Aleatoire : va construire ou pas un batiment au hasard
 // None : n'est pas une IA
 
