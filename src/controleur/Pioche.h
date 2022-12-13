@@ -7,6 +7,7 @@
 #include <algorithm>
 
 #include "Batiment.h"
+#include "gameExeption.h"
 
 class Pioche {
     friend class Batiment;
