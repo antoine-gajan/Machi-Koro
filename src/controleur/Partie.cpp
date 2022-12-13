@@ -5,10 +5,10 @@
 #define REP_EXT_MIN 1
 #define REP_EXT_MAX 4
 
-Partie* Partie::singleton = nullptr;
+Partie::Handler Partie::handler=Partie::Handler();
 
 Partie* Partie::get_instance() {
-    if (singleton == nullptr) {
+    if (handler.instance == nullptr) {
         int rep_ed = -1;
         EditionDeJeu * edition;
         vector<EditionDeJeu *> listing_extension;
@@ -55,17 +55,15 @@ Partie* Partie::get_instance() {
             cout << "Vous avez choisi de quitter." << endl;
         }
         if(rep_ed != 3)
-            singleton = new Partie(edition, listing_extension);
+            handler.instance = new Partie(edition, listing_extension);
+
+        delete edition;
+
+        for (auto & extension : listing_extension)
+            delete extension;
     }
 
-    return singleton;
-}
-
-void Partie::liberer_instance() {
-    if (singleton != nullptr) {
-        delete singleton;
-        singleton = nullptr;
-    }
+    return handler.instance;
 }
 
 

@@ -25,7 +25,12 @@ private:
     Shop* shop;
     Pioche* pioche;
 
-    static Partie* singleton;
+    struct Handler{
+        Partie* instance;
+        Handler():instance(nullptr){}
+        ~Handler(){delete instance;}
+    };
+    static Handler handler;
 
     //// Constructeur et Destructeur ////
     ~Partie();
@@ -35,7 +40,6 @@ public:
     Partie(Partie const&) = delete;
     void operator=(const Partie&) = delete;
     static Partie* get_instance();
-    static void liberer_instance();
 
 
     ////********** A VERIFIER **********////
