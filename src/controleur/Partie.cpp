@@ -195,23 +195,22 @@ Partie::Partie(EditionDeJeu* edition, const vector<EditionDeJeu *>& extensions) 
 }
 
 vector<Batiment *> Partie::get_starter() {
+    ///Renvoie le starter de la partie
     if (list_batiments.empty()) {
-        cout << "Erreur : la liste des batiments est vide" << endl;
-        return {};
+        throw gameException("Aucun batiment dans la liste");
     }
-    else {
-        vector<Batiment*> starter;
-        for (auto bat : list_batiments) {
-            if (bat.first->get_nom() == "Boulangerie" ||
-                bat.first->get_nom() == "ChampBle")
-                starter.push_back(bat.first);
-            if (starter.size() == 2)
-                break;
-        }
-        return starter;
+    vector<Batiment*> starter;
+
+    for (auto bat : list_batiments) {
+        if (bat.first->get_nom() == "Boulangerie" ||
+            bat.first->get_nom() == "ChampBle")
+            starter.push_back(bat.first);
+        if (starter.size() == 2)
+            break;
     }
+    return starter;
+
 }
-Partie* instance = nullptr;
 
 
 Partie::~Partie() {
@@ -274,10 +273,40 @@ bool Partie::acheter_carte() {
             if (choix == 3) {
                 return false;
             } else if (choix == 1) {
+                visit[0] = true;
                 transaction_fin = acheter_bat();
             } else if (choix == 2) {
+                visit[1] = true;
                 transaction_fin = acheter_monu();
             }
+
+            if (!transaction_fin && visit[0]) {
+                cout << "Vous n'avez pas assez de ressources pour acheter un batiment" << endl;
+                choix = -1;
+                while (choix < 0 || choix > 1) {
+                    cout << "Voulez-vous acheter un monument ? (0 : non, 1 : oui)" << endl;
+                    cin >> choix;
+                }
+                if (choix == 1) {
+                    transaction_fin = acheter_monu();
+                }
+            }
+            else if (!transaction_fin && visit[1]) {
+                cout << "Vous n'avez pas assez de ressources pour acheter un monument" << endl;
+                choix = -1;
+                while (choix < 0 || choix > 1) {
+                    cout << "Voulez-vous acheter un batiment ? (0 : non, 1 : oui)" << endl;
+                    cin >> choix;
+                }
+                if (choix == 1) {
+                    transaction_fin = acheter_bat();
+                }
+            }
+
+            if (!transaction_fin) {
+                return false;
+            }
+
         } else {
             choix_ia = rand() % 6;
             if (choix_ia == 0) {
@@ -495,7 +524,7 @@ void Partie::jouer_partie() {
 
     while (!fin_partie) {
         jouer_tour();
-        fin_partie = est_gagnant((joueur_actuel + tab_joueurs.size() - 1) % tab_joueurs.size());
+        fin_partie = est_gagnant(joueur_actuel);
     }
 
     /// On affiche le gagnant
@@ -508,6 +537,9 @@ void Partie::jouer_tour() {
     unsigned int de_1_temp, de_2_temp;
     bool centre_c = false;
     vector <Monument*> monuments_joueurs = tab_joueurs[joueur_actuel]->get_monument_jouables();
+
+    cout << "----------------------------------------------------" << endl;
+    cout << "\t\t\t\t\tDebut du tour" << endl;
 
     de_1 = (rand() % 6) + 1;
     de_1_temp = de_1;
@@ -540,10 +572,14 @@ void Partie::jouer_tour() {
         }
     }
 
-    cout << "Resultat du premier de : " << de_1 << endl;
+    cout << "------------" << endl;
+    cout << "| DE 1 : " << de_1 << " |" << endl;
+    cout << "------------" << endl;
 
     if (de_2 != 0) {
-        cout << "Resultat du deuxieme de : " << de_2 << endl;
+        cout << "------------" << endl;
+        cout << "| DE 2 : " << de_2 << " |" << endl;
+        cout << "------------" << endl;
         de_2_temp = de_2;
     }
 
@@ -559,10 +595,14 @@ void Partie::jouer_tour() {
     }
 
     if (de_1_temp != de_1) {
-        cout << "Resultat du premier de : " << de_1 << endl;
+        cout << "------------" << endl;
+        cout << "| DE 1 : " << de_1 << " |" << endl;
+        cout << "------------" << endl;
     }
     if (de_2 != 0 && de_2_temp != de_2) {
-        cout << "Resultat du deuxieme de : " << de_2 << endl;
+        cout << "------------" << endl;
+        cout << "| DE 2 : " << de_2 << " |" << endl;
+        cout << "------------" << endl;
     }
 
     /// Monument apres le jet de de
@@ -691,7 +731,7 @@ void Partie::jouer_tour() {
 
     tab_joueurs[joueur_actuel]->afficher_joueur();
     cout << "Cartes du shop : " << endl;
-    shop->affiche_shop();
+    shop->affiche_shop_simple();
 
     if (!acheter_carte()) {
         cout << "Vous n'avez rien achete" << endl;
@@ -725,17 +765,13 @@ void Partie::jouer_tour() {
     }
     tab_joueurs[joueur_actuel]->afficher_joueur();
 
-
-    joueur_actuel = (joueur_actuel + 1) % tab_joueurs.size();
-
     while (!pioche->est_vide() && shop->get_nb_tas_reel() < shop->get_nb_tas_max()) {
         shop->completer_shop(pioche->get_carte());
     }
 
-    cout << "Fin du tour" << endl;
+    cout << "\t\t\t\t\tFin du tour" << endl;
+    cout << "----------------------------------------------------" << endl;
 }
-
-/// Questionnable :
 
 
 void Partie::don_argent(Joueur* j1, unsigned int argent, Joueur* j2){
