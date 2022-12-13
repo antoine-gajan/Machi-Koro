@@ -18,11 +18,14 @@ include_directories(cartes/batiment/violet)
 include_directories(cartes/monument)
 include_directories(Joueur)
 include_directories(controleur)
+include_directories(exception)
 include_directories(controleur/EditionDeJeu)
 
 add_executable(src
         main.cpp
 
+        exception/gameExeption.h
+        
         controleur/utils.cpp
         controleur/utils.h
 

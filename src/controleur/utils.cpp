@@ -9,7 +9,6 @@ void menu () {
     Partie* partie = Partie::get_instance();
     partie->jouer_partie();
 
-    Partie::liberer_instance();
     /// Creation de la partie
     cout << "/********\tFin\t********/" << endl;
 }

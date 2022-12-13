@@ -5,13 +5,25 @@
 #define REP_EXT_MIN 1
 #define REP_EXT_MAX 4
 
-Partie* Partie::singleton = nullptr;
+Partie::Handler Partie::handler=Partie::Handler();
 
 Partie* Partie::get_instance() {
-    if (singleton == nullptr) {
+    if (handler.instance == nullptr) {
         int rep_ed = -1;
         EditionDeJeu * edition;
         vector<EditionDeJeu *> listing_extension;
+        cout << R"(
+-----------------------------------------------------------------------------------------------------------------------
+88b           d88        db        ,ad8888ba,  88        88 88    88      a8P  ,ad8888ba,   88888888ba    ,ad8888ba,
+888b         d888       d88b      d8"'    `"8b 88        88 88    88    ,88'  d8"'    `"8b  88      "8b  d8"'    `"8b
+88`8b       d8'88      d8'`8b    d8'           88        88 88    88  ,88"   d8'        `8b 88      ,8P d8'        `8b
+88 `8b     d8' 88     d8'  `8b   88            88aaaaaaaa88 88    88 a88"    88          88 88aaaaaa8P' 88          88
+88  `8b   d8'  88    d8YaaaaY8b  88            88""""""""88 88    8888"88,   88          88 88""""88'   88          88
+88   `8b d8'   88   d8""""""""8b Y8,           88        88 88    88P   Y8b  Y8,        ,8P 88    `8b   Y8,        ,8P
+88    `888'    88  d8'        `8b Y8a.    .a8P 88        88 88    88     "88, Y8a.    .a8P  88     `8b   Y8a.    .a8P
+88     `8'     88 d8'          `8b `"Y8888Y"'  88        88 88    88       Y8b `"Y8888Y"'   88      `8b   `"Y8888Y"'
+-----------------------------------------------------------------------------------------------------------------------
+)" << '\n';
 
         cout << "/********\tMenu\t********/" << endl;
         while (!(REP_ED_MIN <= rep_ed && rep_ed <= REP_ED_MAX)) {
@@ -55,17 +67,15 @@ Partie* Partie::get_instance() {
             cout << "Vous avez choisi de quitter." << endl;
         }
         if(rep_ed != 3)
-            singleton = new Partie(edition, listing_extension);
+            handler.instance = new Partie(edition, listing_extension);
+
+        delete edition;
+
+        for (auto & extension : listing_extension)
+            delete extension;
     }
 
-    return singleton;
-}
-
-void Partie::liberer_instance() {
-    if (singleton != nullptr) {
-        delete singleton;
-        singleton = nullptr;
-    }
+    return handler.instance;
 }
 
 
