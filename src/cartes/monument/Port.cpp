@@ -38,3 +38,7 @@ void Port::declencher_effet(unsigned int possesseur, int bonus) const {
 void Port::activer() {
     set_image("../../assets/monuments/Port-active.png");
 }
+
+void Port::desactiver() {
+    set_image("../../assets/monuments/Port-travaux.png");
+}
