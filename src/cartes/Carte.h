@@ -5,6 +5,7 @@
 #include <list>
 #include <vector>
 #include <iostream>
+#include "gameExeption.h"
 
 class Carte {
 protected:

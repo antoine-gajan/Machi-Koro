@@ -19,7 +19,7 @@ void HalleDeMarche::declencher_effet(unsigned int possesseur, int bonus) const {
     unsigned int nb_restaurant = j_actuel->count_type("restaurant");
 
     if (nb_restaurant > 0) {
-        cout << "Activation de l'effet de la carte Halle de marche du joueur " << j_actuel->get_nom() << endl;
+        cout << "Activation de l'effet de la carte Halle de marche du joueur \"" << j_actuel->get_nom() << "\"" << endl;
     }
 
     // On donne 2 pieces par restaurant

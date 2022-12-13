@@ -13,11 +13,14 @@ SushiBar::SushiBar() :
 void SushiBar::declencher_effet(unsigned int possesseur, int bonus) const{
     Partie * partie = Partie::get_instance();
     Joueur* joueur_possesseur = partie->get_tab_joueurs()[possesseur];
-    cout << "Activation de l'effet du Sushi bar du joueur \"" << joueur_possesseur->get_nom()<<"\"" << endl;
     //Trouver un joueur qui a cette carte
-    if(partie->get_joueur_actuel() != possesseur && partie->get_tab_joueurs()[possesseur]->possede_batiment("Port")){
-        if(partie->transfert_argent(possesseur, partie->get_joueur_actuel(), 3+bonus)){
-            return;
+    if(partie->get_joueur_actuel() != possesseur){
+        if (partie->get_tab_joueurs()[possesseur]->possede_batiment("Port")){
+            cout << "Activation de l'effet du Sushi bar du joueur \"" << joueur_possesseur->get_nom()<<"\"" << endl;
+            partie->transfert_argent(possesseur, partie->get_joueur_actuel(), 3+bonus) ;
         }
+    }
+    else{
+        throw gameException("On ne peut pas se donner d'argent a soi meme");
     }
 }

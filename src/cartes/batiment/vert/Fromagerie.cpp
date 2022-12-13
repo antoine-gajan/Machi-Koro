@@ -19,7 +19,7 @@ void Fromagerie::declencher_effet(unsigned int possesseur, int bonus) const {
     unsigned int nb_betail = j_actuel->count_type("betail");
 
     if (nb_betail > 0) {
-        cout << "Activation de l'effet de la carte Fromagerie du joueur " << j_actuel->get_nom() << endl;
+        cout << "Activation de l'effet de la carte Fromagerie du joueur \"" << j_actuel->get_nom() << "\"" << endl;
     }
 
     // On donne 3 pieces par betail

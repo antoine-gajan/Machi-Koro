@@ -8,7 +8,7 @@ Cafe::Cafe() :
                      "../../assets/batiments/Rouge/Cafe.jpg",
                      Rouge ,
                      list<unsigned int>{3},
-                     "restaurant") {};
+                     "restaurant") {}
 
 void Cafe::declencher_effet(unsigned int possesseur, int bonus) const{
 
@@ -17,9 +17,9 @@ void Cafe::declencher_effet(unsigned int possesseur, int bonus) const{
     cout << "Activation de l'effet du Cafe du joueur \"" << joueur_possesseur->get_nom()<<"\"" << endl;
     //Trouver un joueur qui a cette carte
     if(partie->get_joueur_actuel() != possesseur){
-        if(partie->transfert_argent(possesseur, partie->get_joueur_actuel(), 1+bonus)){
-            return;
-        }
+        partie->transfert_argent(possesseur, partie->get_joueur_actuel(), 1+bonus);
+    } else {
+        throw gameException("On ne peut pas se donner d'argent a soi meme");
     }
 }
 

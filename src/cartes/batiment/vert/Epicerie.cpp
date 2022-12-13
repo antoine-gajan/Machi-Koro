@@ -16,7 +16,7 @@ void Epicerie::declencher_effet(unsigned int possesseur, int bonus) const{
     Joueur* j_actuel = Partie::get_instance()->get_tab_joueurs()[j_act_index];
 
     if (j_actuel->get_monument_jouables().size() < 2){
-        cout << "Activation de l'effet de la carte Epicerie du joueur " << j_actuel->get_nom() << endl;
+        cout << "Activation de l'effet de la carte Epicerie du joueur \"" << j_actuel->get_nom() << "\"" << endl;
         j_actuel->set_argent(j_actuel->get_argent() + 2 + bonus);
     }
 }

@@ -18,7 +18,7 @@ void EntrepriseDeTravauxPublics::declencher_effet(unsigned int possesseur, int b
     unsigned int j_act_index =  Partie::get_instance()->get_joueur_actuel();
     Joueur* j_actuel = Partie::get_instance()->get_tab_joueurs()[j_act_index];
 
-    cout << "Activation de l'effet de la carte Entreprise de travaux publics du joueur " << j_actuel->get_nom() << endl;
+    cout << "Activation de l'effet de la carte Entreprise de travaux publics du joueur \"" << j_actuel->get_nom() << "\"" << endl;
 
     // On demande a l'utilisateur de selectionner un de ses monuments
     Monument* monument = j_actuel->selectionner_monument();

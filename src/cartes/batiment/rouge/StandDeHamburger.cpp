@@ -16,8 +16,9 @@ void StandDeHamburger::declencher_effet(unsigned int possesseur, int bonus) cons
     cout << "Activation de l'effet du cafe du Moonster burger de \"" << joueur_possesseur->get_nom()<<"\"" << endl;
     //Trouver un joueur qui a cette carte
     if(partie->get_joueur_actuel() != possesseur){
-        if(partie->transfert_argent(possesseur, partie->get_joueur_actuel(), 1+bonus)){
-            return;
-        }
+        partie->transfert_argent(possesseur, partie->get_joueur_actuel(), 1+bonus);
+    }
+    else{
+        throw gameException("On ne peut pas se donner d'argent a soi meme");
     }
 }

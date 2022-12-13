@@ -19,7 +19,7 @@ void MarcheDeFruitsEtLegumes::declencher_effet(unsigned int possesseur, int bonu
     unsigned int nb_champs = j_actuel->count_type("champ");
 
     if (nb_champs > 0) {
-        cout << "Activation de l'effet de la carte Marche de fruits et legumes du joueur " << j_actuel->get_nom() << endl;
+        cout << "Activation de l'effet de la carte Marche de fruits et legumes du joueur \"" << j_actuel->get_nom() << "\"" << endl;
     }
 
     // On donne 2 pieces par champ

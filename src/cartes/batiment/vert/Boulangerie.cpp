@@ -15,7 +15,7 @@ void Boulangerie::declencher_effet(unsigned int possesseur, int bonus) const {
     unsigned int j_act_index =  Partie::get_instance()->get_joueur_actuel();
     Joueur* j_actuel = Partie::get_instance()->get_tab_joueurs()[j_act_index];
 
-    cout << "Activation de l'effet de la carte Boulangerie du joueur " << j_actuel->get_nom() << endl;
+    cout << "Activation de l'effet de la carte Boulangerie du joueur \"" << j_actuel->get_nom() << "\"" << endl;
 
     j_actuel->set_argent(j_actuel->get_argent() + 1 + bonus);
 

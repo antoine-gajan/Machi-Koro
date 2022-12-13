@@ -20,7 +20,7 @@ void FabriqueDeMeubles::declencher_effet(unsigned int possesseur, int bonus) con
     unsigned int nb_engrenages = j_actuel->count_type("engrenage");
 
     if (nb_engrenages > 0) {
-        cout << "Activation de l'effet de la carte Fabrique de meubles du joueur " << j_actuel->get_nom() << endl;
+        cout << "Activation de l'effet de la carte Fabrique de meubles du joueur \"" << j_actuel->get_nom() << "\"" << endl;
     }
 
     // On donne 3 pieces par engrenage

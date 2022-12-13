@@ -30,7 +30,7 @@ void Fleuriste::declencher_effet(unsigned int possesseur, int bonus) const {
     }
 
     if (nb_champs_fleur > 0) {
-        cout << "Activation de l'effet de la carte Fleuriste du joueur " << j_actuel->get_nom() << endl;
+        cout << "Activation de l'effet de la carte Fleuriste du joueur \"" << j_actuel->get_nom() << "\"" << endl;
     }
 
     // on donne 1 piece par champ de fleur

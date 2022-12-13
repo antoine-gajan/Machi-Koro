@@ -23,7 +23,7 @@ void MoonsterSoda::declencher_effet(unsigned int possesseur, int bonus) const {
     }
 
     if (nb_restaurants > 0) {
-        cout << "Activation de l'effet de la carte Moonster Soda du joueur " << j_actuel->get_nom() << endl;
+        cout << "Activation de l'effet de la carte Moonster Soda du joueur \"" << j_actuel->get_nom() << "\"" << endl;
     }
 
     // On donne 1 piece par restaurant
