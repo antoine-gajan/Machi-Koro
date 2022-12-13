@@ -5,7 +5,7 @@
 EntrepriseRenovation::EntrepriseRenovation() :
         Batiment("EntrepriseRenovation",
                  1,
-                 "Choississez un de vos établissements qui ne soit pas de type spécial. Tous les établissements identiques de tous les joueurs sont fermés. Puis recevez une pièce de la banque pour chaque établissement fermé.",
+                 "Choississez un de vos etablissements qui ne soit pas de type special. Tous les etablissements identiques de tous les joueurs sont fermes. Puis recevez une piece de la banque pour chaque etablissement ferme.",
                  "../../../assets/batiments/Violet/Entreprise-de-renovation.jpg",
                  Violet,
                  list<unsigned int>{10},
@@ -18,7 +18,7 @@ void EntrepriseRenovation::declencher_effet(unsigned int possesseur, int bonus) 
     Partie* instance = Partie::get_instance();
     const vector<Joueur *> &tab_joueurs = instance->get_tab_joueurs();
     Joueur *j_actuel = tab_joueurs[possesseur];
-    cout << "Activation de l'effet de l'entreprise de rénovation du joueur \"" << j_actuel->get_nom()<<"\"" << endl;
+    cout << "Activation de l'effet de l'entreprise de renovation du joueur \"" << j_actuel->get_nom()<<"\"" << endl;
 
     // Selection du batiment du joueur
     Batiment *batiment;
@@ -43,8 +43,8 @@ void EntrepriseRenovation::declencher_effet(unsigned int possesseur, int bonus) 
             }
         }
     }
-    cout << nb_fermes << "batiments " << batiment->get_nom() << " ont été fermés" << endl;
-    cout << j_actuel->get_nom() << " va recevoir " << nb_fermes << "pièces" << endl;
+    cout << nb_fermes << "batiments " << batiment->get_nom() << " ont ete fermes" << endl;
+    cout << j_actuel->get_nom() << " va recevoir " << nb_fermes << "pieces" << endl;
     j_actuel->set_argent(j_actuel->get_argent() + nb_fermes);
-    cout << j_actuel->get_nom() << "possède maintenant " << j_actuel->get_argent() << " pièces" <<endl;
+    cout << j_actuel->get_nom() << "possede maintenant " << j_actuel->get_argent() << " pieces" <<endl;
 }

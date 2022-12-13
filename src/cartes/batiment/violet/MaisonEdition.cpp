@@ -27,7 +27,7 @@ void MaisonEdition::declencher_effet(unsigned int possesseur, int bonus) const{
     // Parcours du tableau de joueurs
     for (int i = 0; i < tab_joueurs.size(); i++){
         Joueur* joueur = tab_joueurs[i];
-        // On compte le nombre de batiments concernés
+        // On compte le nombre de batiments concernes
         nb_bat = joueur->count_type("restaurant") + joueur->count_type("commerce");
         // On fait le transfert d'argent
         Partie::get_instance()->transfert_argent(i, possesseur, nb_bat);
