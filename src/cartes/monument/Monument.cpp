@@ -8,14 +8,12 @@ Monument::Monument(Moment_Effet effet_moment, const string& nom, unsigned int pr
 
     // Gestion d'erreur moment
     if (effet_moment != AVANT && effet_moment != PENDANT && effet_moment != APRES) {
-        cout << "Erreur : Moment_Effet invalide" << endl;
-        return;
+        throw gameException("Moment_Effet invalide");
     }
 
     // Gestion d'erreur nom, description_effet et path_image
-    if (nom == "" || description_effet == "") {
-        cout << "Erreur : nom ou description_effet invalide" << endl;
-        return;
+    if (nom.empty() || description_effet.empty()) {
+        throw gameException("Nom ou description_effet invalide");
     }
 
     // Initialisation de moment
