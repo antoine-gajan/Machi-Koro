@@ -12,7 +12,16 @@ Restaurant::Restaurant() :
 
 
 void Restaurant::declencher_effet(unsigned int possesseur, int bonus) const{
-    cout << "Activation de l'effet du restaurant" << endl;
+    Partie * partie = Partie::get_instance();
+    Joueur* joueur_possesseur = partie->get_tab_joueurs()[possesseur];
+    cout << "Activation de l'effet du Restaurant du joueur " << joueur_possesseur->get_nom() << endl;
+    //Trouver un joueur qui a cette carte
+    if(partie->get_joueur_actuel() != possesseur){
+        if(partie->transfert_argent(possesseur, partie->get_joueur_actuel(), 2+bonus)){
+            return;
+        }
+    }
+    /*cout << "Activation de l'effet du restaurant" << endl;
     Partie * partie = Partie::get_instance();
     Joueur* joueur_actuel = partie->get_tab_joueurs().at(possesseur);
     //Trouver un joueur qui a cette carte
@@ -22,5 +31,5 @@ void Restaurant::declencher_effet(unsigned int possesseur, int bonus) const{
                 return;
             }
         }
-    }
+    }*/
 }
