@@ -24,3 +24,12 @@ Carte::Carte(const string& name, const string& effect_description, unsigned int 
     prix = price;
     path_image = path_picture;
 }
+
+unsigned int Carte::argent_effet(int a) {
+    /// Retourne le maximum entre a et 0
+
+    if (a < 0)
+        return 0;
+    else
+        return (unsigned int) a;
+}
