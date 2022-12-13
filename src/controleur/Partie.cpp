@@ -1,6 +1,6 @@
 #include "Partie.h"
 #define REP_ED_MIN 1
-#define REP_ED_MAX 3
+#define REP_ED_MAX 4
 
 #define REP_EXT_MIN 1
 #define REP_EXT_MAX 4
@@ -18,7 +18,8 @@ Partie* Partie::get_instance() {
             cout << "\nVeuillez-choisir une edition :\n"
                     "\t1. Standard\n"
                     "\t2. Deluxe\n"
-                    "\t3. Quitter\n"
+                    "\t3. Custom\n"
+                    "\t4. Quitter\n"
                     "Votre choix :" << endl;
             cin >> rep_ed;
         }
@@ -52,9 +53,12 @@ Partie* Partie::get_instance() {
         } else if (rep_ed == 2) {
             edition = new EditionDeJeu("Deluxe");
         } else if (rep_ed == 3) {
-            cout << "Vous avez choisi de quitter." << endl;
+            edition = new EditionDeJeu("Custom");
+        } else {
+            cout << "Vous avez choisi de quitter le jeu" << endl;
+            exit(0);
         }
-        if(rep_ed != 3)
+        if(rep_ed != REP_ED_MAX)
             handler.instance = new Partie(edition, listing_extension);
 
         delete edition;
@@ -698,7 +702,6 @@ void Partie::jouer_tour() {
         // Si le monument est trouve, on le joue
         monuments_joueurs[it_parc - monuments_joueurs.begin()]->declencher_effet(joueur_actuel);
     }
-    tab_joueurs[joueur_actuel]->afficher_joueur();
 
     while (!pioche->est_vide() && shop->get_nb_tas_reel() < shop->get_nb_tas_max()) {
         shop->completer_shop(pioche->get_carte());

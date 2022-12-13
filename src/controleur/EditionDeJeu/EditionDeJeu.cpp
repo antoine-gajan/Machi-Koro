@@ -14,7 +14,6 @@ EditionDeJeu::EditionDeJeu(const string& nom_edition) : nom(nom_edition) {
         nom = "Deluxe";
         est_edition = true;
         nb_joueurs_max = 5;
-        nb_joueurs_min = 2;
         nb_monuments_win = 5;
 
         /// Liste des monuments specifiques a Deluxe
@@ -67,7 +66,6 @@ EditionDeJeu::EditionDeJeu(const string& nom_edition) : nom(nom_edition) {
         nom = "Standard";
         est_edition = true;
         nb_joueurs_max = 4;
-        nb_joueurs_min = 2;
         nb_monuments_win = 4;
 
         /// Liste des monuments specifiques a Standard
@@ -105,7 +103,6 @@ EditionDeJeu::EditionDeJeu(const string& nom_edition) : nom(nom_edition) {
         nom = "GreenValley";
         est_edition = false;
         nb_joueurs_max = 4;
-        nb_joueurs_min = 2;
         nb_monuments_win = 4;
 
 
@@ -116,6 +113,7 @@ EditionDeJeu::EditionDeJeu(const string& nom_edition) : nom(nom_edition) {
 
         // Batiments verts
         batiment.insert(pair<Batiment*, unsigned int>(new BanqueDeMinivilles(), 6));
+        batiment.insert(pair<Batiment*, unsigned int>(new CaveAVin(), 6));
         batiment.insert(pair<Batiment*, unsigned int>(new EntrepriseDeTravauxPublics(), 6));
         batiment.insert(pair<Batiment*, unsigned int>(new MoonsterSoda(), 6));
         batiment.insert(pair<Batiment*, unsigned int>(new Epicerie(), 6));
@@ -135,7 +133,6 @@ EditionDeJeu::EditionDeJeu(const string& nom_edition) : nom(nom_edition) {
         nom = "Marina";
         est_edition = false;
         nb_joueurs_max = 5;
-        nb_joueurs_min = 2;
         nb_monuments_win = 5;
 
         /// Constructeur de Marina
@@ -171,6 +168,72 @@ EditionDeJeu::EditionDeJeu(const string& nom_edition) : nom(nom_edition) {
         batiment.insert(pair<Batiment*, unsigned int>(new Epicerie(), 6));
         batiment.insert(pair<Batiment*, unsigned int>(new Fleuriste(), 6));
         batiment.insert(pair<Batiment*, unsigned int>(new MoonsterSoda(), 6));
+    }
+    else if (nom_edition == "Custom") {
+        // Custom = Edition personnalisee
+        // Contient toutes les cartes de toutes les editions
+        
+        /// Constructeur de Custom
+        nom = "Custom";
+        est_edition = true;
+        nb_joueurs_max = 6;
+        nb_monuments_win = 6;
+
+        /// Liste des monuments specifiques a Custom
+        monument.push_back(new Aeroport());
+        monument.push_back(new CentreCommercial());
+        monument.push_back(new FabriqueDuPereNoel());
+        monument.push_back(new Gare());
+        monument.push_back(new HotelDeVille());
+        monument.push_back(new ParcAttraction());
+        monument.push_back(new Port());
+        monument.push_back(new TourRadio());
+
+        /// Liste des batiments specifiques a Custom
+        // Batiments violets
+        batiment.insert(pair<Batiment*, unsigned int>(new Arboretum(), 2));
+        batiment.insert(pair<Batiment*, unsigned int>(new CentreAffaires(), 2));
+        batiment.insert(pair<Batiment*, unsigned int>(new CentreImpots(), 2));
+        batiment.insert(pair<Batiment*, unsigned int>(new ChaineTelevision(), 2));
+        batiment.insert(pair<Batiment*, unsigned int>(new EntrepriseRenovation(), 2));
+        batiment.insert(pair<Batiment*, unsigned int>(new MaisonEdition(), 2));
+        batiment.insert(pair<Batiment*, unsigned int>(new Stade(), 2));
+
+        // Batiments verts
+        batiment.insert(pair<Batiment*, unsigned int>(new BanqueDeMinivilles(), 4));
+        batiment.insert(pair<Batiment*, unsigned int>(new Boulangerie(), 4));
+        batiment.insert(pair<Batiment*, unsigned int>(new CaveAVin(), 4));
+        batiment.insert(pair<Batiment*, unsigned int>(new EntrepriseDeDemenagement(), 4));
+        batiment.insert(pair<Batiment*, unsigned int>(new EntrepriseDeTravauxPublics(), 4));
+        batiment.insert(pair<Batiment*, unsigned int>(new Epicerie(), 4));
+        batiment.insert(pair<Batiment*, unsigned int>(new FabriqueDeMeubles(), 4));
+        batiment.insert(pair<Batiment*, unsigned int>(new Fleuriste(), 4));
+        batiment.insert(pair<Batiment*, unsigned int>(new Fromagerie(), 4));
+        batiment.insert(pair<Batiment*, unsigned int>(new HalleDeMarche(), 4));
+        batiment.insert(pair<Batiment*, unsigned int>(new MarcheDeFruitsEtLegumes(), 4));
+        batiment.insert(pair<Batiment*, unsigned int>(new MoonsterSoda(), 4));
+        batiment.insert(pair<Batiment*, unsigned int>(new Superette(), 4));
+
+        // Batiments bleus
+        batiment.insert(pair<Batiment*, unsigned int>(new Chalutier(), 4));
+        batiment.insert(pair<Batiment*, unsigned int>(new ChampBle(), 4));
+        batiment.insert(pair<Batiment*, unsigned int>(new ChampFleur(), 4));
+        batiment.insert(pair<Batiment*, unsigned int>(new ChampMais(), 4));
+        batiment.insert(pair<Batiment*, unsigned int>(new Ferme(), 4));
+        batiment.insert(pair<Batiment*, unsigned int>(new Foret(), 4));
+        batiment.insert(pair<Batiment*, unsigned int>(new Mine(), 4));
+        batiment.insert(pair<Batiment*, unsigned int>(new PetitBateauDePeche(), 4));
+        batiment.insert(pair<Batiment*, unsigned int>(new Verger(), 4));
+        batiment.insert(pair<Batiment*, unsigned int>(new Vignoble(), 4));
+
+        // Batiments rouges
+        batiment.insert(pair<Batiment*, unsigned int>(new Cafe(), 4));
+        batiment.insert(pair<Batiment*, unsigned int>(new ClubPrive(), 4));
+        batiment.insert(pair<Batiment*, unsigned int>(new Pizzeria(), 4));
+        batiment.insert(pair<Batiment*, unsigned int>(new Restaurant, 4));
+        batiment.insert(pair<Batiment*, unsigned int>(new Restaurant5Etoiles(), 4));
+        batiment.insert(pair<Batiment*, unsigned int>(new StandDeHamburger(), 4));
+        batiment.insert(pair<Batiment*, unsigned int>(new SushiBar(), 4));
     }
     else{
         cout<<"Ce nom d edition est invalide"<<endl;
