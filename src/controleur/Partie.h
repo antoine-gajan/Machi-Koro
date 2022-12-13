@@ -10,6 +10,7 @@
 #include "Joueur.h"
 #include "Shop.h"
 #include "Pioche.h"
+#include "gameExeption.h"
 
 class Partie {
 private:
@@ -42,7 +43,6 @@ public:
     static Partie* get_instance();
 
 
-    ////********** A VERIFIER **********////
     //********** Jouer une partie **********//
     void jouer_partie();
     void jouer_tour();
