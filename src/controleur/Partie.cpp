@@ -555,7 +555,12 @@ void Partie::jouer_tour() {
     auto it_cc = find_if(monuments_joueurs.begin(), monuments_joueurs.end(), [](Monument* m){return m->get_nom() == "CentreCommercial";});
     if (it_cc != monuments_joueurs.end()){
         // Si le monument est trouve, on le joue
-        monuments_joueurs[it_cc - monuments_joueurs.begin()]->declencher_effet(joueur_actuel);
+        try{
+            monuments_joueurs[it_cc - monuments_joueurs.begin()]->declencher_effet(joueur_actuel);
+        }
+        catch(exception const& e){
+            cerr << "ERREUR : " << e.what() << endl;
+        }
         centre_c = true;
     }
 
@@ -563,7 +568,12 @@ void Partie::jouer_tour() {
     auto it_gare = find_if(monuments_joueurs.begin(), monuments_joueurs.end(), [](Monument* m){return m->get_nom() == "Gare";});
     if (it_gare != monuments_joueurs.end()){
         // Si le monument est trouve, on le joue
-        monuments_joueurs[it_gare - monuments_joueurs.begin()]->declencher_effet(joueur_actuel);
+        try{
+            monuments_joueurs[it_gare - monuments_joueurs.begin()]->declencher_effet(joueur_actuel);
+        }
+        catch(exception const& e){
+            cerr << "ERREUR : " << e.what() << endl;
+        }
     }
 
     cout << "------------" << endl;
@@ -580,7 +590,12 @@ void Partie::jouer_tour() {
     auto it_tr = find_if(monuments_joueurs.begin(), monuments_joueurs.end(), [](Monument* m){return m->get_nom() == "TourRadio";});
     if (it_tr != monuments_joueurs.end()){
         // Si le monument est trouve, on le joue
-        monuments_joueurs[it_tr - monuments_joueurs.begin()]->declencher_effet(joueur_actuel);
+        try{
+            monuments_joueurs[it_tr - monuments_joueurs.begin()]->declencher_effet(joueur_actuel);
+        }
+        catch(exception const& e){
+            cerr << "ERREUR : " << e.what() << endl;
+        }
     }
 
     if (de_1_temp != de_1) {
@@ -598,7 +613,12 @@ void Partie::jouer_tour() {
     for (auto mon : monuments_joueurs) {
         if (mon->get_nom() == "Port" &&  ((de_1 + de_2) >= 10) ||
             mon->get_nom() == "FabriqueDuPereNoel" && de_casse == 1){
-            mon->declencher_effet(joueur_actuel);
+            try{
+                mon->declencher_effet(joueur_actuel);
+            }
+            catch(exception const& e){
+                cerr << "ERREUR : " << e.what() << endl;
+            }
         }
     }
 
@@ -621,11 +641,21 @@ void Partie::jouer_tour() {
             if (find(it.first->get_num_activation().begin(), it.first->get_num_activation().end(), de_1 + de_2) != it.first->get_num_activation().end()) {
                 if (it.first->get_type() == "restaurant" && centre_c) {
                     for (unsigned int effectif = 0; effectif < it.second; effectif++) {
-                        it.first->declencher_effet(j_act_paiement, 1);
+                        try{
+                            it.first->declencher_effet(j_act_paiement, 1);
+                        }
+                        catch(exception const& e){
+                            cerr << "ERREUR : " << e.what() << endl;
+                        }
                     }
                 } else {
                     for (unsigned int effectif = 0; effectif < it.second; effectif++) {
-                        it.first->declencher_effet(j_act_paiement);
+                        try{
+                            it.first->declencher_effet(j_act_paiement);
+                        }
+                        catch(exception const& e){
+                            cerr << "ERREUR : " << e.what() << endl;
+                        }
                     }
                 }
             }
@@ -639,7 +669,12 @@ void Partie::jouer_tour() {
     for (auto it : tab_joueurs[joueur_actuel]->get_liste_batiment(Violet)) {
         if (find(it.first->get_num_activation().begin(), it.first->get_num_activation().end(), de_1 + de_2) != it.first->get_num_activation().end()) {
             for (unsigned int effectif = 0; effectif < it.second; effectif++) {
-                it.first->declencher_effet(joueur_actuel);
+                try{
+                    it.first->declencher_effet(joueur_actuel);
+                }
+                catch(exception const& e){
+                    cerr << "ERREUR : " << e.what() << endl;
+                }
             }
         }
     }
@@ -649,7 +684,12 @@ void Partie::jouer_tour() {
         for (auto it : tab_joueurs[i]->get_liste_batiment(Bleu)) {
             if (find(it.first->get_num_activation().begin(), it.first->get_num_activation().end(), de_1 + de_2) != it.first->get_num_activation().end()) {
                 for (unsigned int effectif = 0; effectif < it.second; effectif++) {
-                    it.first->declencher_effet(i);
+                    try{
+                        it.first->declencher_effet(i);
+                    }
+                    catch(exception const& e){
+                        cerr << "ERREUR : " << e.what() << endl;
+                    }
                 }
             }
         }
@@ -660,11 +700,21 @@ void Partie::jouer_tour() {
         if (find(it.first->get_num_activation().begin(), it.first->get_num_activation().end(), de_1 + de_2) != it.first->get_num_activation().end()) {
             if (it.first->get_type() == "commerce" && centre_c) {
                 for (unsigned int effectif = 0; effectif < it.second; effectif++) {
-                    it.first->declencher_effet(joueur_actuel, 1);
+                    try{
+                        it.first->declencher_effet(joueur_actuel, 1);
+                    }
+                    catch(exception const& e){
+                        cerr << "ERREUR : " << e.what() << endl;
+                    }
                 }
             } else {
                 for (unsigned int effectif = 0; effectif < it.second; effectif++) {
-                    it.first->declencher_effet(joueur_actuel);
+                    try{
+                        it.first->declencher_effet(joueur_actuel);
+                    }
+                    catch(exception const& e){
+                        cerr << "ERREUR : " << e.what() << endl;
+                    }
                 }
             }
         }
@@ -675,7 +725,12 @@ void Partie::jouer_tour() {
     auto it_hdv = find_if(monuments_joueurs.begin(), monuments_joueurs.end(), [](Monument* m){return m->get_nom() == "HotelDeVille";});
     if (it_hdv != monuments_joueurs.end()){
         // Si le monument est trouve, on le joue
-        monuments_joueurs[it_hdv - monuments_joueurs.begin()]->declencher_effet(joueur_actuel);
+        try{
+            monuments_joueurs[it_hdv - monuments_joueurs.begin()]->declencher_effet(joueur_actuel);
+        }
+        catch(exception const& e){
+            cerr << "ERREUR : " << e.what() << endl;
+        }
     }
 
     tab_joueurs[joueur_actuel]->afficher_joueur();
@@ -690,7 +745,12 @@ void Partie::jouer_tour() {
         auto it_earo = find_if(monuments_joueurs.begin(), monuments_joueurs.end(), [](Monument* m){return m->get_nom() == "Aeroport";});
         if (it_earo != monuments_joueurs.end()){
             // Si le monument est trouve, on le joue
-            monuments_joueurs[it_earo - monuments_joueurs.begin()]->declencher_effet(joueur_actuel);
+            try{
+                monuments_joueurs[it_earo - monuments_joueurs.begin()]->declencher_effet(joueur_actuel);
+            }
+            catch(exception const& e){
+                cerr << "ERREUR : " << e.what() << endl;
+            }
         }
 
     }
@@ -700,7 +760,12 @@ void Partie::jouer_tour() {
     auto it_parc = find_if(monuments_joueurs.begin(), monuments_joueurs.end(), [](Monument* m){return m->get_nom() == "ParcAttraction";});
     if (it_parc != monuments_joueurs.end()){
         // Si le monument est trouve, on le joue
-        monuments_joueurs[it_parc - monuments_joueurs.begin()]->declencher_effet(joueur_actuel);
+        try{
+            monuments_joueurs[it_parc - monuments_joueurs.begin()]->declencher_effet(joueur_actuel);
+        }
+        catch(exception const& e){
+            cerr << "ERREUR : " << e.what() << endl;
+        }
     }
 
     while (!pioche->est_vide() && shop->get_nb_tas_reel() < shop->get_nb_tas_max()) {

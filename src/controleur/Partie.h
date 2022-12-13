@@ -5,6 +5,7 @@
 #include <vector>
 #include <string>
 #include <algorithm>
+#include <exception>
 
 #include "EditionDeJeu.h"
 #include "Joueur.h"
