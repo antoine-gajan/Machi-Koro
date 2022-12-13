@@ -25,26 +25,10 @@ void Stade::declencher_effet(unsigned int possesseur, int bonus) const{
     unsigned int argent_joueur;
 
     // Pour chaque joueur de la partie
-    for (auto joueur : tab_joueurs) {
+    for (int i = 0; i < tab_joueurs.size(); i++) {
         // Si le joueur est different du joueur actuel
-        if (joueur != j_actuel) {
-            argent_joueur = joueur->get_argent();
-            // On verifie qu'il a l'argent necessaire
-            if (argent_joueur >= 2) {
-                // Transaction
-                joueur->set_argent(joueur->get_argent() - 2);
-                j_actuel->set_argent(j_actuel->get_argent() + 2);
-                cout << joueur->get_nom() << " a donne 2 a " << j_actuel->get_nom() << endl;
-            } else if (argent_joueur > 0) {
-                // On vide le compte de l'autre joueur
-                // Transaction
-                joueur->set_argent(joueur->get_argent() - argent_joueur);
-                j_actuel->set_argent(j_actuel->get_argent() + argent_joueur);
-                cout << joueur->get_nom() << " a donne" << argent_joueur << " a " << j_actuel->get_nom() << endl;
-            } else {
-                // S'il n'a pas d'argent
-                cout << joueur->get_nom() << "n'a pas d'argent." << endl;
-            }
+        if (i != possesseur) {
+            Partie::get_instance()->transfert_argent(i, possesseur, 2);
         }
     }
     cout << j_actuel->get_nom() << "possede maintenant " << j_actuel->get_argent() << " credits." <<endl;
