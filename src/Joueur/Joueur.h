@@ -3,6 +3,7 @@
 
 #include <map>
 #include <vector>
+#include <algorithm>
 
 #include "Monument.h"
 #include "Batiment.h"
@@ -19,6 +20,7 @@ class Joueur {
 
         const string nom;
         map<Monument*, bool> liste_monument;
+        vector<Batiment*> liste_batiment_fermes;
         map<couleur_bat, map<Batiment*, unsigned int>> liste_batiment;
         unsigned int argent;
         bool est_ia;
@@ -47,6 +49,7 @@ class Joueur {
         Batiment* selectionner_batiment() const;
         Batiment* possede_batiment(const string& nom_bat) const;
         Monument* possede_monument(const string& nom_mon) const;
+        vector<Batiment* > get_liste_batiment_fermes() const {return liste_batiment_fermes;};
 
 
         /***** Setters *****/
@@ -60,6 +63,9 @@ class Joueur {
         void retirer_batiment(Batiment *bat);
         void afficher_cartes() const;
         void afficher_joueur() const;
+        virtual void fermer_batiment(Batiment *bat);
+        virtual void ouvrir_batiment(Batiment *bat);
+
 };
 
 #endif //MACHI_KORO_JOUEUR_H

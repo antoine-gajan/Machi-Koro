@@ -331,3 +331,35 @@ Monument* Joueur::possede_monument(const string& nom_mon) const{
     // Sinon, retourne nullptr
     return nullptr;
 }
+
+void Joueur::fermer_batiment(Batiment *bat) {
+    if (bat == nullptr){
+        throw invalid_argument("Le batiment entre n'est pas valide");
+    }
+    // On retire le batiment de la liste de batiments du joueur
+    retirer_batiment(bat);
+
+    // On ajoute le batiment a la liste de batiments fermes du joueur
+    liste_batiment_fermes.push_back(bat);
+}
+
+void Joueur::ouvrir_batiment(Batiment *bat) {
+
+    if (bat == nullptr){
+        throw invalid_argument("Le batiment entre n'est pas valide");
+    }
+
+    // on le cherche dans les batiments fermes pour avoir un iterateur
+    auto it = find(liste_batiment_fermes.begin(), liste_batiment_fermes.end(), bat);
+
+    // si on le trouve
+    if (it != liste_batiment_fermes.end()){
+        // on l'enleve de la liste des fermes
+        liste_batiment_fermes.erase(it);
+        // on l'ajoute a la liste des batiments du joueur
+        ajouter_batiment(bat);
+    }
+    else{
+        throw invalid_argument("Le joueur n'a pas de batiment ferme correspondant a ce batiment");
+    }
+}

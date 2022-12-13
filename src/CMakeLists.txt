@@ -74,6 +74,8 @@ add_executable(src
         cartes/batiment/vert/MoonsterSoda.cpp
         cartes/batiment/vert/Superette.h
         cartes/batiment/vert/Superette.cpp
+        cartes/batiment/vert/CaveAVin.cpp
+        cartes/batiment/vert/CaveAVin.h
 
         cartes/batiment/violet/Arboretum.cpp
         cartes/batiment/violet/Arboretum.h

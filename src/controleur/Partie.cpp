@@ -561,7 +561,12 @@ void Partie::jouer_tour() {
     }
 
 
-
+    /// Ouverture des batiments
+    for (auto bat : tab_joueurs[joueur_actuel]->get_liste_batiment_fermes()) {
+        if (find(bat->get_num_activation().begin(), bat->get_num_activation().end(), de_1 + de_2) != bat->get_num_activation().end()) {
+            tab_joueurs[joueur_actuel]->ouvrir_batiment(bat);
+        }
+    }
 
 
     /// Activations des effets des batiments
