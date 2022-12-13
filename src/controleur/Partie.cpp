@@ -543,13 +543,14 @@ void Partie::jouer_partie() {
     while (!fin_partie) {
         jouer_tour();
         fin_partie = est_gagnant(joueur_actuel);
+        joueur_actuel = (joueur_actuel + 1) % tab_joueurs.size();
     }
 
     /// On affiche le gagnant
-    cout << "Le gagnant est " << tab_joueurs[((joueur_actuel + tab_joueurs.size() - 1))%tab_joueurs.size()]->get_nom() << endl;
+    unsigned int pos_gagnant = (joueur_actuel + tab_joueurs.size() - 1) % tab_joueurs.size();
+    cout << "Le gagnant est " << tab_joueurs[pos_gagnant]->get_nom() << endl;
     cout << "Voici son etat final : " << endl;
-    cout << "Son argent : " << tab_joueurs[((joueur_actuel + tab_joueurs.size() - 1))%tab_joueurs.size()]->get_argent() << endl;
-    tab_joueurs[((joueur_actuel + tab_joueurs.size() - 1))%tab_joueurs.size()]->afficher_cartes();
+    tab_joueurs[pos_gagnant]->afficher_joueur();
 
     cout << "Felicitations !!!" << endl;
 }
