@@ -20,6 +20,8 @@ void Stade::declencher_effet(unsigned int possesseur, int bonus) const{
     // Variables utiles
     const vector<Joueur*> tab_joueurs = Partie::get_instance()->get_tab_joueurs();
     Joueur* j_actuel = tab_joueurs[possesseur];
+    cout << "Activation de l'effet du Stade du joueur \"" << j_actuel->get_nom()<<"\"" << endl;
+
     unsigned int argent_joueur;
 
     // Pour chaque joueur de la partie
