@@ -1,6 +1,5 @@
 #include "Arboretum.h"
 #include "Partie.h"
-#include "Joueur.h"
 
 Arboretum::Arboretum():
         Batiment("Arboretum",

@@ -1,6 +1,5 @@
 #include "MaisonEdition.h"
 #include "Partie.h"
-#include "Joueur.h"
 
 MaisonEdition::MaisonEdition():
         Batiment("MaisonEdition",

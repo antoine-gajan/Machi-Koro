@@ -1,6 +1,5 @@
 #include "Stade.h"
 #include "Partie.h"
-#include "Joueur.h"
 
 Stade::Stade() :
 Batiment("Stade",

@@ -1,6 +1,5 @@
 #include "CentreImpots.h"
 #include "Partie.h"
-#include "Joueur.h"
 
 CentreImpots::CentreImpots():
         Batiment("CentreImpots",

@@ -99,6 +99,8 @@ add_executable(src
         cartes/batiment/violet/MaisonEdition.h
         cartes/batiment/violet/Stade.cpp
         cartes/batiment/violet/Stade.h
+        cartes/batiment/violet/MgaGameCenter.cpp
+        cartes/batiment/violet/MgaGameCenter.h
 
         cartes/batiment/rouge/Cafe.cpp
         cartes/batiment/rouge/Cafe.h
@@ -160,6 +162,7 @@ add_executable(src
 /// Importation des batiments verts
 #include "BanqueDeMinivilles.h"
 #include "Boulangerie.h"
+#include "CaveAVin.h"
 #include "EntrepriseDeDemenagement.h"
 #include "EntrepriseDeTravauxPublics.h"
 #include "Epicerie.h"
@@ -199,8 +202,8 @@ add_executable(src
 #include "ChaineTelevision.h"
 #include "EntrepriseRenovation.h"
 #include "MaisonEdition.h"
+#include "MgaGameCenter.h"
 #include "Stade.h"
-#include "Startup.h"
 
 /// Importation des controleurs
 #include "EditionDeJeu.h"

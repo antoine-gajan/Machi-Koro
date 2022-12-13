@@ -17,6 +17,16 @@
 #include "Port.h"
 #include "TourRadio.h"
 
+/// Importation des classes monuments
+#include "Aeroport.h"
+#include "CentreCommercial.h"
+#include "FabriqueDuPereNoel.h"
+#include "Gare.h"
+#include "HotelDeVille.h"
+#include "ParcAttraction.h"
+#include "Port.h"
+#include "TourRadio.h"
+
 /// Importation des batiments verts
 #include "BanqueDeMinivilles.h"
 #include "Boulangerie.h"
@@ -60,7 +70,14 @@
 #include "ChaineTelevision.h"
 #include "EntrepriseRenovation.h"
 #include "MaisonEdition.h"
+#include "MgaGameCenter.h"
 #include "Stade.h"
+
+/// Importation des controleurs
+#include "EditionDeJeu.h"
+#include "Pioche.h"
+#include "Shop.h"
+
 
 class EditionDeJeu{
     protected:

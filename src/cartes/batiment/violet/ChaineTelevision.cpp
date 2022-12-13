@@ -1,7 +1,5 @@
 #include "ChaineTelevision.h"
-#include <algorithm>
 #include "Partie.h"
-#include "Joueur.h"
 
 using namespace std;
 

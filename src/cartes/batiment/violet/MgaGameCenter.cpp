@@ -1,4 +1,4 @@
-#include "EntrepriseRenovation.h"
+#include "MgaGameCenter.h"
 #include "Partie.h"
 
 EntrepriseRenovation::EntrepriseRenovation() :
