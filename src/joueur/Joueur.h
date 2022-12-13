@@ -67,7 +67,6 @@ class Joueur {
         virtual void fermer_batiment(Batiment *bat);
         virtual void ouvrir_batiment(Batiment *bat);
 
-        Monument* selectionner_monument() const;
         Monument* possede_monument(const string& nom_mon) const;
 
         Batiment* selectionner_batiment() const;
