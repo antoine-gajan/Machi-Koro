@@ -68,8 +68,6 @@ public:
     // Renvoie l'indice d'un joueur entier valide different de l'indice du joueur actuel
     static unsigned int selectionner_joueur(const vector<Joueur*>& tab_joueurs, unsigned int joueur_actuel);
 
-    static void don_argent(Joueur* j1, unsigned int argent, Joueur* j2);
-
     //********** Methodes non statiques **********//
     void ajout_batiment(Batiment *batiment);
 

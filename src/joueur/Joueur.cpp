@@ -199,7 +199,7 @@ unsigned int Joueur::count_type(const string& type) const {
     auto liste_bat = get_liste_batiment();
     // pour chaque couleur de la liste de batiments du joueur
     for (const auto& couleur : liste_bat) {
-        // pour chaque batiment de la couleur, (batiments sous forme de map(Batiment*, unsigned int))
+        // pour chaque batiment de la couleur, (batiments sous forme de map (Batiment*, unsigned int))
         for (auto batiment : liste_bat[couleur.first]) {
             if (batiment.first->get_type() == type) {
                 count += batiment.second;
@@ -252,7 +252,7 @@ Batiment* Joueur::possede_batiment(const string& nom_bat) const{
     auto liste_bat = get_liste_batiment();
     // pour chaque couleur de la liste de batiments du joueur
     for (const auto& couleur : liste_bat) {
-        // pour chaque batiment de la couleur, (batiments sous forme de map(Batiment*, unsigned int))
+        // pour chaque batiment de la couleur, (batiments sous forme de map (Batiment*, unsigned int))
         for (auto batiment : liste_bat[couleur.first]) {
             // Si c'est l'element qu'on recherche, on le renvoie
             if (batiment.first->get_nom() == nom_bat) {
@@ -268,7 +268,6 @@ Batiment* Joueur::selectionner_batiment() const{
     /// Fonction pour selectionner un batiment
     unsigned int num_bat;
     unsigned int count = 0, count_check = 0;
-    Batiment* bat_a_retourner;
 
     cout<<"Voici la liste des batiments que vous possedez :";
     // affichage des batiments que le joueur possede

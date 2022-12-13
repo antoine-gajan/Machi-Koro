@@ -133,9 +133,11 @@ Partie::Partie(EditionDeJeu* edition, const vector<EditionDeJeu *>& extensions) 
         cout << "Nom du joueur " << i + 1 << " : "  << endl;
         string nom;
         cin >> nom;
-        cout << "\nLe jouer est-il un humain ? (1 : oui, 0 : non)  :" << endl;
-        bool humain;
-        cin >> humain;
+        int humain = -1;
+        while (humain < 0 || 1 < humain ) {
+            cout << "Voulez-vous que le joueur soit humain ? (0 : non, 1 : oui)" << endl;
+            cin >> humain;
+        }
 
 
         if (humain) {
@@ -191,7 +193,12 @@ Partie::Partie(EditionDeJeu* edition, const vector<EditionDeJeu *>& extensions) 
     shop = new Shop(nb_tas);
 
     while (!pioche->est_vide() && shop->get_nb_tas_reel() < shop->get_nb_tas_max()){
-        shop->completer_shop(pioche->get_carte());
+        try  {
+            shop->completer_shop(pioche->get_carte());
+        }
+        catch(exception const& e){
+            cerr << "ERREUR : " << e.what() << endl;
+        }
     }
 
     cout << "Construction de la partie terminee" << endl;
@@ -457,7 +464,14 @@ bool Partie::acheter_bat() {
     }
 
     joueur_act->ajouter_batiment(bat_picked);
-    shop->acheter_batiment(bat_picked);
+
+    try {
+        shop->acheter_batiment(bat_picked);
+    }
+    catch(exception const& e){
+        cerr << "ERREUR : " << e.what() << endl;
+    }
+
     joueur_act->set_argent(joueur_act->get_argent() - bat_picked->get_prix());
     if (bat_picked->get_nom() == "BanqueDeMiniville") {
         joueur_act->set_argent(joueur_act->get_argent() + 5);
@@ -533,6 +547,10 @@ void Partie::jouer_partie() {
 
     /// On affiche le gagnant
     cout << "Le gagnant est " << tab_joueurs[((joueur_actuel + tab_joueurs.size() - 1))%tab_joueurs.size()]->get_nom() << endl;
+    cout << "Voici son etat final : " << endl;
+    cout << "Son argent : " << tab_joueurs[((joueur_actuel + tab_joueurs.size() - 1))%tab_joueurs.size()]->get_argent() << endl;
+    tab_joueurs[((joueur_actuel + tab_joueurs.size() - 1))%tab_joueurs.size()]->afficher_cartes();
+
     cout << "Felicitations !!!" << endl;
 }
 
@@ -543,7 +561,7 @@ void Partie::jouer_tour() {
     vector <Monument*> monuments_joueurs = tab_joueurs[joueur_actuel]->get_monument_jouables();
 
     cout << "----------------------------------------------------" << endl;
-    cout << "\t\t\t\t\tDebut du tour" << endl;
+    cout << "\t\t\tDebut du tour" << endl;
 
     de_1 = (rand() % 6) + 1;
     de_1_temp = de_1;
@@ -626,7 +644,12 @@ void Partie::jouer_tour() {
     /// Ouverture des batiments
     for (auto bat : tab_joueurs[joueur_actuel]->get_liste_batiment_fermes()) {
         if (find(bat->get_num_activation().begin(), bat->get_num_activation().end(), de_1 + de_2) != bat->get_num_activation().end()) {
-            tab_joueurs[joueur_actuel]->ouvrir_batiment(bat);
+            try {
+                tab_joueurs[joueur_actuel]->ouvrir_batiment(bat);
+            }
+            catch(exception const& e){
+                cerr << "ERREUR : " << e.what() << endl;
+            }
         }
     }
 
@@ -769,24 +792,18 @@ void Partie::jouer_tour() {
     }
 
     while (!pioche->est_vide() && shop->get_nb_tas_reel() < shop->get_nb_tas_max()) {
-        shop->completer_shop(pioche->get_carte());
+        try {
+            shop->completer_shop(pioche->get_carte());
+        }
+        catch (exception const& e) {
+            cerr << "ERREUR : " << e.what() << endl;
+        }
     }
 
-    cout << "\t\t\t\t\tFin du tour" << endl;
+    cout << "\t\t\tFin du tour" << endl;
     cout << "----------------------------------------------------" << endl;
 }
 
-
-void Partie::don_argent(Joueur* j1, unsigned int argent, Joueur* j2){
-    /// Don d'argent du joueur j1 au joueur j2
-    if (j1->get_argent() - argent >= 0){
-        j1->set_argent(j1->get_argent() - argent);
-        j2->set_argent(j2->get_argent() + argent);
-    }
-    else{
-        cout << "Impossible, le joueur " << j1->get_nom() << " n'a pas assez d'argent." << endl;
-    }
-}
 
 unsigned int Partie::selectionner_joueur(const vector<Joueur*>& tab_joueurs, unsigned int joueur_actuel){
     unsigned int count = 0;
