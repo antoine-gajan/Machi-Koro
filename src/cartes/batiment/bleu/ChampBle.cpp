@@ -12,12 +12,12 @@ ChampBle::ChampBle() :
 ///Constructeur de ChampBle
 
 void ChampBle::declencher_effet(unsigned int possesseur, int bonus) const {
-    //j'ai deliberement retire le parametre joueur actuel de declencher effet pour respecter la methode virtuelle declaree dans Batiment.h
-    cout << "Activation de l'effet de ChampBle" << endl;
 
     //creation de l'instance de partie
     Partie * partie = Partie::get_instance();
-    Joueur* joueur_actuel = partie->get_tab_joueurs().at(possesseur);
+    Joueur* joueur_actuel = partie->get_tab_joueurs()[possesseur];
+
+    cout << "Activation de l'effet du ChampBle du joueur \"" << joueur_actuel->get_nom()<<"\"" << endl;
 
     //On augmente de un l'argent du joueur actuel
     joueur_actuel->set_argent(joueur_actuel->get_argent() + 1);

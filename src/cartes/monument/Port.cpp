@@ -11,11 +11,11 @@ Port::Port()
 }
 
 void Port::declencher_effet(unsigned int possesseur, int bonus) const {
-    cout << "Activation de l'effet du Port" << endl;
     Partie *partie = Partie::get_instance();
     if (partie->get_de_1() + partie->get_de_2() >= 10) {
+        Joueur *joueur = partie->get_tab_joueurs()[possesseur];
         int choix = -1;
-        
+
         if (partie->get_tab_joueurs()[possesseur]->get_est_ia()) {
             choix = rand() % 2;
         }
@@ -25,8 +25,9 @@ void Port::declencher_effet(unsigned int possesseur, int bonus) const {
                 cin >> choix;
             }
         }
-        
+
         if (choix == 1) {
+            cout << "Activation de l'effet du Port du joueur \"" << joueur->get_nom() << "\"" << endl;
             partie->set_de_1(partie->get_de_1() + 1);
             partie->set_de_2(partie->get_de_2() + 1);
         }
@@ -36,4 +37,8 @@ void Port::declencher_effet(unsigned int possesseur, int bonus) const {
 
 void Port::activer() {
     set_image("../../assets/monuments/Port-active.png");
+}
+
+void Port::desactiver() {
+    set_image("../../assets/monuments/Port-travaux.png");
 }

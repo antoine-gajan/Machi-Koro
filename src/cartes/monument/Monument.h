@@ -23,6 +23,7 @@ class Monument : public Carte{
         void set_image(const std::string& new_path) {path_image = new_path;}
 
         virtual void activer() = 0;
+        virtual void desactiver() = 0;
 };
 
 #endif //MACHI_KORO_MONUMENT_H

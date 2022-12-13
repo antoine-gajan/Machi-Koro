@@ -11,13 +11,17 @@ Aeroport::Aeroport() :
 }
 
 void Aeroport::declencher_effet(unsigned int possesseur, int bonus) const {
-    cout << "Activation de l'effet de l'earoport" << endl;
     Partie * partie = Partie::get_instance();
     Joueur * joueur = partie->get_tab_joueurs()[possesseur];
+    cout << "Activation de l'effet de l'earoport du joueur \"" << joueur->get_nom() << "\"" << endl;
 
     joueur->set_argent(joueur->get_argent() + 10);
 }
 
 void Aeroport::activer() {
     set_image("../../assets/monuments/Aeroport-active.jpg");
+}
+
+void Aeroport::desactiver() {
+    set_image("../../assets/monuments/Aeroport-travaux.jpg");
 }

@@ -94,8 +94,6 @@ add_executable(src
         cartes/batiment/violet/MaisonEdition.h
         cartes/batiment/violet/Stade.cpp
         cartes/batiment/violet/Stade.h
-        cartes/batiment/violet/Startup.cpp
-        cartes/batiment/violet/Startup.h
 
         cartes/batiment/rouge/Cafe.cpp
         cartes/batiment/rouge/Cafe.h

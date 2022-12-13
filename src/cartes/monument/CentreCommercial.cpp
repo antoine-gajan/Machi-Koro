@@ -1,4 +1,5 @@
 #include "CentreCommercial.h"
+#include "Partie.h"
 
 using namespace std;
 
@@ -12,9 +13,14 @@ CentreCommercial::CentreCommercial() :
 }
 
 void CentreCommercial::declencher_effet(unsigned int possesseur, int bonus) const {
-    cout << "Activation de l'efet du Centre commercial" << endl;
+    Joueur * joueurs = Partie::get_instance()->get_tab_joueurs()[possesseur];
+    cout << "Activation de l'efet du Centre commercial du joueur \"" << joueurs->get_nom() << "\"" << endl;
 }
 
 void CentreCommercial::activer() {
     set_image("../../assets/monuments/CentreCommercial-active.png");
+}
+
+void CentreCommercial::desactiver() {
+    set_image("../../assets/monuments/CentreCommercial-travaux.png");
 }
