@@ -111,7 +111,6 @@ EditionDeJeu::EditionDeJeu(const string& nom_edition) : nom(nom_edition) {
 
         /// Liste des batiments specifiques a GreenValley
         // Batiments violets
-        batiment.insert(pair<Batiment*, unsigned int>(new Startup(), 4));
         batiment.insert(pair<Batiment*, unsigned int>(new Arboretum(), 4));
         batiment.insert(pair<Batiment*, unsigned int>(new EntrepriseRenovation(), 4));
 

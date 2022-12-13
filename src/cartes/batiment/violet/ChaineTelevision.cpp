@@ -34,13 +34,19 @@ void ChaineTelevision::declencher_effet(unsigned int possesseur, int bonus) cons
     for (int i = 0; i < tab_joueurs.size(); i++) {
         cout << i << ". " << tab_joueurs[i]->get_nom() << endl;
     }
-    // Demande du nombre et validite de la saisie
-    cout << "Entrez le numero associe au joueur qui va vous donner 5 pieces : ";
-    cin >> num_joueur;
-    while (num_joueur < 0 || num_joueur >= tab_joueurs.size() || num_joueur == possesseur) {
-        cout << "Erreur dans la saisie. Veuillez saisir un nombre valide : ";
+    if (!j_actuel->get_est_ia()){
+        // Demande du nombre et validite de la saisie
+        cout << "Entrez le numero associe au joueur qui va vous donner 5 pieces : ";
         cin >> num_joueur;
+        while (num_joueur < 0 || num_joueur >= tab_joueurs.size() || num_joueur == possesseur) {
+            cout << "Erreur dans la saisie. Veuillez saisir un nombre valide : ";
+            cin >> num_joueur;
+        }
     }
+    else{
+        num_joueur = rand() % tab_joueurs.size();
+    }
+
     // On regarde si le joueur a l'argent necessaire
     if (j_actuel->get_argent() >= 5){
         // Transaction

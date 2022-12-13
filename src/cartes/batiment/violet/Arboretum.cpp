@@ -1,4 +1,6 @@
 #include "Arboretum.h"
+#include "Partie.h"
+#include "Joueur.h"
 
 Arboretum::Arboretum():
         Batiment("Arboretum",
@@ -16,5 +18,16 @@ Arboretum::Arboretum():
 void Arboretum::declencher_effet(unsigned int possesseur, int bonus) const{
     /// Effet de l'arboretum
     cout << "Activation de l'effet de l'arboretum." << endl;
-
+    int somme_totale = 0;
+    vector<Joueur*> tab_joueurs = Partie::get_instance()->get_tab_joueurs();
+    // Calcul de l'argent total
+    for (auto joueur : tab_joueurs){
+        somme_totale += joueur->get_argent();
+    }
+    // Argent à répartir
+    int montant_par_joueur = std::ceil(somme_totale/tab_joueurs.size());
+    // Répartition
+    for (auto joueur : tab_joueurs){
+        joueur->set_argent(montant_par_joueur);
+    }
 }

@@ -59,7 +59,6 @@
 #include "EntrepriseRenovation.h"
 #include "MaisonEdition.h"
 #include "Stade.h"
-#include "Startup.h"
 
 class EditionDeJeu{
 protected:
