@@ -1,4 +1,8 @@
-# Machi-Koro
+<div align="center">
+
+  [![Machi-Koro Banner](https://svg-banners.vercel.app/api?type=rainbow&text1=🌈%20Machi-Koro%20🌈&width=800&height=100)](https://github.com/Akshay090/svg-banners)
+</div>
+
 Contient le travail sur le projet de LO21
 
 lien vers le markdown : https://md.picasoft.net/EOlI631fT96Rk2uIrXs2cQ#
