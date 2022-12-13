@@ -13,7 +13,7 @@ ClubPrive::ClubPrive() :
 void ClubPrive::declencher_effet(unsigned int possesseur, int bonus) const{
     Partie * partie = Partie::get_instance();
     Joueur* joueur_possesseur = partie->get_tab_joueurs()[possesseur];
-    cout << "Activation de l'effet du Club Prive du joueur " << joueur_possesseur->get_nom() << endl;
+    cout << "Activation de l'effet du Club Prive du joueur \"" << joueur_possesseur->get_nom()<<"\"" << endl;
     Joueur* joueur_actuel = partie->get_tab_joueurs()[partie->get_joueur_actuel()];
 
     if(joueur_actuel->get_monument_jouables().size()>=3 && partie->get_joueur_actuel() != possesseur){
