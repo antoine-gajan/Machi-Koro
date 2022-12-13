@@ -17,7 +17,7 @@ void Mine::declencher_effet(unsigned int possesseur, int bonus) const{
 
     //creation de l'instance de partie
     Partie * partie = Partie::get_instance();
-    Joueur* joueur_actuel = partie->get_tab_joueurs().at(possesseur);
+    Joueur* joueur_actuel = partie->get_tab_joueurs()[possesseur];
 
     //On augmente de cinq l'argent du joueur actuel
     joueur_actuel->set_argent(joueur_actuel->get_argent() + 5);
