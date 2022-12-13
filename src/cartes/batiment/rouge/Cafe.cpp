@@ -21,15 +21,6 @@ void Cafe::declencher_effet(unsigned int possesseur, int bonus) const{
             return;
         }
     }
-
-    /*for (unsigned int i = 0; i < partie->get_tab_joueurs().size(); i++){
-        if (partie->get_tab_joueurs().at(i)->possede_batiment("Cafe") && i!=possesseur){
-            if(partie->transfert_argent(possesseur, i, 1)){
-                return;
-            }
-        }
-    }*/
-
 }
 
 

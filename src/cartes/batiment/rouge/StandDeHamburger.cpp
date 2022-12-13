@@ -20,17 +20,4 @@ void StandDeHamburger::declencher_effet(unsigned int possesseur, int bonus) cons
             return;
         }
     }
-
-    /*//j'ai deliberement retire le parametre joueur actuel de declencher effet pour respecter la methode virtuelle declaree dans Batiment.h
-    cout << "Activation de l'effet du stand de hamburger" << endl;
-    Partie * partie = Partie::get_instance();
-    joueur* joueur_actuel = partie->get_tab_joueurs().at(possesseur);
-    //Trouver un joueur qui a cette carte
-    for (unsigned int i = 0; i < partie->get_tab_joueurs().size(); i++){
-        if (partie->get_tab_joueurs().at(i)->possede_batiment("StandDeHamburger") && i!=possesseur){
-            if(partie->transfert_argent(possesseur, i, 1)){
-                return;
-            }
-        }
-    }*/
 }
