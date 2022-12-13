@@ -51,7 +51,7 @@ void Shop::affiche_shop() {
     unsigned int pos = 1;
 
     for (auto & it : contenu) {
-        cout << pos << " : " << it.first->get_nom() << "(cout : " << it.first->get_prix() <<" ; quantite :" << it.second <<")" << endl;
+        cout << pos << " : " << it.first->get_nom() << " (cout : " << it.first->get_prix() <<" ; quantite :" << it.second <<")" << endl;
         cout << "\tEffet : " << it.first->get_description() << endl;
         pos++;
     }
@@ -62,7 +62,7 @@ void Shop::affiche_shop_simple() {
     unsigned int pos = 1;
 
     for (auto & it : contenu) {
-        cout << pos << " : " << it.first->get_nom() << "(cout : " << it.first->get_prix() <<")" << endl;
+        cout << pos << " : " << it.first->get_nom() << " (cout : " << it.first->get_prix() <<")" << endl;
         pos++;
     }
 }
