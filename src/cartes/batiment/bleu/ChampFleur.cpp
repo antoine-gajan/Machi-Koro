@@ -12,12 +12,11 @@ ChampFleur::ChampFleur() :
 ///Constructeur de ChampFleur
 
 void ChampFleur::declencher_effet(unsigned int possesseur, int bonus) const {
+    cout << "Activation de l'effet de ChampFleur" << endl;
 
     //creation de l'instance de partie
     Partie * partie = Partie::get_instance();
     Joueur* joueur_actuel = partie->get_tab_joueurs()[possesseur];
-
-    cout << "Activation de l'effet du ChampFleur du joueur \"" << joueur_actuel->get_nom()<<"\"" << endl;
 
     //On augmente de un l'argent du joueur actuel
     joueur_actuel->set_argent(joueur_actuel->get_argent() + 1);
