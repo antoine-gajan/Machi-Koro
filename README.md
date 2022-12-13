@@ -1,4 +1,9 @@
-# Machi-Koro
+<div align="center">
+
+  (https://svg-banners.vercel.app/api?type=rainbow&text1=🌈£20Machi-Koro%20🌈&width=800&height=400)
+
+</div>
+
 Contient le travail sur le projet de LO21
 
 lien vers le markdown : https://md.picasoft.net/EOlI631fT96Rk2uIrXs2cQ#
