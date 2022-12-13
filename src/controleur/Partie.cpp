@@ -162,7 +162,7 @@ Partie::Partie(EditionDeJeu* edition, const vector<EditionDeJeu *>& extensions) 
                     tab_joueurs.push_back(new Joueur(nom, list_monuments, starter_bat, 3, defensif));
                     break;
                 default :
-                    cout << "Erreur de strategie" << endl;
+                    throw gameException("Strategie IA invalide");
                     break;
             }
         }
