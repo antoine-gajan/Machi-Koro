@@ -24,7 +24,7 @@ void Restaurant5Etoiles::declencher_effet(unsigned int possesseur, int bonus) co
     /*//j'ai deliberement retire le parametre joueur actuel de declencher effet pour respecter la methode virtuelle declaree dans Batiment.h
     cout << "Activation de l'effet du restaurant 5 etoiles" << endl;
     Partie * partie = Partie::get_instance();
-    Joueur* joueur_actuel = partie->get_tab_joueurs().at(possesseur);
+    joueur* joueur_actuel = partie->get_tab_joueurs().at(possesseur);
     //Trouver un joueur qui a cette carte
     if(joueur_actuel->get_monument_jouables().size()>=2){
         for (unsigned int i = 0; i < partie->get_tab_joueurs().size(); i++){

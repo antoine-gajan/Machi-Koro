@@ -10,11 +10,11 @@ include_directories(cartes/batiment/rouge)
 include_directories(cartes/batiment/vert)
 include_directories(cartes/batiment/violet)
 include_directories(cartes/monument)
-include_directories(Joueur)
+include_directories(joueur)
 include_directories(controleur)
 include_directories(controleur/EditionDeJeu)
 include_directories(exception)
-include_directories(Joueur)
+include_directories(joueur)
 
 add_executable(src
         main.cpp
@@ -24,8 +24,8 @@ add_executable(src
         controleur/utils.cpp
         controleur/utils.h
 
-        Joueur/Joueur.cpp
-        Joueur/Joueur.h
+        joueur/Joueur.cpp
+        joueur/Joueur.h
 
         cartes/Carte.cpp
         cartes/Carte.h

@@ -701,7 +701,7 @@ unsigned int Partie::selectionner_joueur(const vector<Joueur*>& tab_joueurs, uns
     unsigned int selection = 0;
 
     //cas où la decision doit se faire par une ia
-    if(tab_joueurs.at(joueur_actuel)->get_est_ia()){
+    if(tab_joueurs[joueur_actuel]->get_est_ia()){
         selection = rand() % tab_joueurs.size();
         if(selection == joueur_actuel) selection = (selection + 1)%tab_joueurs.size();
     }
@@ -723,6 +723,6 @@ unsigned int Partie::selectionner_joueur(const vector<Joueur*>& tab_joueurs, uns
         if(selection == joueur_actuel) throw invalid_argument("On ne peut pas selectionner le joueur actuel");
     }
 
-    cout<<"Joueur selectionne : "<<tab_joueurs.at(selection)->get_nom();
+    cout<<"joueur selectionne : "<<tab_joueurs[selection]->get_nom();
     return selection;
 }

@@ -5,7 +5,7 @@ using namespace std;
 Joueur::Joueur(const string& nom, const vector<Monument *>&list_mon, const vector<Batiment *>&list_bat, unsigned int arg_depart, strat_IA stratIa)
 : strategie(stratIa), est_ia(stratIa != none), nom(nom), argent(arg_depart)
 {
-    /// Constructeur de Joueur
+    /// Constructeur de joueur
     for (auto mon : list_mon)
         liste_monument[mon] = false;
     for (auto bat : list_bat)
@@ -27,7 +27,7 @@ vector<unsigned int> Joueur::get_repartition_argent() const {
 }
 
 Joueur::~Joueur() {
-    /// Destructeur de Joueur
+    /// Destructeur de joueur
     liste_monument.clear();
 
     // Iteration sur les couleurs de batiments
@@ -151,7 +151,7 @@ void Joueur::set_liste_batiment(map<couleur_bat, map<Batiment*, unsigned int>>& 
 
 
 void Joueur::afficher_cartes() const {
-    /// Affiche toutes les cartes du Joueur
+    /// Affiche toutes les cartes du joueur
 
     cout << "Cartes du joueur " << endl;
 
@@ -179,7 +179,7 @@ void Joueur::afficher_joueur() const {
     /// Affiche les informations d'un joueur
 
     cout << "\n********************" << endl;
-    cout << "Joueur : \"" << nom ;
+    cout << "joueur : \"" << nom ;
     if (est_ia){
         cout << "\" est une IA" << endl;
     }
