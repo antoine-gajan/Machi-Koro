@@ -42,7 +42,6 @@ class Joueur {
 
         const string& get_nom() const {return nom;};
         const map<Monument*, bool>& get_liste_monument() const {return liste_monument;};
-        const map<Batiment*, unsigned int> get_liste_bat_non_special() const;
 
         map<couleur_bat, map<Batiment*, unsigned int>> get_liste_batiment() const {return liste_batiment;};
         map<Batiment*, unsigned int> get_liste_batiment(couleur_bat couleur) {return liste_batiment[couleur];};
@@ -54,7 +53,6 @@ class Joueur {
 
         /***** Setters *****/
         void set_argent(unsigned int arg) {argent = arg;};
-        void set_liste_batiment(map<couleur_bat, map<Batiment*, unsigned int>>& liste_bat);
 
         /***** Autres methodes *****/
         unsigned int count_type(const string& type) const;

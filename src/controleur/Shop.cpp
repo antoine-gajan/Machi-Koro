@@ -11,7 +11,7 @@ void Shop::completer_shop(Batiment *new_bat) {
         if (it != contenu.end()) {
             it->second++;
         } else {
-            cout << "Le tas est plein, vous ne pouvez pas ajouter de carte non deja presente." << endl;
+            throw gameException("Le shop est plein");
         }
     } else {
         auto it = contenu.find(new_bat);
@@ -42,8 +42,7 @@ Batiment * Shop::acheter_batiment(Batiment *bat) {
             return bat;
         }
     } else {
-        cout << "Il n'y a pas de carte de ce type dans le shop." << endl;
-        return nullptr;
+        throw gameException("Le batiment n'est pas dans le shop");
     }
 }
 
@@ -53,7 +52,7 @@ void Shop::affiche_shop() {
 
     for (auto & it : contenu) {
         cout << pos << " : " << it.first->get_nom() << "(cout : " << it.first->get_prix() <<" ; quantite :" << it.second <<")" << endl;
-        //cout << "\tDescription : " << it.first->get_description() << endl;
+        cout << "\tEffet : " << it.first->get_description() << endl;
         pos++;
     }
 }

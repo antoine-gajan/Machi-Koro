@@ -6,18 +6,17 @@
 
 using namespace std;
 
-class gameException: public exception
-{
-public:
-    gameException(string const& i):info(i){}
+class gameException: public exception {
+    public:
+        gameException(string const& i):info(i){}
 
-    const char* what() const noexcept override
-    {
-        return info.c_str();
-    }
+        const char* what() const noexcept override
+        {
+            return info.c_str();
+        }
 
-private:
-    string info;
+    private:
+        string info;
 };
 
 #endif //SRC_GAMEEXEPTION_H

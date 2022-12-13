@@ -18,10 +18,8 @@ Batiment* Pioche::get_carte() {
         return bat;
     }
     // Sinon, on renvoie nullptr (erreur)
-    else
-    {
-        cout << "La pioche est vide." <<endl;
-        return nullptr;
+    else {
+        throw gameException("La pioche est vide");
     }
 }
 
