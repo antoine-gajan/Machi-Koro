@@ -11,8 +11,6 @@ Fleuriste::Fleuriste()
                    "commerce") {}
 
 void Fleuriste::declencher_effet(unsigned int possesseur, int bonus) const {
-    cout << "Activation de l'effet de la carte Fleuriste" << endl;
-
     /// Effet de la FabriqueDeMeubles
     unsigned int j_act_index =  Partie::get_instance()->get_joueur_actuel();
     Joueur* j_actuel = Partie::get_instance()->get_tab_joueurs()[j_act_index];
@@ -29,6 +27,10 @@ void Fleuriste::declencher_effet(unsigned int possesseur, int bonus) const {
             nb_champs_fleur += it->second;
             break;
         }
+    }
+
+    if (nb_champs_fleur > 0) {
+        cout << "Activation de l'effet de la carte Fleuriste du joueur " << j_actuel->get_nom() << endl;
     }
 
     // on donne 1 piece par champ de fleur

@@ -11,13 +11,13 @@ EntrepriseDeDemenagement::EntrepriseDeDemenagement()
                    "entreprise") {}
 
 void EntrepriseDeDemenagement::declencher_effet(unsigned int possesseur, int bonus) const {
-    cout << "Activation de l'effet de la carte Entreprise de demenagement" << endl;
-
     /// Effet de l'EntrepriseDeDemenagement
 
     /// DON DE L'ETABLISSEMENT
     unsigned int j_act_index = Partie::get_instance()->get_joueur_actuel();
     Joueur* j_actuel = Partie::get_instance()->get_tab_joueurs()[j_act_index];
+
+    cout << "Activation de l'effet de la carte Entreprise de demenagement du joueur " << j_actuel->get_nom() << endl;
 
     vector<Joueur*> tab_joueurs = Partie::get_instance()->get_tab_joueurs();
 

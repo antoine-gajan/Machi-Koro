@@ -11,8 +11,6 @@ CaveAVin::CaveAVin()
                    "usine") {}
 
 void CaveAVin::declencher_effet(unsigned int possesseur, int bonus) const {
-    cout << "Activation de l'effet de la carte cave a vin" << endl;
-
     /// Effet de la CaveAVin
 
     unsigned int j_act_index =  Partie::get_instance()->get_joueur_actuel();
@@ -29,6 +27,10 @@ void CaveAVin::declencher_effet(unsigned int possesseur, int bonus) const {
             nb_vignoble += it->second;
             break;
         }
+    }
+
+    if (nb_vignoble > 0) {
+        cout << "Activation de l'effet de la carte Cave a vin du joueur " << j_actuel->get_nom() << endl;
     }
 
     j_actuel->set_argent(j_actuel->get_argent() + 6 * nb_vignoble * (1 + bonus));
