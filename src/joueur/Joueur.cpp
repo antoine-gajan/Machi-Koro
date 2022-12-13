@@ -145,11 +145,6 @@ void Joueur::retirer_batiment(Batiment *bat) {
     cout << "Impossible de retirer le batiment. Le joueur \"" << nom << "\" ne possede aucun batiment " << bat->get_nom() << endl;
 }
 
-void Joueur::set_liste_batiment(map<couleur_bat, map<Batiment*, unsigned int>>& liste_bat){
-    /// Mise a jour de la liste des batiments du joueur
-    liste_batiment = liste_bat;
-}
-
 
 void Joueur::afficher_cartes() const {
     /// Affiche toutes les cartes du joueur
@@ -212,22 +207,6 @@ unsigned int Joueur::count_type(const string& type) const {
         }
     }
     return count;
-}
-
-//// a revoir
-
-const map<Batiment*, unsigned int> Joueur::get_liste_bat_non_special() const{
-    /// Retourne la liste des batiments non speciaux du joueur
-    map<Batiment* ,unsigned int> liste;
-    for (const auto& couleur : get_liste_batiment()){
-        for (auto bat : couleur.second){
-            if (bat.first->get_type() != "special")
-            {
-                liste.insert(pair<Batiment*, unsigned int>(bat.first, bat.second));
-            }
-        }
-    }
-    return liste;
 }
 
 Monument* Joueur::selectionner_monument() const{
