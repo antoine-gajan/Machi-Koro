@@ -252,7 +252,7 @@ EditionDeJeu::~EditionDeJeu() {
     monument.clear();
     // Destruction des batiments
     for (auto& bat : batiment) {
-        cout << "Destruction de " << bat.first->get_nom() << endl;
+        //cout << "Destruction de " << bat.first->get_nom() << endl;
         delete bat.first;
     }
     batiment.clear();
