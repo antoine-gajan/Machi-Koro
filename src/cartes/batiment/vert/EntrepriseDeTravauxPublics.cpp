@@ -28,7 +28,8 @@ void EntrepriseDeTravauxPublics::declencher_effet(unsigned int possesseur, int b
     {
         cout << "Choisissez un monument jouable a retourner : " << endl;
         for (unsigned int i = 0; i < monuments_jouables.size(); i++) {
-            cout << i << " : " << monuments_jouables[i]->get_nom() << endl;
+            if (!(monuments_jouables[i]->get_nom() == "HotelDeVille" || monuments_jouables[i]->get_nom() == "FabriqueDuPereNoel"))
+                cout << i << " : " << monuments_jouables[i]->get_nom() << endl;
         }
         while (choix < 0 || choix >= monuments_jouables.size()) {
             cout << "Votre choix : ";
