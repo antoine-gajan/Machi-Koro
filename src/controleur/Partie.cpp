@@ -139,7 +139,7 @@ Partie::Partie(EditionDeJeu* edition, const vector<EditionDeJeu *>& extensions) 
             nom_ok = true;
             for (auto joueur : tab_joueurs) {
                 if (joueur->get_nom() == nom) {
-                    cout << "Ce nom est déjà utilisé" << endl;
+                    cout << "Ce nom est deja utilise" << endl;
                     nom_ok = false;
                     break;
                 }

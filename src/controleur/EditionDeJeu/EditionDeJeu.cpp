@@ -177,7 +177,7 @@ EditionDeJeu::EditionDeJeu(const string& nom_edition) : nom(nom_edition) {
         nom = "Custom";
         est_edition = true;
         nb_joueurs_max = 6;
-        nb_monuments_win = 6;
+        nb_monuments_win = 8;
 
         /// Liste des monuments specifiques a Custom
         monument.push_back(new Aeroport());
