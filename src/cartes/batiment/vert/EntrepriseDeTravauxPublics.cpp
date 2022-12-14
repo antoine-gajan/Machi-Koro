@@ -24,6 +24,9 @@ void EntrepriseDeTravauxPublics::declencher_effet(unsigned int possesseur, int b
     int choix = -1;
     if (j_actuel->get_est_ia()){
         choix = rand() % monuments_jouables.size();
+        while (monuments_jouables[choix]->get_nom() == "HotelDeVille" || monuments_jouables[choix]->get_nom() == "FabriqueDuPereNoel"){
+            choix = rand() % monuments_jouables.size();
+        }
     } else
     {
         cout << "Choisissez un monument jouable a retourner : " << endl;
