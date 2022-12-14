@@ -574,7 +574,8 @@ void Partie::jouer_partie() {
 void Partie::jouer_tour() {
     unsigned int de_casse;
     unsigned int de_1_temp, de_2_temp;
-    bool centre_c = false;
+    bool centre_c_act = false;
+    bool centre_c_possesseur = false;
     vector <Monument*> monuments_joueurs = tab_joueurs[joueur_actuel]->get_monument_jouables();
 
     cout << "----------------------------------------------------" << endl;
@@ -598,7 +599,7 @@ void Partie::jouer_tour() {
         catch(exception const& e){
             cerr << "ERREUR : " << e.what() << endl;
         }
-        centre_c = true;
+        centre_c_act = true;
     }
 
     /// Monument avant le jet de de
@@ -679,9 +680,17 @@ void Partie::jouer_tour() {
     unsigned int j_act_paiement = (joueur_actuel + tab_joueurs.size() - 1) % tab_joueurs.size();
 
     while (j_act_paiement != joueur_actuel) {
+        // Regarde si le joueur possede un centre commercial
+        vector<Monument*> monuments_j_act = tab_joueurs[j_act_paiement]->get_monument_jouables();
+        for (auto mon : monuments_j_act) {
+            if (mon->get_nom() == "CentreCommercial") {
+                centre_c_possesseur = true;
+            }
+        }
+
         for (auto it : tab_joueurs[j_act_paiement]->get_liste_batiment(Rouge)) {
             if (find(it.first->get_num_activation().begin(), it.first->get_num_activation().end(), de_1 + de_2) != it.first->get_num_activation().end()) {
-                if (it.first->get_type() == "restaurant" && centre_c) {
+                if (it.first->get_type() == "restaurant" && centre_c_possesseur) {
                     for (unsigned int effectif = 0; effectif < it.second; effectif++) {
                         try{
                             it.first->declencher_effet(j_act_paiement, 1);
@@ -740,7 +749,7 @@ void Partie::jouer_tour() {
     /// Enfin, les batiments verts du joueur actuel
     for (auto it : tab_joueurs[joueur_actuel]->get_liste_batiment(Vert)) {
         if (find(it.first->get_num_activation().begin(), it.first->get_num_activation().end(), de_1 + de_2) != it.first->get_num_activation().end()) {
-            if (it.first->get_type() == "commerce" && centre_c) {
+            if (it.first->get_type() == "commerce" && centre_c_act) {
                 for (unsigned int effectif = 0; effectif < it.second; effectif++) {
                     try{
                         it.first->declencher_effet(joueur_actuel, 1);

@@ -17,11 +17,8 @@ void Cafe::declencher_effet(unsigned int possesseur, int bonus) const{
     cout << "Activation de l'effet du Cafe du joueur \"" << joueur_possesseur->get_nom()<<"\"" << endl;
     //Trouver un joueur qui a cette carte
     if(partie->get_joueur_actuel() != possesseur){
-        partie->transfert_argent(possesseur, partie->get_joueur_actuel(), 1+bonus);
+        partie->transfert_argent(possesseur, partie->get_joueur_actuel(), 1 + bonus);
     } else {
         throw gameException("On ne peut pas se donner d'argent a soi meme");
     }
 }
-
-
-

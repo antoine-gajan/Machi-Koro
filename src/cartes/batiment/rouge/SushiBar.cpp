@@ -17,7 +17,7 @@ void SushiBar::declencher_effet(unsigned int possesseur, int bonus) const{
     if(partie->get_joueur_actuel() != possesseur){
         if (partie->get_tab_joueurs()[possesseur]->possede_batiment("Port")){
             cout << "Activation de l'effet du Sushi bar du joueur \"" << joueur_possesseur->get_nom()<<"\"" << endl;
-            partie->transfert_argent(possesseur, partie->get_joueur_actuel(), 3+bonus) ;
+            partie->transfert_argent(possesseur, partie->get_joueur_actuel(), 3 + bonus) ;
         }
     }
     else{
