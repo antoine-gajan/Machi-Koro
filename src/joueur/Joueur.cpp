@@ -7,7 +7,10 @@ Joueur::Joueur(const string& nom, const vector<Monument *>&list_mon, const vecto
 {
     /// Constructeur de joueur
     for (auto mon : list_mon)
-        liste_monument[mon] = false;
+        if (mon->get_nom() == "FabriqueDuPereNoel" || mon->get_nom() == "HotelDeVille")
+            liste_monument[mon] = true;
+        else
+            liste_monument[mon] = false;
     for (auto bat : list_bat)
         liste_batiment[bat->get_couleur()][bat] = 1;
 }

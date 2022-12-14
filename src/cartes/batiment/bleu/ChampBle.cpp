@@ -21,6 +21,4 @@ void ChampBle::declencher_effet(unsigned int possesseur, int bonus) const {
 
     //On augmente de un l'argent du joueur actuel
     joueur_actuel->set_argent(joueur_actuel->get_argent() + 1);
-
-
 }
