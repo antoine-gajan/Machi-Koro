@@ -132,7 +132,20 @@ Partie::Partie(EditionDeJeu* edition, const vector<EditionDeJeu *>& extensions) 
         // Info du joueur
         cout << "Nom du joueur " << i + 1 << " : "  << endl;
         string nom;
-        cin >> nom;
+
+        bool nom_ok = false;
+        do{
+            cin >> nom;
+            nom_ok = true;
+            for (auto joueur : tab_joueurs) {
+                if (joueur->get_nom() == nom) {
+                    cout << "Ce nom est déjà utilisé" << endl;
+                    nom_ok = false;
+                    break;
+                }
+            }
+        } while(!nom_ok);
+
         int humain = -1;
         while (humain < 0 || 1 < humain ) {
             cout << "Voulez-vous que le joueur soit humain ? (0 : non, 1 : oui)" << endl;
@@ -163,7 +176,6 @@ Partie::Partie(EditionDeJeu* edition, const vector<EditionDeJeu *>& extensions) 
                     break;
                 default :
                     throw gameException("Strategie IA invalide");
-                    break;
             }
         }
     }
@@ -398,6 +410,8 @@ bool Partie::acheter_monu() {
         joueur_act->set_argent(joueur_act->get_argent() - mon_picked->get_prix());
     }
 
+    cout << "\nLe joueur \"" << tab_joueurs[joueur_actuel]->get_nom() << "\" a active le monument " << mon_picked->get_nom() << "\n\n";
+
     return true;
 }
 
@@ -476,6 +490,8 @@ bool Partie::acheter_bat() {
     if (bat_picked->get_nom() == "BanqueDeMiniville") {
         joueur_act->set_argent(joueur_act->get_argent() + 5);
     }
+
+    cout << "\nLe joueur \"" << tab_joueurs[joueur_actuel]->get_nom() << "\" a achete la carte " << bat_picked->get_nom() << "\n\n";
 
     return true;
 }
@@ -563,6 +579,8 @@ void Partie::jouer_tour() {
 
     cout << "----------------------------------------------------" << endl;
     cout << "\t\t\tDebut du tour" << endl;
+    cout << "Joueur actuel : " << tab_joueurs[joueur_actuel]->get_nom() << endl;
+    cout << "----------------------------------------------------" << endl;
 
     de_1 = (rand() % 6) + 1;
     de_1_temp = de_1;
@@ -757,6 +775,7 @@ void Partie::jouer_tour() {
         }
     }
 
+    cout << "Le joueur \"" << tab_joueurs[joueur_actuel]->get_nom() << "\" va proceder a ses achats, voici son etat : " << endl;
     tab_joueurs[joueur_actuel]->afficher_joueur();
     cout << "Cartes du shop : " << endl;
     shop->affiche_shop_simple();
@@ -801,6 +820,7 @@ void Partie::jouer_tour() {
         }
     }
 
+    cout << "----------------------------------------------------" << endl;
     cout << "\t\t\tFin du tour" << endl;
     cout << "----------------------------------------------------" << endl;
 }
