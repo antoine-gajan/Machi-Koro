@@ -653,6 +653,16 @@ void Partie::jouer_tour() {
             mon->get_nom() == "FabriqueDuPereNoel" && de_casse == 1){
             try{
                 mon->declencher_effet(joueur_actuel);
+                if (de_1_temp != de_1) {
+                    cout << "------------" << endl;
+                    cout << "| DE 1 : " << de_1 << " |" << endl;
+                    cout << "------------" << endl;
+                }
+                if (de_2 != 0 && de_2_temp != de_2) {
+                    cout << "------------" << endl;
+                    cout << "| DE 2 : " << de_2 << " |" << endl;
+                    cout << "------------" << endl;
+                }
             }
             catch(exception const& e){
                 cerr << "ERREUR : " << e.what() << endl;

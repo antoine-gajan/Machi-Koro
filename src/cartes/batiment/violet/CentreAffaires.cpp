@@ -32,10 +32,10 @@ void CentreAffaires::declencher_effet(unsigned int possesseur, int bonus) const 
         cout << "Vous ne pouvez pas selectionner un batiment violet !" << endl;
         batiment_a_donner = j_actuel->selectionner_batiment();
     }
-    batiment_a_recevoir = j_actuel->selectionner_batiment();
+    batiment_a_recevoir = joueur_echange->selectionner_batiment();
     while (batiment_a_recevoir->get_couleur() == Violet) {
         cout << "Vous ne pouvez pas selectionner un batiment violet !" << endl;
-        batiment_a_recevoir = j_actuel->selectionner_batiment();
+        batiment_a_recevoir = joueur_echange->selectionner_batiment();
     }
     cout << "Le joueur " << j_actuel->get_nom() << " va echanger le batiment " << batiment_a_donner->get_nom() << " avec le batiment " << batiment_a_recevoir->get_nom() << " de " << joueur_echange->get_nom() << endl;
 

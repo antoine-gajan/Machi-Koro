@@ -21,8 +21,6 @@ void Stade::declencher_effet(unsigned int possesseur, int bonus) const{
     Joueur* j_actuel = tab_joueurs[possesseur];
     cout << "Activation de l'effet du Stade du joueur \"" << j_actuel->get_nom()<<"\"" << endl;
 
-    unsigned int argent_joueur;
-
     // Pour chaque joueur de la partie
     for (int i = 0; i < tab_joueurs.size(); i++) {
         // Si le joueur est different du joueur actuel
