@@ -410,7 +410,7 @@ bool Partie::acheter_monu() {
         joueur_act->set_argent(joueur_act->get_argent() - mon_picked->get_prix());
     }
 
-    cout << "\nLe joueur \"" << tab_joueurs[joueur_actuel]->get_nom() << "\" a active le monument " << mon_picked->get_nom() << "\n\n";
+    cout << "\n\nLe joueur \"" << tab_joueurs[joueur_actuel]->get_nom() << "\" a active le monument " << mon_picked->get_nom() << "\n\n";
 
     return true;
 }
