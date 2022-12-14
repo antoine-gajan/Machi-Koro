@@ -27,7 +27,7 @@ void CentreImpots::declencher_effet(unsigned int possesseur, int bonus) const {
     for (int i = 0; i < tab_joueurs.size(); i++) {
         if (j_actuel != tab_joueurs[i] && tab_joueurs[i]->get_argent() >= 10) {
             // Si le joueur d'echange a suffisamment d'argent
-            Partie::get_instance()->transfert_argent(i, possesseur, tab_joueurs[i]->get_argent()%2);
+            Partie::get_instance()->transfert_argent(i, possesseur, tab_joueurs[i]->get_argent()/2);
         }
     }
 }

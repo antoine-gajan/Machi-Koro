@@ -23,7 +23,6 @@ void ChaineTelevision::declencher_effet(unsigned int possesseur, int bonus) cons
 
     // Choix de joueur
     unsigned int j_echange = Partie::get_instance()->selectionner_joueur(tab_joueurs, possesseur);
-    Joueur* joueur_echange = tab_joueurs[j_echange];
 
     Partie::get_instance()->transfert_argent(j_echange, possesseur, 5);
 
