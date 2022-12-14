@@ -21,18 +21,20 @@ void EntrepriseDeTravauxPublics::declencher_effet(unsigned int possesseur, int b
     cout << "Activation de l'effet de la carte Entreprise de travaux publics du joueur \"" << j_actuel->get_nom() << "\"" << endl;
 
     vector<Monument*> monuments_jouables = j_actuel->get_monument_jouables();
+    for (auto mon : monuments_jouables) {
+        if (mon->get_nom() == "HotelDeVille" || mon->get_nom() == "FabriqueDuPereNoel") {
+            auto it = find(monuments_jouables.begin(), monuments_jouables.end(), mon);
+            monuments_jouables.erase(it);
+        }
+    }
     int choix = -1;
     if (j_actuel->get_est_ia()){
         choix = rand() % monuments_jouables.size();
-        while (monuments_jouables[choix]->get_nom() == "HotelDeVille" || monuments_jouables[choix]->get_nom() == "FabriqueDuPereNoel"){
-            choix = rand() % monuments_jouables.size();
-        }
     } else
     {
         cout << "Choisissez un monument jouable a retourner : " << endl;
         for (unsigned int i = 0; i < monuments_jouables.size(); i++) {
-            if (!(monuments_jouables[i]->get_nom() == "HotelDeVille" || monuments_jouables[i]->get_nom() == "FabriqueDuPereNoel"))
-                cout << i << " : " << monuments_jouables[i]->get_nom() << endl;
+            cout << i << " : " << monuments_jouables[i]->get_nom() << endl;
         }
         while (choix < 0 || choix >= monuments_jouables.size()) {
             cout << "Votre choix : ";
