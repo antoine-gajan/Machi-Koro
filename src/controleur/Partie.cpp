@@ -290,8 +290,8 @@ bool Partie::acheter_carte() {
         if (!tab_joueurs[joueur_actuel]->get_est_ia()) {
             cout << "Que voulez-vous acheter ? (1 : batiment, 2 : monument, 3 : quitter)" << endl;
             cin >> choix;
-            while (choix < 0 || choix > 3) {
-                cout << "Veuillez entrer 0, 1 ou 3" << endl;
+            while (choix < 1 || choix > 3) {
+                cout << "Veuillez entrer 1, 2 ou 3" << endl;
                 cin >> choix;
             }
             if (choix == 3) {

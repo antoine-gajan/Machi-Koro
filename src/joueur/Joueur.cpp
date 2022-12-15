@@ -66,7 +66,7 @@ void Joueur::activer_monument(Monument *mon) {
     auto it = liste_monument.find(mon);
     if (it != liste_monument.end()) {
         it->first->activer();
-        it->second = true;
+        liste_monument[mon] = true;
     }
 }
 
@@ -80,7 +80,7 @@ void Joueur::desactiver_monument(Monument *mon) {
     auto it = liste_monument.find(mon);
     if (it != liste_monument.end()) {
         it->first->desactiver();
-        it->second = false;
+        liste_monument[mon] = false;
     }
 }
 

@@ -15,8 +15,7 @@ void EntrepriseDeTravauxPublics::declencher_effet(unsigned int possesseur, int b
 
     /// DESACTIVATION DU MONUMENT
 
-    unsigned int j_act_index =  Partie::get_instance()->get_joueur_actuel();
-    Joueur* j_actuel = Partie::get_instance()->get_tab_joueurs()[j_act_index];
+    Joueur* j_actuel = Partie::get_instance()->get_tab_joueurs()[possesseur];
 
     vector<Monument*> monuments_jouables = j_actuel->get_monument_jouables();
     for (auto mon : monuments_jouables) {
@@ -36,8 +35,7 @@ void EntrepriseDeTravauxPublics::declencher_effet(unsigned int possesseur, int b
     int choix = -1;
     if (j_actuel->get_est_ia()){
         choix = rand() % monuments_jouables.size();
-    } else
-    {
+    } else {
         cout << "Choisissez un monument jouable a retourner : " << endl;
         for (unsigned int i = 0; i < monuments_jouables.size(); i++) {
             cout << i << " : " << monuments_jouables[i]->get_nom() << endl;
