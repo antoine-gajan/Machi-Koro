@@ -5,7 +5,7 @@ Ferme::Ferme() :
     Batiment("Ferme",
          1,
         "Recevez une piece de la banque",
-        "../../assets/batiments/bleu/Ferme.jpg",
+        "../../../assets/batiments/bleu/Ferme.jpg",
         Bleu,
         list<unsigned int>{2},
         "Betail"){}

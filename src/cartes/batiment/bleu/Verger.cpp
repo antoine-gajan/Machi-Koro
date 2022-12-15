@@ -5,7 +5,7 @@ Verger::Verger() :
     Batiment("Verger",
          3,
         "Recevez trois pieces de la banque",
-        "../../assets/batiments/bleu/Verger.jpg",
+        "../../../assets/batiments/bleu/Verger.jpg",
         Bleu,
         list<unsigned int>{10},
         "Champ"){}

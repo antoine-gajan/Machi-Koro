@@ -5,7 +5,7 @@ Foret::Foret() :
     Batiment("Foret",
          3,
         "Recevez une piece de la banque",
-        "../../assets/batiments/bleu/Foret.jpg",
+        "../../../assets/batiments/bleu/Foret.jpg",
         Bleu,
         list<unsigned int>{5},
         "Engrenage"){}

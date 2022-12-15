@@ -4,12 +4,16 @@
 #include "Batiment.h"
 
 class Ferme : public Batiment{
-public:
-    Ferme();
-    ~Ferme() override = default;
-    Ferme(const Ferme& ferme) = default;
-    Batiment* clone() const override {return new Ferme(*this);};
-    void declencher_effet(unsigned int possesseur, int bonus = 0) const override;
+    public:
+        //*** Constructeurs et destructeur ***//
+        Ferme();
+        ~Ferme() override = default;
+        Ferme(const Ferme& ferme) = default;
+
+        //*** Méthodes ***//
+        Batiment* clone() const override {return new Ferme(*this);};
+
+        void declencher_effet(unsigned int possesseur, int bonus = 0) const override;
 };
 
 #endif //MACHI_KORO_MASTER_RANCH_H
