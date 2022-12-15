@@ -776,7 +776,7 @@ void Partie::jouer_tour() {
                 for (unsigned int effectif = 0; effectif < it.second; effectif++) {
                     try{
                         it.first->declencher_effet(joueur_actuel);
-                        cout << "fin de l'effet" << endl;
+                        cout << "fin de l'effet dans jouer_tour" << endl;
                     }
                     catch(exception const& e){
                         cerr << "ERREUR : " << e.what() << endl;
