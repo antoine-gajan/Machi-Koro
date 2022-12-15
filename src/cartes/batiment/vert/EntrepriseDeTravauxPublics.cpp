@@ -21,7 +21,9 @@ void EntrepriseDeTravauxPublics::declencher_effet(unsigned int possesseur, int b
     for (auto mon : monuments_jouables) {
         if (mon->get_nom() == "HotelDeVille" || mon->get_nom() == "FabriqueDuPereNoel") {
             auto it = find(monuments_jouables.begin(), monuments_jouables.end(), mon);
-            monuments_jouables.erase(it);
+            if (it != monuments_jouables.end()) {
+                monuments_jouables.erase(it);
+            }
         }
     }
 
@@ -52,6 +54,4 @@ void EntrepriseDeTravauxPublics::declencher_effet(unsigned int possesseur, int b
     /// TRANSACTION AVEC LA BANQUE
     // On donne 8 pieces au joueur actuel
     j_actuel->set_argent(j_actuel->get_argent() + 8 + bonus);
-
-    cout << "fin de l'effet dans la methode" << endl;
 }

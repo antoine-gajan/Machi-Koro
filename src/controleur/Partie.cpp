@@ -566,10 +566,9 @@ void Partie::jouer_partie() {
     }
 
     /// On affiche le gagnant
-    unsigned int pos_gagnant = (joueur_actuel + tab_joueurs.size() - 1) % tab_joueurs.size();
-    cout << "Le gagnant est " << tab_joueurs[pos_gagnant]->get_nom() << endl;
+    cout << "Le gagnant est " << tab_joueurs[joueur_actuel]->get_nom() << endl;
     cout << "Voici son etat final : " << endl;
-    tab_joueurs[pos_gagnant]->afficher_joueur();
+    tab_joueurs[joueur_actuel]->afficher_joueur();
 
     cout << "Felicitations !!!" << endl;
 }
@@ -650,6 +649,9 @@ void Partie::jouer_tour() {
         cout << "| DE 2 : " << de_2 << " |" << endl;
         cout << "------------" << endl;
     }
+
+    de_1_temp = de_1;
+    de_2_temp = de_2;
 
     /// Monument apres le jet de de
     for (auto mon : monuments_joueurs) {
@@ -776,7 +778,6 @@ void Partie::jouer_tour() {
                 for (unsigned int effectif = 0; effectif < it.second; effectif++) {
                     try{
                         it.first->declencher_effet(joueur_actuel);
-                        cout << "fin de l'effet dans jouer_tour" << endl;
                     }
                     catch(exception const& e){
                         cerr << "ERREUR : " << e.what() << endl;
