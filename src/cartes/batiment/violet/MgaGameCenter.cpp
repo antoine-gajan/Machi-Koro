@@ -28,16 +28,20 @@ void MgaGameCenter::declencher_effet(unsigned int possesseur, int bonus) const{
         return;
     }
 
-    cout << "Activation de l'effet de l'entreprise de renovation du joueur \"" << j_actuel->get_nom()<<"\"" << endl;
+    Batiment * bat = j_actuel->possede_batiment("MgaGameCenter");
 
-    // Selection du batiment du joueur
-    Batiment *batiment = j_actuel->selectionner_batiment();
-    while (batiment->get_couleur() == Violet) {
-        cout << "Vous ne pouvez pas selectionner un batiment violet !" << endl;
-        batiment = j_actuel->selectionner_batiment();
+    if (bat != nullptr) {
+        cout << "Activation de l'effet du MgaGameCenter du joueur \"" << j_actuel->get_nom()<<"\"" << endl;
+
+        // Selection du batiment du joueur
+        Batiment *batiment = j_actuel->selectionner_batiment();
+        while (batiment->get_couleur() == Violet) {
+            cout << "Vous ne pouvez pas selectionner un batiment violet !" << endl;
+            batiment = j_actuel->selectionner_batiment();
+        }
+
+        batiment->declencher_effet(possesseur, bonus);
+
+        j_actuel->fermer_batiment(bat);
     }
-
-    batiment->declencher_effet(possesseur, bonus);
-
-    j_actuel->fermer_batiment(j_actuel->possede_batiment("MgaGameCenter"));
 }

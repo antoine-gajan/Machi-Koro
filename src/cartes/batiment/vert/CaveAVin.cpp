@@ -29,12 +29,18 @@ void CaveAVin::declencher_effet(unsigned int possesseur, int bonus) const {
         }
     }
 
-    if (nb_vignoble > 0) {
-        cout << "Activation de l'effet de la carte Cave a vin du joueur \"" << j_actuel->get_nom() << "\"" << endl;
+
+
+    Batiment * bat = j_actuel->possede_batiment("CaveAVin");
+
+    if (bat != nullptr) {
+        if (nb_vignoble > 0) {
+            cout << "Activation de l'effet de la carte Cave a vin du joueur \"" << j_actuel->get_nom() << "\"" << endl;
+        }
+
+        j_actuel->set_argent(j_actuel->get_argent() + 6 * nb_vignoble * (1 + bonus));
+
+        j_actuel->fermer_batiment(bat);
     }
-
-    j_actuel->set_argent(j_actuel->get_argent() + 6 * nb_vignoble * (1 + bonus));
-
-    j_actuel->fermer_batiment(j_actuel->possede_batiment("CaveAVin"));
 
 }
