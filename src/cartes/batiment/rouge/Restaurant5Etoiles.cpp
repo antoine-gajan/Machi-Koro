@@ -5,7 +5,7 @@ Restaurant5Etoiles::Restaurant5Etoiles() :
             Batiment("Restaurant5Etoiles",
                      3 ,
                      "Recevez 5 pieces du joueur qui a lance les des si celui-ci possede au moins deux monuments construits.",
-                     "../../assets/batiments/Rouge/Restaurant-5-etoiles.jpg",
+                     "../../../assets/batiments/Rouge/Restaurant-5-etoiles.jpg",
                      Rouge,
                      list<unsigned int>{5},
                      "restaurant"){}

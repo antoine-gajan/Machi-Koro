@@ -5,7 +5,7 @@ Pizzeria::Pizzeria() :
             Batiment("Pizzeria",
                      1 ,
                      "Recevez 1 piece du joueur qui a lance les des.",
-                     "../../assets/batiments/Rouge/Pizzeria.jpg",
+                     "../../../assets/batiments/Rouge/Pizzeria.jpg",
                      Rouge,
                      list<unsigned int>{7},
                      "restaurant"){}

@@ -4,13 +4,16 @@
 #include "Batiment.h"
 
 class StandDeHamburger : public Batiment {
-public:
-    StandDeHamburger();
-    ~StandDeHamburger() override = default;
-    StandDeHamburger(const StandDeHamburger& standDeHamburger) = default;
-    Batiment* clone() const override {return new StandDeHamburger(*this);};
-    void declencher_effet(unsigned int possesseur, int bonus = 0) const override;
-  
+    public:
+        //*** Constructeurs et destructeur ***//
+        StandDeHamburger();
+        ~StandDeHamburger() override = default;
+        StandDeHamburger(const StandDeHamburger& standDeHamburger) = default;
+
+        //*** Methodes ***//
+        Batiment* clone() const override {return new StandDeHamburger(*this);};
+
+        void declencher_effet(unsigned int possesseur, int bonus = 0) const override;
 };
 
 #endif 

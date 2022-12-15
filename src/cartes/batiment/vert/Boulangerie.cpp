@@ -18,5 +18,4 @@ void Boulangerie::declencher_effet(unsigned int possesseur, int bonus) const {
     cout << "Activation de l'effet de la carte Boulangerie du joueur \"" << j_actuel->get_nom() << "\"" << endl;
 
     j_actuel->set_argent(j_actuel->get_argent() + 1 + bonus);
-
 }

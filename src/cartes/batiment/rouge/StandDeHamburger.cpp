@@ -5,7 +5,7 @@ StandDeHamburger::StandDeHamburger() :
             Batiment("StandDeHamburger",
                      1 ,
                      "Recevez 1 piece du joueur qui a lance les des.",
-                     "../../assets/batiments/Rouge/Monster-burger.jpg",
+                     "../../../assets/batiments/Rouge/Monster-burger.jpg",
                      Rouge,
                      list<unsigned int>{8},
                      "restaurant"){}

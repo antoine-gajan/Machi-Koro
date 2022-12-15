@@ -5,7 +5,7 @@ SushiBar::SushiBar() :
             Batiment("SushiBar",
                      4 ,
                      "Si vous avez le port, recevez 3 pieces du joueur qui a lance les des.",
-                     "../../assets/batiments/Rouge/Sushi-bar.jpg",
+                     "../../../assets/batiments/Rouge/Sushi-bar.jpg",
                      Rouge ,
                      list<unsigned int>{1},
                      "restaurant"){}
