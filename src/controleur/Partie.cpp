@@ -78,6 +78,7 @@ Partie::Partie(EditionDeJeu* edition, const vector<EditionDeJeu *>& extensions) 
     unsigned int max_joueurs = edition->get_nb_joueurs_max();
     unsigned int format = 0;
     unsigned int nb_tas = 0;
+    rejouer = false;
 
 
     for (auto bat : edition->get_batiment()) {
@@ -258,7 +259,7 @@ Partie::~Partie() {
 }
 
 void Partie::rejouer_tour() {
-    joueur_actuel = (joueur_actuel + tab_joueurs.size() - 1) % tab_joueurs.size();
+    rejouer = true;
 }
 
 
@@ -559,7 +560,9 @@ void Partie::jouer_partie() {
     while (!fin_partie) {
         jouer_tour();
         fin_partie = est_gagnant(joueur_actuel);
-        joueur_actuel = (joueur_actuel + 1) % tab_joueurs.size();
+        if (!rejouer && !fin_partie){
+            joueur_actuel = (joueur_actuel + 1) % tab_joueurs.size();
+        }
     }
 
     /// On affiche le gagnant
@@ -577,6 +580,7 @@ void Partie::jouer_tour() {
     bool centre_c_act = false;
     bool centre_c_possesseur = false;
     vector <Monument*> monuments_joueurs = tab_joueurs[joueur_actuel]->get_monument_jouables();
+    rejouer = false;
 
     cout << "----------------------------------------------------" << endl;
     cout << "\t\t\tDebut du tour" << endl;
@@ -772,6 +776,7 @@ void Partie::jouer_tour() {
                 for (unsigned int effectif = 0; effectif < it.second; effectif++) {
                     try{
                         it.first->declencher_effet(joueur_actuel);
+                        cout << "fin de l'effet" << endl;
                     }
                     catch(exception const& e){
                         cerr << "ERREUR : " << e.what() << endl;
@@ -781,6 +786,7 @@ void Partie::jouer_tour() {
         }
     }
     /// Fin des effets des batiments
+
 
     /// Debut de la phase de construction
     auto it_hdv = find_if(monuments_joueurs.begin(), monuments_joueurs.end(), [](Monument* m){return m->get_nom() == "HotelDeVille";});
@@ -820,7 +826,7 @@ void Partie::jouer_tour() {
     /// Fin du tour
 
     auto it_parc = find_if(monuments_joueurs.begin(), monuments_joueurs.end(), [](Monument* m){return m->get_nom() == "ParcAttraction";});
-    if (it_parc != monuments_joueurs.end()){
+    if (it_parc != monuments_joueurs.end() && de_1 == de_2){
         // Si le monument est trouve, on le joue
         try{
             monuments_joueurs[it_parc - monuments_joueurs.begin()]->declencher_effet(joueur_actuel);

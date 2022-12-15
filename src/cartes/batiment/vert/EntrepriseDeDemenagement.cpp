@@ -17,6 +17,16 @@ void EntrepriseDeDemenagement::declencher_effet(unsigned int possesseur, int bon
     unsigned int j_act_index = Partie::get_instance()->get_joueur_actuel();
     Joueur* j_actuel = Partie::get_instance()->get_tab_joueurs()[j_act_index];
 
+    // On verifie que le joueur possede au moins un batiment non violet
+    map<Batiment*, unsigned int> liste_bat_bleu = j_actuel->get_liste_batiment(Bleu);
+    map<Batiment*, unsigned int> liste_bat_vert = j_actuel->get_liste_batiment(Vert);
+    map<Batiment*, unsigned int> liste_bat_rouge = j_actuel->get_liste_batiment(Rouge);
+
+    if (liste_bat_bleu.empty() && liste_bat_vert.empty() && liste_bat_rouge.empty()) {
+        cout << "Vous ne possedez aucun batiment non special !" << endl;
+        return;
+    }
+
     cout << "Activation de l'effet de la carte Entreprise de demenagement du joueur \"" << j_actuel->get_nom() << "\"" << endl;
 
     vector<Joueur*> tab_joueurs = Partie::get_instance()->get_tab_joueurs();

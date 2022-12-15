@@ -23,6 +23,7 @@ private:
     unsigned int nb_monuments_win;
     unsigned int de_1;
     unsigned int de_2;
+    bool rejouer;
 
     Shop* shop;
     Pioche* pioche;

@@ -18,8 +18,6 @@ void EntrepriseDeTravauxPublics::declencher_effet(unsigned int possesseur, int b
     unsigned int j_act_index =  Partie::get_instance()->get_joueur_actuel();
     Joueur* j_actuel = Partie::get_instance()->get_tab_joueurs()[j_act_index];
 
-    cout << "Activation de l'effet de la carte Entreprise de travaux publics du joueur \"" << j_actuel->get_nom() << "\"" << endl;
-
     vector<Monument*> monuments_jouables = j_actuel->get_monument_jouables();
     for (auto mon : monuments_jouables) {
         if (mon->get_nom() == "HotelDeVille" || mon->get_nom() == "FabriqueDuPereNoel") {
@@ -27,6 +25,14 @@ void EntrepriseDeTravauxPublics::declencher_effet(unsigned int possesseur, int b
             monuments_jouables.erase(it);
         }
     }
+
+    if (monuments_jouables.empty()) {
+        cout << "Le joueur n'a pas de monument jouable." << endl;
+        return;
+    }
+
+    cout << "Activation de l'effet de la carte Entreprise de travaux publics du joueur \"" << j_actuel->get_nom() << "\"" << endl;
+
     int choix = -1;
     if (j_actuel->get_est_ia()){
         choix = rand() % monuments_jouables.size();
@@ -49,5 +55,5 @@ void EntrepriseDeTravauxPublics::declencher_effet(unsigned int possesseur, int b
     // On donne 8 pieces au joueur actuel
     j_actuel->set_argent(j_actuel->get_argent() + 8 + bonus);
 
-
+    cout << "fin de l'effet dans la methode" << endl;
 }
