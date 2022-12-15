@@ -199,7 +199,7 @@ void Joueur::afficher_joueur() const {
 unsigned int Joueur::count_type(const string& type) const {
     /// Compte le nombre de cartes d'un type donne
     unsigned int count = 0;
-    auto liste_bat = get_liste_batiment();
+    auto liste_bat = liste_batiment;
     // pour chaque couleur de la liste de batiments du joueur
     for (const auto& couleur : liste_bat) {
         // pour chaque batiment de la couleur, (batiments sous forme de map (Batiment*, unsigned int))
@@ -213,11 +213,10 @@ unsigned int Joueur::count_type(const string& type) const {
 }
 
 Batiment* Joueur::possede_batiment(const string& nom_bat) const{
-    auto liste_bat = get_liste_batiment();
     // pour chaque couleur de la liste de batiments du joueur
-    for (const auto& couleur : liste_bat) {
+    for (const auto& pair : liste_batiment) {
         // pour chaque batiment de la couleur, (batiments sous forme de map (Batiment*, unsigned int))
-        for (auto batiment : liste_bat[couleur.first]) {
+        for (auto batiment : pair.second) {
             // Si c'est l'element qu'on recherche, on le renvoie
             if (batiment.first->get_nom() == nom_bat) {
                 return batiment.first;
@@ -236,7 +235,7 @@ Batiment* Joueur::selectionner_batiment() const{
     cout<<"Voici la liste des batiments que vous possedez :";
     // affichage des batiments que le joueur possede
     // pour chaque couleur de la liste de batiment du joueur
-    for (auto& couleur : get_liste_batiment()) {
+    for (auto& couleur : liste_batiment) {
         for (auto bat : couleur.second){
             cout << count <<" : " << bat.first->get_nom() << endl;
             count++;
@@ -258,7 +257,7 @@ Batiment* Joueur::selectionner_batiment() const{
     }
 
     // Recuperation du batiment choisi
-    for (auto& couleur : get_liste_batiment()) {
+    for (auto& couleur : liste_batiment) {
         for (auto bat : couleur.second){
             if (count_check == num_bat){
                 cout << "Vous avez choisi : " << bat.first->get_nom() << endl;
@@ -272,9 +271,8 @@ Batiment* Joueur::selectionner_batiment() const{
 }
 
 Monument* Joueur::possede_monument(const string& nom_mon) const{
-    auto liste_mon = get_liste_monument();
     // pour chaque monument dans la liste de monuments du joueur
-    for (auto mon : liste_mon) {
+    for (auto mon : liste_monument) {
         if (mon.first->get_nom() == nom_mon) {
             return mon.first;
         }
