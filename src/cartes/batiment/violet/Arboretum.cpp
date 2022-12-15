@@ -24,8 +24,12 @@ void Arboretum::declencher_effet(unsigned int possesseur, int bonus) const{
     for (auto joueur : tab_joueurs){
         somme_totale += joueur->get_argent();
     }
+    while (somme_totale%tab_joueurs.size() != 0){
+        somme_totale++;
+    }
+
     // Argent a repartir
-    int montant_par_joueur = std::ceil((double) somme_totale/ (double) tab_joueurs.size());
+    unsigned int montant_par_joueur = somme_totale / tab_joueurs.size();
     // Repartition
     for (auto joueur : tab_joueurs){
         joueur->set_argent(montant_par_joueur);

@@ -42,6 +42,8 @@ void EntrepriseRenovation::declencher_effet(unsigned int possesseur, int bonus) 
     // Fermeture des batiments correspondants
     for (auto joueur : tab_joueurs){
         for (auto& couleur : joueur->get_liste_batiment()) {
+            if (couleur.first == Violet)
+                continue;
             for (auto bat: couleur.second) {
                 if (bat.first->get_nom() == batiment->get_nom()) {
                     for (int nb = 0; nb < bat.second; nb++) {
