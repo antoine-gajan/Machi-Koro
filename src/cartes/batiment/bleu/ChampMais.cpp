@@ -16,9 +16,11 @@ void ChampMais::declencher_effet(unsigned int possesseur, int bonus) const{
     //creation de l'instance de partie
     Partie * partie = Partie::get_instance();
     Joueur* joueur_actuel = partie->get_tab_joueurs()[possesseur];
+    unsigned int arg = joueur_actuel->get_argent();
 
     cout << "Activation de l'effet du ChampMais du joueur \"" << joueur_actuel->get_nom()<<"\"" << endl;
 
     //On augmente de un l'argent du joueur pointe s'il a moins de deux monuments construits
-    if(joueur_actuel->get_monument_jouables().size() < 2)joueur_actuel->set_argent(joueur_actuel->get_argent() + 1);
+    if(joueur_actuel->get_monument_jouables().size() < 2)
+        joueur_actuel->set_argent(arg + 1);
 }
