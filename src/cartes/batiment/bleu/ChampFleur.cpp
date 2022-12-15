@@ -20,5 +20,6 @@ void ChampFleur::declencher_effet(unsigned int possesseur, int bonus) const {
     cout << "Activation de l'effet du ChampFleur du joueur \"" << joueur_actuel->get_nom()<<"\"" << endl;
 
     //On augmente de un l'argent du joueur actuel
-    joueur_actuel->set_argent(joueur_actuel->get_argent() + 1);
+    unsigned int argent = joueur_actuel->get_argent();
+    joueur_actuel->set_argent(argent + 1);
 }

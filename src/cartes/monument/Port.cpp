@@ -17,7 +17,7 @@ void Port::declencher_effet(unsigned int possesseur, int bonus) const {
         int choix = -1;
 
         if (partie->get_tab_joueurs()[possesseur]->get_est_ia()) {
-            choix = rand() % 2;
+            choix = rand() % 4;
         }
         else {
             while (choix != 0 && choix != 1) {

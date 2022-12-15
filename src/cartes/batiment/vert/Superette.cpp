@@ -19,5 +19,6 @@ void Superette::declencher_effet(unsigned int possesseur, int bonus) const{
 
 
     // On donne 3 pieces
-    j_actuel->set_argent(j_actuel->get_argent() + 3 + bonus);
+    unsigned int argent = j_actuel->get_argent();
+    j_actuel->set_argent(argent + 3 + bonus);
 }
