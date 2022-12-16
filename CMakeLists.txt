@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.23)
-project(src)
+project(Machi-Koro)
 
 set(CMAKE_CXX_STANDARD 14)
 
@@ -15,7 +15,7 @@ include_directories(controleur)
 include_directories(controleur/EditionDeJeu)
 include_directories(Joueur)
 
-add_executable(src
+add_executable(Machi-Koro
         main.cpp
 
         controleur/utils.cpp
