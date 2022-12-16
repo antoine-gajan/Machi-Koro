@@ -2,16 +2,17 @@
 #define MACHI_KORO_MASTER_MINE_H
 
 #include "Batiment.h"
-//#include "Joueur.h"
-#include <list>
-#include <vector>
 
 class Mine : public Batiment{
-public:
-    Mine();
-    ~Mine() override = default;
-    Mine(const Mine& mine) = default;
-    Batiment* clone() const override {return new Mine(*this);};
-    void declencher_effet(unsigned int possesseur, int bonus = 0) const override;
+    public:
+        //*** Constructeurs et destructeur ***//
+        Mine();
+        ~Mine() override = default;
+        Mine(const Mine& mine) = default;
+
+        //*** Méthodes ***//
+        Batiment* clone() const override {return new Mine(*this);};
+
+        void declencher_effet(unsigned int possesseur, int bonus = 0) const override;
 };
 #endif //MACHI_KORO_MASTER_MINE_H

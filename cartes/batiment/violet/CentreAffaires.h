@@ -2,8 +2,6 @@
 #define MACHI_KORO_CENTREAFFAIRES_H
 
 #include "Batiment.h"
-#include <list>
-#include <vector>
 
 class CentreAffaires : public Batiment {
 public:

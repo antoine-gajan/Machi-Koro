@@ -1,4 +1,5 @@
 #include "Fleuriste.h"
+#include "Partie.h"
 
 Fleuriste::Fleuriste()
         : Batiment("Fleuriste",
@@ -10,26 +11,29 @@ Fleuriste::Fleuriste()
                    "commerce") {}
 
 void Fleuriste::declencher_effet(unsigned int possesseur, int bonus) const {
-    cout << "Declenchement de l'effet de la carte Fleuriste" << endl;
-    /*
     /// Effet de la FabriqueDeMeubles
-    Joueur* j_actuel = tab_joueurs[joueur_actuel];
+    unsigned int j_act_index =  Partie::get_instance()->get_joueur_actuel();
+    Joueur* j_actuel = Partie::get_instance()->get_tab_joueurs()[j_act_index];
 
     unsigned int nb_champs_fleur = 0;
 
     // liste des batiments bleus du joueur
-    map<Batiment*, unsigned int> liste_bat_bleu = j_actuel->get_liste_batiment().find("Bleu")->second;
+    map<Batiment*, unsigned int> liste_bat_bleu = j_actuel->get_liste_batiment(Bleu);
 
     // si le joueur possede des champs de fleurs
     map<Batiment*, unsigned int>::iterator it;
     for (it=liste_bat_bleu.begin(); it!=liste_bat_bleu.end(); ++it) {
-        if (it->first->get_nom() == "Champ de fleurs") {
+        if (it->first->get_nom() == "ChampFleur") {
             nb_champs_fleur += it->second;
             break;
         }
     }
 
+    if (nb_champs_fleur > 0) {
+        cout << "Activation de l'effet de la carte Fleuriste du joueur \"" << j_actuel->get_nom() << "\"" << endl;
+    }
+
     // on donne 1 piece par champ de fleur
-    j_actuel->set_argent(j_actuel->get_argent() + nb_champs_fleur);
-    */
+    j_actuel->set_argent(j_actuel->get_argent() + nb_champs_fleur * (1 + bonus));
+
 }

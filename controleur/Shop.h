@@ -3,13 +3,17 @@
 
 #include <map>
 #include <vector>
+
 #include "Batiment.h"
+#include "gameExeption.h"
 
 class Shop{
     private:
         unsigned int nb_tas_max;
         unsigned int nb_tas_reel;
+
         map<Batiment*, unsigned int> contenu;
+
     public:
         /**** Constructeur et destructeur ****/
         explicit Shop(unsigned int nb_tas);
@@ -24,6 +28,7 @@ class Shop{
         /**** Methodes ****/
         void completer_shop(Batiment* new_bat);
         void affiche_shop();
+        void affiche_shop_simple();
         Batiment *acheter_batiment(Batiment* bat);
 };
 

@@ -1,11 +1,7 @@
 #ifndef MACHI_KORO_MOONSTER_SODA_H
 #define MACHI_KORO_MOONSTER_SODA_H
 
-#include "../Batiment.h"
-#include "Joueur.h"
-#include "../controleur/utils.h"
-#include <list>
-#include <vector>
+#include "Batiment.h"
 
 class MoonsterSoda : public Batiment {
 public:

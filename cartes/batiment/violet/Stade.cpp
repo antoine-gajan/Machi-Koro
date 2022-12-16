@@ -1,4 +1,5 @@
 #include "Stade.h"
+#include "Partie.h"
 
 Stade::Stade() :
 Batiment("Stade",
@@ -13,24 +14,19 @@ Batiment("Stade",
 
 void Stade::declencher_effet(unsigned int possesseur, int bonus) const{
     /// Effet de la classe Stade
-    std::cout << "Activation de l'effet du stade." << std::endl;
-    /*Joueur* j_actuel = tab_joueurs[joueur_actuel];
+    cout << "Activation de l'effet du stade." << endl;
+
+    // Variables utiles
+    const vector<Joueur*> tab_joueurs = Partie::get_instance()->get_tab_joueurs();
+    Joueur* j_actuel = tab_joueurs[possesseur];
+    cout << "Activation de l'effet du Stade du joueur \"" << j_actuel->get_nom()<<"\"" << endl;
+
     // Pour chaque joueur de la partie
-    for (auto joueur : tab_joueurs){
+    for (int i = 0; i < tab_joueurs.size(); i++) {
         // Si le joueur est different du joueur actuel
-        if (joueur != j_actuel){
-            // On verifie qu'il a l'argent necessaire
-            if (joueur->get_argent() >= 2) {
-                // Transaction
-                joueur->set_argent(joueur->get_argent() - 2);
-                j_actuel->set_argent(j_actuel->get_argent() + 2);
-                cout << joueur->get_nom() << " a donne 2 a " << j_actuel->get_nom() << endl;
-            }
-            else{
-                cout << joueur->get_nom() << " n'a pas assez d'argent." << endl;
-            }
+        if (i != possesseur) {
+            Partie::get_instance()->transfert_argent(i, possesseur, 2);
         }
     }
     cout << j_actuel->get_nom() << "possede maintenant " << j_actuel->get_argent() << " credits." <<endl;
-     */
 }
