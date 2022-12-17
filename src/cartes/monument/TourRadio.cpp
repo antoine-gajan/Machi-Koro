@@ -16,7 +16,7 @@ void TourRadio::declencher_effet(unsigned int possesseur, int bonus) const {
     int choix = -1;
 
     if (partie->get_tab_joueurs()[possesseur]->get_est_ia()) {
-        choix = rand() % 7;
+        choix = rand() % 8;
     }
     else {
         while (choix != 0 && choix != 1) {
@@ -27,9 +27,9 @@ void TourRadio::declencher_effet(unsigned int possesseur, int bonus) const {
 
     if(choix == 1) {
         cout << "Activation de l'effet de la Tour radio du joueur \"" << joueur->get_nom() << "\"" << endl;
-        partie->set_de_1(1 + (rand() % 6));
+        partie->set_de_1(Partie::lancer_de());
         if (partie->get_de_2() != 0) {
-            partie->set_de_2(1 + (rand() % 6));
+            partie->set_de_2(Partie::lancer_de());
         }
     }
 

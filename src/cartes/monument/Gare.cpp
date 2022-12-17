@@ -17,7 +17,7 @@ void Gare::declencher_effet(unsigned int possesseur, int bonus) const {
         int choix = rand() % 4;
         if (choix != 0) {
             cout << "Activation de l'effet de la gare du joueur \"" << joueur->get_nom() << "\"" << endl;
-            partie->set_de_2((rand() % 6) + 1);
+            partie->set_de_2(Partie::lancer_de());
         }
     }
     else {
@@ -28,7 +28,7 @@ void Gare::declencher_effet(unsigned int possesseur, int bonus) const {
         }
         if (choix == 1) {
             cout << "Activation de l'effet de la gare du joueur \"" << joueur->get_nom() << "\"" << endl;
-            partie->set_de_2((rand() % 6) + 1);
+            partie->set_de_2(Partie::lancer_de());
         }
     }
 }

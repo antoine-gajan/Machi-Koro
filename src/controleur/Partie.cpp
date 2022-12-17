@@ -332,7 +332,7 @@ bool Partie::acheter_carte() {
             }
 
         } else {
-            choix_ia = rand() % 6;
+            choix_ia = rand() % 5;
             if (choix_ia == 0) {
                 visit[0] = true;
                 transaction_fin = acheter_bat();
@@ -586,7 +586,7 @@ void Partie::jouer_tour() {
     cout << "Joueur actuel : " << tab_joueurs[joueur_actuel]->get_nom() << endl;
     cout << "----------------------------------------------------" << endl;
 
-    de_1 = (rand() % 6) + 1;
+    de_1 = lancer_de();
     de_1_temp = de_1;
     de_2 = 0;
     de_casse = (rand() % 50) + 1;
@@ -675,20 +675,6 @@ void Partie::jouer_tour() {
             }
         }
     }
-
-
-    /// Ouverture des batiments
-    for (auto bat : tab_joueurs[joueur_actuel]->get_liste_batiment_fermes()) {
-        if (find(bat->get_num_activation().begin(), bat->get_num_activation().end(), de_1 + de_2) != bat->get_num_activation().end()) {
-            try {
-                tab_joueurs[joueur_actuel]->ouvrir_batiment(bat);
-            }
-            catch(exception const& e){
-                cerr << "ERREUR : " << e.what() << endl;
-            }
-        }
-    }
-
 
     /// Activations des effets des batiments
     /// En premier ce sont les batiments rouges des autres joueurs
@@ -824,6 +810,21 @@ void Partie::jouer_tour() {
 
     }
     /// Fin de la phase de construction
+
+
+    /// Ouverture des batiments
+    for (auto bat : tab_joueurs[joueur_actuel]->get_liste_batiment_fermes()) {
+        if (find(bat->get_num_activation().begin(), bat->get_num_activation().end(), de_1 + de_2) != bat->get_num_activation().end()) {
+            try {
+                tab_joueurs[joueur_actuel]->ouvrir_batiment(bat);
+            }
+            catch(exception const& e){
+                cerr << "ERREUR : " << e.what() << endl;
+            }
+        }
+    }
+
+
     /// Fin du tour
 
     auto it_parc = find_if(monuments_joueurs.begin(), monuments_joueurs.end(), [](Monument* m){return m->get_nom() == "ParcAttraction";});
@@ -881,4 +882,10 @@ unsigned int Partie::selectionner_joueur(const vector<Joueur*>& tab_joueurs, uns
 
     cout<<"joueur selectionne : "<<tab_joueurs[selection]->get_nom();
     return selection;
+}
+
+
+unsigned int Partie::lancer_de() {
+    srand(time(nullptr));
+    return rand() % 6 + 1;
 }
