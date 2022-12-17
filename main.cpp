@@ -1,18 +1,16 @@
 #include <iostream>
 using namespace std;
 
-#include "EditionDeJeu.h"
-#include "Shop.h"
-#include <algorithm>
-#include "Pioche.h"
-#include "Partie.h"
+#include <QApplication>
+#include <QPushButton>
 
-int main() {
 
-    EditionDeJeu edj = EditionDeJeu("Standard");
+int main(int argc, char * argv[]) {
 
-    Partie test = Partie(&edj);
+    QApplication app(argc, argv);
 
-    test.jouer_partie();
-    return 0;
+    QPushButton bouton("Jouer");
+    bouton.show();
+
+    return app.exec();
 }

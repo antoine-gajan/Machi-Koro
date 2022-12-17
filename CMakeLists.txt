@@ -1,7 +1,19 @@
-cmake_minimum_required(VERSION 3.23)
-project(Machi-Koro)
+cmake_minimum_required(VERSION 3.24)
+project(Machi_Koro)
 
 set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTORCC ON)
+set(CMAKE_AUTOUIC ON)
+
+set(CMAKE_PREFIX_PATH "C:/Qt/6.4.1/mingw_64/lib/cmake")
+
+find_package(Qt6 COMPONENTS
+        Core
+        Gui
+        Widgets
+        Multimedia
+        REQUIRED)
 
 include_directories(cartes)
 include_directories(cartes/batiment)
@@ -10,19 +22,14 @@ include_directories(cartes/batiment/rouge)
 include_directories(cartes/batiment/vert)
 include_directories(cartes/batiment/violet)
 include_directories(cartes/monument)
-include_directories(Joueur)
+include_directories(joueur)
 include_directories(controleur)
 include_directories(controleur/EditionDeJeu)
-include_directories(Joueur)
+include_directories(exception)
+include_directories(joueur)
 
-add_executable(Machi-Koro
+add_executable(Machi_Koro
         main.cpp
-
-        controleur/utils.cpp
-        controleur/utils.h
-
-        Joueur/Joueur.cpp
-        Joueur/Joueur.h
 
         cartes/Carte.cpp
         cartes/Carte.h
@@ -74,6 +81,8 @@ add_executable(Machi-Koro
         cartes/batiment/vert/MoonsterSoda.cpp
         cartes/batiment/vert/Superette.h
         cartes/batiment/vert/Superette.cpp
+        cartes/batiment/vert/CaveAVin.cpp
+        cartes/batiment/vert/CaveAVin.h
 
         cartes/batiment/violet/Arboretum.cpp
         cartes/batiment/violet/Arboretum.h
@@ -89,8 +98,8 @@ add_executable(Machi-Koro
         cartes/batiment/violet/MaisonEdition.h
         cartes/batiment/violet/Stade.cpp
         cartes/batiment/violet/Stade.h
-        cartes/batiment/violet/Startup.cpp
-        cartes/batiment/violet/Startup.h
+        cartes/batiment/violet/MgaGameCenter.cpp
+        cartes/batiment/violet/MgaGameCenter.h
 
         cartes/batiment/rouge/Cafe.cpp
         cartes/batiment/rouge/Cafe.h
@@ -136,4 +145,48 @@ add_executable(Machi-Koro
         controleur/Partie.h
         controleur/Shop.cpp
         controleur/Shop.h
+        controleur/utils.cpp
+        controleur/utils.h
+
+        joueur/Joueur.cpp
+        joueur/Joueur.h
+
+        exception/gameExeption.h
         )
+
+target_link_libraries(Machi_Koro
+        Qt::Core
+        Qt::Gui
+        Qt::Widgets
+        Qt::Multimedia
+        )
+
+
+if (WIN32)
+    set(DEBUG_SUFFIX)
+    if (MSVC AND CMAKE_BUILD_TYPE MATCHES "Debug")
+        set(DEBUG_SUFFIX "d")
+    endif ()
+    set(QT_INSTALL_PATH "${CMAKE_PREFIX_PATH}")
+    if (NOT EXISTS "${QT_INSTALL_PATH}/bin")
+        set(QT_INSTALL_PATH "${QT_INSTALL_PATH}/..")
+        if (NOT EXISTS "${QT_INSTALL_PATH}/bin")
+            set(QT_INSTALL_PATH "${QT_INSTALL_PATH}/..")
+        endif ()
+    endif ()
+    if (EXISTS "${QT_INSTALL_PATH}/plugins/platforms/qwindows${DEBUG_SUFFIX}.dll")
+        add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+                COMMAND ${CMAKE_COMMAND} -E make_directory
+                "$<TARGET_FILE_DIR:${PROJECT_NAME}>/plugins/platforms/")
+        add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+                COMMAND ${CMAKE_COMMAND} -E copy
+                "${QT_INSTALL_PATH}/plugins/platforms/qwindows${DEBUG_SUFFIX}.dll"
+                "$<TARGET_FILE_DIR:${PROJECT_NAME}>/plugins/platforms/")
+    endif ()
+    foreach (QT_LIB Core Gui Widgets Multimedia)
+        add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+                COMMAND ${CMAKE_COMMAND} -E copy
+                "${QT_INSTALL_PATH}/bin/Qt6${QT_LIB}${DEBUG_SUFFIX}.dll"
+                "$<TARGET_FILE_DIR:${PROJECT_NAME}>")
+    endforeach (QT_LIB)
+endif ()
