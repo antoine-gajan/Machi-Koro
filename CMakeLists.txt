@@ -152,7 +152,7 @@ add_executable(Machi_Koro
         joueur/Joueur.h
 
         exception/gameExeption.h
-        cartes/VueCarte.cpp cartes/VueCarte.h)
+        cartes/VueCarte.cpp cartes/VueCarte.h Joueur/VueJoueur.cpp Joueur/VueJoueur.h)
 
 target_link_libraries(Machi_Koro
         Qt::Core
