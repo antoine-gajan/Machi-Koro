@@ -3,7 +3,7 @@ using namespace std;
 
 #include <QApplication>
 #include <QPushButton>
-
+#include <QMediaPlayer>
 
 int main(int argc, char * argv[]) {
 
