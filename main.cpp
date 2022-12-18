@@ -3,14 +3,18 @@ using namespace std;
 
 #include <QApplication>
 #include <QPushButton>
-#include <QMediaPlayer>
+#include "VueCarte.h"
+#include "Boulangerie.h"
 
 int main(int argc, char * argv[]) {
 
     QApplication app(argc, argv);
+    QWidget fenetre;
 
-    QPushButton bouton("Jouer");
-    bouton.show();
-
+    fenetre.setFixedSize(500, 300);
+    fenetre.setWindowTitle("Machi Koro");
+    VueCarte *carte = new VueCarte(Boulangerie(), &fenetre);
+    carte->show();
+    fenetre.show();
     return app.exec();
 }

@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.24)
 project(Machi_Koro)
 
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
@@ -152,7 +152,7 @@ add_executable(Machi_Koro
         joueur/Joueur.h
 
         exception/gameExeption.h
-        )
+        cartes/VueCarte.cpp cartes/VueCarte.h)
 
 target_link_libraries(Machi_Koro
         Qt::Core
