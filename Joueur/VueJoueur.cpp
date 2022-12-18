@@ -12,6 +12,9 @@ VueJoueur::VueJoueur(Joueur* joueur, QWidget *parent) {
 
     // Barre avec les informations du joueur
     layout_informations = new QHBoxLayout;
+    QVBoxLayout* layout_informations_gauche = new QVBoxLayout;
+    QHBoxLayout* layout_haut_gauche = new QHBoxLayout;
+
     layout_batiments = new QGridLayout;
     layout_monuments = new QGridLayout;
 
@@ -36,7 +39,14 @@ VueJoueur::VueJoueur(Joueur* joueur, QWidget *parent) {
         ind_cartes++;
     }
 
-    // Ajout des layouts
-    layout_informations->addLayout(layout_monuments);
+    // Création du layout gauche
+    layout_haut_gauche->addWidget(nom_joueur);
+    layout_haut_gauche->addWidget(argent);
+    layout_informations_gauche->addLayout(layout_haut_gauche);
+
+    // Ajout des layouts à la page d'informations
+    layout_informations->addLayout(layout_informations_gauche);
     layout_informations->addLayout(layout_batiments);
+
+    setLayout(layout_informations);
 }
