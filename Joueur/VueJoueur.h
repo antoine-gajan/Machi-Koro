@@ -26,7 +26,7 @@ private:
     vector<VueCarte*> vuecartes; // adresses des objets VueCarte
 private slots:
     // slots qui gère les clics sur les cartes
-    void carteClique(VueCarte* vc);
+    //void carteClique(VueCarte* vc);
 };
 
 
