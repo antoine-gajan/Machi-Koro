@@ -45,11 +45,14 @@ void build_content_jeu(QWidget *jeu){
 
     auto *layout_centre = new QHBoxLayout();
     auto *layout_centre_gauche = new QVBoxLayout(); // Pioche et affichages
+
+    // build_content_centre_gauche(layout_centre_gauche);
     auto label_centre_gauche = new QLabel("Ici pioche");
     layout_centre_gauche->addWidget(label_centre_gauche);
 
     auto *layout_centre_droite = new QVBoxLayout(); // Shop
     auto label_centre_droite = new QLabel("Ici shop");
+    // build_content_centre_droite(layout_centre_droite);
     layout_centre_droite->addWidget(label_centre_droite);
     layout_centre->addLayout(layout_centre_gauche);
     layout_centre->addLayout(layout_centre_droite);
@@ -57,9 +60,14 @@ void build_content_jeu(QWidget *jeu){
 
     auto *layout_joueur = new QHBoxLayout();
     auto *layout_joueur_gauche = new QVBoxLayout(); // Infos joueur, monuments, argent, etc
+
+    // build_content_joueur_gauche(layout_joueur_gauche);
     auto label_joueur_gauche = new QLabel("Ici infos joueur");
     layout_joueur_gauche->addWidget(label_joueur_gauche);
+
     auto *layout_joueur_droite = new QVBoxLayout(); // Batiments et bouton batiments fermes
+    // build_content_joueur_droite(layout_joueur_droite);
+
     auto label_joueur_droite = new QLabel("Ici batiments");
     layout_joueur_droite->addWidget(label_joueur_droite);
     layout_joueur->addLayout(layout_joueur_gauche);
