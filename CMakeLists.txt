@@ -6,7 +6,10 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
 
-set(CMAKE_PREFIX_PATH "C:/Qt/6.4.1/mingw_64/lib/cmake")
+#set(CMAKE_PREFIX_PATH "C:/Qt/6.4.1/mingw_64/lib/cmake")
+set(CMAKE_PREFIX_PATH "/home/theo/LO21/Qt/6.4.1/gcc_64/lib/cmake")
+
+
 
 find_package(Qt6 COMPONENTS
         Core
@@ -22,7 +25,6 @@ include_directories(cartes/batiment/rouge)
 include_directories(cartes/batiment/vert)
 include_directories(cartes/batiment/violet)
 include_directories(cartes/monument)
-include_directories(joueur)
 include_directories(controleur)
 include_directories(controleur/EditionDeJeu)
 include_directories(exception)
@@ -152,7 +154,7 @@ add_executable(Machi_Koro
         joueur/Joueur.h
 
         exception/gameExeption.h
-        cartes/VueCarte.cpp cartes/VueCarte.h Joueur/VueJoueur.cpp Joueur/VueJoueur.h)
+        cartes/VueCarte.cpp cartes/VueCarte.h joueur/VueJoueur.cpp joueur/VueJoueur.h)
 
 target_link_libraries(Machi_Koro
         Qt::Core
