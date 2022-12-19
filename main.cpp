@@ -16,6 +16,8 @@ using namespace std;
 #include "Joueur.h"
 #include "Boulangerie.h"
 #include "Aeroport.h"
+#include "Epicerie.h"
+#include "Cafe.h"
 
 void resize_and_center(QWidget *widget, int width, int height)
 {
@@ -85,7 +87,7 @@ void build_content_jeu(QWidget *jeu){
 int main(int argc, char * argv[]) {
 
     QApplication app(argc, argv);
-    auto *menu = new QWidget();
+    /*auto *menu = new QWidget();
     auto *jeu = new QWidget();
 
     resize_and_center(menu , 700, 500);
@@ -98,16 +100,33 @@ int main(int argc, char * argv[]) {
     jeu->show();
 
 
-    return QApplication::exec();
+    return QApplication::exec();*/
 
-//    QWidget fenetre;
-//    vector<Batiment*> liste_bat;
-//    liste_bat.push_back(new Boulangerie());
-//    vector<Monument*> liste_mon;
-//    liste_mon.push_back(new Aeroport());
-//    Joueur* j = new Joueur("Test", liste_mon, liste_bat, 3);
-//    VueJoueur* vj = new VueJoueur(j, &fenetre);
-//    vj->show();
-//    fenetre.show();
-//    return app.exec();
+    QWidget fenetre;
+    vector<Batiment*> liste_bat;
+    liste_bat.push_back(new Boulangerie());
+    liste_bat.push_back(new Epicerie());
+    liste_bat.push_back(new Cafe());
+    vector<Monument*> liste_mon;
+    //liste_mon.push_back(new Aeroport());
+    Joueur* j = new Joueur("Test", liste_mon, liste_bat, 3);
+    VueJoueur* vj = new VueJoueur(j, &fenetre);
+    vj->show();
+    //fenetre.show();
+
+    //QHBoxLayout * layout = new QHBoxLayout;
+    //QLabel* lab = new QLabel(&fenetre);
+    //lab->setPixmap(QPixmap(":/Boulangerie.jpg"));
+    //QPushButton* button = new QPushButton;
+    //QLabel *label = new QLabel(&fenetre);
+    //QPixmap pixmap("../assets/batiments/Vert/Boulangerie.png");
+    //label->setPixmap(pixmap);
+    //label->resize(pixmap.size());
+    //QIcon ButtonIcon(pixmap);
+    //button->setIcon(ButtonIcon);
+    //button->setIconSize(pixmap.rect().size());
+
+    //fenetre.show();
+
+    return app.exec();
 }
