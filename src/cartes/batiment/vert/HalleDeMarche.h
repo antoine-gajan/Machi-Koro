@@ -1,11 +1,7 @@
 #ifndef MACHI_KORO_HALLE_DE_MARCHE_H
 #define MACHI_KORO_HALLE_DE_MARCHE_H
 
-#include "../Batiment.h"
-#include "Joueur.h"
-#include "../controleur/utils.h"
-#include <list>
-#include <vector>
+#include "Batiment.h"
 
 class HalleDeMarche : public Batiment {
 public:

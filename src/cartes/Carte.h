@@ -2,7 +2,11 @@
 #define MACHI_KORO_CARTE_H
 
 #include <string>
+#include <list>
+#include <vector>
 #include <iostream>
+#include "gameExeption.h"
+
 class Carte {
 protected:
     std::string nom;
@@ -20,6 +24,8 @@ public:
 
 
     virtual std::string get_type() const = 0;
+
+    static unsigned int argent_effet(int a);
 
     virtual void declencher_effet(unsigned int possesseur, int bonus = 0) const = 0;
 };

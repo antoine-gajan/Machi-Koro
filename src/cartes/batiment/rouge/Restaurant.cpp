@@ -1,18 +1,25 @@
 #include "Restaurant.h"
+#include "Partie.h"
 
 Restaurant::Restaurant() :
             Batiment("Restaurant",
                      3,
                      "Recevez 2 pieces du joueur qui a lance les des",
-                     "../../assets/batiments/Rouge/Restaurant.jpg",
+                     "../../../assets/batiments/Rouge/Restaurant.jpg",
                      Rouge ,
                      list<unsigned int>{ 9,10 },
-                     "restaurant") {};
+                     "restaurant") {}
 
 
 void Restaurant::declencher_effet(unsigned int possesseur, int bonus) const{
-    //j'ai deliberement retire le parametre joueur actuel de declencher effet pour respecter la methode virtuelle declaree dans Batiment.h
-    cout << "Activation de l'effet du restaurant" << endl;
+    Partie * partie = Partie::get_instance();
+    Joueur* joueur_possesseur = partie->get_tab_joueurs()[possesseur];
+    cout << "Activation de l'effet du Restaurant du joueur \"" << joueur_possesseur->get_nom()<<"\"" << endl;
     //Trouver un joueur qui a cette carte
-    //si il y en a un enlever 2 piece au joueur actuel et ajouter 2 piece au joueur qui en a une
+    if(partie->get_joueur_actuel() != possesseur){
+        partie->transfert_argent(possesseur, partie->get_joueur_actuel(), 2 + bonus);
+    }
+    else{
+        throw gameException("On ne peut pas se donner d'argent a soi meme");
+    }
 }

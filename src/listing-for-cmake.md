@@ -16,18 +16,21 @@ include_directories(cartes/batiment/rouge)
 include_directories(cartes/batiment/vert)
 include_directories(cartes/batiment/violet)
 include_directories(cartes/monument)
-include_directories(Joueur)
+include_directories(joueur)
 include_directories(controleur)
+include_directories(exception)
 include_directories(controleur/EditionDeJeu)
 
 add_executable(src
         main.cpp
 
+        exception/gameExeption.h
+        
         controleur/utils.cpp
         controleur/utils.h
 
-        Joueur/Joueur.cpp
-        Joueur/Joueur.h
+        joueur/Joueur.cpp
+        joueur/Joueur.h
 
         cartes/Carte.cpp
         cartes/Carte.h
@@ -79,6 +82,8 @@ add_executable(src
         cartes/batiment/vert/MoonsterSoda.cpp
         cartes/batiment/vert/Superette.h
         cartes/batiment/vert/Superette.cpp
+        cartes/batiment/vert/CaveAVin.cpp
+        cartes/batiment/vert/CaveAVin.h
 
         cartes/batiment/violet/Arboretum.cpp
         cartes/batiment/violet/Arboretum.h
@@ -94,8 +99,8 @@ add_executable(src
         cartes/batiment/violet/MaisonEdition.h
         cartes/batiment/violet/Stade.cpp
         cartes/batiment/violet/Stade.h
-        cartes/batiment/violet/Startup.cpp
-        cartes/batiment/violet/Startup.h
+        cartes/batiment/violet/MgaGameCenter.cpp
+        cartes/batiment/violet/MgaGameCenter.h
 
         cartes/batiment/rouge/Cafe.cpp
         cartes/batiment/rouge/Cafe.h
@@ -139,7 +144,7 @@ add_executable(src
         controleur/Shop.h
         controleur/Pioche.cpp
         controleur/Pioche.h
-)
+        )
 ```
 
 ## Imports
@@ -157,6 +162,7 @@ add_executable(src
 /// Importation des batiments verts
 #include "BanqueDeMinivilles.h"
 #include "Boulangerie.h"
+#include "CaveAVin.h"
 #include "EntrepriseDeDemenagement.h"
 #include "EntrepriseDeTravauxPublics.h"
 #include "Epicerie.h"
@@ -196,8 +202,8 @@ add_executable(src
 #include "ChaineTelevision.h"
 #include "EntrepriseRenovation.h"
 #include "MaisonEdition.h"
+#include "MgaGameCenter.h"
 #include "Stade.h"
-#include "Startup.h"
 
 /// Importation des controleurs
 #include "EditionDeJeu.h"

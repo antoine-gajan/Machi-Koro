@@ -5,7 +5,9 @@
 #include <random>
 #include <stack>
 #include <algorithm>
+
 #include "Batiment.h"
+#include "gameExeption.h"
 
 class Pioche {
     friend class Batiment;

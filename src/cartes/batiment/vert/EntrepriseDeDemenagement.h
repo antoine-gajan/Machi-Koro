@@ -1,11 +1,7 @@
 #ifndef MACHI_KORO_ENTREPRISE_DE_DEMENAGEMENT_H
 #define MACHI_KORO_ENTREPRISE_DE_DEMENAGEMENT_H
 
-#include "../Batiment.h"
-#include "Joueur.h"
-#include "../controleur/utils.h"
-#include <list>
-#include <vector>
+#include "Batiment.h"
 
 class EntrepriseDeDemenagement : public Batiment {
 public:

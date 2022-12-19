@@ -10,19 +10,14 @@ include_directories(cartes/batiment/rouge)
 include_directories(cartes/batiment/vert)
 include_directories(cartes/batiment/violet)
 include_directories(cartes/monument)
-include_directories(Joueur)
+include_directories(joueur)
 include_directories(controleur)
 include_directories(controleur/EditionDeJeu)
-include_directories(Joueur)
+include_directories(exception)
+include_directories(joueur)
 
 add_executable(src
         main.cpp
-
-        controleur/utils.cpp
-        controleur/utils.h
-
-        Joueur/Joueur.cpp
-        Joueur/Joueur.h
 
         cartes/Carte.cpp
         cartes/Carte.h
@@ -74,6 +69,8 @@ add_executable(src
         cartes/batiment/vert/MoonsterSoda.cpp
         cartes/batiment/vert/Superette.h
         cartes/batiment/vert/Superette.cpp
+        cartes/batiment/vert/CaveAVin.cpp
+        cartes/batiment/vert/CaveAVin.h
 
         cartes/batiment/violet/Arboretum.cpp
         cartes/batiment/violet/Arboretum.h
@@ -89,8 +86,8 @@ add_executable(src
         cartes/batiment/violet/MaisonEdition.h
         cartes/batiment/violet/Stade.cpp
         cartes/batiment/violet/Stade.h
-        cartes/batiment/violet/Startup.cpp
-        cartes/batiment/violet/Startup.h
+        cartes/batiment/violet/MgaGameCenter.cpp
+        cartes/batiment/violet/MgaGameCenter.h
 
         cartes/batiment/rouge/Cafe.cpp
         cartes/batiment/rouge/Cafe.h
@@ -136,4 +133,11 @@ add_executable(src
         controleur/Partie.h
         controleur/Shop.cpp
         controleur/Shop.h
-        )
+        controleur/utils.cpp
+        controleur/utils.h
+
+        joueur/Joueur.cpp
+        joueur/Joueur.h
+
+        exception/gameExeption.h
+)

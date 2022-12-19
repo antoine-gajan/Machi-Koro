@@ -1,11 +1,21 @@
 #ifndef MACHI_KORO_EDITIONDEJEU_H
 #define MACHI_KORO_EDITIONDEJEU_H
 
-#include <string>
 #include <map>
 #include <vector>
+
 #include "Batiment.h"
 #include "Monument.h"
+
+/// Importation des classes monuments
+#include "Aeroport.h"
+#include "CentreCommercial.h"
+#include "FabriqueDuPereNoel.h"
+#include "Gare.h"
+#include "HotelDeVille.h"
+#include "ParcAttraction.h"
+#include "Port.h"
+#include "TourRadio.h"
 
 /// Importation des classes monuments
 #include "Aeroport.h"
@@ -20,6 +30,7 @@
 /// Importation des batiments verts
 #include "BanqueDeMinivilles.h"
 #include "Boulangerie.h"
+#include "CaveAVin.h"
 #include "EntrepriseDeDemenagement.h"
 #include "EntrepriseDeTravauxPublics.h"
 #include "Epicerie.h"
@@ -47,8 +58,8 @@
 #include "Cafe.h"
 #include "ClubPrive.h"
 #include "Pizzeria.h"
-#include "Restaurant5Etoiles.h"
 #include "Restaurant.h"
+#include "Restaurant5Etoiles.h"
 #include "StandDeHamburger.h"
 #include "SushiBar.h"
 
@@ -59,36 +70,42 @@
 #include "ChaineTelevision.h"
 #include "EntrepriseRenovation.h"
 #include "MaisonEdition.h"
+#include "MgaGameCenter.h"
 #include "Stade.h"
-#include "Startup.h"
+
+/// Importation des controleurs
+#include "EditionDeJeu.h"
+#include "Pioche.h"
+#include "Shop.h"
+
 
 class EditionDeJeu{
-protected:
-    std::string nom;
-    unsigned int nb_joueurs_min;
-    unsigned int nb_joueurs_max;
-    unsigned int nb_monuments_win;
+    protected:
+        string nom;
+        unsigned int nb_joueurs_max;
+        unsigned int nb_monuments_win;
 
-    vector<Monument*> monument;
-    map<Batiment*, unsigned int> batiment;
+        vector<Monument*> monument;
+        map<Batiment*, unsigned int> batiment;
 
-    bool est_edition;
+        bool est_edition;
 
-public:
-    /// *** Constructeur et destructeur *** ///
-    EditionDeJeu(const string& nom);
-    ~EditionDeJeu();
+    public:
+        /// *** Constructeur et destructeur *** ///
+        EditionDeJeu(const string& nom);
+        ~EditionDeJeu();
 
-    /// *** Getters *** ///
-    const std::string& get_nom() const {return nom;};
-    unsigned int get_nb_joueurs_min() const {return nb_joueurs_min;};
-    unsigned int get_nb_joueurs_max() const {return nb_joueurs_max;};
-    unsigned int get_nb_monuments_win() const {return nb_monuments_win;};
+        /// *** Getters *** ///
+        const string& get_nom() const {return nom;};
 
-    bool get_est_edition() const {return est_edition;};
-    /// *** Recuperation des monuments et des batiments *** ///
-    vector<Monument*> get_monument() const {return monument;};
+        unsigned int get_nb_joueurs_max() const {return nb_joueurs_max;};
+        unsigned int get_nb_monuments_win() const {return nb_monuments_win;};
 
-    map<Batiment*, unsigned int> get_batiment() const {return batiment;};
+        bool get_est_edition() const {return est_edition;};
+
+        /// *** Recuperation des monuments et des batiments *** ///
+        vector<Monument*> get_monument() const {return monument;};
+
+        map<Batiment*, unsigned int> get_batiment() const {return batiment;};
 };
 #endif //MACHI_KORO_EDITIONDEJEU_H

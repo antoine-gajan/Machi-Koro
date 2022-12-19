@@ -1,7 +1,6 @@
 #ifndef MACHI_KORO_CHAINETELEVISION_H
 #define MACHI_KORO_CHAINETELEVISION_H
 
-#include <vector>
 #include "Batiment.h"
 
 class ChaineTelevision : public Batiment {

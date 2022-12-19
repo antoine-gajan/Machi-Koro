@@ -1,9 +1,7 @@
 #ifndef MACHI_KORO_BATIMENT_H
 #define MACHI_KORO_BATIMENT_H
-#include <string>
-#include <list>
-#include "../Carte.h"
-#include <iostream>
+
+#include "Carte.h"
 
 using namespace std;
 
