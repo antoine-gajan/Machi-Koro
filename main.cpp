@@ -12,7 +12,10 @@ using namespace std;
 #include <QWidget>
 #include <QVBoxLayout>
 #include "VueCarte.h"
+#include "VueJoueur.h"
+#include "Joueur.h"
 #include "Boulangerie.h"
+#include "Aeroport.h"
 
 void resize_and_center(QWidget *widget, int width, int height)
 {
@@ -87,7 +90,16 @@ int main(int argc, char * argv[]) {
     jeu->show();
 
 
-//    auto *carte = new VueCarte(Boulangerie(), &fenetre);
-//    carte->show();
     return QApplication::exec();
+
+//    QWidget fenetre;
+//    vector<Batiment*> liste_bat;
+//    liste_bat.push_back(new Boulangerie());
+//    vector<Monument*> liste_mon;
+//    liste_mon.push_back(new Aeroport());
+//    Joueur* j = new Joueur("Test", liste_mon, liste_bat, 3);
+//    VueJoueur* vj = new VueJoueur(j, &fenetre);
+//    vj->show();
+//    fenetre.show();
+//    return app.exec();
 }
