@@ -5,7 +5,7 @@ MgaGameCenter::MgaGameCenter() :
         Batiment("MgaGameCenter",
                  7,
                  "Choississez un de vos etablissements qui ne soit pas de type special et activez son effet. Puis fermez le MGA game center.",
-                 "../../../assets/batiments/Violet/MgaGameCenter.jpg",
+                 "../assets/batiments/Violet/MgaGameCenter.png",
                  Violet,
                  {10},
                  "special") {

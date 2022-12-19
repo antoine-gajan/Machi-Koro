@@ -5,7 +5,7 @@ MaisonEdition::MaisonEdition():
         Batiment("MaisonEdition",
                  5,
                  "Recevez 1 piece de chaque joueur pour chaque etablissement de type restaurant et commerce qu'il possede.",
-                 "../../../assets/batiments/Violet/Maison-d-edition.jpg",
+                 "../assets/batiments/Violet/Maison-d-edition.png",
                  Violet,
                  list<unsigned int>{7},
                  "special") {

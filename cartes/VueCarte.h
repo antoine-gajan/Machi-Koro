@@ -19,6 +19,7 @@ public:
     bool cartePresente() const { return carte!=nullptr; }
 private:
     const Carte* carte=nullptr;
+    QPixmap image;
 
 signals:
     // quand la vue de carte est cliquée, elle émet un signal en transmettant son adresse

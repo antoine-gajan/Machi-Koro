@@ -5,7 +5,7 @@ Boulangerie::Boulangerie()
         : Batiment("Boulangerie",
                    1,
                    "Recevez 1 piece de la banque.",
-                   "../../../assets/batiments/Vert/Boulangerie.jpg",
+                   "../assets/batiments/Vert/Boulangerie.png",
                    Vert,
                    {2, 3},
                    "commerce") {}

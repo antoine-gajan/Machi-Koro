@@ -5,7 +5,7 @@ Epicerie::Epicerie()
         : Batiment("Epicerie",
                    0,
                    "Si vous possedez moins de deux monuments, recevez 2 pieces de la banque.",
-                   "../../../assets/batiments/Vert/Epicerie.jpg",
+                   "../assets/batiments/Vert/Epicerie.png",
                    Vert,
                    {2},
                    "commerce") {}

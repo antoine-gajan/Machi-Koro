@@ -5,7 +5,7 @@ Fromagerie::Fromagerie()
         : Batiment("Fromagerie",
                    5,
                    "Recevez 3 pieces de la banque pour chaque etablissement de type betail que vous possedez.",
-                   "../../../assets/batiments/Vert/Fromagerie.jpg",
+                   "../assets/batiments/Vert/Fromagerie.png",
                    Vert,
                    {7},
                    "usine") {}

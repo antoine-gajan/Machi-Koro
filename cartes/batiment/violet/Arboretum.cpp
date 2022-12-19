@@ -5,7 +5,7 @@ Arboretum::Arboretum():
         Batiment("Arboretum",
                  3,
                  "Rassemblez les pieces de tous les joueurs puis redistribuez les de maniere egale entre tous. La banque completera s'il manque des pieces pour une redistribution egale.",
-                 "../../../assets/batiments/Violet/Arboretum.jpg",
+                 "../assets/batiments/Violet/Arboretum.png",
                  Violet,
                  list<unsigned int>{11, 12, 13},
                  "special") {

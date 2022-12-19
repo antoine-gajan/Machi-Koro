@@ -5,7 +5,7 @@ HalleDeMarche::HalleDeMarche()
         : Batiment("HalleDeMarche",
                    2,
                    "Recevez 2 pieces de la banque pour chaque etablissement de type restaurant que vous possedez",
-                   "../../../assets/batiments/Vert/Halle-de-marche.jpg",
+                   "../assets/batiments/Vert/Halle-de-marche.png",
                    Vert,
                    {12, 13},
                    "usine") {}

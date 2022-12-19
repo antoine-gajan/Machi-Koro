@@ -4,7 +4,7 @@ Startup::Startup() :
         Batiment("Startup",
                  1,
                  "Recevez 1 piece de la banque pour chaque piece placee sur l'ensemble de tous les joueurs. A la fin de votre tour, placez une piece sur votre Startup.",
-                 "../../../assets/batiments/Violet/Startup.jpg",
+                 "../assets/batiments/Violet/Startup.png",
                  Violet,
                  list<unsigned int>{10},
                  "special") {

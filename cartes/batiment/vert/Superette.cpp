@@ -5,7 +5,7 @@ Superette::Superette()
         : Batiment("Superette",
                    2,
                    "Recevez 3 piece de la banque.",
-                   "../../../assets/batiments/Vert/Superette.jpg",
+                   "../assets/batiments/Vert/Superette.png",
                    Vert,
                    {4},
                    "commerce") {}

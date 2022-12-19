@@ -15,20 +15,22 @@ VueJoueur::VueJoueur(Joueur* joueur, QWidget *parent) {
     QVBoxLayout* layout_informations_gauche = new QVBoxLayout;
     QHBoxLayout* layout_haut_gauche = new QHBoxLayout;
 
+    // Création de la grid
     layout_batiments = new QGridLayout;
     layout_monuments = new QGridLayout;
-
-    int ind_cartes = 0;
+    int i = 0;
+    int ind_cartes;
     int ind_couleurs = 0;
     // Création des vues des batiments du joueur
     for (auto& couleur : joueur->get_liste_batiment()){
+        ind_cartes = 0;
         for (auto bat : couleur.second){
             // Affichage du batiment
             vue_batiments.push_back(new VueCarte(*bat.first, parent));
-            layout_batiments->addWidget(vue_batiments[ind_cartes], ind_couleurs, ind_cartes);
+            layout_batiments->addWidget(vue_batiments[i], ind_couleurs, ind_cartes);
             ind_cartes++;
+            i++;
         }
-        ind_cartes = 0;
         ind_couleurs++;
     }
 

@@ -7,7 +7,7 @@ ChaineTelevision::ChaineTelevision():
     Batiment("ChaineTelevision",
              7,
              "Recevez 5 pieces du joueur de votre choix",
-             "../../../assets/batiments/Violet/Chaine-de-television.jpg",
+             "../assets/batiments/Violet/Chaine-de-television.png",
              Violet,
              list<unsigned int>{6},
              "special") {

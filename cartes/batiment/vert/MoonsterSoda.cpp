@@ -5,7 +5,7 @@ MoonsterSoda::MoonsterSoda()
         : Batiment("MoonsterSoda",
                    5,
                    "Recevez 1 piece de la banque pour chaque etablissement de type restaurant que possedent tous les joueurs.",
-                   "../../../assets/batiments/Vert/Moonster-soda.jpg",
+                   "../assets/batiments/Vert/Moonster-soda.png",
                    Vert,
                    {11},
                    "usine") {}

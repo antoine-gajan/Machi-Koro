@@ -5,7 +5,7 @@ Stade::Stade() :
 Batiment("Stade",
          6,
          "Recevez 2 pieces de la part de chaque autre joueur",
-         "../../../assets/batiments/Violet/Stade.jpg",
+         "../assets/batiments/Violet/Stade.png",
          Violet,
          list<unsigned int>{6},
          "special") {

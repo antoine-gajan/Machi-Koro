@@ -6,8 +6,8 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
 
-#set(CMAKE_PREFIX_PATH "C:/Qt/6.4.1/mingw_64/lib/cmake")
-set(CMAKE_PREFIX_PATH "/home/theo/LO21/Qt/6.4.1/gcc_64/lib/cmake")
+set(CMAKE_PREFIX_PATH "C:/Qt/6.4.1/mingw_64/lib/cmake")
+#set(CMAKE_PREFIX_PATH "/home/theo/LO21/Qt/6.4.1/gcc_64/lib/cmake")
 
 
 
@@ -154,7 +154,12 @@ add_executable(Machi_Koro
         joueur/Joueur.h
 
         exception/gameExeption.h
-        cartes/VueCarte.cpp cartes/VueCarte.h joueur/VueJoueur.cpp joueur/VueJoueur.h)
+
+        cartes/VueCarte.cpp
+        cartes/VueCarte.h
+
+        joueur/VueJoueur.cpp
+        joueur/VueJoueur.h)
 
 target_link_libraries(Machi_Koro
         Qt::Core
