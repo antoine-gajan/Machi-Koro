@@ -110,7 +110,11 @@ int main(int argc, char * argv[]) {
     liste_bat.push_back(new Epicerie());
     liste_bat.push_back(new Cafe());
     vector<Monument*> liste_mon;
-    liste_mon.push_back(new Aeroport());
+
+    Monument* mon = new Aeroport();
+    mon->activer();
+    liste_mon.push_back(mon);
+    
     Joueur* j = new Joueur("Test", liste_mon, liste_bat, 3);
     j->fermer_batiment(b);
     VueJoueur* vj = new VueJoueur(j, &fenetre);

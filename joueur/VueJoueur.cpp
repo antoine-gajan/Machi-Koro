@@ -45,8 +45,9 @@ VueJoueur::VueJoueur(Joueur* joueur, QWidget *parent) {
     // Création des vues des monuments du joueur
     int ind_mon=0;
     for (auto& mon : joueur->get_liste_monument()){
-        vue_monuments.push_back(new VueCarte(*mon.first, true, parent));
+        vue_monuments.push_back(new VueCarte(*mon.first,true, parent));
         layout_monuments->addWidget(vue_monuments[ind_mon], ind_mon/3, ind_mon%3);
+        connect(vue_monuments[ind_mon],SIGNAL(carteClicked(VueCarte*)),this,SLOT(carteClique(VueCarte*)));
         ind_mon++;
     }
 
