@@ -5,7 +5,7 @@ CaveAVin::CaveAVin()
         : Batiment("CaveAVin",
                    3,
                    "Recevez 6 pieces de la banque pour chaque Vignoble que vous possedez. Puis fermez cette cave a vin.",
-                   "/../assets/batiments/Vert/CaveAVin.png",
+                   "../assets/batiments/Vert/CaveAVin.png",
                    Vert,
                    {9},
                    "usine") {}

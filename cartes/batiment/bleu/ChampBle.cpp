@@ -5,7 +5,7 @@ ChampBle::ChampBle() :
     Batiment("ChampBle",
         1,
         "Recevez une piece de la banque",
-        "../../../assets/batiments/bleu/ChampsBle.jpg",
+        "../assets/batiments/bleu/ChampsBle.png",
         Bleu,
         list<unsigned int>{1},
         "Champ"){}

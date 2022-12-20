@@ -9,7 +9,8 @@ VueJoueur::VueJoueur(Joueur* joueur, QWidget *parent) {
     // Argent du joueur
     argent=new QLCDNumber;
     argent->display((int)joueur->get_argent());
-    argent->setFixedHeight(30);
+    //argent->setFixedHeight(30);
+    argent->setFixedSize(70,30);
 
     // Barre avec les informations du joueur
     layout_informations = new QHBoxLayout;
@@ -19,9 +20,12 @@ VueJoueur::VueJoueur(Joueur* joueur, QWidget *parent) {
     // Création de la grid
     layout_batiments = new QGridLayout;
     layout_monuments = new QGridLayout;
+    text_bat = new QLabel;
+    text_bat->setText(QString::fromStdString("Batiments :"));
+    layout_batiments->addWidget(text_bat, 0,0);
     int i = 0;
     int ind_bat;
-    int ind_couleurs = 0;
+    int ind_couleurs = 1;
     // Création des vues des batiments du joueur
     for (auto& couleur : joueur->get_liste_batiment()){
         ind_bat = 0;
@@ -45,6 +49,7 @@ VueJoueur::VueJoueur(Joueur* joueur, QWidget *parent) {
     // Création des vues des monuments du joueur
     int ind_mon=0;
     for (auto& mon : joueur->get_liste_monument()){
+
         vue_monuments.push_back(new VueCarte(*mon.first,true, parent));
         layout_monuments->addWidget(vue_monuments[ind_mon], ind_mon/3, ind_mon%3);
         connect(vue_monuments[ind_mon],SIGNAL(carteClicked(VueCarte*)),this,SLOT(carteClique(VueCarte*)));

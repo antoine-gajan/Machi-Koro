@@ -18,6 +18,7 @@ Q_OBJECT
 public:
     explicit VueJoueur(Joueur* joueur, QWidget *parent = nullptr);
 private:
+    QLabel* text_bat;
     QLabel* nom_joueur; // texte avec le nom du joueur
     QLCDNumber* argent; // affichage de l'argent du joueur
     QHBoxLayout* layout_informations;

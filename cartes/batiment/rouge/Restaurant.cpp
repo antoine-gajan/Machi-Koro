@@ -5,7 +5,7 @@ Restaurant::Restaurant() :
             Batiment("Restaurant",
                      3,
                      "Recevez 2 pieces du joueur qui a lance les des",
-                     "../../../assets/batiments/Rouge/Restaurant.jpg",
+                     "../assets/batiments/Rouge/Restaurant.png",
                      Rouge ,
                      list<unsigned int>{ 9,10 },
                      "restaurant") {}

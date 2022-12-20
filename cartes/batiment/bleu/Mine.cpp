@@ -5,7 +5,7 @@ Mine::Mine() :
     Batiment("Mine",
          6,
         "Recevez cinq pieces de la banque",
-        "../../../assets/batiments/bleu/Mine.jpg",
+        "../assets/batiments/bleu/Mine.png",
         Bleu,
         list<unsigned int>{9},
         "Engrenage"){}

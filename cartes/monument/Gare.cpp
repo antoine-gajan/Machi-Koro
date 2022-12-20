@@ -6,7 +6,7 @@ Gare::Gare()
                "Gare",
                4,
                "Vous pouvez lancer 2 des",
-               "../../assets/monuments/Gare-travaux.png") {
+               "../assets/monuments/Gare-travaux.png") {
     /// Constructeur de Gare
 }
 
@@ -34,9 +34,9 @@ void Gare::declencher_effet(unsigned int possesseur, int bonus) const {
 }
 
 void Gare::activer() {
-    set_image("../../assets/monuments/Gare-active.png");
+    set_image("../assets/monuments/Gare-active.png");
 }
 
 void Gare::desactiver() {
-    set_image("../../assets/monuments/Gare-travaux.png");
+    set_image("../assets/monuments/Gare-travaux.png");
 }

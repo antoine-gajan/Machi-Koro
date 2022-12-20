@@ -5,7 +5,7 @@ ClubPrive::ClubPrive() :
             Batiment("ClubPrive",
                      4 ,
                      "Recevez toutes les pieces du joueur qui a lance les des si celui-ci possede au moins trois monuments construits.",
-                     "../../../assets/batiments/Rouge/Club-prive.jpg",
+                     "../assets/batiments/Rouge/Club-prive.png",
                      Rouge ,
                      list<unsigned int>{12,13,14},
                      "restaurant"){}

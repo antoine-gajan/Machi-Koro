@@ -8,7 +8,7 @@ CentreCommercial::CentreCommercial() :
              "CentreCommercial",
              10,
              "Les etablissement cafe et commerce vous rapportent une piece de plus",
-             "../../assets/monuments/CentreCommercial-travaux.png") {
+             "../assets/monuments/CentreCommercial-travaux.png") {
     /// Constructeur de Centre commercial
 }
 
@@ -18,9 +18,9 @@ void CentreCommercial::declencher_effet(unsigned int possesseur, int bonus) cons
 }
 
 void CentreCommercial::activer() {
-    set_image("../../assets/monuments/CentreCommercial-active.png");
+    set_image("../assets/monuments/CentreCommercial-active.png");
 }
 
 void CentreCommercial::desactiver() {
-    set_image("../../assets/monuments/CentreCommercial-travaux.png");
+    set_image("../assets/monuments/CentreCommercial-travaux.png");
 }
