@@ -4,7 +4,6 @@
 VueJoueur::VueJoueur(Joueur* joueur, QWidget *parent) {
     /// Vue d'un joueur
     // Nom du joueur
-    j = joueur;
     nom_joueur = new QLabel;
     nom_joueur->setText(QString::fromStdString(joueur->get_nom()));
     // Argent du joueur
@@ -21,21 +20,22 @@ VueJoueur::VueJoueur(Joueur* joueur, QWidget *parent) {
     layout_batiments = new QGridLayout;
     layout_monuments = new QGridLayout;
     int i = 0;
-    int ind_cartes;
+    int ind_bat;
     int ind_couleurs = 0;
     // Création des vues des batiments du joueur
     for (auto& couleur : joueur->get_liste_batiment()){
-        ind_cartes = 0;
+        ind_bat = 0;
         for (auto bat : couleur.second){
             // Affichage du batiment
             vue_batiments.push_back(new VueCarte(*bat.first, true, parent));
-            layout_batiments->addWidget(vue_batiments[i], ind_couleurs, ind_cartes);
+            layout_batiments->addWidget(vue_batiments[i], ind_couleurs, ind_bat);
             connect(vue_batiments[i],SIGNAL(carteClicked(VueCarte*)),this,SLOT(carteClique(VueCarte*)));
-            ind_cartes++;
+            ind_bat++;
             i++;
         }
         ind_couleurs++;
     }
+    // Création d'un bouton donnant accès aux batiments fermés
     QPushButton *bat_ferme = new QPushButton("Batiment Fermes");
     layout_batiments->addWidget(bat_ferme);
     connect(bat_ferme, SIGNAL(clicked()),this, SLOT(affichage_bat_ferme()));
@@ -45,9 +45,19 @@ VueJoueur::VueJoueur(Joueur* joueur, QWidget *parent) {
     // Création des vues des monuments du joueur
     int ind_mon=0;
     for (auto& mon : joueur->get_liste_monument()){
-        vue_monuments.push_back(new VueCarte(*mon.first, parent));
-        layout_monuments->addWidget(vue_monuments[ind_cartes], ind_mon/3, ind_mon%3);
+        vue_monuments.push_back(new VueCarte(*mon.first, true, parent));
+        layout_monuments->addWidget(vue_monuments[ind_mon], ind_mon/3, ind_mon%3);
         ind_mon++;
+    }
+
+    int ind_bat_ferme = 0;
+    // Ajout des batiments fermés à une nouvelle fenêtre
+    fenetre_bat_fermes = new QWidget;
+    layout_batiments_ferme = new QGridLayout(fenetre_bat_fermes);
+    for (auto bat: joueur->get_liste_batiment_fermes()) {
+        vue_batiments_ferme.push_back(new VueCarte(*bat, false, fenetre_bat_fermes));
+        layout_batiments_ferme->addWidget(vue_batiments_ferme[ind_bat_ferme], i % 4, i / 4);
+        ind_bat_ferme++;
     }
 
     // Création du layout gauche
@@ -64,29 +74,20 @@ VueJoueur::VueJoueur(Joueur* joueur, QWidget *parent) {
 }
 
 void VueJoueur::carteClique(VueCarte* vc){
-    QWidget* fenetre2 = new QWidget();
-    QLabel *label2 = new QLabel(fenetre2);
+    /// Slot lorsque la carte est cliquée
+    // Création d'une nouvelle fenetre
+    QWidget* fenetre = new QWidget();
+    // Création d'un label contenant l'image
+    QLabel *label = new QLabel(fenetre);
     QPixmap pixmap(QString::fromStdString(vc->getCarte().get_path_image()));
-    label2->setPixmap(pixmap);
-    label2->resize(pixmap.size());
-    fenetre2->show();
+    label->setPixmap(pixmap);
+    label->resize(pixmap.size());
+    // Affichage de la fenetre pop up
+    fenetre->show();
 }
 
 void VueJoueur::affichage_bat_ferme(){
-    int i = 0;
-    QWidget* fenetre2 = new QWidget;
-    layout_batiments_ferme = new QGridLayout(fenetre2);
-    Joueur* joueur = get_joueur();
-    QPixmap pixmap;
-    QLabel *lab = new QLabel;
-    for (auto bat : joueur->get_liste_batiment_fermes()){
-        vue_batiments_ferme.push_back(new VueCarte(*bat, false, fenetre2));
-        layout_batiments_ferme->addWidget(vue_batiments_ferme[i], i%4, i/4);
-        i++;
-    }
-
-
-    setLayout(layout_batiments_ferme);
-
-    fenetre2->show();
+    /// Affichage de la fenetre avec les batiments fermés
+    // Ouverture de la fenetre si elle est fermée
+    fenetre_bat_fermes->show();
 }

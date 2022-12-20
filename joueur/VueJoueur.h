@@ -17,7 +17,6 @@ class VueJoueur : public QWidget
 Q_OBJECT
 public:
     explicit VueJoueur(Joueur* joueur, QWidget *parent = nullptr);
-    Joueur* get_joueur() const{return j;}
 private:
     QLabel* nom_joueur; // texte avec le nom du joueur
     QLCDNumber* argent; // affichage de l'argent du joueur
@@ -26,9 +25,9 @@ private:
     QGridLayout* layout_monuments; // grille des monuments du joueur
     QGridLayout* layout_batiments_ferme; // grille des batiments ferme du joueu// r
     vector<VueCarte*> vue_batiments; // adresses des batiments VueCarte
-    vector<VueCarte*> vue_batiments_ferme; // adresses des batiments VueCarte
+    vector<VueCarte*> vue_batiments_ferme; // adresses des batiments fermés VueCarte
     vector<VueCarte*> vue_monuments; // adresses des monuments VueCarte
-    Joueur * j;
+    QWidget* fenetre_bat_fermes; // Fenetre avec les batiments fermés
 
 public slots:
     // slots qui gère les clics sur les cartes
