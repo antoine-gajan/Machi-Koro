@@ -12,7 +12,7 @@ VueCarte::VueCarte(const Carte &c, QWidget *parent) {
     connect(this,SIGNAL(clicked()),this,SLOT(clickedEvent()));
     setCheckable(true);
     // Nom du bouton
-    this->setObjectName(c.get_nom());
+    this->setObjectName(QString::fromStdString(c.get_nom()));
     // Image du bouton
     QPixmap pixmap(QString::fromStdString(c.get_path_image()));
     pixmap.scaled(20,31,Qt::KeepAspectRatio);
