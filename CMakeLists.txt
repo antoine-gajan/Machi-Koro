@@ -158,9 +158,10 @@ add_executable(Machi_Koro
 
         cartes/VueCarte.cpp
         cartes/VueCarte.h
-
+        controleur/VuePartie.cpp
+        controleur/VuePartie.h
         joueur/VueJoueur.cpp
-        joueur/VueJoueur.h)
+        joueur/VueJoueur.h controleur/VuePartie.cpp controleur/VuePartie.h)
 
 target_link_libraries(Machi_Koro
         Qt::Core
