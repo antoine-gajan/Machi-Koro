@@ -39,6 +39,16 @@ VuePartie::VuePartie(QWidget *parent){
     joueur_affiche = 0;
     //VueJoueur* vj = new VueJoueur(tab_joueurs[i], &fenetre);
     //VueJoueur* vj = tab_vue_joueurs[i];
+    stack = new QStackedWidget(parent);
+    for(auto it : tab_vue_joueurs){
+        stack->addWidget(it);
+    }
+    stack->setCurrentIndex(0);
+
+
+
+
+
     QPushButton* b1 = new QPushButton(parent);
     b1->setText(QString::fromStdString("(<)"));
     connect(b1, SIGNAL(clicked()),this, SLOT(g_click()));
@@ -47,7 +57,9 @@ VuePartie::VuePartie(QWidget *parent){
     connect(b2, SIGNAL(clicked()),this, SLOT(d_click()));
     layout = new QHBoxLayout(parent);
     layout->addWidget(b1);
-    layout->addWidget(tab_vue_joueurs[joueur_affiche]);
+    layout->addWidget(stack);
+    //layout->addWidget(tab_vue_joueurs[joueur_affiche]);
+
 
     //vj = tab_vue_joueurs[1];
     //layout->replaceWidget(tab_vue_joueurs[i], tab_vue_joueurs[1]);
@@ -58,25 +70,24 @@ VuePartie::VuePartie(QWidget *parent){
 
 
 void VuePartie::d_click(){
-    /*if(joueur_affiche == nb_joueurs-1){
-        layout->replaceWidget(tab_vue_joueurs[joueur_affiche], tab_vue_joueurs[0]);
+    if(joueur_affiche == nb_joueurs-1){
+        stack->setCurrentIndex(0);
         joueur_affiche = 0;
     }
     else{
-        layout->replaceWidget(tab_vue_joueurs[joueur_affiche], tab_vue_joueurs[joueur_affiche+1]);
+        stack->setCurrentIndex(joueur_affiche+1);
         joueur_affiche++;
     }
-    setLayout(layout);*/
 }
 
 void VuePartie::g_click(){
-    /*if(joueur_affiche == 0){
-        layout->replaceWidget(tab_vue_joueurs[joueur_affiche], tab_vue_joueurs[nb_joueurs-1]);
+    if(joueur_affiche == 0){
+        stack->setCurrentIndex(nb_joueurs-1);
         joueur_affiche = nb_joueurs-1;
     }
     else{
-        layout->replaceWidget(tab_vue_joueurs[joueur_affiche], tab_vue_joueurs[joueur_affiche-1]);
+        stack->setCurrentIndex(joueur_affiche-1);
         joueur_affiche--;
     }
-    setLayout(layout);*/
+
 }
