@@ -151,7 +151,7 @@ int main(int argc, char * argv[]) {
     build_content_jeu(jeu);
     jeu->show();*/
     QWidget fenetre;
-    VuePartie* vp = new VuePartie(&fenetre);
+    VuePartie* vp = new VuePartie(nullptr, &fenetre);
     vp->show();
     fenetre.show();
     return QApplication::exec();

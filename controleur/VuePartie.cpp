@@ -1,9 +1,10 @@
 #include <iostream>
 using namespace std;
 #include "VuePartie.h"
+#include "Partie.h"
 
 
-VuePartie::VuePartie(QWidget *parent){
+VuePartie::VuePartie(Partie *partie, QWidget *parent){
 
     /*auto *menu = new QWidget();
     auto *jeu = new QWidget();
@@ -22,9 +23,10 @@ VuePartie::VuePartie(QWidget *parent){
 
     vector<Batiment*> liste_bat;
     Batiment *b = new Boulangerie();
+    Batiment *bat2 = new Epicerie();
     liste_bat.push_back(b);
     //liste_bat.push_back(new Boulangerie());
-    liste_bat.push_back(new Epicerie());
+    liste_bat.push_back(bat2);
     liste_bat.push_back(new Cafe());
     vector<Monument*> liste_mon;
     Monument* mon = new Aeroport();
@@ -33,6 +35,8 @@ VuePartie::VuePartie(QWidget *parent){
     Joueur* j = new Joueur("Test", liste_mon, liste_bat, 3);
     j->fermer_batiment(b);
     Joueur* j2 = new Joueur("Theo", liste_mon, liste_bat, 45);
+    tab_j.push_back(j);
+    tab_j.push_back(j2);
     // Ajout des vues joueurs
     tab_vue_joueurs.push_back(new VueJoueur(j, parent));
     tab_vue_joueurs.push_back(new VueJoueur(j2, parent));
@@ -63,6 +67,8 @@ VuePartie::VuePartie(QWidget *parent){
     //vj = tab_vue_joueurs[1];
     //layout->replaceWidget(tab_vue_joueurs[i], tab_vue_joueurs[1]);
     layout->addWidget(b2);
+    j->fermer_batiment(bat2);
+    j->set_argent(24);
     setLayout(layout);
 
 }
@@ -70,16 +76,40 @@ VuePartie::VuePartie(QWidget *parent){
 
 void VuePartie::d_click(){
     /// Slot bouton droit
+    /*// Clean
+    delete stack;
+    tab_vue_joueurs.clear();
+    // Ajout des nouvelles vues joueurs
+    for (auto joueur : tab_j){
+        tab_vue_joueurs.push_back(new VueJoueur(joueur, parent));
+    }
+    // Ajout des widgets
+    stack = new QStackedWidget;
+    for (auto vj : tab_vue_joueurs){
+        stack->addWidget(vj);
+    }*/
+    // MAJ des indices
     stack->setCurrentIndex((joueur_affiche + 1) % nb_joueurs);
-    joueur_affiche++;
-    // Mise à jour de la vue
-    stack->update();
+    joueur_affiche = (joueur_affiche + 1) % nb_joueurs;
+    //update();
 }
 
 void VuePartie::g_click(){
     /// Slot bouton gauche
+    /*// Clean
+    delete stack;
+    tab_vue_joueurs.clear();
+    // Ajout des nouvelles vues joueurs
+    for (auto joueur : Partie::get_instance()->get_tab_joueurs()){
+        tab_vue_joueurs.push_back(new VueJoueur(joueur, parent));
+    }
+    // Ajout des widgets
+    stack = new QStackedWidget;
+    for (auto vj : tab_vue_joueurs){
+        stack->addWidget(vj);
+    }*/
+    // MAJ des indices
     stack->setCurrentIndex((joueur_affiche - 1) % nb_joueurs);
-    joueur_affiche--;
-    // Mise à jour de la vue
-    stack->update();
+    joueur_affiche = (joueur_affiche - 1) % nb_joueurs;
+    //update();
 }

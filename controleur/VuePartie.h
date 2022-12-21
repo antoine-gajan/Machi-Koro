@@ -18,13 +18,14 @@
 #include "Aeroport.h"
 #include "Epicerie.h"
 #include "Cafe.h"
+#include "Partie.h"
 #include <QStackedWidget>
 
 class VuePartie : public QWidget
 {
     Q_OBJECT
 public:
-    explicit VuePartie(QWidget *parent = nullptr);
+    explicit VuePartie(Partie *partie = nullptr, QWidget *parent = nullptr);
     const vector <VueJoueur*>& get_tab_vue_joueurs() const {return tab_vue_joueurs;};
 private:
     QStackedWidget *stack;
@@ -32,6 +33,8 @@ private:
     unsigned int joueur_affiche;
     vector<VueJoueur *> tab_vue_joueurs;
     QHBoxLayout *layout;
+    QWidget *parent;
+    vector<Joueur*> tab_j;
 
 
 public slots:

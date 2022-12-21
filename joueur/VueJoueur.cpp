@@ -1,21 +1,21 @@
 #include "VueJoueur.h"
 #include <QPixmap>
 
-VueJoueur::VueJoueur(Joueur* joueur, QWidget *parent) {
+VueJoueur::VueJoueur(Joueur* j, QWidget *parent) {
     /// Vue d'un joueur
+    joueur = j;
     // Nom du joueur
     nom_joueur = new QLabel;
     nom_joueur->setText(QString::fromStdString(joueur->get_nom()));
     // Argent du joueur
     argent=new QLCDNumber;
     argent->display((int)joueur->get_argent());
-    //argent->setFixedHeight(30);
     argent->setFixedSize(70,30);
 
     // Barre avec les informations du joueur
     layout_informations = new QHBoxLayout;
-    QVBoxLayout* layout_informations_gauche = new QVBoxLayout;
-    QHBoxLayout* layout_haut_gauche = new QHBoxLayout;
+    layout_informations_gauche = new QVBoxLayout;
+    layout_haut_gauche = new QHBoxLayout;
 
     // Création de la grid
     layout_batiments = new QGridLayout;
@@ -40,7 +40,7 @@ VueJoueur::VueJoueur(Joueur* joueur, QWidget *parent) {
         ind_couleurs++;
     }
     // Création d'un bouton donnant accès aux batiments fermés
-    QPushButton *bat_ferme = new QPushButton("Batiment Fermes");
+    bat_ferme = new QPushButton("Batiment Fermes");
     layout_batiments->addWidget(bat_ferme);
     connect(bat_ferme, SIGNAL(clicked()),this, SLOT(affichage_bat_ferme()));
 
