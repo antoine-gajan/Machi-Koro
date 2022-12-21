@@ -8,16 +8,23 @@ using namespace std;
 #include <QFrame>
 #include <QLineEdit>
 #include <QFormLayout>
-#include <QHBoxLayout>
 #include <QWidget>
-#include <QVBoxLayout>
-#include "VueCarte.h"
 #include "VueJoueur.h"
 #include "Joueur.h"
 #include "Boulangerie.h"
 #include "Aeroport.h"
 #include "Epicerie.h"
 #include "Cafe.h"
+#include <QComboBox>
+#include <QCheckBox>
+#include <QApplication>
+#include <QComboBox>
+#include <QStandardItemModel>
+#include <QStandardItem>
+#include <QApplication>
+#include <QComboBox>
+#include <QStandardItemModel>
+#include <QStandardItem>
 
 void resize_and_center(QWidget *widget, int width, int height)
 {
@@ -25,14 +32,58 @@ void resize_and_center(QWidget *widget, int width, int height)
     widget->move(QApplication::primaryScreen()->geometry().center() - widget->rect().center());
 }
 
+
 void build_content_menu(QWidget *menu){
-    auto *layout_menu = new QGridLayout;
+    auto* form = new QFormLayout(menu);
 
-    auto *bouton1 = new QPushButton("Jouer", menu);
-    bouton1->move(100, 100);
+    auto *editionLabel = new QLabel("Choix de l'édition :");
+    auto* editionCombo = new QComboBox();
 
-    auto *bouton2 = new QPushButton("Options", menu);
-    bouton2->move(100, 200);
+    auto *model = new QStandardItemModel();
+    auto *item1 = new QStandardItem("-- Veuillez choisir une option --");
+    auto *item2 = new QStandardItem("Standard");
+    auto *item3 = new QStandardItem("Deluxe");
+    auto *item4 = new QStandardItem("Custom");
+
+    model->appendRow(item1);
+    model->appendRow(item2);
+    model->appendRow(item3);
+    model->appendRow(item4);
+
+    editionCombo->setCurrentIndex(0);
+
+    item1->setFlags(item1->flags() & ~Qt::ItemIsEnabled);
+
+    editionCombo->setModel(model);
+
+    form->addRow(editionLabel, editionCombo);
+
+    auto *greenValleyCheck = new QCheckBox("Green valley");
+    auto *marinaCheck = new QCheckBox("Marina");
+
+    greenValleyCheck->setEnabled(true);
+    marinaCheck->setEnabled(true);
+
+    form->addRow(greenValleyCheck);
+    form->addRow(marinaCheck);
+
+    auto *validateButton = new QPushButton("Valider");
+    auto *cancelButton = new QPushButton("Annuler");
+
+    form->addRow(validateButton, cancelButton);
+
+    QObject::connect(editionCombo, QOverload<int>::of(&QComboBox::currentIndexChanged),
+                     [greenValleyCheck, marinaCheck](int index) {
+                         if (index == 1) { // Si l'index sélectionné est Standard
+                             greenValleyCheck->setEnabled(true);
+                             marinaCheck->setEnabled(true);
+                         } else {
+                             greenValleyCheck->setEnabled(false);
+                             greenValleyCheck->setChecked(false);
+                             marinaCheck->setEnabled(false);
+                             marinaCheck->setChecked(false);
+                         }
+                     });
 
     menu->setWindowTitle("Machi Koro - Menu");
 }
@@ -87,7 +138,7 @@ void build_content_jeu(QWidget *jeu){
 int main(int argc, char * argv[]) {
 
     QApplication app(argc, argv);
-    /*auto *menu = new QWidget();
+    auto *menu = new QWidget();
     auto *jeu = new QWidget();
 
     resize_and_center(menu , 700, 500);
@@ -95,12 +146,12 @@ int main(int argc, char * argv[]) {
     menu->show();
 
 
-    resize_and_center(jeu, 1000, 700);
+    /*resize_and_center(jeu, 1000, 700);
     build_content_jeu(jeu);
-    jeu->show();
+    jeu->show();*/
 
 
-    return QApplication::exec();*/
+    return QApplication::exec();
 
     QWidget fenetre;
     vector<Batiment*> liste_bat;
