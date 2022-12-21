@@ -89,7 +89,10 @@ void VuePartie::d_click(){
         stack->addWidget(vj);
     }*/
     // MAJ des indices
+    //tab_vue_joueurs[joueur_affiche+1%nb_joueurs]->replace_argent(5);
     stack->setCurrentIndex((joueur_affiche + 1) % nb_joueurs);
+    VueJoueur* vj = (VueJoueur*)stack->currentWidget();
+    vj->replace_argent(456);
     joueur_affiche = (joueur_affiche + 1) % nb_joueurs;
     //update();
 }
@@ -112,4 +115,10 @@ void VuePartie::g_click(){
     stack->setCurrentIndex((joueur_affiche - 1) % nb_joueurs);
     joueur_affiche = (joueur_affiche - 1) % nb_joueurs;
     //update();
+}
+
+void update(Joueur* j, VueJoueur* vj){
+    if(j->get_argent() != vj->get_widget_argent()->intValue()){
+        vj->replace_argent(j->get_argent());
+    }
 }

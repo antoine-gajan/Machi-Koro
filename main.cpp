@@ -153,7 +153,7 @@ int main(int argc, char * argv[]) {
     QWidget fenetre;
     VuePartie* vp = new VuePartie(nullptr, &fenetre);
     vp->show();
-    fenetre.show();
+    //fenetre.show();
     return QApplication::exec();
 
     /*QWidget fenetre;

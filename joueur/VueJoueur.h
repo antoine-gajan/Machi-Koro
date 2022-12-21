@@ -18,7 +18,8 @@ Q_OBJECT
 public:
     explicit VueJoueur(Joueur* j, QWidget *parent = nullptr);
     void update_vue();
-    const Joueur& get_joueur() const {return *joueur;}
+    void replace_argent(int i) {argent->display(i);};
+    QLCDNumber* get_widget_argent() const{return argent;};
 private:
     QLabel* text_bat;
     QLabel* nom_joueur; // texte avec le nom du joueur

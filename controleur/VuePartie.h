@@ -27,7 +27,9 @@ class VuePartie : public QWidget
 public:
     explicit VuePartie(Partie *partie = nullptr, QWidget *parent = nullptr);
     const vector <VueJoueur*>& get_tab_vue_joueurs() const {return tab_vue_joueurs;};
+    void update(Joueur* j, VuePartie* vj);
 private:
+    Partie* partie;
     QStackedWidget *stack;
     unsigned int nb_joueurs;
     unsigned int joueur_affiche;
@@ -35,6 +37,7 @@ private:
     QHBoxLayout *layout;
     QWidget *parent;
     vector<Joueur*> tab_j;
+
 
 
 public slots:
