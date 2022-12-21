@@ -15,6 +15,7 @@ using namespace std;
 #include "Aeroport.h"
 #include "Epicerie.h"
 #include "Cafe.h"
+#include "VuePartie.h"
 #include <QComboBox>
 #include <QCheckBox>
 #include <QApplication>
@@ -138,22 +139,23 @@ void build_content_jeu(QWidget *jeu){
 int main(int argc, char * argv[]) {
 
     QApplication app(argc, argv);
-    auto *menu = new QWidget();
+    /*auto *menu = new QWidget();
     auto *jeu = new QWidget();
 
     resize_and_center(menu , 700, 500);
     build_content_menu(menu);
-    menu->show();
+    menu->show();*/
 
 
     /*resize_and_center(jeu, 1000, 700);
     build_content_jeu(jeu);
     jeu->show();*/
-
-
+    QWidget fenetre;
+    VuePartie* vp = new VuePartie(&fenetre);
+    fenetre.show();
     return QApplication::exec();
 
-    QWidget fenetre;
+    /*QWidget fenetre;
     vector<Batiment*> liste_bat;
     Batiment *b = new Boulangerie();
     liste_bat.push_back(b);
@@ -169,7 +171,7 @@ int main(int argc, char * argv[]) {
     Joueur* j = new Joueur("Test", liste_mon, liste_bat, 3);
     j->fermer_batiment(b);
     VueJoueur* vj = new VueJoueur(j, &fenetre);
-    vj->show();
+    vj->show();*/
     //fenetre.show();
 
     //QHBoxLayout * layout = new QHBoxLayout;

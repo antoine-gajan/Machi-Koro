@@ -33,22 +33,21 @@ VuePartie::VuePartie(QWidget *parent){
     Joueur* j = new Joueur("Test", liste_mon, liste_bat, 3);
     j->fermer_batiment(b);
     Joueur* j2 = new Joueur("Theo", liste_mon, liste_bat, 45);
+    // Ajout des vues joueurs
     tab_vue_joueurs.push_back(new VueJoueur(j, parent));
     tab_vue_joueurs.push_back(new VueJoueur(j2, parent));
     nb_joueurs = tab_vue_joueurs.size();
     joueur_affiche = 0;
-    //VueJoueur* vj = new VueJoueur(tab_joueurs[i], &fenetre);
-    //VueJoueur* vj = tab_vue_joueurs[i];
+
+    // Ajout de toutes les vues joueurs à un QStackWidget
     stack = new QStackedWidget(parent);
-    for(auto it : tab_vue_joueurs){
-        stack->addWidget(it);
+    for(auto vj : tab_vue_joueurs){
+        stack->addWidget(vj);
     }
     stack->setCurrentIndex(0);
 
 
-
-
-
+    // Boutons de navigation gauche et droite dans les Vues Joueurs
     QPushButton* b1 = new QPushButton(parent);
     b1->setText(QString::fromStdString("(<)"));
     connect(b1, SIGNAL(clicked()),this, SLOT(g_click()));
@@ -70,24 +69,17 @@ VuePartie::VuePartie(QWidget *parent){
 
 
 void VuePartie::d_click(){
-    if(joueur_affiche == nb_joueurs-1){
-        stack->setCurrentIndex(0);
-        joueur_affiche = 0;
-    }
-    else{
-        stack->setCurrentIndex(joueur_affiche+1);
-        joueur_affiche++;
-    }
+    /// Slot bouton droit
+    stack->setCurrentIndex((joueur_affiche + 1) % nb_joueurs);
+    joueur_affiche++;
+    // Mise à jour de la vue
+    stack->update();
 }
 
 void VuePartie::g_click(){
-    if(joueur_affiche == 0){
-        stack->setCurrentIndex(nb_joueurs-1);
-        joueur_affiche = nb_joueurs-1;
-    }
-    else{
-        stack->setCurrentIndex(joueur_affiche-1);
-        joueur_affiche--;
-    }
-
+    /// Slot bouton gauche
+    stack->setCurrentIndex((joueur_affiche - 1) % nb_joueurs);
+    joueur_affiche--;
+    // Mise à jour de la vue
+    stack->update();
 }

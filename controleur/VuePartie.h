@@ -35,10 +35,9 @@ private:
 
 
 public slots:
-            // slots qui gère les clics sur les cartes
+        // Slots qui gèrent les clics sur les vues joueurs
         void d_click();
         void g_click();
-        //void g_click();
 };
 
 #endif //MACHI_KORO_VUEPARTIE_H

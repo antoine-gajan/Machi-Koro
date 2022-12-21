@@ -76,6 +76,7 @@ VueJoueur::VueJoueur(Joueur* joueur, QWidget *parent) {
     layout_informations->addLayout(layout_informations_gauche);
     layout_informations->addLayout(layout_batiments);
 
+    // Définition du layout principal
     setLayout(layout_informations);
 }
 
