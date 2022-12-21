@@ -152,6 +152,7 @@ int main(int argc, char * argv[]) {
     jeu->show();*/
     QWidget fenetre;
     VuePartie* vp = new VuePartie(&fenetre);
+    vp->show();
     fenetre.show();
     return QApplication::exec();
 
