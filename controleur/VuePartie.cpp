@@ -121,4 +121,5 @@ void update(Joueur* j, VueJoueur* vj){
     if(j->get_argent() != vj->get_widget_argent()->intValue()){
         vj->replace_argent(j->get_argent());
     }
+
 }
