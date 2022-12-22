@@ -1,11 +1,94 @@
 #include <iostream>
+#include <string>
 using namespace std;
 #include "VuePartie.h"
 #include "Partie.h"
 
-
 VuePartie::VuePartie(Partie *partie, QWidget *parent){
 
+    structure = new QVBoxLayout();
+
+    //Création de l'entete de la page (pourquoi pas créer une classe VueEntete?)
+
+    entete = new QHBoxLayout();
+
+    //Affichage du nom de l'édition de jeu
+
+    label_edj = new QLabel;
+    label_edj->setText("Nom de l'édition de jeu");// à voir avec l'équipe si on ajoute des attributs dans partie pour avoir ces infos de display)
+
+    entete->addWidget(label_edj);
+
+    //Affichage du nom du joueur actuel
+    label_joueur_actuel = new QLabel;
+    string nom_joueur = "Joueur actuel : ";
+    //nom_joueur += partie->get_tab_joueurs()[partie->get_joueur_actuel()]->get_nom();
+    nom_joueur += "nom du joueur";
+    label_joueur_actuel->setText(QString::fromStdString(nom_joueur));
+    entete->addWidget(label_joueur_actuel);
+
+    structure->addLayout(entete);
+
+    //Affichage de la valeur des dés
+
+    display_des = new QVBoxLayout;
+
+    label_de1 = new QLabel;
+    //label_de1->setText(QString::fromStdString((string)partie->get_de_1()));
+    label_de1->setText("valeur de1");
+    display_des->addWidget(label_de1);
+
+    label_de2 = new QLabel;
+    //label_de2->setText(QString::fromStdString((string)partie->get_de_2()));
+    label_de2->setText("valeur de2");
+    display_des->addWidget(label_de2);
+
+    entete->addLayout(display_des);
+
+    ///Affichage du Shop et de la Pioche (va falloir créer deux classes vue shop et vue pioche certainement)
+
+    body = new QHBoxLayout;
+
+    //Affichage de la pioche
+
+    Batiment *b = new Boulangerie();
+    Batiment *bat2 = new Epicerie();
+
+
+    if(partie->get_pioche()->get_top_carte() == nullptr){
+        pioche_exception = new QLabel;
+        pioche_exception->setText("Pioche vide!");
+        body->addWidget(pioche_exception);
+    }else{
+        VueCarte* view_pioche = new VueCarte(*(partie->get_pioche()->get_top_carte()),true);
+        body->addWidget(view_pioche);
+    }
+
+    /*
+    VueCarte* view_pioche = new VueCarte(*b,true);
+    body->addWidget(view_pioche);
+*/
+    //Affichage du shop
+    shop = new QGridLayout;
+    //nous voulons ici calculer la taille du shop.
+    unsigned int largeur = round(sqrt(partie->get_shop()->get_nb_tas_max()));
+
+    unsigned int x = 0;
+    unsigned int y = 1;
+
+    for(auto &it : partie->get_shop()->get_contenu()){
+        shop->addWidget(new VueCarte(*(it.first),true),x,y-1);
+        if(y%largeur == 0){
+            x ++;
+            y = 1;
+        }else{
+            y++;
+        }
+    }
+
+    body->addLayout(shop);
+
+    structure->addLayout(body);
     /*auto *menu = new QWidget();
     auto *jeu = new QWidget();
 
@@ -22,8 +105,7 @@ VuePartie::VuePartie(Partie *partie, QWidget *parent){
     return QApplication::exec();*/
 
     vector<Batiment*> liste_bat;
-    Batiment *b = new Boulangerie();
-    Batiment *bat2 = new Epicerie();
+
     liste_bat.push_back(b);
     //liste_bat.push_back(new Boulangerie());
     liste_bat.push_back(bat2);
@@ -58,7 +140,9 @@ VuePartie::VuePartie(Partie *partie, QWidget *parent){
     QPushButton* b2 = new QPushButton(parent);
     b2->setText(QString::fromStdString("(>)"));
     connect(b2, SIGNAL(clicked()),this, SLOT(d_click()));
-    layout = new QHBoxLayout(parent);
+
+    layout = new QHBoxLayout();
+
     layout->addWidget(b1);
     layout->addWidget(stack);
     //layout->addWidget(tab_vue_joueurs[joueur_affiche]);
@@ -69,7 +153,8 @@ VuePartie::VuePartie(Partie *partie, QWidget *parent){
     layout->addWidget(b2);
     j->fermer_batiment(bat2);
     j->set_argent(24);
-    setLayout(layout);
+    structure->addLayout(layout);
+    setLayout(structure);
 
 }
 
@@ -94,8 +179,11 @@ void VuePartie::d_click(){
     VueJoueur* vj = (VueJoueur*)stack->currentWidget();
     vj->update_vue();
     joueur_affiche = (joueur_affiche + 1) % nb_joueurs;
+
+
     //update();
 }
+
 
 void VuePartie::g_click(){
     /// Slot bouton gauche
