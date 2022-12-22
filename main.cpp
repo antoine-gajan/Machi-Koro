@@ -10,6 +10,7 @@ using namespace std;
 #include <QFormLayout>
 #include <QWidget>
 #include "VueJoueur.h"
+#include <QLayoutItem>
 #include "Joueur.h"
 #include "Boulangerie.h"
 #include "Aeroport.h"
@@ -35,11 +36,13 @@ void resize_and_center(QWidget *widget, int width, int height)
 
 
 void build_content_menu(QWidget *menu){
-    auto* form = new QFormLayout(menu);
+
+    menu->setContentsMargins(50, 30, 50, 50);
+    auto *gridLayout = new QGridLayout;
+
 
     auto *editionLabel = new QLabel("Choix de l'édition :");
     auto* editionCombo = new QComboBox();
-
     auto *model = new QStandardItemModel();
     auto *item1 = new QStandardItem("-- Veuillez choisir une option --");
     auto *item2 = new QStandardItem("Standard");
@@ -52,26 +55,41 @@ void build_content_menu(QWidget *menu){
     model->appendRow(item4);
 
     editionCombo->setCurrentIndex(0);
+    editionCombo->setMinimumWidth(200);
 
     item1->setFlags(item1->flags() & ~Qt::ItemIsEnabled);
 
     editionCombo->setModel(model);
 
-    form->addRow(editionLabel, editionCombo);
+    gridLayout->addWidget(editionLabel, 0, 0);
+    gridLayout->addWidget(editionCombo, 0, 1);
+
+    gridLayout->addItem(new QSpacerItem(0, 15), 1, 0);
+
+    auto *extensionLabel = new QLabel("Choix des extension(s) :");
+    gridLayout->addWidget(extensionLabel, 2, 0);
 
     auto *greenValleyCheck = new QCheckBox("Green valley");
+
     auto *marinaCheck = new QCheckBox("Marina");
 
     greenValleyCheck->setEnabled(true);
     marinaCheck->setEnabled(true);
 
-    form->addRow(greenValleyCheck);
-    form->addRow(marinaCheck);
+    gridLayout->addWidget(greenValleyCheck, 2, 1);
+    gridLayout->addWidget(marinaCheck, 3, 1);
+
+    gridLayout->addItem(new QSpacerItem(0, 15), 4, 0);
+
 
     auto *validateButton = new QPushButton("Valider");
-    auto *cancelButton = new QPushButton("Annuler");
+    validateButton->setFixedWidth(200);
 
-    form->addRow(validateButton, cancelButton);
+    auto *cancelButton = new QPushButton("Annuler");
+    cancelButton->setFixedWidth(200);
+
+    gridLayout->addWidget(validateButton, 5, 0, Qt::AlignCenter);
+    gridLayout->addWidget(cancelButton, 5, 1, Qt::AlignCenter);
 
     QObject::connect(editionCombo, QOverload<int>::of(&QComboBox::currentIndexChanged),
                      [greenValleyCheck, marinaCheck](int index) {
@@ -86,6 +104,8 @@ void build_content_menu(QWidget *menu){
                          }
                      });
 
+    gridLayout->setColumnMinimumWidth(1, 500);
+    menu->setLayout(gridLayout);
     menu->setWindowTitle("Machi Koro - Menu");
 }
 
@@ -139,20 +159,21 @@ void build_content_jeu(QWidget *jeu){
 int main(int argc, char * argv[]) {
 
     QApplication app(argc, argv);
-    /*auto *menu = new QWidget();
+    auto *menu = new QWidget();
     auto *jeu = new QWidget();
 
-    resize_and_center(menu , 700, 500);
+    resize_and_center(menu , 200, 200);
     build_content_menu(menu);
-    menu->show();*/
+    menu->show();
 
 
     /*resize_and_center(jeu, 1000, 700);
     build_content_jeu(jeu);
     jeu->show();*/
-    QWidget fenetre;
-    VuePartie* vp = new VuePartie(nullptr, &fenetre);
-    vp->show();
+
+//    QWidget fenetre;
+//    VuePartie* vp = new VuePartie(nullptr, &fenetre);
+//    vp->show();
     //fenetre.show();
     return QApplication::exec();
 
@@ -168,7 +189,7 @@ int main(int argc, char * argv[]) {
     Monument* mon = new Aeroport();
     mon->activer();
     liste_mon.push_back(mon);
-    
+
     Joueur* j = new Joueur("Test", liste_mon, liste_bat, 3);
     j->fermer_batiment(b);
     VueJoueur* vj = new VueJoueur(j, &fenetre);
