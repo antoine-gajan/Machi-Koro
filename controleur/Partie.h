@@ -32,7 +32,7 @@ private:
 
     struct Handler{
         Partie* instance;
-        Handler():instance(nullptr){}
+        Handler() : instance(nullptr){}
         ~Handler(){delete instance;}
     };
     static Handler handler;
@@ -63,6 +63,8 @@ public:
     //********** Constructeurs et getters **********//
     unsigned int get_joueur_actuel() const {return joueur_actuel;};
     const vector <Joueur*>& get_tab_joueurs() const {return tab_joueurs;};
+    Shop* get_shop() const {return shop;};
+    Pioche* get_pioche() const {return pioche;};
 
     //********** Methodes **********//
     //********** Methodes statiques **********//
