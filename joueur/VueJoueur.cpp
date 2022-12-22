@@ -11,6 +11,7 @@ VueJoueur::VueJoueur(Joueur* j, QWidget *parent) {
     argent=new QLCDNumber;
     argent->display((int)joueur->get_argent());
     argent->setFixedSize(70,30);
+    //
 
     // Barre avec les informations du joueur
     layout_informations = new QHBoxLayout;

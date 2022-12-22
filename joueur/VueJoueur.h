@@ -23,6 +23,7 @@ public:
     void add_batiment(VueCarte* vc){return vue_batiments.push_back(vc);}
     void add_batiment_ferme(VueCarte* vc){return vue_batiments_ferme.push_back(vc);}
     void update_monu(VueCarte* vc){}
+    //
 private:
     QLabel* text_bat;
     QLabel* nom_joueur; // texte avec le nom du joueur

@@ -17,7 +17,7 @@ public:
     void setCarte(const Carte& c) { setCheckable(true); setChecked(false); carte=&c; update(); }
     const Carte& getCarte() const { return *carte; }
     bool cartePresente() const { return carte!=nullptr; }
-
+    //
 private:
     const Carte* carte=nullptr;
     QPixmap pixmap;

@@ -28,6 +28,7 @@ public:
     explicit VuePartie(Partie *partie = nullptr, QWidget *parent = nullptr);
     const vector <VueJoueur*>& get_tab_vue_joueurs() const {return tab_vue_joueurs;};
     void update(Joueur* j, VuePartie* vj);
+    //
 private:
     Partie* partie;
     QStackedWidget *stack;

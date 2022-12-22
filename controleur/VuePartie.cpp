@@ -34,7 +34,7 @@ VuePartie::VuePartie(Partie *partie, QWidget *parent){
     liste_mon.push_back(mon);
     Joueur* j = new Joueur("Test", liste_mon, liste_bat, 3);
     j->fermer_batiment(b);
-    Joueur* j2 = new Joueur("Theo", liste_mon, liste_bat, 45);
+    Joueur* j2 = new Joueur("Test2", liste_mon, liste_bat, 45);
     tab_j.push_back(j);
     tab_j.push_back(j2);
     // Ajout des vues joueurs

@@ -6,6 +6,7 @@
 VueCarte::VueCarte(const Carte &c, bool etat, QWidget *parent) : QPushButton(parent),carte(&c){
     /// Créer la vue d'une carte
     // Si il est à afficher dans VueJoueur
+    //
     carte = &c;
     if(etat){
         setFlat(true);
