@@ -118,7 +118,17 @@ void launch_menu_2(QApplication *app, const string &edition_name, const list<str
     auto *formLayout = new QFormLayout;
     for (int i = 0; i < spinBox->value(); i++) {
         auto *lineEdit = new QLineEdit;
-        formLayout->addRow(QString("Nom du joueur %1 :").arg(i + 1), lineEdit);
+        auto *comboBox = new QComboBox;
+        comboBox->addItem("Humain");
+        comboBox->addItem("IA agressive");
+        comboBox->addItem("IA défensive");
+        comboBox->addItem("IA aléatoire");
+        comboBox->setCurrentIndex(0);
+
+        auto *horizontalLayout = new QHBoxLayout;
+        horizontalLayout->addWidget(lineEdit);
+        horizontalLayout->addWidget(comboBox);
+        formLayout->addRow("Joueur " + QString::number(i + 1) + " : ", horizontalLayout);
     }
 
     auto *layout = new QVBoxLayout;
@@ -142,7 +152,17 @@ void launch_menu_2(QApplication *app, const string &edition_name, const list<str
 
         for (int i = 0; i < value; i++) {
             auto *lineEdit = new QLineEdit;
-            formLayout->addRow(QString("Nom du joueur %1 :").arg(i + 1), lineEdit);
+            auto *comboBox = new QComboBox;
+            comboBox->addItem("Humain");
+            comboBox->addItem("IA agressive");
+            comboBox->addItem("IA défensive");
+            comboBox->addItem("IA aléatoire");
+            comboBox->setCurrentIndex(0);
+
+            auto *horizontalLayout = new QHBoxLayout;
+            horizontalLayout->addWidget(lineEdit);
+            horizontalLayout->addWidget(comboBox);
+            formLayout->addRow("Joueur " + QString::number(i + 1) + " : ", horizontalLayout);
         }
 
     });
@@ -150,12 +170,12 @@ void launch_menu_2(QApplication *app, const string &edition_name, const list<str
     QObject::connect(validateButton, &QPushButton::clicked, [formLayout]() {
         // Parcours des widgets du formulaire et récupération de leurs valeurs
         for (int i = 0; i < formLayout->rowCount(); i++) {
-            auto *lineEdit = qobject_cast<QLineEdit*>(formLayout->itemAt(i, QFormLayout::FieldRole)->widget());
-            if (lineEdit) {
+            auto *lineEdit = qobject_cast<QLineEdit *>(formLayout->itemAt(i, QFormLayout::FieldRole)->layout()->itemAt(0)->widget());
+            auto *comboBox = qobject_cast<QComboBox *>(formLayout->itemAt(i, QFormLayout::FieldRole)->layout()->itemAt(1)->widget());
+            if (lineEdit && comboBox) {
                 QString value = lineEdit->text();
-                cout << "Nom du joueur " << i + 1 << " : " << value.toStdString() << endl;
-                // Utilisation de la valeur récupérée
-                // ...
+                QString type = comboBox->currentText();
+                cout << "Joueur " << i + 1 << " : " << value.toStdString() << " (" << type.toStdString() << ")" << endl;
             }
         }
     });
@@ -165,8 +185,8 @@ void launch_menu_2(QApplication *app, const string &edition_name, const list<str
 }
 
 void validate_menu(QWidget *menu, QApplication *app, const string &edition, const list<string> &extensions){
-    cout << "Edition: " << edition << endl;
-    cout << "Extensions: " << endl;
+    cout << "Edition choisie : " << edition << endl;
+    cout << "Extensions choisies : " << endl;
     for (const auto & extension : extensions){
         cout << extension << endl;
     }
@@ -343,10 +363,8 @@ int main(int argc, char * argv[]) {
 //    VuePartie* vp = new VuePartie(nullptr, &fenetre);
 //    vp->show();
     //fenetre.show();
-    QApplication::exec();
+    return QApplication::exec();
 
-    cout << "Fin du programme" << endl;
-    return 0;
     /*QWidget fenetre;
     vector<Batiment*> liste_bat;
     Batiment *b = new Boulangerie();
