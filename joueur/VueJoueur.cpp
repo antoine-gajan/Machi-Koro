@@ -103,6 +103,11 @@ void VueJoueur::affichage_bat_ferme(){
     fenetre_bat_fermes->show();
 }
 
+void update_monu(VueCarte* vc, Carte* c){
+    vc->set_pixmap(c->get_path_image());
+    vc->set_icon(vc->get_pixmap());
+}
+
 void VueJoueur::update_vue(){
     /// Mise à jour de la vue joueur
     // Mise à jour de l'argent

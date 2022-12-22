@@ -5,7 +5,7 @@ MarcheDeFruitsEtLegumes::MarcheDeFruitsEtLegumes()
         : Batiment("MarcheDeFruitsEtLegumes",
                    2,
                    "Recevez 2 pieces de la banque pour chaque etablissement de type champ que vous possedez.",
-                   "../assets/batiments/Vert/Marche-de-fruits-et-legumes.png",
+                   "../assets/batiments/Vert/MarcheDeFruitsEtLegumes.png",
                    Vert,
                    {11, 12},
                    "marche") {}

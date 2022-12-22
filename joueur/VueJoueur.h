@@ -47,7 +47,7 @@ private:
 
 public slots:
     // slots qui gère les clics sur les cartes
-    void carteClique(VueCarte* vc);
+    virtual void carteClique(VueCarte* vc);
     void affichage_bat_ferme();
 };
 

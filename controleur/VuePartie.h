@@ -35,6 +35,7 @@ private:
     unsigned int nb_joueurs;
     unsigned int joueur_affiche;
     vector<VueJoueur *> tab_vue_joueurs;
+    vector<VueCarte *> tab_vue_shop;
 
     //Labels sur la page
     QLabel* label_edj;
@@ -58,6 +59,7 @@ private:
 
 public slots:
         // Slots qui gèrent les clics sur les vues joueurs
+        virtual void carteClique(VueCarte* vc);
         void d_click();
         void g_click();
 };

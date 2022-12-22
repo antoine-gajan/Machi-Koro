@@ -75,15 +75,19 @@ VuePartie::VuePartie(Partie *partie, QWidget *parent){
 
     unsigned int x = 0;
     unsigned int y = 1;
+    unsigned int compteur=0;
 
     for(auto &it : partie->get_shop()->get_contenu()){
-        shop->addWidget(new VueCarte(*(it.first),true),x,y-1);
+        tab_vue_shop.push_back(new VueCarte(*(it.first),true));
+        shop->addWidget(tab_vue_shop[compteur],x,y-1);
+        connect((tab_vue_shop)[compteur],SIGNAL(carteClicked(VueCarte*)),this,SLOT(carteClique(VueCarte*)));
         if(y%largeur == 0){
             x ++;
             y = 1;
         }else{
             y++;
         }
+        compteur++;
     }
 
     body->addLayout(shop);
@@ -203,6 +207,20 @@ void VuePartie::g_click(){
     stack->setCurrentIndex((joueur_affiche - 1) % nb_joueurs);
     joueur_affiche = (joueur_affiche - 1) % nb_joueurs;
     //update();
+}
+
+void VuePartie::carteClique(VueCarte* vc){
+    /// Slot lorsque la carte est cliquée
+    // Création d'une nouvelle fenetre
+    QWidget* fenetre = new QWidget();
+    // Création d'un label contenant l'image
+    QLabel *label = new QLabel(fenetre);
+    QPixmap pixmap(QString::fromStdString(vc->getCarte().get_path_image()));
+    cout<<vc->getCarte().get_nom()<<endl;
+    label->setPixmap(pixmap);
+    label->resize(pixmap.size());
+    // Affichage de la fenetre pop up
+    fenetre->show();
 }
 
 
