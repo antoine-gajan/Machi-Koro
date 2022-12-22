@@ -6,6 +6,8 @@
 #include <string>
 #include <algorithm>
 #include <exception>
+#include <ctime>
+#include <cstdlib>
 
 #include "EditionDeJeu.h"
 #include "Joueur.h"
@@ -68,6 +70,9 @@ public:
 
     // Renvoie l'indice d'un joueur entier valide different de l'indice du joueur actuel
     static unsigned int selectionner_joueur(const vector<Joueur*>& tab_joueurs, unsigned int joueur_actuel);
+
+    // Lance un de
+    static unsigned int lancer_de();
 
     //********** Methodes non statiques **********//
     void ajout_batiment(Batiment *batiment);

@@ -23,5 +23,5 @@ void Aeroport::activer() {
 }
 
 void Aeroport::desactiver() {
-    set_image("../assets/monuments/Aeroport-travaux.jpg");
+    set_image("../assets/monuments/Aeroport-travaux.png");
 }

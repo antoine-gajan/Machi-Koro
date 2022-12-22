@@ -8,7 +8,7 @@ CentreCommercial::CentreCommercial() :
              "CentreCommercial",
              10,
              "Les etablissement cafe et commerce vous rapportent une piece de plus",
-             "../assets/monuments/CentreCommercial-travaux.png") {
+             "../assets/monuments/Centre-commercial-active.png") {
     /// Constructeur de Centre commercial
 }
 
@@ -16,11 +16,10 @@ void CentreCommercial::declencher_effet(unsigned int possesseur, int bonus) cons
     Joueur * joueurs = Partie::get_instance()->get_tab_joueurs()[possesseur];
     cout << "Activation de l'efet du Centre commercial du joueur \"" << joueurs->get_nom() << "\"" << endl;
 }
-
 void CentreCommercial::activer() {
-    set_image("../assets/monuments/CentreCommercial-active.png");
+    set_image("../assets/monuments/Centre-commercial-active.png");
 }
 
 void CentreCommercial::desactiver() {
-    set_image("../assets/monuments/CentreCommercial-travaux.png");
+    set_image("../assets/monuments/Centre-commercial-active.png");
 }

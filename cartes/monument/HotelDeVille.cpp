@@ -21,9 +21,9 @@ void HotelDeVille::declencher_effet(unsigned int possesseur, int bonus) const {
 }
 
 void HotelDeVille::activer() {
-    set_image("../assets/monuments/HotelDeVille.jpg");
+    set_image("../assets/monuments/HotelDeVille.png");
 }
 
 void HotelDeVille::desactiver() {
-    set_image("../assets/monuments/HotelDeVille.jpg");
+    set_image("../assets/monuments/HotelDeVille.png");
 }

@@ -29,7 +29,7 @@ VuePartie::VuePartie(Partie *partie, QWidget *parent){
     liste_bat.push_back(bat2);
     liste_bat.push_back(new Cafe());
     vector<Monument*> liste_mon;
-    Monument* mon = new Aeroport();
+    Monument* mon = new TourRadio();
     mon->activer();
     liste_mon.push_back(mon);
     Joueur* j = new Joueur("Test", liste_mon, liste_bat, 3);
