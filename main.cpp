@@ -136,8 +136,10 @@ void launch_menu_2(QApplication *app, const string &edition_name, const list<str
     h_layout->addWidget(label);
     h_layout->addWidget(spinBox);
     layout->addLayout(h_layout);
+    layout->addWidget(new QLabel());
     layout->addLayout(formLayout);
-
+    layout->addWidget(new QLabel());
+    
     auto *validateButton = new QPushButton("Valider");
     layout->addWidget(validateButton);
 
