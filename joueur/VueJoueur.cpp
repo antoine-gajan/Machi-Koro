@@ -6,7 +6,12 @@ VueJoueur::VueJoueur(Joueur* j, QWidget *parent) {
     joueur = j;
     // Nom du joueur
     nom_joueur = new QLabel;
-    nom_joueur->setText(QString::fromStdString(joueur->get_nom()));
+    if(j->get_est_ia()){
+        nom_joueur->setText(QString::fromStdString(joueur->get_nom()+" (IA)"));
+    }
+    else{
+        nom_joueur->setText(QString::fromStdString(joueur->get_nom()));
+    }
     // Argent du joueur
     argent=new QLCDNumber;
     argent->display((int)joueur->get_argent());
