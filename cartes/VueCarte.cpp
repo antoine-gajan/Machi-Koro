@@ -8,7 +8,9 @@ VueCarte::VueCarte(const Carte &c, bool etat, QWidget *parent) : QPushButton(par
     // Si il est à afficher dans VueJoueur
     //
     carte = &c;
+    path_carte = carte->get_path_image();
     if(etat){
+
         setFlat(true);
         setAutoFillBackground(true);
         setFixedSize(40, 62);
@@ -17,9 +19,9 @@ VueCarte::VueCarte(const Carte &c, bool etat, QWidget *parent) : QPushButton(par
         // Nom du bouton
         this->setObjectName(QString::fromStdString(c.get_nom()));
         // Image du bouton
-        QPixmap pixmap(QString::fromStdString(c.get_path_image()));
+        pixmap = QPixmap(QString::fromStdString(path_carte));
         pixmap.scaled(20,31,Qt::KeepAspectRatio);
-        QIcon ButtonIcon(pixmap);
+        ButtonIcon = QIcon(pixmap);
         this->setIconSize(QSize(40, 62));
         this->setIcon(ButtonIcon);
     }
@@ -33,9 +35,9 @@ VueCarte::VueCarte(const Carte &c, bool etat, QWidget *parent) : QPushButton(par
         // Nom du bouton
         this->setObjectName(QString::fromStdString(c.get_nom()));
         // Image du bouton
-        QPixmap pixmap(QString::fromStdString(c.get_path_image()));
+        pixmap = QPixmap(QString::fromStdString(path_carte));
         pixmap.scaled(120,186,Qt::KeepAspectRatio);
-        QIcon ButtonIcon(pixmap);
+        ButtonIcon = QIcon(pixmap);
         this->setIconSize(QSize(120, 186));
         this->setIcon(ButtonIcon);
     }
