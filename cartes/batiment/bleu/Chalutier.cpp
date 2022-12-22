@@ -24,7 +24,7 @@ void Chalutier::declencher_effet(unsigned int possesseur, int bonus) const{
         unsigned int result_des;
         unsigned int argent;
         cout<<"Tirage des deux des"<<endl;
-        result_des = rand() % 12 + 1;
+        result_des = Partie::lancer_de() + Partie::lancer_de();
         argent = joueur_actuel->get_argent();
         joueur_actuel->set_argent(argent + result_des);
     }
