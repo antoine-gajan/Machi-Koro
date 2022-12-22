@@ -10,10 +10,17 @@ using namespace std;
 #include <QFormLayout>
 #include <QWidget>
 #include "VueJoueur.h"
+#include <QLayoutItem>
 #include "Joueur.h"
 #include "Boulangerie.h"
 #include "Aeroport.h"
 #include "Epicerie.h"
+#include <QApplication>
+#include <QDialog>
+#include <QLabel>
+#include <QSpinBox>
+#include <QFormLayout>
+#include <QLineEdit>
 #include "Cafe.h"
 #include "VuePartie.h"
 #include <QComboBox>
@@ -26,7 +33,6 @@ using namespace std;
 #include <QComboBox>
 #include <QStandardItemModel>
 #include <QStandardItem>
-#include "Partie.h"
 
 void resize_and_center(QWidget *widget, int width, int height)
 {
@@ -34,13 +40,178 @@ void resize_and_center(QWidget *widget, int width, int height)
     widget->move(QApplication::primaryScreen()->geometry().center() - widget->rect().center());
 }
 
+void launch_menu_2(QApplication *app, const string &edition_name, const list<string> &extensions){
 
-void build_content_menu(QWidget *menu){
-    auto* form = new QFormLayout(menu);
+    EditionDeJeu * edition;
+    vector<EditionDeJeu *> listing_extension;
+
+    edition = new EditionDeJeu(edition_name);
+
+    for (const auto & extension : extensions){
+        cout << "Extension : " << extension << endl;
+        listing_extension.push_back(new EditionDeJeu(extension));
+    }
+
+
+    unsigned int max_joueurs = edition->get_nb_joueurs_max();
+    unsigned int nb_monuments_win = edition->get_nb_monuments_win();
+    for (const auto & extension : listing_extension){
+        if (extension->get_nb_joueurs_max() > max_joueurs){
+            max_joueurs = extension->get_nb_joueurs_max();
+        }
+        if (extension->get_nb_monuments_win() > nb_monuments_win){
+            nb_monuments_win = extension->get_nb_monuments_win();
+        }
+    }
+
+    auto list_batiments = edition->get_batiment();
+    unsigned int nb_batiments_differents = list_batiments.size();
+
+
+    for (const auto & extension : listing_extension){
+        for (const auto & batiment : extension->get_batiment()){
+
+            string nom = batiment.first->get_nom();
+            bool found = false;
+
+            for (const auto & batiment2 : list_batiments){
+                if (batiment2.first->get_nom() == nom){
+                    found = true;
+                    break;
+                }
+            }
+
+            if (!found){
+                list_batiments[batiment.first] = batiment.second;
+                nb_batiments_differents++;
+            }
+        }
+    }
+
+    cout << "nb_batiments_differents = " << nb_batiments_differents << endl;
+
+    delete edition;
+    for (const auto & extension : listing_extension){
+        delete extension;
+    }
+
+
+//    pas 2 joueurs même nom
+// taille shop ou extended
+
+//    auto *menu = new QWidget();
+//    resize_and_center(menu, 500, 180);
+
+//    menu->setContentsMargins(50, 30, 50, 50);
+
+    auto *window = new QDialog();
+
+    window->setWindowTitle("Machi Koro - Menu");
+    window->setContentsMargins(50, 30, 50, 50);
+
+    auto *label = new QLabel("Choisissez le nombre de joueurs :");
+
+    auto *spinBox = new QSpinBox;
+    spinBox->setRange(2, (int) max_joueurs);
+    spinBox->setValue(2);
+
+    auto *formLayout = new QFormLayout;
+    for (int i = 0; i < spinBox->value(); i++) {
+        auto *lineEdit = new QLineEdit;
+        auto *comboBox = new QComboBox;
+        comboBox->addItem("Humain");
+        comboBox->addItem("IA agressive");
+        comboBox->addItem("IA défensive");
+        comboBox->addItem("IA aléatoire");
+        comboBox->setCurrentIndex(0);
+
+        auto *horizontalLayout = new QHBoxLayout;
+        horizontalLayout->addWidget(lineEdit);
+        horizontalLayout->addWidget(comboBox);
+        formLayout->addRow("Joueur " + QString::number(i + 1) + " : ", horizontalLayout);
+    }
+
+    auto *layout = new QVBoxLayout;
+    auto *h_layout = new QHBoxLayout;
+    h_layout->addWidget(label);
+    h_layout->addWidget(spinBox);
+    layout->addLayout(h_layout);
+    layout->addWidget(new QLabel());
+    layout->addLayout(formLayout);
+    layout->addWidget(new QLabel());
+    
+    auto *validateButton = new QPushButton("Valider");
+    layout->addWidget(validateButton);
+
+    window->setLayout(layout);
+
+
+    QObject::connect(spinBox, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), [formLayout](int value) {
+
+        while (formLayout->rowCount() > 0) {
+            formLayout->removeRow(0);
+        }
+
+        for (int i = 0; i < value; i++) {
+            auto *lineEdit = new QLineEdit;
+            auto *comboBox = new QComboBox;
+            comboBox->addItem("Humain");
+            comboBox->addItem("IA agressive");
+            comboBox->addItem("IA défensive");
+            comboBox->addItem("IA aléatoire");
+            comboBox->setCurrentIndex(0);
+
+            auto *horizontalLayout = new QHBoxLayout;
+            horizontalLayout->addWidget(lineEdit);
+            horizontalLayout->addWidget(comboBox);
+            formLayout->addRow("Joueur " + QString::number(i + 1) + " : ", horizontalLayout);
+        }
+
+    });
+
+    QObject::connect(validateButton, &QPushButton::clicked, [formLayout]() {
+        // Parcours des widgets du formulaire et récupération de leurs valeurs
+        for (int i = 0; i < formLayout->rowCount(); i++) {
+            auto *lineEdit = qobject_cast<QLineEdit *>(formLayout->itemAt(i, QFormLayout::FieldRole)->layout()->itemAt(0)->widget());
+            auto *comboBox = qobject_cast<QComboBox *>(formLayout->itemAt(i, QFormLayout::FieldRole)->layout()->itemAt(1)->widget());
+            if (lineEdit && comboBox) {
+                QString value = lineEdit->text();
+                QString type = comboBox->currentText();
+                cout << "Joueur " << i + 1 << " : " << value.toStdString() << " (" << type.toStdString() << ")" << endl;
+            }
+        }
+    });
+
+
+    window->show();
+}
+
+void validate_menu(QWidget *menu, QApplication *app, const string &edition, const list<string> &extensions){
+    cout << "Edition choisie : " << edition << endl;
+    cout << "Extensions choisies : " << endl;
+    for (const auto & extension : extensions){
+        cout << extension << endl;
+    }
+    cout << "Validation du menu" << endl;
+
+    menu->close();
+
+    launch_menu_2(app, edition, extensions);
+}
+
+
+void launch_menu_1(QApplication *app){
+
+    auto *menu = new QWidget();
+    resize_and_center(menu, 500, 180);
+
+
+    menu->setContentsMargins(50, 30, 50, 50);
+    auto *gridLayout = new QGridLayout;
+
 
     auto *editionLabel = new QLabel("Choix de l'édition :");
     auto* editionCombo = new QComboBox();
-
     auto *model = new QStandardItemModel();
     auto *item1 = new QStandardItem("-- Veuillez choisir une option --");
     auto *item2 = new QStandardItem("Standard");
@@ -53,26 +224,52 @@ void build_content_menu(QWidget *menu){
     model->appendRow(item4);
 
     editionCombo->setCurrentIndex(0);
+    editionCombo->setMinimumWidth(200);
 
     item1->setFlags(item1->flags() & ~Qt::ItemIsEnabled);
 
     editionCombo->setModel(model);
 
-    form->addRow(editionLabel, editionCombo);
+    gridLayout->addWidget(editionLabel, 0, 0);
+    gridLayout->addWidget(editionCombo, 0, 1);
 
+    gridLayout->addItem(new QSpacerItem(0, 15), 1, 0);
+
+    auto *extensionLabel = new QLabel("Choix des extension(s) :");
+    gridLayout->addWidget(extensionLabel, 2, 0);
+
+    auto *layout_h1 = new QHBoxLayout;
+    auto *label_vide1 = new QLabel();
+    label_vide1->setFixedWidth(5);
     auto *greenValleyCheck = new QCheckBox("Green valley");
+    layout_h1->addWidget(label_vide1);
+    layout_h1->addWidget(greenValleyCheck);
+
+    auto *layout_h2 = new QHBoxLayout;
+    auto *label_vide2 = new QLabel();
+    label_vide2->setFixedWidth(5);
     auto *marinaCheck = new QCheckBox("Marina");
+    layout_h2->addWidget(label_vide2);
+    layout_h2->addWidget(marinaCheck);
 
     greenValleyCheck->setEnabled(true);
     marinaCheck->setEnabled(true);
 
-    form->addRow(greenValleyCheck);
-    form->addRow(marinaCheck);
+    gridLayout->addLayout(layout_h1, 2, 1);
+    gridLayout->addLayout(layout_h2, 3, 1);
+
+    gridLayout->addItem(new QSpacerItem(0, 15), 4, 0);
 
     auto *validateButton = new QPushButton("Valider");
-    auto *cancelButton = new QPushButton("Annuler");
+    validateButton->setFixedWidth(200);
 
-    form->addRow(validateButton, cancelButton);
+    auto *cancelButton = new QPushButton("Annuler");
+    cancelButton->setFixedWidth(200);
+
+    gridLayout->addWidget(validateButton, 5, 0, Qt::AlignCenter);
+    gridLayout->addWidget(cancelButton, 5, 1, Qt::AlignCenter);
+
+    QObject::connect(cancelButton, &QPushButton::clicked, app, &QApplication::quit);
 
     QObject::connect(editionCombo, QOverload<int>::of(&QComboBox::currentIndexChanged),
                      [greenValleyCheck, marinaCheck](int index) {
@@ -87,7 +284,23 @@ void build_content_menu(QWidget *menu){
                          }
                      });
 
+    // le bouton valider fait appel à la fonction validate_menu
+    QObject::connect(validateButton, &QPushButton::clicked, [menu, app, editionCombo, greenValleyCheck, marinaCheck](){
+        string edition = editionCombo->currentText().toStdString();
+        list<string> extensions;
+        if (greenValleyCheck->isChecked()){
+            extensions.emplace_back("GreenValley");
+        }
+        if (marinaCheck->isChecked()){
+            extensions.emplace_back("Marina");
+        }
+        validate_menu(menu, app, edition, extensions);
+    });
+
+    menu->setLayout(gridLayout);
     menu->setWindowTitle("Machi Koro - Menu");
+
+    menu->show();
 }
 
 void build_content_jeu(QWidget *jeu){
@@ -140,21 +353,17 @@ void build_content_jeu(QWidget *jeu){
 int main(int argc, char * argv[]) {
 
     QApplication app(argc, argv);
-    /*auto *menu = new QWidget();
     auto *jeu = new QWidget();
 
-    resize_and_center(menu , 700, 500);
-    build_content_menu(menu);
-    menu->show();*/
-
+    launch_menu_1(&app);
 
     /*resize_and_center(jeu, 1000, 700);
     build_content_jeu(jeu);
     jeu->show();*/
-    QWidget fenetre;
-    Partie* partie = Partie::get_instance();
-    VuePartie* vp = new VuePartie(partie, &fenetre);
-    vp->show();
+
+//    QWidget fenetre;
+//    VuePartie* vp = new VuePartie(nullptr, &fenetre);
+//    vp->show();
     //fenetre.show();
     return QApplication::exec();
 
@@ -170,7 +379,7 @@ int main(int argc, char * argv[]) {
     Monument* mon = new Aeroport();
     mon->activer();
     liste_mon.push_back(mon);
-    
+
     Joueur* j = new Joueur("Test", liste_mon, liste_bat, 3);
     j->fermer_batiment(b);
     VueJoueur* vj = new VueJoueur(j, &fenetre);
