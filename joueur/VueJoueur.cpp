@@ -113,6 +113,10 @@ void update_monu(VueCarte* vc, Carte* c){
     vc->set_icon(vc->get_pixmap());
 }
 
+void replace_batiment(){
+
+}
+
 void VueJoueur::update_vue(){
     /// Mise à jour de la vue joueur
     // Mise à jour de l'argent
@@ -120,11 +124,16 @@ void VueJoueur::update_vue(){
         replace_argent(joueur->get_argent());
     }
     // Mise à jour des batiments
-    
+
 
     // Mise à jour des batiments fermés
 
 
     // Mise à jour des monuments
-    update();
+    map<Monument*, bool> mon = joueur->get_liste_monument();
+    for(size_t i; i< mon.size();i++){
+
+    }
+
 }
+

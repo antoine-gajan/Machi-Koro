@@ -26,6 +26,7 @@ public:
     const vector<VueCarte*>& get_vue_batiments() const {return *vue_batiments;}
     const vector<VueCarte*>& get_vue_batiments_ferme() const {return *vue_batiments_ferme;}
     const vector<VueCarte*>& get_vue_monuments() const {return *vue_monuments;}
+
     void update_vue();
 private:
     QLabel* text_bat;

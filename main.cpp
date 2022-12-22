@@ -355,15 +355,16 @@ int main(int argc, char * argv[]) {
     QApplication app(argc, argv);
     auto *jeu = new QWidget();
 
-    launch_menu_1(&app);
+    //launch_menu_1(&app);
 
     /*resize_and_center(jeu, 1000, 700);
     build_content_jeu(jeu);
     jeu->show();*/
 
-//    QWidget fenetre;
-//    VuePartie* vp = new VuePartie(nullptr, &fenetre);
-//    vp->show();
+    QWidget fenetre;
+    Partie *p = Partie::get_instance();
+    VuePartie* vp = new VuePartie(p, &fenetre);
+    vp->show();
     //fenetre.show();
     return QApplication::exec();
 

@@ -117,13 +117,13 @@ VuePartie::VuePartie(Partie *partie, QWidget *parent){
     vector<Monument*> liste_mon;
     Monument* mon = new TourRadio();
     mon->activer();
-    vector<Joueur*> j = partie->get_tab_joueurs();
+    /*vector<Joueur*> j = partie->get_tab_joueurs();
     for(size_t i = 0; i<j.size(); i++){
         tab_vue_joueurs.push_back(new VueJoueur(j[i], parent));
-    }
+    }*/
 
 
-    /*
+
     liste_mon.push_back(mon);
     Joueur* j = new Joueur("Test", liste_mon, liste_bat, 3);
     j->fermer_batiment(b);
@@ -132,7 +132,7 @@ VuePartie::VuePartie(Partie *partie, QWidget *parent){
     tab_j.push_back(j2);
     // Ajout des vues joueurs
     tab_vue_joueurs.push_back(new VueJoueur(j, parent));
-    tab_vue_joueurs.push_back(new VueJoueur(j2, parent));*/
+    tab_vue_joueurs.push_back(new VueJoueur(j2, parent));
 
     //Mettre les joueurs dans des stacks
     nb_joueurs = tab_vue_joueurs.size();
@@ -164,8 +164,8 @@ VuePartie::VuePartie(Partie *partie, QWidget *parent){
     //vj = tab_vue_joueurs[1];
     //layout->replaceWidget(tab_vue_joueurs[i], tab_vue_joueurs[1]);
     layout->addWidget(b2);
-    //j->fermer_batiment(bat2);
-    //j->set_argent(24);
+    j->fermer_batiment(bat2);
+    j->set_argent(24);
     structure->addLayout(layout);
     setLayout(structure);
 
@@ -225,7 +225,7 @@ void VuePartie::carteClique(VueCarte* vc){
     // Création d'un label contenant l'image
     QLabel *label = new QLabel(fenetre);
     QPixmap pixmap(QString::fromStdString(vc->getCarte().get_path_image()));
-    std::cout<<vc->getCarte().get_nom()<<endl;
+    //std::cout<<vc->getCarte().get_nom()<<endl;
     label->setPixmap(pixmap);
     label->resize(pixmap.size());
     // Affichage de la fenetre pop up
