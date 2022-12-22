@@ -216,7 +216,7 @@ void VuePartie::carteClique(VueCarte* vc){
     // Création d'un label contenant l'image
     QLabel *label = new QLabel(fenetre);
     QPixmap pixmap(QString::fromStdString(vc->getCarte().get_path_image()));
-    cout<<vc->getCarte().get_nom()<<endl;
+    std::cout<<vc->getCarte().get_nom()<<endl;
     label->setPixmap(pixmap);
     label->resize(pixmap.size());
     // Affichage de la fenetre pop up
