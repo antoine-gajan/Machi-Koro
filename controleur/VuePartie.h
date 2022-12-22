@@ -25,6 +25,7 @@ class VuePartie : public QWidget
 {
     Q_OBJECT
 public:
+
     explicit VuePartie(Partie *partie = nullptr, QWidget *parent = nullptr);
     const vector <VueJoueur*>& get_tab_vue_joueurs() const {return tab_vue_joueurs;};
 
@@ -34,9 +35,24 @@ private:
     unsigned int nb_joueurs;
     unsigned int joueur_affiche;
     vector<VueJoueur *> tab_vue_joueurs;
+
+    //Labels sur la page
+    QLabel* label_edj;
+    QLabel* label_joueur_actuel;
+    QLabel* label_de1;
+    QLabel* label_de2;
+    QLabel* pioche_exception;
+    QGridLayout* shop;
+
+    //partitionnement de la page
+    QVBoxLayout *structure;
     QHBoxLayout *layout;
-    QWidget *parent;
+    QHBoxLayout *entete;
+    QVBoxLayout *display_des;
+    QHBoxLayout *body;
+
     vector<Joueur*> tab_j;
+    QWidget *parent;
 
 
 
