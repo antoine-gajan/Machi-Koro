@@ -177,7 +177,7 @@ int main(int argc, char * argv[]) {
 
     //QHBoxLayout * layout = new QHBoxLayout;
     //QLabel* lab = new QLabel(&fenetre);
-    //lab->setPixmap(QPixmap(":/Boulangerie.jpg"));
+    //lab->setPixmap(QPixmap(":/Boulangerie.png"));
     //QPushButton* button = new QPushButton;
     //QLabel *label = new QLabel(&fenetre);
     //QPixmap pixmap("../assets/batiments/Vert/Boulangerie.png");
