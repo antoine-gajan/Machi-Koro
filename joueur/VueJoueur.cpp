@@ -28,13 +28,14 @@ VueJoueur::VueJoueur(Joueur* j, QWidget *parent) {
     int ind_bat;
     int ind_couleurs = 1;
     // Création des vues des batiments du joueur
+    vue_batiments = new vector<VueCarte*>;
     for (auto& couleur : joueur->get_liste_batiment()){
         ind_bat = 0;
         for (auto bat : couleur.second){
             // Affichage du batiment
-            vue_batiments.push_back(new VueCarte(*bat.first, true, parent));
-            layout_batiments->addWidget(vue_batiments[i], ind_couleurs, ind_bat);
-            connect(vue_batiments[i],SIGNAL(carteClicked(VueCarte*)),this,SLOT(carteClique(VueCarte*)));
+            vue_batiments->push_back(new VueCarte(*bat.first, true, parent));
+            layout_batiments->addWidget((*vue_batiments)[i], ind_couleurs, ind_bat);
+            connect((*vue_batiments)[i],SIGNAL(carteClicked(VueCarte*)),this,SLOT(carteClique(VueCarte*)));
             ind_bat++;
             i++;
         }
@@ -48,22 +49,24 @@ VueJoueur::VueJoueur(Joueur* j, QWidget *parent) {
 
 
     // Création des vues des monuments du joueur
+    vue_monuments = new vector<VueCarte*>;
     int ind_mon=0;
     for (auto& mon : joueur->get_liste_monument()){
 
-        vue_monuments.push_back(new VueCarte(*mon.first,true, parent));
-        layout_monuments->addWidget(vue_monuments[ind_mon], ind_mon/3, ind_mon%3);
-        connect(vue_monuments[ind_mon],SIGNAL(carteClicked(VueCarte*)),this,SLOT(carteClique(VueCarte*)));
+        vue_monuments->push_back(new VueCarte(*mon.first,true, parent));
+        layout_monuments->addWidget((*vue_monuments)[ind_mon], ind_mon/3, ind_mon%3);
+        connect((*vue_monuments)[ind_mon],SIGNAL(carteClicked(VueCarte*)),this,SLOT(carteClique(VueCarte*)));
         ind_mon++;
     }
 
     int ind_bat_ferme = 0;
+    vue_batiments_ferme = new vector<VueCarte*>;
     // Ajout des batiments fermés à une nouvelle fenêtre
     fenetre_bat_fermes = new QWidget;
     layout_batiments_ferme = new QGridLayout(fenetre_bat_fermes);
     for (auto bat: joueur->get_liste_batiment_fermes()) {
-        vue_batiments_ferme.push_back(new VueCarte(*bat, false, fenetre_bat_fermes));
-        layout_batiments_ferme->addWidget(vue_batiments_ferme[ind_bat_ferme], i % 4, i / 4);
+        vue_batiments_ferme->push_back(new VueCarte(*bat, false, fenetre_bat_fermes));
+        layout_batiments_ferme->addWidget((*vue_batiments_ferme)[ind_bat_ferme], i % 4, i / 4);
         ind_bat_ferme++;
     }
 
@@ -98,4 +101,20 @@ void VueJoueur::affichage_bat_ferme(){
     /// Affichage de la fenetre avec les batiments fermés
     // Ouverture de la fenetre si elle est fermée
     fenetre_bat_fermes->show();
+}
+
+void VueJoueur::update_vue(){
+    /// Mise à jour de la vue joueur
+    // Mise à jour de l'argent
+    if(joueur->get_argent() != get_widget_argent()->intValue()){
+        replace_argent(joueur->get_argent());
+    }
+    // Mise à jour des batiments
+    
+
+    // Mise à jour des batiments fermés
+
+
+    // Mise à jour des monuments
+    update();
 }
