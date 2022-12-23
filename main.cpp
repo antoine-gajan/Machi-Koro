@@ -57,6 +57,13 @@ void validate_menu_2(QWidget *menu, const string &edition, const list<string> &e
     cout << "Type de magasin: " << shop_type << endl;
     cout << "Taille du magasin: " << shop_size << endl;
 
+
+    QWidget *fenetre = new QWidget;
+    Partie *p = Partie::get_instance(edition, extensions, joueurs, shop_type, shop_size);
+    auto* vp = new VuePartie(p, fenetre);
+    vp->show();
+    //fenetre.show();
+
     menu->close();
 
 }
@@ -420,53 +427,10 @@ void build_content_jeu(QWidget *jeu){
 int main(int argc, char * argv[]) {
 
     QApplication app(argc, argv);
-    auto *jeu = new QWidget();
 
-//    launch_menu_1(&app);
+    launch_menu_1(&app);
 
-    /*resize_and_center(jeu, 1000, 700);
-    build_content_jeu(jeu);
-    jeu->show();*/
-
-    QWidget fenetre;
-    Partie *p = Partie::get_instance();
-    VuePartie* vp = new VuePartie(p, &fenetre);
-    vp->show();
-    //fenetre.show();
     return QApplication::exec();
 
-    /*QWidget fenetre;
-    vector<Batiment*> liste_bat;
-    Batiment *b = new Boulangerie();
-    liste_bat.push_back(b);
-    //liste_bat.push_back(new Boulangerie());
-    liste_bat.push_back(new Epicerie());
-    liste_bat.push_back(new Cafe());
-    vector<Monument*> liste_mon;
 
-    Monument* mon = new Aeroport();
-    mon->activer();
-    liste_mon.push_back(mon);
-
-    Joueur* j = new Joueur("Test", liste_mon, liste_bat, 3);
-    j->fermer_batiment(b);
-    VueJoueur* vj = new VueJoueur(j, &fenetre);
-    vj->show();*/
-    //fenetre.show();
-
-    //QHBoxLayout * layout = new QHBoxLayout;
-    //QLabel* lab = new QLabel(&fenetre);
-    //lab->setPixmap(QPixmap(":/Boulangerie.png"));
-    //QPushButton* button = new QPushButton;
-    //QLabel *label = new QLabel(&fenetre);
-    //QPixmap pixmap("../assets/batiments/Vert/Boulangerie.png");
-    //label->setPixmap(pixmap);
-    //label->resize(pixmap.size());
-    //QIcon ButtonIcon(pixmap);
-    //button->setIcon(ButtonIcon);
-    //button->setIconSize(pixmap.rect().size());
-
-    //fenetre.show();
-
-    return app.exec();
 }

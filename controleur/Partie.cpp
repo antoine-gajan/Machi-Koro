@@ -1,65 +1,33 @@
 #include "Partie.h"
-#define REP_ED_MIN 1
-#define REP_ED_MAX 4
-
-#define REP_EXT_MIN 1
-#define REP_EXT_MAX 4
 
 Partie::Handler Partie::handler=Partie::Handler();
 
-Partie* Partie::get_instance() {
+
+Partie* Partie::get_instance(const string &edition_name, const list<string> &extensions_names, const map<string, string>& joueurs, const string& shop_type, unsigned int shop_size) {
     if (handler.instance == nullptr) {
         int rep_ed = -1;
         EditionDeJeu * edition;
         vector<EditionDeJeu *> listing_extension;
 
-        cout << "/********\tMenu\t********/" << endl;
-        while (!(REP_ED_MIN <= rep_ed && rep_ed <= REP_ED_MAX)) {
-            cout << "\nVeuillez-choisir une edition :\n"
-                    "\t1. Standard\n"
-                    "\t2. Deluxe\n"
-                    "\t3. Custom\n"
-                    "\t4. Quitter\n"
-                    "Votre choix :" << endl;
-            cin >> rep_ed;
-        }
-
-        if (rep_ed == 1) {
+        if (edition_name == "Standard") {
             edition = new EditionDeJeu("Standard");
-            int rep_ext = -1;
-            while (!(REP_EXT_MIN <= rep_ext && rep_ext <= REP_EXT_MAX)) {
-                cout << "Vous avez choisi l'edition standard\n"
-                        "Vous pouvez jouer avec des extensions\n"
-                        "Avec laquelle voulez-vous jouer ?\n"
-                        "\t1. Green-Valley\n"
-                        "\t2. Marina\n"
-                        "\t3. Les deux (Marina + Green-Valley)\n"
-                        "\t4. Aucune\n"
-                        "Votre choix :" << endl;
-                cin >> rep_ext;
-            }
-            if (rep_ext == 1)
-                listing_extension.push_back(new EditionDeJeu("GreenValley"));
-            else if (rep_ext == 2)
-                listing_extension.push_back(new EditionDeJeu("Marina"));
-            else if (rep_ext == 3) {
-                listing_extension.push_back(new EditionDeJeu("GreenValley"));
-                listing_extension.push_back(new EditionDeJeu("Marina"));
-            }
-            else
-                cout << "Vous avez choisi de jouer sans extension"<< endl;
 
+            for (const auto & extensions_name : extensions_names) {
+                listing_extension.push_back(new EditionDeJeu(extensions_name));
+            }
 
-        } else if (rep_ed == 2) {
-            edition = new EditionDeJeu("Deluxe");
-        } else if (rep_ed == 3) {
-            edition = new EditionDeJeu("Custom");
-        } else {
-            cout << "Vous avez choisi de quitter le jeu" << endl;
-            exit(0);
         }
-        if(rep_ed != REP_ED_MAX)
-            handler.instance = new Partie(edition, listing_extension);
+        else if (edition_name == "Deluxe") {
+            edition = new EditionDeJeu("Deluxe");
+        }
+        else if (edition_name == "Custom") {
+            edition = new EditionDeJeu("Custom");
+        }
+        else {
+            throw gameException("Edition inconnue");
+        }
+
+        handler.instance = new Partie(edition, joueurs, shop_type, shop_size, listing_extension);
 
         delete edition;
 
@@ -71,13 +39,18 @@ Partie* Partie::get_instance() {
 }
 
 
-Partie::Partie(EditionDeJeu* edition, const vector<EditionDeJeu *>& extensions) : nb_monuments_win(edition->get_nb_monuments_win()), joueur_actuel(0), de_1(0), de_2(0) {
+Partie* Partie::get_instance() {
+    if (handler.instance == nullptr) {
+        throw gameException("Partie non initialisee");
+    }
+    return handler.instance;
+}
+
+Partie::Partie(EditionDeJeu* edition, const map<string, string>& joueurs, const string& shop_type, unsigned int shop_size, const vector<EditionDeJeu *>& extensions) : nb_monuments_win(edition->get_nb_monuments_win()), joueur_actuel(0), de_1(0), de_2(0) {
     ///Constructeur de Partie
 
     //Initialisation des variables utiles
-    unsigned int max_joueurs = edition->get_nb_joueurs_max();
-    unsigned int format = 0;
-    unsigned int nb_tas = 0;
+    unsigned int nb_tas;
     rejouer = false;
 
     tab_nom_edition.push_back(edition->get_nom());
@@ -105,10 +78,6 @@ Partie::Partie(EditionDeJeu* edition, const vector<EditionDeJeu *>& extensions) 
                 list_monuments.push_back(monu->clone());
             }
 
-            if (ext->get_nb_joueurs_max() > max_joueurs)
-                max_joueurs = ext->get_nb_joueurs_max();
-
-
             if (ext->get_nb_monuments_win() > nb_monuments_win)
                 nb_monuments_win = ext->get_nb_monuments_win();
 
@@ -119,91 +88,35 @@ Partie::Partie(EditionDeJeu* edition, const vector<EditionDeJeu *>& extensions) 
     vector<Batiment*> starter_bat = get_starter();
 
     // Ajout des joueurs
-    for (unsigned int i = 0; i < max_joueurs; i++) {
-        // Si plus de 2 joueurs, l'ajout devient optionnel
-        if (i >= 2) {
-            cout << "Voulez-vous ajouter un joueur ? (0 : non, 1 : oui)" << endl;
-            int choix;
-            cin >> choix;
-            while (choix != 0 && choix != 1) {
-                cout << "Veuillez entrer 0 ou 1" << endl;
-                cin >> choix;
-            }
-            if (choix == 0) {
-                break;
-            }
+    for (auto & joueur : joueurs){
+
+        if (joueur.second == "Humain") {
+            tab_joueurs.push_back(new Joueur(joueur.first, list_monuments, starter_bat, 3));
         }
-        // Info du joueur
-        cout << "Nom du joueur " << i + 1 << " : "  << endl;
-        string nom;
-
-        bool nom_ok = false;
-        do{
-            cin >> nom;
-            nom_ok = true;
-            for (auto joueur : tab_joueurs) {
-                if (joueur->get_nom() == nom) {
-                    cout << "Ce nom est deja utilise" << endl;
-                    nom_ok = false;
-                    break;
-                }
-            }
-        } while(!nom_ok);
-
-        int humain = -1;
-        while (humain < 0 || 1 < humain ) {
-            cout << "Voulez-vous que le joueur soit humain ? (0 : non, 1 : oui)" << endl;
-            cin >> humain;
-        }
-
-
-        if (humain) {
-            tab_joueurs.push_back(new Joueur(nom, list_monuments, starter_bat, 3));
-        }
-        // Demande de la strategie IA
         else {
-            unsigned int strategie = -1;
-            while (strategie < 1 || strategie > 3) {
-                cout << "\nQuelle est la strategie du joueur ? (1 : aleatoire, 2 : agressive, 3 : defensif) :" << endl;
-                cin >> strategie;
+            if (joueur.second == "IA agressive") {
+                tab_joueurs.push_back(new Joueur(joueur.first, list_monuments, starter_bat, 3, agressive));
             }
-            // Ajout du joueur au tableau de joueurs
-            switch (strategie) {
-                case 1:
-                    tab_joueurs.push_back(new Joueur(nom, list_monuments, starter_bat, 3, aleatoire));
-                    break;
-                case 2:
-                    tab_joueurs.push_back(new Joueur(nom, list_monuments, starter_bat, 3, agressive));
-                    break;
-                case 3:
-                    tab_joueurs.push_back(new Joueur(nom, list_monuments, starter_bat, 3, defensif));
-                    break;
-                default :
-                    throw gameException("Strategie IA invalide");
+            else if (joueur.second == "IA défensive") {
+                tab_joueurs.push_back(new Joueur(joueur.first, list_monuments, starter_bat, 3, defensif));
+            }
+            else if (joueur.second == "IA aléatoire") {
+                tab_joueurs.push_back(new Joueur(joueur.first, list_monuments, starter_bat, 3, aleatoire));
+            }
+            else {
+                throw gameException("Type de joueur inconnu");
             }
         }
     }
 
     pioche = new Pioche(map_to_vector(list_batiments));
-    // Demande du format du shop
-    while (format < 1 || format > 2) {
-        cout << "Quel est le format du shop la partie ? (1 : standard, 2 : extended) :" << endl;
-        cout <<"1 : standard :" << endl;
-        cout << "\tAvec ce format vous pouvez choisir le nombre de tas de cartes que vous voulez." << endl;
-        cout << "2 : extended :" << endl;
-        cout << "\tAvec ce format toutes les cartes sont dans le shop." << endl;
-        cout << "Votre choix : " << endl;
-        cin >> format;
-    }
 
-    if (format == 1) {
-        while (nb_tas < 9 || nb_tas > list_batiments.size() - 1) {
-            cout << "Combien de tas voulez-vous ? (9 <= tas <= " << list_batiments.size() - 1 << ") :" << endl;
-            cin >> nb_tas;
-        }
+    if (shop_type == "standard") {
+        nb_tas = shop_size;
     }
-    else
+    else{
         nb_tas = list_batiments.size();
+    }
 
     // Construction du Shop
     shop = new Shop(nb_tas);
@@ -216,10 +129,8 @@ Partie::Partie(EditionDeJeu* edition, const vector<EditionDeJeu *>& extensions) 
             cerr << "ERREUR : " << e.what() << endl;
         }
     }
-
-    cout << "Construction de la partie terminee" << endl;
-    cout << "Bon jeu !" << endl;
 }
+
 
 vector<Batiment *> Partie::get_starter() {
     ///Renvoie le starter de la partie
@@ -877,8 +788,8 @@ unsigned int Partie::selectionner_joueur(const vector<Joueur*>& tab_joueurs, uns
         cin >> selection;
 
         //cas où erreur (nom entre pas dans la liste ou nom entre = joueur actuel)
-        if(selection > tab_joueurs.size()) throw invalid_argument("L'indice entre n'est pas valide");
-        if(selection == joueur_actuel) throw invalid_argument("On ne peut pas selectionner le joueur actuel");
+        if(selection > tab_joueurs.size()) throw gameException("L'indice entre n'est pas valide");
+        if(selection == joueur_actuel) throw gameException("On ne peut pas selectionner le joueur actuel");
     }
 
     cout<<"joueur selectionne : "<<tab_joueurs[selection]->get_nom();

@@ -7,15 +7,15 @@ Carte::Carte(const string& name, const string& effect_description, unsigned int 
 
     // Gestion des erreurs
     if (name.empty()) {
-        throw invalid_argument("Le nom de la carte ne peut pas etre vide");
+        throw gameException("Le nom de la carte ne peut pas etre vide");
     }
 
     if (effect_description.empty()) {
-        throw invalid_argument("La description de l'effet de la carte ne peut pas etre vide");
+        throw gameException("La description de l'effet de la carte ne peut pas etre vide");
     }
 
     if (path_picture.empty()) {
-        throw invalid_argument("Le chemin de l'image de la carte ne peut pas etre vide");
+        throw gameException("Le chemin de l'image de la carte ne peut pas etre vide");
     }
 
     // Initialisation des attributs

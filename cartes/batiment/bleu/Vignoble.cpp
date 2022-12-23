@@ -5,7 +5,7 @@ Vignoble::Vignoble() :
     Batiment("Vignoble",
          3,
         "Recevez trois pieces de la banque",
-        "../assets/batiments/bleu/Vignobles.png",
+        "../assets/batiments/Bleu/Vignobles.png",
         Bleu,
         list<unsigned int>{7},
         "Champ"){}

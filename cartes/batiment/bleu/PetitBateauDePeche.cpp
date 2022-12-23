@@ -5,7 +5,7 @@ PetitBateauDePeche::PetitBateauDePeche() :
         Batiment("PetitBateauDePeche",
                  2,
                  "Si vous avez le port, recevez 3 pieces",
-                 "../assets/batiments/bleu/Petit-bateau-peche.png",
+                 "../assets/batiments/Bleu/Petit-bateau-peche.png",
                  Bleu,
                  list<unsigned int>{8},
                  "Bateau"){}

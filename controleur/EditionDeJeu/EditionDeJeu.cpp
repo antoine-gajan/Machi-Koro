@@ -6,7 +6,7 @@ EditionDeJeu::EditionDeJeu(const string& nom_edition) : nom(nom_edition) {
 
     //Gestion des erreurs
     if (nom.empty()){
-        throw invalid_argument("Le nom de l'edition ne peut etre vide.");
+        throw gameException("Le nom de l'edition ne peut etre vide.");
     }
 
     if (nom_edition == "Deluxe") {

@@ -5,7 +5,7 @@ Chalutier::Chalutier() :
         Batiment("Chalutier",
         5,
         "Le joueur dont c'est le tour lance deux des. Si vous avez le Port, recevez de la banque autant de pieces que le total des deux des",
-        "../assets/batiments/bleu/Chalutier.png",
+        "../assets/batiments/Bleu/Chalutier.png",
         Bleu,
         list<unsigned int>{12,13,14},
         "Bateau"){}

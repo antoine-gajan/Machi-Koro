@@ -40,12 +40,14 @@ private:
 
     //// Constructeur et Destructeur ////
     ~Partie();
-    explicit Partie(EditionDeJeu* edition, const vector<EditionDeJeu *>& extensions = vector<EditionDeJeu *>());
+    explicit Partie(EditionDeJeu* edition, const map<string, string>& joueurs, const string& shop_type, unsigned int shop_size, const vector<EditionDeJeu *>& extensions = vector<EditionDeJeu *>());
+
 
 public:
     Partie(Partie const&) = delete;
     void operator=(const Partie&) = delete;
     static Partie* get_instance();
+    static Partie* get_instance(const string &edition_name, const list<string> &extensions_names, const map<string, string>& joueurs, const string& shop_type, unsigned int shop_size);
 
 
     //********** Jouer une partie **********//
