@@ -161,7 +161,7 @@ add_executable(Machi_Koro
         controleur/VuePartie.cpp
         controleur/VuePartie.h
         joueur/VueJoueur.cpp
-        joueur/VueJoueur.h controleur/VuePartie.cpp controleur/VuePartie.h)
+        joueur/VueJoueur.h controleur/VuePartie.cpp controleur/VuePartie.h controleur/VuePioche.cpp controleur/VuePioche.h controleur/VueShop.cpp controleur/VueShop.h)
 
 target_link_libraries(Machi_Koro
         Qt::Core

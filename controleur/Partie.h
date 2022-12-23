@@ -66,7 +66,8 @@ public:
     const vector <Joueur*>& get_tab_joueurs() const {return tab_joueurs;};
     Shop* get_shop() const {return shop;};
     Pioche* get_pioche() const {return pioche;};
-    vector<string> get_nom_edition()const {return tab_nom_edition;};
+    vector<string> get_nom_edition() const {return tab_nom_edition;};
+    unsigned int get_nb_cartes_edition() const {return list_batiments.size();};
 
     //********** Methodes **********//
     //********** Methodes statiques **********//

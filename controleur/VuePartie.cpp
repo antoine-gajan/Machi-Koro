@@ -5,6 +5,10 @@ using namespace std;
 #include "Partie.h"
 
 VuePartie::VuePartie(Partie *partie, QWidget *parent){
+    /// Constructeur de VuePartie
+    // Attributs principaux
+    partie_actuelle = partie;
+    parent_fenetre = parent;
 
     structure = new QVBoxLayout();
 
@@ -52,10 +56,10 @@ VuePartie::VuePartie(Partie *partie, QWidget *parent){
 
     //Affichage de la pioche
 
-    Batiment *b = new Boulangerie();
-    Batiment *bat2 = new Epicerie();
+    //Batiment *b = new Boulangerie();
+    //Batiment *bat2 = new Epicerie();
 
-    pioche = new QHBoxLayout;
+    pioche = new QVBoxLayout;
     if(partie->get_pioche()->get_top_carte() == nullptr){
         pioche_exception = new QLabel;
         pioche_exception->setText("Pioche vide!");
@@ -64,6 +68,15 @@ VuePartie::VuePartie(Partie *partie, QWidget *parent){
         VueCarte* view_pioche = new VueCarte(*(partie->get_pioche()->get_top_carte()),true);
         pioche->addWidget(view_pioche,33);
     }
+
+    unsigned int nb_cartes_start = partie->get_pioche()->get_taille();//on initialise l'attribut avce le nombre max de cartes qu'on pourra avoir dans la pioche c'est à dire au début
+
+    QProgressBar* barre_pioche = new QProgressBar;
+    barre_pioche->setRange(0,nb_cartes_start);
+    barre_pioche->setValue(partie->get_pioche()->get_taille());//valeur que l'on devra mettre à jour à chaque fois qu'on pioche une carte
+    barre_pioche->setFixedWidth(300);
+    pioche->addWidget(barre_pioche,33);
+
 
     /*
     VueCarte* view_pioche = new VueCarte(*b,true);
@@ -120,44 +133,6 @@ VuePartie::VuePartie(Partie *partie, QWidget *parent){
 
     return QApplication::exec();*/
 
-    vector<Batiment*> liste_bat;
-
-    liste_bat.push_back(b);
-    //liste_bat.push_back(new Boulangerie());
-    liste_bat.push_back(bat2);
-    liste_bat.push_back(new Cafe());
-    vector<Monument*> liste_mon;
-    Monument* mon = new TourRadio();
-    mon->activer();
-    /*vector<Joueur*> j = partie->get_tab_joueurs();
-    for(size_t i = 0; i<j.size(); i++){
-        tab_vue_joueurs.push_back(new VueJoueur(j[i], parent));
-    }*/
-
-
-
-    liste_mon.push_back(mon);
-    Joueur* j = new Joueur("Test", liste_mon, liste_bat, 3);
-    j->fermer_batiment(b);
-    Joueur* j2 = new Joueur("Test2", liste_mon, liste_bat, 45);
-    tab_j.push_back(j);
-    tab_j.push_back(j2);
-    // Ajout des vues joueurs
-    tab_vue_joueurs.push_back(new VueJoueur(j, parent));
-    tab_vue_joueurs.push_back(new VueJoueur(j2, parent));
-
-    //Mettre les joueurs dans des stacks
-    nb_joueurs = tab_vue_joueurs.size();
-    joueur_affiche = 0;
-
-    // Ajout de toutes les vues joueurs à un QStackWidget
-    stack = new QStackedWidget(parent);
-    for(auto vj : tab_vue_joueurs){
-        stack->addWidget(vj);
-    }
-    stack->setCurrentIndex(0);
-
-
     // Boutons de navigation gauche et droite dans les Vues Joueurs
     QPushButton* b1 = new QPushButton(parent);
     b1->setText(QString::fromStdString("(<)"));
@@ -169,16 +144,13 @@ VuePartie::VuePartie(Partie *partie, QWidget *parent){
     layout = new QHBoxLayout();
 
     layout->addWidget(b1);
-    layout->addWidget(stack);
-    //layout->addWidget(tab_vue_joueurs[joueur_affiche]);
 
+    nb_joueurs = partie->get_tab_joueurs().size();
+    joueur_affiche = 0;
+    vue_joueur = new VueJoueur(partie_actuelle->get_tab_joueurs()[joueur_affiche], parent);
+    layout->addWidget(vue_joueur);
 
-    //vj = tab_vue_joueurs[1];
-    //layout->replaceWidget(tab_vue_joueurs[i], tab_vue_joueurs[1]);
     layout->addWidget(b2);
-    j->fermer_batiment(bat2);
-    j->set_argent(24);
-
 
     structure->addLayout(layout,40);
     setLayout(structure);
@@ -188,48 +160,31 @@ VuePartie::VuePartie(Partie *partie, QWidget *parent){
 
 void VuePartie::d_click(){
     /// Slot bouton droit
-    /*// Clean
-    delete stack;
-    tab_vue_joueurs.clear();
-    // Ajout des nouvelles vues joueurs
-    for (auto joueur : tab_j){
-        tab_vue_joueurs.push_back(new VueJoueur(joueur, parent));
-    }
-    // Ajout des widgets
-    stack = new QStackedWidget;
-    for (auto vj : tab_vue_joueurs){
-        stack->addWidget(vj);
-    }*/
-    // MAJ des indices
-    //tab_vue_joueurs[joueur_affiche+1%nb_joueurs]->replace_argent(5);
-    stack->setCurrentIndex((joueur_affiche + 1) % nb_joueurs);
-    VueJoueur* vj = (VueJoueur*)stack->currentWidget();
-    vj->update_vue();
     joueur_affiche = (joueur_affiche + 1) % nb_joueurs;
-
-
-    //update();
+    // Récupération de l'ancienne vue
+    VueJoueur *old = vue_joueur;
+    // Création de la nouvelle
+    vue_joueur = new VueJoueur(partie_actuelle->get_tab_joueurs()[joueur_affiche], parent_fenetre);
+    // Remplacement par la nouvelle
+    layout->replaceWidget(old, vue_joueur);
+    delete old;
+    // Mise à jour de l'affichage
+    update();
 }
 
 
 void VuePartie::g_click(){
     /// Slot bouton gauche
-    /*// Clean
-    delete stack;
-    tab_vue_joueurs.clear();
-    // Ajout des nouvelles vues joueurs
-    for (auto joueur : Partie::get_instance()->get_tab_joueurs()){
-        tab_vue_joueurs.push_back(new VueJoueur(joueur, parent));
-    }
-    // Ajout des widgets
-    stack = new QStackedWidget;
-    for (auto vj : tab_vue_joueurs){
-        stack->addWidget(vj);
-    }*/
-    // MAJ des indices
-    stack->setCurrentIndex((joueur_affiche - 1) % nb_joueurs);
     joueur_affiche = (joueur_affiche - 1) % nb_joueurs;
-    //update();
+    // Récupération de l'ancienne vue
+    VueJoueur *old = vue_joueur;
+    // Création de la nouvelle
+    vue_joueur = new VueJoueur(partie_actuelle->get_tab_joueurs()[joueur_affiche], parent_fenetre);
+    // Remplacement par la nouvelle
+    layout->replaceWidget(old, vue_joueur);
+    delete old;
+    // Mise à jour de l'affichage
+    update();
 }
 
 void VuePartie::carteClique(VueCarte* vc){
@@ -237,13 +192,26 @@ void VuePartie::carteClique(VueCarte* vc){
     // Création d'une nouvelle fenetre
     QWidget* fenetre = new QWidget();
     // Création d'un label contenant l'image
-    QLabel *label = new QLabel(fenetre);
+    QLabel *label = new QLabel(parent_fenetre);
     QPixmap pixmap(QString::fromStdString(vc->getCarte().get_path_image()));
     //std::cout<<vc->getCarte().get_nom()<<endl;
     label->setPixmap(pixmap);
     label->resize(pixmap.size());
     // Affichage de la fenetre pop up
     fenetre->show();
+}
+
+void VuePartie::update_vue_joueur() {
+    /// Fonction pour mettre à jour la vue joueur actuelle
+    // Récupération de l'ancienne vue
+    VueJoueur *old = vue_joueur;
+    // Création de la nouvelle
+    vue_joueur = new VueJoueur(partie_actuelle->get_tab_joueurs()[joueur_affiche], parent_fenetre);
+    // Remplacement par la nouvelle
+    layout->replaceWidget(old, vue_joueur);
+    delete old;
+    // Mise à jour de l'affichage
+    update();
 }
 
 
