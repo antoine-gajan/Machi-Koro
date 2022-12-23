@@ -32,6 +32,7 @@ public:
     void update_vue_joueur();
     unsigned int get_nb_joueurs() const {return nb_joueurs;}
     unsigned int get_joueur_affiche() const {return joueur_affiche;}
+    Partie* get_partie_actuelle() const{return partie_actuelle;}
 
 private:
     Partie* partie_actuelle;
