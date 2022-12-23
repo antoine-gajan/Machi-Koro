@@ -10,9 +10,11 @@ using namespace std;
 #include <QFormLayout>
 #include <QWidget>
 #include "VueJoueur.h"
+#include <QRadioButton>
 #include <QLayoutItem>
 #include "Joueur.h"
 #include "Boulangerie.h"
+#include <set>
 #include "Aeroport.h"
 #include "Epicerie.h"
 #include <QApplication>
@@ -40,7 +42,26 @@ void resize_and_center(QWidget *widget, int width, int height)
     widget->move(QApplication::primaryScreen()->geometry().center() - widget->rect().center());
 }
 
-void launch_menu_2(QApplication *app, const string &edition_name, const list<string> &extensions){
+void validate_menu_2(QWidget *menu, const string &edition, const list<string> &extensions, const map<string, string>& joueurs, const string& shop_type, unsigned int shop_size){
+
+    // affichage des infos
+    cout << "Edition: " << edition << endl;
+    cout << "Extensions: " << endl;
+    for (const auto & extension : extensions){
+        cout << extension << endl;
+    }
+    cout << "Joueurs: " << endl;
+    for (const auto & joueur : joueurs){
+        cout << joueur.first << " : " << joueur.second << endl;
+    }
+    cout << "Type de magasin: " << shop_type << endl;
+    cout << "Taille du magasin: " << shop_size << endl;
+
+    menu->close();
+
+}
+
+void launch_menu_2(const string &edition_name, const list<string> &extensions){
 
     EditionDeJeu * edition;
     vector<EditionDeJeu *> listing_extension;
@@ -88,21 +109,10 @@ void launch_menu_2(QApplication *app, const string &edition_name, const list<str
         }
     }
 
-    cout << "nb_batiments_differents = " << nb_batiments_differents << endl;
-
     delete edition;
     for (const auto & extension : listing_extension){
         delete extension;
     }
-
-
-//    pas 2 joueurs même nom
-// taille shop ou extended
-
-//    auto *menu = new QWidget();
-//    resize_and_center(menu, 500, 180);
-
-//    menu->setContentsMargins(50, 30, 50, 50);
 
     auto *window = new QDialog();
 
@@ -139,12 +149,48 @@ void launch_menu_2(QApplication *app, const string &edition_name, const list<str
     layout->addWidget(new QLabel());
     layout->addLayout(formLayout);
     layout->addWidget(new QLabel());
-    
-    auto *validateButton = new QPushButton("Valider");
+
+    auto *standardRadioButton = new QRadioButton("Standard");
+    auto *extendedRadioButton = new QRadioButton("Extended");
+
+    standardRadioButton->setChecked(true);
+
+    auto *spinBox_shop = new QSpinBox;
+    spinBox_shop->setRange(9, (int) nb_batiments_differents);
+    spinBox_shop->setValue(9);
+
+    auto *shop_layout = new QHBoxLayout;
+    auto *shop_label = new QLabel("Choisissez le type du shop :");
+    shop_layout->addWidget(shop_label);
+    shop_layout->addWidget(standardRadioButton);
+    shop_layout->addWidget(extendedRadioButton);
+    layout->addLayout(shop_layout);
+
+    auto *shop_layout2 = new QHBoxLayout;
+    shop_layout2->addWidget(new QLabel("Nombre de cartes dans le shop :"));
+    shop_layout2->addWidget(spinBox_shop);
+    layout->addLayout(shop_layout2);
+
+    layout->addWidget(new QLabel());
+
+    auto *errorLabel = new QLabel();
+    errorLabel->setStyleSheet("QLabel { color : red; }");
+    layout->addWidget(errorLabel, 0, Qt::AlignCenter);
+
+    layout->addWidget(new QLabel());
+    auto *validateButton = new QPushButton("Jouer");
     layout->addWidget(validateButton);
 
     window->setLayout(layout);
 
+
+    QObject::connect(standardRadioButton, &QRadioButton::clicked, [spinBox_shop](bool checked) {
+        spinBox_shop->setEnabled(checked);
+    });
+
+    QObject::connect(extendedRadioButton, &QRadioButton::clicked, [spinBox_shop](bool checked) {
+        spinBox_shop->setEnabled(!checked);
+    });
 
     QObject::connect(spinBox, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), [formLayout](int value) {
 
@@ -169,34 +215,55 @@ void launch_menu_2(QApplication *app, const string &edition_name, const list<str
 
     });
 
-    QObject::connect(validateButton, &QPushButton::clicked, [formLayout]() {
-        // Parcours des widgets du formulaire et récupération de leurs valeurs
+    QObject::connect(validateButton, &QPushButton::clicked, [window, formLayout, standardRadioButton, spinBox_shop, errorLabel, edition_name, extensions]() {
+
+        map<string, string> joueurs;
+
         for (int i = 0; i < formLayout->rowCount(); i++) {
             auto *lineEdit = qobject_cast<QLineEdit *>(formLayout->itemAt(i, QFormLayout::FieldRole)->layout()->itemAt(0)->widget());
             auto *comboBox = qobject_cast<QComboBox *>(formLayout->itemAt(i, QFormLayout::FieldRole)->layout()->itemAt(1)->widget());
             if (lineEdit && comboBox) {
                 QString value = lineEdit->text();
                 QString type = comboBox->currentText();
-                cout << "Joueur " << i + 1 << " : " << value.toStdString() << " (" << type.toStdString() << ")" << endl;
+                if (value.toStdString().empty()){
+                    errorLabel->setText("Veuillez renseigner tous les noms de joueurs");
+                    return;
+                }
+                if (joueurs.find(value.toStdString()) != joueurs.end()){
+                    errorLabel->setText("Veuillez renseigner des noms de joueurs différents");
+                    return;
+                }
+                joueurs[value.toStdString()] = type.toStdString();
             }
         }
+
+        string shop;
+        int nb_cartes;
+        if (standardRadioButton->isChecked()){
+            shop = "standard";
+            nb_cartes = spinBox_shop->value();
+        }
+        else {
+            shop = "extended";
+            nb_cartes = 0;
+        }
+
+        validate_menu_2(window, edition_name, extensions, joueurs, shop, nb_cartes);
+
     });
 
 
     window->show();
 }
 
-void validate_menu(QWidget *menu, QApplication *app, const string &edition, const list<string> &extensions){
-    cout << "Edition choisie : " << edition << endl;
-    cout << "Extensions choisies : " << endl;
+void validate_menu_1(QWidget *menu, const string &edition, const list<string> &extensions){
     for (const auto & extension : extensions){
         cout << extension << endl;
     }
-    cout << "Validation du menu" << endl;
 
     menu->close();
 
-    launch_menu_2(app, edition, extensions);
+    launch_menu_2(edition, extensions);
 }
 
 
@@ -284,8 +351,8 @@ void launch_menu_1(QApplication *app){
                          }
                      });
 
-    // le bouton valider fait appel à la fonction validate_menu
-    QObject::connect(validateButton, &QPushButton::clicked, [menu, app, editionCombo, greenValleyCheck, marinaCheck](){
+    // le bouton valider fait appel à la fonction validate_menu_1
+    QObject::connect(validateButton, &QPushButton::clicked, [menu, editionCombo, greenValleyCheck, marinaCheck](){
         string edition = editionCombo->currentText().toStdString();
         list<string> extensions;
         if (greenValleyCheck->isChecked()){
@@ -294,7 +361,7 @@ void launch_menu_1(QApplication *app){
         if (marinaCheck->isChecked()){
             extensions.emplace_back("Marina");
         }
-        validate_menu(menu, app, edition, extensions);
+        validate_menu_1(menu, edition, extensions);
     });
 
     menu->setLayout(gridLayout);
@@ -355,7 +422,7 @@ int main(int argc, char * argv[]) {
     QApplication app(argc, argv);
     auto *jeu = new QWidget();
 
-    //launch_menu_1(&app);
+//    launch_menu_1(&app);
 
     /*resize_and_center(jeu, 1000, 700);
     build_content_jeu(jeu);
