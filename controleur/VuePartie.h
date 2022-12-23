@@ -29,13 +29,14 @@ class VuePartie : public QWidget
 public:
 
     explicit VuePartie(Partie *partie = nullptr, QWidget *parent = nullptr);
-    const vector <VueJoueur*>& get_tab_vue_joueurs() const {return tab_vue_joueurs;};
+    void update_vue_joueur();
+    unsigned int get_nb_joueurs() const {return nb_joueurs;}
+    unsigned int get_joueur_affiche() const {return joueur_affiche;}
 
 private:
     Partie* partie_actuelle;
     unsigned int nb_joueurs;
     unsigned int joueur_affiche;
-    vector<VueJoueur *> tab_vue_joueurs;
     vector<VueCarte *> tab_vue_shop;
 
     //Labels sur la page

@@ -9,7 +9,7 @@ VuePartie::VuePartie(Partie *partie, QWidget *parent){
     // Attributs principaux
     partie_actuelle = partie;
     parent_fenetre = parent;
-    
+
     structure = new QVBoxLayout();
 
     //Création de l'entete de la page (pourquoi pas créer une classe VueEntete?)
@@ -124,44 +124,6 @@ VuePartie::VuePartie(Partie *partie, QWidget *parent){
 
     return QApplication::exec();*/
 
-    /*vector<Batiment*> liste_bat;
-
-    liste_bat.push_back(b);
-    //liste_bat.push_back(new Boulangerie());
-    liste_bat.push_back(bat2);
-    liste_bat.push_back(new Cafe());
-    vector<Monument*> liste_mon;
-    Monument* mon = new TourRadio();
-    mon->activer();*/
-    /*vector<Joueur*> j = partie->get_tab_joueurs();
-    for(size_t i = 0; i<j.size(); i++){
-        tab_vue_joueurs.push_back(new VueJoueur(j[i], parent));
-    }*/
-
-
-
-    /*liste_mon.push_back(mon);
-    Joueur* j = new Joueur("Test", liste_mon, liste_bat, 3);
-    j->fermer_batiment(b);
-    Joueur* j2 = new Joueur("Test2", liste_mon, liste_bat, 45);
-    tab_j.push_back(j);
-    tab_j.push_back(j2);
-    // Ajout des vues joueurs
-    tab_vue_joueurs.push_back(new VueJoueur(j, parent));
-    tab_vue_joueurs.push_back(new VueJoueur(j2, parent));
-
-    //Mettre les joueurs dans des stacks
-    nb_joueurs = tab_vue_joueurs.size();
-    joueur_affiche = 0;*/
-
-    // Ajout de toutes les vues joueurs à un QStackWidget
-    /*stack = new QStackedWidget(parent);
-    for(auto vj : tab_vue_joueurs){
-        stack->addWidget(vj);
-    }
-    stack->setCurrentIndex(0);*/
-
-
     // Boutons de navigation gauche et droite dans les Vues Joueurs
     QPushButton* b1 = new QPushButton(parent);
     b1->setText(QString::fromStdString("(<)"));
@@ -173,19 +135,13 @@ VuePartie::VuePartie(Partie *partie, QWidget *parent){
     layout = new QHBoxLayout();
 
     layout->addWidget(b1);
-    //layout->addWidget(stack);
-    //layout->addWidget(tab_vue_joueurs[joueur_affiche]);
 
     nb_joueurs = partie->get_tab_joueurs().size();
     joueur_affiche = 0;
     vue_joueur = new VueJoueur(partie_actuelle->get_tab_joueurs()[joueur_affiche], parent);
     layout->addWidget(vue_joueur);
-    //vj = tab_vue_joueurs[1];
-    //layout->replaceWidget(tab_vue_joueurs[i], tab_vue_joueurs[1]);
-    layout->addWidget(b2);
-    //j->fermer_batiment(bat2);
-    //j->set_argent(24);
 
+    layout->addWidget(b2);
 
     structure->addLayout(layout,40);
     setLayout(structure);
@@ -234,6 +190,19 @@ void VuePartie::carteClique(VueCarte* vc){
     label->resize(pixmap.size());
     // Affichage de la fenetre pop up
     fenetre->show();
+}
+
+void VuePartie::update_vue_joueur() {
+    /// Fonction pour mettre à jour la vue joueur actuelle
+    // Récupération de l'ancienne vue
+    VueJoueur *old = vue_joueur;
+    // Création de la nouvelle
+    vue_joueur = new VueJoueur(partie_actuelle->get_tab_joueurs()[joueur_affiche], parent_fenetre);
+    // Remplacement par la nouvelle
+    layout->replaceWidget(old, vue_joueur);
+    delete old;
+    // Mise à jour de l'affichage
+    update();
 }
 
 
