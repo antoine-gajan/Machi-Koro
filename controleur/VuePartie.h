@@ -32,8 +32,7 @@ public:
     const vector <VueJoueur*>& get_tab_vue_joueurs() const {return tab_vue_joueurs;};
 
 private:
-    Partie* partie;
-    QStackedWidget *stack;
+    Partie* partie_actuelle;
     unsigned int nb_joueurs;
     unsigned int joueur_affiche;
     vector<VueJoueur *> tab_vue_joueurs;
@@ -54,9 +53,9 @@ private:
     QVBoxLayout *display_des;
     QHBoxLayout *body;
     QHBoxLayout *pioche;
+    VueJoueur* vue_joueur;
 
-    vector<Joueur*> tab_j;
-    QWidget *parent;
+    QWidget *parent_fenetre;
 
 
 
