@@ -22,13 +22,14 @@ public:
     QIcon get_icon() const{return ButtonIcon;}
     void set_pixmap(string path){pixmap = QPixmap(QString::fromStdString(path));};
     void set_icon(QPixmap pixmap){ButtonIcon = QIcon(pixmap);};
+    void peinture(QPaintEvent* event);
     //
+    void paintEvent(QPaintEvent *event) override;
 private:
-    const Carte* carte=nullptr;
+    const Carte* carte = nullptr;
     QPixmap pixmap;
     QIcon ButtonIcon;
     string path_carte;
-
 
 signals:
     // quand la vue de carte est cliquée, elle émet un signal en transmettant son adresse

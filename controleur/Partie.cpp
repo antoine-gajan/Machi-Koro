@@ -80,6 +80,9 @@ Partie::Partie(EditionDeJeu* edition, const vector<EditionDeJeu *>& extensions) 
     unsigned int nb_tas = 0;
     rejouer = false;
 
+    tab_nom_edition.push_back(edition->get_nom());
+    for (auto & extension : extensions)
+        tab_nom_edition.push_back(extension->get_nom());
 
     for (auto bat : edition->get_batiment()) {
         for (unsigned int i = 0; i < bat.second; i++) {

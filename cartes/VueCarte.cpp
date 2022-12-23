@@ -2,6 +2,7 @@
 #include <QHBoxLayout>
 #include "VueCarte.h"
 #include "../joueur/Joueur.h"
+#include "qpainter.h"
 
 VueCarte::VueCarte(const Carte &c, bool etat, QWidget *parent) : QPushButton(parent),carte(&c){
     /// Créer la vue d'une carte
@@ -49,4 +50,30 @@ VueCarte::VueCarte(QWidget *parent): QPushButton(parent)
     setFixedSize(80, 124);
     connect(this,SIGNAL(clicked()),this,SLOT(clickedEvent()));
     setCheckable(false);
+}
+
+void VueCarte::paintEvent(QPaintEvent *event) {
+/*
+    //setFlat(true);
+    //setAutoFillBackground(true);
+    //setFixedSize(40, 62);
+    //connect(this,SIGNAL(clicked()),this,SLOT(clickedEvent()));
+    //setCheckable(true);
+    // Nom du bouton
+    this->setObjectName(QString::fromStdString(this->getCarte().get_nom()));
+    // Image du bouton
+    pixmap = QPixmap(QString::fromStdString(path_carte));
+    pixmap.scaled(20,31,Qt::KeepAspectRatio);
+    ButtonIcon = QIcon(pixmap);
+    this->setIconSize(QSize(40, 62));
+    this->setIcon(ButtonIcon);*/
+
+    QPainter painter(this);
+    painter.drawPixmap(0,0,40,62,pixmap);
+    painter.drawText(QPoint(0,0),"test");
+    QRect rect(0,0,0,0);
+    if(event == nullptr){
+        painter.drawLine(0,0,100,100);
+    }
+    QWidget::paintEvent(event);
 }

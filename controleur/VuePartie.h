@@ -10,6 +10,8 @@
 #include <QFormLayout>
 #include <QHBoxLayout>
 #include <QWidget>
+#include <QPainter>
+#include <QPaintEvent>
 #include <QVBoxLayout>
 #include "VueCarte.h"
 #include "VueJoueur.h"
@@ -51,6 +53,7 @@ private:
     QHBoxLayout *entete;
     QVBoxLayout *display_des;
     QHBoxLayout *body;
+    QHBoxLayout *pioche;
 
     vector<Joueur*> tab_j;
     QWidget *parent;

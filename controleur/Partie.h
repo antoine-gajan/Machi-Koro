@@ -26,6 +26,7 @@ private:
     unsigned int de_1;
     unsigned int de_2;
     bool rejouer;
+    vector<string> tab_nom_edition;
 
     Shop* shop;
     Pioche* pioche;
@@ -65,6 +66,7 @@ public:
     const vector <Joueur*>& get_tab_joueurs() const {return tab_joueurs;};
     Shop* get_shop() const {return shop;};
     Pioche* get_pioche() const {return pioche;};
+    vector<string> get_nom_edition()const {return tab_nom_edition;};
 
     //********** Methodes **********//
     //********** Methodes statiques **********//

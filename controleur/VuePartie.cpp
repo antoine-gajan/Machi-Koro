@@ -15,32 +15,33 @@ VuePartie::VuePartie(Partie *partie, QWidget *parent){
     //Affichage du nom de l'édition de jeu
 
     label_edj = new QLabel;
-    label_edj->setText("Nom de l'édition de jeu");// à voir avec l'équipe si on ajoute des attributs dans partie pour avoir ces infos de display)
+    string nom_edj;
+    for (auto it : partie->get_nom_edition()){
+        nom_edj += it + " ";
+    }
+    label_edj->setText("Profil de la partie : " + QString::fromStdString(nom_edj));
 
     entete->addWidget(label_edj);
 
     //Affichage du nom du joueur actuel
     label_joueur_actuel = new QLabel;
     string nom_joueur = "Joueur actuel : ";
-    //nom_joueur += partie->get_tab_joueurs()[partie->get_joueur_actuel()]->get_nom();
-    nom_joueur += "nom du joueur";
+    nom_joueur += partie->get_tab_joueurs()[partie->get_joueur_actuel()]->get_nom();
     label_joueur_actuel->setText(QString::fromStdString(nom_joueur));
     entete->addWidget(label_joueur_actuel);
 
-    structure->addLayout(entete);
+    structure->addLayout(entete,10);
 
     //Affichage de la valeur des dés
 
     display_des = new QVBoxLayout;
 
     label_de1 = new QLabel;
-    //label_de1->setText(QString::fromStdString((string)partie->get_de_1()));
-    label_de1->setText("valeur de1");
+    label_de1->setText(QString::number(partie->get_de_1()));
     display_des->addWidget(label_de1);
 
     label_de2 = new QLabel;
-    //label_de2->setText(QString::fromStdString((string)partie->get_de_2()));
-    label_de2->setText("valeur de2");
+    label_de1->setText(QString::number(partie->get_de_2()));
     display_des->addWidget(label_de2);
 
     entete->addLayout(display_des);
@@ -54,14 +55,14 @@ VuePartie::VuePartie(Partie *partie, QWidget *parent){
     Batiment *b = new Boulangerie();
     Batiment *bat2 = new Epicerie();
 
-
+    pioche = new QHBoxLayout;
     if(partie->get_pioche()->get_top_carte() == nullptr){
         pioche_exception = new QLabel;
         pioche_exception->setText("Pioche vide!");
-        body->addWidget(pioche_exception);
+        pioche->addWidget(pioche_exception,33);
     }else{
         VueCarte* view_pioche = new VueCarte(*(partie->get_pioche()->get_top_carte()),true);
-        body->addWidget(view_pioche);
+        pioche->addWidget(view_pioche,33);
     }
 
     /*
@@ -79,8 +80,18 @@ VuePartie::VuePartie(Partie *partie, QWidget *parent){
 
     for(auto &it : partie->get_shop()->get_contenu()){
         tab_vue_shop.push_back(new VueCarte(*(it.first),true));
-        shop->addWidget(tab_vue_shop[compteur],x,y-1);
+
         connect((tab_vue_shop)[compteur],SIGNAL(carteClicked(VueCarte*)),this,SLOT(carteClique(VueCarte*)));
+        shop->addWidget((tab_vue_shop)[compteur],x,y-1);
+        if(it.second>1){
+            tab_vue_shop[compteur]->update();
+            //QPainter* painter = new QPainter(tab_vue_shop[compteur]);
+            //painter->begin(tab_vue_shop[compteur]);
+            //painter->drawText(0,0,QString::fromStdString(to_string(it.second)));
+            //painter->end();
+            //QPaintEvent* event = new QPaintEvent((tab_vue_shop)[compteur]->rect());
+            //(tab_vue_shop)[compteur]->paintEvent(event);
+        }
         if(y%largeur == 0){
             x ++;
             y = 1;
@@ -90,9 +101,10 @@ VuePartie::VuePartie(Partie *partie, QWidget *parent){
         compteur++;
     }
 
-    body->addLayout(shop);
+    body->addLayout(pioche,1);
+    body->addLayout(shop,100);
 
-    structure->addLayout(body);
+    structure->addLayout(body,50);
     /*auto *menu = new QWidget();
     auto *jeu = new QWidget();
 
@@ -166,9 +178,11 @@ VuePartie::VuePartie(Partie *partie, QWidget *parent){
     layout->addWidget(b2);
     j->fermer_batiment(bat2);
     j->set_argent(24);
-    structure->addLayout(layout);
-    setLayout(structure);
 
+
+    structure->addLayout(layout,40);
+    setLayout(structure);
+    this->setWindowState(Qt::WindowFullScreen);
 }
 
 
