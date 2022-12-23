@@ -59,7 +59,7 @@ VuePartie::VuePartie(Partie *partie, QWidget *parent){
     //Batiment *b = new Boulangerie();
     //Batiment *bat2 = new Epicerie();
 
-    pioche = new QHBoxLayout;
+    pioche = new QVBoxLayout;
     if(partie->get_pioche()->get_top_carte() == nullptr){
         pioche_exception = new QLabel;
         pioche_exception->setText("Pioche vide!");
@@ -68,6 +68,15 @@ VuePartie::VuePartie(Partie *partie, QWidget *parent){
         VueCarte* view_pioche = new VueCarte(*(partie->get_pioche()->get_top_carte()),true);
         pioche->addWidget(view_pioche,33);
     }
+
+    unsigned int nb_cartes_start = partie->get_pioche()->get_taille();//on initialise l'attribut avce le nombre max de cartes qu'on pourra avoir dans la pioche c'est à dire au début
+
+    QProgressBar* barre_pioche = new QProgressBar;
+    barre_pioche->setRange(0,nb_cartes_start);
+    barre_pioche->setValue(partie->get_pioche()->get_taille());//valeur que l'on devra mettre à jour à chaque fois qu'on pioche une carte
+    barre_pioche->setFixedWidth(300);
+    pioche->addWidget(barre_pioche,33);
+
 
     /*
     VueCarte* view_pioche = new VueCarte(*b,true);

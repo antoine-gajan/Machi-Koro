@@ -53,7 +53,7 @@ private:
     QHBoxLayout *entete;
     QVBoxLayout *display_des;
     QHBoxLayout *body;
-    QHBoxLayout *pioche;
+    QVBoxLayout *pioche;
     VueJoueur* vue_joueur;
 
     QWidget *parent_fenetre;

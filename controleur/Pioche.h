@@ -22,6 +22,7 @@ class Pioche {
         bool est_vide() {return contenu.empty();};
         Batiment* get_carte(); // retourne la carte du dessus de la pioche
         Carte* get_top_carte() {return contenu.top();};
+        unsigned int get_taille() const {return contenu.size();};
 };
 
 #endif //MACHI_KORO_PIOCHE_H
