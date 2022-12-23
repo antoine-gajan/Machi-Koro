@@ -147,7 +147,7 @@ VuePartie::VuePartie(Partie *partie, QWidget *parent){
 
     nb_joueurs = partie->get_tab_joueurs().size();
     joueur_affiche = 0;
-    vue_joueur = new VueJoueur(partie_actuelle->get_tab_joueurs()[joueur_affiche], parent);
+    vue_joueur = new VueJoueur(partie_actuelle->get_tab_joueurs()[joueur_affiche], true, parent);
     layout->addWidget(vue_joueur);
 
     layout->addWidget(b2);
@@ -164,7 +164,13 @@ void VuePartie::d_click(){
     // Récupération de l'ancienne vue
     VueJoueur *old = vue_joueur;
     // Création de la nouvelle
-    vue_joueur = new VueJoueur(partie_actuelle->get_tab_joueurs()[joueur_affiche], parent_fenetre);
+    if(get_partie_actuelle()->get_joueur_actuel() == joueur_affiche){
+        vue_joueur = new VueJoueur(partie_actuelle->get_tab_joueurs()[joueur_affiche],true, parent_fenetre);
+    }
+    else{
+        vue_joueur = new VueJoueur(partie_actuelle->get_tab_joueurs()[joueur_affiche],false,  parent_fenetre);
+    }
+
     // Remplacement par la nouvelle
     layout->replaceWidget(old, vue_joueur);
     delete old;
@@ -179,7 +185,12 @@ void VuePartie::g_click(){
     // Récupération de l'ancienne vue
     VueJoueur *old = vue_joueur;
     // Création de la nouvelle
-    vue_joueur = new VueJoueur(partie_actuelle->get_tab_joueurs()[joueur_affiche], parent_fenetre);
+    if(get_partie_actuelle()->get_joueur_actuel() == joueur_affiche){
+        vue_joueur = new VueJoueur(partie_actuelle->get_tab_joueurs()[joueur_affiche],true, parent_fenetre);
+    }
+    else{
+        vue_joueur = new VueJoueur(partie_actuelle->get_tab_joueurs()[joueur_affiche],false,  parent_fenetre);
+    }
     // Remplacement par la nouvelle
     layout->replaceWidget(old, vue_joueur);
     delete old;

@@ -1,8 +1,9 @@
 #include "VueJoueur.h"
 #include <QPixmap>
 
-VueJoueur::VueJoueur(Joueur* j, QWidget *parent) {
+VueJoueur::VueJoueur(Joueur* j,bool e_j_a, QWidget *parent) {
     /// Vue d'un joueur
+    est_joueur_actuel = e_j_a;
     joueur = j;
     // Nom du joueur
     nom_joueur = new QLabel;
@@ -40,7 +41,7 @@ VueJoueur::VueJoueur(Joueur* j, QWidget *parent) {
             // Affichage du batiment
             vue_batiments->push_back(new VueCarte(*bat.first, true, parent));
             layout_batiments->addWidget((*vue_batiments)[i], ind_couleurs, ind_bat);
-            connect((*vue_batiments)[i],SIGNAL(carteClicked(VueCarte*)),this,SLOT(carteClique(VueCarte*)));
+            connect((*vue_batiments)[i],SIGNAL(carteClicked(VueCarte*)),this,SLOT(batimentClique(VueCarte*)));
             ind_bat++;
             i++;
         }
@@ -60,7 +61,7 @@ VueJoueur::VueJoueur(Joueur* j, QWidget *parent) {
 
         vue_monuments->push_back(new VueCarte(*mon.first,true, parent));
         layout_monuments->addWidget((*vue_monuments)[ind_mon], ind_mon/3, ind_mon%3);
-        connect((*vue_monuments)[ind_mon],SIGNAL(carteClicked(VueCarte*)),this,SLOT(carteClique(VueCarte*)));
+        connect((*vue_monuments)[ind_mon],SIGNAL(carteClicked(VueCarte*)),this,SLOT(monumentClique(VueCarte*)));
         ind_mon++;
     }
 
@@ -89,7 +90,7 @@ VueJoueur::VueJoueur(Joueur* j, QWidget *parent) {
     setLayout(layout_informations);
 }
 
-void VueJoueur::carteClique(VueCarte* vc){
+void VueJoueur::batimentClique(VueCarte* vc){
     /// Slot lorsque la carte est cliquée
     // Création d'une nouvelle fenetre
     QWidget* fenetre = new QWidget();
@@ -101,6 +102,25 @@ void VueJoueur::carteClique(VueCarte* vc){
     // Affichage de la fenetre pop up
     fenetre->show();
 }
+void VueJoueur::monumentClique(VueCarte* vc){
+    /// Slot lorsque la carte est cliquée
+    // Création d'une nouvelle fenetre
+    QWidget* fenetre = new QWidget();
+    // Création d'un label contenant l'image
+    QLabel *label = new QLabel(fenetre);
+    QPixmap pixmap(QString::fromStdString(vc->getCarte().get_path_image()));
+    label->setPixmap(pixmap);
+    label->resize(pixmap.size());
+    if(get_est_joueur_actuel()){
+        QPushButton *buttonAct = new QPushButton(fenetre);
+        buttonAct->setText(QString::fromStdString("Acheter monument"));
+    }
+
+    // Affichage de la fenetre pop up
+    fenetre->show();
+}
+
+
 
 void VueJoueur::affichage_bat_ferme(){
     /// Affichage de la fenetre avec les batiments fermés
