@@ -62,7 +62,7 @@ void validate_menu_2(QWidget *menu, const string &edition, const list<string> &e
     Partie *p = Partie::get_instance(edition, extensions, joueurs, shop_type, shop_size);
     auto* vp = new VuePartie(p, fenetre);
     vp->show();
-    //fenetre.show();
+//    fenetre->show();
 
     menu->close();
 
