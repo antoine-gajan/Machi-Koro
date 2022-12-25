@@ -1,6 +1,6 @@
 #include "Pioche.h"
 
-Pioche::Pioche(const vector<Batiment*>& batiments) {
+Pioche::Pioche(const vector<Batiment*>& batiments) : taille_init(batiments.size()){
     /// Constructeur de la classe Pioche
 
     for (auto batiment : batiments) {
