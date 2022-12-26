@@ -41,27 +41,11 @@ void VueShop::batiment_clique(VueCarte *vc) {
     // Création d'un label contenant l'image
     QLabel *label = new QLabel(fenetre);
     QPixmap pixmap(QString::fromStdString(vc->getCarte().get_path_image()));
-    //std::cout<<vc->getCarte().get_nom()<<endl;
+    QPushButton *buttonAct = new QPushButton(fenetre);
+    buttonAct->setText(QString::fromStdString("Acheter le batiment"));
     label->setPixmap(pixmap);
     label->resize(pixmap.size());
     // Affichage de la fenetre pop up
     fenetre->show();
-
-    /*
-    /// Slot lorsque la carte est cliquée
-    // Création d'une nouvelle fenetre
-    QWidget* fenetre = new QWidget();
-    // Création d'un label contenant l'image
-    QLabel *label = new QLabel(fenetre);
-    QPixmap pixmap(QString::fromStdString(vc->getCarte().get_path_image()));
-    label->setPixmap(pixmap);
-    label->resize(pixmap.size());
-    if(get_est_joueur_actuel()){
-        QPushButton *buttonAct = new QPushButton(fenetre);
-        buttonAct->setText(QString::fromStdString("Acheter monument"));
-    }
-
-    // Affichage de la fenetre pop up
-    fenetre->show();*/
 }
 
