@@ -229,49 +229,6 @@ Batiment* Joueur::possede_batiment(const string& nom_bat) const{
     return nullptr;
 }
 
-Batiment* Joueur::selectionner_batiment() const{
-    /// Fonction pour selectionner un batiment
-    unsigned int num_bat;
-    unsigned int count = 0, count_check = 0;
-
-    cout<<"Voici la liste des batiments que vous possedez :";
-    // affichage des batiments que le joueur possede
-    // pour chaque couleur de la liste de batiment du joueur
-    for (auto& couleur : liste_batiment) {
-        for (auto bat : couleur.second){
-            cout << count <<" : " << bat.first->get_nom() << endl;
-            count++;
-        }
-    }
-    // Si le joueur est une IA, on prend au hasard
-    if (est_ia){
-        num_bat = rand()%count;
-    }
-    else{
-        // Demande du numero de batiment
-        cout<<"Quel batiment voulez-vous selectionner parmis la liste ci-dessous : " << endl;
-        cin >> num_bat;
-        // Verification validite
-        while (num_bat < 0 || num_bat >= count){
-            cout << "Le numero de batiment n'est pas valide.\nNumero du batiment a selectionner :" << endl;
-            cin >> num_bat;
-        }
-    }
-
-    // Recuperation du batiment choisi
-    for (auto& couleur : liste_batiment) {
-        for (auto bat : couleur.second){
-            if (count_check == num_bat){
-                cout << "Vous avez choisi : " << bat.first->get_nom() << endl;
-                return bat.first;
-            }
-            count_check++;
-        }
-    }
-    //cas où erreur (batiment entre pas dans la liste)
-    throw gameException("Le batiment entre n'est pas valide");
-}
-
 Batiment* Joueur::selectionner_batiment() const {
     /// Slot lorsque la carte est cliquée
     // Création d'une nouvelle fenetre

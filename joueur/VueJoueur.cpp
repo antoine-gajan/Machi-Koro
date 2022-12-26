@@ -96,7 +96,7 @@ void VueJoueur::batimentClique(VueCarte* vc){
     QWidget* fenetre = new QWidget();
     // Création d'un label contenant l'image
     QLabel *label = new QLabel(fenetre);
-    QPixmap pixmap(QString::fromStdString(vc->getCarte().get_path_image()));
+    QPixmap pixmap(QString::fromStdString(vc->getCarte()->get_path_image()));
     label->setPixmap(pixmap);
     label->resize(pixmap.size());
     // Affichage de la fenetre pop up
@@ -108,7 +108,7 @@ void VueJoueur::monumentClique(VueCarte* vc){
     QWidget* fenetre = new QWidget();
     // Création d'un label contenant l'image
     QLabel *label = new QLabel(fenetre);
-    QPixmap pixmap(QString::fromStdString(vc->getCarte().get_path_image()));
+    QPixmap pixmap(QString::fromStdString(vc->getCarte()->get_path_image()));
     label->setPixmap(pixmap);
     label->resize(pixmap.size());
     if(get_est_joueur_actuel()){

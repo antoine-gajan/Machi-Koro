@@ -40,7 +40,7 @@ void VueShop::batiment_clique(VueCarte *vc) {
     QWidget* fenetre = new QWidget();
     // Création d'un label contenant l'image
     QLabel *label = new QLabel(fenetre);
-    QPixmap pixmap(QString::fromStdString(vc->getCarte().get_path_image()));
+    QPixmap pixmap(QString::fromStdString(vc->getCarte()->get_path_image()));
     QPushButton *buttonAct = new QPushButton(fenetre);
     buttonAct->setText(QString::fromStdString("Acheter le batiment"));
     label->setPixmap(pixmap);

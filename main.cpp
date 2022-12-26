@@ -44,7 +44,7 @@ void resize_and_center(QWidget *widget, int width, int height)
 }
 
 void validate_menu_2(QWidget *menu, const string &edition, const list<string> &extensions, const map<string, string>& joueurs, const string& shop_type, unsigned int shop_size){
-
+    QWidget fenetre;
     // affichage des infos
     cout << "Edition: " << edition << endl;
     cout << "Extensions: " << endl;
@@ -59,12 +59,10 @@ void validate_menu_2(QWidget *menu, const string &edition, const list<string> &e
     cout << "Taille du magasin: " << shop_size << endl;
 
 
-    QWidget *fenetre = new QWidget;
     Partie *p = Partie::get_instance(edition, extensions, joueurs, shop_type, shop_size);
-
-//    fenetre->show();
-
+    VuePartie *vp = new VuePartie(&fenetre);
     menu->close();
+    vp->show();
     p->jouer_partie();
 
 }
@@ -428,7 +426,6 @@ void build_content_jeu(QWidget *jeu){
 int main(int argc, char * argv[]) {
 
     QApplication app(argc, argv);
-
     launch_menu_1(&app);
 
     return QApplication::exec();

@@ -55,10 +55,6 @@ VuePartie::VuePartie(QWidget *parent){
     body = new QHBoxLayout;
 
     view_pioche = new VuePioche(*(partie_actuelle->get_pioche()), nullptr);
-    /*
-    VueCarte* view_pioche = new VueCarte(*b,true);
-    body->addWidget(view_pioche);
-*/
 
     view_shop = new VueShop(*(partie_actuelle->get_shop()), nullptr);
 
@@ -66,20 +62,6 @@ VuePartie::VuePartie(QWidget *parent){
     body->addLayout(view_shop,100);
 
     structure->addLayout(body,50);
-    /*auto *menu = new QWidget();
-    auto *jeu = new QWidget();
-
-    resize_and_center(menu , 700, 500);
-    build_content_menu(menu);
-    menu->show();
-
-
-    resize_and_center(jeu, 1000, 700);
-    build_content_jeu(jeu);
-    jeu->show();
-
-
-    return QApplication::exec();*/
 
     // Boutons de navigation gauche et droite dans les Vues Joueurs
     QPushButton* b1 = new QPushButton(parent);
