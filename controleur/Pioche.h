@@ -22,7 +22,7 @@ class Pioche {
         ~Pioche() = default;
         bool est_vide() {return contenu.empty();};
         Batiment* get_carte(); // retourne la carte du dessus de la pioche
-        Carte* get_top_carte() {return contenu.top();};
+        const Carte* get_top_carte() const {return contenu.top();};
         unsigned int get_taille() const {return contenu.size();};
         unsigned int get_taille_init() const {return taille_init;};
 };

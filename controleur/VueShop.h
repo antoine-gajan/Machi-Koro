@@ -3,10 +3,18 @@
 
 #include <QWidget>
 #include "Shop.h"
+#include "VueCarte.h"
+#include "VuePartie.h"
+#include <QGridLayout>
 
-class VueShop {
+class VueShop  : public QGridLayout{
+    Q_OBJECT
+    vector<VueCarte *> tab_vue_shop;
 public:
-    VueShop(const Shop& shop, QWidget *parent = nullptr);
+
+    VueShop(Shop& shop, QWidget *parent = nullptr);
+public slots:
+    void batiment_clique(VueCarte* vc);
 };
 
 

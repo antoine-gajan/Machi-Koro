@@ -54,68 +54,16 @@ VuePartie::VuePartie(Partie *partie, QWidget *parent){
 
     body = new QHBoxLayout;
 
-    //Affichage de la pioche
-
-    //Batiment *b = new Boulangerie();
-    //Batiment *bat2 = new Epicerie();
-
-    pioche = new QVBoxLayout;
-    if(partie->get_pioche()->get_top_carte() == nullptr){
-        pioche_exception = new QLabel;
-        pioche_exception->setText("Pioche vide!");
-        pioche->addWidget(pioche_exception,33);
-    }else{
-        VueCarte* view_pioche = new VueCarte(*(partie->get_pioche()->get_top_carte()),true);
-        pioche->addWidget(view_pioche,33);
-    }
-
-    unsigned int nb_cartes_start = partie->get_pioche()->get_taille();//on initialise l'attribut avce le nombre max de cartes qu'on pourra avoir dans la pioche c'est à dire au début
-
-    QProgressBar* barre_pioche = new QProgressBar;
-    barre_pioche->setRange(0,nb_cartes_start);
-    barre_pioche->setValue(partie->get_pioche()->get_taille());//valeur que l'on devra mettre à jour à chaque fois qu'on pioche une carte
-    barre_pioche->setFixedWidth(300);
-    pioche->addWidget(barre_pioche,33);
-
-
+    view_pioche = new VuePioche(*(partie->get_pioche()), nullptr);
     /*
     VueCarte* view_pioche = new VueCarte(*b,true);
     body->addWidget(view_pioche);
 */
-    //Affichage du shop
-    shop = new QGridLayout;
-    //nous voulons ici calculer la taille du shop.
-    unsigned int largeur = round(sqrt(partie->get_shop()->get_nb_tas_max()));
 
-    unsigned int x = 0;
-    unsigned int y = 1;
-    unsigned int compteur=0;
+    view_shop = new VueShop(*(partie->get_shop()), nullptr);
 
-    for(auto &it : partie->get_shop()->get_contenu()){
-        tab_vue_shop.push_back(new VueCarte(*(it.first),true));
-
-        connect((tab_vue_shop)[compteur],SIGNAL(carteClicked(VueCarte*)),this,SLOT(carteClique(VueCarte*)));
-        shop->addWidget((tab_vue_shop)[compteur],x,y-1);
-        if(it.second>1){
-            tab_vue_shop[compteur]->update();
-            //QPainter* painter = new QPainter(tab_vue_shop[compteur]);
-            //painter->begin(tab_vue_shop[compteur]);
-            //painter->drawText(0,0,QString::fromStdString(to_string(it.second)));
-            //painter->end();
-            //QPaintEvent* event = new QPaintEvent((tab_vue_shop)[compteur]->rect());
-            //(tab_vue_shop)[compteur]->paintEvent(event);
-        }
-        if(y%largeur == 0){
-            x ++;
-            y = 1;
-        }else{
-            y++;
-        }
-        compteur++;
-    }
-
-    body->addLayout(pioche,1);
-    body->addLayout(shop,100);
+    body->addLayout(view_pioche,1);
+    body->addLayout(view_shop,100);
 
     structure->addLayout(body,50);
     /*auto *menu = new QWidget();
@@ -196,20 +144,6 @@ void VuePartie::g_click(){
     delete old;
     // Mise à jour de l'affichage
     update();
-}
-
-void VuePartie::carteClique(VueCarte* vc){
-    /// Slot lorsque la carte est cliquée
-    // Création d'une nouvelle fenetre
-    QWidget* fenetre = new QWidget();
-    // Création d'un label contenant l'image
-    QLabel *label = new QLabel(parent_fenetre);
-    QPixmap pixmap(QString::fromStdString(vc->getCarte().get_path_image()));
-    //std::cout<<vc->getCarte().get_nom()<<endl;
-    label->setPixmap(pixmap);
-    label->resize(pixmap.size());
-    // Affichage de la fenetre pop up
-    fenetre->show();
 }
 
 void VuePartie::update_vue_joueur() {

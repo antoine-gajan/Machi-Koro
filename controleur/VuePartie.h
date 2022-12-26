@@ -21,6 +21,8 @@
 #include "Epicerie.h"
 #include "Cafe.h"
 #include "Partie.h"
+#include "VueShop.h"
+#include "VuePioche.h"
 #include <QStackedWidget>
 
 class VuePartie : public QWidget
@@ -56,14 +58,15 @@ private:
     QHBoxLayout *body;
     QVBoxLayout *pioche;
     VueJoueur* vue_joueur;
-
+    QGridLayout* view_shop;
+    QVBoxLayout* view_pioche;
     QWidget *parent_fenetre;
 
 
 
 public slots:
         // Slots qui gèrent les clics sur les vues joueurs
-        virtual void carteClique(VueCarte* vc);
+        //virtual void carteClique(VueCarte* vc);
         void d_click();
         void g_click();
 };

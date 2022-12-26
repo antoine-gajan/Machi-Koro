@@ -3,10 +3,16 @@
 
 
 #include <QWidget>
+#include <QVBoxLayout>
+#include <QLabel>
+#include "VuePartie.h"
 #include "Pioche.h"
 
-class VuePioche {
-    VuePioche(const Pioche& pioche, QWidget* parent = nullptr);
+class VuePioche : public QVBoxLayout{
+    QLabel* pioche_exception;
+    QProgressBar* barre_pioche;
+public:
+    VuePioche(Pioche& pioche, QWidget *parent = nullptr);
 };
 
 
