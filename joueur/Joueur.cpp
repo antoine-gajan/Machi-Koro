@@ -285,8 +285,7 @@ Batiment* Joueur::selectionner_batiment() const {
             Batiment* adresse_bat = bat.first;
             vue_batiments.push_back(new VueCarte(*bat.first, true, fenetre));
             layout_batiments->addWidget(vue_batiments[i], i / 4, i % 4);
-            QObject::connect(vue_batiments[i], SIGNAL(carteClicked(VueCarte * )), nullptr,
-                             [fenetre, adresse_bat]() {
+            QObject::connect(vue_batiments[i], &QPushButton::clicked, [fenetre, adresse_bat]() {
                                  fenetre->close();
                                  return adresse_bat;
                              });
