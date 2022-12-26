@@ -293,19 +293,26 @@ bool Partie::acheter_monu() {
         }
 
         if (monuments_dispo.empty()) {
-            cout << "Vous ne pouvez pas acheter de monument" << endl;
             return false;
         }
 
-        while (choix < 0 || choix > monuments_dispo.size()) {
-            cout << "Votre choix : " << endl;
-            cin >> choix;
+        QWidget* fenetre = new QWidget();
+        vector<VueCarte*> vue_monuments;
+        QGridLayout* layout_monuments = new QGridLayout;
+        int i = 0;
+        for (auto& mon : monuments_dispo) {
+            // Affichage du monument
+            Monument* adresse_mon = mon;
+            vue_monuments.push_back(new VueCarte(*mon, true, fenetre));
+            layout_monuments->addWidget(vue_monuments[i], i / 4, i % 4);
+            QObject::connect(vue_monuments[i], &QPushButton::clicked, [fenetre, adresse_mon, &mon_picked]() {
+                fenetre->close();
+                mon_picked = adresse_mon;
+            });
+            i++;
         }
-
-        if (choix == 0)
-            return false;
-
-        mon_picked = monuments_dispo[choix - 1];
+        fenetre->setLayout(layout_monuments);
+        fenetre->show();
 
         joueur_act->activer_monument(mon_picked);
         joueur_act->set_argent(joueur_act->get_argent() - mon_picked->get_prix());
@@ -314,10 +321,6 @@ bool Partie::acheter_monu() {
             if (!mon_act.second && mon_act.first->get_prix() <= joueur_act->get_argent()) {
                 monuments_dispo.push_back(mon_act.first);
             }
-        }
-
-        if (monuments_dispo.empty()) {
-            return false;
         }
 
         mon_picked = monuments_dispo[rand() % monuments_dispo.size()];
