@@ -15,7 +15,7 @@ public:
     explicit VueCarte(QWidget *parent = nullptr);
     // affecter une nouvelle carte à la vue
     void setCarte(const Carte& c) { setCheckable(true); setChecked(false); carte=&c; update(); }
-    const Carte& getCarte() const { return *carte; }
+    const Carte* getCarte() const { return carte; }
     bool cartePresente() const { return carte!=nullptr; }
     string get_path_carte() const{return path_carte;};
     QPixmap get_pixmap() const{return pixmap;}

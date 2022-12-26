@@ -1,4 +1,6 @@
+#include <QGridLayout>
 #include "Joueur.h"
+#include "VueCarte.h"
 
 using namespace std;
 
@@ -268,6 +270,31 @@ Batiment* Joueur::selectionner_batiment() const{
     }
     //cas où erreur (batiment entre pas dans la liste)
     throw gameException("Le batiment entre n'est pas valide");
+}
+
+Batiment* Joueur::selectionner_batiment() const {
+    /// Slot lorsque la carte est cliquée
+    // Création d'une nouvelle fenetre
+    QWidget* fenetre = new QWidget();
+    vector<VueCarte*> vue_batiments;
+    QGridLayout* layout_batiments = new QGridLayout;
+    int i = 0;
+    for (auto& couleur : get_liste_batiment()) {
+        for (auto bat: couleur.second) {
+            // Affichage du batiment
+            Batiment* adresse_bat = bat.first;
+            vue_batiments.push_back(new VueCarte(*bat.first, true, fenetre));
+            layout_batiments->addWidget(vue_batiments[i], i / 4, i % 4);
+            QObject::connect(vue_batiments[i], SIGNAL(carteClicked(VueCarte * )), nullptr,
+                             [fenetre, adresse_bat]() {
+                                 fenetre->close();
+                                 return adresse_bat;
+                             });
+            i++;
+        }
+    }
+    fenetre->setLayout(layout_batiments);
+    fenetre->show();
 }
 
 Monument* Joueur::possede_monument(const string& nom_mon) const{
