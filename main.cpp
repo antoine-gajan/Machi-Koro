@@ -25,6 +25,7 @@ using namespace std;
 #include <QLineEdit>
 #include "Cafe.h"
 #include "VuePartie.h"
+#include "Partie.h"
 #include <QComboBox>
 #include <QCheckBox>
 #include <QApplication>
@@ -60,11 +61,11 @@ void validate_menu_2(QWidget *menu, const string &edition, const list<string> &e
 
     QWidget *fenetre = new QWidget;
     Partie *p = Partie::get_instance(edition, extensions, joueurs, shop_type, shop_size);
-    auto* vp = new VuePartie(p, fenetre);
-    vp->show();
+
 //    fenetre->show();
 
     menu->close();
+    p->jouer_partie();
 
 }
 

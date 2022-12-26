@@ -4,10 +4,10 @@ using namespace std;
 #include "VuePartie.h"
 #include "Partie.h"
 
-VuePartie::VuePartie(Partie *partie, QWidget *parent){
+VuePartie::VuePartie(QWidget *parent){
     /// Constructeur de VuePartie
     // Attributs principaux
-    partie_actuelle = partie;
+    Partie *partie_actuelle = Partie::get_instance();
     parent_fenetre = parent;
 
     structure = new QVBoxLayout();
@@ -20,7 +20,7 @@ VuePartie::VuePartie(Partie *partie, QWidget *parent){
 
     label_edj = new QLabel;
     string nom_edj;
-    for (auto it : partie->get_nom_edition()){
+    for (auto it : partie_actuelle->get_nom_edition()){
         nom_edj += it + " ";
     }
     label_edj->setText("Profil de la partie : " + QString::fromStdString(nom_edj));
@@ -30,7 +30,7 @@ VuePartie::VuePartie(Partie *partie, QWidget *parent){
     //Affichage du nom du joueur actuel
     label_joueur_actuel = new QLabel;
     string nom_joueur = "Joueur actuel : ";
-    nom_joueur += partie->get_tab_joueurs()[partie->get_joueur_actuel()]->get_nom();
+    nom_joueur += partie_actuelle->get_tab_joueurs()[partie_actuelle->get_joueur_actuel()]->get_nom();
     label_joueur_actuel->setText(QString::fromStdString(nom_joueur));
     entete->addWidget(label_joueur_actuel);
 
@@ -41,11 +41,11 @@ VuePartie::VuePartie(Partie *partie, QWidget *parent){
     display_des = new QVBoxLayout;
 
     label_de1 = new QLabel;
-    label_de1->setText(QString::number(partie->get_de_1()));
+    label_de1->setText(QString::number(partie_actuelle->get_de_1()));
     display_des->addWidget(label_de1);
 
     label_de2 = new QLabel;
-    label_de1->setText(QString::number(partie->get_de_2()));
+    label_de1->setText(QString::number(partie_actuelle->get_de_2()));
     display_des->addWidget(label_de2);
 
     entete->addLayout(display_des);
@@ -54,13 +54,13 @@ VuePartie::VuePartie(Partie *partie, QWidget *parent){
 
     body = new QHBoxLayout;
 
-    view_pioche = new VuePioche(*(partie->get_pioche()), nullptr);
+    view_pioche = new VuePioche(*(partie_actuelle->get_pioche()), nullptr);
     /*
     VueCarte* view_pioche = new VueCarte(*b,true);
     body->addWidget(view_pioche);
 */
 
-    view_shop = new VueShop(*(partie->get_shop()), nullptr);
+    view_shop = new VueShop(*(partie_actuelle->get_shop()), nullptr);
 
     body->addLayout(view_pioche,1);
     body->addLayout(view_shop,100);
@@ -93,9 +93,9 @@ VuePartie::VuePartie(Partie *partie, QWidget *parent){
 
     layout->addWidget(b1);
 
-    nb_joueurs = partie->get_tab_joueurs().size();
+    nb_joueurs = partie_actuelle->get_tab_joueurs().size();
     joueur_affiche = 0;
-    vue_joueur = new VueJoueur(partie_actuelle->get_tab_joueurs()[joueur_affiche], true, parent);
+    vue_joueur = new VueJoueur(Partie::get_instance()->get_tab_joueurs()[joueur_affiche], true, parent);
     layout->addWidget(vue_joueur);
 
     layout->addWidget(b2);
@@ -107,12 +107,13 @@ VuePartie::VuePartie(Partie *partie, QWidget *parent){
 
 
 void VuePartie::d_click(){
+    Partie *partie_actuelle = Partie::get_instance();
     /// Slot bouton droit
     joueur_affiche = (joueur_affiche + 1) % nb_joueurs;
     // Récupération de l'ancienne vue
     VueJoueur *old = vue_joueur;
     // Création de la nouvelle
-    if(get_partie_actuelle()->get_joueur_actuel() == joueur_affiche){
+    if(partie_actuelle->get_joueur_actuel() == joueur_affiche){
         vue_joueur = new VueJoueur(partie_actuelle->get_tab_joueurs()[joueur_affiche],true, parent_fenetre);
     }
     else{
@@ -128,12 +129,13 @@ void VuePartie::d_click(){
 
 
 void VuePartie::g_click(){
+    Partie *partie_actuelle = Partie::get_instance();
     /// Slot bouton gauche
     joueur_affiche = (joueur_affiche - 1) % nb_joueurs;
     // Récupération de l'ancienne vue
     VueJoueur *old = vue_joueur;
     // Création de la nouvelle
-    if(get_partie_actuelle()->get_joueur_actuel() == joueur_affiche){
+    if(partie_actuelle->get_joueur_actuel() == joueur_affiche){
         vue_joueur = new VueJoueur(partie_actuelle->get_tab_joueurs()[joueur_affiche],true, parent_fenetre);
     }
     else{
@@ -147,11 +149,12 @@ void VuePartie::g_click(){
 }
 
 void VuePartie::update_vue_joueur() {
+    Partie *partie_actuelle = Partie::get_instance();
     /// Fonction pour mettre à jour la vue joueur actuelle
     // Récupération de l'ancienne vue
     VueJoueur *old = vue_joueur;
     // Création de la nouvelle
-    if(get_partie_actuelle()->get_joueur_actuel() == joueur_affiche){
+    if(partie_actuelle->get_joueur_actuel() == joueur_affiche){
         vue_joueur = new VueJoueur(partie_actuelle->get_tab_joueurs()[joueur_affiche],true, parent_fenetre);
     }
     else{

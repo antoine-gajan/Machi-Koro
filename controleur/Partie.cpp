@@ -1,4 +1,5 @@
 #include "Partie.h"
+#include "VuePartie.h"
 
 Partie::Handler Partie::handler=Partie::Handler();
 
@@ -462,7 +463,12 @@ bool Partie::transfert_argent(unsigned int indice_joueur1, unsigned int indice_j
 }
 
 void Partie::jouer_partie() {
+
+    //vue = new VuePartie();
+    //vue->showMaximized();
+
     joueur_actuel = 0;
+
     bool fin_partie = false;
     /// Tant que le joueur precedent n'a pas gagne on continue la partie
 

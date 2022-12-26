@@ -14,6 +14,7 @@
 #include "Shop.h"
 #include "Pioche.h"
 #include "gameExeption.h"
+#include "VuePartie.h"
 
 class Partie {
 private:
@@ -27,6 +28,7 @@ private:
     unsigned int de_2;
     bool rejouer;
     vector<string> tab_nom_edition;
+    QWidget* vue;
 
     Shop* shop;
     Pioche* pioche;
@@ -70,6 +72,7 @@ public:
     Pioche* get_pioche() const {return pioche;};
     vector<string> get_nom_edition() const {return tab_nom_edition;};
     unsigned int get_nb_cartes_edition() const {return list_batiments.size();};
+    //void set_vue(QWidget* vue) {this->vue = vue;};
 
     //********** Methodes **********//
     //********** Methodes statiques **********//

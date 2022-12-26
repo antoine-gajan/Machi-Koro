@@ -20,7 +20,7 @@
 #include "Aeroport.h"
 #include "Epicerie.h"
 #include "Cafe.h"
-#include "Partie.h"
+
 #include "VueShop.h"
 #include "VuePioche.h"
 #include <QStackedWidget>
@@ -30,14 +30,14 @@ class VuePartie : public QWidget
     Q_OBJECT
 public:
 
-    explicit VuePartie(Partie *partie = nullptr, QWidget *parent = nullptr);
+    explicit VuePartie(QWidget *parent = nullptr);
     void update_vue_joueur();
     unsigned int get_nb_joueurs() const {return nb_joueurs;}
     unsigned int get_joueur_affiche() const {return joueur_affiche;}
-    Partie* get_partie_actuelle() const{return partie_actuelle;}
+    //Partie* get_partie_actuelle() const{return partie_actuelle;}
 
 private:
-    Partie* partie_actuelle;
+    //Partie* partie_actuelle;
     unsigned int nb_joueurs;
     unsigned int joueur_affiche;
     vector<VueCarte *> tab_vue_shop;
