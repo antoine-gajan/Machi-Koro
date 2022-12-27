@@ -36,6 +36,7 @@ using namespace std;
 #include <QComboBox>
 #include <QStandardItemModel>
 #include <QStandardItem>
+#include <QStyleFactory>
 
 void resize_and_center(QWidget *widget, int width, int height)
 {
@@ -298,6 +299,7 @@ void launch_menu_1(QApplication *app){
 
     editionCombo->setCurrentIndex(0);
     editionCombo->setMinimumWidth(200);
+    editionCombo->setStyle(QStyleFactory::create("Fusion"));
 
     item1->setFlags(item1->flags() & ~Qt::ItemIsEnabled);
 
@@ -335,9 +337,11 @@ void launch_menu_1(QApplication *app){
 
     auto *validateButton = new QPushButton("Valider");
     validateButton->setFixedWidth(200);
+    validateButton->setStyle(QStyleFactory::create("Fusion"));
 
     auto *cancelButton = new QPushButton("Annuler");
     cancelButton->setFixedWidth(200);
+    cancelButton->setStyle(QStyleFactory::create("Fusion"));
 
     gridLayout->addWidget(validateButton, 5, 0, Qt::AlignCenter);
     gridLayout->addWidget(cancelButton, 5, 1, Qt::AlignCenter);
@@ -426,6 +430,7 @@ void build_content_jeu(QWidget *jeu){
 int main(int argc, char * argv[]) {
 
     QApplication app(argc, argv);
+    app.setStyle(QStyleFactory::create("Fusion"));
     launch_menu_1(&app);
 
     return QApplication::exec();

@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <QScrollArea>
+#include <QStyleFactory>
 
 using namespace std;
 #include "VuePartie.h"
@@ -104,6 +105,7 @@ VuePartie::VuePartie(QWidget *parent){
     scroll_shop->setWidgetResizable(true);
     unsigned int largeur = floor(sqrt(partie_actuelle->get_shop()->get_nb_tas_reel()));
     scroll_shop->setFixedWidth(130 * largeur);
+    scroll_shop->setStyle(QStyleFactory::create("Fusion"));
     body->addWidget(scroll_shop,100);
 
     structure->addLayout(body,50);
