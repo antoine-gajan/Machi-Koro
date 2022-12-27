@@ -1,5 +1,7 @@
 #include <iostream>
 #include <string>
+#include <QScrollArea>
+
 using namespace std;
 #include "VuePartie.h"
 #include "Partie.h"
@@ -78,13 +80,22 @@ VuePartie::VuePartie(QWidget *parent){
     body = new QHBoxLayout;
 
     view_pioche = new VuePioche(*(partie_actuelle->get_pioche()), nullptr);
-
-    view_shop = new VueShop(*(partie_actuelle->get_shop()), nullptr);
-
     body->addLayout(view_pioche,1);
-    body->addLayout(view_shop,100);
+
+    auto * scroll_shop = new QScrollArea;
+    QWidget * widget_shop = new QWidget;
+    view_shop = new VueShop(*(partie_actuelle->get_shop()), nullptr);
+    widget_shop->setLayout(view_shop);
+    scroll_shop->setWidget(widget_shop);
+    scroll_shop->setWidgetResizable(true);
+    unsigned int largeur = floor(sqrt(partie_actuelle->get_shop()->get_nb_tas_reel()));
+    scroll_shop->setFixedWidth(130 * largeur);
+    body->addWidget(scroll_shop,100);
 
     structure->addLayout(body,50);
+
+
+
 
     // Boutons de navigation gauche et droite dans les Vues Joueurs
     QPushButton* b1 = new QPushButton(parent);
