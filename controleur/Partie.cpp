@@ -1,3 +1,4 @@
+#include <QRadioButton>
 #include "Partie.h"
 #include "VuePartie.h"
 
@@ -203,49 +204,42 @@ bool Partie::acheter_carte() {
     bool transaction_fin = false;
 
     while (!transaction_fin){
+        // Si le joueur est humain
         if (!tab_joueurs[joueur_actuel]->get_est_ia()) {
-            cout << "Que voulez-vous acheter ? (1 : batiment, 2 : monument, 3 : quitter)" << endl;
-            cin >> choix;
-            while (choix < 1 || choix > 3) {
-                cout << "Veuillez entrer 1, 2 ou 3" << endl;
-                cin >> choix;
-            }
-            if (choix == 3) {
-                return false;
-            } else if (choix == 1) {
-                visit[0] = true;
-                transaction_fin = acheter_bat();
-            } else if (choix == 2) {
-                visit[1] = true;
-                transaction_fin = acheter_monu();
-            }
+            // Ouverture d'une fenetre de dialogue
+            auto *window = new QDialog();
 
-            if (!transaction_fin && visit[0]) {
-                cout << "Vous n'avez pas assez de ressources pour acheter un batiment" << endl;
-                choix = -1;
-                while (choix < 0 || choix > 1) {
-                    cout << "Voulez-vous acheter un monument ? (0 : non, 1 : oui)" << endl;
-                    cin >> choix;
-                }
-                if (choix == 1) {
-                    transaction_fin = acheter_monu();
-                }
-            }
-            else if (!transaction_fin && visit[1]) {
-                cout << "Vous n'avez pas assez de ressources pour acheter un monument" << endl;
-                choix = -1;
-                while (choix < 0 || choix > 1) {
-                    cout << "Voulez-vous acheter un batiment ? (0 : non, 1 : oui)" << endl;
-                    cin >> choix;
-                }
-                if (choix == 1) {
-                    transaction_fin = acheter_bat();
-                }
-            }
+            window->setWindowTitle("Machi Koro - Acheter une carte");
+            window->setContentsMargins(50, 30, 50, 50);
+            // Création d'un formulaire
+            auto *formLayout = new QFormLayout;
 
-            if (!transaction_fin) {
-                return false;
-            }
+            auto *layout = new QVBoxLayout;
+
+            layout->addWidget(new QLabel());
+            layout->addLayout(formLayout);
+            layout->addWidget(new QLabel());
+            // Ajout des radio boutons pour le choix de batiment ou monument
+            auto *batimentRadioButton = new QRadioButton("Batiment");
+            auto *monumentRadioButton = new QRadioButton("Monument");
+
+            layout->addWidget(new QLabel());
+            auto *validateButton = new QPushButton("Jouer");
+            layout->addWidget(validateButton);
+            // Connection entre boutons et slots
+            QObject::connect(batimentRadioButton, &QRadioButton::clicked, [this]() {
+                // Acheter un batiment
+                if (!acheter_bat()) {
+                    return false;
+                }
+            });
+
+            QObject::connect(monumentRadioButton, &QRadioButton::clicked, [this]() {
+                // Acheter un monument
+                if (!acheter_monu()) {
+                    return false;
+                }
+            });
 
         } else {
             choix_ia = rand() % 5;
