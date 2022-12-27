@@ -117,7 +117,7 @@ Partie::Partie(EditionDeJeu* edition, const map<string, string>& joueurs, const 
         nb_tas = shop_size;
     }
     else{
-        nb_tas = list_batiments.size();
+        nb_tas = list_batiments.size() + 1;
     }
 
     // Construction du Shop
