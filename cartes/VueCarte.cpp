@@ -15,16 +15,16 @@ VueCarte::VueCarte(const Carte &c,bool etat, QWidget *parent) : QPushButton(pare
 
         setFlat(true);
         setAutoFillBackground(true);
-        setFixedSize(40, 62);
+        setFixedSize(80, 124);
         connect(this,SIGNAL(clicked()),this,SLOT(clickedEvent()));
         setCheckable(true);
         // Nom du bouton
         this->setObjectName(QString::fromStdString(c.get_nom()));
         // Image du bouton
         pixmap = QPixmap(QString::fromStdString(path_carte));
-        pixmap.scaled(20,31,Qt::KeepAspectRatio);
+        pixmap.scaled(80,124,Qt::KeepAspectRatio);
         ButtonIcon = QIcon(pixmap);
-        this->setIconSize(QSize(40, 62));
+        this->setIconSize(QSize(80, 124));
         this->setIcon(ButtonIcon);
     }
     // S'il est à afficher dans une pop up (taille plus grande)
@@ -48,7 +48,7 @@ VueCarte::VueCarte(const Carte &c,bool etat, QWidget *parent) : QPushButton(pare
 VueCarte::VueCarte(QWidget *parent): QPushButton(parent)
 {
     setAutoFillBackground(true);
-    setFixedSize(80, 124);
+    setFixedSize(80, 140);
     connect(this,SIGNAL(clicked()),this,SLOT(clickedEvent()));
     setCheckable(false);
 }
@@ -70,7 +70,7 @@ void VueCarte::paintEvent(QPaintEvent *event) {
     this->setIcon(ButtonIcon);*/
 
     QPainter painter(this);
-    painter.drawPixmap(0,0,40,62,pixmap);
+    painter.drawPixmap(0,0,80,120,pixmap);
     painter.drawText(QPoint(0,0),"test");
     QRect rect(0,0,0,0);
     if(event == nullptr){

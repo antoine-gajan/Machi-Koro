@@ -1,3 +1,4 @@
+#include <QStyleFactory>
 #include "VuePioche.h"
 
 VuePioche::VuePioche(Pioche& pioche, QWidget *parent) {
@@ -7,15 +8,19 @@ VuePioche::VuePioche(Pioche& pioche, QWidget *parent) {
         pioche_exception->setText("Pioche vide!");
         this->addWidget(pioche_exception,33);
     }else{
-        VueCarte* view_pioche = new VueCarte(*(pioche.get_top_carte()),true);
-        this->addWidget(view_pioche,33);
+        QLabel* back_carte = new QLabel;
+        QPixmap img(QString::fromStdString("../assets/batiments/BACK-cartes.png"));
+        img = img.scaled(120,186,Qt::KeepAspectRatio);
+        back_carte->setPixmap(img);
+        back_carte->setFixedSize(120,186);
+        this->addWidget(back_carte,33);
     }
 
-    unsigned int nb_cartes_start = pioche.get_taille();//on initialise l'attribut avce le nombre max de cartes qu'on pourra avoir dans la pioche c'est à dire au début
 
     barre_pioche = new QProgressBar;
-    barre_pioche->setRange(0,nb_cartes_start);
-    barre_pioche->setValue(pioche.get_taille());//valeur que l'on devra mettre à jour à chaque fois qu'on pioche une carte
+    barre_pioche->setRange(0,(int)pioche.get_taille_init());
+    barre_pioche->setValue((int)pioche.get_taille());//valeur que l'on devra mettre à jour à chaque fois qu'on pioche une carte
     barre_pioche->setFixedWidth(300);
+    barre_pioche->setStyle(QStyleFactory::create("Fusion"));
     this->addWidget(barre_pioche,33);
 }
