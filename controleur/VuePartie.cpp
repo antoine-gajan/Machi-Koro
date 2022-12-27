@@ -15,6 +15,10 @@ VuePartie::VuePartie(QWidget *parent){
 
     //Création de l'entete de la page (pourquoi pas créer une classe VueEntete?)
 
+    /// ****************************************************************************************************************
+    /// ************************************ Création de l'entete de la page *******************************************
+    /// ****************************************************************************************************************
+
     entete = new QHBoxLayout();
 
     //Affichage du nom de l'édition de jeu
@@ -23,20 +27,32 @@ VuePartie::VuePartie(QWidget *parent){
     // Permet de séparer les noms des éditions et extensions de jeu par un espace
     string nom_edj;
     for (auto it : partie_actuelle->get_nom_edition()){
-        nom_edj += it + " ";
+        if (it != partie_actuelle->get_nom_edition().back()){
+            nom_edj += it + " + ";
+        }
+        else{
+            nom_edj += it;
+        }
     }
     label_edj->setText("Profil de la partie : " + QString::fromStdString(nom_edj));
+    label_edj->setFixedSize(300, 50);
+    label_edj->setAlignment(Qt::AlignLeft);
 
     entete->addWidget(label_edj);
 
     //Affichage du nom du joueur actuel
     label_joueur_actuel = new QLabel;
-    string nom_joueur = "Joueur actuel : ";
-    nom_joueur += partie_actuelle->get_tab_joueurs()[partie_actuelle->get_joueur_actuel()]->get_nom();
+    string nom_joueur = "Joueur actuel : \"" + partie_actuelle->get_tab_joueurs()[partie_actuelle->get_joueur_actuel()]->get_nom() + "\"";
     label_joueur_actuel->setText(QString::fromStdString(nom_joueur));
+    label_joueur_actuel->setFixedSize(300, 50);
+    label_joueur_actuel->setAlignment(Qt::AlignCenter);
     entete->addWidget(label_joueur_actuel);
+    structure->addLayout(entete, 10);
 
-    structure->addLayout(entete,10);
+    /// ****************************************************************************************************************
+    /// ************************************              FIN                *******************************************
+    /// ************************************ Création de l'entete de la page *******************************************
+    /// ****************************************************************************************************************
 
     //Affichage de la valeur des dés
 
@@ -51,6 +67,10 @@ VuePartie::VuePartie(QWidget *parent){
     display_des->addWidget(label_de2);
 
     entete->addLayout(display_des);
+
+    /// ****************************************************************************************************************
+    /// ************************************ Création du SHOP et de la PIOCHE ******************************************
+    /// ****************************************************************************************************************
 
     ///Affichage du Shop et de la Pioche
 
