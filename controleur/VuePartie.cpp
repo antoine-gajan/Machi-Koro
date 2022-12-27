@@ -107,7 +107,7 @@ VuePartie::VuePartie(QWidget *parent){
 
     structure->addLayout(layout,40);
     setLayout(structure);
-    this->setWindowState(Qt::WindowFullScreen);
+    this->setWindowState(Qt::WindowMaximized);
 }
 
 
