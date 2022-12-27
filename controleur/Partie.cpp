@@ -279,6 +279,7 @@ bool Partie::acheter_monu() {
     if (!tab_joueurs[joueur_actuel]->get_est_ia()) {
         cout << "Quel est le numero du monument que vous voulez acheter?" << endl;
         cout << "0 : Annuler" << endl;
+        // Ajout des monuments disponibles à la liste
         for (auto mon_act: joueur_act->get_liste_monument()) {
             if (!mon_act.second && mon_act.first->get_prix() <= joueur_act->get_argent()) {
                 cout << pos << " : " << mon_act.first->get_nom() << endl;
@@ -286,11 +287,11 @@ bool Partie::acheter_monu() {
                 monuments_dispo.push_back(mon_act.first);
             }
         }
-
+        // Si liste vide, on renvoie false
         if (monuments_dispo.empty()) {
             return false;
         }
-
+        // Fenetre de dialogue pour l'achat
         QWidget* fenetre = new QWidget();
         vector<VueCarte*> vue_monuments;
         QGridLayout* layout_monuments = new QGridLayout;
@@ -307,8 +308,9 @@ bool Partie::acheter_monu() {
             i++;
         }
         fenetre->setLayout(layout_monuments);
+        // Affichage de la fenêtre
         fenetre->show();
-
+        // Activation du monument et update
         joueur_act->activer_monument(mon_picked);
         joueur_act->set_argent(joueur_act->get_argent() - mon_picked->get_prix());
     } else {
@@ -335,19 +337,27 @@ bool Partie::acheter_bat() {
     Joueur *joueur_act = tab_joueurs[joueur_actuel];
     int choix = -1;
     vector<Batiment*> bat_shop = shop->get_contenu_v();
-
+    // Si le joueur est humain
     if (!tab_joueurs[joueur_actuel]->get_est_ia()) {
-        cout << "Quel est le numero du batiment que vous voulez acheter?" << endl;
-        cout << "0 : Annuler" << endl;
-        shop->affiche_shop();
-
-        while (choix < 0 || choix > bat_shop.size()) {
-            cout << "Votre choix : " << endl;
-            cin >> choix;
+        // Fenetre de dialogue pour l'achat
+        QWidget* fenetre = new QWidget();
+        vector<VueCarte*> vue_shop;
+        QGridLayout* layout_shop = new QGridLayout;
+        int i = 0;
+        for (auto& bat : bat_shop) {
+            // Affichage du monument
+            Batiment* adresse_bat = bat;
+            vue_shop.push_back(new VueCarte(*bat, true, fenetre));
+            layout_shop->addWidget(vue_shop[i], i / 4, i % 4);
+            QObject::connect(vue_shop[i], &QPushButton::clicked, [fenetre, adresse_bat, &bat_picked]() {
+                fenetre->close();
+                bat_picked = adresse_bat;
+            });
+            i++;
         }
-
-        if (choix == 0)
-            return false;
+        fenetre->setLayout(layout_shop);
+        // Affichage de la fenêtre
+        fenetre->show();
 
         bat_picked = bat_shop[choix - 1];
         if (bat_picked->get_prix() > joueur_act->get_argent()) {
