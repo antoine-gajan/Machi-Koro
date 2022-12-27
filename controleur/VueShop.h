@@ -10,9 +10,13 @@
 class VueShop  : public QGridLayout{
     Q_OBJECT
     vector<VueCarte *> tab_vue_shop;
+    unsigned int largeur;
+
 public:
 
     VueShop(Shop& shop, QWidget *parent = nullptr);
+    void update();
+
 public slots:
     void batiment_clique(VueCarte* vc);
 };
