@@ -200,7 +200,7 @@ Partie::Partie(EditionDeJeu* edition, const vector<EditionDeJeu *>& extensions) 
         }
     }
     else
-        nb_tas = list_batiments.size();
+        nb_tas = list_batiments.size() + 1;
 
     // Construction du Shop
     shop = new Shop(nb_tas);
