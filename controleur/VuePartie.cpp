@@ -60,14 +60,28 @@ VuePartie::VuePartie(QWidget *parent){
     //Affichage de la valeur des dés
 
     display_des = new QVBoxLayout;
+    layout_de_1 = new QHBoxLayout;
+    layout_de_2 = new QHBoxLayout;
+
+    bouton_lancer_de_1 = new QPushButton("Lancer le dé 1");
+    bouton_lancer_de_2 = new QPushButton("Lancer le dé 2");
+    bouton_lancer_de_1->setFixedSize(150, 50);
+    bouton_lancer_de_2->setFixedSize(150, 50);
+    bouton_lancer_de_1->setEnabled(false);
+    bouton_lancer_de_2->setEnabled(false);
+    layout_de_1->addWidget(bouton_lancer_de_1);
+    layout_de_2->addWidget(bouton_lancer_de_2);
 
     label_de1 = new QLabel;
     label_de1->setText(QString::number(partie_actuelle->get_de_1()));
-    display_des->addWidget(label_de1);
+    layout_de_1->addWidget(label_de1);
 
-    label_de2 = new QLabel;
-    label_de1->setText(QString::number(partie_actuelle->get_de_2()));
-    display_des->addWidget(label_de2);
+    label_de2 = new QLabel("Valeur de dé 2");
+    label_de2->setText(QString::number(partie_actuelle->get_de_2()));
+    layout_de_2->addWidget(label_de2);
+
+    display_des->addLayout(layout_de_1);
+    display_des->addLayout(layout_de_2);
 
     entete->addLayout(display_des);
 
@@ -181,6 +195,26 @@ void VuePartie::update_vue_joueur() {
     delete old;
     // Mise à jour de l'affichage
     update();
+}
+
+void VuePartie::lancer_de_1_display(){
+    Partie* partie_actuelle = Partie::get_instance();
+    /// Fonction pour mettre à jour les dés
+
+    bouton_lancer_de_1->setEnabled(true);
+    QObject::connect(bouton_lancer_de_1, SIGNAL(clicked()), this, SLOT(partie_actuelle->set_de_1(partie_actuelle->lancer_de());bouton_lancer_de_1->setEnabled(false);));
+    entete->update();
+
+}
+
+void VuePartie::lancer_de_2_display(){
+    Partie* partie_actuelle = Partie::get_instance();
+    /// Fonction pour mettre à jour les dés
+
+    bouton_lancer_de_2->setEnabled(true);
+    QObject::connect(bouton_lancer_de_1, SIGNAL(clicked()), this, SLOT(partie_actuelle->set_de_2(partie_actuelle->lancer_de());bouton_lancer_de_2->setEnabled(false);));
+    entete->update();
+
 }
 
 

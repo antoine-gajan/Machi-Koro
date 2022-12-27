@@ -1,5 +1,6 @@
 #include "Gare.h"
 #include "Partie.h"
+#include <QRadioButton>
 
 Gare::Gare()
     : Monument(AVANT,
@@ -21,16 +22,38 @@ void Gare::declencher_effet(unsigned int possesseur, int bonus) const {
         }
     }
     else {
-        int choix = -1;
-        while (choix != 0 && choix != 1) {
-            cout << "Voulez-vous lancer 2 des ? (0 : non, 1 : oui)" << endl;
-            cin >> choix;
+
+            //Création d'une boite de dialogue afin de savoit si le joueur veut lancer deux dés ou non
+            QDialog *window = new QDialog();
+            window->setWindowTitle("Machi Koro - Jouer deux dés");
+            window->setContentsMargins(50, 30, 50, 50);
+            // Création d'un formulaire
+            auto *formLayout = new QFormLayout;
+            QLabel* label = new QLabel("Voulez-vous lancer deux dés?");
+            formLayout->addRow(label);
+            auto *ouiRadioButton = new QRadioButton("Oui");
+            formLayout->addRow(ouiRadioButton);
+            auto *nonRadioButton = new QRadioButton("Oui");
+            formLayout->addRow(nonRadioButton);
+            auto *validateButton = new QPushButton("Valider");
+            formLayout->addRow(validateButton);
+
+            // Connection entre boutons et slots
+            QObject::connect(validateButton, &QPushButton::clicked, [partie, window, ouiRadioButton,nonRadioButton]() {
+                window->accept();
+                // Cas où le joueur veut lancer deux dés
+                if (ouiRadioButton->isChecked()){
+                    partie->get_vue_partie()->lancer_de_2_display();
+
+                }
+                    // Sinon on ne fait rien
+
+            });
+            // Execution de la boite de dialogue et attente d'une réponse
+            window->setLayout(formLayout);
+            window->exec();
+
         }
-        if (choix == 1) {
-            cout << "Activation de l'effet de la gare du joueur \"" << joueur->get_nom() << "\"" << endl;
-            partie->set_de_2(Partie::lancer_de());
-        }
-    }
 }
 
 void Gare::activer() {

@@ -8,6 +8,7 @@
 #include <exception>
 #include <ctime>
 #include <cstdlib>
+#include <unistd.h>
 
 #include "EditionDeJeu.h"
 #include "Joueur.h"

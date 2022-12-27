@@ -47,12 +47,16 @@ private:
     QLabel* label_de2;
     QLabel* pioche_exception;
     QGridLayout* shop;
+    QPushButton *bouton_lancer_de_1;
+    QPushButton *bouton_lancer_de_2;
 
     //partitionnement de la page
     QVBoxLayout *structure;
     QHBoxLayout *layout;
     QHBoxLayout *entete;
     QVBoxLayout *display_des;
+    QHBoxLayout* layout_de_1;
+    QHBoxLayout* layout_de_2;
     QHBoxLayout *body;
     QVBoxLayout *pioche;
     VueJoueur* vue_joueur;
@@ -63,11 +67,14 @@ private:
 
 
 
+
 public slots:
         // Slots qui gèrent les clics sur les vues joueurs
         //virtual void carteClique(VueCarte* vc);
         void d_click();
         void g_click();
+        void lancer_de_1_display();
+        void lancer_de_2_display();
 };
 
 #endif //MACHI_KORO_VUEPARTIE_H
