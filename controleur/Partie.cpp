@@ -352,8 +352,27 @@ bool Partie::acheter_monu() {
 
         joueur_act->activer_monument(mon_picked);
         joueur_act->set_argent(joueur_act->get_argent() - mon_picked->get_prix());
+        // Ouverture d'une fenetre de dialogue
+        auto *window = new QDialog();
+        QVBoxLayout* layout = new QVBoxLayout;
+        window->setWindowTitle("Machi Koro - Informations");
+        window->setContentsMargins(50, 30, 50, 50);
+        // Texte informatif
+        QLabel *info = new QLabel(QString::fromStdString(joueur_act->get_nom() + " a activé le monument " + mon_picked->get_nom()));
+        info->setStyleSheet("QLabel { color : blue; font-weight : bold; font-size : 20px; }");
+        layout->addWidget(info);
+        // Bouton pour indiquer que le joueur comprend la situation
+        QPushButton* daccord = new QPushButton;
+        daccord->setText("D'accord !");
+        QObject::connect(daccord, &QPushButton::clicked, [window]() {
+            window->accept();
+        });
+        layout->addWidget(daccord);
 
-        cout << "\n\nLe joueur \"" << tab_joueurs[joueur_actuel]->get_nom() << "\" a active le monument " << mon_picked->get_nom() << "\n\n";
+        window->setLayout(layout);
+        // Affichage de la fenêtre
+        window->exec();
+
         return true;
     }
     else {
@@ -363,7 +382,7 @@ bool Partie::acheter_monu() {
 
 bool Partie::acheter_bat() {
     /// Fonction qui permet a un joueur IA d'acheter un batiment
-    Batiment* bat_picked;
+    Batiment* bat_picked = nullptr;
     Joueur *joueur_act = tab_joueurs[joueur_actuel];
     int choix = -1;
     vector<Batiment*> bat_shop = shop->get_contenu_v();
@@ -401,24 +420,43 @@ bool Partie::acheter_bat() {
     else {
         bat_picked = bat_shop_couleur[rand() % bat_shop_couleur.size()];
     }
+    // Message informatif pour indiquer que le batiment a été ajouté
+    if (bat_picked != nullptr){
+        joueur_act->ajouter_batiment(bat_picked);
 
+        try {
+            shop->acheter_batiment(bat_picked);
+        }
+        catch(exception const& e){
+            cerr << "ERREUR : " << e.what() << endl;
+        }
 
-    joueur_act->ajouter_batiment(bat_picked);
+        joueur_act->set_argent(joueur_act->get_argent() - bat_picked->get_prix());
+        if (bat_picked->get_nom() == "BanqueDeMiniville") {
+            joueur_act->set_argent(joueur_act->get_argent() + 5);
+        }
 
-    try {
-        shop->acheter_batiment(bat_picked);
+        // Ouverture d'une fenetre de dialogue
+        auto *window = new QDialog();
+        QVBoxLayout* layout = new QVBoxLayout;
+        window->setWindowTitle("Machi Koro - Informations");
+        window->setContentsMargins(50, 30, 50, 50);
+        // Texte informatif
+        QLabel *info = new QLabel(QString::fromStdString(joueur_act->get_nom() + " a acheté le batiment " + bat_picked->get_nom()));
+        info->setStyleSheet("QLabel { color : blue; font-weight : bold; font-size : 20px; }");
+        layout->addWidget(info);
+        // Bouton pour indiquer que le joueur comprend la situation
+        QPushButton* daccord = new QPushButton;
+        daccord->setText("D'accord !");
+        QObject::connect(daccord, &QPushButton::clicked, [window]() {
+            window->accept();
+        });
+        layout->addWidget(daccord);
+
+        window->setLayout(layout);
+        // Affichage de la fenêtre
+        window->exec();
     }
-    catch(exception const& e){
-        cerr << "ERREUR : " << e.what() << endl;
-    }
-
-    joueur_act->set_argent(joueur_act->get_argent() - bat_picked->get_prix());
-    if (bat_picked->get_nom() == "BanqueDeMiniville") {
-        joueur_act->set_argent(joueur_act->get_argent() + 5);
-    }
-
-    cout << "\nLe joueur \"" << tab_joueurs[joueur_actuel]->get_nom() << "\" a achete la carte " << bat_picked->get_nom() << "\n\n";
-
     return true;
 }
 
