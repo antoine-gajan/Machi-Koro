@@ -9,6 +9,7 @@ VuePartie::VuePartie(QWidget *parent){
     // Attributs principaux
     Partie *partie_actuelle = Partie::get_instance();
     parent_fenetre = parent;
+    fenetre_carte = nullptr;
 
     structure = new QVBoxLayout();
 

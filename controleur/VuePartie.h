@@ -30,6 +30,9 @@ public:
     unsigned int get_nb_joueurs() const {return nb_joueurs;}
     unsigned int get_joueur_affiche() const {return joueur_affiche;}
     //Partie* get_partie_actuelle() const{return partie_actuelle;}
+    QWidget* get_vue_carte() const {return fenetre_carte;}
+    void set_vue_carte(QWidget* vue_carte) {fenetre_carte = vue_carte;}
+
 
 private:
     //Partie* partie_actuelle;
@@ -56,6 +59,7 @@ private:
     QGridLayout* view_shop;
     QVBoxLayout* view_pioche;
     QWidget *parent_fenetre;
+    QWidget *fenetre_carte;
 
 
 

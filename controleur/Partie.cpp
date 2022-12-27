@@ -486,16 +486,16 @@ void Partie::jouer_partie() {
     vue_partie = new VuePartie(fenetre);
     vue_partie->show();
 
-
+    /*
     joueur_actuel = 0;
 
     bool fin_partie = false;
-    /*/// Tant que le joueur precedent n'a pas gagne on continue la partie
+    // Tant que le joueur precedent n'a pas gagne on continue la partie
 
     cout << "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nBienvenue dans Miniville !" << endl;
     cout << "Vous allez jouer avec " << tab_joueurs.size() << " joueurs." << endl;
     cout << "Le but du jeu est d'obtenir " << nb_monuments_win << " monuments." << endl;
-    cout << "Bon jeu !\n\n" << endl;*/
+    cout << "Bon jeu !\n\n" << endl;
 
     while (!fin_partie) {
         jouer_tour();
@@ -510,7 +510,7 @@ void Partie::jouer_partie() {
     cout << "Voici son etat final : " << endl;
     tab_joueurs[joueur_actuel]->afficher_joueur();
 
-    cout << "Felicitations !!!" << endl;
+    cout << "Felicitations !!!" << endl;*/
 }
 
 void Partie::jouer_tour() {

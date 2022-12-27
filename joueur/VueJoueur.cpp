@@ -1,5 +1,6 @@
 #include "VueJoueur.h"
 #include <QPixmap>
+#include "Partie.h"
 
 VueJoueur::VueJoueur(Joueur* j,bool e_j_a, QWidget *parent) {
     /// Vue d'un joueur
@@ -93,7 +94,11 @@ VueJoueur::VueJoueur(Joueur* j,bool e_j_a, QWidget *parent) {
 void VueJoueur::batimentClique(VueCarte* vc){
     /// Slot lorsque la carte est cliquée
     // Création d'une nouvelle fenetre
+    if (Partie::get_instance()->get_vue_partie()->get_vue_carte() != nullptr) {
+        Partie::get_instance()->get_vue_partie()->get_vue_carte()->close();
+    }
     QWidget* fenetre = new QWidget();
+    Partie::get_instance()->get_vue_partie()->set_vue_carte(fenetre);
     // Création d'un label contenant l'image
     QLabel *label = new QLabel(fenetre);
     QPixmap pixmap(QString::fromStdString(vc->getCarte()->get_path_image()));
@@ -105,7 +110,11 @@ void VueJoueur::batimentClique(VueCarte* vc){
 void VueJoueur::monumentClique(VueCarte* vc){
     /// Slot lorsque la carte est cliquée
     // Création d'une nouvelle fenetre
+    if (Partie::get_instance()->get_vue_partie()->get_vue_carte() != nullptr) {
+        Partie::get_instance()->get_vue_partie()->get_vue_carte()->close();
+    }
     QWidget* fenetre = new QWidget();
+    Partie::get_instance()->get_vue_partie()->set_vue_carte(fenetre);
     // Création d'un label contenant l'image
     QLabel *label = new QLabel(fenetre);
     QPixmap pixmap(QString::fromStdString(vc->getCarte()->get_path_image()));

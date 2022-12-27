@@ -72,6 +72,8 @@ public:
     Pioche* get_pioche() const {return pioche;};
     vector<string> get_nom_edition() const {return tab_nom_edition;};
     unsigned int get_nb_cartes_edition() const {return list_batiments.size();};
+    VuePartie* get_vue_partie() const {return vue_partie;};
+
     //void set_vue(QWidget* vue) {this->vue = vue;};
 
     //********** Methodes **********//

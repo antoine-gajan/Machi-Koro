@@ -1,4 +1,6 @@
 #include "VueShop.h"
+#include "Partie.h"
+
 
 VueShop::VueShop(Shop &shop, QWidget *parent) {
 
@@ -38,7 +40,11 @@ VueShop::VueShop(Shop &shop, QWidget *parent) {
 void VueShop::batiment_clique(VueCarte *vc) {
     /// Slot lorsque la carte est cliquée
     // Création d'une nouvelle fenetre
+    if (Partie::get_instance()->get_vue_partie()->get_vue_carte() != nullptr) {
+        Partie::get_instance()->get_vue_partie()->get_vue_carte()->close();
+    }
     QWidget* fenetre = new QWidget();
+    Partie::get_instance()->get_vue_partie()->set_vue_carte(fenetre);
     // Création d'un label contenant l'image
     QLabel *label = new QLabel(fenetre);
     QPixmap pixmap(QString::fromStdString(vc->getCarte()->get_path_image()));
