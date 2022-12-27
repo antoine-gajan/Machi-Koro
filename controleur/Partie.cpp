@@ -236,13 +236,15 @@ bool Partie::acheter_carte() {
                     return false;
                 }
             }
-            else{
+            else if (monumentRadioButton->isChecked()){
             // Acheter un monument
-            if (batimentRadioButton->isChecked()){
                 if (!acheter_monu()) {
                     return false;
                 }
             }
+            // Acheter rien
+            else {
+                return false;
             }
         });
         // Execution de la boite de dialogue et attente d'une réponse
@@ -299,24 +301,24 @@ bool Partie::acheter_monu() {
             return false;
         }
         // Fenetre de dialogue pour l'achat
-        QWidget* fenetre = new QWidget();
+        QDialog* window = new QDialog();
         vector<VueCarte*> vue_monuments;
         QGridLayout* layout_monuments = new QGridLayout;
         int i = 0;
         for (auto& mon : monuments_dispo) {
             // Affichage du monument
             Monument* adresse_mon = mon;
-            vue_monuments.push_back(new VueCarte(*mon, true, fenetre));
+            vue_monuments.push_back(new VueCarte(*mon, true, window));
             layout_monuments->addWidget(vue_monuments[i], i / 4, i % 4);
-            QObject::connect(vue_monuments[i], &QPushButton::clicked, [fenetre, adresse_mon, &mon_picked]() {
-                fenetre->close();
+            QObject::connect(vue_monuments[i], &QPushButton::clicked, [window, adresse_mon, &mon_picked]() {
+                window->accept();
                 mon_picked = adresse_mon;
             });
             i++;
         }
-        fenetre->setLayout(layout_monuments);
+        window->setLayout(layout_monuments);
         // Affichage de la fenêtre
-        fenetre->show();
+        window->exec();
         // Activation du monument et update
         joueur_act->activer_monument(mon_picked);
         joueur_act->set_argent(joueur_act->get_argent() - mon_picked->get_prix());
