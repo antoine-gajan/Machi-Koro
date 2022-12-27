@@ -28,6 +28,7 @@ public:
     static unsigned int argent_effet(int a);
 
     virtual void declencher_effet(unsigned int possesseur, int bonus = 0) const = 0;
+
 };
 
 

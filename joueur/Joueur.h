@@ -1,5 +1,6 @@
 #ifndef MACHI_KORO_JOUEUR_H
 #define MACHI_KORO_JOUEUR_H
+#include "VueCarte.h"
 
 #include <map>
 #include <vector>
@@ -18,6 +19,7 @@ enum strat_IA {aleatoire, agressive, defensif, none};
 class Joueur {
     private:
         /*** Attributs de la classe ***/
+        Batiment* selec_bat = nullptr;
         const string nom;
         unsigned int argent;
         bool est_ia;
@@ -71,6 +73,8 @@ class Joueur {
 
         Batiment* selectionner_batiment() const;
         Batiment* possede_batiment(const string& nom_bat) const;
+public slots:
+    void selection_bat(VueCarte *);
 };
 
 #endif //MACHI_KORO_JOUEUR_H

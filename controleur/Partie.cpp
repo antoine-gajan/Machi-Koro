@@ -480,7 +480,7 @@ void Partie::jouer_partie() {
 
     joueur_actuel = 0;
 
-    bool fin_partie = false;
+    /*bool fin_partie = false;
     /// Tant que le joueur precedent n'a pas gagne on continue la partie
 
     cout << "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nBienvenue dans Miniville !" << endl;
@@ -501,7 +501,7 @@ void Partie::jouer_partie() {
     cout << "Voici son etat final : " << endl;
     tab_joueurs[joueur_actuel]->afficher_joueur();
 
-    cout << "Felicitations !!!" << endl;
+    cout << "Felicitations !!!" << endl;*/
 }
 
 void Partie::jouer_tour() {
