@@ -197,58 +197,115 @@ void Partie::ajout_batiment(Batiment *batiment) {
 }
 
 bool Partie::acheter_carte() {
-    //fonction qui permet a un joueur donne d'acheter une carte (batiment ou monument)
+    /// Fonction qui permet a un joueur d'acheter une carte (batiment ou monument)
     int choix = -1;
     int choix_ia = -1;
     bool visit[2] = {false, false};
     bool transaction_fin = false;
-
+    Joueur *joueur_act = tab_joueurs[joueur_actuel];
     // Si le joueur est humain
-    if (!tab_joueurs[joueur_actuel]->get_est_ia()) {
+    if (!joueur_act->get_est_ia()) {
         // Ouverture d'une fenetre de dialogue
         auto *window = new QDialog();
 
         window->setWindowTitle("Machi Koro - Acheter une carte");
         window->setContentsMargins(50, 30, 50, 50);
         // Création d'un formulaire
-        auto *formLayout = new QFormLayout;
-
         auto *layout = new QVBoxLayout;
+        QLabel *texte = new QLabel(QString::fromStdString(joueur_act->get_nom() + ", quelle carte veux-tu acheter ?"));
+        texte->setStyleSheet("QLabel { font-weight : bold; font-size : 25px; }");
+        layout->addWidget(texte);
 
-        layout->addWidget(new QLabel());
-        layout->addLayout(formLayout);
-        layout->addWidget(new QLabel());
-        // Ajout des radio boutons pour le choix de batiment ou monument
-        auto *batimentRadioButton = new QRadioButton("Batiment");
-        auto *monumentRadioButton = new QRadioButton("Monument");
-        formLayout->addWidget(batimentRadioButton);
-        formLayout->addWidget(monumentRadioButton);
+        // Ajout des monuments
+        vector<VueCarte*> vue_monuments;
+        QGridLayout* layout_monuments = new QGridLayout;
+        int i = 0;
+        for (auto mon: joueur_act->get_liste_monument()) {
+            // Si il y a une possibilité d'acheter un monument
+            if (!mon.second && mon.first->get_prix() <= joueur_act->get_argent()) {
 
-        layout->addWidget(new QLabel());
-        auto *validateButton = new QPushButton("Valider");
-        layout->addWidget(validateButton);
-        // Connection entre boutons et slots
-        QObject::connect(validateButton, &QPushButton::clicked, [this, window, batimentRadioButton, monumentRadioButton]() {
-            window->accept();
-            // Acheter un batiment
-            if (batimentRadioButton->isChecked()){
-                if (!acheter_bat()) {
-                    return false;
-                }
+                Monument *adresse_mon = mon.first;
+                vue_monuments.push_back(new VueCarte(*mon.first, true, window));
+                layout_monuments->addWidget(vue_monuments[i], i / 4, i % 4);
+                QObject::connect(vue_monuments[i], &QPushButton::clicked, [window, joueur_act, adresse_mon]() {
+                    window->accept();
+                    // Achat du monument et activation
+                    joueur_act->activer_monument(adresse_mon);
+                    joueur_act->set_argent(joueur_act->get_argent() - adresse_mon->get_prix());
+                });
+                i++;
             }
-            else if (monumentRadioButton->isChecked()){
-            // Acheter un monument
-                if (!acheter_monu()) {
-                    return false;
-                }
+        }
+        if (vue_monuments.size() > 0){
+            QLabel *monuments = new QLabel(QString::fromStdString("Monuments : "));
+            monuments->setStyleSheet("QLabel { font-weight : bold; font-size : 20px; }");
+            layout->addWidget(monuments);
+        }
+        layout->addLayout(layout_monuments);
+
+
+        // Ajout des batiments
+        vector<VueCarte*> vue_shop;
+        QGridLayout* layout_batiments = new QGridLayout;
+        i = 0;
+        for (auto& bat : shop->get_contenu_v()) {
+            // Si le joueur a l'argent
+            if (bat->get_prix() <= joueur_act->get_argent()){
+                // Affichage du monument
+                Batiment* adresse_bat = bat;
+                vue_shop.push_back(new VueCarte(*bat, true, window));
+                layout_batiments->addWidget(vue_shop[i], i / 4, i % 4);
+                QObject::connect(vue_shop[i], &QPushButton::clicked, [window, joueur_act, adresse_bat, this]() {
+                    // Accepte le choix de l'utilisateur
+                    window->accept();
+                    joueur_act->ajouter_batiment(adresse_bat);
+                    // On tente de supprimer le batiment du shop
+                    try {
+                        shop->acheter_batiment(adresse_bat);
+                    }
+                    catch(exception const& e){
+                        cerr << "ERREUR : " << e.what() << endl;
+                    }
+                    // Achat du batiment
+                    joueur_act->set_argent(joueur_act->get_argent() - adresse_bat->get_prix());
+                    if (adresse_bat->get_nom() == "BanqueDeMiniville") {
+                        joueur_act->set_argent(joueur_act->get_argent() + 5);
+                    }
+                });
+                i++;
             }
-            // Acheter rien
-            else {
-                return false;
-            }
-        });
-        // Execution de la boite de dialogue et attente d'une réponse
+        }
+        if (vue_shop.size() > 0){
+            QLabel *batiments = new QLabel(QString::fromStdString("Batiments : "));
+            batiments->setStyleSheet("QLabel { font-weight : bold; font-size : 20px; }");
+            layout->addWidget(batiments);
+        }
+        layout->addLayout(layout_batiments);
+        if (!vue_monuments.empty() || !vue_shop.empty()){
+            // Bouton pour ne rien acheter
+            QPushButton* cancel = new QPushButton;
+            cancel->setText("Ne rien acheter");
+            QObject::connect(cancel, &QPushButton::clicked, [window]() {
+                window->accept();
+            });
+            layout->addWidget(cancel);
+        }
+        else{
+            // Message d'erreur si on ne peut rien acheter
+            QLabel *erreur = new QLabel(QString::fromStdString("Tu ne peux malheureusement rien acheter..."));
+            erreur->setStyleSheet("QLabel { color : red; font-weight : bold; font-size : 25px; }");
+            layout->addWidget(erreur);
+            // Bouton pour indiquer que le joueur comprend qu'il ne peut rien acheter
+            QPushButton* cancel = new QPushButton;
+            cancel->setText("Je comprends");
+            QObject::connect(cancel, &QPushButton::clicked, [window]() {
+                window->accept();
+            });
+            layout->addWidget(cancel);
+        }
+
         window->setLayout(layout);
+        // Affichage de la fenêtre
         window->exec();
 
     } else {
@@ -278,137 +335,73 @@ bool Partie::acheter_carte() {
 }
 
 bool Partie::acheter_monu() {
-    //fonction qui permet a un joueur donne d'acheter un monument
+    /// Fonction qui permet a un joueur IA d'acheter un monument
     Monument* mon_picked;
     Joueur *joueur_act = tab_joueurs[joueur_actuel];
     int choix = -1;
     unsigned int pos = 1;
     vector<Monument*> monuments_dispo;
 
-    if (!tab_joueurs[joueur_actuel]->get_est_ia()) {
-        cout << "Quel est le numero du monument que vous voulez acheter?" << endl;
-        cout << "0 : Annuler" << endl;
-        // Ajout des monuments disponibles à la liste
-        for (auto mon_act: joueur_act->get_liste_monument()) {
-            if (!mon_act.second && mon_act.first->get_prix() <= joueur_act->get_argent()) {
-                cout << pos << " : " << mon_act.first->get_nom() << endl;
-                pos++;
-                monuments_dispo.push_back(mon_act.first);
-            }
+    for (auto mon_act: joueur_act->get_liste_monument()) {
+        if (!mon_act.second && mon_act.first->get_prix() <= joueur_act->get_argent()) {
+            monuments_dispo.push_back(mon_act.first);
         }
-        // Si liste vide, on renvoie false
-        if (monuments_dispo.empty()) {
-            return false;
-        }
-        // Fenetre de dialogue pour l'achat
-        QDialog* window = new QDialog();
-        vector<VueCarte*> vue_monuments;
-        QGridLayout* layout_monuments = new QGridLayout;
-        int i = 0;
-        for (auto& mon : monuments_dispo) {
-            // Affichage du monument
-            Monument* adresse_mon = mon;
-            vue_monuments.push_back(new VueCarte(*mon, true, window));
-            layout_monuments->addWidget(vue_monuments[i], i / 4, i % 4);
-            QObject::connect(vue_monuments[i], &QPushButton::clicked, [window, adresse_mon, &mon_picked]() {
-                window->accept();
-                mon_picked = adresse_mon;
-            });
-            i++;
-        }
-        window->setLayout(layout_monuments);
-        // Affichage de la fenêtre
-        window->exec();
-        // Activation du monument et update
-        joueur_act->activer_monument(mon_picked);
-        joueur_act->set_argent(joueur_act->get_argent() - mon_picked->get_prix());
-    } else {
-        for (auto mon_act: joueur_act->get_liste_monument()) {
-            if (!mon_act.second && mon_act.first->get_prix() <= joueur_act->get_argent()) {
-                monuments_dispo.push_back(mon_act.first);
-            }
-        }
-
+    }
+    if (monuments_dispo.size() > 0){
         mon_picked = monuments_dispo[rand() % monuments_dispo.size()];
 
         joueur_act->activer_monument(mon_picked);
         joueur_act->set_argent(joueur_act->get_argent() - mon_picked->get_prix());
+
+        cout << "\n\nLe joueur \"" << tab_joueurs[joueur_actuel]->get_nom() << "\" a active le monument " << mon_picked->get_nom() << "\n\n";
+        return true;
     }
-
-    cout << "\n\nLe joueur \"" << tab_joueurs[joueur_actuel]->get_nom() << "\" a active le monument " << mon_picked->get_nom() << "\n\n";
-
-    return true;
+    else {
+        return false;
+    }
 }
 
 bool Partie::acheter_bat() {
-    //fonction qui permet a un joueur donne d'acheter un batiment
+    /// Fonction qui permet a un joueur IA d'acheter un batiment
     Batiment* bat_picked;
     Joueur *joueur_act = tab_joueurs[joueur_actuel];
     int choix = -1;
     vector<Batiment*> bat_shop = shop->get_contenu_v();
-    // Si le joueur est humain
-    if (!tab_joueurs[joueur_actuel]->get_est_ia()) {
-        // Fenetre de dialogue pour l'achat
-        QDialog* window = new QDialog();
-        vector<VueCarte*> vue_shop;
-        QGridLayout* layout_shop = new QGridLayout;
-        int i = 0;
-        for (auto& bat : bat_shop) {
-            // Affichage du monument
-            Batiment* adresse_bat = bat;
-            vue_shop.push_back(new VueCarte(*bat, true, window));
-            layout_shop->addWidget(vue_shop[i], i / 4, i % 4);
-            QObject::connect(vue_shop[i], &QPushButton::clicked, [window, adresse_bat, &bat_picked]() {
-                window->accept();
-                bat_picked = adresse_bat;
-            });
-            i++;
-        }
-        window->setLayout(layout_shop);
-        // Affichage de la fenêtre de dialogue
-        window->exec();
 
-        bat_picked = bat_shop[choix - 1];
-        if (bat_picked->get_prix() > joueur_act->get_argent()) {
-            cout << "Vous n'avez pas assez d'argent pour acheter ce batiment" << endl;
-            return false;
-        }
-
-    } else {
-        strat_IA strat = tab_joueurs[joueur_actuel]->get_strategie();
-        vector<Batiment*> bat_shop_couleur;
-        vector<Batiment*> bat_shop_prix_ok;
-        for (auto bat_act: bat_shop) {
-            if (bat_act->get_prix() <= joueur_act->get_argent()) {
-                bat_shop_prix_ok.push_back(bat_act);
-            }
-        }
-
-        if (strat == agressive) {
-            for (auto bat_act: bat_shop) {
-                if (bat_act->get_couleur() == Rouge && bat_act->get_prix() <= joueur_act->get_argent()) {
-                    bat_shop_couleur.push_back(bat_act);
-                }
-            }
-        }
-        else if (strat == defensif) {
-            for (auto bat_act: bat_shop) {
-                if (bat_act->get_couleur() == Bleu && bat_act->get_prix() <= joueur_act->get_argent()) {
-                    bat_shop_couleur.push_back(bat_act);
-                }
-            }
-        }
-
-        if (bat_shop_couleur.empty() && bat_shop_prix_ok.empty()) {
-            return false;
-        }
-        else if (bat_shop_couleur.empty()) {
-            bat_picked = bat_shop_prix_ok[rand() % bat_shop_prix_ok.size()];
-        }
-        else {
-            bat_picked = bat_shop_couleur[rand() % bat_shop_couleur.size()];
+    strat_IA strat = tab_joueurs[joueur_actuel]->get_strategie();
+    vector<Batiment*> bat_shop_couleur;
+    vector<Batiment*> bat_shop_prix_ok;
+    for (auto bat_act: bat_shop) {
+        if (bat_act->get_prix() <= joueur_act->get_argent()) {
+            bat_shop_prix_ok.push_back(bat_act);
         }
     }
+
+    if (strat == agressive) {
+        for (auto bat_act: bat_shop) {
+            if (bat_act->get_couleur() == Rouge && bat_act->get_prix() <= joueur_act->get_argent()) {
+                bat_shop_couleur.push_back(bat_act);
+            }
+        }
+    }
+    else if (strat == defensif) {
+        for (auto bat_act: bat_shop) {
+            if (bat_act->get_couleur() == Bleu && bat_act->get_prix() <= joueur_act->get_argent()) {
+                bat_shop_couleur.push_back(bat_act);
+            }
+        }
+    }
+
+    if (bat_shop_couleur.empty() && bat_shop_prix_ok.empty()) {
+        return false;
+    }
+    else if (bat_shop_couleur.empty()) {
+        bat_picked = bat_shop_prix_ok[rand() % bat_shop_prix_ok.size()];
+    }
+    else {
+        bat_picked = bat_shop_couleur[rand() % bat_shop_couleur.size()];
+    }
+
 
     joueur_act->ajouter_batiment(bat_picked);
 
@@ -486,7 +479,6 @@ void Partie::jouer_partie() {
     vue_partie = new VuePartie(fenetre);
     vue_partie->show();
 
-    /*
     joueur_actuel = 0;
 
     bool fin_partie = false;
@@ -510,10 +502,11 @@ void Partie::jouer_partie() {
     cout << "Voici son etat final : " << endl;
     tab_joueurs[joueur_actuel]->afficher_joueur();
 
-    cout << "Felicitations !!!" << endl;*/
+    cout << "Felicitations !!!" << endl;
 }
 
 void Partie::jouer_tour() {
+    /// Fonction pour jouer un tour
     unsigned int de_casse;
     unsigned int de_1_temp, de_2_temp;
     bool centre_c_act = false;
