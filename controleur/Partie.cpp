@@ -203,66 +203,73 @@ bool Partie::acheter_carte() {
     bool visit[2] = {false, false};
     bool transaction_fin = false;
 
-    while (!transaction_fin){
-        // Si le joueur est humain
-        if (!tab_joueurs[joueur_actuel]->get_est_ia()) {
-            // Ouverture d'une fenetre de dialogue
-            auto *window = new QDialog();
+    // Si le joueur est humain
+    if (!tab_joueurs[joueur_actuel]->get_est_ia()) {
+        // Ouverture d'une fenetre de dialogue
+        auto *window = new QDialog();
 
-            window->setWindowTitle("Machi Koro - Acheter une carte");
-            window->setContentsMargins(50, 30, 50, 50);
-            // Création d'un formulaire
-            auto *formLayout = new QFormLayout;
+        window->setWindowTitle("Machi Koro - Acheter une carte");
+        window->setContentsMargins(50, 30, 50, 50);
+        // Création d'un formulaire
+        auto *formLayout = new QFormLayout;
 
-            auto *layout = new QVBoxLayout;
+        auto *layout = new QVBoxLayout;
 
-            layout->addWidget(new QLabel());
-            layout->addLayout(formLayout);
-            layout->addWidget(new QLabel());
-            // Ajout des radio boutons pour le choix de batiment ou monument
-            auto *batimentRadioButton = new QRadioButton("Batiment");
-            auto *monumentRadioButton = new QRadioButton("Monument");
+        layout->addWidget(new QLabel());
+        layout->addLayout(formLayout);
+        layout->addWidget(new QLabel());
+        // Ajout des radio boutons pour le choix de batiment ou monument
+        auto *batimentRadioButton = new QRadioButton("Batiment");
+        auto *monumentRadioButton = new QRadioButton("Monument");
+        formLayout->addWidget(batimentRadioButton);
+        formLayout->addWidget(monumentRadioButton);
 
-            layout->addWidget(new QLabel());
-            auto *validateButton = new QPushButton("Jouer");
-            layout->addWidget(validateButton);
-            // Connection entre boutons et slots
-            QObject::connect(batimentRadioButton, &QRadioButton::clicked, [this]() {
-                // Acheter un batiment
+        layout->addWidget(new QLabel());
+        auto *validateButton = new QPushButton("Valider");
+        layout->addWidget(validateButton);
+        // Connection entre boutons et slots
+        QObject::connect(validateButton, &QPushButton::clicked, [this, window, batimentRadioButton, monumentRadioButton]() {
+            window->accept();
+            // Acheter un batiment
+            if (batimentRadioButton->isChecked()){
                 if (!acheter_bat()) {
                     return false;
                 }
-            });
-
-            QObject::connect(monumentRadioButton, &QRadioButton::clicked, [this]() {
-                // Acheter un monument
+            }
+            else{
+            // Acheter un monument
+            if (batimentRadioButton->isChecked()){
                 if (!acheter_monu()) {
                     return false;
                 }
-            });
+            }
+            }
+        });
+        // Execution de la boite de dialogue et attente d'une réponse
+        window->setLayout(layout);
+        window->exec();
 
+    } else {
+        choix_ia = rand() % 5;
+        if (choix_ia == 0) {
+            visit[0] = true;
+            transaction_fin = acheter_bat();
         } else {
-            choix_ia = rand() % 5;
-            if (choix_ia == 0) {
-                visit[0] = true;
-                transaction_fin = acheter_bat();
-            } else {
-                visit[1] = true;
-                transaction_fin = acheter_monu();
-            }
+            visit[1] = true;
+            transaction_fin = acheter_monu();
+        }
 
-            if (!transaction_fin && !visit[0]) {
-                visit[0] = true;
-                transaction_fin = acheter_bat();
-            }
-            else if (!transaction_fin && !visit[1]) {
-                visit[1] = true;
-                transaction_fin = acheter_monu();
-            }
+        if (!transaction_fin && !visit[0]) {
+            visit[0] = true;
+            transaction_fin = acheter_bat();
+        }
+        else if (!transaction_fin && !visit[1]) {
+            visit[1] = true;
+            transaction_fin = acheter_monu();
+        }
 
-            if (!transaction_fin) {
-                return false;
-            }
+        if (!transaction_fin) {
+            return false;
         }
     }
     return true;
@@ -340,24 +347,24 @@ bool Partie::acheter_bat() {
     // Si le joueur est humain
     if (!tab_joueurs[joueur_actuel]->get_est_ia()) {
         // Fenetre de dialogue pour l'achat
-        QWidget* fenetre = new QWidget();
+        QDialog* window = new QDialog();
         vector<VueCarte*> vue_shop;
         QGridLayout* layout_shop = new QGridLayout;
         int i = 0;
         for (auto& bat : bat_shop) {
             // Affichage du monument
             Batiment* adresse_bat = bat;
-            vue_shop.push_back(new VueCarte(*bat, true, fenetre));
+            vue_shop.push_back(new VueCarte(*bat, true, window));
             layout_shop->addWidget(vue_shop[i], i / 4, i % 4);
-            QObject::connect(vue_shop[i], &QPushButton::clicked, [fenetre, adresse_bat, &bat_picked]() {
-                fenetre->close();
+            QObject::connect(vue_shop[i], &QPushButton::clicked, [window, adresse_bat, &bat_picked]() {
+                window->accept();
                 bat_picked = adresse_bat;
             });
             i++;
         }
-        fenetre->setLayout(layout_shop);
-        // Affichage de la fenêtre
-        fenetre->show();
+        window->setLayout(layout_shop);
+        // Affichage de la fenêtre de dialogue
+        window->exec();
 
         bat_picked = bat_shop[choix - 1];
         if (bat_picked->get_prix() > joueur_act->get_argent()) {
@@ -480,13 +487,13 @@ void Partie::jouer_partie() {
 
     joueur_actuel = 0;
 
-    /*bool fin_partie = false;
-    /// Tant que le joueur precedent n'a pas gagne on continue la partie
+    bool fin_partie = false;
+    /*/// Tant que le joueur precedent n'a pas gagne on continue la partie
 
     cout << "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nBienvenue dans Miniville !" << endl;
     cout << "Vous allez jouer avec " << tab_joueurs.size() << " joueurs." << endl;
     cout << "Le but du jeu est d'obtenir " << nb_monuments_win << " monuments." << endl;
-    cout << "Bon jeu !\n\n" << endl;
+    cout << "Bon jeu !\n\n" << endl;*/
 
     while (!fin_partie) {
         jouer_tour();
@@ -501,7 +508,7 @@ void Partie::jouer_partie() {
     cout << "Voici son etat final : " << endl;
     tab_joueurs[joueur_actuel]->afficher_joueur();
 
-    cout << "Felicitations !!!" << endl;*/
+    cout << "Felicitations !!!" << endl;
 }
 
 void Partie::jouer_tour() {
