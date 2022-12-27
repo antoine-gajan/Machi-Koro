@@ -3,7 +3,7 @@
 VueShop::VueShop(Shop &shop, QWidget *parent) {
 
     //nous voulons ici calculer la taille du shop.
-    unsigned int largeur = round(sqrt(shop.get_nb_tas_max()));
+    unsigned int largeur = floor(sqrt(shop.get_nb_tas_reel()));
 
     unsigned int x = 0;
     unsigned int y = 1;
@@ -16,13 +16,14 @@ VueShop::VueShop(Shop &shop, QWidget *parent) {
         this->addWidget((tab_vue_shop)[compteur],x,y-1);
         if(it.second>1){
             // cas où on a plusieurs cartes identiques les unes sur les autres
-            tab_vue_shop[compteur]->update();
-            //QPainter* painter = new QPainter(tab_vue_shop[compteur]);
-            //painter->begin(tab_vue_shop[compteur]);
-            //painter->drawText(0,0,QString::fromStdString(to_string(it.second)));
-            //painter->end();
-            //QPaintEvent* event = new QPaintEvent((tab_vue_shop)[compteur]->rect());
-            //(tab_vue_shop)[compteur]->paintEvent(event);
+            QLabel* nb_carte = new QLabel;
+            nb_carte->setText(QString::number(it.second));
+            //nb_carte->setAttribute(Qt::WA_TranslucentBackground);
+            nb_carte->setStyleSheet("QLabel { color : white; background-color : black; }");
+            nb_carte->setFixedSize(20,20);
+            nb_carte->setAlignment(Qt::AlignTop | Qt::AlignRight);
+            this->addWidget(nb_carte,x,y-1);
+            this->setAlignment(nb_carte,Qt::AlignTop | Qt::AlignRight);
         }
         if(y%largeur == 0){
             x ++;
