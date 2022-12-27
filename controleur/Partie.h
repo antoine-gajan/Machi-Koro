@@ -28,7 +28,7 @@ private:
     unsigned int de_2;
     bool rejouer;
     vector<string> tab_nom_edition;
-    QWidget* vue;
+    VuePartie* vue_partie;
 
     Shop* shop;
     Pioche* pioche;

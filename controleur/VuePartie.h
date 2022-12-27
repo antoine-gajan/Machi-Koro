@@ -16,11 +16,6 @@
 #include "VueCarte.h"
 #include "VueJoueur.h"
 #include "Joueur.h"
-#include "Boulangerie.h"
-#include "Aeroport.h"
-#include "Epicerie.h"
-#include "Cafe.h"
-
 #include "VueShop.h"
 #include "VuePioche.h"
 #include <QStackedWidget>

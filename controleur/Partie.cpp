@@ -130,6 +130,7 @@ Partie::Partie(EditionDeJeu* edition, const map<string, string>& joueurs, const 
             cerr << "ERREUR : " << e.what() << endl;
         }
     }
+    vue_partie = nullptr;
 }
 
 
@@ -466,9 +467,12 @@ bool Partie::transfert_argent(unsigned int indice_joueur1, unsigned int indice_j
 }
 
 void Partie::jouer_partie() {
+    /// Fonction pour jouer une partie
+    // Création de la vue
+    QWidget *fenetre = new QWidget;
+    vue_partie = new VuePartie(fenetre);
+    vue_partie->show();
 
-    //vue = new VuePartie();
-    //vue->showMaximized();
 
     joueur_actuel = 0;
 
