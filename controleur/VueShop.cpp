@@ -21,7 +21,7 @@ VueShop::VueShop(Shop &shop, QWidget *parent) {
             QLabel* nb_carte = new QLabel;
             nb_carte->setText(QString::number(it.second));
             //nb_carte->setAttribute(Qt::WA_TranslucentBackground);
-            nb_carte->setStyleSheet("QLabel { color : white; background-color : black; }");
+            nb_carte->setStyleSheet("QLabel { color : yellow; background-color : red; }");
             nb_carte->setFixedSize(20,20);
             nb_carte->setAlignment(Qt::AlignTop | Qt::AlignRight);
             this->addWidget(nb_carte,x,y-1);
