@@ -24,6 +24,7 @@ VuePartie::VuePartie(QWidget *parent){
     /// ****************************************************************************************************************
 
     entete = new QHBoxLayout();
+    entete_gauche = new QVBoxLayout();
 
     //Affichage du nom de l'édition de jeu
 
@@ -42,16 +43,27 @@ VuePartie::VuePartie(QWidget *parent){
     label_edj->setFixedSize(300, 50);
     label_edj->setAlignment(Qt::AlignLeft);
 
-    entete->addWidget(label_edj);
+    entete_gauche->addWidget(label_edj);
 
     //Affichage du nom du joueur actuel
     label_joueur_actuel = new QLabel;
     string nom_joueur = "Joueur actuel : \"" + partie_actuelle->get_tab_joueurs()[partie_actuelle->get_joueur_actuel()]->get_nom() + "\"";
     label_joueur_actuel->setText(QString::fromStdString(nom_joueur));
     label_joueur_actuel->setFixedSize(300, 50);
-    label_joueur_actuel->setAlignment(Qt::AlignCenter);
-    entete->addWidget(label_joueur_actuel);
+    label_joueur_actuel->setAlignment(Qt::AlignLeft);
+    entete_gauche->addWidget(label_joueur_actuel);
+    entete->addLayout(entete_gauche);
     structure->addLayout(entete, 10);
+
+    //Ajout de l'image dans l'entete
+    image_entete = new QLabel;
+    QPixmap* image = new QPixmap("../assets/annexes/Machi-Koro.png");
+    image->scaled(300,50, Qt::KeepAspectRatio);
+    image_entete->setPixmap(*image);
+
+    entete->addWidget(image_entete);
+
+    //Affichage de l'image "Machi Koro"
 
     /// ****************************************************************************************************************
     /// ************************************              FIN                *******************************************
@@ -76,10 +88,12 @@ VuePartie::VuePartie(QWidget *parent){
     label_de1 = new QLabel;
     label_de1->setText(QString::number(partie_actuelle->get_de_1()));
     layout_de_1->addWidget(label_de1);
+    layout_de_1->setAlignment(Qt::AlignCenter);
 
     label_de2 = new QLabel("Valeur de dé 2");
     label_de2->setText(QString::number(partie_actuelle->get_de_2()));
     layout_de_2->addWidget(label_de2);
+    layout_de_2->setAlignment(Qt::AlignCenter);
 
     display_des->addLayout(layout_de_1);
     display_des->addLayout(layout_de_2);

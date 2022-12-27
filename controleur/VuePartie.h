@@ -47,6 +47,7 @@ private:
     QLabel* label_de2;
     QLabel* pioche_exception;
     QGridLayout* shop;
+    QLabel* image_entete;
     QPushButton *bouton_lancer_de_1;
     QPushButton *bouton_lancer_de_2;
 
@@ -54,6 +55,8 @@ private:
     QVBoxLayout *structure;
     QHBoxLayout *layout;
     QHBoxLayout *entete;
+    QVBoxLayout *entete_gauche;
+
     QVBoxLayout *display_des;
     QHBoxLayout* layout_de_1;
     QHBoxLayout* layout_de_2;
