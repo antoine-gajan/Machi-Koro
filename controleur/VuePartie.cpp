@@ -12,6 +12,7 @@ VuePartie::VuePartie(QWidget *parent){
 
     structure = new QVBoxLayout();
 
+
     //Création de l'entete de la page (pourquoi pas créer une classe VueEntete?)
 
     entete = new QHBoxLayout();
@@ -19,6 +20,7 @@ VuePartie::VuePartie(QWidget *parent){
     //Affichage du nom de l'édition de jeu
 
     label_edj = new QLabel;
+    // Permet de séparer les noms des éditions et extensions de jeu par un espace
     string nom_edj;
     for (auto it : partie_actuelle->get_nom_edition()){
         nom_edj += it + " ";
@@ -50,7 +52,7 @@ VuePartie::VuePartie(QWidget *parent){
 
     entete->addLayout(display_des);
 
-    ///Affichage du Shop et de la Pioche (va falloir créer deux classes vue shop et vue pioche certainement)
+    ///Affichage du Shop et de la Pioche
 
     body = new QHBoxLayout;
 
