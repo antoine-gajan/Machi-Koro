@@ -99,7 +99,6 @@ public:
 
     vector<Batiment *> get_starter();
 
-public slots:
     void acheter_carte_event(VueCarte* vc);
 };
 
