@@ -49,7 +49,6 @@ void VueShop::batiment_clique(VueCarte *vc) {
     QPixmap pixmap(QString::fromStdString(vc->getCarte()->get_path_image()));
     bouton_acheter = new QPushButton(fenetre);
     bouton_acheter->setText(QString::fromStdString("Acheter le batiment"));
-    Partie* partie_actuelle = Partie::get_instance();
 
     connect(bouton_acheter, SIGNAL(clicked()), this, SLOT(clicked_acheter_event()));
 
