@@ -28,6 +28,8 @@ public:
     const vector<VueCarte*>& get_vue_monuments() const {return *vue_monuments;}
     bool get_est_joueur_actuel() const{return est_joueur_actuel;}
     void update_vue();
+    VueCarte* get_carte_choisie() const {return carte_choisie;}
+
 private:
     bool est_joueur_actuel;
     QLabel* text_bat;
@@ -47,6 +49,7 @@ private:
     Joueur *joueur;
     QWidget *parent;
     VueCarte *carte_choisie;
+    QPushButton* bouton_achat;
 
 public slots:
     // slots qui gère les clics sur les cartes

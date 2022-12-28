@@ -121,10 +121,10 @@ void VueJoueur::monumentClique(VueCarte* vc){
     label->setPixmap(pixmap);
     label->resize(pixmap.size());
     if(get_est_joueur_actuel()){
-        QPushButton *buttonAct = new QPushButton(fenetre);
-        buttonAct->setText(QString::fromStdString("Acheter monument"));
+        bouton_achat = new QPushButton(fenetre);
+        bouton_achat->setText(QString::fromStdString("Acheter monument"));
         carte_choisie = vc;
-        connect(buttonAct, SIGNAL(clicked()), this, SLOT(clicked_acheter_event()));
+        connect(bouton_achat, SIGNAL(clicked()), this, SLOT(clicked_acheter_event()));
     }
 
     // Affichage de la fenetre pop up
@@ -170,7 +170,7 @@ void VueJoueur::update_vue(){
 
 void VueJoueur::clicked_acheter_event(){
     Partie *partie = Partie::get_instance();
-    VueCarte* carte = partie->get_vue_partie()->get_vue_shop()->get_carte_choisie();
+    VueCarte* carte = partie->get_vue_partie()->get_vue_joueur()->get_carte_choisie();
     partie->acheter_carte_event(carte);
 
     carte_choisie = nullptr;

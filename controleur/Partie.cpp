@@ -286,9 +286,12 @@ bool Partie::acheter_carte(VueCarte *vue_carte) {
     bool visit[2] = {false, false};
     bool transaction_fin = false;
 
+    cout << "Le type d'achat est : "<< vue_carte->getCarte()->get_type() <<endl;
     bool est_bat = true;
-    if (vue_carte->getCarte()->get_type() == "Monument")
+    if (vue_carte->getCarte()->get_type() == "Monument") {
         est_bat = false;
+    }
+
 
     // Si le joueur est humain
     if (!tab_joueurs[joueur_actuel]->get_est_ia()) {
@@ -373,7 +376,8 @@ bool Partie::acheter_monu(VueCarte* vue_carte) {
         joueur_act->set_argent(joueur_act->get_argent() - mon_picked->get_prix());*/
 
         for (auto mon_act: joueur_act->get_liste_monument()) {
-            if (!mon_act.second && mon_act.first->get_nom() == vue_carte->getCarte()->get_nom()) {
+            if (mon_act.first->get_nom() == vue_carte->getCarte()->get_nom()) {
+                if (mon_act.second) { return false; }
                 mon_picked = mon_act.first;
             }
         }
