@@ -50,24 +50,19 @@ VuePartie::VuePartie(QWidget *parent){
     label_joueur_actuel->setText(QString::fromStdString(nom_joueur));
     label_joueur_actuel->setFixedSize(300, 50);
     label_joueur_actuel->setAlignment(Qt::AlignCenter);
-    entete_gauche->addWidget(label_joueur_actuel);
+    entete_gauche->addWidget(label_joueur_actuel, 0, Qt::AlignCenter);
     entete->addLayout(entete_gauche);
     structure->addLayout(entete, 10);
 
     //Ajout de l'image dans l'entete
+    //Affichage de l'image "Machi Koro"
     image_entete = new QLabel;
     QPixmap* image = new QPixmap("../assets/annexes/Machi-Koro.png");
     image->scaled(300,50, Qt::KeepAspectRatio);
     image_entete->setPixmap(*image);
 
-    entete->addWidget(image_entete);
+    entete->addWidget(image_entete, 0, Qt::AlignCenter);
 
-    //Affichage de l'image "Machi Koro"
-
-    /// ****************************************************************************************************************
-    /// ************************************              FIN                *******************************************
-    /// ************************************ Création de l'entete de la page *******************************************
-    /// ****************************************************************************************************************
 
     //Affichage de la valeur des dés
 
@@ -81,25 +76,39 @@ VuePartie::VuePartie(QWidget *parent){
     bouton_lancer_de_2->setFixedSize(150, 50);
     bouton_lancer_de_1->setEnabled(false);
     bouton_lancer_de_2->setEnabled(false);
-    layout_de_1->addWidget(bouton_lancer_de_1);
-    layout_de_2->addWidget(bouton_lancer_de_2);
+    layout_de_1->addWidget(bouton_lancer_de_1, 0, Qt::AlignCenter);
+    layout_de_2->addWidget(bouton_lancer_de_2, 0, Qt::AlignCenter);
 
     label_de1 = new QLabel;
     label_de1->setText(QString::number(partie_actuelle->get_de_1()));
     label_de1->setAlignment(Qt::AlignHCenter);
-    layout_de_1->addWidget(label_de1);
+    layout_de_1->addWidget(label_de1, 0, Qt::AlignCenter);
     layout_de_1->setAlignment(Qt::AlignCenter);
 
     label_de2 = new QLabel("Valeur de dé 2");
     label_de2->setText(QString::number(partie_actuelle->get_de_2()));
     label_de1->setAlignment(Qt::AlignHCenter);
-    layout_de_2->addWidget(label_de2);
+    layout_de_2->addWidget(label_de2, 0, Qt::AlignCenter);
     layout_de_2->setAlignment(Qt::AlignCenter);
 
     display_des->addLayout(layout_de_1);
     display_des->addLayout(layout_de_2);
 
     entete->addLayout(display_des);
+
+    vue_tour_suivant = new QPushButton("Tour suivant");
+    vue_tour_suivant->setFixedSize(150, 50);
+    vue_tour_suivant->setEnabled(true);
+    vue_tour_suivant->setStyleSheet("background-color: blue; color: white;");
+    connect(vue_tour_suivant, SIGNAL(clicked()), this, SLOT(tour_suivant()));
+
+
+    entete->addWidget(vue_tour_suivant, 0, Qt::AlignCenter);
+
+    /// ****************************************************************************************************************
+    /// ************************************              FIN                *******************************************
+    /// ************************************ Création de l'entete de la page *******************************************
+    /// ****************************************************************************************************************
 
     /// ****************************************************************************************************************
     /// **************************************** MILIEU DE L'AFFICHAGE *************************************************
@@ -274,4 +283,10 @@ void VuePartie::update_nom_joueur(){
     // Mise à jour du nom du joueur actuel dans l'entete
     Partie* partie_actuelle = Partie::get_instance();
     label_joueur_actuel->setText(QString::fromStdString(partie_actuelle->get_tab_joueurs()[joueur_affiche]->get_nom()));
+}
+void VuePartie::tour_suivant() {
+    QMessageBox::information(this, "Tour suivant", "Le tour suivant va commencer, si vous n'avez rien acheté, tant pis pour vous !");
+    Partie* partie_actuelle = Partie::get_instance();
+    // On appelle la fonction de mise à jour de l'affichage
+    partie_actuelle->suite_tour(false);
 }
