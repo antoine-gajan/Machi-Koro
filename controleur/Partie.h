@@ -56,6 +56,7 @@ public:
     //********** Jouer une partie **********//
     void jouer_partie();
     void jouer_tour();
+    void suite_tour(bool achat_ok);
     bool est_gagnant(unsigned int j) const;
 
 
@@ -90,13 +91,16 @@ public:
     //********** Methodes non statiques **********//
     void ajout_batiment(Batiment *batiment);
 
-    bool acheter_carte();
-    bool acheter_monu();//sous fonction appelee dans acheter_carte
-    bool acheter_bat();//sous fonction appelee dans acheter_carte
+    bool acheter_carte(VueCarte* vue_carte, bool est_bat);
+    bool acheter_monu(VueCarte* vue_carte);//sous fonction appelee dans acheter_carte
+    bool acheter_bat(VueCarte* vue_carte);//sous fonction appelee dans acheter_carte
     bool transfert_argent(unsigned int indice_joueur1, unsigned int indice_joueur2, unsigned int somme);
     void rejouer_tour();
 
     vector<Batiment *> get_starter();
+
+public slots:
+    void acheter_carte_event(VueCarte* vc, bool est_bat);
 };
 
 #endif //MACHI_KORO_PARTIE_H

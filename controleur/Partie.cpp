@@ -196,6 +196,7 @@ void Partie::ajout_batiment(Batiment *batiment) {
     }
 }
 
+/*
 bool Partie::acheter_carte() {
     //fonction qui permet a un joueur donne d'acheter une carte (batiment ou monument)
     int choix = -1;
@@ -276,8 +277,57 @@ bool Partie::acheter_carte() {
     }
     return true;
 }
+*/
 
-bool Partie::acheter_monu() {
+bool Partie::acheter_carte(VueCarte *vue_carte, bool est_bat) {
+    //fonction qui permet a un joueur donne d'acheter une carte (batiment ou monument)
+    int choix = -1;
+    int choix_ia = -1;
+    bool visit[2] = {false, false};
+    bool transaction_fin = false;
+
+    // Si le joueur est humain
+    if (!tab_joueurs[joueur_actuel]->get_est_ia()) {
+
+        if(est_bat){
+            if (!acheter_bat(vue_carte)) {
+                return false;
+            }
+        }
+        else{
+            if (!acheter_monu(vue_carte)) {
+                return false;
+            }
+        }
+
+
+    } else {
+        choix_ia = rand() % 5;
+        if (choix_ia == 0) {
+            visit[0] = true;
+            transaction_fin = acheter_bat(nullptr);
+        } else {
+            visit[1] = true;
+            transaction_fin = acheter_monu(nullptr);
+        }
+
+        if (!transaction_fin && !visit[0]) {
+            visit[0] = true;
+            transaction_fin = acheter_bat(nullptr);
+        }
+        else if (!transaction_fin && !visit[1]) {
+            visit[1] = true;
+            transaction_fin = acheter_monu(nullptr);
+        }
+
+        if (!transaction_fin) {
+            return false;
+        }
+    }
+    return true;
+}
+
+bool Partie::acheter_monu(VueCarte* vue_carte) {
     //fonction qui permet a un joueur donne d'acheter un monument
     Monument* mon_picked;
     Joueur *joueur_act = tab_joueurs[joueur_actuel];
@@ -340,7 +390,7 @@ bool Partie::acheter_monu() {
     return true;
 }
 
-bool Partie::acheter_bat() {
+bool Partie::acheter_bat(VueCarte* vue_carte) {
     //fonction qui permet a un joueur donne d'acheter un batiment
     Batiment* bat_picked;
     Joueur *joueur_act = tab_joueurs[joueur_actuel];
@@ -349,6 +399,8 @@ bool Partie::acheter_bat() {
     // Si le joueur est humain
     if (!tab_joueurs[joueur_actuel]->get_est_ia()) {
         // Fenetre de dialogue pour l'achat
+
+        /*
         QDialog* window = new QDialog();
         vector<VueCarte*> vue_shop;
         QGridLayout* layout_shop = new QGridLayout;
@@ -367,10 +419,21 @@ bool Partie::acheter_bat() {
         window->setLayout(layout_shop);
         // Affichage de la fenêtre de dialogue
         window->exec();
+*/
+        for(auto& bat : bat_shop){
+            if(bat->get_nom() == vue_carte->getCarte()->get_nom()){
+                bat_picked = bat;
+            }
+        }
 
-        bat_picked = bat_shop[choix - 1];
+        //bat_picked = bat_shop[choix - 1];
         if (bat_picked->get_prix() > joueur_act->get_argent()) {
-            cout << "Vous n'avez pas assez d'argent pour acheter ce batiment" << endl;
+            QWidget* pop_up = new QWidget();
+            pop_up->setWindowTitle("Erreur");
+            QLabel* label = new QLabel("Vous n'avez pas assez d'argent pour acheter ce batiment", pop_up);
+            QPushButton* ok = new QPushButton("OK", pop_up);
+            QObject::connect(ok, &QPushButton::clicked, pop_up, &QWidget::close);
+
             return false;
         }
 
@@ -486,7 +549,6 @@ void Partie::jouer_partie() {
     vue_partie = new VuePartie(fenetre);
     vue_partie->show();
 
-
     joueur_actuel = 0;
 
     bool fin_partie = false;
@@ -496,7 +558,7 @@ void Partie::jouer_partie() {
     cout << "Vous allez jouer avec " << tab_joueurs.size() << " joueurs." << endl;
     cout << "Le but du jeu est d'obtenir " << nb_monuments_win << " monuments." << endl;
     cout << "Bon jeu !\n\n" << endl;
-/*
+
     while (!fin_partie) {
         jouer_tour();
         fin_partie = est_gagnant(joueur_actuel);
@@ -504,7 +566,7 @@ void Partie::jouer_partie() {
             joueur_actuel = (joueur_actuel + 1) % tab_joueurs.size();
         }
     }
-*/
+
     /// On affiche le gagnant
     cout << "Le gagnant est " << tab_joueurs[joueur_actuel]->get_nom() << endl;
     cout << "Voici son etat final : " << endl;
@@ -518,7 +580,7 @@ void Partie::jouer_tour() {
     unsigned int de_1_temp, de_2_temp;
     bool centre_c_act = false;
     bool centre_c_possesseur = false;
-    vector <Monument*> monuments_joueurs = tab_joueurs[joueur_actuel]->get_monument_jouables();
+    vector < Monument * > monuments_joueurs = tab_joueurs[joueur_actuel]->get_monument_jouables();
     rejouer = false;
 /*
     cout << "----------------------------------------------------" << endl;
@@ -529,9 +591,10 @@ void Partie::jouer_tour() {
     // On update le nom du joueur actuel dans l'entete
     vue_partie->update_nom_joueur();
 
-    if(!tab_joueurs[joueur_actuel]->get_est_ia()) {
+
+    if (!tab_joueurs[joueur_actuel]->get_est_ia()) {
         vue_partie->lancer_de_1_display();
-    }else{
+    } else {
         de_1 = Partie::lancer_de();
         de_1_temp = de_1;
         vue_partie->update_des();
@@ -541,26 +604,28 @@ void Partie::jouer_tour() {
     de_casse = (rand() % 50) + 1;
 
     // Si le joueur a un centre commercial
-    auto it_cc = find_if(monuments_joueurs.begin(), monuments_joueurs.end(), [](Monument* m){return m->get_nom() == "CentreCommercial";});
-    if (it_cc != monuments_joueurs.end()){
+    auto it_cc = find_if(monuments_joueurs.begin(), monuments_joueurs.end(),
+                         [](Monument *m) { return m->get_nom() == "CentreCommercial"; });
+    if (it_cc != monuments_joueurs.end()) {
         // Si le monument est trouve, on le joue
-        try{
+        try {
             monuments_joueurs[it_cc - monuments_joueurs.begin()]->declencher_effet(joueur_actuel);
         }
-        catch(exception const& e){
+        catch (exception const &e) {
             cerr << "ERREUR : " << e.what() << endl;
         }
         centre_c_act = true;
     }
 
     /// Monument avant le jet de de
-    auto it_gare = find_if(monuments_joueurs.begin(), monuments_joueurs.end(), [](Monument* m){return m->get_nom() == "Gare";});
-    if (it_gare != monuments_joueurs.end()){
+    auto it_gare = find_if(monuments_joueurs.begin(), monuments_joueurs.end(),
+                           [](Monument *m) { return m->get_nom() == "Gare"; });
+    if (it_gare != monuments_joueurs.end()) {
         // Si le monument est trouve, on le joue
-        try{
+        try {
             monuments_joueurs[it_gare - monuments_joueurs.begin()]->declencher_effet(joueur_actuel);
         }
-        catch(exception const& e){
+        catch (exception const &e) {
             cerr << "ERREUR : " << e.what() << endl;
         }
     }
@@ -576,13 +641,14 @@ void Partie::jouer_tour() {
         de_2_temp = de_2;
     }*/
 
-    auto it_tr = find_if(monuments_joueurs.begin(), monuments_joueurs.end(), [](Monument* m){return m->get_nom() == "TourRadio";});
-    if (it_tr != monuments_joueurs.end()){
+    auto it_tr = find_if(monuments_joueurs.begin(), monuments_joueurs.end(),
+                         [](Monument *m) { return m->get_nom() == "TourRadio"; });
+    if (it_tr != monuments_joueurs.end()) {
         // Si le monument est trouve, on le joue
-        try{
+        try {
             monuments_joueurs[it_tr - monuments_joueurs.begin()]->declencher_effet(joueur_actuel);
         }
-        catch(exception const& e){
+        catch (exception const &e) {
             cerr << "ERREUR : " << e.what() << endl;
         }
     }
@@ -602,10 +668,10 @@ void Partie::jouer_tour() {
     de_2_temp = de_2;
 
     /// Monument apres le jet de de
-    for (auto mon : monuments_joueurs) {
-        if (mon->get_nom() == "Port" &&  ((de_1 + de_2) >= 10) ||
-            mon->get_nom() == "FabriqueDuPereNoel" && de_casse == 1){
-            try{
+    for (auto mon: monuments_joueurs) {
+        if (mon->get_nom() == "Port" && ((de_1 + de_2) >= 10) ||
+            mon->get_nom() == "FabriqueDuPereNoel" && de_casse == 1) {
+            try {
                 mon->declencher_effet(joueur_actuel);
                 if (de_1_temp != de_1) {
                     cout << "------------" << endl;
@@ -618,7 +684,7 @@ void Partie::jouer_tour() {
                     cout << "------------" << endl;
                 }
             }
-            catch(exception const& e){
+            catch (exception const &e) {
                 cerr << "ERREUR : " << e.what() << endl;
             }
         }
@@ -631,30 +697,31 @@ void Partie::jouer_tour() {
 
     while (j_act_paiement != joueur_actuel) {
         // Regarde si le joueur possede un centre commercial
-        vector<Monument*> monuments_j_act = tab_joueurs[j_act_paiement]->get_monument_jouables();
-        for (auto mon : monuments_j_act) {
+        vector < Monument * > monuments_j_act = tab_joueurs[j_act_paiement]->get_monument_jouables();
+        for (auto mon: monuments_j_act) {
             if (mon->get_nom() == "CentreCommercial") {
                 centre_c_possesseur = true;
             }
         }
 
-        for (auto it : tab_joueurs[j_act_paiement]->get_liste_batiment(Rouge)) {
-            if (find(it.first->get_num_activation().begin(), it.first->get_num_activation().end(), de_1 + de_2) != it.first->get_num_activation().end()) {
+        for (auto it: tab_joueurs[j_act_paiement]->get_liste_batiment(Rouge)) {
+            if (find(it.first->get_num_activation().begin(), it.first->get_num_activation().end(), de_1 + de_2) !=
+                it.first->get_num_activation().end()) {
                 if (it.first->get_type() == "restaurant" && centre_c_possesseur) {
                     for (unsigned int effectif = 0; effectif < it.second; effectif++) {
-                        try{
+                        try {
                             it.first->declencher_effet(j_act_paiement, 1);
                         }
-                        catch(exception const& e){
+                        catch (exception const &e) {
                             cerr << "ERREUR : " << e.what() << endl;
                         }
                     }
                 } else {
                     for (unsigned int effectif = 0; effectif < it.second; effectif++) {
-                        try{
+                        try {
                             it.first->declencher_effet(j_act_paiement);
                         }
-                        catch(exception const& e){
+                        catch (exception const &e) {
                             cerr << "ERREUR : " << e.what() << endl;
                         }
                     }
@@ -667,13 +734,14 @@ void Partie::jouer_tour() {
 
 
     /// Ensuite ce sont les batiments violets du joueur actuel
-    for (auto it : tab_joueurs[joueur_actuel]->get_liste_batiment(Violet)) {
-        if (find(it.first->get_num_activation().begin(), it.first->get_num_activation().end(), de_1 + de_2) != it.first->get_num_activation().end()) {
+    for (auto it: tab_joueurs[joueur_actuel]->get_liste_batiment(Violet)) {
+        if (find(it.first->get_num_activation().begin(), it.first->get_num_activation().end(), de_1 + de_2) !=
+            it.first->get_num_activation().end()) {
             for (unsigned int effectif = 0; effectif < it.second; effectif++) {
-                try{
+                try {
                     it.first->declencher_effet(joueur_actuel);
                 }
-                catch(exception const& e){
+                catch (exception const &e) {
                     cerr << "ERREUR : " << e.what() << endl;
                 }
             }
@@ -682,13 +750,14 @@ void Partie::jouer_tour() {
 
     /// Puis, les batiments bleus de tous les joueurs
     for (int i = 0; i < tab_joueurs.size(); i++) {
-        for (auto it : tab_joueurs[i]->get_liste_batiment(Bleu)) {
-            if (find(it.first->get_num_activation().begin(), it.first->get_num_activation().end(), de_1 + de_2) != it.first->get_num_activation().end()) {
+        for (auto it: tab_joueurs[i]->get_liste_batiment(Bleu)) {
+            if (find(it.first->get_num_activation().begin(), it.first->get_num_activation().end(), de_1 + de_2) !=
+                it.first->get_num_activation().end()) {
                 for (unsigned int effectif = 0; effectif < it.second; effectif++) {
-                    try{
+                    try {
                         it.first->declencher_effet(i);
                     }
-                    catch(exception const& e){
+                    catch (exception const &e) {
                         cerr << "ERREUR : " << e.what() << endl;
                     }
                 }
@@ -697,23 +766,24 @@ void Partie::jouer_tour() {
     }
 
     /// Enfin, les batiments verts du joueur actuel
-    for (auto it : tab_joueurs[joueur_actuel]->get_liste_batiment(Vert)) {
-        if (find(it.first->get_num_activation().begin(), it.first->get_num_activation().end(), de_1 + de_2) != it.first->get_num_activation().end()) {
+    for (auto it: tab_joueurs[joueur_actuel]->get_liste_batiment(Vert)) {
+        if (find(it.first->get_num_activation().begin(), it.first->get_num_activation().end(), de_1 + de_2) !=
+            it.first->get_num_activation().end()) {
             if (it.first->get_type() == "commerce" && centre_c_act) {
                 for (unsigned int effectif = 0; effectif < it.second; effectif++) {
-                    try{
+                    try {
                         it.first->declencher_effet(joueur_actuel, 1);
                     }
-                    catch(exception const& e){
+                    catch (exception const &e) {
                         cerr << "ERREUR : " << e.what() << endl;
                     }
                 }
             } else {
                 for (unsigned int effectif = 0; effectif < it.second; effectif++) {
-                    try{
+                    try {
                         it.first->declencher_effet(joueur_actuel);
                     }
-                    catch(exception const& e){
+                    catch (exception const &e) {
                         cerr << "ERREUR : " << e.what() << endl;
                     }
                 }
@@ -724,23 +794,34 @@ void Partie::jouer_tour() {
 
 
     /// Debut de la phase de construction
-    auto it_hdv = find_if(monuments_joueurs.begin(), monuments_joueurs.end(), [](Monument* m){return m->get_nom() == "HotelDeVille";});
-    if (it_hdv != monuments_joueurs.end()){
+    auto it_hdv = find_if(monuments_joueurs.begin(), monuments_joueurs.end(),
+                          [](Monument *m) { return m->get_nom() == "HotelDeVille"; });
+    if (it_hdv != monuments_joueurs.end()) {
         // Si le monument est trouve, on le joue
-        try{
+        try {
             monuments_joueurs[it_hdv - monuments_joueurs.begin()]->declencher_effet(joueur_actuel);
         }
-        catch(exception const& e){
+        catch (exception const &e) {
             cerr << "ERREUR : " << e.what() << endl;
         }
     }
 
+    /// Fin de la phase de construction
+/*
     cout << "Le joueur \"" << tab_joueurs[joueur_actuel]->get_nom() << "\" va proceder a ses achats, voici son etat : " << endl;
     tab_joueurs[joueur_actuel]->afficher_joueur();
     cout << "Cartes du shop : " << endl;
     shop->affiche_shop_simple();
+*/
 
-    if (!acheter_carte()) {
+//on vient scinder un tour en deux phases, permettant de pouvoir attendre que l'utilisateur clique sur achetr un batiment avant de continuer le tour
+//lorsque le click_acheter_event est réalisé, on achete le batiment puis poursuivont la partie.
+}
+
+void Partie::suite_tour(bool achat_ok){
+    vector < Monument * > monuments_joueurs = tab_joueurs[joueur_actuel]->get_monument_jouables();
+
+    if (!achat_ok) {
         cout << "Vous n'avez rien achete" << endl;
         if (tab_joueurs[joueur_actuel]->get_argent() < 2)
             tab_joueurs[joueur_actuel]->set_argent(2);
@@ -757,7 +838,6 @@ void Partie::jouer_tour() {
         }
 
     }
-    /// Fin de la phase de construction
 
     /// Ouverture des batiments
     for (auto bat : tab_joueurs[joueur_actuel]->get_liste_batiment_fermes()) {
@@ -798,7 +878,6 @@ void Partie::jouer_tour() {
     cout << "----------------------------------------------------" << endl;
 }
 
-
 unsigned int Partie::selectionner_joueur(const vector<Joueur*>& tab_joueurs, unsigned int joueur_actuel){
     unsigned int count = 0;
     unsigned int selection = 0;
@@ -833,4 +912,9 @@ unsigned int Partie::selectionner_joueur(const vector<Joueur*>& tab_joueurs, uns
 unsigned int Partie::lancer_de() {
     srand(time(nullptr));
     return (rand() % 6) + 1;
+}
+
+void Partie::acheter_carte_event(VueCarte* vc, bool est_bat) {
+    bool est_ok = Partie::get_instance()->acheter_carte(vc, est_bat);
+    Partie::get_instance()->suite_tour(est_ok);
 }
