@@ -564,7 +564,6 @@ void Partie::jouer_partie() {
     // Création de la vue
     QWidget *fenetre = new QWidget;
     vue_partie = new VuePartie(fenetre);
-    vue_partie->update_pasta("Bon jeu !");
 
     vue_partie->update_pasta("Bon jeu !");
     vue_partie->update_pasta("Bon jeu !");
@@ -589,6 +588,25 @@ void Partie::jouer_partie() {
     vue_partie->update_pasta("Bon jeu !");
     vue_partie->update_pasta("Bon jeu !");
     vue_partie->update_pasta("Bon jeu !");
+    vue_partie->update_pasta("Bon jeu !");
+    vue_partie->update_pasta("Bon jeu !");
+    vue_partie->update_pasta("Bon jeu !");
+    vue_partie->update_pasta("Bon jeu !");
+    vue_partie->update_pasta("Bon jeu !");
+    vue_partie->update_pasta("Bon jeu !");
+    vue_partie->update_pasta("Bon jeu !");
+    vue_partie->update_pasta("Bon jeu !");
+    vue_partie->update_pasta("Bon jeu !");
+    vue_partie->update_pasta("Bon jeu !");
+    vue_partie->update_pasta("Bon jeu !");
+    vue_partie->update_pasta("Bon jeu !");
+    vue_partie->update_pasta("Bon jeu !");
+    vue_partie->update_pasta("Bon jeu !");
+    vue_partie->update_pasta("Bon jeu !");
+    vue_partie->update_pasta("Bon jeu !");
+    vue_partie->update_pasta("Bon jeu !");
+    vue_partie->clear_pasta(true);
+
 
 
 

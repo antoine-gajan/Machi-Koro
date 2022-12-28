@@ -39,7 +39,7 @@ public:
     void update_des();
     void update_nom_joueur();
     void update_pasta (const string& pasta);
-    void clear_pasta();
+    void clear_pasta(bool etat_clear);
 
 private:
     //Partie* partie_actuelle;
@@ -83,6 +83,7 @@ private:
     QWidget* widget_shop;
 
     //Pasta à droite
+    QWidget *scroll_widget_pasta;
     QScrollArea *scroll_pasta;
     QVBoxLayout *stacked_pasta;
     QLabel * pasta_label;

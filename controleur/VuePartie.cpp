@@ -139,7 +139,7 @@ VuePartie::VuePartie(QWidget *parent){
                                 border-radius : 10px; \
                                 border : 1px solid black; \
                                 }");
-    view_widget_pasta = new QVBoxLayout;
+    /*view_widget_pasta = new QVBoxLayout;
     widget_pasta->setLayout(view_widget_pasta);
 
     // Widget contenant les informations sur le tour actuel
@@ -158,6 +158,25 @@ VuePartie::VuePartie(QWidget *parent){
 
     body->addWidget(scroll_pasta, 1);
     structure->addLayout(body,50);
+    */
+    view_widget_pasta = new QVBoxLayout;
+    scroll_widget_pasta = new QWidget();
+    scroll_widget_pasta->setLayout(view_widget_pasta);
+    // Widget contenant les informations sur le tour actuel
+    stacked_pasta->addWidget(pasta_label);
+    scroll_pasta->setWidget(scroll_widget_pasta);
+    scroll_pasta->setWidgetResizable(true);
+    scroll_pasta->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    scroll_pasta->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
+
+    scroll_pasta->setFixedWidth(270);
+    scroll_pasta->setFixedHeight(470);
+    stacked_pasta->addWidget(scroll_pasta, 1);
+
+    widget_pasta->setLayout(stacked_pasta);
+    body->addWidget(widget_pasta);
+    structure->addLayout(body,50);
+
 
 
 
@@ -304,19 +323,25 @@ void VuePartie::update_pasta(const string &pasta_name) {
     QLabel *label_pasta = new QLabel();
     label_pasta->setText(QString::fromStdString(pasta_name));
     pasta.push_back(label_pasta);
-    clear_pasta();
+    clear_pasta(false);
 
-    for (auto & i : pasta) {
-        view_widget_pasta->addWidget(i, 1, Qt::AlignTop);
+    for (auto i : pasta) {
+        view_widget_pasta->addWidget(i,1, Qt::AlignCenter);
     }
 
     update();
 }
 
-void VuePartie::clear_pasta() {
-    widget_pasta = new QWidget();
+void VuePartie::clear_pasta(bool etat_clear) {
+    unsigned int compteur = 0;
+    for (auto label : pasta) {
+        QLayoutItem * item = view_widget_pasta->takeAt(compteur);
+        view_widget_pasta->removeWidget(label);
+        delete label;
+        delete item;
+        compteur++;
+    }
 
-    stacked_pasta->addWidget(pasta_label);
     update();
 }
 
