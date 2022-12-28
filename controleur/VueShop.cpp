@@ -47,12 +47,15 @@ void VueShop::batiment_clique(VueCarte *vc) {
     // Création d'un label contenant l'image
     QLabel *label = new QLabel(fenetre);
     QPixmap pixmap(QString::fromStdString(vc->getCarte()->get_path_image()));
-    bouton_acheter = new QPushButton(fenetre);
-    bouton_acheter->setText(QString::fromStdString("Acheter le batiment"));
-    carte_choisie = vc;
-
-    connect(bouton_acheter, SIGNAL(clicked()), this, SLOT(clicked_acheter_event()));
-
+    // Si on est dans la phase d'achat
+    if (Partie::get_instance()->get_moment_achat() == true) {
+        // On autorise l'achat
+        bouton_acheter = new QPushButton(fenetre);
+        bouton_acheter->setText(QString::fromStdString("Acheter le batiment"));
+        carte_choisie = vc;
+        // Ajout du bouton acheter
+        connect(bouton_acheter, SIGNAL(clicked()), this, SLOT(clicked_acheter_event()));
+    }
     label->setPixmap(pixmap);
     label->resize(pixmap.size());
     // Affichage de la fenetre pop up
@@ -60,6 +63,7 @@ void VueShop::batiment_clique(VueCarte *vc) {
 }
 
 void VueShop::update() {
+    /// Mise à jour de VueShop
     int x = 0;
     int y = 1;
     unsigned int compteur=0;
@@ -91,8 +95,35 @@ void VueShop::update() {
 }
 
 void VueShop::clicked_acheter_event(){
+    /// Slot lorsque le bouton acheter est cliqué
     Partie *partie = Partie::get_instance();
-    VueCarte* carte = partie->get_vue_partie()->get_vue_shop()->get_carte_choisie();
-    partie->acheter_carte_event(carte);
-    carte_choisie = nullptr;
+    // Si on est dans la phase d'achat
+    if (partie->get_moment_achat() == true) {
+        partie->acheter_carte_event(carte_choisie);
+        carte_choisie = nullptr;
+        // On ferme la fenêtre d'achat
+        Partie::get_instance()->get_vue_partie()->get_vue_carte()->close();
+        // On met la popup à nullptr
+        Partie::get_instance()->get_vue_partie()->set_vue_carte(nullptr);
+    }
+    else
+    {
+        // Fenetre pop up d'erreur
+        QWidget *pop_up = new QWidget();
+        QVBoxLayout* layout = new QVBoxLayout();
+        QLabel *label = new QLabel();
+        label->setText("Désolé. Vous ne pouvez pas acheter. Ce n'est pas la phase d'achat...");
+        QPushButton* bouton_erreur = new QPushButton(pop_up);
+        bouton_erreur->setText(QString::fromStdString("Je comprends"));
+        // Ajout du bouton d'erreur pour valider
+        QObject::connect(bouton_erreur, &QPushButton::clicked, [pop_up]() {
+            pop_up->close();
+        });
+        // Ajout des widgets
+        layout->addWidget(label);
+        layout->addWidget(bouton_erreur);
+        pop_up->setLayout(layout);
+        // Affichage de la fenetre pop up
+        pop_up->show();
+    }
 }

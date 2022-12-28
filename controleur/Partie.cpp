@@ -280,23 +280,17 @@ bool Partie::acheter_carte() {
 */
 
 bool Partie::acheter_carte(VueCarte *vue_carte) {
-    //fonction qui permet a un joueur donne d'acheter une carte (batiment ou monument)
+    ///Fonction qui permet a un joueur d'acheter une carte (batiment ou monument)
     int choix = -1;
     int choix_ia = -1;
     bool visit[2] = {false, false};
     bool transaction_fin = false;
 
-    cout << "Le type d'achat est : "<< vue_carte->getCarte()->get_type() <<endl;
-    bool est_bat = true;
-    if (vue_carte->getCarte()->get_type() == "Monument") {
-        est_bat = false;
-    }
-
 
     // Si le joueur est humain
     if (!tab_joueurs[joueur_actuel]->get_est_ia()) {
 
-        if(est_bat){
+        if(vue_carte->getCarte()->get_type() != "Monument"){
             return acheter_bat(vue_carte);
         }
         else{
@@ -376,8 +370,7 @@ bool Partie::acheter_monu(VueCarte* vue_carte) {
         joueur_act->set_argent(joueur_act->get_argent() - mon_picked->get_prix());*/
 
         for (auto mon_act: joueur_act->get_liste_monument()) {
-            if (mon_act.first->get_nom() == vue_carte->getCarte()->get_nom()) {
-                if (mon_act.second) { return false; }
+            if (!mon_act.second && mon_act.first->get_nom() == vue_carte->getCarte()->get_nom()) {
                 mon_picked = mon_act.first;
             }
         }
@@ -816,6 +809,7 @@ void Partie::jouer_tour() {
 
 
     /// Debut de la phase de construction
+    moment_achat = true;
     auto it_hdv = find_if(monuments_joueurs.begin(), monuments_joueurs.end(),
                           [](Monument *m) { return m->get_nom() == "HotelDeVille"; });
     if (it_hdv != monuments_joueurs.end()) {
@@ -827,6 +821,7 @@ void Partie::jouer_tour() {
             cerr << "ERREUR : " << e.what() << endl;
         }
     }
+    moment_achat = false;
 
     /// Fin de la phase de construction
 /*

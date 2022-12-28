@@ -34,6 +34,8 @@ private:
     Shop* shop;
     Pioche* pioche;
 
+    bool moment_achat;
+
     struct Handler{
         Partie* instance;
         Handler() : instance(nullptr){}
@@ -75,6 +77,7 @@ public:
     vector<string> get_nom_edition() const {return tab_nom_edition;};
     unsigned int get_nb_cartes_edition() const {return list_batiments.size();};
     VuePartie* get_vue_partie() const {return vue_partie;};
+    bool get_moment_achat() const {return moment_achat;}
 
     //void set_vue(QWidget* vue) {this->vue = vue;};
 
