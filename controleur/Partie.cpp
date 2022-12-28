@@ -279,12 +279,16 @@ bool Partie::acheter_carte() {
 }
 */
 
-bool Partie::acheter_carte(VueCarte *vue_carte, bool est_bat) {
+bool Partie::acheter_carte(VueCarte *vue_carte) {
     //fonction qui permet a un joueur donne d'acheter une carte (batiment ou monument)
     int choix = -1;
     int choix_ia = -1;
     bool visit[2] = {false, false};
     bool transaction_fin = false;
+
+    bool est_bat = true;
+    if (vue_carte->getCarte()->get_type() == "Monument")
+        est_bat = false;
 
     // Si le joueur est humain
     if (!tab_joueurs[joueur_actuel]->get_est_ia()) {
@@ -299,7 +303,6 @@ bool Partie::acheter_carte(VueCarte *vue_carte, bool est_bat) {
                 return false;
             }
         }
-
 
     } else {
         choix_ia = rand() % 5;
@@ -335,7 +338,7 @@ bool Partie::acheter_monu(VueCarte* vue_carte) {
     unsigned int pos = 1;
     vector<Monument*> monuments_dispo;
 
-    if (!tab_joueurs[joueur_actuel]->get_est_ia()) {
+    if (!tab_joueurs[joueur_actuel]->get_est_ia()) {/*
         cout << "Quel est le numero du monument que vous voulez acheter?" << endl;
         cout << "0 : Annuler" << endl;
         // Ajout des monuments disponibles à la liste
@@ -371,7 +374,21 @@ bool Partie::acheter_monu(VueCarte* vue_carte) {
         window->exec();
         // Activation du monument et update
         joueur_act->activer_monument(mon_picked);
+        joueur_act->set_argent(joueur_act->get_argent() - mon_picked->get_prix());*/
+
+        for (auto mon_act: joueur_act->get_liste_monument()) {
+            if (!mon_act.second && mon_act.first->get_nom() == vue_carte->getCarte()->get_nom()) {
+                mon_picked = mon_act.first;
+            }
+        }
+
+        if (mon_picked == nullptr || mon_picked->get_prix() > joueur_act->get_argent()) {
+            return false;
+        }
+
+        joueur_act->activer_monument(mon_picked);
         joueur_act->set_argent(joueur_act->get_argent() - mon_picked->get_prix());
+
     } else {
         for (auto mon_act: joueur_act->get_liste_monument()) {
             if (!mon_act.second && mon_act.first->get_prix() <= joueur_act->get_argent()) {
@@ -914,7 +931,7 @@ unsigned int Partie::lancer_de() {
     return (rand() % 6) + 1;
 }
 
-void Partie::acheter_carte_event(VueCarte* vc, bool est_bat) {
-    bool est_ok = Partie::get_instance()->acheter_carte(vc, est_bat);
+void Partie::acheter_carte_event(VueCarte* vc) {
+    bool est_ok = Partie::get_instance()->acheter_carte(vc);
     Partie::get_instance()->suite_tour(est_ok);
 }
