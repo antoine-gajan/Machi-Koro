@@ -2,7 +2,7 @@
 #include <QPixmap>
 #include "Partie.h"
 
-VueJoueur::VueJoueur(Joueur* j,bool e_j_a, QWidget *parent) {
+VueJoueur::VueJoueur(Joueur* j,bool e_j_a, QWidget *parent) : carte_choisie(nullptr) {
     /// Vue d'un joueur
     est_joueur_actuel = e_j_a;
     joueur = j;
@@ -123,6 +123,8 @@ void VueJoueur::monumentClique(VueCarte* vc){
     if(get_est_joueur_actuel()){
         QPushButton *buttonAct = new QPushButton(fenetre);
         buttonAct->setText(QString::fromStdString("Acheter monument"));
+        carte_choisie = vc;
+        connect(buttonAct, SIGNAL(clicked()), this, SLOT(clicked_acheter_event()));
     }
 
     // Affichage de la fenetre pop up
@@ -166,3 +168,10 @@ void VueJoueur::update_vue(){
 
 }
 
+void VueJoueur::clicked_acheter_event(){
+    Partie *partie = Partie::get_instance();
+    VueCarte* carte = partie->get_vue_partie()->get_vue_shop()->get_carte_choisie();
+    partie->acheter_carte_event(carte);
+
+    carte_choisie = nullptr;
+}

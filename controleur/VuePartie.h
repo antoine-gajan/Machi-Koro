@@ -1,26 +1,17 @@
 #ifndef MACHI_KORO_VUEPARTIE_H
 #define MACHI_KORO_VUEPARTIE_H
-#include <QApplication>
-#include <QtGui/QScreen>
-#include <QScrollArea>
-#include <QStyleFactory>
-#include <QPushButton>
-#include <QGridLayout>
-#include <QLabel>
-#include <QFrame>
-#include <QLineEdit>
-#include <QFormLayout>
-#include <QHBoxLayout>
+
 #include <QWidget>
-#include <QPainter>
-#include <QPaintEvent>
-#include <QVBoxLayout>
 #include "VueCarte.h"
 #include "VueJoueur.h"
 #include "Joueur.h"
 #include "VueShop.h"
 #include "VuePioche.h"
-#include <QStackedWidget>
+#include "VueInfo.h"
+#include <QScrollArea>
+#include <QStyleFactory>
+#include <QFormLayout>
+
 
 class VuePartie : public QWidget
 {
@@ -38,8 +29,11 @@ public:
     void lancer_de_2_display();
     void update_des();
     void update_nom_joueur();
-    void update_pasta (const string& pasta);
-    void clear_pasta(bool etat_clear);
+
+    VueInfo* get_vue_info() const {return infos;}
+    VueJoueur* get_vue_joueur() const {return vue_joueur;}
+    VueShop* get_vue_shop() const {return view_shop;}
+    VuePioche* get_vue_pioche() const {return view_pioche;}
 
 private:
     //Partie* partie_actuelle;
@@ -75,23 +69,17 @@ private:
     /// Milieu de la page
     //Pioche à gauche
     QVBoxLayout *pioche;
-    QVBoxLayout* view_pioche;
+    QWidget *fenetre_pioche;
+    VuePioche* view_pioche;
 
     //Shop au centre
-    QGridLayout* view_shop;
+    VueShop* view_shop;
     QScrollArea* scroll_shop;
     QWidget* widget_shop;
 
-    //Pasta à droite
-    QWidget *scroll_widget_pasta;
-    QScrollArea *scroll_pasta;
-    QVBoxLayout *stacked_pasta;
-    QLabel * pasta_label;
-    QWidget *widget_pasta;
-    QVBoxLayout *view_widget_pasta;
-    vector<QLabel*> pasta;
-
-
+    //Infos à droite
+    VueInfo *infos;
+    QWidget* widget_infos;
 
 public slots:
     // Slots qui gèrent les clics sur les vues joueurs

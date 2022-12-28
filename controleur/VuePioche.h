@@ -5,14 +5,14 @@
 #include <QWidget>
 #include <QVBoxLayout>
 #include <QLabel>
-#include "VuePartie.h"
+#include <QProgressBar>
 #include "Pioche.h"
 
 class VuePioche : public QVBoxLayout{
     QLabel* pioche_exception;
     QProgressBar* barre_pioche;
 public:
-    VuePioche(Pioche& pioche, QWidget *parent = nullptr);
+    VuePioche(Pioche *pioche, QWidget *parent = nullptr);
     void update();
 };
 

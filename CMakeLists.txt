@@ -8,7 +8,7 @@ set(CMAKE_AUTOUIC ON)
 
 #set(CMAKE_PREFIX_PATH "D:/Qt/6.3.0/mingw_64/lib/cmake")
 #set(CMAKE_PREFIX_PATH "/home/theo/LO21/Qt/6.4.1/gcc_64/lib/cmake")
-set(CMAKE_PREFIX_PATH "D:/Qt/6.4.1/mingw_64/lib/cmake")
+set(CMAKE_PREFIX_PATH "C:/Qt/6.4.1/mingw_64/lib/cmake")
 
 
 
@@ -161,7 +161,7 @@ add_executable(Machi_Koro
         controleur/VuePartie.cpp
         controleur/VuePartie.h
         joueur/VueJoueur.cpp
-        joueur/VueJoueur.h controleur/VuePartie.cpp controleur/VuePartie.h controleur/VuePioche.cpp controleur/VuePioche.h controleur/VueShop.cpp controleur/VueShop.h)
+        joueur/VueJoueur.h controleur/VuePartie.cpp controleur/VuePartie.h controleur/VuePioche.cpp controleur/VuePioche.h controleur/VueShop.cpp controleur/VueShop.h controleur/VueInfo.cpp controleur/VueInfo.h)
 
 target_link_libraries(Machi_Koro
         Qt::Core

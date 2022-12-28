@@ -294,14 +294,10 @@ bool Partie::acheter_carte(VueCarte *vue_carte) {
     if (!tab_joueurs[joueur_actuel]->get_est_ia()) {
 
         if(est_bat){
-            if (!acheter_bat(vue_carte)) {
-                return false;
-            }
+            return acheter_bat(vue_carte);
         }
         else{
-            if (!acheter_monu(vue_carte)) {
-                return false;
-            }
+            return acheter_monu(vue_carte);
         }
 
     } else {
@@ -564,49 +560,6 @@ void Partie::jouer_partie() {
     // Création de la vue
     QWidget *fenetre = new QWidget;
     vue_partie = new VuePartie(fenetre);
-
-    vue_partie->update_pasta("Bon jeu !");
-    vue_partie->update_pasta("Bon jeu !");
-    vue_partie->update_pasta("Bon jeu !");
-    vue_partie->update_pasta("Bon jeu !");
-    vue_partie->update_pasta("Bon jeu !");
-    vue_partie->update_pasta("Bon jeu !");
-    vue_partie->update_pasta("Bon jeu !");
-    vue_partie->update_pasta("Bon jeu !");
-    vue_partie->update_pasta("Bon jeu !");
-    vue_partie->update_pasta("Bon jeu !");
-    vue_partie->update_pasta("Bon jeu !");
-    vue_partie->update_pasta("Bon jeu !");
-    vue_partie->update_pasta("Bon jeu !");
-    vue_partie->update_pasta("Bon jeu !");
-    vue_partie->update_pasta("Bon jeu !");
-    vue_partie->update_pasta("Bon jeu !");
-    vue_partie->update_pasta("Bon jeu !");
-    vue_partie->update_pasta("Bon jeu !");
-    vue_partie->update_pasta("Bon jeu !");
-    vue_partie->update_pasta("Bon jeu !");
-    vue_partie->update_pasta("Bon jeu !");
-    vue_partie->update_pasta("Bon jeu !");
-    vue_partie->update_pasta("Bon jeu !");
-    vue_partie->update_pasta("Bon jeu !");
-    vue_partie->update_pasta("Bon jeu !");
-    vue_partie->update_pasta("Bon jeu !");
-    vue_partie->update_pasta("Bon jeu !");
-    vue_partie->update_pasta("Bon jeu !");
-    vue_partie->update_pasta("Bon jeu !");
-    vue_partie->update_pasta("Bon jeu !");
-    vue_partie->update_pasta("Bon jeu !");
-    vue_partie->update_pasta("Bon jeu !");
-    vue_partie->update_pasta("Bon jeu !");
-    vue_partie->update_pasta("Bon jeu !");
-    vue_partie->update_pasta("Bon jeu !");
-    vue_partie->update_pasta("Bon jeu !");
-    vue_partie->update_pasta("Bon jeu !");
-    vue_partie->update_pasta("Bon jeu !");
-    vue_partie->update_pasta("Bon jeu !");
-    vue_partie->update_pasta("Bon jeu !");
-    vue_partie->clear_pasta(true);
-
 
 
 

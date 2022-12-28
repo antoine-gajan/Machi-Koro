@@ -46,11 +46,14 @@ private:
     QPushButton *bat_ferme;
     Joueur *joueur;
     QWidget *parent;
+    VueCarte *carte_choisie;
 
 public slots:
     // slots qui gère les clics sur les cartes
     virtual void batimentClique(VueCarte* vc);
     void affichage_bat_ferme();
+    void clicked_acheter_event();
+
     void monumentClique(VueCarte* vc);
 };
 

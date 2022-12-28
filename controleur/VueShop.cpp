@@ -2,12 +2,12 @@
 #include "Partie.h"
 
 
-VueShop::VueShop(Shop &shop, QWidget *parent) {
+VueShop::VueShop(Shop &shop, QWidget *parent)  : carte_choisie(nullptr){
     /// Calcul de la dimension de la grille
     largeur = floor(sqrt(shop.get_nb_tas_reel()));
 
-    unsigned int x = 0;
-    unsigned int y = 1;
+    int x = 0;
+    int y = 1;
     unsigned int compteur=0;
 
     for(auto &it : shop.get_contenu()){
@@ -49,6 +49,7 @@ void VueShop::batiment_clique(VueCarte *vc) {
     QPixmap pixmap(QString::fromStdString(vc->getCarte()->get_path_image()));
     bouton_acheter = new QPushButton(fenetre);
     bouton_acheter->setText(QString::fromStdString("Acheter le batiment"));
+    carte_choisie = vc;
 
     connect(bouton_acheter, SIGNAL(clicked()), this, SLOT(clicked_acheter_event()));
 
@@ -59,8 +60,8 @@ void VueShop::batiment_clique(VueCarte *vc) {
 }
 
 void VueShop::update() {
-    unsigned int x = 0;
-    unsigned int y = 1;
+    int x = 0;
+    int y = 1;
     unsigned int compteur=0;
 
     for(auto &it : Partie::get_instance()->get_shop()->get_contenu()){
@@ -76,7 +77,7 @@ void VueShop::update() {
             nb_carte->setStyleSheet("QLabel { color : yellow; background-color : red; }");
             nb_carte->setFixedSize(20,20);
             nb_carte->setAlignment(Qt::AlignTop | Qt::AlignRight);
-            this->addWidget(nb_carte,x,y-1);
+            this->addWidget(nb_carte,x,y-1, Qt::AlignCenter);
             this->setAlignment(nb_carte,Qt::AlignTop | Qt::AlignRight);
         }
         if(y % largeur == 0){
@@ -89,7 +90,9 @@ void VueShop::update() {
     }
 }
 
-void VueShop::clicked_acheter_event(VueCarte* vc){
-    Partie* partie_actuelle = Partie::get_instance();
-    partie_actuelle->acheter_carte_event(vc);
+void VueShop::clicked_acheter_event(){
+    Partie *partie = Partie::get_instance();
+    VueCarte* carte = partie->get_vue_partie()->get_vue_shop()->get_carte_choisie();
+    partie->acheter_carte_event(carte);
+    carte_choisie = nullptr;
 }

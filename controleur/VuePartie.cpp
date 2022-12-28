@@ -104,12 +104,15 @@ VuePartie::VuePartie(QWidget *parent){
     /// **************************************** MILIEU DE L'AFFICHAGE *************************************************
     /// ****************************************************************************************************************
 
-    ///Affichage du Shop et de la Pioche
+    ///Affichage du Shop, de la Pioche et des informations
 
     body = new QHBoxLayout;
 
-    view_pioche = new VuePioche(*(partie_actuelle->get_pioche()), nullptr);
-    body->addLayout(view_pioche,1);
+    view_pioche = new VuePioche(partie_actuelle->get_pioche(), nullptr);
+    fenetre_pioche = new QWidget;
+    fenetre_pioche->setFixedSize(300, 520);
+    fenetre_pioche->setLayout(view_pioche);
+    body->addWidget(fenetre_pioche, 100, Qt::AlignCenter);
 
     scroll_shop = new QScrollArea;
     widget_shop = new QWidget;
@@ -121,64 +124,16 @@ VuePartie::VuePartie(QWidget *parent){
     scroll_shop->setFixedWidth(130 * largeur);
     scroll_shop->setFixedHeight(520);
     scroll_shop->setStyle(QStyleFactory::create("Fusion"));
-    body->addWidget(scroll_shop,100);
+    body->addWidget(scroll_shop,100, Qt::AlignCenter);
 
-    scroll_pasta = new QScrollArea;
-    stacked_pasta = new QVBoxLayout;
-    widget_pasta = new QWidget;
-    widget_pasta->setFixedSize(298, 468);
-
-    // Widget toujours présent
-    pasta_label = new QLabel("Voici les informations sur le tour actuel :");
-    pasta_label->setAlignment(Qt::AlignCenter);
-    pasta_label->setFixedSize(298, 50);
-    pasta_label->setStyleSheet("QLabel { background-color : green; \
-                                color : white; \
-                                font-size : 12px; \
-                                font-weight : bold; \
-                                border-radius : 10px; \
-                                border : 1px solid black; \
-                                }");
-    /*view_widget_pasta = new QVBoxLayout;
-    widget_pasta->setLayout(view_widget_pasta);
-
-    // Widget contenant les informations sur le tour actuel
-
-    stacked_pasta->addWidget(pasta_label);
-    stacked_pasta->addWidget(widget_pasta);
+    infos = new VueInfo(nullptr);
+    widget_infos = new QWidget;
+    widget_infos->setLayout(infos);
+    widget_infos->setFixedSize(300, 520);
+    body->addWidget(widget_infos, 100, Qt::AlignCenter);
 
 
-    scroll_pasta->setLayout(stacked_pasta);
-    scroll_pasta->setWidgetResizable(false);
-    scroll_pasta->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    scroll_pasta->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
-
-    scroll_pasta->setFixedWidth(300);
-    scroll_pasta->setFixedHeight(520);
-
-    body->addWidget(scroll_pasta, 1);
     structure->addLayout(body,50);
-    */
-    view_widget_pasta = new QVBoxLayout;
-    scroll_widget_pasta = new QWidget();
-    scroll_widget_pasta->setLayout(view_widget_pasta);
-    // Widget contenant les informations sur le tour actuel
-    stacked_pasta->addWidget(pasta_label);
-    scroll_pasta->setWidget(scroll_widget_pasta);
-    scroll_pasta->setWidgetResizable(true);
-    scroll_pasta->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    scroll_pasta->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
-
-    scroll_pasta->setFixedWidth(270);
-    scroll_pasta->setFixedHeight(470);
-    stacked_pasta->addWidget(scroll_pasta, 1);
-
-    widget_pasta->setLayout(stacked_pasta);
-    body->addWidget(widget_pasta);
-    structure->addLayout(body,50);
-
-
-
 
 
     // Boutons de navigation gauche et droite dans les Vues Joueurs
@@ -317,32 +272,3 @@ void VuePartie::update_nom_joueur(){
     Partie* partie_actuelle = Partie::get_instance();
     label_joueur_actuel->setText(QString::fromStdString(partie_actuelle->get_tab_joueurs()[joueur_affiche]->get_nom()));
 }
-
-void VuePartie::update_pasta(const string &pasta_name) {
-    // Mise à jour de l'affichage de la pasta
-    QLabel *label_pasta = new QLabel();
-    label_pasta->setText(QString::fromStdString(pasta_name));
-    pasta.push_back(label_pasta);
-    clear_pasta(false);
-
-    for (auto i : pasta) {
-        view_widget_pasta->addWidget(i,1, Qt::AlignCenter);
-    }
-
-    update();
-}
-
-void VuePartie::clear_pasta(bool etat_clear) {
-    unsigned int compteur = 0;
-    for (auto label : pasta) {
-        QLayoutItem * item = view_widget_pasta->takeAt(compteur);
-        view_widget_pasta->removeWidget(label);
-        delete label;
-        delete item;
-        compteur++;
-    }
-
-    update();
-}
-
-

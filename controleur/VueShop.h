@@ -4,12 +4,12 @@
 #include <QWidget>
 #include "Shop.h"
 #include "VueCarte.h"
-#include "VuePartie.h"
 #include <QGridLayout>
 
 class VueShop  : public QGridLayout{
     Q_OBJECT
     vector<VueCarte *> tab_vue_shop;
+    VueCarte *carte_choisie;
     unsigned int largeur;
     QPushButton* bouton_acheter;
 
@@ -17,9 +17,10 @@ public:
 
     VueShop(Shop& shop, QWidget *parent = nullptr);
     void update();
+    VueCarte* get_carte_choisie() const {return carte_choisie;}
 
 public slots:
-    void clicked_acheter_event(VueCarte* vc);
+    void clicked_acheter_event();//VueCarte* vc);
     void batiment_clique(VueCarte* vc);
 };
 
