@@ -496,7 +496,7 @@ void Partie::jouer_partie() {
     cout << "Vous allez jouer avec " << tab_joueurs.size() << " joueurs." << endl;
     cout << "Le but du jeu est d'obtenir " << nb_monuments_win << " monuments." << endl;
     cout << "Bon jeu !\n\n" << endl;
-
+/*
     while (!fin_partie) {
         jouer_tour();
         fin_partie = est_gagnant(joueur_actuel);
@@ -504,7 +504,7 @@ void Partie::jouer_partie() {
             joueur_actuel = (joueur_actuel + 1) % tab_joueurs.size();
         }
     }
-
+*/
     /// On affiche le gagnant
     cout << "Le gagnant est " << tab_joueurs[joueur_actuel]->get_nom() << endl;
     cout << "Voici son etat final : " << endl;

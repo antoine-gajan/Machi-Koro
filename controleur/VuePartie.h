@@ -32,7 +32,9 @@ public:
     //Partie* get_partie_actuelle() const{return partie_actuelle;}
     QWidget* get_vue_carte() const {return fenetre_carte;}
     void set_vue_carte(QWidget* vue_carte) {fenetre_carte = vue_carte;}
-
+    void lancer_de_1_display();
+    void lancer_de_2_display();
+    void update_des();
 
 private:
     //Partie* partie_actuelle;
@@ -76,8 +78,9 @@ public slots:
         //virtual void carteClique(VueCarte* vc);
         void d_click();
         void g_click();
-        void lancer_de_1_display();
-        void lancer_de_2_display();
+
+        void clicked_event_de_1();
+        void clicked_event_de_2();
 };
 
 #endif //MACHI_KORO_VUEPARTIE_H

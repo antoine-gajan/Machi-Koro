@@ -65,6 +65,7 @@ void validate_menu_2(QWidget *menu, const string &edition, const list<string> &e
     menu->close();
     //vp->show();
     p->jouer_partie();
+    p->get_vue_partie()->lancer_de_1_display();
 
 }
 

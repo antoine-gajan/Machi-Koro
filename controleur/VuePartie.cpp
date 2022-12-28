@@ -41,7 +41,7 @@ VuePartie::VuePartie(QWidget *parent){
     }
     label_edj->setText("Profil de la partie : " + QString::fromStdString(nom_edj));
     label_edj->setFixedSize(300, 50);
-    label_edj->setAlignment(Qt::AlignLeft);
+    label_edj->setAlignment(Qt::AlignCenter);
 
     entete_gauche->addWidget(label_edj);
 
@@ -50,7 +50,7 @@ VuePartie::VuePartie(QWidget *parent){
     string nom_joueur = "Joueur actuel : \"" + partie_actuelle->get_tab_joueurs()[partie_actuelle->get_joueur_actuel()]->get_nom() + "\"";
     label_joueur_actuel->setText(QString::fromStdString(nom_joueur));
     label_joueur_actuel->setFixedSize(300, 50);
-    label_joueur_actuel->setAlignment(Qt::AlignLeft);
+    label_joueur_actuel->setAlignment(Qt::AlignCenter);
     entete_gauche->addWidget(label_joueur_actuel);
     entete->addLayout(entete_gauche);
     structure->addLayout(entete, 10);
@@ -87,11 +87,13 @@ VuePartie::VuePartie(QWidget *parent){
 
     label_de1 = new QLabel;
     label_de1->setText(QString::number(partie_actuelle->get_de_1()));
+    label_de1->setAlignment(Qt::AlignHCenter);
     layout_de_1->addWidget(label_de1);
     layout_de_1->setAlignment(Qt::AlignCenter);
 
     label_de2 = new QLabel("Valeur de dé 2");
     label_de2->setText(QString::number(partie_actuelle->get_de_2()));
+    label_de1->setAlignment(Qt::AlignHCenter);
     layout_de_2->addWidget(label_de2);
     layout_de_2->setAlignment(Qt::AlignCenter);
 
@@ -218,8 +220,7 @@ void VuePartie::lancer_de_1_display(){
     /// Fonction pour mettre à jour les dés
 
     bouton_lancer_de_1->setEnabled(true);
-    QObject::connect(bouton_lancer_de_1, SIGNAL(clicked()), this, SLOT(partie_actuelle->set_de_1(partie_actuelle->lancer_de());bouton_lancer_de_1->setEnabled(false);));
-    entete->update();
+    QObject::connect(bouton_lancer_de_1, SIGNAL(clicked()), this, SLOT(clicked_event_de_1()));
 
 }
 
@@ -228,9 +229,29 @@ void VuePartie::lancer_de_2_display(){
     /// Fonction pour mettre à jour les dés
 
     bouton_lancer_de_2->setEnabled(true);
-    QObject::connect(bouton_lancer_de_1, SIGNAL(clicked()), this, SLOT(partie_actuelle->set_de_2(partie_actuelle->lancer_de());bouton_lancer_de_2->setEnabled(false);));
-    entete->update();
+    QObject::connect(bouton_lancer_de_1, SIGNAL(clicked()), this, SLOT(clicked_event_de_2()));
 
 }
+
+void VuePartie::clicked_event_de_1() {
+    Partie* partie_actuelle = Partie::get_instance();
+    partie_actuelle->set_de_1(partie_actuelle->lancer_de());
+    bouton_lancer_de_1->setEnabled(false);
+    update_des();
+}
+
+void VuePartie::clicked_event_de_2() {
+    Partie* partie_actuelle = Partie::get_instance();
+    partie_actuelle->set_de_2(partie_actuelle->lancer_de());
+    bouton_lancer_de_2->setEnabled(false);
+    update_des();
+}
+
+void VuePartie::update_des() {
+    Partie* partie_actuelle = Partie::get_instance();
+    label_de1->setText(QString::fromStdString(std::to_string(partie_actuelle->get_de_1())));
+    label_de2->setText(QString::fromStdString(std::to_string(partie_actuelle->get_de_2())));
+}
+
 
 
