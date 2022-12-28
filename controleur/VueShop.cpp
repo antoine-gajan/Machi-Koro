@@ -51,7 +51,7 @@ void VueShop::batiment_clique(VueCarte *vc) {
     bouton_acheter->setText(QString::fromStdString("Acheter le batiment"));
     Partie* partie_actuelle = Partie::get_instance();
 
-    connect(bouton_acheter, SIGNAL(&QPushButton::clicked), this, SLOT(acheter_carte_event(vc, true)));
+    connect(bouton_acheter, SIGNAL(&QPushButton::clicked), this, SLOT(acheter_carte_event(vc,true)));
     label->setPixmap(pixmap);
     label->resize(pixmap.size());
     // Affichage de la fenetre pop up

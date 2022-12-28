@@ -569,6 +569,34 @@ void Partie::jouer_partie() {
     // Création de la vue
     QWidget *fenetre = new QWidget;
     vue_partie = new VuePartie(fenetre);
+    vue_partie->update_pasta("Bon jeu !");
+
+    vue_partie->update_pasta("Bon jeu !");
+    vue_partie->update_pasta("Bon jeu !");
+    vue_partie->update_pasta("Bon jeu !");
+    vue_partie->update_pasta("Bon jeu !");
+    vue_partie->update_pasta("Bon jeu !");
+    vue_partie->update_pasta("Bon jeu !");
+    vue_partie->update_pasta("Bon jeu !");
+    vue_partie->update_pasta("Bon jeu !");
+    vue_partie->update_pasta("Bon jeu !");
+    vue_partie->update_pasta("Bon jeu !");
+    vue_partie->update_pasta("Bon jeu !");
+    vue_partie->update_pasta("Bon jeu !");
+    vue_partie->update_pasta("Bon jeu !");
+    vue_partie->update_pasta("Bon jeu !");
+    vue_partie->update_pasta("Bon jeu !");
+    vue_partie->update_pasta("Bon jeu !");
+    vue_partie->update_pasta("Bon jeu !");
+    vue_partie->update_pasta("Bon jeu !");
+    vue_partie->update_pasta("Bon jeu !");
+    vue_partie->update_pasta("Bon jeu !");
+    vue_partie->update_pasta("Bon jeu !");
+    vue_partie->update_pasta("Bon jeu !");
+    vue_partie->update_pasta("Bon jeu !");
+
+
+
     vue_partie->show();
 
     joueur_actuel = 0;
@@ -581,6 +609,7 @@ void Partie::jouer_partie() {
     cout << "Le but du jeu est d'obtenir " << nb_monuments_win << " monuments." << endl;
     cout << "Bon jeu !\n\n" << endl;
     jouer_tour();
+    //vue_partie->update_pasta("Le joueur " + tab_joueurs[joueur_actuel]->get_nom() + " a gagne !");
 /*
     while (!fin_partie) {
 

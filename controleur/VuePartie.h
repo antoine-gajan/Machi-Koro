@@ -2,6 +2,8 @@
 #define MACHI_KORO_VUEPARTIE_H
 #include <QApplication>
 #include <QtGui/QScreen>
+#include <QScrollArea>
+#include <QStyleFactory>
 #include <QPushButton>
 #include <QGridLayout>
 #include <QLabel>
@@ -36,6 +38,8 @@ public:
     void lancer_de_2_display();
     void update_des();
     void update_nom_joueur();
+    void update_pasta (const string& pasta);
+    void clear_pasta();
 
 private:
     //Partie* partie_actuelle;
@@ -64,18 +68,32 @@ private:
     QHBoxLayout* layout_de_1;
     QHBoxLayout* layout_de_2;
     QHBoxLayout *body;
-    QVBoxLayout *pioche;
     VueJoueur* vue_joueur;
-    QGridLayout* view_shop;
-    QVBoxLayout* view_pioche;
     QWidget *parent_fenetre;
     QWidget *fenetre_carte;
 
+    /// Milieu de la page
+    //Pioche à gauche
+    QVBoxLayout *pioche;
+    QVBoxLayout* view_pioche;
+
+    //Shop au centre
+    QGridLayout* view_shop;
+    QScrollArea* scroll_shop;
+    QWidget* widget_shop;
+
+    //Pasta à droite
+    QScrollArea *scroll_pasta;
+    QVBoxLayout *stacked_pasta;
+    QLabel * pasta_label;
+    QWidget *widget_pasta;
+    QVBoxLayout *view_widget_pasta;
+    vector<QLabel*> pasta;
 
 
 
 public slots:
-        // Slots qui gèrent les clics sur les vues joueurs
+    // Slots qui gèrent les clics sur les vues joueurs
         //virtual void carteClique(VueCarte* vc);
         void d_click();
         void g_click();
