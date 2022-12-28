@@ -52,7 +52,6 @@ Partie::Partie(EditionDeJeu* edition, const map<string, string>& joueurs, const 
     ///Constructeur de Partie
 
     //Initialisation des variables utiles
-    unsigned int nb_tas;
     rejouer = false;
 
     tab_nom_edition.push_back(edition->get_nom());
@@ -114,23 +113,29 @@ Partie::Partie(EditionDeJeu* edition, const map<string, string>& joueurs, const 
     pioche = new Pioche(map_to_vector(list_batiments));
 
     if (shop_type == "standard") {
-        nb_tas = shop_size;
-    }
-    else{
-        nb_tas = list_batiments.size() + 1;
+        shop = new Shop(shop_size);
+        while (!pioche->est_vide() && shop->get_nb_tas_reel() < shop->get_nb_tas_max()){
+            try  {
+                shop->completer_shop(pioche->get_carte());
+            }
+            catch(exception const& e){
+                cerr << "ERREUR : " << e.what() << endl;
+            }
+        }
+    } else {
+
+        shop = new Shop(list_batiments.size());
+        while (!pioche->est_vide()){
+            try  {
+                shop->completer_shop(pioche->get_carte());
+            }
+            catch(exception const& e){
+                cerr << "ERREUR : " << e.what() << endl;
+            }
+        }
     }
 
-    // Construction du Shop
-    shop = new Shop(nb_tas);
 
-    while (!pioche->est_vide() && shop->get_nb_tas_reel() < shop->get_nb_tas_max()){
-        try  {
-            shop->completer_shop(pioche->get_carte());
-        }
-        catch(exception const& e){
-            cerr << "ERREUR : " << e.what() << endl;
-        }
-    }
     vue_partie = nullptr;
 }
 

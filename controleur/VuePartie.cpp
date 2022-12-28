@@ -121,9 +121,33 @@ VuePartie::VuePartie(QWidget *parent){
     scroll_shop->setWidgetResizable(true);
     unsigned int largeur = floor(sqrt(partie_actuelle->get_shop()->get_nb_tas_reel()));
     scroll_shop->setFixedWidth(130 * largeur);
+    scroll_shop->setFixedHeight(130 * 4);
     scroll_shop->setStyle(QStyleFactory::create("Fusion"));
     body->addWidget(scroll_shop,100);
 
+    auto *scroll_info = new QScrollArea;
+    QStackedWidget *widget_info = new QStackedWidget;
+
+    // Widget toujours présent
+    QLabel *label_info = new QLabel("Voici les informations sur le tour actuel :");
+    label_info->setAlignment(Qt::AlignCenter);
+
+    // Widget contenant les informations sur le tour actuel
+    QWidget *widget_information = new QWidget;
+
+
+    widget_info->addWidget(label_info);
+    widget_info->addWidget(widget_information);
+
+    scroll_info->setWidget(widget_info);
+
+    scroll_info->setWidgetResizable(true);
+    scroll_info->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+
+    scroll_info->setFixedWidth(300);
+    scroll_info->setFixedHeight(130 * 4);
+
+    body->addWidget(scroll_info, 1);
     structure->addLayout(body,50);
 
 
