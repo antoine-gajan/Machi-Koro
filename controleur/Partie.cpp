@@ -520,17 +520,21 @@ void Partie::jouer_tour() {
     bool centre_c_possesseur = false;
     vector <Monument*> monuments_joueurs = tab_joueurs[joueur_actuel]->get_monument_jouables();
     rejouer = false;
-
+/*
     cout << "----------------------------------------------------" << endl;
     cout << "\t\t\tDebut du tour" << endl;
     cout << "Joueur actuel : " << tab_joueurs[joueur_actuel]->get_nom() << endl;
     cout << "----------------------------------------------------" << endl;
+*/
+    // On update le nom du joueur actuel dans l'entete
+    vue_partie->update_nom_joueur();
 
     if(!tab_joueurs[joueur_actuel]->get_est_ia()) {
         vue_partie->lancer_de_1_display();
     }else{
         de_1 = Partie::lancer_de();
         de_1_temp = de_1;
+        vue_partie->update_des();
     }
 
     de_2 = 0;

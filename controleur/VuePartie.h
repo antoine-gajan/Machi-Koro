@@ -35,6 +35,7 @@ public:
     void lancer_de_1_display();
     void lancer_de_2_display();
     void update_des();
+    void update_nom_joueur();
 
 private:
     //Partie* partie_actuelle;

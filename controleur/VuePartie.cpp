@@ -217,40 +217,53 @@ void VuePartie::update_vue_joueur() {
 
 void VuePartie::lancer_de_1_display(){
     Partie* partie_actuelle = Partie::get_instance();
-    /// Fonction pour mettre à jour les dés
+    /// Fonction pour mettre à jour le dé 1 de manière graphique
 
     bouton_lancer_de_1->setEnabled(true);
+    // On vient connecter le bouton du dé 1 avec un slot personnalisé
     QObject::connect(bouton_lancer_de_1, SIGNAL(clicked()), this, SLOT(clicked_event_de_1()));
 
 }
 
 void VuePartie::lancer_de_2_display(){
     Partie* partie_actuelle = Partie::get_instance();
-    /// Fonction pour mettre à jour les dés
+    /// Fonction pour mettre à jour le dé 2 de manière graphique
 
     bouton_lancer_de_2->setEnabled(true);
+    // On vient connecter le bouton du dé 2 avec un slot personnalisé
     QObject::connect(bouton_lancer_de_1, SIGNAL(clicked()), this, SLOT(clicked_event_de_2()));
 
 }
 
 void VuePartie::clicked_event_de_1() {
+    // Slot personnalisé qui vient créer une nouvelle valeur pour le dé et l'injecte dans partie
     Partie* partie_actuelle = Partie::get_instance();
     partie_actuelle->set_de_1(partie_actuelle->lancer_de());
     bouton_lancer_de_1->setEnabled(false);
+    // On appelle la fonction de mise à jour de l'affichage des dés
     update_des();
 }
 
 void VuePartie::clicked_event_de_2() {
+    // Slot personnalisé qui vient créer une nouvelle valeur pour le dé et l'injecte dans partie
     Partie* partie_actuelle = Partie::get_instance();
     partie_actuelle->set_de_2(partie_actuelle->lancer_de());
     bouton_lancer_de_2->setEnabled(false);
+    // On appelle la fonction de mise à jour de l'affichage des dés
     update_des();
 }
 
 void VuePartie::update_des() {
+    // Mise à jour de l'affichage des dés
     Partie* partie_actuelle = Partie::get_instance();
     label_de1->setText(QString::fromStdString(std::to_string(partie_actuelle->get_de_1())));
     label_de2->setText(QString::fromStdString(std::to_string(partie_actuelle->get_de_2())));
+}
+
+void VuePartie::update_nom_joueur(){
+    // Mise à jour du nom du joueur actuel dans l'entete
+    Partie* partie_actuelle = Partie::get_instance();
+    label_joueur_actuel->setText(QString::fromStdString(partie_actuelle->get_tab_joueurs()[joueur_affiche]->get_nom()));
 }
 
 
