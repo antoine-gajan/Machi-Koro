@@ -50,7 +50,7 @@ void VueShop::batiment_clique(VueCarte *vc) {
     bouton_acheter = new QPushButton(fenetre);
     bouton_acheter->setText(QString::fromStdString("Acheter le batiment"));
     carte_choisie = vc;
-
+    // Ajout du bouton acheter
     connect(bouton_acheter, SIGNAL(clicked()), this, SLOT(clicked_acheter_event()));
 
     label->setPixmap(pixmap);
@@ -60,6 +60,7 @@ void VueShop::batiment_clique(VueCarte *vc) {
 }
 
 void VueShop::update() {
+    /// Mise à jour de VueShop
     int x = 0;
     int y = 1;
     unsigned int compteur=0;
@@ -91,8 +92,12 @@ void VueShop::update() {
 }
 
 void VueShop::clicked_acheter_event(){
+    /// Slot lorsque le bouton acheter est cliqué
     Partie *partie = Partie::get_instance();
-    VueCarte* carte = partie->get_vue_partie()->get_vue_shop()->get_carte_choisie();
-    partie->acheter_carte_event(carte);
+    partie->acheter_carte_event(carte_choisie);
     carte_choisie = nullptr;
+    // On ferme la fenêtre d'achat
+    Partie::get_instance()->get_vue_partie()->get_vue_carte()->close();
+    // On met la popup à nullptr
+    Partie::get_instance()->get_vue_partie()->set_vue_carte(nullptr);
 }

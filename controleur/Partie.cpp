@@ -280,20 +280,17 @@ bool Partie::acheter_carte() {
 */
 
 bool Partie::acheter_carte(VueCarte *vue_carte) {
-    //fonction qui permet a un joueur donne d'acheter une carte (batiment ou monument)
+    ///Fonction qui permet a un joueur d'acheter une carte (batiment ou monument)
     int choix = -1;
     int choix_ia = -1;
     bool visit[2] = {false, false};
     bool transaction_fin = false;
 
-    bool est_bat = true;
-    if (vue_carte->getCarte()->get_type() == "Monument")
-        est_bat = false;
 
     // Si le joueur est humain
     if (!tab_joueurs[joueur_actuel]->get_est_ia()) {
 
-        if(est_bat){
+        if(vue_carte->getCarte()->get_type() != "Monument"){
             return acheter_bat(vue_carte);
         }
         else{

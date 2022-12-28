@@ -37,6 +37,7 @@ VuePartie::VuePartie(QWidget *parent){
             nom_edj += it;
         }
     }
+    // Profil de la partie
     label_edj->setText("Profil de la partie : " + QString::fromStdString(nom_edj));
     label_edj->setFixedSize(300, 50);
     label_edj->setAlignment(Qt::AlignCenter);
@@ -107,13 +108,14 @@ VuePartie::VuePartie(QWidget *parent){
     ///Affichage du Shop, de la Pioche et des informations
 
     body = new QHBoxLayout;
-
+    // Pioche
     view_pioche = new VuePioche(partie_actuelle->get_pioche(), nullptr);
     fenetre_pioche = new QWidget;
     fenetre_pioche->setFixedSize(300, 520);
     fenetre_pioche->setLayout(view_pioche);
     body->addWidget(fenetre_pioche, 100, Qt::AlignCenter);
 
+    // Shop
     scroll_shop = new QScrollArea;
     widget_shop = new QWidget;
     view_shop = new VueShop(*(partie_actuelle->get_shop()), nullptr);
@@ -126,6 +128,7 @@ VuePartie::VuePartie(QWidget *parent){
     scroll_shop->setStyle(QStyleFactory::create("Fusion"));
     body->addWidget(scroll_shop,100, Qt::AlignCenter);
 
+    // Informations sur le tour
     infos = new VueInfo(nullptr);
     widget_infos = new QWidget;
     widget_infos->setLayout(infos);
@@ -144,6 +147,7 @@ VuePartie::VuePartie(QWidget *parent){
     b2->setText(QString::fromStdString("(>)"));
     connect(b2, SIGNAL(clicked()),this, SLOT(d_click()));
 
+    // Partie basse avec la vue joueur
     layout = new QHBoxLayout();
 
     layout->addWidget(b1);
@@ -233,9 +237,8 @@ void VuePartie::lancer_de_1_display(){
 }
 
 void VuePartie::lancer_de_2_display(){
-    Partie* partie_actuelle = Partie::get_instance();
     /// Fonction pour mettre à jour le dé 2 de manière graphique
-
+    Partie* partie_actuelle = Partie::get_instance();
     bouton_lancer_de_2->setEnabled(true);
     // On vient connecter le bouton du dé 2 avec un slot personnalisé
     QObject::connect(bouton_lancer_de_1, SIGNAL(clicked()), this, SLOT(clicked_event_de_2()));
