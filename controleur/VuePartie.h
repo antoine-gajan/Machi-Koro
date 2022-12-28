@@ -52,7 +52,7 @@ private:
     QLabel* label_de1;
     QLabel* label_de2;
     QLabel* pioche_exception;
-    QGridLayout* shop;
+    VueShop* shop;
     QLabel* image_entete;
     QPushButton *bouton_lancer_de_1;
     QPushButton *bouton_lancer_de_2;
@@ -91,9 +91,11 @@ public slots:
 
     // Slots qui gèrent les clics sur les vues joueurs
         //virtual void carteClique(VueCarte* vc);
-        void d_click();
+
+    void d_click();
     void g_click();
-        void clicked_event_de_1();
+
+    void clicked_event_de_1();
 
     void clicked_event_de_2();
     void tour_suivant();

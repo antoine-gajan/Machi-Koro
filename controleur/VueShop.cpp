@@ -48,14 +48,19 @@ void VueShop::batiment_clique(VueCarte *vc) {
     QLabel *label = new QLabel(fenetre);
     QPixmap pixmap(QString::fromStdString(vc->getCarte()->get_path_image()));
     // Si on est dans la phase d'achat
-    if (Partie::get_instance()->get_moment_achat() == true) {
-        // On autorise l'achat
-        bouton_acheter = new QPushButton(fenetre);
-        bouton_acheter->setText(QString::fromStdString("Acheter le batiment"));
-        carte_choisie = vc;
-        // Ajout du bouton acheter
-        connect(bouton_acheter, SIGNAL(clicked()), this, SLOT(clicked_acheter_event()));
+    // On autorise l'achat
+    bouton_acheter = new QPushButton(fenetre);
+    bouton_acheter->setText(QString::fromStdString("Acheter le batiment"));
+    if(Partie::get_instance()->get_moment_achat() == true) {
+        bouton_acheter->setEnabled(true);
+    }else{
+        bouton_acheter->setEnabled(false);
     }
+
+    carte_choisie = vc;
+    // Ajout du bouton acheter
+    connect(bouton_acheter, SIGNAL(clicked()), this, SLOT(clicked_acheter_event()));
+
     label->setPixmap(pixmap);
     label->resize(pixmap.size());
     // Affichage de la fenetre pop up

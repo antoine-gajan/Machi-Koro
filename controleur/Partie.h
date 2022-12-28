@@ -78,6 +78,7 @@ public:
     unsigned int get_nb_cartes_edition() const {return list_batiments.size();};
     VuePartie* get_vue_partie() const {return vue_partie;};
     bool get_moment_achat() const {return moment_achat;}
+    void set_moment_achat(bool b) {moment_achat = b;}
 
     //void set_vue(QWidget* vue) {this->vue = vue;};
 

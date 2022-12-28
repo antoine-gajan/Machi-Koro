@@ -606,7 +606,7 @@ void Partie::jouer_tour() {
     // On update le nom du joueur actuel dans l'entete
     vue_partie->update_nom_joueur();
 
-
+    moment_achat = false;
     if (!tab_joueurs[joueur_actuel]->get_est_ia()) {
         vue_partie->lancer_de_1_display();
     } else {
@@ -809,7 +809,6 @@ void Partie::jouer_tour() {
 
 
     /// Debut de la phase de construction
-    moment_achat = true;
     auto it_hdv = find_if(monuments_joueurs.begin(), monuments_joueurs.end(),
                           [](Monument *m) { return m->get_nom() == "HotelDeVille"; });
     if (it_hdv != monuments_joueurs.end()) {
@@ -821,7 +820,7 @@ void Partie::jouer_tour() {
             cerr << "ERREUR : " << e.what() << endl;
         }
     }
-    moment_achat = false;
+
 
     /// Fin de la phase de construction
 /*
@@ -836,6 +835,8 @@ void Partie::jouer_tour() {
 }
 
 void Partie::suite_tour(bool achat_ok){
+
+    moment_achat = false;
     vector < Monument * > monuments_joueurs = tab_joueurs[joueur_actuel]->get_monument_jouables();
 
     if (!achat_ok) {

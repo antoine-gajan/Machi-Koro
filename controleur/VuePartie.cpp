@@ -277,6 +277,7 @@ void VuePartie::update_des() {
     Partie* partie_actuelle = Partie::get_instance();
     label_de1->setText(QString::fromStdString(std::to_string(partie_actuelle->get_de_1())));
     label_de2->setText(QString::fromStdString(std::to_string(partie_actuelle->get_de_2())));
+    partie_actuelle->set_moment_achat(true);
 }
 
 void VuePartie::update_nom_joueur(){
