@@ -19,7 +19,7 @@ public:
     void update();
 
 public slots:
-    //void clicked_acheter_event() {};
+    void clicked_acheter_event(VueCarte* vc);
     void batiment_clique(VueCarte* vc);
 };
 
