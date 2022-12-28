@@ -809,6 +809,7 @@ void Partie::jouer_tour() {
 
 
     /// Debut de la phase de construction
+    moment_achat = true;
     auto it_hdv = find_if(monuments_joueurs.begin(), monuments_joueurs.end(),
                           [](Monument *m) { return m->get_nom() == "HotelDeVille"; });
     if (it_hdv != monuments_joueurs.end()) {
@@ -820,6 +821,7 @@ void Partie::jouer_tour() {
             cerr << "ERREUR : " << e.what() << endl;
         }
     }
+    moment_achat = false;
 
     /// Fin de la phase de construction
 /*
