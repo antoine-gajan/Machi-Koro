@@ -6,7 +6,8 @@ TourRadio::TourRadio() :
              "TourRadio",
              22,
              "Une fois par tour vous pouvez relancer vos des",
-             "../assets/monuments/Tour-radio-travaux.png") {
+             "../assets/monuments/Tour-radio-travaux.png",
+             "../assets/monuments/Tour-radio-active.png") {
     /// Constructeur de TourRadio
 }
 
@@ -33,12 +34,4 @@ void TourRadio::declencher_effet(unsigned int possesseur, int bonus) const {
         }
     }
 
-}
-
-void TourRadio::activer(){
-    set_image("../assets/monuments/Tour-radio-active.png");
-}
-
-void TourRadio::desactiver(){
-    set_image("../assets/monuments/Tour-radio-travaux.png");
 }

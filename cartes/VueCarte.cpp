@@ -5,12 +5,19 @@
 #include "qpainter.h"
 #include "Monument.h"
 
-VueCarte::VueCarte(const Carte &c,bool etat, QWidget *parent) : QPushButton(parent),carte(&c){
+VueCarte::VueCarte(const Carte &c,bool etat,bool est_act, QWidget *parent) : QPushButton(parent),carte(&c){
     /// Créer la vue d'une carte
     // Si il est à afficher dans VueJoueur
     //
     carte = &c;
-    path_carte = carte->get_path_image();
+
+    if(!est_act){
+        path_carte = carte->get_path_image();
+    }
+    else{
+        Monument* mon = (Monument*)carte;
+        path_carte = mon->get_path_image_actif();
+    }
     if(etat){
 
         setFlat(true);

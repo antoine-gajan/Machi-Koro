@@ -6,7 +6,8 @@ Port::Port()
                    "Port",
                    2,
                    "Si le resultat du jet de de est superieur ou egal a 10, vous pouvez ajouter 2 a ce resultat.",
-                   "../assets/monuments/Port-travaux.png") {
+                   "../assets/monuments/Port-travaux.png",
+                   "../assets/monuments/Port-active.png") {
     /// Constructeur de Port
 }
 
@@ -33,12 +34,4 @@ void Port::declencher_effet(unsigned int possesseur, int bonus) const {
         }
         
     }
-}
-
-void Port::activer() {
-    set_image("../assets/monuments/Port-active.png");
-}
-
-void Port::desactiver() {
-    set_image("../assets/monuments/Port-travaux.png");
 }

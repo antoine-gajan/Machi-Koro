@@ -2,8 +2,8 @@
 
 using namespace std;
 
-Monument::Monument(Moment_Effet effet_moment, const string& nom, unsigned int prix, const string& description_effet, const string& path_image) :
-    Carte(nom, description_effet, prix, path_image) {
+Monument::Monument(Moment_Effet effet_moment, const string& nom, unsigned int prix, const string& description_effet, const string& path_image, const std::string& path_actif) :
+    Carte(nom, description_effet, prix, path_image), path_image_actif(path_actif){
     /// Constructeur de Monument
 
     // Gestion d'erreur moment
@@ -15,7 +15,6 @@ Monument::Monument(Moment_Effet effet_moment, const string& nom, unsigned int pr
     if (nom.empty() || description_effet.empty()) {
         throw gameException("Nom ou description_effet invalide");
     }
-
     // Initialisation de moment
     moment = effet_moment;
 }

@@ -13,8 +13,7 @@ class CentreCommercial : public Monument {
 
         //*** Methodes ***//
         void declencher_effet(unsigned int possesseur, int bonus = 0) const override;
-        void activer() override;
-        void desactiver() override;
+
 };
 
 #endif //MACHI_KORO_CENTRECOMMERCIAL_H

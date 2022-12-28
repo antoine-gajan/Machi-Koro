@@ -40,7 +40,7 @@ VueJoueur::VueJoueur(Joueur* j,bool e_j_a, QWidget *parent) : carte_choisie(null
         ind_bat = 0;
         for (auto bat : couleur.second){
             // Affichage du batiment
-            vue_batiments->push_back(new VueCarte(*bat.first, true, parent));
+            vue_batiments->push_back(new VueCarte(*bat.first, true, false, parent));
             layout_batiments->addWidget((*vue_batiments)[i], ind_couleurs, ind_bat);
             connect((*vue_batiments)[i],SIGNAL(carteClicked(VueCarte*)),this,SLOT(batimentClique(VueCarte*)));
             ind_bat++;
@@ -59,8 +59,7 @@ VueJoueur::VueJoueur(Joueur* j,bool e_j_a, QWidget *parent) : carte_choisie(null
     vue_monuments = new vector<VueCarte*>;
     int ind_mon=0;
     for (auto& mon : joueur->get_liste_monument()){
-
-        vue_monuments->push_back(new VueCarte(*mon.first,true, parent));
+        vue_monuments->push_back(new VueCarte(*mon.first,true, (bool*)mon.second, parent));
         layout_monuments->addWidget((*vue_monuments)[ind_mon], ind_mon/3, ind_mon%3);
         connect((*vue_monuments)[ind_mon],SIGNAL(carteClicked(VueCarte*)),this,SLOT(monumentClique(VueCarte*)));
         ind_mon++;
@@ -72,7 +71,7 @@ VueJoueur::VueJoueur(Joueur* j,bool e_j_a, QWidget *parent) : carte_choisie(null
     fenetre_bat_fermes = new QWidget;
     layout_batiments_ferme = new QGridLayout(fenetre_bat_fermes);
     for (auto bat: joueur->get_liste_batiment_fermes()) {
-        vue_batiments_ferme->push_back(new VueCarte(*bat, false, fenetre_bat_fermes));
+        vue_batiments_ferme->push_back(new VueCarte(*bat, false, false, fenetre_bat_fermes));
         layout_batiments_ferme->addWidget((*vue_batiments_ferme)[ind_bat_ferme], i % 4, i / 4);
         ind_bat_ferme++;
     }

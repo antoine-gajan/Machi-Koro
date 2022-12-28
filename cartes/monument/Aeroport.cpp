@@ -6,7 +6,8 @@ Aeroport::Aeroport() :
                 "Aeroport",
                 30,
                 "Si rien n'a ete construit durant le tour, la banque donne 10 au joueur",
-                "../assets/monuments/Aeroport-travaux.png") {
+                "../assets/monuments/Aeroport-travaux.png",
+                "../assets/monuments/Aeroport-active.png") {
     /// Constructeur de Aeroport
 }
 
@@ -18,10 +19,3 @@ void Aeroport::declencher_effet(unsigned int possesseur, int bonus) const {
     joueur->set_argent(joueur->get_argent() + 10);
 }
 
-void Aeroport::activer() {
-    set_image("../assets/monuments/Aeroport-active.png");
-}
-
-void Aeroport::desactiver() {
-    set_image("../assets/monuments/Aeroport-travaux.png");
-}

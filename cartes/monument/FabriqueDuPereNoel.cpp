@@ -6,6 +6,7 @@ FabriqueDuPereNoel::FabriqueDuPereNoel() :
                  "FabriqueDuPereNoel",
                  0,
                  "Si le jet de de est casse vous gagnez 3 pieces",
+                 "../assets/monuments/FabriqueDuPereNoel.png",
                  "../assets/monuments/FabriqueDuPereNoel.png") {
     /// Constructeur de Centre commercial
 }
@@ -21,12 +22,4 @@ void FabriqueDuPereNoel::declencher_effet(unsigned int possesseur, int bonus) co
     if (partie->get_de_2() != 0) {
         partie->set_de_2(Partie::lancer_de());
     }
-}
-
-void FabriqueDuPereNoel::activer() {
-    set_image("../assets/monuments/FabriqueDuPereNoel.png");
-}
-
-void FabriqueDuPereNoel::desactiver() {
-    set_image("../assets/monuments/FabriqueDuPereNoel.png");
 }

@@ -11,7 +11,7 @@ VueShop::VueShop(Shop &shop, QWidget *parent)  : carte_choisie(nullptr){
     unsigned int compteur=0;
 
     for(auto &it : shop.get_contenu()){
-        tab_vue_shop.push_back(new VueCarte(*(it.first),true));
+        tab_vue_shop.push_back(new VueCarte(*(it.first),true, false));
 
         connect((tab_vue_shop)[compteur],SIGNAL(carteClicked(VueCarte*)),this,SLOT(batiment_clique(VueCarte*)));
         this->addWidget((tab_vue_shop)[compteur],x,y-1);
@@ -69,7 +69,7 @@ void VueShop::update() {
     unsigned int compteur=0;
 
     for(auto &it : Partie::get_instance()->get_shop()->get_contenu()){
-        tab_vue_shop.push_back(new VueCarte(*(it.first),true));
+        tab_vue_shop.push_back(new VueCarte(*(it.first),true, false));
 
         connect((tab_vue_shop)[compteur],SIGNAL(carteClicked(VueCarte*)),this,SLOT(batiment_clique(VueCarte*)));
         this->addWidget((tab_vue_shop)[compteur],x,y-1);

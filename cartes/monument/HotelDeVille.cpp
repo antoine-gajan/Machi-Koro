@@ -6,6 +6,7 @@ HotelDeVille::HotelDeVille() :
              "HotelDeVille",
              0,
              "Avant de construire, si vous n'avez pas d'argent vous recevez 1 piece de la banque.",
+             "../assets/monuments/HotelDeVille.png",
              "../assets/monuments/HotelDeVille.png") {
     /// Constructeur de HotelDeVille
 }
@@ -20,10 +21,3 @@ void HotelDeVille::declencher_effet(unsigned int possesseur, int bonus) const {
     }
 }
 
-void HotelDeVille::activer() {
-    set_image("../assets/monuments/HotelDeVille.png");
-}
-
-void HotelDeVille::desactiver() {
-    set_image("../assets/monuments/HotelDeVille.png");
-}
