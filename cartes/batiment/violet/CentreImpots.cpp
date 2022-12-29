@@ -17,9 +17,10 @@ CentreImpots::CentreImpots():
 void CentreImpots::declencher_effet(unsigned int possesseur, int bonus) const {
     /// Effet du Centre des Impots
     // Variables utiles pour la fonction
+    Partie *partie = Partie::get_instance();
     const vector<Joueur *> &tab_joueurs = Partie::get_instance()->get_tab_joueurs();
     Joueur *j_actuel = tab_joueurs[possesseur];
-    cout << "Activation de l'effet du Centre des Impots du joueur \"" << j_actuel->get_nom()<<"\"" << endl;
+    partie->get_vue_partie()->get_vue_infos()->add_info("Activation de l'effet du Centre des Impots du joueur \"" + j_actuel->get_nom() + "\"");
 
     // Parcours du tableau de joueurs
     for (int i = 0; i < tab_joueurs.size(); i++) {
