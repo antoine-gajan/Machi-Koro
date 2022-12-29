@@ -16,14 +16,16 @@ Arboretum::Arboretum():
 
 void Arboretum::declencher_effet(unsigned int possesseur, int bonus) const{
     /// Effet de l'arboretum
+    Partie *partie = Partie::get_instance();
     unsigned int somme_totale = 0;
-    vector<Joueur*> tab_joueurs = Partie::get_instance()->get_tab_joueurs();
-    cout << "Activation de l'effet du Arboretum du joueur \"" << tab_joueurs[possesseur]->get_nom()<<"\"" << endl;
+    vector<Joueur*> tab_joueurs = partie->get_tab_joueurs();
+    partie->get_vue_partie()->get_vue_infos()->add_info("Activation de l'effet du Arboretum du joueur \"" + tab_joueurs[possesseur]->get_nom());
 
     // Calcul de l'argent total
     for (auto joueur : tab_joueurs){
         somme_totale += joueur->get_argent();
     }
+    // Pour arrondi à l'inférieur
     while (somme_totale%tab_joueurs.size() != 0){
         somme_totale++;
     }
@@ -34,5 +36,5 @@ void Arboretum::declencher_effet(unsigned int possesseur, int bonus) const{
     for (auto joueur : tab_joueurs){
         joueur->set_argent(montant_par_joueur);
     }
-    cout << "Tous les joueurs ont maintenant " << montant_par_joueur << " credits !" << endl;
+    partie->get_vue_partie()->get_vue_infos()->add_info("Tous les joueurs ont maintenant " + std::to_string(montant_par_joueur) + " credits !");
 }

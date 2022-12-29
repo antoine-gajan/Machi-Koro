@@ -1,4 +1,5 @@
 #include "Pioche.h"
+#include "Partie.h"
 
 Pioche::Pioche(const vector<Batiment*>& batiments) : taille_init(batiments.size()){
     /// Constructeur de la classe Pioche
@@ -15,6 +16,7 @@ Batiment* Pioche::get_carte() {
         // Recupere la tete et on la renvoie
         Batiment *bat = contenu.top();
         contenu.pop();
+        // Retourne le batiment
         return bat;
     }
     // Sinon, on renvoie nullptr (erreur)

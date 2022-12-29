@@ -14,8 +14,8 @@ EntrepriseRenovation::EntrepriseRenovation() :
 
 void EntrepriseRenovation::declencher_effet(unsigned int possesseur, int bonus) const{
     /// Effet de la classe Entreprise de Renovation
-    Partie* instance = Partie::get_instance();
-    const vector<Joueur *> &tab_joueurs = instance->get_tab_joueurs();
+    Partie* partie = Partie::get_instance();
+    const vector<Joueur *> &tab_joueurs = partie->get_tab_joueurs();
     Joueur *j_actuel = tab_joueurs[possesseur];
 
     // On verifie que le joueur possede au moins un batiment non violet
@@ -24,17 +24,17 @@ void EntrepriseRenovation::declencher_effet(unsigned int possesseur, int bonus) 
     map<Batiment*, unsigned int> liste_bat_rouge = j_actuel->get_liste_batiment(Rouge);
 
     if (liste_bat_bleu.empty() && liste_bat_vert.empty() && liste_bat_rouge.empty()) {
-        cout << "Vous ne possedez aucun batiment non special !" << endl;
+        partie->get_vue_partie()->get_vue_infos()->add_info("Vous ne possedez aucun batiment non special !");
         return;
     }
 
-    cout << "Activation de l'effet de l'entreprise de renovation du joueur \"" << j_actuel->get_nom()<<"\"" << endl;
+    partie->get_vue_partie()->get_vue_infos()->add_info("Activation de l'effet de l'entreprise de renovation du joueur \"" + j_actuel->get_nom() + "\"");
 
     // Selection du batiment du joueur
     Batiment *batiment;
     batiment = j_actuel->selectionner_batiment();
     while (batiment->get_couleur() == Violet) {
-        cout << "Vous ne pouvez pas selectionner un batiment violet !" << endl;
+        partie->get_vue_partie()->get_vue_infos()->add_info("Vous ne pouvez pas selectionner un batiment violet !");
         batiment = j_actuel->selectionner_batiment();
     }
 
@@ -55,8 +55,9 @@ void EntrepriseRenovation::declencher_effet(unsigned int possesseur, int bonus) 
             }
         }
     }
-    cout << nb_fermes << "batiments " << batiment->get_nom() << " ont ete fermes" << endl;
-    cout << j_actuel->get_nom() << " va recevoir " << nb_fermes << "pieces" << endl;
+    // Affichage récapitulatif
+    partie->get_vue_partie()->get_vue_infos()->add_info(std::to_string(nb_fermes) + "batiments " + batiment->get_nom() + " ont ete fermes");
+    partie->get_vue_partie()->get_vue_infos()->add_info(" va recevoir " + std::to_string(nb_fermes) + "pieces");
     j_actuel->set_argent(j_actuel->get_argent() + nb_fermes);
-    cout << j_actuel->get_nom() << "possede maintenant " << j_actuel->get_argent() << " pieces" <<endl;
+    partie->get_vue_partie()->get_vue_infos()->add_info(j_actuel->get_nom() + "possede maintenant " + std::to_string(j_actuel->get_argent()) + " pieces");
 }

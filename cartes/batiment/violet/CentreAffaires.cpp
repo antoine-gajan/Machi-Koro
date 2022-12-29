@@ -16,6 +16,7 @@ CentreAffaires::CentreAffaires():
 
 void CentreAffaires::declencher_effet(unsigned int possesseur, int bonus) const {
     /// Effet du Centre d'affaires
+    Partie *partie = Partie::get_instance();
     const vector<Joueur *> &tab_joueurs = Partie::get_instance()->get_tab_joueurs();
     Joueur *j_actuel = tab_joueurs[possesseur];
 
@@ -25,10 +26,11 @@ void CentreAffaires::declencher_effet(unsigned int possesseur, int bonus) const 
     map<Batiment*, unsigned int> liste_bat_rouge = j_actuel->get_liste_batiment(Rouge);
 
     if (liste_bat_bleu.empty() && liste_bat_vert.empty() && liste_bat_rouge.empty()) {
-        cout << "Vous ne possedez aucun batiment non special !" << endl;
+        partie->get_vue_partie()->get_vue_infos()->add_info("Vous ne possedez aucun batiment non special !");
         return;
     }
 
+    // Idem pour au moins un autre joueur
     bool exist_joueur_echange = false;
     for (auto &joueur : tab_joueurs) {
         // On verifie que le joueur possede au moins un batiment non violet
@@ -41,19 +43,20 @@ void CentreAffaires::declencher_effet(unsigned int possesseur, int bonus) const 
             break;
         }
     }
-
+    // Regarde si un joueur a autre chose que des batiments violet
     if (!exist_joueur_echange) {
-        cout << "Aucun joueur ne possede de batiment non special !" << endl;
+        partie->get_vue_partie()->get_vue_infos()->add_info("Aucun joueur ne possede de batiment non special !");
         return;
     }
 
-    cout << "Activation de l'effet du Centres des Affaires du joueur \"" << j_actuel->get_nom()<<"\"" << endl;
+    partie->get_vue_partie()->get_vue_infos()->add_info("Activation de l'effet du Centres des Affaires du joueur \"" + j_actuel->get_nom() +"\"");
 
     // Choix du joueur
     unsigned int num_joueur;
     Joueur *joueur_echange;
 
     do{
+        // Selection du joueur pour faire l'echange
         num_joueur = Partie::selectionner_joueur(tab_joueurs, possesseur);
         joueur_echange = tab_joueurs[num_joueur];
 
@@ -63,27 +66,27 @@ void CentreAffaires::declencher_effet(unsigned int possesseur, int bonus) const 
         liste_bat_rouge = joueur_echange->get_liste_batiment(Rouge);
 
         if (liste_bat_bleu.empty() && liste_bat_vert.empty() && liste_bat_rouge.empty()) {
-            cout << "Le joueur \"" << joueur_echange->get_nom() << "\" ne possede aucun batiment non special !" << endl;
+            partie->get_vue_partie()->get_vue_infos()->add_info("Le joueur \"" + joueur_echange->get_nom() + "\" ne possede aucun batiment non special !");
         }
 
     } while (liste_bat_bleu.empty() && liste_bat_vert.empty() && liste_bat_rouge.empty());
 
 
-    cout << "Vous allez procede a un echange avec " << joueur_echange->get_nom() << endl;
+    partie->get_vue_partie()->get_vue_infos()->add_info("Vous allez procede a un echange avec " + joueur_echange->get_nom());
 
     // Selection des batiments
     Batiment *batiment_a_donner, *batiment_a_recevoir;
     batiment_a_donner = j_actuel->selectionner_batiment();
     while (batiment_a_donner->get_couleur() == Violet) {
-        cout << "Vous ne pouvez pas selectionner un batiment violet !" << endl;
+        partie->get_vue_partie()->get_vue_infos()->add_info("Vous ne pouvez pas selectionner un batiment violet !");
         batiment_a_donner = j_actuel->selectionner_batiment();
     }
     batiment_a_recevoir = joueur_echange->selectionner_batiment();
     while (batiment_a_recevoir->get_couleur() == Violet) {
-        cout << "Vous ne pouvez pas selectionner un batiment violet !" << endl;
+        partie->get_vue_partie()->get_vue_infos()->add_info("Vous ne pouvez pas selectionner un batiment violet !");
         batiment_a_recevoir = joueur_echange->selectionner_batiment();
     }
-    cout << "Le joueur " << j_actuel->get_nom() << " va echanger le batiment " << batiment_a_donner->get_nom() << " avec le batiment " << batiment_a_recevoir->get_nom() << " de " << joueur_echange->get_nom() << endl;
+    partie->get_vue_partie()->get_vue_infos()->add_info("Le joueur \"" + j_actuel->get_nom() + " \" va echanger le batiment " + batiment_a_donner->get_nom() + " avec le batiment " + batiment_a_recevoir->get_nom() + " de " + joueur_echange->get_nom());
 
     // Echange des batiments
     // Gestion du batiment 2 dans l'echange

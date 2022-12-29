@@ -1,4 +1,5 @@
 #include "Shop.h"
+#include "Partie.h"
 
 Shop::Shop(unsigned int nb_tas) : nb_tas_max(nb_tas), nb_tas_reel(0), contenu() {
     ///Constructeur de Shop

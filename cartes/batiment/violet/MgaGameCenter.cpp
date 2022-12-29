@@ -24,24 +24,26 @@ void MgaGameCenter::declencher_effet(unsigned int possesseur, int bonus) const{
     map<Batiment*, unsigned int> liste_bat_rouge = j_actuel->get_liste_batiment(Rouge);
 
     if (liste_bat_bleu.empty() && liste_bat_vert.empty() && liste_bat_rouge.empty()) {
-        cout << "Vous ne possedez aucun batiment non special !" << endl;
+        instance->get_vue_partie()->get_vue_infos()->add_info("Vous ne possedez aucun batiment non special !");
         return;
     }
-
+    // Récupération du pointeur sur le batiment (adresse)
     Batiment * bat = j_actuel->possede_batiment("MgaGameCenter");
 
     if (bat != nullptr) {
-        cout << "Activation de l'effet du MgaGameCenter du joueur \"" << j_actuel->get_nom()<<"\"" << endl;
+        instance->get_vue_partie()->get_vue_infos()->add_info("Activation de l'effet du MgaGameCenter du joueur \"" + j_actuel->get_nom() + "\"");
 
         // Selection du batiment du joueur
         Batiment *batiment = j_actuel->selectionner_batiment();
+        // Tant qu'il choisi un batiment violet, on lui redemande
         while (batiment->get_couleur() == Violet) {
-            cout << "Vous ne pouvez pas selectionner un batiment violet !" << endl;
+            instance->get_vue_partie()->get_vue_infos()->add_info("Vous ne pouvez pas selectionner un batiment violet !");
             batiment = j_actuel->selectionner_batiment();
         }
-
+        // Déclenchement de l'effet du batiment choisi
         batiment->declencher_effet(possesseur, bonus);
 
+        // Fermeture du batiment MGAGameCenter
         j_actuel->fermer_batiment(bat);
     }
 }
