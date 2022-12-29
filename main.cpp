@@ -434,6 +434,4 @@ int main(int argc, char * argv[]) {
     launch_menu_1(&app);
 
     return QApplication::exec();
-
-
 }

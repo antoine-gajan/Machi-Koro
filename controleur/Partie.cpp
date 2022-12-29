@@ -620,7 +620,9 @@ void Partie::jouer_tour() {
     moment_achat = false;
     if (!tab_joueurs[joueur_actuel]->get_est_ia()) {
         vue_partie->lancer_de_1_display();
-        vue_partie->get_vue_infos()->add_info("Lancer le dé 1 en cliquant sur le bouton");
+        for (int i = 0; i < 100; i++) {
+            vue_partie->get_vue_infos()->add_info("Lancer le dé 1 en cliquant sur le bouton");
+        }
     } else {
         de_1 = Partie::lancer_de();
         de_1_temp = de_1;
