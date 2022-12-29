@@ -586,12 +586,12 @@ void Partie::jouer_tour() {
     cout << "Tour du joueur " << tab_joueurs[joueur_actuel]->get_nom() << endl;
 
     /// Lancer des des
-    de_1 = Partie::lancer_de();
+    //de_1 = Partie::lancer_de();
+    de_1 = 4; // DE POUR TESTER SES EFFETS ////!!!!\\\\\
     de_1_temp = de_1;
-    vue_partie->update_des();
 
     de_2 = 0;
-    de_casse = (rand() % 50) + 1;
+    de_casse = Partie::lancer_de() + Partie::lancer_de() + Partie::lancer_de() + Partie::lancer_de();
 
     /// ****************************************************************************************************************
     /// ****************************** ETAPE 2 : Effets des monuments **************************************************
@@ -648,7 +648,7 @@ void Partie::jouer_tour() {
     /// Port + Fabrique du père noel
     for (auto mon: monuments_joueurs) {
         if (mon->get_nom() == "Port" && ((de_1 + de_2) >= 10) ||
-            mon->get_nom() == "FabriqueDuPereNoel" && de_casse == 1) {
+            mon->get_nom() == "FabriqueDuPereNoel" && de_casse == 16) {
             try {
                 mon->declencher_effet(joueur_actuel);
             }
@@ -907,5 +907,4 @@ unsigned int Partie::lancer_de() {
 
 void Partie::acheter_carte_event(VueCarte* vc) {
     bool est_ok = Partie::get_instance()->acheter_carte(vc);
-    Partie::get_instance()->suite_tour(est_ok);
 }

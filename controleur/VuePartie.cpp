@@ -241,12 +241,8 @@ void VuePartie::update_vue_joueur() {
     // Récupération de l'ancienne vue
     VueJoueur *old = vue_joueur;
     // Création de la nouvelle
-    if(partie_actuelle->get_joueur_actuel() == joueur_affiche){
-        vue_joueur = new VueJoueur(partie_actuelle->get_tab_joueurs()[joueur_affiche],true, parent_fenetre);
-    }
-    else{
-        vue_joueur = new VueJoueur(partie_actuelle->get_tab_joueurs()[joueur_affiche],false,  parent_fenetre);
-    }
+    vue_joueur = new VueJoueur(partie_actuelle->get_tab_joueurs()[partie_actuelle->get_joueur_actuel()],true,  parent_fenetre);
+
     // Remplacement par la nouvelle
     layout->replaceWidget(old, vue_joueur);
     vue_joueur->setFixedSize(700,300);
