@@ -584,6 +584,8 @@ void Partie::jouer_partie() {
     //vue_partie->update_pasta("Le joueur " + tab_joueurs[joueur_actuel]->get_nom() + " a gagne !");
 /*
     while (!fin_partie) {
+        // Affichage du tour
+        jouer_tour();
 
         fin_partie = est_gagnant(joueur_actuel);
         if (!rejouer && !fin_partie){
@@ -904,6 +906,8 @@ void Partie::suite_tour(bool achat_ok){
     cout << "----------------------------------------------------" << endl;
     cout << "\t\t\tFin du tour" << endl;
     cout << "----------------------------------------------------" << endl;
+
+    vue_partie->update_vue_partie();
 }
 
 unsigned int Partie::selectionner_joueur(const vector<Joueur*>& tab_joueurs, unsigned int joueur_actuel){
