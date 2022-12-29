@@ -71,7 +71,7 @@ void VueShop::clicked_acheter_event(){
     /// Slot lorsque le bouton acheter est cliqué
     Partie *partie = Partie::get_instance();
     // Si on est dans la phase d'achat
-    if (partie->get_moment_achat() == true) {
+    if (partie->get_moment_achat()) {
         partie->acheter_carte_event(carte_choisie);
         carte_choisie = nullptr;
         // On ferme la fenêtre d'achat

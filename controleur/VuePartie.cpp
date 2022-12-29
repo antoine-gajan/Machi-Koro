@@ -29,7 +29,7 @@ VuePartie::VuePartie(QWidget *parent){
     label_edj = new QLabel;
     // Permet de séparer les noms des éditions et extensions de jeu par un espace
     string nom_edj;
-    for (auto it : partie_actuelle->get_nom_edition()){
+    for (const auto& it : partie_actuelle->get_nom_edition()){
         if (it != partie_actuelle->get_nom_edition().back()){
             nom_edj += it + " + ";
         }
@@ -288,7 +288,7 @@ void VuePartie::clicked_event_de_1() {
 void VuePartie::clicked_event_de_2() {
     // Slot personnalisé qui vient créer une nouvelle valeur pour le dé et l'injecte dans partie
     Partie* partie_actuelle = Partie::get_instance();
-    partie_actuelle->set_de_2(partie_actuelle->lancer_de());
+    partie_actuelle->set_de_2(Partie::lancer_de());
     bouton_lancer_de_2->setEnabled(false);
     // On appelle la fonction de mise à jour de l'affichage des dés
     update_des();

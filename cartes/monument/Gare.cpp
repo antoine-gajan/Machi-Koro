@@ -32,7 +32,7 @@ void Gare::declencher_effet(unsigned int possesseur, int bonus) const {
             string effet = "Activation de l'effet de la gare du joueur \"" + joueur->get_nom() + "\"";
             partie->set_de_2(Partie::lancer_de());
             partie->get_vue_partie()->update_des();
-            partie->get_vue_partie()->get_vue_info()->add_info(effet);
+            partie->get_vue_partie()->get_vue_infos()->add_info(effet);
         }
         /*
 
