@@ -1,4 +1,5 @@
 #include "Shop.h"
+#include "Partie.h"
 
 Shop::Shop(unsigned int nb_tas) : nb_tas_max(nb_tas), nb_tas_reel(0), contenu() {
     ///Constructeur de Shop
@@ -22,6 +23,9 @@ void Shop::completer_shop(Batiment *new_bat) {
             nb_tas_reel++;
         }
     }
+    // Mise à jour de la VueShop
+    Partie *partie = Partie::get_instance();
+    partie->get_vue_partie()->get_vue_shop()->update();
 }
 
 Shop::~Shop() {
