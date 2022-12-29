@@ -14,7 +14,7 @@ Aeroport::Aeroport() :
 void Aeroport::declencher_effet(unsigned int possesseur, int bonus) const {
     Partie * partie = Partie::get_instance();
     Joueur * joueur = partie->get_tab_joueurs()[possesseur];
-    cout << "Activation de l'effet de l'earoport du joueur \"" << joueur->get_nom() << "\"" << endl;
+    partie->get_vue_partie()->get_vue_infos()->add_info("Activation de l'effet de l'earoport du joueur \"" + joueur->get_nom() + "\"");
 
     joueur->set_argent(joueur->get_argent() + 10);
 }

@@ -15,23 +15,27 @@ void Port::declencher_effet(unsigned int possesseur, int bonus) const {
     Partie *partie = Partie::get_instance();
     if (partie->get_de_1() + partie->get_de_2() >= 10) {
         Joueur *joueur = partie->get_tab_joueurs()[possesseur];
-        int choix = -1;
 
         if (partie->get_tab_joueurs()[possesseur]->get_est_ia()) {
-            choix = rand() % 4;
-        }
-        else {
-            while (choix != 0 && choix != 1) {
-                cout << "Voulez-vous ajouter 2 au resultat du jet de de ? (0 : non, 1 : oui)" << endl;
-                cin >> choix;
+            if (rand() % 4 == 1) {
+                partie->get_vue_partie()->get_vue_infos()->add_info("Activation de l'effet du Port du joueur \"" + joueur->get_nom() + "\"");
+                partie->set_de_1(partie->get_de_1() + 1);
+                partie->set_de_2(partie->get_de_2() + 1);
+            }
+        } else {
+            QMessageBox msgBox;
+            string message = "Voulez-vous ajouter 2 au résultat du jet de dés qui est de " +
+                             to_string(partie->get_de_1() + partie->get_de_2()) + " ?";
+            msgBox.setText(QString::fromStdString(message));
+            msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
+            msgBox.setDefaultButton(QMessageBox::No);
+            int ret = msgBox.exec();
+            if (ret == QMessageBox::Yes) {
+                string effet = "Activation de l'effet du Port du joueur \"" + joueur->get_nom() + "\"";
+                partie->set_de_2(Partie::lancer_de());
+                partie->get_vue_partie()->update_des();
+                partie->get_vue_partie()->get_vue_infos()->add_info(effet);
             }
         }
-
-        if (choix == 1) {
-            cout << "Activation de l'effet du Port du joueur \"" << joueur->get_nom() << "\"" << endl;
-            partie->set_de_1(partie->get_de_1() + 1);
-            partie->set_de_2(partie->get_de_2() + 1);
-        }
-        
     }
 }
