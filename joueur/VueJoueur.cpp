@@ -116,7 +116,14 @@ void VueJoueur::monumentClique(VueCarte* vc){
     Partie::get_instance()->get_vue_partie()->set_vue_carte(fenetre);
     // Création d'un label contenant l'image
     QLabel *label = new QLabel(fenetre);
-    QPixmap pixmap(QString::fromStdString(vc->getCarte()->get_path_image()));
+    QPixmap pixmap;
+    if(vc->get_est_actif()){
+        Monument* mon = (Monument*)vc->getCarte();
+        pixmap.load( QString::fromStdString(mon->get_path_image_actif()));
+    }
+    else{
+        pixmap.load(QString::fromStdString(vc->getCarte()->get_path_image()));
+    }
     label->setPixmap(pixmap);
     label->resize(pixmap.size());
     if(get_est_joueur_actuel()){

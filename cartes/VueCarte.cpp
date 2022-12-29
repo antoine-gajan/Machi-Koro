@@ -10,7 +10,7 @@ VueCarte::VueCarte(const Carte &c,bool etat,bool est_act, QWidget *parent) : QPu
     // Si il est à afficher dans VueJoueur
     //
     carte = &c;
-
+    est_actif = est_act;
     if(!est_act){
         path_carte = carte->get_path_image();
     }

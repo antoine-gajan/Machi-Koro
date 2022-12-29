@@ -23,6 +23,7 @@ public:
     void set_pixmap(string path){pixmap = QPixmap(QString::fromStdString(path));};
     void set_icon(QPixmap pixmap){ButtonIcon = QIcon(pixmap);};
     void peinture(QPaintEvent* event);
+    bool get_est_actif() const{return est_actif;}
     //
     void paintEvent(QPaintEvent *event) override;
 private:
@@ -30,6 +31,7 @@ private:
     QPixmap pixmap;
     QIcon ButtonIcon;
     string path_carte;
+    bool est_actif;
 
 signals:
     // quand la vue de carte est cliquée, elle émet un signal en transmettant son adresse

@@ -8,6 +8,7 @@
 #include <QProgressBar>
 #include <QLCDNumber>
 #include <QString>
+#include <QScrollArea>
 #include <QMessageBox>
 #include "VueCarte.h"
 #include "Joueur.h"
@@ -50,6 +51,8 @@ private:
     QWidget *parent;
     VueCarte *carte_choisie;
     QPushButton* bouton_achat;
+    QScrollArea* scroll_bat;
+    QScrollArea* scroll_mon;
 
 public slots:
     // slots qui gère les clics sur les cartes

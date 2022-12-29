@@ -150,9 +150,11 @@ VuePartie::VuePartie(QWidget *parent){
 
     // Boutons de navigation gauche et droite dans les Vues Joueurs
     QPushButton* b1 = new QPushButton(parent);
+    b1->setFixedSize(50,50);
     b1->setText(QString::fromStdString("(<)"));
     connect(b1, SIGNAL(clicked()),this, SLOT(g_click()));
     QPushButton* b2 = new QPushButton(parent);
+    b2->setFixedSize(50,50);
     b2->setText(QString::fromStdString("(>)"));
     connect(b2, SIGNAL(clicked()),this, SLOT(d_click()));
 
@@ -164,6 +166,7 @@ VuePartie::VuePartie(QWidget *parent){
     nb_joueurs = partie_actuelle->get_tab_joueurs().size();
     joueur_affiche = 0;
     vue_joueur = new VueJoueur(Partie::get_instance()->get_tab_joueurs()[joueur_affiche], true, parent);
+    vue_joueur->setFixedSize(700,300);
     layout->addWidget(vue_joueur);
 
     layout->addWidget(b2);
@@ -190,6 +193,7 @@ void VuePartie::d_click(){
 
     // Remplacement par la nouvelle
     layout->replaceWidget(old, vue_joueur);
+    vue_joueur->setFixedSize(700,300);
     delete old;
     // Mise à jour de l'affichage
     update();
@@ -211,6 +215,7 @@ void VuePartie::g_click(){
     }
     // Remplacement par la nouvelle
     layout->replaceWidget(old, vue_joueur);
+    vue_joueur->setFixedSize(700,300);
     delete old;
     // Mise à jour de l'affichage
     update();
@@ -230,6 +235,7 @@ void VuePartie::update_vue_joueur() {
     }
     // Remplacement par la nouvelle
     layout->replaceWidget(old, vue_joueur);
+    vue_joueur->setFixedSize(700,300);
     delete old;
     // Mise à jour de l'affichage
     update();
