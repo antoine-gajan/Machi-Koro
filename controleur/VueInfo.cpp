@@ -33,9 +33,15 @@ VueInfo::VueInfo(QWidget *parent) {
 }
 
 void VueInfo::add_info(const string &info) {
-    QLabel *label = new QLabel(QString::fromStdString(info), widget_layout_info);
+    string info_affiche = "\n" + info + "\n";
+    QLabel *label = new QLabel(QString::fromStdString(info_affiche), widget_layout_info);
     label->setAlignment(Qt::AlignCenter);
-    label->setFixedSize(290, 20);
-    info_layout->addWidget(label, 1, Qt::AlignCenter);
+    label->setFixedWidth(250);
+    label->setContentsMargins(0, 200, 0, 200);
+    label->setWordWrap(true);
+
+    info_layout->insertWidget(0, label);
     liste_info.push_back(label);
+
+
 }
