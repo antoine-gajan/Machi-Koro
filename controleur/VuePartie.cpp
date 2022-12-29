@@ -64,7 +64,7 @@ VuePartie::VuePartie(QWidget *parent){
     //Ajout de l'image dans l'entete
     //Affichage de l'image "Machi Koro"
     image_entete = new QLabel;
-    QPixmap* image = new QPixmap("../assets/annexes/Machi-Koro.png");
+    QPixmap* image = new QPixmap("../assets/annexes/Machi-koro.png");
     image->scaled(300,50, Qt::KeepAspectRatio);
     image_entete->setPixmap(*image);
 
