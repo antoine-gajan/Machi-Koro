@@ -15,8 +15,7 @@ class VueShop  : public QGridLayout{
 
 public:
 
-    VueShop(Shop& shop, QWidget *parent = nullptr);
-    void update();
+    VueShop(Shop* shop, QWidget *parent = nullptr);
     VueCarte* get_carte_choisie() const {return carte_choisie;}
     void set_bouton_acheter() {bouton_acheter->setEnabled(true);}
 

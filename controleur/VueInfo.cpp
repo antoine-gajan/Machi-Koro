@@ -36,15 +36,7 @@ VueInfo::VueInfo(QWidget *parent) {
 void VueInfo::add_info(const string &info) {
     QLabel *label = new QLabel(QString::fromStdString(info), widget_layout_info);
     label->setAlignment(Qt::AlignCenter);
-    label->setFixedSize(290, 50);
-    info_layout->addWidget(label);
+    label->setFixedSize(290, 20);
+    info_layout->addWidget(label, 1, Qt::AlignCenter);
     liste_info.push_back(label);
-}
-
-void VueInfo::clear_info() {
-    for (auto &i : liste_info) {
-        info_layout->removeWidget(i);
-        delete i;
-    }
-    liste_info.clear();
 }

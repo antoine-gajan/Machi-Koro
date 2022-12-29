@@ -559,18 +559,22 @@ void Partie::jouer_partie() {
     vue_partie = new VuePartie(fenetre);
 
 
-
+    cout << "Avant" << endl;
     vue_partie->show();
 
-    joueur_actuel = 0;
+    joueur_actuel = 1;
+    vue_partie->update_vue_partie();
+    vue_partie->get_vue_info()->add_info("Tour du joueur " + tab_joueurs[joueur_actuel]->get_nom());
+    vue_partie->get_vue_info()->add_info("Vous avez " + to_string(tab_joueurs[joueur_actuel]->get_argent()) + " $");
+    cout << "Apres" << endl;
 
     bool fin_partie = false;
     // Tant que le joueur precedent n'a pas gagne on continue la partie
 
-    cout << "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nBienvenue dans Miniville !" << endl;
-    cout << "Vous allez jouer avec " << tab_joueurs.size() << " joueurs." << endl;
-    cout << "Le but du jeu est d'obtenir " << nb_monuments_win << " monuments." << endl;
-    cout << "Bon jeu !\n\n" << endl;
+//    cout << "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nBienvenue dans Miniville !" << endl;
+//    cout << "Vous allez jouer avec " << tab_joueurs.size() << " joueurs." << endl;
+//    cout << "Le but du jeu est d'obtenir " << nb_monuments_win << " monuments." << endl;
+//    cout << "Bon jeu !\n\n" << endl;
     jouer_tour();
     //vue_partie->update_pasta("Le joueur " + tab_joueurs[joueur_actuel]->get_nom() + " a gagne !");
 /*
@@ -583,11 +587,11 @@ void Partie::jouer_partie() {
     }*/
 
     /// On affiche le gagnant
-    cout << "Le gagnant est " << tab_joueurs[joueur_actuel]->get_nom() << endl;
-    cout << "Voici son etat final : " << endl;
-    tab_joueurs[joueur_actuel]->afficher_joueur();
-
-    cout << "Felicitations !!!" << endl;
+//    cout << "Le gagnant est " << tab_joueurs[joueur_actuel]->get_nom() << endl;
+//    cout << "Voici son etat final : " << endl;
+//    tab_joueurs[joueur_actuel]->afficher_joueur();
+//
+//    cout << "Felicitations !!!" << endl;
 }
 
 void Partie::jouer_tour() {

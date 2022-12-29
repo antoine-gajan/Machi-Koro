@@ -25,20 +25,3 @@ VuePioche::VuePioche(Pioche* pioche, QWidget *parent) {
     barre_pioche->setStyle(QStyleFactory::create("Fusion"));
     this->addWidget(barre_pioche,100, Qt::AlignCenter);
 }
-
-void VuePioche::update() {
-    barre_pioche->setValue((int)Partie::get_instance()->get_pioche()->get_taille());
-    if (Partie::get_instance()->get_pioche()->get_taille() == 0) {
-        pioche_exception = new QLabel;
-        pioche_exception->setText("Pioche vide!");
-        this->addWidget(pioche_exception,33);
-    }
-    else {
-        QLabel* back_carte = new QLabel;
-        QPixmap img(QString::fromStdString("../assets/batiments/BACK-cartes.png"));
-        img = img.scaled(120,186,Qt::KeepAspectRatio);
-        back_carte->setPixmap(img);
-        back_carte->setFixedSize(120,186);
-        this->addWidget(back_carte,33);
-    }
-}
