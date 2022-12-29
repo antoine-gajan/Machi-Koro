@@ -59,5 +59,5 @@ void EntrepriseRenovation::declencher_effet(unsigned int possesseur, int bonus) 
     partie->get_vue_partie()->get_vue_infos()->add_info(std::to_string(nb_fermes) + "batiments " + batiment->get_nom() + " ont ete fermes");
     partie->get_vue_partie()->get_vue_infos()->add_info(" va recevoir " + std::to_string(nb_fermes) + "pieces");
     j_actuel->set_argent(j_actuel->get_argent() + nb_fermes);
-    partie->get_vue_partie()->get_vue_infos()->add_info(j_actuel->get_nom() + "possede maintenant " + j_actuel->get_argent() + " pieces");
+    partie->get_vue_partie()->get_vue_infos()->add_info(j_actuel->get_nom() + "possede maintenant " + std::to_string(j_actuel->get_argent()) + " pieces");
 }

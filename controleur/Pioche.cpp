@@ -16,10 +16,6 @@ Batiment* Pioche::get_carte() {
         // Recupere la tete et on la renvoie
         Batiment *bat = contenu.top();
         contenu.pop();
-        // Mise à jour de la VuePioche
-        Partie* partie = Partie::get_instance();
-        VuePioche *vue_pioche = partie->get_vue_partie()->get_vue_pioche();
-        vue_pioche->update();
         // Retourne le batiment
         return bat;
     }

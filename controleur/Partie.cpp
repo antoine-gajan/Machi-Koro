@@ -496,6 +496,9 @@ bool Partie::acheter_bat(VueCarte* vue_carte) {
     if (bat_picked->get_nom() == "BanqueDeMiniville") {
         joueur_act->set_argent(joueur_act->get_argent() + 5);
     }
+    // Mise à jour de la VueShop
+    Partie *partie = Partie::get_instance();
+    partie->get_vue_partie()->get_vue_shop()->update();
 
     cout << "\nLe joueur \"" << tab_joueurs[joueur_actuel]->get_nom() << "\" a achete la carte " << bat_picked->get_nom() << "\n\n";
 
@@ -885,6 +888,10 @@ void Partie::suite_tour(bool achat_ok){
     while (!pioche->est_vide() && shop->get_nb_tas_reel() < shop->get_nb_tas_max()) {
         try {
             shop->completer_shop(pioche->get_carte());
+            // Mise à jour de la VuePioche
+            Partie* partie = Partie::get_instance();
+            VuePioche *vue_pioche = partie->get_vue_partie()->get_vue_pioche();
+            vue_pioche->update();
         }
         catch (exception const& e) {
             cerr << "ERREUR : " << e.what() << endl;
