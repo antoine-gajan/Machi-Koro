@@ -53,6 +53,8 @@ private:
     QPushButton* bouton_achat;
     QScrollArea* scroll_bat;
     QScrollArea* scroll_mon;
+    QWidget* widget_scroll_bat;
+    QWidget* widget_scroll_mon;
 
 public slots:
     // slots qui gère les clics sur les cartes

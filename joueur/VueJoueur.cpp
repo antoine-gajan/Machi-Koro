@@ -36,6 +36,8 @@ VueJoueur::VueJoueur(Joueur* j,bool e_j_a, QWidget *parent) : carte_choisie(null
 
     // Création des vues des batiments du joueur
     vue_batiments = new vector<VueCarte*>;
+    widget_scroll_bat = new QWidget();
+
 
     for(auto &couleur : j->get_liste_batiment()){
         ind_bat = 0;
@@ -45,7 +47,7 @@ VueJoueur::VueJoueur(Joueur* j,bool e_j_a, QWidget *parent) : carte_choisie(null
             // Ajout du slot
             connect((*vue_batiments)[i],SIGNAL(carteClicked(VueCarte*)),this,SLOT(batimentClique(VueCarte*)));
             // Ajout du widget
-            layout_batiments->addWidget((*vue_batiments)[i],ind_bat,ind_couleurs);
+            layout_batiments->addWidget((*vue_batiments)[i],ind_couleurs,ind_bat);
             if(bat.second>1){
                 // Si plusieurs exemplaires du batiment
                 QLabel* nb_bat = new QLabel;
@@ -55,7 +57,7 @@ VueJoueur::VueJoueur(Joueur* j,bool e_j_a, QWidget *parent) : carte_choisie(null
                 nb_bat->setFixedSize(20,20);
                 nb_bat->setAlignment(Qt::AlignTop | Qt::AlignRight);
                 // Ajout du widget
-                layout_batiments->addWidget(nb_bat,ind_bat,ind_couleurs, Qt::AlignCenter);
+                layout_batiments->addWidget(nb_bat,ind_couleurs,ind_bat, Qt::AlignCenter);
                 layout_batiments->setAlignment(nb_bat,Qt::AlignTop | Qt::AlignRight);
             }
             // Incrémentation
@@ -64,6 +66,14 @@ VueJoueur::VueJoueur(Joueur* j,bool e_j_a, QWidget *parent) : carte_choisie(null
             }
         ind_couleurs++;
     }
+    layout_batiments->setAlignment(Qt::AlignLeft);
+    widget_scroll_bat->setLayout(layout_batiments);
+    scroll_bat = new QScrollArea();
+    scroll_bat->setWidget(widget_scroll_bat);
+    scroll_bat->setWidgetResizable(true);
+    //scroll_bat->setFixedSize(700, 280);
+    scroll_bat->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
+    scroll_bat->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
 
     // Création d'un bouton donnant accès aux batiments fermés
     bat_ferme = new QPushButton("Batiment Fermes");
@@ -74,13 +84,22 @@ VueJoueur::VueJoueur(Joueur* j,bool e_j_a, QWidget *parent) : carte_choisie(null
 
     // Création des vues des monuments du joueur
     vue_monuments = new vector<VueCarte*>;
+    widget_scroll_mon = new QWidget();
     int ind_mon=0;
     for (auto& mon : joueur->get_liste_monument()){
         vue_monuments->push_back(new VueCarte(*mon.first,true, (bool*)mon.second, parent));
-        layout_monuments->addWidget((*vue_monuments)[ind_mon], ind_mon/3, ind_mon%3);
+        layout_monuments->addWidget((*vue_monuments)[ind_mon], ind_mon/3, ind_mon%3, Qt::Alignment());
         connect((*vue_monuments)[ind_mon],SIGNAL(carteClicked(VueCarte*)),this,SLOT(monumentClique(VueCarte*)));
         ind_mon++;
     }
+    widget_scroll_mon->setLayout(layout_monuments);
+    scroll_mon = new QScrollArea();
+    scroll_mon->setWidget(widget_scroll_mon);
+    scroll_mon->setWidgetResizable(true);
+    //scroll_mon->setFixedSize(300, 260);
+    scroll_mon->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    scroll_mon->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
+
 
     int ind_bat_ferme = 0;
     vue_batiments_ferme = new vector<VueCarte*>;
@@ -97,11 +116,12 @@ VueJoueur::VueJoueur(Joueur* j,bool e_j_a, QWidget *parent) : carte_choisie(null
     layout_haut_gauche->addWidget(nom_joueur);
     layout_haut_gauche->addWidget(argent);
     layout_informations_gauche->addLayout(layout_haut_gauche);
-    layout_informations_gauche->addLayout(layout_monuments);
+    layout_informations_gauche->addWidget(scroll_mon);
+
 
     // Ajout des layouts à la page d'informations
     layout_informations->addLayout(layout_informations_gauche);
-    layout_informations->addLayout(layout_batiments);
+    layout_informations->addWidget(scroll_bat);
 
     // Définition du layout principal
     setLayout(layout_informations);
