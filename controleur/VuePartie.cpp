@@ -96,14 +96,21 @@ VuePartie::VuePartie(QWidget *parent){
 
     entete->addLayout(display_des);
 
-    vue_tour_suivant = new QPushButton("Tour suivant");
-    vue_tour_suivant->setFixedSize(150, 50);
-    vue_tour_suivant->setEnabled(true);
-    vue_tour_suivant->setStyleSheet("background-color: blue; color: white;");
-    connect(vue_tour_suivant, SIGNAL(clicked()), this, SLOT(tour_suivant()));
+    //création du bouton au cas ù l'on ne veut rien acheter
+    bouton_rien_faire = new QPushButton("Ne rien faire");
+    bouton_rien_faire->setFixedSize(150, 50);
+    bouton_rien_faire->setEnabled(false);
+    bouton_rien_faire->setStyleSheet("background-color: blue; color: white;");
+    connect(bouton_rien_faire, SIGNAL(clicked()), this, SLOT(tour_suivant()));
 
+    //création du bouton pour passer au tour suivant
+    bouton_tour_suivant = new QPushButton("Passer au tour suivant");
+    bouton_tour_suivant->setFixedSize(150,50);
+    bouton_tour_suivant->setEnabled(false);
+    bouton_tour_suivant->setStyleSheet("background-color: blue; color: white;");
 
-    entete->addWidget(vue_tour_suivant, 0, Qt::AlignCenter);
+    entete->addWidget(bouton_rien_faire, 0, Qt::AlignCenter);
+    entete->addWidget(bouton_tour_suivant, 1, Qt::AlignCenter);
 
     /// ****************************************************************************************************************
     /// ************************************              FIN                *******************************************
@@ -266,6 +273,7 @@ void VuePartie::clicked_event_de_1() {
     partie_actuelle->set_de_1(partie_actuelle->lancer_de());
     bouton_lancer_de_1->setEnabled(false);
     // On appelle la fonction de mise à jour de l'affichage des dés
+    bouton_rien_faire->setEnabled(true);
     update_des();
 }
 
@@ -291,6 +299,7 @@ void VuePartie::update_nom_joueur(){
     Partie* partie_actuelle = Partie::get_instance();
     label_joueur_actuel->setText(QString::fromStdString(partie_actuelle->get_tab_joueurs()[joueur_affiche]->get_nom()));
 }
+
 void VuePartie::tour_suivant() {
     QMessageBox::information(this, "Tour suivant", "Le tour suivant va commencer, si vous n'avez rien acheté, tant pis pour vous !");
     Partie* partie_actuelle = Partie::get_instance();

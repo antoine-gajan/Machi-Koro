@@ -22,7 +22,7 @@ public:
 
     /// Update de la vue
     void update_vue_joueur();
-
+    void set_bouton_rien_faire(bool b) {bouton_rien_faire->setEnabled(b);}
     void update_des();
 
     /// Getters
@@ -71,7 +71,8 @@ private:
     VueJoueur* vue_joueur;
     QWidget *parent_fenetre;
     QWidget *fenetre_carte;
-    QPushButton* vue_tour_suivant;
+    QPushButton* bouton_rien_faire;
+    QPushButton* bouton_tour_suivant;
     /// Milieu de la page
     //Pioche à gauche
     QVBoxLayout *pioche;

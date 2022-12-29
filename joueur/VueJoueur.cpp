@@ -131,6 +131,11 @@ void VueJoueur::monumentClique(VueCarte* vc){
         bouton_achat->setText(QString::fromStdString("Acheter monument"));
         carte_choisie = vc;
         connect(bouton_achat, SIGNAL(clicked()), this, SLOT(clicked_acheter_event()));
+        if(Partie::get_instance()->get_moment_achat() == true){
+            bouton_achat->setEnabled(true);
+        }else{
+            bouton_achat->setEnabled(false);
+        }
     }
 
     // Affichage de la fenetre pop up
