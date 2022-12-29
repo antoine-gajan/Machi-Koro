@@ -51,7 +51,12 @@ void VueShop::batiment_clique(VueCarte *vc) {
     // On autorise l'achat
     bouton_acheter = new QPushButton(fenetre);
     bouton_acheter->setText(QString::fromStdString("Acheter le batiment"));
-    if(Partie::get_instance()->get_moment_achat() == true) {
+
+    auto indice = Partie::get_instance()->get_joueur_actuel();
+    auto argent = Partie::get_instance()->get_tab_joueurs()[indice]->get_argent();
+    auto prix = vc->getCarte()->get_prix();
+
+    if(Partie::get_instance()->get_moment_achat() && argent >= prix) {
         bouton_acheter->setEnabled(true);
     }else{
         bouton_acheter->setEnabled(false);

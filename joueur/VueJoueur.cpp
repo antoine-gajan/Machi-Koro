@@ -168,7 +168,12 @@ void VueJoueur::monumentClique(VueCarte* vc){
         bouton_achat->setText(QString::fromStdString("Acheter monument"));
         carte_choisie = vc;
         connect(bouton_achat, SIGNAL(clicked()), this, SLOT(clicked_acheter_event()));
-        if(Partie::get_instance()->get_moment_achat()){
+
+        auto indice = Partie::get_instance()->get_joueur_actuel();
+        auto argent_joueur = Partie::get_instance()->get_tab_joueurs()[indice]->get_argent();
+        auto prix = vc->getCarte()->get_prix();
+
+        if(Partie::get_instance()->get_moment_achat() && argent_joueur >= prix){
             bouton_achat->setEnabled(true);
         }else{
             bouton_achat->setEnabled(false);
