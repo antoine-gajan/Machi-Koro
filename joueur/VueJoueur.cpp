@@ -18,7 +18,6 @@ VueJoueur::VueJoueur(Joueur* j,bool e_j_a, QWidget *parent) : carte_choisie(null
     argent=new QLCDNumber;
     argent->display((int)joueur->get_argent());
     argent->setFixedSize(70,30);
-    //
 
     // Barre avec les informations du joueur
     layout_informations = new QHBoxLayout;
@@ -34,20 +33,38 @@ VueJoueur::VueJoueur(Joueur* j,bool e_j_a, QWidget *parent) : carte_choisie(null
     int i = 0;
     int ind_bat;
     int ind_couleurs = 1;
+
     // Création des vues des batiments du joueur
     vue_batiments = new vector<VueCarte*>;
-    for (auto& couleur : joueur->get_liste_batiment()){
+
+    for(auto &couleur : j->get_liste_batiment()){
         ind_bat = 0;
         for (auto bat : couleur.second){
-            // Affichage du batiment
-            vue_batiments->push_back(new VueCarte(*bat.first, true, false, parent));
-            layout_batiments->addWidget((*vue_batiments)[i], ind_couleurs, ind_bat);
+            // Création vue carte
+            vue_batiments->push_back(new VueCarte(*(bat.first),true, false));
+            // Ajout du slot
             connect((*vue_batiments)[i],SIGNAL(carteClicked(VueCarte*)),this,SLOT(batimentClique(VueCarte*)));
+            // Ajout du widget
+            layout_batiments->addWidget((*vue_batiments)[i],ind_bat,ind_couleurs);
+            if(bat.second>1){
+                // Si plusieurs exemplaires du batiment
+                QLabel* nb_bat = new QLabel;
+                nb_bat->setText(QString::number(bat.second));
+                nb_bat->setStyleSheet("QLabel { color : white; background-color : black; }");
+                // Mise en forme
+                nb_bat->setFixedSize(20,20);
+                nb_bat->setAlignment(Qt::AlignTop | Qt::AlignRight);
+                // Ajout du widget
+                layout_batiments->addWidget(nb_bat,ind_bat,ind_couleurs, Qt::AlignCenter);
+                layout_batiments->setAlignment(nb_bat,Qt::AlignTop | Qt::AlignRight);
+            }
+            // Incrémentation
             ind_bat++;
             i++;
-        }
+            }
         ind_couleurs++;
     }
+
     // Création d'un bouton donnant accès aux batiments fermés
     bat_ferme = new QPushButton("Batiment Fermes");
     layout_batiments->addWidget(bat_ferme);
@@ -156,26 +173,6 @@ void update_monu(VueCarte* vc, Carte* c){
 }
 
 void replace_batiment(){
-
-}
-
-void VueJoueur::update_vue(){
-    /// Mise à jour de la vue joueur
-    // Mise à jour de l'argent
-    if(joueur->get_argent() != get_widget_argent()->intValue()){
-        replace_argent(joueur->get_argent());
-    }
-    // Mise à jour des batiments
-
-
-    // Mise à jour des batiments fermés
-
-
-    // Mise à jour des monuments
-    map<Monument*, bool> mon = joueur->get_liste_monument();
-    for(size_t i; i< mon.size();i++){
-
-    }
 
 }
 
