@@ -207,4 +207,5 @@ void VueJoueur::clicked_acheter_event(){
     partie->acheter_carte_event(carte);
 
     carte_choisie = nullptr;
+    partie->suite_tour(true);
 }
