@@ -277,7 +277,8 @@ void VuePartie::lancer_de_2_display(){
 void VuePartie::clicked_event_de_1() {
     // Slot personnalisé qui vient créer une nouvelle valeur pour le dé et l'injecte dans partie
     Partie* partie_actuelle = Partie::get_instance();
-    partie_actuelle->set_de_1(partie_actuelle->lancer_de());
+    //partie_actuelle->set_de_1(partie_actuelle->lancer_de());
+    partie_actuelle->set_de_1(4);
     bouton_lancer_de_1->setEnabled(false);
     // On appelle la fonction de mise à jour de l'affichage des dés
     bouton_rien_faire->setEnabled(true);

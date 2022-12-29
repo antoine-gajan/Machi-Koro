@@ -1,6 +1,6 @@
 #include "Gare.h"
 #include "Partie.h"
-#include <QRadioButton>
+#include <QMessageBox>
 
 Gare::Gare()
     : Monument(AVANT,
@@ -23,6 +23,18 @@ void Gare::declencher_effet(unsigned int possesseur, int bonus) const {
         }
     }
     else {
+        QMessageBox msgBox;
+        msgBox.setText("Voulez-vous lancer un deuxième dé ?");
+        msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
+        msgBox.setDefaultButton(QMessageBox::No);
+        int ret = msgBox.exec();
+        if (ret == QMessageBox::Yes) {
+            string effet = "Activation de l'effet de la gare du joueur \"" + joueur->get_nom() + "\"";
+            partie->set_de_2(Partie::lancer_de());
+            partie->get_vue_partie()->update_des();
+            partie->get_vue_partie()->get_vue_info()->add_info(effet);
+        }
+        /*
 
             //Création d'une boite de dialogue afin de savoit si le joueur veut lancer deux dés ou non
             QDialog *window = new QDialog();
@@ -52,7 +64,7 @@ void Gare::declencher_effet(unsigned int possesseur, int bonus) const {
             });
             // Execution de la boite de dialogue et attente d'une réponse
             window->setLayout(formLayout);
-            window->exec();
+            window->exec();*/
 
         }
 }
