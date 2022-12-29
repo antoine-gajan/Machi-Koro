@@ -22,6 +22,10 @@ public:
 
     /// Update de la vue
     void update_vue_joueur();
+    void update_vue_partie();
+    void update_vue_shop();
+    void update_vue_pioche();
+    void update_vue_info();
     void set_bouton_rien_faire(bool b) {bouton_rien_faire->setEnabled(b);}
     void update_des();
 
@@ -52,7 +56,6 @@ private:
     QLabel* label_de1;
     QLabel* label_de2;
     QLabel* pioche_exception;
-    VueShop* shop;
     QLabel* image_entete;
     QPushButton *bouton_lancer_de_1;
     QPushButton *bouton_lancer_de_2;
@@ -62,8 +65,9 @@ private:
     QHBoxLayout *layout;
     QHBoxLayout *entete;
     QVBoxLayout *entete_gauche;
-    /// Au de la page
+    /// Haut de la page
     QVBoxLayout *display_des;
+    QLabel * infos_partie;
 
     QHBoxLayout* layout_de_1;
     QHBoxLayout* layout_de_2;

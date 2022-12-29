@@ -52,7 +52,6 @@ Partie::Partie(EditionDeJeu* edition, const map<string, string>& joueurs, const 
     ///Constructeur de Partie
 
     //Initialisation des variables utiles
-    unsigned int nb_tas;
     rejouer = false;
 
     tab_nom_edition.push_back(edition->get_nom());
@@ -113,22 +112,27 @@ Partie::Partie(EditionDeJeu* edition, const map<string, string>& joueurs, const 
 
     pioche = new Pioche(map_to_vector(list_batiments));
 
-    if (shop_type == "standard") {
-        nb_tas = shop_size;
-    }
-    else{
-        nb_tas = list_batiments.size() + 1;
-    }
+    if (shop_type == "standard") {    // Construction du Shop
+        shop = new Shop(shop_size);
 
-    // Construction du Shop
-    shop = new Shop(nb_tas);
-
-    while (!pioche->est_vide() && shop->get_nb_tas_reel() < shop->get_nb_tas_max()){
-        try  {
-            shop->completer_shop(pioche->get_carte());
+        while (!pioche->est_vide() && shop->get_nb_tas_reel() < shop->get_nb_tas_max()){
+            try  {
+                shop->completer_shop(pioche->get_carte());
+            }
+            catch(exception const& e){
+                cerr << "ERREUR : " << e.what() << endl;
+            }
         }
-        catch(exception const& e){
-            cerr << "ERREUR : " << e.what() << endl;
+    } else {
+        shop = new Shop(list_batiments.size());
+
+        while (!pioche->est_vide()){
+            try  {
+                shop->completer_shop(pioche->get_carte());
+            }
+            catch(exception const& e){
+                cerr << "ERREUR : " << e.what() << endl;
+            }
         }
     }
     vue_partie = nullptr;
@@ -562,18 +566,47 @@ void Partie::jouer_partie() {
     vue_partie = new VuePartie(fenetre);
 
 
-
+    cout << "Avant" << endl;
     vue_partie->show();
 
-    joueur_actuel = 0;
+    joueur_actuel = 1;
+    vue_partie->update_vue_partie();
+    vue_partie->get_vue_infos()->add_info("Tour du joueur " + tab_joueurs[joueur_actuel]->get_nom());
+    vue_partie->get_vue_infos()->add_info("Vous avez " + to_string(tab_joueurs[joueur_actuel]->get_argent()) + " $");
+    vue_partie->get_vue_infos()->add_info("Vous avez " + to_string(tab_joueurs[joueur_actuel]->get_argent()) + " $");
+    vue_partie->get_vue_infos()->add_info("Vous avez " + to_string(tab_joueurs[joueur_actuel]->get_argent()) + " $");
+    vue_partie->get_vue_infos()->add_info("Vous avez " + to_string(tab_joueurs[joueur_actuel]->get_argent()) + " $");
+    vue_partie->get_vue_infos()->add_info("Vous avez " + to_string(tab_joueurs[joueur_actuel]->get_argent()) + " $");
+    vue_partie->get_vue_infos()->add_info("Vous avez " + to_string(tab_joueurs[joueur_actuel]->get_argent()) + " $");
+    vue_partie->get_vue_infos()->add_info("Vous avez " + to_string(tab_joueurs[joueur_actuel]->get_argent()) + " $");
+    vue_partie->get_vue_infos()->add_info("Vous avez " + to_string(tab_joueurs[joueur_actuel]->get_argent()) + " $");
+    vue_partie->get_vue_infos()->add_info("Vous avez " + to_string(tab_joueurs[joueur_actuel]->get_argent()) + " $");
+    vue_partie->get_vue_infos()->add_info("Vous avez " + to_string(tab_joueurs[joueur_actuel]->get_argent()) + " $");
+    vue_partie->get_vue_infos()->add_info("Vous avez " + to_string(tab_joueurs[joueur_actuel]->get_argent()) + " $");
+    vue_partie->get_vue_infos()->add_info("Vous avez " + to_string(tab_joueurs[joueur_actuel]->get_argent()) + " $");
+    vue_partie->get_vue_infos()->add_info("Vous avez " + to_string(tab_joueurs[joueur_actuel]->get_argent()) + " $");
+    vue_partie->get_vue_infos()->add_info("Vous avez " + to_string(tab_joueurs[joueur_actuel]->get_argent()) + " $");
+    vue_partie->get_vue_infos()->add_info("Vous avez " + to_string(tab_joueurs[joueur_actuel]->get_argent()) + " $");
+    vue_partie->get_vue_infos()->add_info("Vous avez " + to_string(tab_joueurs[joueur_actuel]->get_argent()) + " $");
+    vue_partie->get_vue_infos()->add_info("Vous avez " + to_string(tab_joueurs[joueur_actuel]->get_argent()) + " $");
+    vue_partie->get_vue_infos()->add_info("Vous avez " + to_string(tab_joueurs[joueur_actuel]->get_argent()) + " $");
+    vue_partie->get_vue_infos()->add_info("Vous avez " + to_string(tab_joueurs[joueur_actuel]->get_argent()) + " $");
+    vue_partie->get_vue_infos()->add_info("Vous avez " + to_string(tab_joueurs[joueur_actuel]->get_argent()) + " $");
+    vue_partie->get_vue_infos()->add_info("Vous avez " + to_string(tab_joueurs[joueur_actuel]->get_argent()) + " $");
+    vue_partie->get_vue_infos()->add_info("Vous avez " + to_string(tab_joueurs[joueur_actuel]->get_argent()) + " $");
+    vue_partie->get_vue_infos()->add_info("Vous avez " + to_string(tab_joueurs[joueur_actuel]->get_argent()) + " $");
+    vue_partie->get_vue_infos()->add_info("Vous avez " + to_string(tab_joueurs[joueur_actuel]->get_argent()) + " $");
+    vue_partie->get_vue_infos()->add_info("Vous avez " + to_string(tab_joueurs[joueur_actuel]->get_argent()) + " $");
+    vue_partie->get_vue_infos()->add_info("Vous avez " + to_string(tab_joueurs[joueur_actuel]->get_argent()) + " $");
+    cout << "Apres" << endl;
 
     bool fin_partie = false;
     // Tant que le joueur precedent n'a pas gagne on continue la partie
 
-    cout << "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nBienvenue dans Miniville !" << endl;
-    cout << "Vous allez jouer avec " << tab_joueurs.size() << " joueurs." << endl;
-    cout << "Le but du jeu est d'obtenir " << nb_monuments_win << " monuments." << endl;
-    cout << "Bon jeu !\n\n" << endl;
+//    cout << "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nBienvenue dans Miniville !" << endl;
+//    cout << "Vous allez jouer avec " << tab_joueurs.size() << " joueurs." << endl;
+//    cout << "Le but du jeu est d'obtenir " << nb_monuments_win << " monuments." << endl;
+//    cout << "Bon jeu !\n\n" << endl;
     jouer_tour();
     //vue_partie->update_pasta("Le joueur " + tab_joueurs[joueur_actuel]->get_nom() + " a gagne !");
 /*
@@ -586,11 +619,11 @@ void Partie::jouer_partie() {
     }*/
 
     /// On affiche le gagnant
-    cout << "Le gagnant est " << tab_joueurs[joueur_actuel]->get_nom() << endl;
-    cout << "Voici son etat final : " << endl;
-    tab_joueurs[joueur_actuel]->afficher_joueur();
-
-    cout << "Felicitations !!!" << endl;
+//    cout << "Le gagnant est " << tab_joueurs[joueur_actuel]->get_nom() << endl;
+//    cout << "Voici son etat final : " << endl;
+//    tab_joueurs[joueur_actuel]->afficher_joueur();
+//
+//    cout << "Felicitations !!!" << endl;
 }
 
 void Partie::jouer_tour() {

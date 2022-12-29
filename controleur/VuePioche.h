@@ -13,7 +13,6 @@ class VuePioche : public QVBoxLayout{
     QProgressBar* barre_pioche;
 public:
     VuePioche(Pioche *pioche, QWidget *parent = nullptr);
-    void update();
 };
 
 

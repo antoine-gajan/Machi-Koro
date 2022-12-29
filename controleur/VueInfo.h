@@ -13,7 +13,7 @@ class VueInfo : public QVBoxLayout {
     public :
     VueInfo(QWidget *parent = nullptr);
     void add_info(const std::string& info);
-    void clear_info();
+
 
 private:
     QLabel *info_permament;

@@ -44,6 +44,12 @@ VuePartie::VuePartie(QWidget *parent){
 
     entete_gauche->addWidget(label_edj);
 
+    infos_partie = new QLabel();
+    string infos_ma_partie = "Nombre de joueurs : " + to_string(partie_actuelle->get_tab_joueurs().size()) + "\nNombre de monuments pour gagner : " + to_string(partie_actuelle->get_nb_monuments_win());
+    infos_partie->setText(QString::fromStdString(infos_ma_partie));
+    infos_partie->setFixedSize(300, 50);
+    entete_gauche->addWidget(infos_partie, 0, Qt::AlignCenter);
+
     //Affichage du nom du joueur actuel
     label_joueur_actuel = new QLabel;
     string nom_joueur = "Joueur actuel : \"" + partie_actuelle->get_tab_joueurs()[partie_actuelle->get_joueur_actuel()]->get_nom() + "\"";
@@ -51,6 +57,7 @@ VuePartie::VuePartie(QWidget *parent){
     label_joueur_actuel->setFixedSize(300, 50);
     label_joueur_actuel->setAlignment(Qt::AlignCenter);
     entete_gauche->addWidget(label_joueur_actuel, 0, Qt::AlignCenter);
+
     entete->addLayout(entete_gauche);
     structure->addLayout(entete, 10);
 
@@ -134,7 +141,7 @@ VuePartie::VuePartie(QWidget *parent){
     // Shop
     scroll_shop = new QScrollArea;
     widget_shop = new QWidget;
-    view_shop = new VueShop(*(partie_actuelle->get_shop()), nullptr);
+    view_shop = new VueShop(partie_actuelle->get_shop(), nullptr);
     widget_shop->setLayout(view_shop);
     scroll_shop->setWidget(widget_shop);
     scroll_shop->setWidgetResizable(true);
@@ -289,15 +296,36 @@ void VuePartie::clicked_event_de_2() {
 void VuePartie::update_des() {
     // Mise à jour de l'affichage des dés
     Partie* partie_actuelle = Partie::get_instance();
-    label_de1->setText(QString::fromStdString(std::to_string(partie_actuelle->get_de_1())));
-    label_de2->setText(QString::fromStdString(std::to_string(partie_actuelle->get_de_2())));
+    QLabel* old_de_1 = label_de1;
+    QLabel* old_de_2 = label_de2;
+    label_de1 = new QLabel(QString::number(partie_actuelle->get_de_1()));
+    label_de1->setAlignment(Qt::AlignHCenter);
+
+    label_de2 = new QLabel(QString::number(partie_actuelle->get_de_2()));
+    label_de2->setAlignment(Qt::AlignHCenter);
+
+    //label_de1->setText(QString::fromStdString(std::to_string(partie_actuelle->get_de_1())));
+    //label_de2->setText(QString::fromStdString(std::to_string(partie_actuelle->get_de_2())));
     partie_actuelle->set_moment_achat(true);
+    layout_de_1->replaceWidget(old_de_1, label_de1);
+    layout_de_2->replaceWidget(old_de_2, label_de2);
+    delete old_de_1;
+    delete old_de_2;
+    update();
 }
 
 void VuePartie::update_nom_joueur(){
     // Mise à jour du nom du joueur actuel dans l'entete
     Partie* partie_actuelle = Partie::get_instance();
-    label_joueur_actuel->setText(QString::fromStdString(partie_actuelle->get_tab_joueurs()[joueur_affiche]->get_nom()));
+    QLabel* old_nom_joueur = label_joueur_actuel;
+    label_joueur_actuel = new QLabel();
+    string nom_joueur = "Joueur actuel : \"" + partie_actuelle->get_tab_joueurs()[partie_actuelle->get_joueur_actuel()]->get_nom() + "\"";
+    label_joueur_actuel->setText(QString::fromStdString(nom_joueur));
+    label_joueur_actuel->setFixedSize(300, 50);
+    label_joueur_actuel->setAlignment(Qt::AlignCenter);
+    entete_gauche->addWidget(label_joueur_actuel, 0, Qt::AlignCenter);
+    delete old_nom_joueur;
+    update();
 }
 
 void VuePartie::tour_suivant() {
@@ -305,4 +333,80 @@ void VuePartie::tour_suivant() {
     Partie* partie_actuelle = Partie::get_instance();
     // On appelle la fonction de mise à jour de l'affichage
     partie_actuelle->suite_tour(false);
+}
+
+void VuePartie::update_vue_partie() {
+    /// Update du haut de la vue partie
+    update_nom_joueur();
+    update_des();
+
+    /// Update du milieu de la vue partie
+    update_vue_pioche();
+    update_vue_shop();
+    update_vue_info();
+
+    /// Update du bas de la vue partie
+    update_vue_joueur();
+
+    /// Update de la vue partie
+    update();
+}
+
+void VuePartie::update_vue_shop() {
+    Partie* partie_actuelle = Partie::get_instance();
+    // On appelle la fonction de mise à jour de l'affichage
+    VueShop* old = view_shop;
+    QWidget* old_widget = widget_shop;
+    QScrollArea* old_scroll = scroll_shop;
+
+    scroll_shop = new QScrollArea;
+    widget_shop = new QWidget;
+    view_shop = new VueShop(partie_actuelle->get_shop(), nullptr);
+    widget_shop->setLayout(view_shop);
+    scroll_shop->setWidget(widget_shop);
+    scroll_shop->setWidgetResizable(true);
+    unsigned int largeur = floor(sqrt(partie_actuelle->get_shop()->get_nb_tas_reel()));
+    scroll_shop->setFixedWidth(130 * largeur);
+    scroll_shop->setFixedHeight(520);
+    scroll_shop->setStyle(QStyleFactory::create("Fusion"));
+    body->addWidget(scroll_shop,100, Qt::AlignCenter);
+    delete old;
+    delete old_widget;
+    delete old_scroll;
+    update();
+}
+
+void VuePartie::update_vue_pioche() {
+    Partie* partie_actuelle = Partie::get_instance();
+    // On appelle la fonction de mise à jour de l'affichage
+    VuePioche* old = view_pioche;
+    QWidget* old_widget = fenetre_pioche;
+
+    view_pioche = new VuePioche(partie_actuelle->get_pioche(), nullptr);
+    fenetre_pioche = new QWidget;
+    fenetre_pioche->setFixedSize(300, 520);
+    fenetre_pioche->setLayout(view_pioche);
+    fenetre_pioche->setStyle(QStyleFactory::create("Fusion"));
+    body->addWidget(fenetre_pioche, 100, Qt::AlignCenter);
+
+    delete old;
+    delete old_widget;
+    update();
+}
+
+void VuePartie::update_vue_info () {
+    Partie* partie_actuelle = Partie::get_instance();
+    // On appelle la fonction de mise à jour de l'affichage
+    VueInfo* old = infos;
+    QWidget* old_widget = widget_infos;
+
+    infos = new VueInfo(nullptr);
+    widget_infos = new QWidget;
+    widget_infos->setLayout(infos);
+    widget_infos->setFixedSize(300, 520);
+    body->addWidget(widget_infos, 100, Qt::AlignCenter);
+
+    delete old;
+    delete old_widget;
+    update();
 }
