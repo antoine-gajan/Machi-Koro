@@ -34,11 +34,11 @@ public:
     void lancer_de_1_display();
     void lancer_de_2_display();
     void update_nom_joueur();
-    VueInfo* get_vue_info() const {return infos;}
 
     VueJoueur* get_vue_joueur() const {return vue_joueur;}
     VueShop* get_vue_shop() const {return view_shop;}
     VuePioche* get_vue_pioche() const {return view_pioche;}
+    VueInfo* get_vue_infos() const {return infos;}
 private:
 
     //Partie* partie_actuelle;
