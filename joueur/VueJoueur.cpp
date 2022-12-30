@@ -190,7 +190,7 @@ void VueJoueur::monumentClique(VueCarte* vc){
         auto argent_joueur = Partie::get_instance()->get_tab_joueurs()[indice]->get_argent();
         auto prix = vc->getCarte()->get_prix();
 
-        if(Partie::get_instance()->get_moment_achat() && argent_joueur >= prix){
+        if(Partie::get_instance()->get_moment_achat() && !joueur->get_est_ia() && argent_joueur >= prix){
             bouton_achat->setEnabled(true);
         }else{
             bouton_achat->setEnabled(false);

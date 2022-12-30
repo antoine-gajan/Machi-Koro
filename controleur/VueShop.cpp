@@ -67,7 +67,7 @@ void VueShop::batiment_clique(VueCarte *vc) {
         }
     }
 
-    if(Partie::get_instance()->get_moment_achat() && argent >= prix && !deja_possede){
+    if(Partie::get_instance()->get_moment_achat() && !joueur->get_est_ia() && argent >= prix && !deja_possede){
         bouton_acheter->setEnabled(true);
     }else{
         bouton_acheter->setEnabled(false);
