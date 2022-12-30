@@ -71,7 +71,7 @@ VueJoueur::VueJoueur(Joueur* j,bool e_j_a, QWidget *parent) : carte_choisie(null
                 nb_bat->setStyleSheet("QLabel { color : white; background-color : black; }");
                 // Mise en forme
                 nb_bat->setFixedSize(20,20);
-                nb_bat->setAlignment(Qt::AlignTop | Qt::AlignRight);
+                nb_bat->setAlignment(Qt::AlignTop | Qt::AlignCenter);
                 // Ajout du widget
                 layout_batiments->addWidget(nb_bat,ind_couleurs,ind_bat, Qt::AlignCenter);
                 layout_batiments->setAlignment(nb_bat,Qt::AlignTop | Qt::AlignRight);

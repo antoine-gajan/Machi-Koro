@@ -838,6 +838,9 @@ void Partie::suite_tour(bool achat_ok){
         QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
     }
 
+    if (vue_partie->get_vue_carte() != nullptr)
+        vue_partie->get_vue_carte()->close();
+
     /// Vérifie si la partie est finie
     if (est_gagnant(joueur_actuel)) {
         /// Fin de la partie

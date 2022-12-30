@@ -22,7 +22,7 @@ VueShop::VueShop(Shop *shop, QWidget *parent)  : carte_choisie(nullptr){
             //nb_carte->setAttribute(Qt::WA_TranslucentBackground);
             nb_carte->setStyleSheet("QLabel { color : white; background-color : black; }");
             nb_carte->setFixedSize(20,20);
-            nb_carte->setAlignment(Qt::AlignTop | Qt::AlignRight);
+            nb_carte->setAlignment(Qt::AlignTop | Qt::AlignCenter);
             this->addWidget(nb_carte,x,y-1, Qt::AlignCenter);
             this->setAlignment(nb_carte,Qt::AlignTop | Qt::AlignRight);
         }
