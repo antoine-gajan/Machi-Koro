@@ -53,10 +53,21 @@ void VueShop::batiment_clique(VueCarte *vc) {
     bouton_acheter->setText(QString::fromStdString("Acheter le batiment"));
 
     auto indice = Partie::get_instance()->get_joueur_actuel();
-    auto argent = Partie::get_instance()->get_tab_joueurs()[indice]->get_argent();
-    auto prix = vc->getCarte()->get_prix();
+    auto joueur = Partie::get_instance()->get_tab_joueurs()[indice];
+    auto argent = joueur->get_argent();
+    auto carte = (Batiment *) vc->getCarte();
+    auto prix = carte->get_prix();
+    bool deja_possede = false;
 
-    if(Partie::get_instance()->get_moment_achat() && argent >= prix) {
+
+    if (carte->get_couleur() == Violet){
+        auto nom = carte->get_nom();
+        if (joueur->possede_batiment(nom)){
+            deja_possede = true;
+        }
+    }
+
+    if(Partie::get_instance()->get_moment_achat() && argent >= prix && !deja_possede){
         bouton_acheter->setEnabled(true);
     }else{
         bouton_acheter->setEnabled(false);
