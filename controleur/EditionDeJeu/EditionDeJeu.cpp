@@ -237,9 +237,7 @@ EditionDeJeu::EditionDeJeu(const string& nom_edition) : nom(nom_edition) {
         batiment.insert(pair<Batiment*, unsigned int>(new StandDeHamburger(), 4));
         batiment.insert(pair<Batiment*, unsigned int>(new SushiBar(), 4));
     }
-    else{
-        cout<<"Ce nom d edition est invalide"<<endl;
-    }
+
 }
 
 EditionDeJeu::~EditionDeJeu() {
