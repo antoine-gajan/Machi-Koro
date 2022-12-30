@@ -35,6 +35,9 @@ include_directories(joueur)
 add_executable(Machi_Koro
         main.cpp
 
+        cartes/VueCarte.cpp
+        cartes/VueCarte.h
+
         cartes/Carte.cpp
         cartes/Carte.h
 
@@ -149,18 +152,24 @@ add_executable(Machi_Koro
         controleur/Partie.h
         controleur/Shop.cpp
         controleur/Shop.h
+        controleur/VuePartie.cpp
+        controleur/VuePartie.h
+        controleur/VuePartie.cpp
+        controleur/VuePartie.h
+        controleur/VuePioche.cpp
+        controleur/VuePioche.h
+        controleur/VueShop.cpp
+        controleur/VueShop.h
+        controleur/VueInfo.cpp
+        controleur/VueInfo.h
 
         joueur/Joueur.cpp
         joueur/Joueur.h
+        joueur/VueJoueur.cpp
+        joueur/VueJoueur.h
 
         exception/gameExeption.h
-
-        cartes/VueCarte.cpp
-        cartes/VueCarte.h
-        controleur/VuePartie.cpp
-        controleur/VuePartie.h
-        joueur/VueJoueur.cpp
-        joueur/VueJoueur.h controleur/VuePartie.cpp controleur/VuePartie.h controleur/VuePioche.cpp controleur/VuePioche.h controleur/VueShop.cpp controleur/VueShop.h controleur/VueInfo.cpp controleur/VueInfo.h)
+)
 
 target_link_libraries(Machi_Koro
         Qt::Core
