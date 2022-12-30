@@ -750,6 +750,10 @@ void Partie::jouer_tour() {
         }
         /// on lance la phase d'achat de l'IA
         acheter_carte_ia();
+    } else {
+        vue_partie->get_vue_infos()->add_info("Pour acheter une carte, cliquez dessus puis sur le bouton 'Acheter'");
+        vue_partie->get_vue_infos()->add_info("Pour passer votre tour, cliquez sur le bouton 'Ne rien faire' puis confirmez");
+        vue_partie->get_vue_infos()->add_info("C'est à vous de jouer !");
     }
 }
 
