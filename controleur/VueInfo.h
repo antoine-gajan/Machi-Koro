@@ -2,7 +2,6 @@
 #define MACHI_KORO_VUEINFO_H
 
 
-#include <vector>
 #include <QWidget>
 #include <QScrollArea>
 #include <QVBoxLayout>

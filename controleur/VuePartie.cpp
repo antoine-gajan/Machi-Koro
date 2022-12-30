@@ -1,9 +1,9 @@
 #include <iostream>
-#include <string>
 
-using namespace std;
 #include "VuePartie.h"
 #include "Partie.h"
+
+using namespace std;
 
 VuePartie::VuePartie(QWidget *parent){
     /// Constructeur de VuePartie

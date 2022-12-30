@@ -14,10 +14,7 @@ class VueShop  : public QGridLayout{
     QPushButton* bouton_acheter;
 
 public:
-
     VueShop(Shop* shop, QWidget *parent = nullptr);
-    VueCarte* get_carte_choisie() const {return carte_choisie;}
-    void set_bouton_acheter() {bouton_acheter->setEnabled(true);}
 
 public slots:
     void clicked_acheter_event();//VueCarte* vc);

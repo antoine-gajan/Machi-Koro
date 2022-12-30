@@ -30,19 +30,14 @@ public:
     void update_des();
 
     /// Getters
-    unsigned int get_nb_joueurs() const {return nb_joueurs;}
-    unsigned int get_joueur_affiche() const {return joueur_affiche;}
-    //Partie* get_partie_actuelle() const{return partie_actuelle;}
     QWidget* get_vue_carte() const {return fenetre_carte;}
     void set_vue_carte(QWidget* vue_carte) {fenetre_carte = vue_carte;}
     void update_nom_joueur();
 
     VueJoueur* get_vue_joueur() const {return vue_joueur;}
-    VueShop* get_vue_shop() const {return view_shop;}
-    VuePioche* get_vue_pioche() const {return view_pioche;}
     VueInfo* get_vue_infos() const {return infos;}
-private:
 
+private:
     //Partie* partie_actuelle;
     unsigned int nb_joueurs;
     unsigned int joueur_affiche;
@@ -89,11 +84,9 @@ private:
     VueInfo *infos;
 
     QWidget* widget_infos;
+
 public slots:
-
     // Slots qui gèrent les clics sur les vues joueurs
-        //virtual void carteClique(VueCarte* vc);
-
     void d_click();
     void g_click();
     void tour_suivant();

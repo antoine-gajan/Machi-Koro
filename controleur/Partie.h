@@ -9,6 +9,7 @@
 #include <ctime>
 #include <cstdlib>
 #include <unistd.h>
+#include <random>
 
 #include "EditionDeJeu.h"
 #include "Joueur.h"

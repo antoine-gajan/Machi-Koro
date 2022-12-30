@@ -1,10 +1,7 @@
 #ifndef MACHI_KORO_PIOCHE_H
 #define MACHI_KORO_PIOCHE_H
 
-#include <vector>
-#include <random>
 #include <stack>
-#include <algorithm>
 
 #include "Batiment.h"
 #include "gameExeption.h"
@@ -22,7 +19,6 @@ class Pioche {
         ~Pioche() = default;
         bool est_vide() {return contenu.empty();};
         Batiment* get_carte(); // retourne la carte du dessus de la pioche
-        const Carte* get_top_carte() const {return contenu.top();};
         unsigned int get_taille() const {return contenu.size();};
         unsigned int get_taille_init() const {return taille_init;};
 };

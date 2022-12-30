@@ -4,7 +4,7 @@
 
 VuePioche::VuePioche(Pioche* pioche, QWidget *parent) {
 
-    if(pioche->get_top_carte() == nullptr){
+    if(pioche->get_taille() == 0) {
         pioche_exception = new QLabel;
         pioche_exception->setText("Pioche vide!");
         this->addWidget(pioche_exception,20, Qt::AlignCenter);

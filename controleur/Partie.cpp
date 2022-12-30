@@ -339,9 +339,8 @@ bool Partie::acheter_monu_ia() {
     joueur_act->activer_monument(mon_picked);
     joueur_act->set_argent(joueur_act->get_argent() - mon_picked->get_prix());
 
-    cout << "\n\nLe joueur \"" << tab_joueurs[joueur_actuel]->get_nom() << "\" a active le monument " << mon_picked->get_nom() << "\n\n";
-
-
+    vue_partie->get_vue_infos()->add_info("Le joueur \"" + tab_joueurs[joueur_actuel]->get_nom() + "\" a active le monument " + mon_picked->get_nom() + "\n\n");
+    return true;
 }
 
 bool Partie::acheter_bat_ia() {
@@ -401,8 +400,7 @@ bool Partie::acheter_bat_ia() {
         joueur_act->set_argent(joueur_act->get_argent() + 5);
     }
 
-    cout << "\nLe joueur \"" << tab_joueurs[joueur_actuel]->get_nom() << "\" a achete la carte " << bat_picked->get_nom() << "\n\n";
-
+    vue_partie->get_vue_infos()->add_info("Le joueur \"" + tab_joueurs[joueur_actuel]->get_nom() + "\" a achete la carte " + bat_picked->get_nom() + "\n\n");
     return true;
 }
 
@@ -459,44 +457,7 @@ bool Partie::acheter_monu(VueCarte* vue_carte) {
     unsigned int pos = 1;
     vector<Monument*> monuments_dispo;
 
-    if (!tab_joueurs[joueur_actuel]->get_est_ia()) {/*
-        cout << "Quel est le numero du monument que vous voulez acheter?" << endl;
-        cout << "0 : Annuler" << endl;
-        // Ajout des monuments disponibles à la liste
-        for (auto mon_act: joueur_act->get_liste_monument()) {
-            if (!mon_act.second && mon_act.first->get_prix() <= joueur_act->get_argent()) {
-                cout << pos << " : " << mon_act.first->get_nom() << endl;
-                pos++;
-                monuments_dispo.push_back(mon_act.first);
-            }
-        }
-        // Si liste vide, on renvoie false
-        if (monuments_dispo.empty()) {
-            return false;
-        }
-        // Fenetre de dialogue pour l'achat
-        QDialog* window = new QDialog();
-        vector<VueCarte*> vue_monuments;
-        QGridLayout* layout_monuments = new QGridLayout;
-        int i = 0;
-        for (auto& mon : monuments_dispo) {
-            // Affichage du monument
-            Monument* adresse_mon = mon;
-            vue_monuments.push_back(new VueCarte(*mon, true, window));
-            layout_monuments->addWidget(vue_monuments[i], i / 4, i % 4);
-            QObject::connect(vue_monuments[i], &QPushButton::clicked, [window, adresse_mon, &mon_picked]() {
-                window->accept();
-                mon_picked = adresse_mon;
-            });
-            i++;
-        }
-        window->setLayout(layout_monuments);
-        // Affichage de la fenêtre
-        window->exec();
-        // Activation du monument et update
-        joueur_act->activer_monument(mon_picked);
-        joueur_act->set_argent(joueur_act->get_argent() - mon_picked->get_prix());*/
-
+    if (!tab_joueurs[joueur_actuel]->get_est_ia()) {
         for (auto mon_act: joueur_act->get_liste_monument()) {
             if (!mon_act.second && mon_act.first->get_nom() == vue_carte->getCarte()->get_nom()) {
                 mon_picked = mon_act.first;
@@ -523,8 +484,7 @@ bool Partie::acheter_monu(VueCarte* vue_carte) {
         joueur_act->set_argent(joueur_act->get_argent() - mon_picked->get_prix());
     }
 
-    cout << "\n\nLe joueur \"" << tab_joueurs[joueur_actuel]->get_nom() << "\" a active le monument " << mon_picked->get_nom() << "\n\n";
-
+    vue_partie->get_vue_infos()->add_info("Le joueur \"" + tab_joueurs[joueur_actuel]->get_nom() + "\" a active le monument " + mon_picked->get_nom() + "\n\n");
     return true;
 }
 
@@ -537,27 +497,6 @@ bool Partie::acheter_bat(VueCarte* vue_carte) {
     // Si le joueur est humain
     if (!tab_joueurs[joueur_actuel]->get_est_ia()) {
         // Fenetre de dialogue pour l'achat
-
-        /*
-        QDialog* window = new QDialog();
-        vector<VueCarte*> vue_shop;
-        QGridLayout* layout_shop = new QGridLayout;
-        int i = 0;
-        for (auto& bat : bat_shop) {
-            // Affichage du monument
-            Batiment* adresse_bat = bat;
-            vue_shop.push_back(new VueCarte(*bat, true, window));
-            layout_shop->addWidget(vue_shop[i], i / 4, i % 4);
-            QObject::connect(vue_shop[i], &QPushButton::clicked, [window, adresse_bat, &bat_picked]() {
-                window->accept();
-                bat_picked = adresse_bat;
-            });
-            i++;
-        }
-        window->setLayout(layout_shop);
-        // Affichage de la fenêtre de dialogue
-        window->exec();
-*/
         for(auto& bat : bat_shop){
             if(bat->get_nom() == vue_carte->getCarte()->get_nom()){
                 bat_picked = bat;
@@ -625,7 +564,7 @@ bool Partie::acheter_bat(VueCarte* vue_carte) {
         joueur_act->set_argent(joueur_act->get_argent() + 5);
     }
 
-    cout << "\nLe joueur \"" << tab_joueurs[joueur_actuel]->get_nom() << "\" a achete la carte " << bat_picked->get_nom() << "\n\n";
+    vue_partie->get_vue_infos()->add_info("Le joueur \"" + tab_joueurs[joueur_actuel]->get_nom() + "\" a achete la carte " + bat_picked->get_nom() + "\n\n");
 
     return true;
 }
@@ -706,7 +645,6 @@ void Partie::jouer_tour() {
 
     /// On update toutes la vue
     vue_partie->update_vue_partie();
-    cout << "Tour du joueur " << tab_joueurs[joueur_actuel]->get_nom() << endl;
 
     /// Lancer des des
     de_1 = Partie::lancer_de();
