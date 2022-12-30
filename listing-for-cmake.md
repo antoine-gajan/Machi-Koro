@@ -23,9 +23,6 @@ include_directories(controleur/EditionDeJeu)
 add_executable(src
         main.cpp
 
-        controleur/utils.cpp
-        controleur/utils.h
-
         Joueur/Joueur.cpp
         Joueur/Joueur.h
 
@@ -139,7 +136,7 @@ add_executable(src
         controleur/Shop.h
         controleur/Pioche.cpp
         controleur/Pioche.h
-)
+        )
 ```
 
 ## Imports

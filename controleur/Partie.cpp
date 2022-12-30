@@ -731,7 +731,6 @@ void Partie::jouer_tour() {
         j_act_paiement = (j_act_paiement + tab_joueurs.size() - 1) % tab_joueurs.size();
     }
 
-
     /// Violet
     for (auto it: tab_joueurs[joueur_actuel]->get_liste_batiment(Violet)) {
         if (find(it.first->get_num_activation().begin(), it.first->get_num_activation().end(), de_1 + de_2) !=
@@ -808,13 +807,9 @@ void Partie::jouer_tour() {
     }
 
     /// Achat
-    if(tab_joueurs[joueur_actuel]->get_est_ia()==false){
+    if(!tab_joueurs[joueur_actuel]->get_est_ia()){
         moment_achat = true;
         vue_partie->set_bouton_rien_faire(true);
-    }
-    else{
-        moment_achat = false;
-        vue_partie->set_bouton_rien_faire(false);
     }
 
     vue_partie->update_vue_joueur();
@@ -900,6 +895,7 @@ void Partie::suite_tour(bool achat_ok){
     de_2 = 0;
 
     /// Update la vue
+    vue_partie->set_bouton_rien_faire(false);
     vue_partie->update_vue_partie();
     QTime endTime = QTime::currentTime().addSecs(3);
 

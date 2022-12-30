@@ -1,14 +1,12 @@
 #ifndef MACHI_KORO_VUEPARTIE_H
 #define MACHI_KORO_VUEPARTIE_H
 
-#include <QWidget>
 #include "VueCarte.h"
 #include "VueJoueur.h"
 #include "Joueur.h"
 #include "VueShop.h"
 #include "VuePioche.h"
 #include "VueInfo.h"
-#include <QScrollArea>
 #include <QStyleFactory>
 #include <QFormLayout>
 
@@ -33,6 +31,8 @@ public:
     QWidget* get_vue_carte() const {return fenetre_carte;}
     void set_vue_carte(QWidget* vue_carte) {fenetre_carte = vue_carte;}
     void update_nom_joueur();
+
+
 
     VueJoueur* get_vue_joueur() const {return vue_joueur;}
     VueInfo* get_vue_infos() const {return infos;}
@@ -90,6 +90,7 @@ public slots:
     void d_click();
     void g_click();
     void tour_suivant();
+    void ne_rien_faire_bouton();
 };
 
 #endif //MACHI_KORO_VUEPARTIE_H

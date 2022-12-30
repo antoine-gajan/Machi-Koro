@@ -109,7 +109,7 @@ VuePartie::VuePartie(QWidget *parent){
     bouton_rien_faire->setFixedSize(150, 50);
     bouton_rien_faire->setEnabled(false);
     bouton_rien_faire->setStyleSheet("background-color: blue; color: white;");
-    connect(bouton_rien_faire, SIGNAL(clicked()), this, SLOT(tour_suivant()));
+    connect(bouton_rien_faire, SIGNAL(clicked()), this, SLOT(ne_rien_faire_bouton()));
 
     entete->addWidget(bouton_rien_faire, 0, Qt::AlignCenter);
 
@@ -364,4 +364,15 @@ void VuePartie::update_vue_info () {
     delete old;
     delete old_widget;
     update();
+}
+
+void VuePartie::ne_rien_faire_bouton() {
+    // On créer une boite de dialogue pour demander confirmation
+    QMessageBox::StandardButton reply;
+    reply = QMessageBox::question(this, "Confirmation", "Voulez-vous vraiment ne rien faire ?", QMessageBox::Yes|QMessageBox::No);
+    if (reply == QMessageBox::Yes) {
+        Partie* partie_actuelle = Partie::get_instance();
+        // On appelle la fonction de mise à jour de l'affichage
+        partie_actuelle->suite_tour(false);
+    }
 }

@@ -1,42 +1,22 @@
 #include <iostream>
-using namespace std;
+
+/// QT Includes
 #include <QApplication>
 #include <QtGui/QScreen>
-#include <QPushButton>
-#include <QGridLayout>
-#include <QLabel>
-#include <QFrame>
 #include <QLineEdit>
-#include <QFormLayout>
-#include <QWidget>
-#include "VueJoueur.h"
 #include <QRadioButton>
 #include <QLayoutItem>
-#include "Joueur.h"
-#include "Boulangerie.h"
-#include <set>
-#include "Aeroport.h"
-#include "Epicerie.h"
-#include <QApplication>
 #include <QDialog>
-#include <QLabel>
+#include <QComboBox>
 #include <QSpinBox>
-#include <QFormLayout>
-#include <QLineEdit>
-#include "Cafe.h"
-#include "VuePartie.h"
-#include "Partie.h"
-#include <QComboBox>
 #include <QCheckBox>
-#include <QApplication>
-#include <QComboBox>
-#include <QStandardItemModel>
 #include <QStandardItem>
-#include <QApplication>
-#include <QComboBox>
-#include <QStandardItemModel>
-#include <QStandardItem>
-#include <QStyleFactory>
+
+
+/// Project Includes
+#include "Partie.h"
+#include <set>
+using namespace std;
 
 void resize_and_center(QWidget *widget, int width, int height)
 {
@@ -264,10 +244,6 @@ void launch_menu_2(const string &edition_name, const list<string> &extensions){
 }
 
 void validate_menu_1(QWidget *menu, const string &edition, const list<string> &extensions){
-    for (const auto & extension : extensions){
-        cout << extension << endl;
-    }
-
     menu->close();
 
     launch_menu_2(edition, extensions);

@@ -104,14 +104,16 @@ void Joueur::ajouter_batiment(Batiment *bat) {
         if (batiment.first == bat){
             // Si l'utilisateur a deja un exemplaire de ce batiment et qu'il est violet : erreur
             if (bat->get_couleur() == Violet){
-                cout << "Le joueur \"" << nom << "\" possede deja un exemplaire du batiment violet" << bat->get_nom()<<endl;
+                string message = "Le joueur \"" + nom + "\" possede deja un exemplaire du batiment violet " + bat->get_nom();
+                Partie::get_instance()->get_vue_partie()->get_vue_infos()->add_info(message);
                 return;
             }
             // Sinon, on augmente le nombre d'exemplaires de celui-ci
             else{
                 liste_batiment[couleur][batiment.first]++;
-                cout << "Ajout du batiment " << bat->get_nom() << " au joueur " << nom << endl;
-                cout << "Le joueur \"" << nom << "\" possede " << batiment.second << " exemplaires du batiment " << bat->get_nom() << endl;
+                string message = "Le joueur \"" + nom + "\" a ajoute un exemplaire du batiment " + bat->get_nom()+ "\n" +
+                        "Le joueur \"" + nom + "\" possede maintenant " + to_string( batiment.second) + " exemplaires du batiment " + bat->get_nom();
+                Partie::get_instance()->get_vue_partie()->get_vue_infos()->add_info(message);
                 return;
             }
         }
@@ -119,8 +121,9 @@ void Joueur::ajouter_batiment(Batiment *bat) {
 
     // Si aucun exemplaire du batiment, on l'ajoute
     liste_batiment[couleur].insert(pair<Batiment*, unsigned int> (bat, 1));
-    cout << "Ajout du batiment " << bat->get_nom() << " au joueur " << nom << endl;
-    cout << "Le joueur \"" << nom << "\" possede 1 exemplaire du batiment " << bat->get_nom() << endl;
+    string messsage_ajout = "Ajout du batiment " + bat->get_nom() + " au joueur " + nom + "\n" +
+            "Le joueur \"" + nom + "\" possede 1 exemplaire du batiment " + bat->get_nom();
+    Partie::get_instance()->get_vue_partie()->get_vue_infos()->add_info(messsage_ajout);
 }
 
 
@@ -145,60 +148,14 @@ void Joueur::retirer_batiment(Batiment *bat) {
             else{
                 liste_batiment[couleur][batiment.first]--;
             }
-            cout << "Le batiment " << bat->get_nom() << " a ete retire du joueur \"" << nom << "\"" << endl;
+            string message = "Le batiment " + bat->get_nom() + " a ete retire du joueur \"" + nom + "\"";
+            Partie::get_instance()->get_vue_partie()->get_vue_infos()->add_info(message);
             return;
         }
     }
     // Sinon, aucun batiment correspondant pour le joueur, on renvoie une erreur
-    cout << "Impossible de retirer le batiment. Le joueur \"" << nom << "\" ne possede aucun batiment " << bat->get_nom() << endl;
-}
-
-
-void Joueur::afficher_cartes() const {
-    /// Affiche toutes les cartes du joueur
-
-    cout << "Cartes du joueur " << endl;
-
-    cout << "Monuments : " << endl;
-    for (const auto& monument : liste_monument){
-        if (monument.second){
-            cout << "[X]";
-        }
-        else{
-            cout << "[ ]";
-        }
-
-        cout << " : " << monument.first->get_nom() << endl;
-    }
-
-    cout << "Batiments : " << endl;
-    for (const auto& couleur : liste_batiment){
-        for (const auto& batiment : couleur.second){
-            cout << batiment.second << " : " << batiment.first->get_nom() << endl;
-        }
-    }
-}
-
-void Joueur::afficher_joueur() const {
-    /// Affiche les informations d'un joueur
-
-    cout << "\n****************************************" << endl;
-    cout << "Joueur : \"" << nom ;
-    if (est_ia){
-        cout << "\" est une IA ";
-        if (strategie == agressive)
-            cout << " agressive" << endl;
-        else if (strategie == defensif)
-            cout << " defensive" << endl;
-        else if (strategie == aleatoire)
-            cout << " neutre" << endl;
-    }
-    else{
-        cout << "\" est un Humain" << endl;
-    }
-    cout << "Argent : " << argent << endl;
-    afficher_cartes();
-    cout << "****************************************\n" << endl;
+    string message = "Impossible de retirer le batiment. Le joueur \"" + nom + "\" ne possede aucun batiment " + bat->get_nom();
+    Partie::get_instance()->get_vue_partie()->get_vue_infos()->add_info(message);
 }
 
 unsigned int Joueur::count_type(const string& type) const {
@@ -288,7 +245,8 @@ Batiment* Joueur::selectionner_batiment() const {
             }
         }
     }
-    cout << bat_picked->get_nom();
+    string message = "Le joueur " + this->get_nom() + " a selectionne le batiment " + bat_picked->get_nom();
+    Partie::get_instance()->get_vue_partie()->get_vue_infos()->add_info(message);
     return bat_picked;
 }
 

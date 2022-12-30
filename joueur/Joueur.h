@@ -63,8 +63,6 @@ class Joueur {
         void desactiver_monument(Monument *mon);
         void ajouter_batiment(Batiment *bat);
         void retirer_batiment(Batiment *bat);
-        void afficher_cartes() const;
-        void afficher_joueur() const;
 
         virtual void fermer_batiment(Batiment *bat);
         virtual void ouvrir_batiment(Batiment *bat);

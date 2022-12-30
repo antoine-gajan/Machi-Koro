@@ -149,8 +149,6 @@ add_executable(Machi_Koro
         controleur/Partie.h
         controleur/Shop.cpp
         controleur/Shop.h
-        controleur/utils.cpp
-        controleur/utils.h
 
         joueur/Joueur.cpp
         joueur/Joueur.h
