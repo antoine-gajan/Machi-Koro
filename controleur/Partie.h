@@ -95,7 +95,9 @@ public:
 
     //********** Methodes non statiques **********//
     void ajout_batiment(Batiment *batiment);
-
+    bool acheter_monu_ia();
+    bool acheter_bat_ia();
+    void acheter_carte_ia();
     bool acheter_carte(VueCarte* vue_carte);
     bool acheter_monu(VueCarte* vc);//sous fonction appelee dans acheter_carte
     bool acheter_bat(VueCarte* vc);//sous fonction appelee dans acheter_carte

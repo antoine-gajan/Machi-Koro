@@ -285,86 +285,37 @@ bool Partie::acheter_carte() {
     return true;
 }
 */
-/*bool Partie::acheter_carte() {
+
+void Partie::acheter_carte_ia() {
     //fonction qui permet a un joueur donne d'acheter une carte (batiment ou monument)
     int choix = -1;
     int choix_ia = -1;
     bool visit[2] = {false, false};
     bool transaction_fin = false;
 
-    while (!transaction_fin){
-        if (!tab_joueurs[joueur_actuel]->get_est_ia()) {
-            cout << "Que voulez-vous acheter ? (1 : batiment, 2 : monument, 3 : quitter)" << endl;
-            cin >> choix;
-            while (choix < 1 || choix > 3) {
-                cout << "Veuillez entrer 1, 2 ou 3" << endl;
-                cin >> choix;
-            }
-            if (choix == 3) {
-                return false;
-            } else if (choix == 1) {
-                visit[0] = true;
-                transaction_fin = acheter_bat();
-            } else if (choix == 2) {
-                visit[1] = true;
-                transaction_fin = acheter_monu();
-            }
 
-            if (!transaction_fin && visit[0]) {
-                cout << "Vous n'avez pas assez de ressources pour acheter un batiment" << endl;
-                choix = -1;
-                while (choix < 0 || choix > 1) {
-                    cout << "Voulez-vous acheter un monument ? (0 : non, 1 : oui)" << endl;
-                    cin >> choix;
-                }
-                if (choix == 1) {
-                    transaction_fin = acheter_monu();
-                }
-            }
-            else if (!transaction_fin && visit[1]) {
-                cout << "Vous n'avez pas assez de ressources pour acheter un monument" << endl;
-                choix = -1;
-                while (choix < 0 || choix > 1) {
-                    cout << "Voulez-vous acheter un batiment ? (0 : non, 1 : oui)" << endl;
-                    cin >> choix;
-                }
-                if (choix == 1) {
-                    transaction_fin = acheter_bat();
-                }
-            }
-
-            if (!transaction_fin) {
-                return false;
-            }
-
-        } else {
-            choix_ia = rand() % 5;
-            if (choix_ia == 0) {
-                visit[0] = true;
-                transaction_fin = acheter_bat();
-            } else {
-                visit[1] = true;
-                transaction_fin = acheter_monu();
-            }
-
-            if (!transaction_fin && !visit[0]) {
-                visit[0] = true;
-                transaction_fin = acheter_bat();
-            }
-            else if (!transaction_fin && !visit[1]) {
-                visit[1] = true;
-                transaction_fin = acheter_monu();
-            }
-
-            if (!transaction_fin) {
-                return false;
-            }
-        }
+    choix_ia = rand() % 5;
+    if (choix_ia == 0) {
+        visit[0] = true;
+        transaction_fin = acheter_bat_ia();
+    } else {
+        visit[1] = true;
+        transaction_fin = acheter_monu_ia();
     }
-    return true;
+
+    if (!transaction_fin && !visit[0]) {
+        visit[0] = true;
+        transaction_fin = acheter_bat_ia();
+    }
+    else if (!transaction_fin && !visit[1]) {
+        visit[1] = true;
+        transaction_fin = acheter_monu_ia();
+    }
+
+    suite_tour(transaction_fin);
 }
 
-bool Partie::acheter_monu() {
+bool Partie::acheter_monu_ia() {
     //fonction qui permet a un joueur donne d'acheter un monument
     Monument* mon_picked;
     Joueur *joueur_act = tab_joueurs[joueur_actuel];
@@ -372,117 +323,69 @@ bool Partie::acheter_monu() {
     unsigned int pos = 1;
     vector<Monument*> monuments_dispo;
 
-    if (!tab_joueurs[joueur_actuel]->get_est_ia()) {
-        cout << "Quel est le numero du monument que vous voulez acheter?" << endl;
-        cout << "0 : Annuler" << endl;
-        for (auto mon_act: joueur_act->get_liste_monument()) {
-            if (!mon_act.second && mon_act.first->get_prix() <= joueur_act->get_argent()) {
-                cout << pos << " : " << mon_act.first->get_nom() << endl;
-                pos++;
-                monuments_dispo.push_back(mon_act.first);
-            }
+
+    for (auto mon_act: joueur_act->get_liste_monument()) {
+        if (!mon_act.second && mon_act.first->get_prix() <= joueur_act->get_argent()) {
+            monuments_dispo.push_back(mon_act.first);
         }
-
-        if (monuments_dispo.empty()) {
-            cout << "Vous ne pouvez pas acheter de monument" << endl;
-            return false;
-        }
-
-        while (choix < 0 || choix > monuments_dispo.size()) {
-            cout << "Votre choix : " << endl;
-            cin >> choix;
-        }
-
-        if (choix == 0)
-            return false;
-
-        mon_picked = monuments_dispo[choix - 1];
-
-        joueur_act->activer_monument(mon_picked);
-        joueur_act->set_argent(joueur_act->get_argent() - mon_picked->get_prix());
-    } else {
-        for (auto mon_act: joueur_act->get_liste_monument()) {
-            if (!mon_act.second && mon_act.first->get_prix() <= joueur_act->get_argent()) {
-                monuments_dispo.push_back(mon_act.first);
-            }
-        }
-
-        if (monuments_dispo.empty()) {
-            return false;
-        }
-
-        mon_picked = monuments_dispo[rand() % monuments_dispo.size()];
-
-        joueur_act->activer_monument(mon_picked);
-        joueur_act->set_argent(joueur_act->get_argent() - mon_picked->get_prix());
     }
+
+    if (monuments_dispo.empty()) {
+        return false;
+    }
+
+    mon_picked = monuments_dispo[rand() % monuments_dispo.size()];
+
+    joueur_act->activer_monument(mon_picked);
+    joueur_act->set_argent(joueur_act->get_argent() - mon_picked->get_prix());
 
     cout << "\n\nLe joueur \"" << tab_joueurs[joueur_actuel]->get_nom() << "\" a active le monument " << mon_picked->get_nom() << "\n\n";
 
-    return true;
+
 }
 
-bool Partie::acheter_bat() {
+bool Partie::acheter_bat_ia() {
     //fonction qui permet a un joueur donne d'acheter un batiment
     Batiment* bat_picked;
     Joueur *joueur_act = tab_joueurs[joueur_actuel];
     int choix = -1;
     vector<Batiment*> bat_shop = shop->get_contenu_v();
 
-    if (!tab_joueurs[joueur_actuel]->get_est_ia()) {
-        cout << "Quel est le numero du batiment que vous voulez acheter?" << endl;
-        cout << "0 : Annuler" << endl;
-        shop->affiche_shop();
 
-        while (choix < 0 || choix > bat_shop.size()) {
-            cout << "Votre choix : " << endl;
-            cin >> choix;
-        }
-
-        if (choix == 0)
-            return false;
-
-        bat_picked = bat_shop[choix - 1];
-        if (bat_picked->get_prix() > joueur_act->get_argent()) {
-            cout << "Vous n'avez pas assez d'argent pour acheter ce batiment" << endl;
-            return false;
-        }
-
-    } else {
-        strat_IA strat = tab_joueurs[joueur_actuel]->get_strategie();
-        vector<Batiment*> bat_shop_couleur;
-        vector<Batiment*> bat_shop_prix_ok;
-        for (auto bat_act: bat_shop) {
-            if (bat_act->get_prix() <= joueur_act->get_argent()) {
-                bat_shop_prix_ok.push_back(bat_act);
-            }
-        }
-
-        if (strat == agressive) {
-            for (auto bat_act: bat_shop) {
-                if (bat_act->get_couleur() == Rouge && bat_act->get_prix() <= joueur_act->get_argent()) {
-                    bat_shop_couleur.push_back(bat_act);
-                }
-            }
-        }
-        else if (strat == defensif) {
-            for (auto bat_act: bat_shop) {
-                if (bat_act->get_couleur() == Bleu && bat_act->get_prix() <= joueur_act->get_argent()) {
-                    bat_shop_couleur.push_back(bat_act);
-                }
-            }
-        }
-
-        if (bat_shop_couleur.empty() && bat_shop_prix_ok.empty()) {
-            return false;
-        }
-        else if (bat_shop_couleur.empty()) {
-            bat_picked = bat_shop_prix_ok[rand() % bat_shop_prix_ok.size()];
-        }
-        else {
-            bat_picked = bat_shop_couleur[rand() % bat_shop_couleur.size()];
+    strat_IA strat = tab_joueurs[joueur_actuel]->get_strategie();
+    vector<Batiment*> bat_shop_couleur;
+    vector<Batiment*> bat_shop_prix_ok;
+    for (auto bat_act: bat_shop) {
+        if (bat_act->get_prix() <= joueur_act->get_argent()) {
+            bat_shop_prix_ok.push_back(bat_act);
         }
     }
+
+    if (strat == agressive) {
+        for (auto bat_act: bat_shop) {
+            if (bat_act->get_couleur() == Rouge && bat_act->get_prix() <= joueur_act->get_argent()) {
+                bat_shop_couleur.push_back(bat_act);
+            }
+        }
+    }
+    else if (strat == defensif) {
+        for (auto bat_act: bat_shop) {
+            if (bat_act->get_couleur() == Bleu && bat_act->get_prix() <= joueur_act->get_argent()) {
+                bat_shop_couleur.push_back(bat_act);
+            }
+        }
+    }
+
+    if (bat_shop_couleur.empty() && bat_shop_prix_ok.empty()) {
+        return false;
+    }
+    else if (bat_shop_couleur.empty()) {
+        bat_picked = bat_shop_prix_ok[rand() % bat_shop_prix_ok.size()];
+    }
+    else {
+        bat_picked = bat_shop_couleur[rand() % bat_shop_couleur.size()];
+    }
+
 
     joueur_act->ajouter_batiment(bat_picked);
 
@@ -501,7 +404,7 @@ bool Partie::acheter_bat() {
     cout << "\nLe joueur \"" << tab_joueurs[joueur_actuel]->get_nom() << "\" a achete la carte " << bat_picked->get_nom() << "\n\n";
 
     return true;
-}*/
+}
 
 
 bool Partie::acheter_carte(VueCarte *vue_carte) {
@@ -1006,6 +909,17 @@ void Partie::jouer_tour() {
     moment_achat = true;
     vue_partie->set_bouton_rien_faire(true);
     vue_partie->update_vue_joueur();
+    vue_partie->get_vue_infos()->add_info("Phase d'achat");
+
+    if (tab_joueurs[joueur_actuel]->get_est_ia()) {
+        /// on fige l'interface graphique pour 4 secondes
+        QTime dieTime = QTime::currentTime().addSecs(4);
+        while (QTime::currentTime() < dieTime) {
+            QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
+        }
+        /// on lance la phase d'achat de l'IA
+        acheter_carte_ia();
+    }
 }
 
 void Partie::suite_tour(bool achat_ok){
@@ -1073,10 +987,12 @@ void Partie::suite_tour(bool achat_ok){
             cerr << "ERREUR : " << e.what() << endl;
         }
     }
+    de_1 = 0;
+    de_2 = 0;
 
     /// Update la vue
     vue_partie->update_vue_partie();
-    QTime endTime = QTime::currentTime().addSecs(5);
+    QTime endTime = QTime::currentTime().addSecs(3);
 
     // Figer l'affichage jusqu'à ce que l'heure actuelle soit supérieure à l'heure de fin
     while (QTime::currentTime() < endTime)
