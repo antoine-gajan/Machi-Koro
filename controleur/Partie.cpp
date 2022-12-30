@@ -95,7 +95,7 @@ Partie::Partie(EditionDeJeu* edition, const map<string, string>& joueurs, const 
 
         if (joueur.second == "Humain") {
             //tab_joueurs.push_back(new Joueur(joueur.first, list_monuments, starter_bat, 3));
-            tab_joueurs.push_back(new Joueur(joueur.first, list_monuments, starter_bat, 390));
+            tab_joueurs.push_back(new Joueur(joueur.first, list_monuments, starter_bat, 3));
         }
         else {
             if (joueur.second == "IA agressive") {
