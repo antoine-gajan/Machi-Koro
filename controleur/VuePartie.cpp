@@ -88,14 +88,14 @@ VuePartie::VuePartie(QWidget *parent){
     lcd_de1 = new QLCDNumber;
     lcd_de1->display((int)partie_actuelle->get_de_1());
     lcd_de1->setDigitCount(1);
-    //lcd_de1->setAlignment(Qt::AlignHCenter);
+    lcd_de1->setSegmentStyle(QLCDNumber::Flat);
     layout_de_1->addWidget(lcd_de1, 0, Qt::AlignCenter);
     layout_de_1->setAlignment(Qt::AlignCenter);
 
     lcd_de2 = new QLCDNumber;
     lcd_de2->display((int)partie_actuelle->get_de_2());
     lcd_de2->setDigitCount(1);
-    //lcd_de2->setAlignment(Qt::AlignHCenter);
+    lcd_de2->setSegmentStyle(QLCDNumber::Flat);
     layout_de_2->addWidget(lcd_de2, 0, Qt::AlignCenter);
     layout_de_2->setAlignment(Qt::AlignCenter);
 
@@ -255,10 +255,13 @@ void VuePartie::update_des() {
     lcd_de1 = new QLCDNumber;
     lcd_de1->display((int)partie_actuelle->get_de_1());
     lcd_de1->setDigitCount(1);
+    lcd_de1->setSegmentStyle(QLCDNumber::Flat);
+
 
     lcd_de2 = new QLCDNumber;
     lcd_de2->display((int)partie_actuelle->get_de_2());
     lcd_de2->setDigitCount(1);
+    lcd_de2->setSegmentStyle(QLCDNumber::Flat);
 
     partie_actuelle->set_moment_achat(true);
     layout_de_1->replaceWidget(old_de_1, lcd_de1);
@@ -371,8 +374,8 @@ void VuePartie::ne_rien_faire_bouton() {
     QMessageBox::StandardButton reply;
     reply = QMessageBox::question(this, "Confirmation - Ne rien faire", "Voulez-vous vraiment ne rien faire ?\n", QMessageBox::Yes|QMessageBox::No);
     if (reply == QMessageBox::Yes) {
-        Partie* partie_actuelle = Partie::get_instance();
         // On appelle la fonction de mise à jour de l'affichage
+        Partie* partie_actuelle = Partie::get_instance();
         partie_actuelle->suite_tour(false);
     }
 }
