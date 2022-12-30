@@ -422,21 +422,44 @@ bool Partie::acheter_bat() {
     Joueur *joueur_act = tab_joueurs[joueur_actuel];
     int choix = -1;
     vector<Batiment*> bat_shop = shop->get_contenu_v();
+    bool doublon = true;
 
     if (!tab_joueurs[joueur_actuel]->get_est_ia()) {
         cout << "Quel est le numero du batiment que vous voulez acheter?" << endl;
         cout << "0 : Annuler" << endl;
         shop->affiche_shop();
 
-        while (choix < 0 || choix > bat_shop.size()) {
+        // on verifie que le shop contient au moins un batiment achetable
+        for (auto bat: bat_shop) {
+            if (bat->get_couleur() == Violet){
+                if (!joueur_act->possede_batiment(bat->get_nom())){
+                    doublon = false;
+                }
+            }
+        }
+
+        if (doublon){
+            cout << "Vous ne pouvez pas acheter de batiment" << endl;
+            return false;
+        }
+
+        while (choix < 0 || choix > bat_shop.size() || doublon) {
+            doublon = false;
             cout << "Votre choix : " << endl;
             cin >> choix;
+
+            bat_picked = bat_shop[choix - 1];
+            if (bat_picked->get_couleur() == Violet){
+                if (joueur_act->possede_batiment(bat_picked->get_nom())){
+                    cout << "Vous ne pouvez pas acheter plusieurs batiments violets identiques" << endl;
+                    doublon = true;
+                }
+            }
         }
 
         if (choix == 0)
             return false;
 
-        bat_picked = bat_shop[choix - 1];
         if (bat_picked->get_prix() > joueur_act->get_argent()) {
             cout << "Vous n'avez pas assez d'argent pour acheter ce batiment" << endl;
             return false;
