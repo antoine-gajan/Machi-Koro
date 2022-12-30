@@ -369,7 +369,7 @@ void VuePartie::update_vue_info () {
 void VuePartie::ne_rien_faire_bouton() {
     // On créer une boite de dialogue pour demander confirmation
     QMessageBox::StandardButton reply;
-    reply = QMessageBox::question(this, "Confirmation", "Voulez-vous vraiment ne rien faire ?", QMessageBox::Yes|QMessageBox::No);
+    reply = QMessageBox::question(this, "Confirmation - Ne rien faire", "Voulez-vous vraiment ne rien faire ?\n", QMessageBox::Yes|QMessageBox::No);
     if (reply == QMessageBox::Yes) {
         Partie* partie_actuelle = Partie::get_instance();
         // On appelle la fonction de mise à jour de l'affichage

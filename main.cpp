@@ -27,25 +27,24 @@ void resize_and_center(QWidget *widget, int width, int height)
 void validate_menu_2(QWidget *menu, const string &edition, const list<string> &extensions, const map<string, string>& joueurs, const string& shop_type, unsigned int shop_size){
     //QWidget fenetre;
     // affichage des infos
-    cout << "Edition: " << edition << endl;
-    cout << "Extensions: " << endl;
+    string mes_infos = "Edition: " + edition + "\nExtensions: ";
     for (const auto & extension : extensions){
-        cout << extension << endl;
+        mes_infos += "- "+ extension + "\n";
     }
-    cout << "Joueurs: " << endl;
+    mes_infos += "Joueurs: ";
     for (const auto & joueur : joueurs){
-        cout << joueur.first << " : " << joueur.second << endl;
+        mes_infos += "- "+ joueur.first + " : " + joueur.second + "\n";
     }
-    cout << "Type de magasin: " << shop_type << endl;
-    cout << "Taille du magasin: " << shop_size << endl;
+
+    mes_infos += "Type de magasin: " + shop_type + "\nTaille du magasin: " + to_string(shop_size);
+    menu->close();
+    QMessageBox::information(menu, "Informations partie", QString::fromStdString(mes_infos));
+
 
 
     Partie *p = Partie::get_instance(edition, extensions, joueurs, shop_type, shop_size);
-    //VuePartie *vp = new VuePartie(&fenetre);
-    menu->close();
     //vp->show();
     p->jouer_partie();
-
 }
 
 void launch_menu_2(const string &edition_name, const list<string> &extensions){
@@ -56,10 +55,8 @@ void launch_menu_2(const string &edition_name, const list<string> &extensions){
     edition = new EditionDeJeu(edition_name);
 
     for (const auto & extension : extensions){
-        cout << "Extension : " << extension << endl;
         listing_extension.push_back(new EditionDeJeu(extension));
     }
-
 
     unsigned int max_joueurs = edition->get_nb_joueurs_max();
     unsigned int nb_monuments_win = edition->get_nb_monuments_win();
