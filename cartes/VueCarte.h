@@ -22,10 +22,8 @@ public:
     QIcon get_icon() const{return ButtonIcon;}
     void set_pixmap(string path){pixmap = QPixmap(QString::fromStdString(path));};
     void set_icon(QPixmap pixmap){ButtonIcon = QIcon(pixmap);};
-    void peinture(QPaintEvent* event);
     bool get_est_actif() const{return est_actif;}
     //
-    void paintEvent(QPaintEvent *event) override;
 private:
     const Carte* carte = nullptr;
     QPixmap pixmap;
