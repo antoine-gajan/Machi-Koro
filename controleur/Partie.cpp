@@ -586,8 +586,8 @@ void Partie::jouer_tour() {
     cout << "Tour du joueur " << tab_joueurs[joueur_actuel]->get_nom() << endl;
 
     /// Lancer des des
-    //de_1 = Partie::lancer_de();
-    de_1 = 4; // DE POUR TESTER SES EFFETS ////!!!!\\\\\
+    de_1 = Partie::lancer_de();
+    //de_1 = 4; // DE POUR TESTER SES EFFETS ////!!!!\\\\\
     de_1_temp = de_1;
 
     de_2 = 0;
@@ -624,6 +624,7 @@ void Partie::jouer_tour() {
         }
     }
 
+    //une fois que tout les effets en rapport avec les dés sont joués, on update l'affichage des dés
     vue_partie->update_des();
 
     /// Tour radio
@@ -783,6 +784,7 @@ void Partie::jouer_tour() {
 
     /// Achat
     moment_achat = true;
+    vue_partie->set_bouton_rien_faire(true);
     vue_partie->update_vue_joueur();
 }
 
