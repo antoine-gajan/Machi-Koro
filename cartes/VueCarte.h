@@ -11,7 +11,7 @@ class VueCarte : public QPushButton
 {
 Q_OBJECT
 public:
-    VueCarte(const Carte& c,bool etat,bool est_act, QWidget *parent = nullptr);
+    VueCarte(const Carte& c,bool etat, bool est_act = false, QWidget *parent = nullptr);
     explicit VueCarte(QWidget *parent = nullptr);
     // affecter une nouvelle carte à la vue
     void setCarte(const Carte& c) { setCheckable(true); setChecked(false); carte=&c; update(); }
