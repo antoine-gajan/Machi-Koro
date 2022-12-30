@@ -73,6 +73,7 @@ class Joueur {
 
         Batiment* selectionner_batiment() const;
         Monument* selectionner_monument() const;
+
         Batiment* possede_batiment(const string& nom_bat) const;
 public slots:
     void selection_bat(VueCarte *);

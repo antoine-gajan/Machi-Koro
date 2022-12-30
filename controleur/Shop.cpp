@@ -46,27 +46,6 @@ Batiment * Shop::acheter_batiment(Batiment *bat) {
     }
 }
 
-void Shop::affiche_shop() {
-    ///Affiche le shop
-    unsigned int pos = 1;
-
-    for (auto & it : contenu) {
-        cout << pos << " : " << it.first->get_nom() << " (cout : " << it.first->get_prix() <<" ; quantite :" << it.second <<")" << endl;
-        cout << "\tEffet : " << it.first->get_description() << endl;
-        pos++;
-    }
-}
-
-void Shop::affiche_shop_simple() {
-    ///Affiche le shop
-    unsigned int pos = 1;
-
-    for (auto & it : contenu) {
-        cout << pos << " : " << it.first->get_nom() << " (cout : " << it.first->get_prix() <<")" << endl;
-        pos++;
-    }
-}
-
 vector<Batiment*> Shop::get_contenu_v() const {
     ///Retourne le contenu du shop sous forme de vecteur
 

@@ -18,7 +18,7 @@ void Restaurant5Etoiles::declencher_effet(unsigned int possesseur, int bonus) co
 
     if (partie->get_joueur_actuel() != possesseur){
         if(joueur_actuel->get_monument_jouables().size() >= 2){
-            cout << "Activation de l'effet du Restaurant 5 Etoiles du joueur \"" << joueur_possesseur->get_nom()<<"\"" << endl;
+            partie->get_vue_partie()->get_vue_infos()->add_info("Activation de l'effet du Restaurant 5 Etoiles du joueur \""+ joueur_possesseur->get_nom() + "\"");
             partie->transfert_argent(possesseur, partie->get_joueur_actuel(), 5 + bonus);
         }
     }

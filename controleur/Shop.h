@@ -27,8 +27,6 @@ class Shop{
 
         /**** Methodes ****/
         void completer_shop(Batiment* new_bat);
-        void affiche_shop();
-        void affiche_shop_simple();
         Batiment *acheter_batiment(Batiment* bat);
 };
 

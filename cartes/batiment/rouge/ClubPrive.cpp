@@ -17,7 +17,7 @@ void ClubPrive::declencher_effet(unsigned int possesseur, int bonus) const{
 
     if (partie->get_joueur_actuel() != possesseur){
         if(joueur_actuel->get_monument_jouables().size()>=3){
-            cout << "Activation de l'effet du Club Prive du joueur \"" << joueur_possesseur->get_nom()<< "\"" << endl;
+            partie->get_vue_partie()->get_vue_infos()->add_info( "Activation de l'effet du Club Prive du joueur \""+ joueur_possesseur->get_nom() + "\"");
             partie->transfert_argent(possesseur, partie->get_joueur_actuel(), joueur_actuel->get_argent());
             joueur_possesseur->set_argent(joueur_possesseur->get_argent() + 1);
         }
