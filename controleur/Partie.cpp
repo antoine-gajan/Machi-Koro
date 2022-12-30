@@ -50,7 +50,7 @@ Partie* Partie::get_instance() {
     return handler.instance;
 }
 
-Partie::Partie(EditionDeJeu* edition, const map<string, string>& joueurs, const string& shop_type, unsigned int shop_size, const vector<EditionDeJeu *>& extensions) : nb_monuments_win(edition->get_nb_monuments_win()), joueur_actuel(0), de_1(0), de_2(0) {
+Partie::Partie(EditionDeJeu* edition, const map<string, string>& joueurs, const string& shop_type, unsigned int shop_size, const vector<EditionDeJeu *>& extensions) : nb_monuments_win(edition->get_nb_monuments_win()), joueur_actuel(0), de_1(0), de_2(0),compteur_tour(0) {
     ///Constructeur de Partie
 
     //Initialisation des variables utiles
@@ -94,7 +94,6 @@ Partie::Partie(EditionDeJeu* edition, const map<string, string>& joueurs, const 
     for (auto & joueur : joueurs){
 
         if (joueur.second == "Humain") {
-            //tab_joueurs.push_back(new Joueur(joueur.first, list_monuments, starter_bat, 3));
             tab_joueurs.push_back(new Joueur(joueur.first, list_monuments, starter_bat, 3));
         }
         else {
@@ -523,6 +522,7 @@ void Partie::jouer_tour() {
     bool centre_c_possesseur = false;
     vector < Monument * > monuments_joueurs = tab_joueurs[joueur_actuel]->get_monument_jouables();
 
+    compteur_tour++;
     /// Variable de tour
     moment_achat = false;
     rejouer = false;
@@ -537,6 +537,9 @@ void Partie::jouer_tour() {
 
     de_2 = 0;
     de_casse = Partie::lancer_de() + Partie::lancer_de() + Partie::lancer_de() + Partie::lancer_de();
+
+    string debut_tour = "Début du " + to_string(compteur_tour) + "e tour\n";
+    vue_partie->get_vue_infos()->add_info(debut_tour);
 
     /// ****************************************************************************************************************
     /// ****************************** ETAPE 2 : Effets des monuments **************************************************
@@ -613,6 +616,7 @@ void Partie::jouer_tour() {
 
     /// Rouge
     unsigned int j_act_paiement = (joueur_actuel + tab_joueurs.size() - 1) % tab_joueurs.size();
+    vue_partie->get_vue_infos()->add_info("Effet des batiments rouges");
 
     while (j_act_paiement != joueur_actuel) {
         // Regarde si le joueur possede un centre commercial
@@ -652,6 +656,7 @@ void Partie::jouer_tour() {
     }
 
     /// Violet
+    vue_partie->get_vue_infos()->add_info("Effet des batiments violets");
     for (auto it: tab_joueurs[joueur_actuel]->get_liste_batiment(Violet)) {
         if (find(it.first->get_num_activation().begin(), it.first->get_num_activation().end(), de_1 + de_2) !=
             it.first->get_num_activation().end()) {
@@ -667,6 +672,7 @@ void Partie::jouer_tour() {
     }
 
     /// Bleu
+    vue_partie->get_vue_infos()->add_info("Effet des batiments bleus");
     for (int i = 0; i < tab_joueurs.size(); i++) {
         for (auto it: tab_joueurs[i]->get_liste_batiment(Bleu)) {
             if (find(it.first->get_num_activation().begin(), it.first->get_num_activation().end(), de_1 + de_2) !=
@@ -684,6 +690,7 @@ void Partie::jouer_tour() {
     }
 
     /// Vert
+    vue_partie->get_vue_infos()->add_info("Effet des batiments verts");
     for (auto it: tab_joueurs[joueur_actuel]->get_liste_batiment(Vert)) {
         if (find(it.first->get_num_activation().begin(), it.first->get_num_activation().end(), de_1 + de_2) !=
             it.first->get_num_activation().end()) {
@@ -779,6 +786,7 @@ void Partie::suite_tour(bool achat_ok){
     /// ****************************************************************************************************************
 
     /// Ouverture
+    vue_partie->get_vue_infos()->add_info("Ouverture des batiments");
     for (auto bat : tab_joueurs[joueur_actuel]->get_liste_batiment_fermes()) {
         if (find(bat->get_num_activation().begin(), bat->get_num_activation().end(), de_1 + de_2) != bat->get_num_activation().end()) {
             try {
@@ -817,6 +825,7 @@ void Partie::suite_tour(bool achat_ok){
     /// Update la vue
     vue_partie->set_bouton_rien_faire(false);
     vue_partie->update_vue_partie();
+    vue_partie->get_vue_infos()->add_info("Fin du tour");
     QTime endTime = QTime::currentTime().addSecs(3);
 
     // Figer l'affichage jusqu'à ce que l'heure actuelle soit supérieure à l'heure de fin
