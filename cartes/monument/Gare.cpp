@@ -18,13 +18,14 @@ void Gare::declencher_effet(unsigned int possesseur, int bonus) const {
     if (joueur->get_est_ia()) {
         int choix = rand() % 4;
         if (choix != 0) {
-            cout << "Activation de l'effet de la gare du joueur \"" << joueur->get_nom() << "\"" << endl;
             partie->get_vue_partie()->get_vue_infos()->add_info("Activation de l'effet de la gare du joueur \"" + joueur->get_nom() + "\"");
             partie->set_de_2(Partie::lancer_de());
         }
     }
     else {
         QMessageBox msgBox;
+        string title = "Effet de la gare du joueur \"" + joueur->get_nom() + "\"";
+        msgBox.setWindowTitle(QString::fromStdString(title));
         msgBox.setText("Voulez-vous lancer deux dés ?");
         msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
         msgBox.setDefaultButton(QMessageBox::No);

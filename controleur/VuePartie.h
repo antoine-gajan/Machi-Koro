@@ -35,8 +35,6 @@ public:
     //Partie* get_partie_actuelle() const{return partie_actuelle;}
     QWidget* get_vue_carte() const {return fenetre_carte;}
     void set_vue_carte(QWidget* vue_carte) {fenetre_carte = vue_carte;}
-    void lancer_de_1_display();
-    void lancer_de_2_display();
     void update_nom_joueur();
 
     VueJoueur* get_vue_joueur() const {return vue_joueur;}
@@ -53,12 +51,12 @@ private:
     QLabel* label_edj;
 
     QLabel* label_joueur_actuel;
-    QLabel* label_de1;
-    QLabel* label_de2;
+    QLCDNumber* lcd_de1;
+    QLCDNumber* lcd_de2;
     QLabel* pioche_exception;
     QLabel* image_entete;
-    QPushButton *bouton_lancer_de_1;
-    QPushButton *bouton_lancer_de_2;
+    QLabel *affichage_de_1;
+    QLabel *affichage_de_2;
     //partitionnement de la page
     QVBoxLayout *structure;
 
@@ -76,7 +74,6 @@ private:
     QWidget *parent_fenetre;
     QWidget *fenetre_carte;
     QPushButton* bouton_rien_faire;
-    QPushButton* bouton_tour_suivant;
     /// Milieu de la page
     //Pioche à gauche
     QVBoxLayout *pioche;
@@ -99,10 +96,6 @@ public slots:
 
     void d_click();
     void g_click();
-
-    void clicked_event_de_1();
-
-    void clicked_event_de_2();
     void tour_suivant();
 };
 

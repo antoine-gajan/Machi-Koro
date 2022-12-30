@@ -17,7 +17,7 @@ void ChampFleur::declencher_effet(unsigned int possesseur, int bonus) const {
     Partie * partie = Partie::get_instance();
     Joueur* joueur_actuel = partie->get_tab_joueurs()[possesseur];
 
-    cout << "Activation de l'effet du ChampFleur du joueur \"" << joueur_actuel->get_nom()<<"\"" << endl;
+    partie->get_vue_partie()->get_vue_infos()->add_info("Activation de l'effet du ChampFleur du joueur \"" + joueur_actuel->get_nom() + "\"");
 
     //On augmente de un l'argent du joueur actuel
     unsigned int argent = joueur_actuel->get_argent();

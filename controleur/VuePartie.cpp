@@ -56,6 +56,7 @@ VuePartie::VuePartie(QWidget *parent){
     label_joueur_actuel->setText(QString::fromStdString(nom_joueur));
     label_joueur_actuel->setFixedSize(300, 50);
     label_joueur_actuel->setAlignment(Qt::AlignCenter);
+    label_joueur_actuel->setStyleSheet("QLabel { background-color : transparent; color : green; }");
     entete_gauche->addWidget(label_joueur_actuel, 0, Qt::AlignCenter);
 
     entete->addLayout(entete_gauche);
@@ -77,25 +78,23 @@ VuePartie::VuePartie(QWidget *parent){
     layout_de_1 = new QHBoxLayout;
     layout_de_2 = new QHBoxLayout;
 
-    bouton_lancer_de_1 = new QPushButton("Lancer le dé 1");
-    bouton_lancer_de_2 = new QPushButton("Lancer le dé 2");
-    bouton_lancer_de_1->setFixedSize(150, 50);
-    bouton_lancer_de_2->setFixedSize(150, 50);
-    bouton_lancer_de_1->setEnabled(false);
-    bouton_lancer_de_2->setEnabled(false);
-    layout_de_1->addWidget(bouton_lancer_de_1, 0, Qt::AlignCenter);
-    layout_de_2->addWidget(bouton_lancer_de_2, 0, Qt::AlignCenter);
+    affichage_de_1 = new QLabel("Dé 1 : ");
+    affichage_de_2 = new QLabel("Dé 2 : ");
+    affichage_de_1->setFixedSize(150, 50);
+    affichage_de_2->setFixedSize(150, 50);
+    layout_de_1->addWidget(affichage_de_1, 0, Qt::AlignCenter);
+    layout_de_2->addWidget(affichage_de_2, 0, Qt::AlignCenter);
 
-    label_de1 = new QLabel;
-    label_de1->setText(QString::number(partie_actuelle->get_de_1()));
-    label_de1->setAlignment(Qt::AlignHCenter);
-    layout_de_1->addWidget(label_de1, 0, Qt::AlignCenter);
+    lcd_de1 = new QLCDNumber;
+    lcd_de1->display((int)partie_actuelle->get_de_1());
+    //lcd_de1->setAlignment(Qt::AlignHCenter);
+    layout_de_1->addWidget(lcd_de1, 0, Qt::AlignCenter);
     layout_de_1->setAlignment(Qt::AlignCenter);
 
-    label_de2 = new QLabel("Valeur de dé 2");
-    label_de2->setText(QString::number(partie_actuelle->get_de_2()));
-    label_de1->setAlignment(Qt::AlignHCenter);
-    layout_de_2->addWidget(label_de2, 0, Qt::AlignCenter);
+    lcd_de2 = new QLCDNumber;
+    lcd_de2->display((int)partie_actuelle->get_de_2());
+    //lcd_de2->setAlignment(Qt::AlignHCenter);
+    layout_de_2->addWidget(lcd_de2, 0, Qt::AlignCenter);
     layout_de_2->setAlignment(Qt::AlignCenter);
 
     display_des->addLayout(layout_de_1);
@@ -103,21 +102,14 @@ VuePartie::VuePartie(QWidget *parent){
 
     entete->addLayout(display_des);
 
-    //création du bouton au cas ù l'on ne veut rien acheter
+    //création du bouton au cas où l'on ne veut rien acheter
     bouton_rien_faire = new QPushButton("Ne rien faire");
     bouton_rien_faire->setFixedSize(150, 50);
     bouton_rien_faire->setEnabled(false);
     bouton_rien_faire->setStyleSheet("background-color: blue; color: white;");
     connect(bouton_rien_faire, SIGNAL(clicked()), this, SLOT(tour_suivant()));
 
-    //création du bouton pour passer au tour suivant
-    bouton_tour_suivant = new QPushButton("Passer au tour suivant");
-    bouton_tour_suivant->setFixedSize(150,50);
-    bouton_tour_suivant->setEnabled(false);
-    bouton_tour_suivant->setStyleSheet("background-color: blue; color: white;");
-
     entete->addWidget(bouton_rien_faire, 0, Qt::AlignCenter);
-    entete->addWidget(bouton_tour_suivant, 1, Qt::AlignCenter);
 
     /// ****************************************************************************************************************
     /// ************************************              FIN                *******************************************
@@ -251,61 +243,20 @@ void VuePartie::update_vue_joueur() {
     update();
 }
 
-void VuePartie::lancer_de_1_display(){
-    Partie* partie_actuelle = Partie::get_instance();
-    /// Fonction pour mettre à jour le dé 1 de manière graphique
-
-    bouton_lancer_de_1->setEnabled(true);
-    // On vient connecter le bouton du dé 1 avec un slot personnalisé
-    QObject::connect(bouton_lancer_de_1, SIGNAL(clicked()), this, SLOT(clicked_event_de_1()));
-
-}
-
-void VuePartie::lancer_de_2_display(){
-    /// Fonction pour mettre à jour le dé 2 de manière graphique
-    Partie* partie_actuelle = Partie::get_instance();
-    bouton_lancer_de_2->setEnabled(true);
-    // On vient connecter le bouton du dé 2 avec un slot personnalisé
-    QObject::connect(bouton_lancer_de_1, SIGNAL(clicked()), this, SLOT(clicked_event_de_2()));
-
-}
-
-void VuePartie::clicked_event_de_1() {
-    // Slot personnalisé qui vient créer une nouvelle valeur pour le dé et l'injecte dans partie
-    Partie* partie_actuelle = Partie::get_instance();
-    //partie_actuelle->set_de_1(partie_actuelle->lancer_de());
-    partie_actuelle->set_de_1(4);
-    bouton_lancer_de_1->setEnabled(false);
-    // On appelle la fonction de mise à jour de l'affichage des dés
-    bouton_rien_faire->setEnabled(true);
-    update_des();
-}
-
-void VuePartie::clicked_event_de_2() {
-    // Slot personnalisé qui vient créer une nouvelle valeur pour le dé et l'injecte dans partie
-    Partie* partie_actuelle = Partie::get_instance();
-    partie_actuelle->set_de_2(Partie::lancer_de());
-    bouton_lancer_de_2->setEnabled(false);
-    // On appelle la fonction de mise à jour de l'affichage des dés
-    update_des();
-}
-
 void VuePartie::update_des() {
     // Mise à jour de l'affichage des dés
     Partie* partie_actuelle = Partie::get_instance();
-    QLabel* old_de_1 = label_de1;
-    QLabel* old_de_2 = label_de2;
-    label_de1 = new QLabel(QString::number(partie_actuelle->get_de_1()));
-    label_de1->setAlignment(Qt::AlignHCenter);
+    QLCDNumber* old_de_1 = lcd_de1;
+    QLCDNumber* old_de_2 = lcd_de2;
+    lcd_de1 = new QLCDNumber;
+    lcd_de1->display((int)partie_actuelle->get_de_1());
 
-    label_de2 = new QLabel(QString::number(partie_actuelle->get_de_2()));
-    label_de2->setAlignment(Qt::AlignHCenter);
+    lcd_de2 = new QLCDNumber;
+    lcd_de2->display((int)partie_actuelle->get_de_2());
 
-    //label_de1->setText(QString::fromStdString(std::to_string(partie_actuelle->get_de_1())));
-    //label_de2->setText(QString::fromStdString(std::to_string(partie_actuelle->get_de_2())));
     partie_actuelle->set_moment_achat(true);
-    layout_de_1->replaceWidget(old_de_1, label_de1);
-    layout_de_2->replaceWidget(old_de_2, label_de2);
+    layout_de_1->replaceWidget(old_de_1, lcd_de1);
+    layout_de_2->replaceWidget(old_de_2, lcd_de2);
     delete old_de_1;
     delete old_de_2;
     update();
@@ -320,6 +271,7 @@ void VuePartie::update_nom_joueur(){
     label_joueur_actuel->setText(QString::fromStdString(nom_joueur));
     label_joueur_actuel->setFixedSize(300, 50);
     label_joueur_actuel->setAlignment(Qt::AlignCenter);
+    label_joueur_actuel->setStyleSheet("QLabel { background-color : transparent; color : green;}");
     entete_gauche->addWidget(label_joueur_actuel, 0, Qt::AlignCenter);
     delete old_nom_joueur;
     update();

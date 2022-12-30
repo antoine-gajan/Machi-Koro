@@ -43,5 +43,4 @@ void VueInfo::add_info(const string &info) {
     info_layout->insertWidget(0, label);
     liste_info.push_back(label);
 
-
 }
