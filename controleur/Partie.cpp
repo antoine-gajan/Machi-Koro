@@ -1,4 +1,6 @@
 #include <QRadioButton>
+#include <QCoreApplication>
+#include <QTime>
 #include "Partie.h"
 #include "VuePartie.h"
 
@@ -93,7 +95,7 @@ Partie::Partie(EditionDeJeu* edition, const map<string, string>& joueurs, const 
 
         if (joueur.second == "Humain") {
             //tab_joueurs.push_back(new Joueur(joueur.first, list_monuments, starter_bat, 3));
-            tab_joueurs.push_back(new Joueur(joueur.first, list_monuments, starter_bat, 39));
+            tab_joueurs.push_back(new Joueur(joueur.first, list_monuments, starter_bat, 390));
         }
         else {
             if (joueur.second == "IA agressive") {
@@ -856,6 +858,13 @@ void Partie::suite_tour(bool achat_ok){
 
     /// Update la vue
     vue_partie->update_vue_partie();
+    QTime endTime = QTime::currentTime().addSecs(5);
+
+    // Figer l'affichage jusqu'à ce que l'heure actuelle soit supérieure à l'heure de fin
+    while (QTime::currentTime() < endTime)
+    {
+        QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
+    }
 
     /// Vérifie si la partie est finie
     if (est_gagnant(joueur_actuel)) {
@@ -864,9 +873,9 @@ void Partie::suite_tour(bool achat_ok){
         vue_partie->close();
     } else {
         /// Fin du tour
-        //if (!rejouer) {
+        if (!rejouer) {
             joueur_actuel = (joueur_actuel + 1) % tab_joueurs.size();
-       // }
+        }
         jouer_tour();
     }
 }

@@ -24,6 +24,8 @@ void Gare::declencher_effet(unsigned int possesseur, int bonus) const {
     }
     else {
         QMessageBox msgBox;
+        string title = "Effet de la gare du joueur \"" + joueur->get_nom() + "\"";
+        msgBox.setWindowTitle(QString::fromStdString(title));
         msgBox.setText("Voulez-vous lancer deux dés ?");
         msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
         msgBox.setDefaultButton(QMessageBox::No);

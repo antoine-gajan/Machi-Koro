@@ -14,6 +14,17 @@ VueJoueur::VueJoueur(Joueur* j,bool e_j_a, QWidget *parent) : carte_choisie(null
     else{
         nom_joueur->setText(QString::fromStdString(joueur->get_nom()));
     }
+
+    if (est_joueur_actuel) {
+        nom_joueur->setStyleSheet("QLabel { color : green; background-color : transparent; }");
+        string nom = nom_joueur->text().toStdString();
+        nom += " (Joueur actuel)";
+        nom_joueur->setText(QString::fromStdString(nom));
+    }
+    else {
+        nom_joueur->setStyleSheet("QLabel { color : red; background-color : transparent; }");
+    }
+
     // Argent du joueur
     argent=new QLCDNumber;
     argent->display((int)joueur->get_argent());
