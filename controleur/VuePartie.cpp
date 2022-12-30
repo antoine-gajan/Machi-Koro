@@ -56,6 +56,7 @@ VuePartie::VuePartie(QWidget *parent){
     label_joueur_actuel->setText(QString::fromStdString(nom_joueur));
     label_joueur_actuel->setFixedSize(300, 50);
     label_joueur_actuel->setAlignment(Qt::AlignCenter);
+    label_joueur_actuel->setStyleSheet("QLabel { background-color : transparent; color : green; }");
     entete_gauche->addWidget(label_joueur_actuel, 0, Qt::AlignCenter);
 
     entete->addLayout(entete_gauche);
@@ -270,6 +271,7 @@ void VuePartie::update_nom_joueur(){
     label_joueur_actuel->setText(QString::fromStdString(nom_joueur));
     label_joueur_actuel->setFixedSize(300, 50);
     label_joueur_actuel->setAlignment(Qt::AlignCenter);
+    label_joueur_actuel->setStyleSheet("QLabel { background-color : transparent; color : green;}");
     entete_gauche->addWidget(label_joueur_actuel, 0, Qt::AlignCenter);
     delete old_nom_joueur;
     update();

@@ -26,6 +26,8 @@ void Port::declencher_effet(unsigned int possesseur, int bonus) const {
             QMessageBox msgBox;
             string message = "Voulez-vous ajouter 2 au résultat du jet de dés qui est de " +
                              to_string(partie->get_de_1() + partie->get_de_2()) + " ?";
+            string titre = "Effet du Port du joueur \"" + joueur->get_nom() + "\"";
+            msgBox.setWindowTitle(QString::fromStdString(titre));
             msgBox.setText(QString::fromStdString(message));
             msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
             msgBox.setDefaultButton(QMessageBox::No);

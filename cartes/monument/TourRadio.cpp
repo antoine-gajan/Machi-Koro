@@ -28,6 +28,8 @@ void TourRadio::declencher_effet(unsigned int possesseur, int bonus) const {
         QMessageBox msgBox;
         string message = "Votre résultat de dés est de : dé 1=" + to_string(partie->get_de_1())
                 + " dé 2=" + to_string(partie->get_de_2()) + ". Voulez-vous relancer vos dés ?";
+        string titre = "Effet de la Tour radio du joueur \"" + joueur->get_nom() + "\"";
+        msgBox.setWindowTitle(QString::fromStdString(titre));
         msgBox.setText(QString::fromStdString(message));
         msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
         msgBox.setDefaultButton(QMessageBox::No);
