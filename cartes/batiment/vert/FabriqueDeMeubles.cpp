@@ -14,13 +14,14 @@ FabriqueDeMeubles::FabriqueDeMeubles()
 void FabriqueDeMeubles::declencher_effet(unsigned int possesseur, int bonus) const {
     /// Effet de la FabriqueDeMeubles
     unsigned int j_act_index =  Partie::get_instance()->get_joueur_actuel();
-    Joueur* j_actuel = Partie::get_instance()->get_tab_joueurs()[j_act_index];
+    Partie * partie = Partie::get_instance();
+    Joueur* j_actuel = partie->get_tab_joueurs()[j_act_index];
 
     // On compte le nombre d'etablissements de type engrenage
     unsigned int nb_engrenages = j_actuel->count_type("engrenage");
 
     if (nb_engrenages > 0) {
-        cout << "Activation de l'effet de la carte Fabrique de meubles du joueur \"" << j_actuel->get_nom() << "\"" << endl;
+        partie->get_vue_partie()->get_vue_infos()->add_info("Activation de l'effet de la carte Fabrique de meubles du joueur \""+ j_actuel->get_nom() + "\"");
     }
 
     // On donne 3 pieces par engrenage

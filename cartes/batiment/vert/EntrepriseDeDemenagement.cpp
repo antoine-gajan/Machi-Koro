@@ -15,7 +15,9 @@ void EntrepriseDeDemenagement::declencher_effet(unsigned int possesseur, int bon
 
     /// DON DE L'ETABLISSEMENT
     unsigned int j_act_index = Partie::get_instance()->get_joueur_actuel();
-    Joueur* j_actuel = Partie::get_instance()->get_tab_joueurs()[j_act_index];
+    Partie * partie = Partie::get_instance();
+    Joueur* j_actuel = partie->get_tab_joueurs()[j_act_index];
+
 
     // On verifie que le joueur possede au moins un batiment non violet
     map<Batiment*, unsigned int> liste_bat_bleu = j_actuel->get_liste_batiment(Bleu);
@@ -26,8 +28,7 @@ void EntrepriseDeDemenagement::declencher_effet(unsigned int possesseur, int bon
         cout << "Vous ne possedez aucun batiment non special !" << endl;
         return;
     }
-
-    cout << "Activation de l'effet de la carte Entreprise de demenagement du joueur \"" << j_actuel->get_nom() << "\"" << endl;
+    partie->get_vue_partie()->get_vue_infos()->add_info("Activation de l'effet de la carte Entreprise de demenagement du joueur \""+ j_actuel->get_nom() + "\"");
 
     vector<Joueur*> tab_joueurs = Partie::get_instance()->get_tab_joueurs();
 
@@ -39,6 +40,7 @@ void EntrepriseDeDemenagement::declencher_effet(unsigned int possesseur, int bon
 
     // On verifie que le batiment n'est pas de type special
     while (batiment->get_type() == "special"){
+        partie->get_vue_partie()->get_vue_infos()->add_info("Vous ne pouvez pas donner un etablissement de type special");
         cout << "Vous ne pouvez pas donner un etablissement de type special." << endl;
         batiment = j_actuel->selectionner_batiment();
     }
