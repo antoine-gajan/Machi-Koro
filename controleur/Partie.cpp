@@ -808,8 +808,15 @@ void Partie::jouer_tour() {
     }
 
     /// Achat
-    moment_achat = true;
-    vue_partie->set_bouton_rien_faire(true);
+    if(tab_joueurs[joueur_actuel]->get_est_ia()==false){
+        moment_achat = true;
+        vue_partie->set_bouton_rien_faire(true);
+    }
+    else{
+        moment_achat = false;
+        vue_partie->set_bouton_rien_faire(false);
+    }
+
     vue_partie->update_vue_joueur();
     vue_partie->get_vue_infos()->add_info("Phase d'achat");
 
