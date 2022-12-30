@@ -198,7 +198,6 @@ EditionDeJeu::EditionDeJeu(const string& nom_edition) : nom(nom_edition) {
         batiment.insert(pair<Batiment*, unsigned int>(new EntrepriseRenovation(), 2));
         batiment.insert(pair<Batiment*, unsigned int>(new MaisonEdition(), 2));
         batiment.insert(pair<Batiment*, unsigned int>(new MgaGameCenter(), 2));
-
         batiment.insert(pair<Batiment*, unsigned int>(new Stade(), 2));
 
         // Batiments verts

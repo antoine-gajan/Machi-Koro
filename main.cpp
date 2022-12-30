@@ -27,19 +27,35 @@ void resize_and_center(QWidget *widget, int width, int height)
 void validate_menu_2(QWidget *menu, const string &edition, const list<string> &extensions, const map<string, string>& joueurs, const string& shop_type, unsigned int shop_size){
     //QWidget fenetre;
     // affichage des infos
-    string mes_infos = "Edition: " + edition + "\nExtensions: ";
-    for (const auto & extension : extensions){
-        mes_infos += "- "+ extension + "\n";
+    string mes_infos = "Edition: " + edition + "\n";
+    if (edition == "Deluxe"){
+        mes_infos += "Cette edition est basée sur la version française du jeu.\n";
+        mes_infos += "Elle condense ainsi les cartes de l'édition standard et des extensions Marina et Green Valley.\n";
+    } else if (edition == "Custom") {
+        mes_infos += "Nous avons créé cette édition pour vous permettre de jouer avec toutes les cartes existantes.\n";
+        mes_infos += "Elle contient donc toutes les cartes des éditions standard, deluxe, marina et green valley.\n";
+        mes_infos += "Mais ce n'est pas tout ! Elle contient également des cartes spéciales telles que : \n";
+        mes_infos += " - le MGA game center\n";
+        mes_infos += " - la fabrique du père noël\n";
     }
-    mes_infos += "Joueurs: ";
+    if (extensions.size() > 0){
+        mes_infos += "Extensions: ";
+        for (auto it = extensions.begin(); it != extensions.end(); ++it){
+            mes_infos += *it + " ";
+        }
+        mes_infos += "\n";
+    }
+
+    mes_infos += "\nJoueurs: \n";
     for (const auto & joueur : joueurs){
         mes_infos += "- "+ joueur.first + " : " + joueur.second + "\n";
     }
 
-    mes_infos += "Type de magasin: " + shop_type + "\nTaille du magasin: " + to_string(shop_size);
+    mes_infos += "\nType de shop : " + shop_type;
+    if (shop_type == "standard")
+        mes_infos += "\nLe shop est composé de " + to_string(shop_size) + " cartes différentes.";
     menu->close();
     QMessageBox::information(menu, "Informations partie", QString::fromStdString(mes_infos));
-
 
 
     Partie *p = Partie::get_instance(edition, extensions, joueurs, shop_type, shop_size);
