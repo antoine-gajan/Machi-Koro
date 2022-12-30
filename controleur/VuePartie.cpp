@@ -87,12 +87,14 @@ VuePartie::VuePartie(QWidget *parent){
 
     lcd_de1 = new QLCDNumber;
     lcd_de1->display((int)partie_actuelle->get_de_1());
+    lcd_de1->setDigitCount(1);
     //lcd_de1->setAlignment(Qt::AlignHCenter);
     layout_de_1->addWidget(lcd_de1, 0, Qt::AlignCenter);
     layout_de_1->setAlignment(Qt::AlignCenter);
 
     lcd_de2 = new QLCDNumber;
     lcd_de2->display((int)partie_actuelle->get_de_2());
+    lcd_de2->setDigitCount(1);
     //lcd_de2->setAlignment(Qt::AlignHCenter);
     layout_de_2->addWidget(lcd_de2, 0, Qt::AlignCenter);
     layout_de_2->setAlignment(Qt::AlignCenter);
@@ -179,6 +181,8 @@ VuePartie::VuePartie(QWidget *parent){
 
     structure->addLayout(layout,40);
     setLayout(structure);
+    // fermeture de la fenetre entraine la fermeture de l'application
+    setAttribute(Qt::WA_DeleteOnClose);
     this->setWindowState(Qt::WindowMaximized);
 }
 
@@ -250,9 +254,11 @@ void VuePartie::update_des() {
     QLCDNumber* old_de_2 = lcd_de2;
     lcd_de1 = new QLCDNumber;
     lcd_de1->display((int)partie_actuelle->get_de_1());
+    lcd_de1->setDigitCount(1);
 
     lcd_de2 = new QLCDNumber;
     lcd_de2->display((int)partie_actuelle->get_de_2());
+    lcd_de2->setDigitCount(1);
 
     partie_actuelle->set_moment_achat(true);
     layout_de_1->replaceWidget(old_de_1, lcd_de1);

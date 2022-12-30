@@ -9,7 +9,7 @@ VueJoueur::VueJoueur(Joueur* j,bool e_j_a, QWidget *parent) : carte_choisie(null
     // Nom du joueur
     nom_joueur = new QLabel;
     if(j->get_est_ia()){
-        nom_joueur->setText(QString::fromStdString(joueur->get_nom()+" (IA)"));
+        nom_joueur->setText(QString::fromStdString(joueur->get_nom()+" [IA]"));
     }
     else{
         nom_joueur->setText(QString::fromStdString(joueur->get_nom()));

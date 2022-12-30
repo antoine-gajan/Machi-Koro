@@ -909,6 +909,17 @@ void Partie::jouer_tour() {
     moment_achat = true;
     vue_partie->set_bouton_rien_faire(true);
     vue_partie->update_vue_joueur();
+    vue_partie->get_vue_infos()->add_info("Phase d'achat");
+
+    if (tab_joueurs[joueur_actuel]->get_est_ia()) {
+        /// on fige l'interface graphique pour 4 secondes
+        QTime dieTime = QTime::currentTime().addSecs(4);
+        while (QTime::currentTime() < dieTime) {
+            QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
+        }
+        /// on lance la phase d'achat de l'IA
+        acheter_carte_ia();
+    }
 }
 
 void Partie::suite_tour(bool achat_ok){
@@ -976,10 +987,12 @@ void Partie::suite_tour(bool achat_ok){
             cerr << "ERREUR : " << e.what() << endl;
         }
     }
+    de_1 = 0;
+    de_2 = 0;
 
     /// Update la vue
     vue_partie->update_vue_partie();
-    QTime endTime = QTime::currentTime().addSecs(5);
+    QTime endTime = QTime::currentTime().addSecs(3);
 
     // Figer l'affichage jusqu'à ce que l'heure actuelle soit supérieure à l'heure de fin
     while (QTime::currentTime() < endTime)
