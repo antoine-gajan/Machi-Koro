@@ -17,6 +17,7 @@ VueJoueur::VueJoueur(Joueur* j,bool e_j_a, QWidget *parent) : carte_choisie(null
 
     if (est_joueur_actuel) {
         nom_joueur->setStyleSheet("QLabel { color : green; background-color : transparent; }");
+
         string nom = nom_joueur->text().toStdString();
         nom += " (Joueur actuel)";
         nom_joueur->setText(QString::fromStdString(nom));
@@ -25,7 +26,15 @@ VueJoueur::VueJoueur(Joueur* j,bool e_j_a, QWidget *parent) : carte_choisie(null
         nom_joueur->setStyleSheet("QLabel { color : red; background-color : transparent; }");
     }
 
+    QFont font = nom_joueur->font();
+    font.setUnderline(true);
+    nom_joueur->setFont(font);
+
     // Argent du joueur
+    auto label_argent = new QLabel("Argent : ");
+    auto monument_label = new QLabel("Monuments");
+    label_argent->setAlignment(Qt::AlignCenter | Qt::AlignRight);
+    monument_label->setAlignment(Qt::AlignCenter);
     argent=new QLCDNumber;
     argent->display((int)joueur->get_argent());
     argent->setFixedSize(70,30);
@@ -40,12 +49,11 @@ VueJoueur::VueJoueur(Joueur* j,bool e_j_a, QWidget *parent) : carte_choisie(null
     layout_monuments = new QGridLayout;
     layout_haut_droit = new QHBoxLayout;
     layout_droit = new QVBoxLayout;
-    text_bat = new QLabel;
-    text_bat->setText(QString::fromStdString("Batiments :"));
-    bat_ferme = new QPushButton("Batiment Fermes");
-    bat_ferme->setFixedSize(100,20);
-    layout_haut_droit->addWidget(bat_ferme);
-    layout_haut_droit->addWidget(text_bat);
+    text_bat = new QLabel("Bâtiments");
+    text_bat->setAlignment(Qt::AlignCenter);
+
+    bat_ferme = new QPushButton("Bâtiments Fermés");
+    bat_ferme->setFixedSize(150,30);
     int i = 0;
     int ind_bat;
     int ind_couleurs = 1;
@@ -129,14 +137,20 @@ VueJoueur::VueJoueur(Joueur* j,bool e_j_a, QWidget *parent) : carte_choisie(null
 
     // Création du layout gauche
     layout_haut_gauche->addWidget(nom_joueur);
+    layout_haut_gauche->addWidget(label_argent);
     layout_haut_gauche->addWidget(argent);
+
     layout_informations_gauche->addLayout(layout_haut_gauche);
+    layout_informations_gauche->addWidget(monument_label);
     layout_informations_gauche->addWidget(scroll_mon);
 
 
     // Ajout des layouts à la page d'informations
     layout_informations->addLayout(layout_informations_gauche);
+
+    layout_haut_droit->addWidget(bat_ferme);
     layout_droit->addLayout(layout_haut_droit);
+    layout_droit->addWidget(text_bat);
     layout_droit->addWidget(scroll_bat);
     layout_informations->addLayout(layout_droit);
 
