@@ -55,6 +55,8 @@ private:
     QScrollArea* scroll_mon;
     QWidget* widget_scroll_bat;
     QWidget* widget_scroll_mon;
+    QHBoxLayout* layout_haut_droit;
+    QVBoxLayout* layout_droit;
 
 public slots:
     // slots qui gère les clics sur les cartes

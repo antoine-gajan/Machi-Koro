@@ -27,9 +27,14 @@ VueJoueur::VueJoueur(Joueur* j,bool e_j_a, QWidget *parent) : carte_choisie(null
     // Création de la grid
     layout_batiments = new QGridLayout;
     layout_monuments = new QGridLayout;
+    layout_haut_droit = new QHBoxLayout;
+    layout_droit = new QVBoxLayout;
     text_bat = new QLabel;
     text_bat->setText(QString::fromStdString("Batiments :"));
-    layout_batiments->addWidget(text_bat, 0,0);
+    bat_ferme = new QPushButton("Batiment Fermes");
+    bat_ferme->setFixedSize(100,20);
+    layout_haut_droit->addWidget(bat_ferme);
+    layout_haut_droit->addWidget(text_bat);
     int i = 0;
     int ind_bat;
     int ind_couleurs = 1;
@@ -71,13 +76,12 @@ VueJoueur::VueJoueur(Joueur* j,bool e_j_a, QWidget *parent) : carte_choisie(null
     scroll_bat = new QScrollArea();
     scroll_bat->setWidget(widget_scroll_bat);
     scroll_bat->setWidgetResizable(true);
-    //scroll_bat->setFixedSize(700, 280);
+    //scroll_bat->setFixedWidth(130 * 4);
     scroll_bat->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
     scroll_bat->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
 
     // Création d'un bouton donnant accès aux batiments fermés
-    bat_ferme = new QPushButton("Batiment Fermes");
-    layout_batiments->addWidget(bat_ferme);
+
     connect(bat_ferme, SIGNAL(clicked()),this, SLOT(affichage_bat_ferme()));
 
 
@@ -96,7 +100,7 @@ VueJoueur::VueJoueur(Joueur* j,bool e_j_a, QWidget *parent) : carte_choisie(null
     scroll_mon = new QScrollArea();
     scroll_mon->setWidget(widget_scroll_mon);
     scroll_mon->setWidgetResizable(true);
-    //scroll_mon->setFixedSize(300, 260);
+    scroll_mon->setFixedWidth(320);
     scroll_mon->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     scroll_mon->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
 
@@ -121,7 +125,9 @@ VueJoueur::VueJoueur(Joueur* j,bool e_j_a, QWidget *parent) : carte_choisie(null
 
     // Ajout des layouts à la page d'informations
     layout_informations->addLayout(layout_informations_gauche);
-    layout_informations->addWidget(scroll_bat);
+    layout_droit->addLayout(layout_haut_droit);
+    layout_droit->addWidget(scroll_bat);
+    layout_informations->addLayout(layout_droit);
 
     // Définition du layout principal
     setLayout(layout_informations);
