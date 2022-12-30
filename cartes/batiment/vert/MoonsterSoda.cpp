@@ -13,8 +13,9 @@ MoonsterSoda::MoonsterSoda()
 void MoonsterSoda::declencher_effet(unsigned int possesseur, int bonus) const {
     /// Effet du MoonsterSoda
     unsigned int j_act_index =  Partie::get_instance()->get_joueur_actuel();
-    Joueur* j_actuel = Partie::get_instance()->get_tab_joueurs()[j_act_index];
-    vector<Joueur*> tab_joueurs = Partie::get_instance()->get_tab_joueurs();
+    Partie * partie = Partie::get_instance();
+    Joueur* j_actuel = partie->get_tab_joueurs()[j_act_index];
+    vector<Joueur*> tab_joueurs = partie->get_tab_joueurs();
 
     // On compte le nombre d'etablissements de type restaurant de tous les joueurs
     unsigned int nb_restaurants = 0;
@@ -23,7 +24,7 @@ void MoonsterSoda::declencher_effet(unsigned int possesseur, int bonus) const {
     }
 
     if (nb_restaurants > 0) {
-        cout << "Activation de l'effet de la carte Moonster Soda du joueur \"" << j_actuel->get_nom() << "\"" << endl;
+        partie->get_vue_partie()->get_vue_infos()->add_info("Activation de l'effet de la carte Moonster Soda du joueur \""+ j_actuel->get_nom() + "\"");
     }
 
     // On donne 1 piece par restaurant

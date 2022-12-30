@@ -20,9 +20,11 @@ void BanqueDeMinivilles::declencher_effet(unsigned int possesseur, int bonus) co
     // Le joueur actuel paye 2 pieces a la banque
 
     unsigned int j_act_index =  Partie::get_instance()->get_joueur_actuel();
-    Joueur* j_actuel = Partie::get_instance()->get_tab_joueurs()[j_act_index];
 
-    cout << "Activation de l'effet de la carte Banque de minivilles du joueur \"" << j_actuel->get_nom() << "\"" << endl;
+
+    Partie * partie = Partie::get_instance();
+    Joueur* j_actuel = partie->get_tab_joueurs()[j_act_index];
+    partie->get_vue_partie()->get_vue_infos()->add_info("Activation de l'effet de la carte Banque de minivilles du joueur \""+ j_actuel->get_nom() + "\"");
 
     if (j_actuel->get_argent() >= 2) {
         j_actuel->set_argent(j_actuel->get_argent() - 2);
