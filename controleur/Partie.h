@@ -76,13 +76,11 @@ public:
     Shop* get_shop() const {return shop;};
     Pioche* get_pioche() const {return pioche;};
     vector<string> get_nom_edition() const {return tab_nom_edition;};
-    unsigned int get_nb_cartes_edition() const {return list_batiments.size();};
     VuePartie* get_vue_partie() const {return vue_partie;};
     bool get_moment_achat() const {return moment_achat;}
     void set_moment_achat(bool b) {moment_achat = b;}
     unsigned int get_nb_monuments_win() const {return nb_monuments_win;}
 
-    //void set_vue(QWidget* vue) {this->vue = vue;};
 
     //********** Methodes **********//
     //********** Methodes statiques **********//

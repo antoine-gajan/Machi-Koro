@@ -930,23 +930,41 @@ unsigned int Partie::selectionner_joueur(const vector<Joueur*>& tab_joueurs, uns
     }
     //cas où c'est un joueur reel qui prend la decision
     else{
-        //Affichage de tous les joueus de tab_joueurs
-        cout<<"Quel joueur voulez vous choisir parmis la liste suivante :" << endl;
-        for(Joueur* curseur:tab_joueurs){
-            cout<<count<<" : "<<curseur->get_nom()<<endl;
-            count++;
+        // Fenetre de dialogue pour la selection
+        QDialog* window = new QDialog();
+        window->setWindowTitle("Machi Koro - Selectionner un joueur");
+        window->setContentsMargins(50, 30, 50, 50);
+
+        vector<QPushButton*> liste_joueurs;
+        QVBoxLayout* layout_joueurs = new QVBoxLayout;
+        // Texte informatif
+        QLabel *texte = new QLabel(QString::fromStdString(tab_joueurs[joueur_actuel]->get_nom() + ", quel joueur veux tu sélectionner ?"));
+        texte->setStyleSheet("QLabel { font-weight : bold; font-size : 25px; }");
+        layout_joueurs->addWidget(texte);
+
+        int i = 0, ind_joueur = 0;
+        for (auto& joueur : tab_joueurs) {
+            // Ajout du joueur
+            if (joueur != tab_joueurs[joueur_actuel]) {
+                // Ajout du bouton
+                QPushButton *bouton = new QPushButton;
+                bouton->setText(QString::fromStdString(joueur->get_nom()));
+                liste_joueurs.push_back(bouton);
+                layout_joueurs->addWidget(liste_joueurs[i]);
+                // Ajout du slot
+                QObject::connect(liste_joueurs[i], &QPushButton::clicked, [window, ind_joueur, &selection]() {
+                    window->accept();
+                    selection = ind_joueur;
+                });
+                i++;
+            }
+            ind_joueur++;
         }
-
-        //Scan de tab_joueurs a la recherche du nom entre
-        cout<<"Indice du joueur a selectionner :"<<endl;
-        cin >> selection;
-
-        //cas où erreur (nom entre pas dans la liste ou nom entre = joueur actuel)
-        if(selection > tab_joueurs.size()) throw gameException("L'indice entre n'est pas valide");
-        if(selection == joueur_actuel) throw gameException("On ne peut pas selectionner le joueur actuel");
+        window->setLayout(layout_joueurs);
+        // Affichage de la fenêtre
+        window->exec();
     }
-
-    cout<<"joueur selectionne : "<<tab_joueurs[selection]->get_nom();
+    Partie::get_instance()->get_vue_partie()->get_vue_infos()->add_info("Joueur sélectionné : "+ tab_joueurs[selection]->get_nom());
     return selection;
 }
 
