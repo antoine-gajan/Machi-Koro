@@ -405,56 +405,21 @@ bool Partie::acheter_bat_ia() {
 }
 
 
-bool Partie::acheter_carte(VueCarte *vue_carte) {
+void Partie::acheter_carte(VueCarte *vue_carte) {
     ///Fonction qui permet a un joueur d'acheter une carte (batiment ou monument)
-    int choix = -1;
-    int choix_ia = -1;
-    bool visit[2] = {false, false};
-    bool transaction_fin = false;
 
-
-    // Si le joueur est humain
-    if (!tab_joueurs[joueur_actuel]->get_est_ia()) {
-
-        if(vue_carte->getCarte()->get_type() != "Monument"){
-            return acheter_bat(vue_carte);
-        }
-        else{
-            return acheter_monu(vue_carte);
-        }
-
-    } else {
-        choix_ia = rand() % 5;
-        if (choix_ia == 0) {
-            visit[0] = true;
-            transaction_fin = acheter_bat(nullptr);
-        } else {
-            visit[1] = true;
-            transaction_fin = acheter_monu(nullptr);
-        }
-
-        if (!transaction_fin && !visit[0]) {
-            visit[0] = true;
-            transaction_fin = acheter_bat(nullptr);
-        }
-        else if (!transaction_fin && !visit[1]) {
-            visit[1] = true;
-            transaction_fin = acheter_monu(nullptr);
-        }
-
-        if (!transaction_fin) {
-            return false;
-        }
+    if(vue_carte->getCarte()->get_type() != "Monument") {
+        acheter_bat(vue_carte);
     }
-    return true;
+    else {
+        acheter_monu(vue_carte);
+    }
 }
 
 bool Partie::acheter_monu(VueCarte* vue_carte) {
     //fonction qui permet a un joueur donne d'acheter un monument
     Monument* mon_picked;
     Joueur *joueur_act = tab_joueurs[joueur_actuel];
-    int choix = -1;
-    unsigned int pos = 1;
     vector<Monument*> monuments_dispo;
 
     if (!tab_joueurs[joueur_actuel]->get_est_ia()) {
@@ -492,7 +457,6 @@ bool Partie::acheter_bat(VueCarte* vue_carte) {
     //fonction qui permet a un joueur donne d'acheter un batiment
     Batiment* bat_picked;
     Joueur *joueur_act = tab_joueurs[joueur_actuel];
-    int choix = -1;
     vector<Batiment*> bat_shop = shop->get_contenu_v();
     // Si le joueur est humain
     if (!tab_joueurs[joueur_actuel]->get_est_ia()) {
@@ -989,5 +953,5 @@ unsigned int Partie::lancer_de() {
 }
 
 void Partie::acheter_carte_event(VueCarte* vc) {
-    bool est_ok = Partie::get_instance()->acheter_carte(vc);
+    acheter_carte(vc);
 }
