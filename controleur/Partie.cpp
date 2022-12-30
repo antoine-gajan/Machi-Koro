@@ -206,7 +206,6 @@ void Partie::ajout_batiment(Batiment *batiment) {
 
 void Partie::acheter_carte_ia() {
     //fonction qui permet a un joueur donne d'acheter une carte (batiment ou monument)
-    int choix = -1;
     int choix_ia = -1;
     bool visit[2] = {false, false};
     bool transaction_fin = false;
@@ -223,7 +222,10 @@ void Partie::acheter_carte_ia() {
 
     if (!transaction_fin && !visit[0]) {
         visit[0] = true;
-        transaction_fin = acheter_bat_ia();
+        unsigned int rand_ia = Partie::lancer_de() % 3;
+        if (rand_ia != 0) {
+            transaction_fin = acheter_bat_ia();
+        }
     }
     else if (!transaction_fin && !visit[1]) {
         visit[1] = true;
@@ -826,8 +828,9 @@ void Partie::suite_tour(bool achat_ok){
     /// Vérifie si la partie est finie
     if (est_gagnant(joueur_actuel)) {
         /// Fin de la partie
-        QMessageBox::information(vue_partie, "Fin de la partie", "Le joueur " + QString::fromStdString(tab_joueurs[joueur_actuel]->get_nom()) + " a gagne !");
         vue_partie->close();
+        vue_partie->get_vue_carte()->close();
+        QMessageBox::information(vue_partie, "Fin de la partie", "Le joueur " + QString::fromStdString(tab_joueurs[joueur_actuel]->get_nom()) + " a gagne !");
     } else {
         /// Fin du tour
         if (!rejouer) {
