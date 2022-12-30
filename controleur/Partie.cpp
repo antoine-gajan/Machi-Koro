@@ -841,7 +841,6 @@ void Partie::suite_tour(bool achat_ok){
     if (est_gagnant(joueur_actuel)) {
         /// Fin de la partie
         vue_partie->close();
-        vue_partie->get_vue_carte()->close();
         QMessageBox::information(vue_partie, "Fin de la partie", "Le joueur " + QString::fromStdString(tab_joueurs[joueur_actuel]->get_nom()) + " a gagne !");
     } else {
         /// Fin du tour
