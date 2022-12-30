@@ -94,7 +94,7 @@ Partie::Partie(EditionDeJeu* edition, const map<string, string>& joueurs, const 
     for (auto & joueur : joueurs){
 
         if (joueur.second == "Humain") {
-            tab_joueurs.push_back(new Joueur(joueur.first, list_monuments, starter_bat, 3));
+            tab_joueurs.push_back(new Joueur(joueur.first, list_monuments, starter_bat, 300));
         }
         else {
             if (joueur.second == "IA agressive") {
@@ -759,6 +759,7 @@ void Partie::jouer_tour() {
 
 void Partie::suite_tour(bool achat_ok){
     vector < Monument * > monuments_joueurs = tab_joueurs[joueur_actuel]->get_monument_jouables();
+    moment_achat = false;
 
     /// ****************************************************************************************************************
     /// ****************************** ETAPE 1 : Affichage achat + effet ***********************************************
