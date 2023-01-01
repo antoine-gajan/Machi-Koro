@@ -94,7 +94,7 @@ Partie::Partie(EditionDeJeu* edition, const map<string, string>& joueurs, const 
     for (auto & joueur : joueurs){
 
         if (joueur.second == "Humain") {
-            tab_joueurs.push_back(new Joueur(joueur.first, list_monuments, starter_bat, 300));
+            tab_joueurs.push_back(new Joueur(joueur.first, list_monuments, starter_bat, 3));
         }
         else {
             if (joueur.second == "IA agressive") {
@@ -831,7 +831,7 @@ void Partie::suite_tour(bool achat_ok){
     vue_partie->set_bouton_rien_faire(false);
     vue_partie->update_vue_partie();
     vue_partie->get_vue_infos()->add_info("Fin du tour");
-    QTime endTime = QTime::currentTime().addSecs(3);
+    QTime endTime = QTime::currentTime().addSecs(1);
 
     // Figer l'affichage jusqu'à ce que l'heure actuelle soit supérieure à l'heure de fin
     while (QTime::currentTime() < endTime)
