@@ -10,17 +10,17 @@
 
 class VueInfo : public QVBoxLayout {
     public :
-    VueInfo(QWidget *parent = nullptr);
-    void add_info(const std::string& info);
+        VueInfo(QWidget *parent = nullptr);
+        void add_info(const std::string& info);
 
 
-private:
-    QLabel *info_permament;
+    private:
+        QLabel *info_permament;
 
-    QWidget *widget_layout_info;
-    QScrollArea *scroll_info;
-    QVBoxLayout *info_layout;
-    std::vector<QLabel*> liste_info;
+        QWidget *widget_layout_info;
+        QScrollArea *scroll_info;
+        QVBoxLayout *info_layout;
+        std::vector<QLabel*> liste_info;
 };
 
 #endif //MACHI_KORO_VUEINFO_H

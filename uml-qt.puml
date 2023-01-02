@@ -3,17 +3,17 @@ package Jeu  <<Frame>> #EDF6F9{
     package Controleur  <<Frame>> #FEFAE0{
         package EditionDeJeu  <<Frame>> #FEFAE0{
             class EditionDeJeu{
-                    - nom : string
+                    - nom : str
                     - nb_joueurs_max : unsigned int
                     - nb_monuments_win :  unsigned int
                     - batiment : map<Batiment*,unsigned int>
                     - monument : vector<Monument*>
                     - est_edition : bool
                     ----
-                    + EditionDeJeu(nom : const string&)
+                    + EditionDeJeu(nom : const str&)
                     + ~EditionDeJeu()
                     .. GETTER ..
-                    + get_nom () : const string&
+                    + get_nom () : const str&
                     + get_nb_joueurs_max () : unsigned int
                     + get_nb_monuments_win () : unsigned int
                     + get_batiment () : map<Batiment*,unsigned int>
@@ -30,7 +30,7 @@ package Jeu  <<Frame>> #EDF6F9{
             class Partie{
                 - tab_joueurs : vector<Joueur*>
                 - list_monuments : vector<Monument*>
-                - tab_nom_edition : vector<string>
+                - tab_nom_edition : vector<str>
                 - vue_partie : VuePartie*
                 - shop : Shop*
                 - pioche : Pioche*
@@ -45,7 +45,7 @@ package Jeu  <<Frame>> #EDF6F9{
                 - {static} handler : Handler
                 --
                 - ~Partie()
-                - Partie(edition : EditionDeJeu*, joueurs : const map<string, string>&, shop_type : const string&, shop_size : unsigned int, extension : const vector<EditionDeJeu*>& = vector<EditionDeJeu*>())
+                - Partie(edition : EditionDeJeu*, joueurs : const map<str, str>&, shop_type : const str&, shop_size : unsigned int, extension : const vector<EditionDeJeu*>& = vector<EditionDeJeu*>())
                 + Partie (p : const Partie&) = delete
                 + operator=(p : const Partie&) = delete
                 + jouer_tour() : void
@@ -67,7 +67,7 @@ package Jeu  <<Frame>> #EDF6F9{
                 + {static} lance_de() : unsigned int
                 + {static} map_to_vector(map : const map<Batiment*,unsigned int>&) : vector<Batiment*>
                 + {static} get_instance() : Partie*
-                + {static} get_instance(edition : EditionDeJeu*, joueurs : const map<string, string>&, shop_type : const string&, shop_size : unsigned int, extension : const vector<EditionDeJeu*>& = vector<EditionDeJeu*>()) : Partie*
+                + {static} get_instance(edition : EditionDeJeu*, joueurs : const map<str, str>&, shop_type : const str&, shop_size : unsigned int, extension : const vector<EditionDeJeu*>& = vector<EditionDeJeu*>()) : Partie*
                 .. GETTER ..
                 + get_de_1() : unsigned int
                 + get_de_2() : unsigned int
@@ -75,7 +75,7 @@ package Jeu  <<Frame>> #EDF6F9{
                 + get_tab_joueurs() : const vector<Joueur*>&
                 + get_shop() : Shop*
                 + get_pioche() : Pioche*
-                + get_nom_edition() : vector<string>
+                + get_nom_edition() : vector<str>
                 + get_vue_partie() : VuePartie*
                 + get_moment_achat() : bool
                 + get_nb_monuments_win() : unsigned int
@@ -142,31 +142,40 @@ package Jeu  <<Frame>> #EDF6F9{
         package Pioche  <<Frame>> #FEFAE0{
             class Pioche
             {
-                - contenu : *Batiment[]
-
-                - get_carte () : *Batiment
-                - est_vide () : bool
-                - Pioche (liste_bat : *Batiment[])
-                - ~Pioche()
+                - contenu : stack<Batiment*>
+                - taille_init : unsigned int
+                --
+                + Pioche (liste_bat : const vector<Batiment*>&)
+                + ~Pioche()
+                + get_carte () : Batiment*
+                + est_vide () : bool
+                .. GETTER ..
+                + get_taille_init () const : unsigned int
+                + get_taille () const : unsigned int
             }
             class VuePioche
             {
                 - pioche_exception : QLabel*
                 - barre_pioche : QProgressBar*
-                --
                 + VuePioche(pioche : Pioche *, parent : QWidget* = nullptr);
             }
         }
         package Shop  <<Frame>> #FEFAE0{
             class Shop
             {
-                - nb_cartes_possibles : unsigned int
+                - nb_tas_max : unsigned int
+                - nb_tas_reel : unsigned int
                 - contenu : map<Batiment*, unsigned int>
                 --
-                - completer_shop (new_bat : Batiment*) : void
+                + completer_shop (new_bat : Batiment*) : void
+                + acheter_batiment (bat : Batiment*) : Batiment*
+                + Shop (nb_tas : unsigned int)
+                + ~Shop()
                 .. GETTER ..
-                + get_nb_cartes_possible () : unsigned int
-                + get_contenu () : map<Batiment*, unsigned int>
+                + get_nb_tas_max () const : unsigned int
+                + get_nb_tas_reel () const : unsigned int
+                + get_contenu () const : const map<Batiment*, unsigned int>&
+                + get_contenu_v () const : vector<Batiment*>
                 .. SETTER ..
                 + Shop (format : Shop_Format, nb_c : unsigned int) : void
                 + retirer (indice : unsigned int) : void
@@ -179,9 +188,9 @@ package Jeu  <<Frame>> #EDF6F9{
                 - bouton_acheter : QPushButton *
                 --
                 + VueShop(shop : Shop*, parent : QWidget *= nullptr)
-                ==SLOTS==
-                - clicked_acheter_event() : void
-                - batiment_clique(vc : VueCarte*) : void
+                == SLOTS ==
+                + clicked_acheter_event() : void
+                + batiment_clique(vc : VueCarte*) : void
             }
         }
         class VueInfo
@@ -191,7 +200,6 @@ package Jeu  <<Frame>> #EDF6F9{
             - scroll_info : QScrollArea *
             - info_layout : QVBoxLayout *
             - liste_info : vector<QLabel*>
-            --
             + VueInfo(QWidget *parent = nullptr);
             + add_info(info : const str& ) : void
         }
@@ -205,14 +213,14 @@ package Jeu  <<Frame>> #EDF6F9{
                 - carte : const Carte*
                 - pixmap : QPixmap
                 - ButtonIcon : QIcon
-                - path_carte : string
+                - path_carte : str
                 - est_actif : bool
                 --
                 + VueCarte (c : const Carte&, etat : bool, est_act : bool = false, parent : QWidget* = nullptr)
                 + VueCarte (parent : QWidget* = nullptr)
                 + getCarte () const : const Carte*
                 + get_pixmap () const : QPixmap
-                + set_pixmap (path : string) : void
+                + set_pixmap (path : str) : void
                 + set_icon (pixmap : QPixmap) : void
                 + get_est_actif () const : bool
                 == SIGNALS ==
@@ -223,20 +231,20 @@ package Jeu  <<Frame>> #EDF6F9{
 
             abstract class Carte
             {
-                # description_effet : string
-                # nom : string
-                # path_image : string
+                # description_effet : str
+                # nom : str
+                # path_image : str
                 # prix : unsigned int
                 ----
                 # Carte (name, effet_description,
                 + ~Carte ()
                 + {abstract}  declencher_effet (possesseur : unsigned int, bonus : int = 0) const : void
-                + {abstract}  get_type () const : string
+                + {abstract}  get_type () const : str
                 + {static} argent_effet (a : int) : unsigned int
                 .. GETTER ..
-                + get_nom () const : string
-                + get_description_effet () const : string
-                + get_image () const : string
+                + get_nom () const : str
+                + get_description_effet () const : str
+                + get_image () const : str
                  + get_prix () const : unsigned int
             }
 
@@ -245,11 +253,11 @@ package Jeu  <<Frame>> #EDF6F9{
                 {
                     - path_image_actif : str
                     ----
-                    # Monument (desc_effet, nom, path_image_actif, path_image : const string&; prix : unsigned int)
+                    # Monument (desc_effet, nom, path_image_actif, path_image : const str&; prix : unsigned int)
                     + ~Monument ()
                     + {abstract} clone () : Monument*
                     .. GETTER ..
-                    + get_path_image_actif () const : const string&
+                    + get_path_image_actif () const : const str&
                     + get_type () const : str
 
                 }
@@ -278,7 +286,7 @@ package Jeu  <<Frame>> #EDF6F9{
                     - num_activation : unsigned int[]
                     - type : str
                     ----
-                    # Batiment (nom, description_effet, path_image, type_bat : const string&, prix unsigned int, coul : couleur_bat, num : const list<unsigned int>&)
+                    # Batiment (nom, description_effet, path_image, type_bat : const str&, prix unsigned int, coul : couleur_bat, num : const list<unsigned int>&)
                     + ~Batiment ()
                     + {abstract} clone () : Batiment*
                     .. GETTER ..
@@ -351,14 +359,14 @@ package Jeu  <<Frame>> #EDF6F9{
             {
                 - est_IA : bool
                 - strategie : strat_IA
-                - nom : const string
+                - nom : const str
                 - argent : unsigned int
                 - liste_batiments_fermes : vector<Batiment*>
                 - liste_monument : map<Monument*, bool>
                 - liste_batiment : map<couleur_bat, map<Batiment*, unsigned int>>
                 --
                 + acheter_carte(carte_achat : Carte) : bool
-                + Joueur (nom : const string&, list_mon : const vector<Monument *>&, list_bat : const vector<Batiment*>&, arg_depart : unsigned int, strat_IA : strat_IA = none)
+                + Joueur (nom : const str&, list_mon : const vector<Monument *>&, list_bat : const vector<Batiment*>&, arg_depart : unsigned int, strat_IA : strat_IA = none)
                 + ~Joueur ()
                 + count_type (type : const str&) const : unsigned int
                 + activer_monument (monument : Monument*) : void
@@ -376,7 +384,7 @@ package Jeu  <<Frame>> #EDF6F9{
                 + get_repartition_argent (unsigned int) const : vector<unsigned int>
                 + get_est_IA () const : bool
                 + get_strategie () const : strat_IA
-                + get_nom () const : const string&
+                + get_nom () const : const str&
                 + get_liste_monument () const : const map<Monument*, bool>&
                 + get_liste_batiment () const : const map<couleur_bat, map<Batiment*, unsigned int>>&
                 + get_liste_batiment(coul : couleur_bat) const : const map<Batiment*, unsigned int>&
@@ -404,13 +412,6 @@ package Jeu  <<Frame>> #EDF6F9{
                 extended
             }
 
-            enum Valeur_Piece
-            {
-                1
-                5
-                10
-            }
-
             enum strat_IA
             {
                 aleatoire
@@ -419,15 +420,21 @@ package Jeu  <<Frame>> #EDF6F9{
                 none
             }
     }
-
+    package exception <<Frame>> {
+        class gameException
+        {
+            - info : str
+            + gameException (info : const str&)
+            + what () const : const str&
+        }
+    }
 }
-
 
 
 Carte <|-up- Monument #line:green
 Carte <|-- Batiment #line:green
 
-VueCarte "1" *-- "1" Carte : "Affiche >"
+VueCarte "1" *-- "1" Carte #line:blue : "Affiche >"
 
 Monument <|-- Gare #line:red
 Monument <|-- Aéroport #line:red
@@ -438,13 +445,13 @@ Batiment <|-- Cafe #line:red
 Batiment "*" -up-* "0..1" Pioche : "Est constitué de <"
 
 Partie +- Handler
-VuePartie "0..1" *- "1" Partie : "Affiche >"
+VuePartie "0..1" *- "1" Partie #line:blue : "Affiche >"
 Partie "1" --- "2..*" Joueur : "Participe à <"
 Partie "1" *- "0..1" Pioche : "Est constituée de >"
 Partie "1" *-- "1" Shop : "Est constituée de >"
 Partie "1" -- "1..*" EditionDeJeu : "utilise >"
 
-Joueur "1" -* "0..1" VueJoueur : "Affiche <"
+Joueur "1" -* "0..1" VueJoueur #line:blue : "Affiche <"
 
 Joueur "1..*" - "*" Batiment : "Possède >"
 Joueur "1..*" - "M" Monument : "Possède >"
@@ -453,8 +460,17 @@ Joueur "1..*" - "M" Monument : "Possède >"
 EditionDeJeu "1..*" o- "1..*" Monument : "Appartenir"
 EditionDeJeu "1..*" o- "1..*" Batiment : "Appartenir"
 
-
+VueShop "1" *- "1" Shop #line:blue : "Affiche >"
 Shop "0..1" *-- "*" Batiment : "Est constitué de     >"
 
+VuePioche "1" *- "1" Pioche #line:blue : "Affiche >"
 Pioche "1" -- "1" Shop : "Interagit avec"
+
+VuePartie "1" o- "1" VueInfo #line:blue : "possède"
+VuePartie "1" o-- "1" VueJoueur #line:blue : "possède"
+VuePartie "1" o- "1" VueShop #line:blue : "possède"
+VuePartie "1" o- "1" VuePioche #line:blue : "possède"
+
+VueJoueur "*" o- "*" VueCarte #line:blue : "possède"
+VueShop "0..1" o- "*" VueCarte #line:blue : "possède"
 @enduml
