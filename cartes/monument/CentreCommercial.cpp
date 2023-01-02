@@ -4,8 +4,7 @@
 using namespace std;
 
 CentreCommercial::CentreCommercial() :
-    Monument(APRES,
-             "CentreCommercial",
+    Monument("CentreCommercial",
              10,
              "Les etablissement cafe et commerce vous rapportent une piece de plus",
              "../assets/monuments/Centre-commercial-travaux.png",

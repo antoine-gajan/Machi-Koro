@@ -2,8 +2,7 @@
 #include "Partie.h"
 
 TourRadio::TourRadio() :
-    Monument(APRES,
-             "TourRadio",
+    Monument("TourRadio",
              22,
              "Une fois par tour vous pouvez relancer vos des",
              "../assets/monuments/Tour-radio-travaux.png",

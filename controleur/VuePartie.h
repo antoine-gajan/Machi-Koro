@@ -26,14 +26,11 @@ public:
     void update_vue_info();
     void set_bouton_rien_faire(bool b) {bouton_rien_faire->setEnabled(b);}
     void update_des();
-
-    /// Getters
-    QWidget* get_vue_carte() const {return fenetre_carte;}
     void set_vue_carte(QWidget* vue_carte) {fenetre_carte = vue_carte;}
     void update_nom_joueur();
 
-
-
+    /// Getters
+    QWidget* get_vue_carte() const {return fenetre_carte;}
     VueJoueur* get_vue_joueur() const {return vue_joueur;}
     VueInfo* get_vue_infos() const {return infos;}
 
@@ -89,7 +86,6 @@ public slots:
     // Slots qui gèrent les clics sur les vues joueurs
     void d_click();
     void g_click();
-    void tour_suivant();
     void ne_rien_faire_bouton();
 };
 

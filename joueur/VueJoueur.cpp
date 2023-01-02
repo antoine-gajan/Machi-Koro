@@ -223,15 +223,6 @@ void VueJoueur::affichage_bat_ferme(){
     fenetre_bat_fermes->show();
 }
 
-void update_monu(VueCarte* vc, Carte* c){
-    vc->set_pixmap(c->get_path_image());
-    vc->set_icon(vc->get_pixmap());
-}
-
-void replace_batiment(){
-
-}
-
 void VueJoueur::clicked_acheter_event(){
     Partie *partie = Partie::get_instance();
     partie->get_vue_partie()->get_vue_carte()->close();

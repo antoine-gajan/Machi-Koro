@@ -2,7 +2,7 @@
 
 using namespace std;
 
-Carte::Carte(const string& name, const string& effect_description, unsigned int price, const string& path_picture) {
+Carte::Carte(const string& name, const string& effet_description, unsigned int price, const string& path_picture) {
     /// Constructeur de la classe Carte
 
     // Gestion des erreurs
@@ -10,7 +10,7 @@ Carte::Carte(const string& name, const string& effect_description, unsigned int 
         throw gameException("Le nom de la carte ne peut pas etre vide");
     }
 
-    if (effect_description.empty()) {
+    if (effet_description.empty()) {
         throw gameException("La description de l'effet de la carte ne peut pas etre vide");
     }
 
@@ -20,7 +20,7 @@ Carte::Carte(const string& name, const string& effect_description, unsigned int 
 
     // Initialisation des attributs
     nom = name;
-    description_effet = effect_description;
+    description_effet = effet_description;
     prix = price;
     path_image = path_picture;
 }

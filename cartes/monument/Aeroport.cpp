@@ -2,8 +2,7 @@
 #include "Partie.h"
 
 Aeroport::Aeroport() :
-    Monument(APRES,
-                "Aeroport",
+    Monument("Aeroport",
                 30,
                 "Si rien n'a ete construit durant le tour, la banque donne 10 au joueur",
                 "../assets/monuments/Aeroport-travaux.png",

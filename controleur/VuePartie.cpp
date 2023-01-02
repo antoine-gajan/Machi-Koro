@@ -286,13 +286,6 @@ void VuePartie::update_nom_joueur(){
     update();
 }
 
-void VuePartie::tour_suivant() {
-    QMessageBox::information(this, "Tour suivant", "Le tour suivant va commencer, si vous n'avez rien acheté, tant pis pour vous !");
-    Partie* partie_actuelle = Partie::get_instance();
-    // On appelle la fonction de mise à jour de l'affichage
-    partie_actuelle->suite_tour(false);
-}
-
 void VuePartie::update_vue_partie() {
     /// Update du haut de la vue partie
     update_nom_joueur();

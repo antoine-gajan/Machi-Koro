@@ -2,8 +2,7 @@
 #include "Partie.h"
 
 Port::Port()
-        : Monument(PENDANT,
-                   "Port",
+        : Monument("Port",
                    2,
                    "Si le resultat du jet de de est superieur ou egal a 10, vous pouvez ajouter 2 a ce resultat.",
                    "../assets/monuments/Port-travaux.png",

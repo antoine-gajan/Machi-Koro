@@ -18,17 +18,7 @@ class VueJoueur : public QWidget
 Q_OBJECT
 public:
     explicit VueJoueur(Joueur* j,bool e_j_a,  QWidget *parent = nullptr);
-    void replace_argent(int i) {argent->display(i);};
-    QLCDNumber* get_widget_argent() const{return argent;};
-    void add_batiment(VueCarte* vc){return vue_batiments->push_back(vc);}
-    void add_batiment_ferme(VueCarte* vc){return vue_batiments_ferme->push_back(vc);}
-    void update_monu(VueCarte* vc){}
-    const Joueur& get_joueur() const {return *joueur;}
-    const vector<VueCarte*>& get_vue_batiments() const {return *vue_batiments;}
-    const vector<VueCarte*>& get_vue_batiments_ferme() const {return *vue_batiments_ferme;}
-    const vector<VueCarte*>& get_vue_monuments() const {return *vue_monuments;}
     bool get_est_joueur_actuel() const{return est_joueur_actuel;}
-    void update_vue();
     VueCarte* get_carte_choisie() const {return carte_choisie;}
 
 private:
@@ -37,26 +27,26 @@ private:
     QLabel* nom_joueur; // texte avec le nom du joueur
     QLCDNumber* argent; // affichage de l'argent du joueur
     QHBoxLayout* layout_informations;
+    QHBoxLayout* layout_haut_gauche;
+    QHBoxLayout* layout_haut_droit;
+    QVBoxLayout* layout_droit;
+    QVBoxLayout* layout_informations_gauche;
     QGridLayout* layout_batiments; // grille des batiments du joueur
     QGridLayout* layout_monuments; // grille des monuments du joueur
-    QGridLayout* layout_batiments_ferme; // grille des batiments ferme du joueu// r
+    QGridLayout* layout_batiments_ferme; // grille des batiments ferme du joueur
     vector<VueCarte*>* vue_batiments; // adresses des batiments VueCarte
     vector<VueCarte*>* vue_batiments_ferme; // adresses des batiments fermés VueCarte
     vector<VueCarte*>* vue_monuments; // adresses des monuments VueCarte
-    QWidget* fenetre_bat_fermes; // Fenetre avec les batiments fermés
-    QHBoxLayout* layout_haut_gauche;
-    QVBoxLayout* layout_informations_gauche;
     QPushButton *bat_ferme;
-    Joueur *joueur;
-    QWidget *parent;
-    VueCarte *carte_choisie;
     QPushButton* bouton_achat;
+    Joueur *joueur;
+    VueCarte *carte_choisie;
     QScrollArea* scroll_bat;
     QScrollArea* scroll_mon;
+    QWidget *parent;
+    QWidget* fenetre_bat_fermes; // Fenetre avec les batiments fermés
     QWidget* widget_scroll_bat;
     QWidget* widget_scroll_mon;
-    QHBoxLayout* layout_haut_droit;
-    QVBoxLayout* layout_droit;
 
 public slots:
     // slots qui gère les clics sur les cartes

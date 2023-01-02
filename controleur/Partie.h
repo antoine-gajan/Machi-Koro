@@ -22,6 +22,7 @@ class Partie {
 private:
     map<Batiment*, unsigned int> list_batiments;
     vector<Monument*> list_monuments;
+    vector<string> tab_nom_edition;
     vector<Joueur*> tab_joueurs;
 
     unsigned int joueur_actuel;
@@ -30,13 +31,11 @@ private:
     unsigned int de_2;
     unsigned int compteur_tour;
     bool rejouer;
-    vector<string> tab_nom_edition;
-    VuePartie* vue_partie;
+    bool moment_achat;
 
+    VuePartie* vue_partie;
     Shop* shop;
     Pioche* pioche;
-
-    bool moment_achat;
 
     struct Handler{
         Partie* instance;

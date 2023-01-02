@@ -2,8 +2,7 @@
 #include "Partie.h"
 
 HotelDeVille::HotelDeVille() :
-    Monument(APRES,
-             "HotelDeVille",
+    Monument("HotelDeVille",
              0,
              "Avant de construire, si vous n'avez pas d'argent vous recevez 1 piece de la banque.",
              "../assets/monuments/HotelDeVille.png",

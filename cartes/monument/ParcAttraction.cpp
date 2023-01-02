@@ -2,8 +2,7 @@
 #include "Partie.h"
 
 ParcAttraction::ParcAttraction() :
-    Monument(APRES,
-             "ParcAttraction",
+    Monument("ParcAttraction",
              16,
              "Si le jet de de est un double vous pouvez rejouer",
              "../assets/monuments/Parc-attractions-travaux.png",

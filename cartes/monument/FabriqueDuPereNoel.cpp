@@ -2,8 +2,7 @@
 #include "Partie.h"
 
 FabriqueDuPereNoel::FabriqueDuPereNoel() :
-        Monument(APRES,
-                 "FabriqueDuPereNoel",
+        Monument("FabriqueDuPereNoel",
                  0,
                  "Si le jet de de est casse vous gagnez 3 pieces",
                  "../assets/monuments/FabriqueDuPereNoel.png",

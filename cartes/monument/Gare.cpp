@@ -3,8 +3,7 @@
 #include <QMessageBox>
 
 Gare::Gare()
-    : Monument(AVANT,
-               "Gare",
+    : Monument("Gare",
                4,
                "Vous pouvez lancer 2 des",
                "../assets/monuments/Gare-travaux.png",

@@ -101,8 +101,6 @@ class EditionDeJeu{
         unsigned int get_nb_joueurs_max() const {return nb_joueurs_max;};
         unsigned int get_nb_monuments_win() const {return nb_monuments_win;};
 
-        bool get_est_edition() const {return est_edition;};
-
         /// *** Recuperation des monuments et des batiments *** ///
         vector<Monument*> get_monument() const {return monument;};
 
