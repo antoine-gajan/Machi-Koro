@@ -1,0 +1,252 @@
+@startuml
+package Jeu  <<Frame>> #EDF6F9{
+    package Controleur  <<Frame>> #FEFAE0{
+        class Partie{
+            - tab_joueurs : *Joueur[]
+            - pointeur_joueur_actuel : Joueur*
+            - editions : *EditionDeJeu[]
+            - nb_monuments_win :  unsigned int
+            - nb_joueurs : int > 2
+            - nb_mon_min : int
+
+            + jouer_partie () : void
+            + jouer_tour (Joueur*) : void
+            + joueur_actuel () : Joueur*
+            + Partie (editions : *EditionDeJeu[])
+            + ~Partie ()
+        }
+
+        class Dé{
+            - {static} min : unsigned int
+            - {static} max : unsigned int
+
+            + lancer_dé () : unsigned int
+        }
+
+         class EditionDeJeu{
+            - nom : string
+            - nb_joueurs_min : unsigned int
+            - nb_joueurs_max : unsigned int
+            - nb_monuments_win :  unsigned int
+            - batiments : map<unsigned int, Batiment>
+            - monuments : map<unsigned int, Monument>
+            - est_edition : bool
+            ----
+             - EditionDeJeu()
+             - ~EditionDeJeu()
+            .. GETTER ..
+            + get_nom () : string
+            + get_nb_joueurs_min () : unsigned int
+            + get_nb_joueurs_max () : unsigned int
+            + get_nb_monuments_win () : unsigned int
+            + get_est_edition () : bool
+        }
+
+
+        note right of EditionDeJeu::nb_joueurs_min
+           Doit être supêrieur ou égal à 2
+        end note
+
+        note right of EditionDeJeu::nb_monuments_win
+           Doit être supêrieur ou égal à 1
+        end note
+
+        class Pioche
+        {
+            - contenu : *Batiment[]
+
+            - get_carte () : *Batiment
+            - est_vide () : bool
+            - Pioche (liste_bat : *Batiment[])
+            - ~Pioche()
+        }
+
+        class Shop
+        {
+            - nb_cartes_possibles : unsigned int
+            - contenu : map<Batiment*, unsigned int>
+            --
+            - completer_shop (new_bat : Batiment*) : void
+            .. GETTER ..
+            + get_nb_cartes_possible () : unsigned int
+            + get_contenu () : map<Batiment*, unsigned int>
+            .. SETTER ..
+            + Shop (format : Shop_Format, nb_c : unsigned int) : void
+            + retirer (indice : unsigned int) : void
+        }
+    }
+
+
+    together {
+        package Cartes  <<Frame>> #FFDDD2{
+
+
+            abstract class Carte
+            {
+                # description_effet : string
+                # nom : string
+                # prix : unsigned int
+                # image : image
+                + {static} prix_min : unsigned int
+                ----
+                + {abstract} declencher_effet (tab_joueurs : *Joueur[]) : void
+                - Carte (desc : string, nom : string, prix : unsigned int, image : image)
+                - ~Carte ()
+                .. GETTER ..
+                + get_nom () : string
+                + get_description_effet () : string
+                + get_prix () : unsigned int
+                + get_image () : image
+
+            }
+
+            package Monuments <<Frame>> {
+                abstract class Monument
+                {
+                    - moment_effet : Moment_effet
+                    - path_image_actif : str
+                    ----
+                    # Monument (moment : Moment_effet; desc_effet, nom, path_image_actif, path_image : const string&; prix : unsigned int)
+                    + ~Monument ()
+                    .. GETTER ..
+                    + get_moment_effet () : Moment_effet
+                    + {abstract} clone () : Monument*
+                    + get_path_image_actif () : const string&
+
+                }
+                together {
+                    class Gare {}
+                    class Aéroport {}
+                    class Tour_radio {}
+                    class EMPTY_M{}
+                }
+            }
+
+            package Batiments <<Frame>> {
+                abstract class Batiment
+                {
+                    - couleur : couleur_bat
+                    - num_activation : unsigned int[]
+                    - type : str
+                    ----
+                    # Batiment (nom, description_effet, path_image, type_bat : const string&, prix unsigned int, coul : couleur_bat, num : const list<unsigned int>&)
+                    + ~Batiment ()
+                    + {abstract} clone () : Batiment*
+                    .. GETTER ..
+                    + get_couleur () : couleur_bat
+                    + get_num_activation () : const unsigned int[]&
+                    + get_type () : str
+                }
+
+                together {
+                    class Boulangerie {
+                        + Boulangerie ()
+                        + ~Boulangerie ()
+                        + clone () : Batiment*
+                        + declencher_effet (possesseur : unsigned int, bonus : int = 0) : void
+                    }
+
+                    class Cafe {
+                        + Cafe ()
+                        + ~Cafe ()
+                        + clone () : Batiment*
+                        + declencher_effet (possesseur : unsigned int, bonus : int = 0) : void
+                    }
+                }
+            }
+        }
+
+        package Joueur  <<Frame>> #83C5BE{
+            class Joueur
+            {
+                - nom : string
+                - liste_monument : const map<bool, Monument*>
+                - liste_batiment : map<unsigned int, Batiment*>
+                - argent : unsigned int
+                - est_IA : bool
+                - strat_IA : enum
+                ----
+                + acheter_carte(carte_achat : Carte) : bool
+                + Joueur (nom : string, IA : bool)
+                + ~Joueur ()
+                ..GETTER..
+                + get_argent () : unsigned int
+                + get_repartition_pieces (unsigned int) : unsigned int[3]
+                + get_nom () : string
+                + get_liste_monument () : const map<bool, Monument*>
+                + get_liste_batiment () : map<unsigned int, Batiment*>
+                .. SETTER ..
+                + update_argent (new_argent : unsigned int) : void
+                + ajout_batiment (new_batiment : *Batiment) : void
+                + activer_monument (*Monument) : void
+            }
+        }
+    }
+    package Enum <<Frame>> {
+        together {
+            enum couleur_bat
+            {
+                Bleu
+                Rouge
+                Vert
+                Violet
+            }
+
+            enum Moment_effet
+            {
+                avant
+                pendant
+                apres
+            }
+
+            enum Shop_Format
+            {
+                standard
+                extended
+            }
+
+            enum Valeur_Piece
+            {
+                1
+                5
+                10
+            }
+        }
+    }
+}
+
+
+
+Carte <|-up- Monument #line:green
+Carte <|-- Batiment #line:green
+
+Monument <|-- Gare #line:red
+Monument <|-- Aéroport #line:red
+Monument <|-- EMPTY_M #line:red
+Monument <|-- Tour_radio #line:red
+
+Batiment <|-- Boulangerie #line:red
+Batiment <|-- Cafe #line:red
+
+Batiment "*" -up-* "0..1" Pioche : "Est constitué de <"
+
+
+Partie "*" - "1..*" Dé: "Est lancé dans <"
+Partie "1" --- "2..*" Joueur : "Participe à <"
+Partie "1" *- "0..1" Pioche : "Est constituée de >"
+Partie "1" *-- "1" Shop : "Est constituée de >"
+Partie "1" -- "1..*" EditionDeJeu : "utilise >"
+
+
+Joueur "1..*" - "*" Batiment : "Possède >"
+Joueur "1..*" - "M" Monument : "Possède >"
+
+
+EditionDeJeu "1..*" o- "1..*" Monument : "Appartenir"
+EditionDeJeu "1..*" o- "1..*" Batiment : "Appartenir"
+
+
+Shop "0..1" *-- "*" Batiment : "Est constitué de     >"
+
+Pioche "1" -- "1" Shop : "Interagit avec"
+@enduml

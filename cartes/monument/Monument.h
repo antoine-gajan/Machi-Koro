@@ -9,11 +9,11 @@ class Monument : public Carte{
     protected:
         Moment_Effet moment;
         std::string path_image_actif;
-
-
-    public:
-        //*** Constructeur et destructeur ***//
         Monument(Moment_Effet moment, const std::string& nom, unsigned int prix, const std::string& description_effet, const std::string& path_image,const std::string& path_actif);
+
+
+public:
+        //*** Constructeur et destructeur ***//
         ~Monument()override=default;
         virtual Monument* clone() const = 0;
 
