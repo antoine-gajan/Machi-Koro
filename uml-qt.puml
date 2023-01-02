@@ -149,6 +149,13 @@ package Jeu  <<Frame>> #EDF6F9{
                 - Pioche (liste_bat : *Batiment[])
                 - ~Pioche()
             }
+            class VuePioche
+            {
+                - pioche_exception : QLabel*
+                - barre_pioche : QProgressBar*
+                --
+                + VuePioche(pioche : Pioche *, parent : QWidget* = nullptr);
+            }
         }
         package Shop  <<Frame>> #FEFAE0{
             class Shop
@@ -164,6 +171,29 @@ package Jeu  <<Frame>> #EDF6F9{
                 + Shop (format : Shop_Format, nb_c : unsigned int) : void
                 + retirer (indice : unsigned int) : void
             }
+            class VueShop
+            {
+                - tab_vue_shop : vector<VueCarte *>
+                - carte_choisie : VueCarte *
+                - largeur : unsigned int
+                - bouton_acheter : QPushButton *
+                --
+                + VueShop(shop : Shop*, parent : QWidget *= nullptr)
+                ==SLOTS==
+                - clicked_acheter_event() : void
+                - batiment_clique(vc : VueCarte*) : void
+            }
+        }
+        class VueInfo
+        {
+            - info_permament : QLabel *
+            - widget_layout_info : QWidget *
+            - scroll_info : QScrollArea *
+            - info_layout : QVBoxLayout *
+            - liste_info : vector<QLabel*>
+            --
+            + VueInfo(QWidget *parent = nullptr);
+            + add_info(info : const str& ) : void
         }
     }
 
