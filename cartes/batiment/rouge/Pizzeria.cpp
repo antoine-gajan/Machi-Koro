@@ -16,7 +16,7 @@ void Pizzeria::declencher_effet(unsigned int possesseur, int bonus) const{
     //Trouver un joueur qui a cette carte
     if(partie->get_joueur_actuel() != possesseur){
         partie->get_vue_partie()->get_vue_infos()->add_info( "Activation de l'effet de la Pizzeria du joueur \""+ joueur_possesseur->get_nom() + "\"");
-        partie->transfert_argent(possesseur, partie->get_joueur_actuel(), 1 + bonus);
+        partie->transfert_argent(partie->get_joueur_actuel(), possesseur, 1 + bonus);
     }
     else{
         throw gameException("On ne peut pas se donner d'argent a soi meme");

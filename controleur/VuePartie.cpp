@@ -321,6 +321,7 @@ void VuePartie::update_vue_partie() {
 
     /// Update de la vue partie
     update();
+    this->setWindowState(Qt::WindowActive);
 }
 
 void VuePartie::update_vue_shop() {

@@ -69,16 +69,17 @@ package Jeu  <<Frame>> #EDF6F9{
                 + {static} get_instance() : Partie*
                 + {static} get_instance(edition : EditionDeJeu*, joueurs : const map<str, str>&, shop_type : const str&, shop_size : unsigned int, extension : const vector<EditionDeJeu*>& = vector<EditionDeJeu*>()) : Partie*
                 .. GETTER ..
-                + get_de_1() : unsigned int
-                + get_de_2() : unsigned int
-                + get_joueur_actuel() : unsigned int
-                + get_tab_joueurs() : const vector<Joueur*>&
-                + get_shop() : Shop*
-                + get_pioche() : Pioche*
-                + get_nom_edition() : vector<str>
-                + get_vue_partie() : VuePartie*
-                + get_moment_achat() : bool
-                + get_nb_monuments_win() : unsigned int
+                + get_de_1() const : unsigned int
+                + get_de_2() const : unsigned int
+                + get_joueur_actuel() const : unsigned int
+                + get_tab_joueurs() const  : const vector<Joueur*>&
+                + get_shop() const : Shop*
+                + get_pioche() const : Pioche*
+                + get_nom_edition() const : vector<str>
+                + get_vue_partie() const : VuePartie*
+                + get_moment_achat() const : bool
+                + get_nb_monuments_win() const : unsigned int
+                + get_compteur_tour() const : unsigned int
                 .. SETTER ..
                 + set_de_1(de : unsigned int) : void
                 + set_de_2(de : unsigned int) : void
@@ -103,6 +104,7 @@ package Jeu  <<Frame>> #EDF6F9{
                 - entete_gauche : QVBoxLayout*
                 - display_des : QVBoxLayout*
                 - infos_partie : QLabel*
+                - label_tour_actuel : QLabel*
                 - layout_de_1 : QHBoxLayout*
                 - layout_de_2 : QHBoxLayout*
                 - body : QHBoxLayout*

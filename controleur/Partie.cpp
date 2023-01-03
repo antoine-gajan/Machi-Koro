@@ -507,6 +507,7 @@ void Partie::jouer_partie() {
     // Création de la vue
     QWidget *fenetre = new QWidget;
     vue_partie = new VuePartie(fenetre);
+    vue_partie->setWindowState(Qt::WindowMaximized);
     vue_partie->show();
 
     jouer_tour();
