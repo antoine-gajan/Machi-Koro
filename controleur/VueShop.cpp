@@ -93,6 +93,7 @@ void VueShop::clicked_acheter_event(){
         carte_choisie = nullptr;
         // On ferme la fenêtre d'achat
         Partie::get_instance()->get_vue_partie()->get_vue_carte()->close();
+        Partie::get_instance()->get_vue_partie()->update_vue_partie();
         // On met la popup à nullptr
         Partie::get_instance()->get_vue_partie()->set_vue_carte(nullptr);
         Partie::get_instance()->get_vue_partie()->set_bouton_rien_faire(false);

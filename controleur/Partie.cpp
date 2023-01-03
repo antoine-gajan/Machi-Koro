@@ -94,7 +94,7 @@ Partie::Partie(EditionDeJeu* edition, const map<string, string>& joueurs, const 
     for (auto & joueur : joueurs){
 
         if (joueur.second == "Humain") {
-            tab_joueurs.push_back(new Joueur(joueur.first, list_monuments, starter_bat, 3));
+            tab_joueurs.push_back(new Joueur(joueur.first, list_monuments, starter_bat, 300));
         }
         else {
             if (joueur.second == "IA agressive") {
@@ -497,11 +497,11 @@ void Partie::jouer_tour() {
     moment_achat = false;
     rejouer = false;
 
-    /// On update toutes la vue
+    /// On update toute la vue
     vue_partie->update_vue_partie();
 
     /// Lancer des des
-    de_1 = Partie::lancer_de();
+    de_1 = 6;
     de_1_temp = de_1;
 
     de_2 = 0;
@@ -828,7 +828,7 @@ void Partie::suite_tour(bool achat_ok){
 
 unsigned int Partie::selectionner_joueur(const vector<Joueur*>& tab_joueurs, unsigned int joueur_actuel){
     unsigned int count = 0;
-    unsigned int selection = 0;
+    unsigned int selection = -1;
 
     //cas où la decision doit se faire par une ia
     if(tab_joueurs[joueur_actuel]->get_est_ia()){
@@ -838,38 +838,41 @@ unsigned int Partie::selectionner_joueur(const vector<Joueur*>& tab_joueurs, uns
     //cas où c'est un joueur reel qui prend la decision
     else{
         // Fenetre de dialogue pour la selection
-        QDialog* window = new QDialog();
-        window->setWindowTitle("Machi Koro - Selectionner un joueur");
-        window->setContentsMargins(50, 30, 50, 50);
+        while (selection == -1) {
+            QDialog *window = new QDialog();
+            window->setWindowTitle("Machi Koro - Selectionner un joueur");
+            window->setContentsMargins(50, 30, 50, 50);
 
-        vector<QPushButton*> liste_joueurs;
-        QVBoxLayout* layout_joueurs = new QVBoxLayout;
-        // Texte informatif
-        QLabel *texte = new QLabel(QString::fromStdString(tab_joueurs[joueur_actuel]->get_nom() + ", quel joueur veux tu sélectionner ?"));
-        texte->setStyleSheet("QLabel { font-weight : bold; font-size : 25px; }");
-        layout_joueurs->addWidget(texte);
+            vector<QPushButton *> liste_joueurs;
+            QVBoxLayout *layout_joueurs = new QVBoxLayout;
+            // Texte informatif
+            QLabel *texte = new QLabel(QString::fromStdString(
+                    tab_joueurs[joueur_actuel]->get_nom() + ", quel joueur veux tu sélectionner ?"));
+            texte->setStyleSheet("QLabel { font-weight : bold; font-size : 25px; }");
+            layout_joueurs->addWidget(texte);
 
-        int i = 0, ind_joueur = 0;
-        for (auto& joueur : tab_joueurs) {
-            // Ajout du joueur
-            if (joueur != tab_joueurs[joueur_actuel]) {
-                // Ajout du bouton
-                QPushButton *bouton = new QPushButton;
-                bouton->setText(QString::fromStdString(joueur->get_nom()));
-                liste_joueurs.push_back(bouton);
-                layout_joueurs->addWidget(liste_joueurs[i]);
-                // Ajout du slot
-                QObject::connect(liste_joueurs[i], &QPushButton::clicked, [window, ind_joueur, &selection]() {
-                    window->accept();
-                    selection = ind_joueur;
-                });
-                i++;
+            int i = 0, ind_joueur = 0;
+            for (auto &joueur: tab_joueurs) {
+                // Ajout du joueur
+                if (joueur != tab_joueurs[joueur_actuel]) {
+                    // Ajout du bouton
+                    QPushButton *bouton = new QPushButton;
+                    bouton->setText(QString::fromStdString(joueur->get_nom()));
+                    liste_joueurs.push_back(bouton);
+                    layout_joueurs->addWidget(liste_joueurs[i]);
+                    // Ajout du slot
+                    QObject::connect(liste_joueurs[i], &QPushButton::clicked, [window, ind_joueur, &selection]() {
+                        window->accept();
+                        selection = ind_joueur;
+                    });
+                    i++;
+                }
+                ind_joueur++;
             }
-            ind_joueur++;
+            window->setLayout(layout_joueurs);
+            // Affichage de la fenêtre
+            window->exec();
         }
-        window->setLayout(layout_joueurs);
-        // Affichage de la fenêtre
-        window->exec();
     }
     Partie::get_instance()->get_vue_partie()->get_vue_infos()->add_info("Joueur sélectionné : "+ tab_joueurs[selection]->get_nom());
     return selection;

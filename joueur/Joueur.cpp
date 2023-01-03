@@ -192,37 +192,48 @@ Batiment* Joueur::possede_batiment(const string& nom_bat) const{
 Batiment* Joueur::selectionner_batiment() const {
     /// Fonction pour selectionner un batiment
     Batiment *bat_picked = nullptr;
+    int i = 0;
+    // On verifie que le joueur possede au moins un batiment selectionnable
+    for (auto& couleur : get_liste_batiment()) {
+        for (auto& bat: couleur.second) {
+            i++;
+        }
+    }
+    if (i == 0) return nullptr;
+    // Selection du batiment
     if (! this->get_est_ia()){
         // Création d'une nouvelle fenetre
-        QDialog* window = new QDialog();
-        window->setWindowTitle("Machi Koro - Selectionner un batiment");
-        window->setContentsMargins(50, 30, 50, 50);
+        while (bat_picked == nullptr){
+            QDialog* window = new QDialog();
+            window->setWindowTitle("Machi Koro - Selectionner un batiment");
+            window->setContentsMargins(50, 30, 50, 50);
 
-        vector<VueCarte*> liste_batiments;
-        QVBoxLayout* layout = new QVBoxLayout;
-        // Texte informatif
-        QLabel *texte = new QLabel(QString::fromStdString("Quel batiment veux tu sélectionner dans le jeu de " + this->get_nom() + " ?"));
-        texte->setStyleSheet("QLabel { font-weight : bold; font-size : 25px; }");
-        layout->addWidget(texte);
-        vector<VueCarte*> vue_batiments;
-        QGridLayout* layout_batiments = new QGridLayout;
-        int i = 0;
-        for (auto& couleur : get_liste_batiment()) {
-            for (auto& bat: couleur.second) {
-                // Affichage du batiment
-                vue_batiments.push_back(new VueCarte(*bat.first, true, false, window));
-                layout_batiments->addWidget(vue_batiments[i], i / 4, i % 4);
-                QObject::connect(vue_batiments[i], &QPushButton::clicked, [window, bat, &bat_picked]() {
-                    window->accept();
-                    bat_picked = bat.first;
-                });
-                i++;
+            vector<VueCarte*> liste_batiments;
+            QVBoxLayout* layout = new QVBoxLayout;
+            // Texte informatif
+            QLabel *texte = new QLabel(QString::fromStdString("Quel batiment veux tu sélectionner dans le jeu de " + this->get_nom() + " ?"));
+            texte->setStyleSheet("QLabel { font-weight : bold; font-size : 25px; }");
+            layout->addWidget(texte);
+            vector<VueCarte*> vue_batiments;
+            QGridLayout* layout_batiments = new QGridLayout;
+            i = 0;
+            for (auto& couleur : get_liste_batiment()) {
+                for (auto& bat: couleur.second) {
+                    // Affichage du batiment
+                    vue_batiments.push_back(new VueCarte(*bat.first, true, false, window));
+                    layout_batiments->addWidget(vue_batiments[i], i / 4, i % 4);
+                    QObject::connect(vue_batiments[i], &QPushButton::clicked, [window, bat, &bat_picked]() {
+                        bat_picked = bat.first;
+                        window->accept();
+                    });
+                    i++;
+                }
             }
+            // Execution de la fenetre
+            layout->addLayout(layout_batiments);
+            window->setLayout(layout);
+            window->exec();
         }
-        // Execution de la fenetre
-        layout->addLayout(layout_batiments);
-        window->setLayout(layout);
-        window->exec();
     }
     // Si c'est une IA
     else{
@@ -297,6 +308,7 @@ void Joueur::ouvrir_batiment(Batiment *bat) {
 
 Monument *Joueur::selectionner_monument() const {
     /// Choisir un de ses monuments
+    Monument* mon_picked = nullptr;
     vector<Monument*> monuments_jouables = this->get_monument_jouables();
     // Récupération des monuments jouables
     for (auto mon : monuments_jouables) {
@@ -316,39 +328,43 @@ Monument *Joueur::selectionner_monument() const {
     int choix = -1;
     if (this->get_est_ia()){
         choix = rand() % monuments_jouables.size();
+        mon_picked = monuments_jouables[choix];
     }
     // Si joueur humain
     else {
         // Création d'une nouvelle fenetre
-        QDialog* window = new QDialog();
-        window->setWindowTitle("Machi Koro - Selectionner un monument");
-        window->setContentsMargins(50, 30, 50, 50);
+        while (mon_picked == nullptr){
+            QDialog* window = new QDialog();
+            window->setWindowTitle("Machi Koro - Selectionner un monument");
+            window->setContentsMargins(50, 30, 50, 50);
 
-        vector<VueCarte*> liste_monuments;
-        QVBoxLayout* layout = new QVBoxLayout;
-        // Texte informatif
-        QLabel *texte = new QLabel(QString::fromStdString(this->get_nom() + ", quel batiment veux tu sélectionner ?"));
-        texte->setStyleSheet("QLabel { font-weight : bold; font-size : 25px; }");
-        layout->addWidget(texte);
-        vector<VueCarte*> vue_monuments;
-        QGridLayout* layout_monuments = new QGridLayout;
-        int i = 0;
-        for (auto& monument : monuments_jouables) {
-            // Affichage du monument
-            vue_monuments.push_back(new VueCarte(*monument, true, true, window));
-            layout_monuments->addWidget(vue_monuments[i], i / 4, i % 4);
-            // Connexion avec slot
-            QObject::connect(vue_monuments[i], &QPushButton::clicked, [window, i, &choix]()  {
-                window->accept();
-                choix = i;
-            });
-            i++;
+            vector<VueCarte*> liste_monuments;
+            QVBoxLayout* layout = new QVBoxLayout;
+            // Texte informatif
+            QLabel *texte = new QLabel(QString::fromStdString(this->get_nom() + ", quel batiment veux tu sélectionner ?"));
+            texte->setStyleSheet("QLabel { font-weight : bold; font-size : 25px; }");
+            layout->addWidget(texte);
+            vector<VueCarte*> vue_monuments;
+            QGridLayout* layout_monuments = new QGridLayout;
+            int i = 0;
+            for (auto& monument : monuments_jouables) {
+                // Affichage du monument
+                VueCarte* vue_mon = new VueCarte(*monument, true, true, window);
+                vue_monuments.push_back(vue_mon);
+                layout_monuments->addWidget(vue_monuments[i], i / 4, i % 4);
+                // Connexion avec slot
+                QObject::connect(vue_monuments[i], &QPushButton::clicked, [window, &mon_picked, &monument]()  {
+                    window->accept();
+                    mon_picked = monument;
+                });
+                i++;
+            }
+            // Execution de la fenetre
+            layout->addLayout(layout_monuments);
+            window->setLayout(layout);
+            window->exec();
         }
-        // Execution de la fenetre
-        layout->addLayout(layout_monuments);
-        window->setLayout(layout);
-        window->exec();
     }
     // Retourne le monument choisi
-    return monuments_jouables[choix];
+    return mon_picked;
 }
