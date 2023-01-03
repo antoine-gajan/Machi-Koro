@@ -81,6 +81,7 @@ public:
     bool get_moment_achat() const {return moment_achat;}
     void set_moment_achat(bool b) {moment_achat = b;}
     unsigned int get_nb_monuments_win() const {return nb_monuments_win;}
+    unsigned int get_compteur_tour() const {return compteur_tour;}
 
 
     //********** Methodes **********//
