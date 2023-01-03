@@ -511,7 +511,7 @@ bool Partie::acheter_bat() {
     }
 
     joueur_act->set_argent(joueur_act->get_argent() - bat_picked->get_prix());
-    if (bat_picked->get_nom() == "BanqueDeMiniville") {
+    if (bat_picked->get_nom() == "BanqueDeMinivilles") {
         joueur_act->set_argent(joueur_act->get_argent() + 5);
     }
 
