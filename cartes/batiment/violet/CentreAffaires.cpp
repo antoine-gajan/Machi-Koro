@@ -77,12 +77,14 @@ void CentreAffaires::declencher_effet(unsigned int possesseur, int bonus) const 
     // Selection des batiments
     Batiment *batiment_a_donner, *batiment_a_recevoir;
     batiment_a_donner = j_actuel->selectionner_batiment();
-    while (batiment_a_donner->get_couleur() == Violet) {
+
+    while (batiment_a_donner == nullptr || batiment_a_donner->get_couleur() == Violet) {
         partie->get_vue_partie()->get_vue_infos()->add_info("Vous ne pouvez pas selectionner un batiment violet !");
         batiment_a_donner = j_actuel->selectionner_batiment();
     }
     batiment_a_recevoir = joueur_echange->selectionner_batiment();
-    while (batiment_a_recevoir->get_couleur() == Violet) {
+
+    while (batiment_a_recevoir == nullptr || batiment_a_recevoir->get_couleur() == Violet) {
         partie->get_vue_partie()->get_vue_infos()->add_info("Vous ne pouvez pas selectionner un batiment violet !");
         batiment_a_recevoir = joueur_echange->selectionner_batiment();
     }

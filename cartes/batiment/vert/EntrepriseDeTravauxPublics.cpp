@@ -17,10 +17,17 @@ void EntrepriseDeTravauxPublics::declencher_effet(unsigned int possesseur, int b
 
     Partie * partie = Partie::get_instance();
     Joueur* j_actuel = partie->get_tab_joueurs()[possesseur];
+
+
+
     partie->get_vue_partie()->get_vue_infos()->add_info("Activation de l'effet de la carte Entreprise de travaux publics du joueur \""+ j_actuel->get_nom() + "\"");
-
-
     Monument* monument_choisi = j_actuel->selectionner_monument();
+
+
+    if (monument_choisi == nullptr){
+        return;
+    }
+
 
     // On desactive le monument
     j_actuel->desactiver_monument(monument_choisi);

@@ -33,7 +33,8 @@ void EntrepriseRenovation::declencher_effet(unsigned int possesseur, int bonus) 
     // Selection du batiment du joueur
     Batiment *batiment;
     batiment = j_actuel->selectionner_batiment();
-    while (batiment->get_couleur() == Violet) {
+
+    while (batiment == nullptr || batiment->get_couleur() == Violet) {
         partie->get_vue_partie()->get_vue_infos()->add_info("Vous ne pouvez pas selectionner un batiment violet !");
         batiment = j_actuel->selectionner_batiment();
     }
