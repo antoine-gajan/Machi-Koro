@@ -830,6 +830,9 @@ void Partie::suite_tour(bool achat_ok){
     /// Update la vue
     vue_partie->set_bouton_rien_faire(false);
     vue_partie->update_vue_joueur();
+    vue_partie->update_vue_pioche();
+    vue_partie->update_vue_shop();
+    vue_partie->update_vue_info();
     vue_partie->get_vue_infos()->add_info("Fin du tour");
     QTime endTime = QTime::currentTime().addSecs(1);
 
