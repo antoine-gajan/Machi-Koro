@@ -319,7 +319,7 @@ bool Partie::acheter_bat_ia() {
         joueur_act->set_argent(joueur_act->get_argent() + 5);
     }
 
-    vue_partie->get_vue_infos()->add_info("Le joueur \"" + tab_joueurs[joueur_actuel]->get_nom() + "\" a achete la carte " + bat_picked->get_nom() + "\n\n");
+    vue_partie->get_vue_infos()->add_info("Le joueur \"" + tab_joueurs[joueur_actuel]->get_nom() + "\" à acheté la carte " + bat_picked->get_nom() + "\n\n");
     return true;
 }
 
@@ -766,7 +766,7 @@ void Partie::suite_tour(bool achat_ok){
     /// ****************************************************************************************************************
 
     if (!achat_ok) {
-        vue_partie->get_vue_infos()->add_info("Vous n'avez rien achete");
+        vue_partie->get_vue_infos()->add_info("Vous n'avez rien acheté");
 
         /// Banque
         if (tab_joueurs[joueur_actuel]->get_argent() < 2)
@@ -829,7 +829,7 @@ void Partie::suite_tour(bool achat_ok){
 
     /// Update la vue
     vue_partie->set_bouton_rien_faire(false);
-    vue_partie->update_vue_partie();
+    vue_partie->update_vue_joueur();
     vue_partie->get_vue_infos()->add_info("Fin du tour");
     QTime endTime = QTime::currentTime().addSecs(1);
 
