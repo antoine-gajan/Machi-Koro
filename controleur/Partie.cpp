@@ -532,7 +532,6 @@ void Partie::jouer_tour() {
 
     /// Lancer des des
     de_1 = Partie::lancer_de();
-    //de_1 = 4; // DE POUR TESTER SES EFFETS ////!!!!\\\\\
     de_1_temp = de_1;
 
     de_2 = 0;
