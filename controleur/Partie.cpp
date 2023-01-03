@@ -112,6 +112,12 @@ Partie::Partie(EditionDeJeu* edition, const map<string, string>& joueurs, const 
         }
     }
 
+
+    random_device rd;
+    mt19937 g(rd());
+
+    shuffle(tab_joueurs.begin(), tab_joueurs.end(), g);
+
     pioche = new Pioche(map_to_vector(list_batiments));
 
     if (shop_type == "standard") {    // Construction du Shop
