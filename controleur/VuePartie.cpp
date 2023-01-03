@@ -212,7 +212,7 @@ void VuePartie::d_click(){
 
 void VuePartie::g_click(){
     Partie *partie_actuelle = Partie::get_instance();
-    /// Slot bouton gauche
+    /// Slot bouton droit
     joueur_affiche = (joueur_affiche - 1) % nb_joueurs;
     // Récupération de l'ancienne vue
     VueJoueur *old = vue_joueur;
@@ -223,6 +223,7 @@ void VuePartie::g_click(){
     else{
         vue_joueur = new VueJoueur(partie_actuelle->get_tab_joueurs()[joueur_affiche],false,  parent_fenetre);
     }
+
     // Remplacement par la nouvelle
     layout->replaceWidget(old, vue_joueur);
     vue_joueur->setFixedSize(700,300);
