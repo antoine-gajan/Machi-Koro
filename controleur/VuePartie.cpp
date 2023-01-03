@@ -158,12 +158,12 @@ VuePartie::VuePartie(QWidget *parent){
 
     // Boutons de navigation gauche et droite dans les Vues Joueurs
     QPushButton* b1 = new QPushButton(parent);
-    b1->setFixedSize(50,50);
-    b1->setText(QString::fromStdString("(<)"));
+    b1->setFixedSize(200,50);
+    b1->setText(QString::fromStdString("(<) Joueur précédent"));
     connect(b1, SIGNAL(clicked()),this, SLOT(g_click()));
     QPushButton* b2 = new QPushButton(parent);
-    b2->setFixedSize(50,50);
-    b2->setText(QString::fromStdString("(>)"));
+    b2->setFixedSize(200,50);
+    b2->setText(QString::fromStdString("Joueur suivant (>)"));
     connect(b2, SIGNAL(clicked()),this, SLOT(d_click()));
 
     // Partie basse avec la vue joueur

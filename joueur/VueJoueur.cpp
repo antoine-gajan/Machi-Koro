@@ -101,7 +101,12 @@ VueJoueur::VueJoueur(Joueur* j,bool e_j_a, QWidget *parent) : carte_choisie(null
 
     // Création d'un bouton donnant accès aux batiments fermés
 
-    connect(bat_ferme, SIGNAL(clicked()),this, SLOT(affichage_bat_ferme()));
+    if (joueur->get_liste_batiment_fermes().empty()){
+        bat_ferme->setEnabled(false);
+    }
+    else{
+        connect(bat_ferme,SIGNAL(clicked()),this,SLOT(afficher_bat_ferme()));
+    }
 
 
 

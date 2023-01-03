@@ -10,6 +10,7 @@
 #include <cstdlib>
 #include <unistd.h>
 #include <random>
+#include <QMessageBox>
 
 #include "EditionDeJeu.h"
 #include "Joueur.h"

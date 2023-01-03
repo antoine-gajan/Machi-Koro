@@ -743,8 +743,8 @@ void Partie::jouer_tour() {
     vue_partie->get_vue_infos()->add_info("Phase d'achat");
 
     if (tab_joueurs[joueur_actuel]->get_est_ia()) {
-        /// on fige l'interface graphique pour 4 secondes
-        QTime dieTime = QTime::currentTime().addSecs(4);
+        /// on fige l'interface graphique pour 2 secondes
+        QTime dieTime = QTime::currentTime().addSecs(2);
         while (QTime::currentTime() < dieTime) {
             QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
         }
@@ -847,7 +847,7 @@ void Partie::suite_tour(bool achat_ok){
         /// Fin de la partie
         vue_partie->close();
         QMessageBox::information(vue_partie, "Fin de la partie", "Le joueur " + QString::fromStdString(tab_joueurs[joueur_actuel]->get_nom()) + " a gagne !");
-        QCoreApplication::quit();
+//        QCoreApplication::quit();
     } else {
         /// Fin du tour
         if (!rejouer) {
