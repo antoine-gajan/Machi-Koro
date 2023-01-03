@@ -58,6 +58,7 @@ private:
     /// Haut de la page
     QVBoxLayout *display_des;
     QLabel * infos_partie;
+    QLabel* label_tour_actuel;
 
     QHBoxLayout* layout_de_1;
     QHBoxLayout* layout_de_2;

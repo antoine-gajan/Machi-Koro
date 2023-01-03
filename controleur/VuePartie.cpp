@@ -54,10 +54,18 @@ VuePartie::VuePartie(QWidget *parent){
     label_joueur_actuel = new QLabel;
     string nom_joueur = "Joueur actuel : \"" + partie_actuelle->get_tab_joueurs()[partie_actuelle->get_joueur_actuel()]->get_nom() + "\"";
     label_joueur_actuel->setText(QString::fromStdString(nom_joueur));
-    label_joueur_actuel->setFixedSize(300, 50);
+    label_joueur_actuel->setFixedSize(300, 30);
     label_joueur_actuel->setAlignment(Qt::AlignCenter);
     label_joueur_actuel->setStyleSheet("QLabel { background-color : transparent; color : green; }");
     entete_gauche->addWidget(label_joueur_actuel, 0, Qt::AlignCenter);
+
+    label_tour_actuel = new QLabel;
+    string tour_actuel = "Tour actuel : " + to_string(partie_actuelle->get_compteur_tour() / partie_actuelle->get_tab_joueurs().size() + 1);
+    label_tour_actuel->setText(QString::fromStdString(tour_actuel));
+    label_tour_actuel->setFixedSize(300, 20);
+    label_tour_actuel->setAlignment(Qt::AlignCenter);
+    label_tour_actuel->setStyleSheet("QLabel { background-color : transparent; color : blue; }");
+    entete_gauche->addWidget(label_tour_actuel, 0, Qt::AlignCenter);
 
     entete->addLayout(entete_gauche);
     structure->addLayout(entete, 10);
@@ -282,7 +290,18 @@ void VuePartie::update_nom_joueur(){
     label_joueur_actuel->setFixedSize(300, 50);
     label_joueur_actuel->setAlignment(Qt::AlignCenter);
     label_joueur_actuel->setStyleSheet("QLabel { background-color : transparent; color : green;}");
-    entete_gauche->addWidget(label_joueur_actuel, 0, Qt::AlignCenter);
+    entete_gauche->addWidget(label_joueur_actuel);
+
+    QLabel* old_tour = label_tour_actuel;
+    label_tour_actuel = new QLabel();
+    string tour_actuel = "Tour actuel : " + to_string(partie_actuelle->get_compteur_tour() / partie_actuelle->get_tab_joueurs().size() + 1);
+    label_tour_actuel->setText(QString::fromStdString(tour_actuel));
+    label_tour_actuel->setFixedSize(300, 20);
+    label_tour_actuel->setAlignment(Qt::AlignCenter);
+    label_tour_actuel->setStyleSheet("QLabel { background-color : transparent; color : blue; }");
+    entete_gauche->addWidget(label_tour_actuel);
+
+    delete old_tour;
     delete old_nom_joueur;
     update();
 }

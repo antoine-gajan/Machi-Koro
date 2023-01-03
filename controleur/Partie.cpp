@@ -538,9 +538,6 @@ void Partie::jouer_tour() {
     de_2 = 0;
     de_casse = Partie::lancer_de() + Partie::lancer_de() + Partie::lancer_de() + Partie::lancer_de();
 
-    string debut_tour = "Début du " + to_string(compteur_tour) + "e tour\n";
-    vue_partie->get_vue_infos()->add_info(debut_tour);
-
     /// ****************************************************************************************************************
     /// ****************************** ETAPE 2 : Effets des monuments **************************************************
     /// ****************************************************************************************************************
