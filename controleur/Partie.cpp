@@ -315,7 +315,7 @@ bool Partie::acheter_bat_ia() {
     }
 
     joueur_act->set_argent(joueur_act->get_argent() - bat_picked->get_prix());
-    if (bat_picked->get_nom() == "BanqueDeMiniville") {
+    if (bat_picked->get_nom() == "BanqueDeMinivilles") {
         joueur_act->set_argent(joueur_act->get_argent() + 5);
     }
 
@@ -377,60 +377,23 @@ bool Partie::acheter_bat(VueCarte* vue_carte) {
     Batiment* bat_picked;
     Joueur *joueur_act = tab_joueurs[joueur_actuel];
     vector<Batiment*> bat_shop = shop->get_contenu_v();
-    // Si le joueur est humain
-    if (!tab_joueurs[joueur_actuel]->get_est_ia()) {
-        // Fenetre de dialogue pour l'achat
-        for(auto& bat : bat_shop){
-            if(bat->get_nom() == vue_carte->getCarte()->get_nom()){
-                bat_picked = bat;
-            }
-        }
 
-        //bat_picked = bat_shop[choix - 1];
-        if (bat_picked->get_prix() > joueur_act->get_argent()) {
-            QWidget* pop_up = new QWidget();
-            pop_up->setWindowTitle("Erreur");
-            QLabel* label = new QLabel("Vous n'avez pas assez d'argent pour acheter ce batiment", pop_up);
-            QPushButton* ok = new QPushButton("OK", pop_up);
-            QObject::connect(ok, &QPushButton::clicked, pop_up, &QWidget::close);
+    // Fenetre de dialogue pour l'achat
+    for(auto& bat : bat_shop){
+        if(bat->get_nom() == vue_carte->getCarte()->get_nom()){
+            bat_picked = bat;
+        }
+    }
 
-            return false;
-        }
+    //bat_picked = bat_shop[choix - 1];
+    if (bat_picked->get_prix() > joueur_act->get_argent()) {
+        QWidget* pop_up = new QWidget();
+        pop_up->setWindowTitle("Erreur");
+        QLabel* label = new QLabel("Vous n'avez pas assez d'argent pour acheter ce batiment", pop_up);
+        QPushButton* ok = new QPushButton("OK", pop_up);
+        QObject::connect(ok, &QPushButton::clicked, pop_up, &QWidget::close);
 
-    } else {
-        strat_IA strat = tab_joueurs[joueur_actuel]->get_strategie();
-        vector<Batiment*> bat_shop_couleur;
-        vector<Batiment*> bat_shop_prix_ok;
-        for (auto bat_act: bat_shop) {
-            if (bat_act->get_prix() <= joueur_act->get_argent()) {
-                bat_shop_prix_ok.push_back(bat_act);
-            }
-        }
-
-        if (strat == agressive) {
-            for (auto bat_act: bat_shop) {
-                if (bat_act->get_couleur() == Rouge && bat_act->get_prix() <= joueur_act->get_argent()) {
-                    bat_shop_couleur.push_back(bat_act);
-                }
-            }
-        }
-        else if (strat == defensif) {
-            for (auto bat_act: bat_shop) {
-                if (bat_act->get_couleur() == Bleu && bat_act->get_prix() <= joueur_act->get_argent()) {
-                    bat_shop_couleur.push_back(bat_act);
-                }
-            }
-        }
-
-        if (bat_shop_couleur.empty() && bat_shop_prix_ok.empty()) {
-            return false;
-        }
-        else if (bat_shop_couleur.empty()) {
-            bat_picked = bat_shop_prix_ok[rand() % bat_shop_prix_ok.size()];
-        }
-        else {
-            bat_picked = bat_shop_couleur[rand() % bat_shop_couleur.size()];
-        }
+        return false;
     }
 
     joueur_act->ajouter_batiment(bat_picked);
@@ -443,7 +406,7 @@ bool Partie::acheter_bat(VueCarte* vue_carte) {
     }
 
     joueur_act->set_argent(joueur_act->get_argent() - bat_picked->get_prix());
-    if (bat_picked->get_nom() == "BanqueDeMiniville") {
+    if (bat_picked->get_nom() == "BanqueDeMinivilles") {
         joueur_act->set_argent(joueur_act->get_argent() + 5);
     }
 
