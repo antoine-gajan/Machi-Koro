@@ -181,6 +181,9 @@ void VueJoueur::batimentClique(VueCarte* vc){
 }
 void VueJoueur::monumentClique(VueCarte* vc){
     /// Slot lorsque la carte est cliquée
+
+    bool deja_actif;
+
     // Création d'une nouvelle fenetre
     if (Partie::get_instance()->get_vue_partie()->get_vue_carte() != nullptr) {
         Partie::get_instance()->get_vue_partie()->get_vue_carte()->close();
@@ -203,13 +206,23 @@ void VueJoueur::monumentClique(VueCarte* vc){
         bouton_achat = new QPushButton(fenetre);
         bouton_achat->setText(QString::fromStdString("Acheter monument"));
         carte_choisie = vc;
+
+        Monument * mon = joueur->possede_monument(carte_choisie->getCarte()->get_nom());
+        if (mon) {
+            vector<Monument*> mons = joueur->get_monument_jouables();
+            if (std::find(mons.begin(), mons.end(), mon) != mons.end()) {
+                deja_actif = true;
+            }
+        }
+
         connect(bouton_achat, SIGNAL(clicked()), this, SLOT(clicked_acheter_event()));
+
 
         auto indice = Partie::get_instance()->get_joueur_actuel();
         auto argent_joueur = Partie::get_instance()->get_tab_joueurs()[indice]->get_argent();
         auto prix = vc->getCarte()->get_prix();
 
-        if(Partie::get_instance()->get_moment_achat() && !joueur->get_est_ia() && argent_joueur >= prix){
+        if(Partie::get_instance()->get_moment_achat() && !joueur->get_est_ia() && argent_joueur >= prix && !deja_actif){
             bouton_achat->setEnabled(true);
         }else{
             bouton_achat->setEnabled(false);
