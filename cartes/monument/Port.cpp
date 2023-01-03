@@ -33,7 +33,8 @@ void Port::declencher_effet(unsigned int possesseur, int bonus) const {
             int ret = msgBox.exec();
             if (ret == QMessageBox::Yes) {
                 string effet = "Activation de l'effet du Port du joueur \"" + joueur->get_nom() + "\"";
-                partie->set_de_2(Partie::lancer_de());
+                partie->set_de_2(partie->get_de_2() + 1);
+                partie->set_de_1(partie->get_de_1() + 1);
                 partie->get_vue_partie()->update_des();
                 partie->get_vue_partie()->get_vue_infos()->add_info(effet);
             }
