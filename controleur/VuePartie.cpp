@@ -221,7 +221,7 @@ void VuePartie::d_click(){
 void VuePartie::g_click(){
     Partie *partie_actuelle = Partie::get_instance();
     /// Slot bouton droit
-    joueur_affiche = (joueur_affiche - 1) % nb_joueurs;
+    joueur_affiche = (joueur_affiche + nb_joueurs - 1) % nb_joueurs;
     // Récupération de l'ancienne vue
     VueJoueur *old = vue_joueur;
     // Création de la nouvelle
